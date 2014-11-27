@@ -17,14 +17,12 @@
 package com.gwtplatform.dispatch.rest.rebind2.serialization;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -74,16 +72,13 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator
     }
 
     @Override
-    protected Map<String, Object> createTemplateVariables() {
-        HashMap<String, Object> variables = Maps.newHashMap();
+    protected void populateTemplateVariables(Map<String, Object> variables) {
         String importClause = type.getQualifiedSourceName();
         String parameterizedSourceName = type.getParameterizedQualifiedSourceName()
                 .substring(importClause.lastIndexOf('.') + 1);
 
         variables.put("import", importClause);
         variables.put("type", parameterizedSourceName);
-
-        return variables;
     }
 
     @Override

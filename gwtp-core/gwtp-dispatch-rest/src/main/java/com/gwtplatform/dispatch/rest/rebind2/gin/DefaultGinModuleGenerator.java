@@ -25,7 +25,6 @@ import javax.inject.Inject;
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.gwt.core.ext.BadPropertyValueException;
@@ -81,11 +80,8 @@ public class DefaultGinModuleGenerator extends AbstractVelocityGenerator impleme
     }
 
     @Override
-    protected Map<String, Object> createTemplateVariables() {
-        Map<String, Object> variables = Maps.newHashMap();
+    protected void populateTemplateVariables(Map<String, Object> variables) {
         variables.put("bindings", bindings);
-
-        return variables;
     }
 
     @Override

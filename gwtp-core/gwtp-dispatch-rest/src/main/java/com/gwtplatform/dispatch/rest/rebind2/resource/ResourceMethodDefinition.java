@@ -28,15 +28,18 @@ import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 public class ResourceMethodDefinition {
     private final JMethod method;
     private final List<Parameter> parameters;
+    private final List<Parameter> inheritedParameters;
     private final Set<String> imports;
 
     private String output;
 
     public ResourceMethodDefinition(
             JMethod method,
-            List<Parameter> parameters) {
+            List<Parameter> parameters,
+            List<Parameter> inheritedParameters) {
         this.method = method;
         this.parameters = parameters;
+        this.inheritedParameters = inheritedParameters;
         this.imports = Sets.newTreeSet();
     }
 
@@ -46,6 +49,10 @@ public class ResourceMethodDefinition {
 
     public List<Parameter> getParameters() {
         return Lists.newArrayList(parameters);
+    }
+
+    public List<Parameter> getInheritedParameters() {
+        return Lists.newArrayList(inheritedParameters);
     }
 
     public void addImport(ClassDefinition actionDefinition) {

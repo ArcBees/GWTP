@@ -17,7 +17,6 @@
 package com.gwtplatform.dispatch.rest.rebind2.serialization;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -91,11 +90,8 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
     }
 
     @Override
-    protected Map<String, Object> createTemplateVariables() {
-        HashMap<String, Object> variables = Maps.newHashMap();
+    protected void populateTemplateVariables(Map<String, Object> variables) {
         variables.put("types", registeredTypes);
-
-        return variables;
     }
 
     @Override

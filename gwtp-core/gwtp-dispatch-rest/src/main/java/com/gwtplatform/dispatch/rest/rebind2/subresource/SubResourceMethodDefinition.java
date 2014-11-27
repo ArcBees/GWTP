@@ -14,34 +14,35 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind2.action;
+package com.gwtplatform.dispatch.rest.rebind2.subresource;
 
 import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind2.Parameter;
+import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodDefinition;
 
-public class ActionMethodDefinition extends ResourceMethodDefinition {
-    private final List<ActionDefinition> actionDefinitions;
+public class SubResourceMethodDefinition extends ResourceMethodDefinition {
+    private final List<ResourceDefinition> resourceDefinitions;
 
-    public ActionMethodDefinition(
+    public SubResourceMethodDefinition(
             JMethod method,
             List<Parameter> parameters,
             List<Parameter> inheritedParameters) {
         super(method, parameters, inheritedParameters);
 
-        actionDefinitions = Lists.newArrayList();
+        resourceDefinitions = Lists.newArrayList();
     }
 
-    public void addAction(ActionDefinition actionDefinition) {
-        actionDefinitions.add(actionDefinition);
+    public void addResource(ResourceDefinition resourceDefinition) {
+        resourceDefinitions.add(resourceDefinition);
 
-        addImport(actionDefinition.toString());
+        addImport(resourceDefinition.toString());
     }
 
-    public List<ActionDefinition> getActionDefinitions() {
-        return Lists.newArrayList(actionDefinitions);
+    public List<ResourceDefinition> getResourceDefinitions() {
+        return Lists.newArrayList(resourceDefinitions);
     }
 }

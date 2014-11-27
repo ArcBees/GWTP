@@ -24,13 +24,13 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithInput;
-import com.gwtplatform.dispatch.rest.rebind2.HasWeight;
+import com.gwtplatform.dispatch.rest.rebind2.HasPriority;
 
 public class Generators {
-    private static final Comparator<HasWeight> COMPARATOR = new Comparator<HasWeight>() {
+    private static final Comparator<HasPriority> COMPARATOR = new Comparator<HasPriority>() {
         @Override
-        public int compare(HasWeight o1, HasWeight o2) {
-            return o1.getWeight() - o2.getWeight();
+        public int compare(HasPriority o1, HasPriority o2) {
+            return o1.getPriority() - o2.getPriority();
         }
     };
 
@@ -39,16 +39,9 @@ public class Generators {
      *
      * @throws UnableToCompleteException If no generators are found.
      */
-    public static <T extends HasWeight & GeneratorWithInput<I, ?>, I> T getFirstGeneratorByWeightAndInput(Logger logger,
-            Collection<T> generators, I input) throws UnableToCompleteException {
-        List<T> sortedGenerators = sortGenerators(generators);
-
-        return getFirstGeneratorByInput(logger, sortedGenerators, input);
-    }
-
-    public static <T extends GeneratorWithInput<I, ?>, I> T getFirstGeneratorByInput(Logger logger,
-            Collection<T> generators, I input) throws UnableToCompleteException {
-        T generator = findFirstGeneratorByInput(logger, generators, input);
+    public static <T extends HasPriority & GeneratorWithInput<? super I, ?>, I> T getGenerator(
+            Logger logger, Collection<T> generators, I input) throws UnableToCompleteException {
+        T generator = findGenerator(logger, generators, input);
 
         if (generator != null) {
             return generator;
@@ -57,16 +50,16 @@ public class Generators {
         return logger.die("Unable to find an appropriate generator for '%s'", input);
     }
 
-    public static <T extends HasWeight & GeneratorWithInput<I, ?>, I> T findFirstGeneratorByWeightAndInput(
+    /**
+     * Find the best suited generator for the given type.
+     *
+     * @return the best suited generator for input or {@code null} if none are found.
+     */
+    public static <T extends HasPriority & GeneratorWithInput<? super I, ?>, I> T findGenerator(
             Logger logger, Collection<T> generators, I input) {
         List<T> sortedGenerators = sortGenerators(generators);
 
-        return findFirstGeneratorByInput(logger, sortedGenerators, input);
-    }
-
-    public static <T extends GeneratorWithInput<I, ?>, I> T findFirstGeneratorByInput(Logger logger,
-            Collection<T> generators, I input) {
-        for (T generator : generators) {
+        for (T generator : sortedGenerators) {
             try {
                 if (generator.canGenerate(input)) {
                     return generator;
@@ -82,7 +75,7 @@ public class Generators {
     /**
      * Sort the provided generators by weight without modifying the original collection.
      */
-    private static <T extends HasWeight> List<T> sortGenerators(Collection<T> generators) {
+    private static <T extends HasPriority> List<T> sortGenerators(Collection<T> generators) {
         List<T> sortedGenerators = Lists.newArrayList(generators);
         Collections.sort(sortedGenerators, COMPARATOR);
 

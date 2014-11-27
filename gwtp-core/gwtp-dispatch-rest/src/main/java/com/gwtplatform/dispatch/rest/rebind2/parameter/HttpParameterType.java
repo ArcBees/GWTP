@@ -38,10 +38,6 @@ public enum HttpParameterType {
         this.annotationClass = annotationClass;
     }
 
-    public Class<? extends Annotation> getAnnotationClass() {
-        return annotationClass;
-    }
-
     public static boolean isHttpParameter(HasAnnotations hasAnnotations) {
         for (HttpParameterType type : values()) {
             if (hasAnnotations.isAnnotationPresent(type.getAnnotationClass())) {
@@ -50,5 +46,9 @@ public enum HttpParameterType {
         }
 
         return false;
+    }
+
+    public Class<? extends Annotation> getAnnotationClass() {
+        return annotationClass;
     }
 }

@@ -17,7 +17,6 @@
 package com.gwtplatform.dispatch.rest.rebind2.serialization;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -26,7 +25,6 @@ import javax.inject.Inject;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -109,11 +107,8 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator
     }
 
     @Override
-    protected Map<String, Object> createTemplateVariables() {
-        HashMap<String, Object> variables = Maps.newHashMap();
+    protected void populateTemplateVariables(Map<String, Object> variables) {
         variables.put("metadata", registeredMetadata);
-
-        return variables;
     }
 
     private void registerGinBinding() throws UnableToCompleteException {

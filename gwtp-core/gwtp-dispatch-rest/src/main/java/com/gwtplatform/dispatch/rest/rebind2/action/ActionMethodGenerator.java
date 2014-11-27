@@ -27,7 +27,6 @@ import org.apache.velocity.app.VelocityEngine;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JMethod;
@@ -37,15 +36,17 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.rebind2.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.HttpVerbs;
 import com.gwtplatform.dispatch.rest.rebind2.Parameter;
+import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodGenerator;
+import com.gwtplatform.dispatch.rest.rebind2.subresource.SubResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
-import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.findFirstGeneratorByInput;
-import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.getFirstGeneratorByWeightAndInput;
+import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.findGenerator;
+import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.getGenerator;
 
 public class ActionMethodGenerator extends AbstractVelocityGenerator implements ResourceMethodGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/action/ActionMethod.vm";
@@ -54,6 +55,8 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
 
     private ResourceMethodContext context;
     private ActionMethodDefinition methodDefinition;
+    private ResourceDefinition parentDefinition;
+    private JMethod method;
 
     @Inject
     ActionMethodGenerator(
@@ -68,32 +71,24 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
 
     @Override
     public boolean canGenerate(ResourceMethodContext context) throws UnableToCompleteException {
-        this.context = context;
-        JType returnType = context.getMethod().getReturnType();
+        setContext(context);
 
-        boolean canGenerate = returnType != null
+        JType returnType = method.getReturnType();
+
+        return returnType != null
                 && isValidRestAction(returnType)
-                && hasExactlyOneHttpVerb();
-
-        // Make sure we have at least one action generator suited for the work
-        if (canGenerate) {
-            ActionContext actionContext = new ActionContext(context, null);
-            ActionGenerator actionGenerator = findFirstGeneratorByInput(getLogger(), actionGenerators, actionContext);
-
-            canGenerate = actionGenerator != null;
-        }
-
-        return canGenerate;
+                && hasExactlyOneHttpVerb()
+                && canGenerateAction();
     }
 
     @Override
     public ResourceMethodDefinition generate(ResourceMethodContext context) throws UnableToCompleteException {
-        this.context = context;
+        setContext(context);
 
-        // TODO: Carry parameters from the resource context (sub-resources)
         List<Parameter> parameters = resolveParameters();
+        List<Parameter> inheritedParameters = resolveInheritedParameters();
 
-        methodDefinition = new ActionMethodDefinition(context.getMethod(), parameters);
+        methodDefinition = new ActionMethodDefinition(context.getMethod(), parameters, inheritedParameters);
         methodDefinition.addImport(RestAction.class.getName());
 
         generateAction();
@@ -103,18 +98,17 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
     }
 
     @Override
-    protected Map<String, Object> createTemplateVariables() {
-        Map<String, Object> variables = Maps.newHashMap();
-        JMethod method = context.getMethod();
+    protected void populateTemplateVariables(Map<String, Object> variables) {
         String resultType =
                 method.getReturnType().isParameterized().getTypeArgs()[0].getParameterizedQualifiedSourceName();
+        List<Parameter> actionParameters = methodDefinition.getInheritedParameters();
+        actionParameters.addAll(methodDefinition.getParameters());
 
         variables.put("resultType", resultType);
         variables.put("methodName", method.getName());
-        variables.put("parameters", methodDefinition.getParameters());
+        variables.put("methodParameters", methodDefinition.getParameters());
+        variables.put("actionParameters", actionParameters);
         variables.put("action", methodDefinition.getActionDefinitions().get(0));
-
-        return variables;
     }
 
     @Override
@@ -124,17 +118,22 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
 
     @Override
     protected String getPackageName() {
-        return context.getMethod().getEnclosingType().getPackage().getName();
+        return parentDefinition.getPackageName();
     }
 
     @Override
     protected String getImplName() {
-        JMethod method = context.getMethod();
-        return method.getEnclosingType().getSimpleSourceName() + "#" + method.getName();
+        return parentDefinition.getClassName() + "#" + method.getName();
+    }
+
+    private void setContext(ResourceMethodContext context) {
+        this.context = context;
+        this.method = context.getMethod();
+        this.parentDefinition = context.getResourceDefinition();
     }
 
     private List<Parameter> resolveParameters() {
-        List<JParameter> jParameters = Arrays.asList(context.getMethod().getParameters());
+        List<JParameter> jParameters = Arrays.asList(method.getParameters());
 
         return Lists.transform(jParameters, new Function<JParameter, Parameter>() {
             @Override
@@ -144,9 +143,21 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
         });
     }
 
+    private List<Parameter> resolveInheritedParameters() {
+        List<Parameter> inheritedParameters;
+
+        if (parentDefinition instanceof SubResourceDefinition) {
+            inheritedParameters = ((SubResourceDefinition) parentDefinition).getParameters();
+        } else {
+            inheritedParameters = Lists.newArrayList();
+        }
+
+        return inheritedParameters;
+    }
+
     private void generateAction() throws UnableToCompleteException {
         ActionContext actionContext = new ActionContext(context, methodDefinition);
-        ActionGenerator generator = getFirstGeneratorByWeightAndInput(getLogger(), actionGenerators, actionContext);
+        ActionGenerator generator = getGenerator(getLogger(), actionGenerators, actionContext);
         ActionDefinition definition = generator.generate(actionContext);
 
         methodDefinition.addAction(definition);
@@ -167,7 +178,8 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
 
             boolean isValid = parameterizedType != null && parameterizedType.getTypeArgs().length == 1;
             if (!isValid) {
-                warn("RestAction<?> specified as a return type for `%s#%s`, but type argument is missing.");
+                getLogger().warn("RestAction<?> specified as a return type for `%s#%s`, but type argument is missing.",
+                        getContextParentName(), method.getName());
             }
 
             return isValid;
@@ -180,7 +192,7 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
         int annotationsCount = 0;
 
         for (HttpVerbs annotation : HttpVerbs.values()) {
-            if (context.getMethod().isAnnotationPresent(annotation.getAnnotationClass())) {
+            if (method.isAnnotationPresent(annotation.getAnnotationClass())) {
                 annotationsCount += 1;
             }
         }
@@ -195,15 +207,27 @@ public class ActionMethodGenerator extends AbstractVelocityGenerator implements 
                 count = "more than one";
             }
 
-            warn("End-Point method detected but " + count
-                    + " http annotations found. Verify `%s#%s` is properly annotated.");
+            getLogger().warn("End-Point method detected but %s http annotations found. Verify `%s#%s` is properly "
+                    + "annotated.", count, getContextParentName(), method.getName());
         }
 
         return hasOneAnnotation;
     }
 
-    private void warn(String message) {
-        JMethod method = context.getMethod();
-        getLogger().warn(message, method.getEnclosingType().getQualifiedSourceName(), method.getName());
+    private String getContextParentName() {
+        return context.getResourceContext().getResourceType().getQualifiedSourceName();
+    }
+
+    private boolean canGenerateAction() {
+        ActionContext actionContext = new ActionContext(context, null);
+        ActionGenerator actionGenerator = findGenerator(getLogger(), actionGenerators, actionContext);
+
+        boolean canGenerate = actionGenerator != null;
+        if (!canGenerate) {
+            getLogger().debug("Cannot find an action generator for `%s#%s`.", getContextParentName(),
+                    method.getName());
+        }
+
+        return canGenerate;
     }
 }

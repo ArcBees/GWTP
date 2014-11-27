@@ -32,14 +32,15 @@ import com.google.inject.Injector;
 import com.google.inject.Stage;
 import com.gwtplatform.dispatch.rest.rebind2.entrypoint.EntryPointGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.gin.GinModuleGenerator;
+import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceContext;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.serialization.ActionMetadataProviderGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.serialization.JacksonMapperProviderGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 
-import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.findFirstGeneratorByWeightAndInput;
-import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.getFirstGeneratorByWeightAndInput;
+import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.findGenerator;
+import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.getGenerator;
 
 public class DispatchRestGenerator extends IncrementalGenerator implements GeneratorWithInput<String, ClassDefinition> {
     private static final int VERSION = 14;
@@ -107,10 +108,10 @@ public class DispatchRestGenerator extends IncrementalGenerator implements Gener
     @Override
     public ClassDefinition generate(String typeName) throws UnableToCompleteException {
         EntryPointGenerator entryPointGenerator
-                = getFirstGeneratorByWeightAndInput(logger, entryPointGenerators, typeName);
+                = getGenerator(logger, entryPointGenerators, typeName);
 
         // TODO: Store the returned definitions, so it's possible to run "enhancer".
-        // Maybe allow them to run before everything. After resources. Before GIN. After GIN.
+        // TODO: Maybe allow them to run before everything. After resources. Before GIN. After GIN.
         generateResources();
         generateMetadataProvider();
         generateJacksonMapperProvider();
@@ -126,10 +127,11 @@ public class DispatchRestGenerator extends IncrementalGenerator implements Gener
     }
 
     private void maybeGenerateResource(JClassType type) throws UnableToCompleteException {
-        ResourceGenerator generator = findFirstGeneratorByWeightAndInput(logger, resourceGenerators, type);
+        ResourceContext resourceContext = new ResourceContext(type);
+        ResourceGenerator generator = findGenerator(logger, resourceGenerators, resourceContext);
 
         if (generator != null) {
-            generator.generate(type);
+            generator.generate(resourceContext);
         }
     }
 

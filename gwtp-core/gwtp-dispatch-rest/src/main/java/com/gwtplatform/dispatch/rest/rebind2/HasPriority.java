@@ -16,8 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.rebind2;
 
-public interface HasWeight {
-    int DEFAULT_WEIGHT = 75;
+public interface HasPriority {
+    int DEFAULT_PRIORITY = 15;
 
-    byte getWeight();
+    byte getPriority();
 }

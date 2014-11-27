@@ -14,11 +14,17 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind2.resource;
+package com.gwtplatform.dispatch.rest.rebind2.subresource;
 
-import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithInput;
-import com.gwtplatform.dispatch.rest.rebind2.HasPriority;
+import com.google.inject.AbstractModule;
 
-public interface ResourceMethodGenerator
-        extends HasPriority, GeneratorWithInput<ResourceMethodContext, ResourceMethodDefinition> {
+import static com.gwtplatform.dispatch.rest.rebind2.resource.ResourceModule.addResourceGenerator;
+import static com.gwtplatform.dispatch.rest.rebind2.resource.ResourceModule.addResourceMethodGenerator;
+
+public class SubResourceModule extends AbstractModule {
+    @Override
+    protected void configure() {
+        addResourceMethodGenerator(binder()).to(SubResourceMethodGenerator.class);
+        addResourceGenerator(binder()).to(SubResourceGenerator.class);
+    }
 }

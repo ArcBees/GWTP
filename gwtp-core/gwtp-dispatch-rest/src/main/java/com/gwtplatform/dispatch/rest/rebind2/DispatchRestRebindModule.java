@@ -35,6 +35,7 @@ import com.gwtplatform.dispatch.rest.rebind2.action.ActionModule;
 import com.gwtplatform.dispatch.rest.rebind2.entrypoint.EntryPointModule;
 import com.gwtplatform.dispatch.rest.rebind2.gin.GinModule;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceModule;
+import com.gwtplatform.dispatch.rest.rebind2.subresource.SubResourceModule;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 
 public class DispatchRestRebindModule extends AbstractModule {
@@ -56,6 +57,7 @@ public class DispatchRestRebindModule extends AbstractModule {
         install(new EntryPointModule());
         install(new GinModule());
         install(new ResourceModule());
+        install(new SubResourceModule());
 
         bind(GeneratorContext.class).toInstance(context);
 
@@ -65,6 +67,7 @@ public class DispatchRestRebindModule extends AbstractModule {
     @Provides
     @Singleton
     Logger getLogger() {
+        // TODO: Consider not injecting it or some automated way to take advantage of branching
         return new Logger(treeLogger);
     }
 

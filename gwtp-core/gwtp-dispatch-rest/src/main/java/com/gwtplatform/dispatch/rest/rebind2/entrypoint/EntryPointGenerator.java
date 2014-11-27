@@ -17,8 +17,8 @@
 package com.gwtplatform.dispatch.rest.rebind2.entrypoint;
 
 import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithInput;
-import com.gwtplatform.dispatch.rest.rebind2.HasWeight;
+import com.gwtplatform.dispatch.rest.rebind2.HasPriority;
 import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 
-public interface EntryPointGenerator extends HasWeight, GeneratorWithInput<String, ClassDefinition> {
+public interface EntryPointGenerator extends HasPriority, GeneratorWithInput<String, ClassDefinition> {
 }

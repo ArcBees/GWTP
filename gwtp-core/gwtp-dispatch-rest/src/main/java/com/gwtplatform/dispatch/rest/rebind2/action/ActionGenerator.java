@@ -17,7 +17,7 @@
 package com.gwtplatform.dispatch.rest.rebind2.action;
 
 import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithInput;
-import com.gwtplatform.dispatch.rest.rebind2.HasWeight;
+import com.gwtplatform.dispatch.rest.rebind2.HasPriority;
 
-public interface ActionGenerator extends GeneratorWithInput<ActionContext, ActionDefinition>, HasWeight {
+public interface ActionGenerator extends GeneratorWithInput<ActionContext, ActionDefinition>, HasPriority {
 }

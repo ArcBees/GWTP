@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.rebind2;
 
 import java.lang.annotation.Annotation;
 
+import com.google.gwt.core.ext.typeinfo.HasAnnotations;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**
@@ -38,6 +39,16 @@ public enum HttpVerbs {
             Class<? extends Annotation> annotationClass) {
         this.verb = verb;
         this.annotationClass = annotationClass;
+    }
+
+    public static boolean isHttpMethod(HasAnnotations hasAnnotations) {
+        for (HttpVerbs type : values()) {
+            if (hasAnnotations.isAnnotationPresent(type.getAnnotationClass())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public HttpMethod getVerb() {

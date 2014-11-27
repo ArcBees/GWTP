@@ -20,17 +20,24 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 
 public class ResourceMethodContext {
     private final ResourceDefinition resourceDefinition;
+    private final ResourceContext resourceContext;
     private final JMethod method;
 
     public ResourceMethodContext(
             ResourceDefinition resourceDefinition,
+            ResourceContext resourceContext,
             JMethod method) {
         this.resourceDefinition = resourceDefinition;
+        this.resourceContext = resourceContext;
         this.method = method;
     }
 
     public ResourceDefinition getResourceDefinition() {
         return resourceDefinition;
+    }
+
+    public ResourceContext getResourceContext() {
+        return resourceContext;
     }
 
     public JMethod getMethod() {

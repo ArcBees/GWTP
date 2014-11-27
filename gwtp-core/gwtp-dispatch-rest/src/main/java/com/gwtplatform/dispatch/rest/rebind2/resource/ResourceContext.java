@@ -16,9 +16,17 @@
 
 package com.gwtplatform.dispatch.rest.rebind2.resource;
 
-import com.gwtplatform.dispatch.rest.rebind2.GeneratorWithInput;
-import com.gwtplatform.dispatch.rest.rebind2.HasPriority;
+import com.google.gwt.core.ext.typeinfo.JClassType;
 
-public interface ResourceMethodGenerator
-        extends HasPriority, GeneratorWithInput<ResourceMethodContext, ResourceMethodDefinition> {
+public class ResourceContext {
+    private final JClassType resourceType;
+
+    public ResourceContext(
+            JClassType resourceType) {
+        this.resourceType = resourceType;
+    }
+
+    public JClassType getResourceType() {
+        return resourceType;
+    }
 }

@@ -48,7 +48,10 @@ public abstract class AbstractVelocityGenerator extends AbstractGenerator {
     }
 
     protected void mergeTemplate(Writer writer) throws UnableToCompleteException {
-        VelocityContext velocityContext = new VelocityContext(createTemplateVariables());
+        Map<String, Object> variables = Maps.newHashMap();
+        populateTemplateVariables(variables);
+
+        VelocityContext velocityContext = new VelocityContext(variables);
         velocityContext.put("lf", "\n");
         velocityContext.put("impl", getImplName());
         velocityContext.put("package", getPackageName());
@@ -60,8 +63,7 @@ public abstract class AbstractVelocityGenerator extends AbstractGenerator {
         }
     }
 
-    protected Map<String, Object> createTemplateVariables() {
-        return Maps.newHashMap();
+    protected void populateTemplateVariables(Map<String, Object> variables) {
     }
 
     protected ClassDefinition getClassDefinition() {

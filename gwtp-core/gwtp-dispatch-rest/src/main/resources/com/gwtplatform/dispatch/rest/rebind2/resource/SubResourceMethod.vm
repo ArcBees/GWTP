@@ -1,0 +1,7 @@
+    @Override
+    public $resourceType ${methodName}(#foreach ($param in $parameters)
+
+            $param.qualifiedSourceName $param.variableName#commaIfNeeded($parameters)#end) {
+        return new ${subResource.className}(defaultDateFormat#foreach ($param in $subResourceParameters),
+                $param.variableName#end);
+    }

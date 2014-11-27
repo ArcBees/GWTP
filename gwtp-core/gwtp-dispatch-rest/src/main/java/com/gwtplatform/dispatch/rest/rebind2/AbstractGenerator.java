@@ -25,7 +25,7 @@ import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 
-public abstract class AbstractGenerator implements HasWeight {
+public abstract class AbstractGenerator implements HasPriority {
     protected static final String IMPL = "Impl";
 
     private final Logger logger;
@@ -39,8 +39,8 @@ public abstract class AbstractGenerator implements HasWeight {
     }
 
     @Override
-    public byte getWeight() {
-        return DEFAULT_WEIGHT;
+    public byte getPriority() {
+        return DEFAULT_PRIORITY;
     }
 
     protected Logger getLogger() {

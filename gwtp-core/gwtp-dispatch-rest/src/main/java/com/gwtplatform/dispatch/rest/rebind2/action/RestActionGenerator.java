@@ -26,7 +26,6 @@ import javax.ws.rs.Consumes;
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -42,8 +41,12 @@ import com.gwtplatform.dispatch.rest.rebind2.events.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind2.events.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind2.parameter.HttpParameter;
 import com.gwtplatform.dispatch.rest.rebind2.parameter.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceContext;
+import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceMethodContext;
+import com.gwtplatform.dispatch.rest.rebind2.subresource.SubResourceContext;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Arrays;
+import com.gwtplatform.dispatch.rest.rebind2.utils.ClassNameGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind2.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -64,6 +67,8 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     private final HttpParameterFactory httpParameterFactory;
 
     private ActionContext context;
+    private ResourceDefinition resourceDefinition;
+    private ActionMethodDefinition methodDefinition;
     private JMethod method;
     private ActionDefinition actionDefinition;
     private String packageName;
@@ -86,12 +91,12 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
 
     @Override
     public boolean canGenerate(ActionContext context) {
-        this.context = context;
+        setContext(context);
+
         int potentialBodyParametersCount = 0;
         boolean formParamDetected = false;
-        boolean canGenerate = true;
 
-        List<JParameter> parameters = Arrays.asList(context.getMethodContext().getMethod().getParameters());
+        List<JParameter> parameters = findAllParameters(context.getMethodContext());
         for (JParameter parameter : parameters) {
             boolean isValidHttpParam = httpParameterFactory.validate(parameter);
 
@@ -101,6 +106,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
             }
         }
 
+        boolean canGenerate = true;
         if (potentialBodyParametersCount > 1) {
             canGenerate = false;
             error(MANY_POTENTIAL_BODY);
@@ -115,10 +121,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
 
     @Override
     public ActionDefinition generate(ActionContext context) throws UnableToCompleteException {
-        // TODO: Input should include parent's Ctor Params (sub-resource)
-
-        this.context = context;
-        this.method = context.getMethodContext().getMethod();
+        setContext(context);
 
         resolveClassName();
         HttpMethod verb = resolveHttpVerb();
@@ -143,22 +146,21 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     }
 
     @Override
-    protected Map<String, Object> createTemplateVariables() {
-        Map<String, Object> variables = Maps.newHashMap();
+    protected void populateTemplateVariables(Map<String, Object> variables) {
         String resultTypeName = actionDefinition.getResultType().getParameterizedQualifiedSourceName();
         String bodyParameterName =
                 actionDefinition.hasBody() ? actionDefinition.getBodyParameter().getVariableName() : null;
+        List<Parameter> parameters = methodDefinition.getInheritedParameters();
+        parameters.addAll(methodDefinition.getParameters());
 
         variables.put("result", resultTypeName);
         variables.put("secured", actionDefinition.isSecured());
         variables.put("httpVerb", actionDefinition.getVerb());
         variables.put("path", actionDefinition.getPath());
         variables.put("bodyParameterName", bodyParameterName);
-        variables.put("parameters", context.getMethodDefinition().getParameters());
+        variables.put("parameters", parameters);
         variables.put("httpParameters", actionDefinition.getHttpParameters());
         variables.put("contentType", actionDefinition.getContentType());
-
-        return variables;
     }
 
     @Override
@@ -176,22 +178,29 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         return className;
     }
 
+    private void setContext(ActionContext context) {
+        ResourceMethodContext methodContext = context.getMethodContext();
+
+        this.context = context;
+        this.methodDefinition = context.getMethodDefinition();
+        this.resourceDefinition = methodContext.getResourceDefinition();
+        this.method = methodContext.getMethod();
+    }
+
     private void resolveClassName() {
         this.packageName = generatePackageName();
         this.className = generateTypeName();
     }
 
     private String generatePackageName() {
-        return context.getMethodContext().getResourceDefinition().getPackageName();
+        return resourceDefinition.getPackageName();
     }
 
     private String generateTypeName() {
-        // The service may define overloads, in which case the method name is not unique.
-        // The method index will ensure the generated class uniqueness.
-        int methodIndex = Arrays.asList(method.getEnclosingType().getInheritableMethods()).indexOf(method);
+        String resourceClassName = resourceDefinition.getClassName();
+        String methodName = method.getName();
 
-        String resourceClassName = context.getMethodContext().getResourceDefinition().getClassName();
-        return String.format("%s_%d_%s", resourceClassName, methodIndex, method.getName());
+        return ClassNameGenerator.prefixName(method, resourceClassName, methodName);
     }
 
     private HttpMethod resolveHttpVerb() throws UnableToCompleteException {
@@ -208,13 +217,11 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     }
 
     private String resolvePath() {
-        return PathResolver.resolve(context.getMethodContext().getResourceDefinition().getPath(), method);
+        return PathResolver.resolve(resourceDefinition.getPath(), method);
     }
 
     private boolean resolveSecured() {
-        ResourceMethodContext methodContext = context.getMethodContext();
-
-        return methodContext.getResourceDefinition().isSecured()
+        return resourceDefinition.isSecured()
                 && !method.isAnnotationPresent(NoXsrfHeader.class);
     }
 
@@ -223,7 +230,9 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     }
 
     private void filterParameters() throws UnableToCompleteException {
-        List<Parameter> parameters = context.getMethodDefinition().getParameters();
+        List<Parameter> parameters = methodDefinition.getInheritedParameters();
+        parameters.addAll(methodDefinition.getParameters());
+
         httpParameters = Lists.newArrayList();
         bodyParameter = null;
 
@@ -234,8 +243,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
                 HttpParameter httpParameter = httpParameterFactory.create(jParameter);
                 httpParameters.add(httpParameter);
             } else {
-                // We already verified we have only one in #canGenerate()
-                assert bodyParameter == null;
+                assert bodyParameter == null; // We already verified we have only one in #canGenerate()
                 bodyParameter = parameter;
             }
         }
@@ -254,7 +262,6 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         return contentType;
     }
 
-    // TODO: Revisit when rewriting serialization generators
     private void registerMetadata() throws UnableToCompleteException {
         if (bodyParameter != null) {
             registerMetadatum(BODY_TYPE, bodyParameter.getParameter().getType());
@@ -271,6 +278,21 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         if (!Void.class.getCanonicalName().equals(type.getQualifiedSourceName()) && type.isPrimitive() == null) {
             eventBus.post(new RegisterSerializableTypeEvent(type));
         }
+    }
+
+    private List<JParameter> findAllParameters(ResourceMethodContext methodContext) {
+        List<JParameter> jParameters = Lists.newArrayList();
+
+        ResourceContext resourceContext = methodContext.getResourceContext();
+        if (resourceContext instanceof SubResourceContext) {
+            ResourceMethodContext parentMethodContext = ((SubResourceContext) resourceContext).getMethodContext();
+            List<JParameter> parentParameters = findAllParameters(parentMethodContext);
+
+            jParameters.addAll(parentParameters);
+        }
+
+        jParameters.addAll(Arrays.asList(methodContext.getMethod().getParameters()));
+        return jParameters;
     }
 
     private void error(String message) {
