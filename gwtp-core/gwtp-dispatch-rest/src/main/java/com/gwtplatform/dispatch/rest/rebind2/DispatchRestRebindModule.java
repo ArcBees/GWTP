@@ -33,6 +33,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.gwtplatform.dispatch.rest.rebind2.action.ActionModule;
 import com.gwtplatform.dispatch.rest.rebind2.entrypoint.EntryPointModule;
+import com.gwtplatform.dispatch.rest.rebind2.extension.ExtensionModule;
 import com.gwtplatform.dispatch.rest.rebind2.gin.GinModule;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceModule;
 import com.gwtplatform.dispatch.rest.rebind2.subresource.SubResourceModule;
@@ -55,6 +56,7 @@ public class DispatchRestRebindModule extends AbstractModule {
     protected void configure() {
         install(new ActionModule());
         install(new EntryPointModule());
+        install(new ExtensionModule());
         install(new GinModule());
         install(new ResourceModule());
         install(new SubResourceModule());

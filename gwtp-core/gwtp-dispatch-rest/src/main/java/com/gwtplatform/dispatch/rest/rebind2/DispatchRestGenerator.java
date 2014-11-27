@@ -16,23 +16,23 @@
 
 package com.gwtplatform.dispatch.rest.rebind2;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.GeneratorContext;
-import com.google.gwt.core.ext.IncrementalGenerator;
-import com.google.gwt.core.ext.RebindMode;
-import com.google.gwt.core.ext.RebindResult;
-import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Stage;
 import com.gwtplatform.dispatch.rest.rebind2.entrypoint.EntryPointGenerator;
+import com.gwtplatform.dispatch.rest.rebind2.extension.ExtensionContext;
+import com.gwtplatform.dispatch.rest.rebind2.extension.ExtensionGenerator;
+import com.gwtplatform.dispatch.rest.rebind2.extension.ExtensionPoint;
 import com.gwtplatform.dispatch.rest.rebind2.gin.GinModuleGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceContext;
+import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind2.resource.ResourceGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.serialization.ActionMetadataProviderGenerator;
 import com.gwtplatform.dispatch.rest.rebind2.serialization.JacksonMapperProviderGenerator;
@@ -42,120 +42,133 @@ import com.gwtplatform.dispatch.rest.rebind2.utils.Logger;
 import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.findGenerator;
 import static com.gwtplatform.dispatch.rest.rebind2.utils.Generators.getGenerator;
 
-public class DispatchRestGenerator extends IncrementalGenerator implements GeneratorWithInput<String, ClassDefinition> {
-    private static final int VERSION = 14;
-
-    private final Logger logger;
-    private final GeneratorContext context;
+public class DispatchRestGenerator extends AbstractGenerator implements GeneratorWithInput<String, ClassDefinition> {
+    private final Set<ExtensionGenerator> extensionGenerators;
     private final Set<EntryPointGenerator> entryPointGenerators;
     private final Set<ResourceGenerator> resourceGenerators;
     private final ActionMetadataProviderGenerator actionMetadataProviderGenerator;
     private final JacksonMapperProviderGenerator jacksonMapperProviderGenerator;
     private final GinModuleGenerator ginModuleGenerator;
+    private final List<ClassDefinition> extensionDefinitions;
 
-    /**
-     * This constructor is used by GWT to create the generator.
-     */
-    @SuppressWarnings("UnusedDeclaration")
-    public DispatchRestGenerator() {
-        logger = null;
-        context = null;
-        entryPointGenerators = null;
-        resourceGenerators = null;
-        actionMetadataProviderGenerator = null;
-        jacksonMapperProviderGenerator = null;
-        ginModuleGenerator = null;
-    }
+    private List<ResourceDefinition> resourceDefinitions;
+    private ClassDefinition metadataProviderDefinition;
+    private ClassDefinition jacksonMapperProviderDefinition;
+    private ClassDefinition ginModuleDefinition;
+    private ClassDefinition entryPointDefinition;
 
     @Inject
     DispatchRestGenerator(
             Logger logger,
             GeneratorContext context,
+            Set<ExtensionGenerator> extensionGenerators,
             Set<EntryPointGenerator> entryPointGenerators,
             Set<ResourceGenerator> resourceGenerators,
             ActionMetadataProviderGenerator actionMetadataProviderGenerator,
             JacksonMapperProviderGenerator jacksonMapperProviderGenerator,
             GinModuleGenerator ginModuleGenerator) {
-        this.logger = logger;
-        this.context = context;
+        super(logger, context);
+
+        this.extensionGenerators = extensionGenerators;
         this.entryPointGenerators = entryPointGenerators;
         this.resourceGenerators = resourceGenerators;
         this.actionMetadataProviderGenerator = actionMetadataProviderGenerator;
         this.jacksonMapperProviderGenerator = jacksonMapperProviderGenerator;
         this.ginModuleGenerator = ginModuleGenerator;
-    }
-
-    @Override
-    public long getVersionId() {
-        return VERSION;
-    }
-
-    @Override
-    public RebindResult generateIncrementally(TreeLogger logger, GeneratorContext context, String typeName)
-            throws UnableToCompleteException {
-        Injector injector = Guice.createInjector(Stage.PRODUCTION, new DispatchRestRebindModule(logger, context));
-        DispatchRestGenerator generator = injector.getInstance(DispatchRestGenerator.class);
-        ClassDefinition result = generator.generate(typeName);
-
-        return new RebindResult(RebindMode.USE_ALL_NEW_WITH_NO_CACHING, result.toString());
+        this.extensionDefinitions = Lists.newArrayList();
     }
 
     @Override
     public boolean canGenerate(String typeName) throws UnableToCompleteException {
-        return context.getTypeOracle().findType(typeName) != null;
+        return findType(typeName) != null;
     }
 
     @Override
     public ClassDefinition generate(String typeName) throws UnableToCompleteException {
-        EntryPointGenerator entryPointGenerator
-                = getGenerator(logger, entryPointGenerators, typeName);
+        executeExtensions(ExtensionPoint.BEFORE_EVERYTHING);
 
-        // TODO: Store the returned definitions, so it's possible to run "enhancer".
-        // TODO: Maybe allow them to run before everything. After resources. Before GIN. After GIN.
         generateResources();
         generateMetadataProvider();
         generateJacksonMapperProvider();
         generateGinModule();
+        generateEntryPoint(typeName);
 
-        return entryPointGenerator.generate(typeName);
+        executeExtensions(ExtensionPoint.AFTER_EVERYTHING);
+
+        return entryPointDefinition;
+    }
+
+    private void executeExtensions(ExtensionPoint extensionPoint) {
+        ExtensionContext extensionContext =
+                new ExtensionContext(extensionPoint, extensionDefinitions, resourceDefinitions,
+                        metadataProviderDefinition, jacksonMapperProviderDefinition, ginModuleDefinition,
+                        entryPointDefinition);
+
+        for (ExtensionGenerator generator : extensionGenerators) {
+            maybeExecuteExtension(extensionContext, generator);
+        }
+    }
+
+    private void maybeExecuteExtension(ExtensionContext extensionContext, ExtensionGenerator generator) {
+        try {
+            if (generator.canGenerate(extensionContext)) {
+                Collection<ClassDefinition> definitions = generator.generate(extensionContext);
+                extensionDefinitions.addAll(definitions);
+            }
+        } catch (UnableToCompleteException e) {
+            getLogger().warn("Unexpected exception executing extension.", e);
+        }
     }
 
     private void generateResources() throws UnableToCompleteException {
-        for (JClassType type : context.getTypeOracle().getTypes()) {
+        resourceDefinitions = Lists.newArrayList();
+        for (JClassType type : getContext().getTypeOracle().getTypes()) {
             maybeGenerateResource(type);
         }
+
+        executeExtensions(ExtensionPoint.AFTER_RESOURCES);
     }
 
     private void maybeGenerateResource(JClassType type) throws UnableToCompleteException {
         ResourceContext resourceContext = new ResourceContext(type);
-        ResourceGenerator generator = findGenerator(logger, resourceGenerators, resourceContext);
+        ResourceGenerator generator = findGenerator(getLogger(), resourceGenerators, resourceContext);
 
         if (generator != null) {
-            generator.generate(resourceContext);
+            ResourceDefinition resourceDefinition = generator.generate(resourceContext);
+            resourceDefinitions.add(resourceDefinition);
         }
     }
 
     private void generateMetadataProvider() throws UnableToCompleteException {
         if (!actionMetadataProviderGenerator.canGenerate()) {
-            logger.die("Unable to generate metadata provider. See previous log entries.");
+            getLogger().die("Unable to generate metadata provider. See previous log entries.");
         } else {
-            actionMetadataProviderGenerator.generate();
+            metadataProviderDefinition = actionMetadataProviderGenerator.generate();
         }
     }
 
     private void generateJacksonMapperProvider() throws UnableToCompleteException {
         if (!jacksonMapperProviderGenerator.canGenerate()) {
-            logger.die("Unable to generate jackson mapper provider. See previous log entries.");
+            getLogger().die("Unable to generate jackson mapper provider. See previous log entries.");
         } else {
-            jacksonMapperProviderGenerator.generate();
+            jacksonMapperProviderDefinition = jacksonMapperProviderGenerator.generate();
         }
     }
 
     private void generateGinModule() throws UnableToCompleteException {
         if (!ginModuleGenerator.canGenerate()) {
-            logger.die("Unable to generate Gin Module. See previous log entries.");
+            getLogger().die("Unable to generate Gin Module. See previous log entries.");
         } else {
-            ginModuleGenerator.generate();
+            executeExtensions(ExtensionPoint.BEFORE_GIN);
+
+            ginModuleDefinition = ginModuleGenerator.generate();
+
+            executeExtensions(ExtensionPoint.AFTER_GIN);
         }
+    }
+
+    private void generateEntryPoint(String typeName) throws UnableToCompleteException {
+        EntryPointGenerator entryPointGenerator = getGenerator(getLogger(), entryPointGenerators, typeName);
+        entryPointDefinition = entryPointGenerator.generate(typeName);
     }
 }

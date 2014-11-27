@@ -135,8 +135,6 @@ public class TopLevelResourceGenerator extends AbstractVelocityGenerator impleme
     }
 
     private void resolveImplName() {
-        // TODO: Maybe try moving package from shared to client. May cause issues if there are no client sources
-
         this.resourceTypeName = resourceType.getSimpleSourceName();
         this.packageName = resourceType.getPackage().getName();
         this.implName = resourceTypeName + IMPL;

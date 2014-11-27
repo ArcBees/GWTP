@@ -16,13 +16,14 @@
 
     <extend-configuration-property name="gin.classloading.exceptedPackages" value="javax.ws.rs"/>
 
-    <define-configuration-property name="gwtp.dispatch.rest.ginmodule" is-multi-valued="false"/>
-    <set-configuration-property name="gwtp.dispatch.rest.ginmodule"
+    <define-configuration-property name="gwtp.dispatch.rest.generatorModules" is-multi-valued="true"/>
+    <define-configuration-property name="gwtp.dispatch.rest.ginModule" is-multi-valued="false"/>
+    <set-configuration-property name="gwtp.dispatch.rest.ginModule"
             value="com.gwtplatform.dispatch.rest.client.RestGinModule"/>
     <extend-configuration-property name="gin.ginjector.modules"
             value="com.gwtplatform.dispatch.rest.client.RestGinModule"/>
 
-    <generate-with class="com.gwtplatform.dispatch.rest.rebind2.DispatchRestGenerator">
+    <generate-with class="com.gwtplatform.dispatch.rest.rebind2.DispatchRestIncrementalGenerator">
         <when-type-is class="com.gwtplatform.dispatch.rest.client.DispatchRestEntryPoint"/>
     </generate-with>
 </module>
