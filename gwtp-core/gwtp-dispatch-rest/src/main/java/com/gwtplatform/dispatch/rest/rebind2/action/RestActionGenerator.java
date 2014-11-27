@@ -273,7 +273,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     private void registerMetadatum(MetadataType metadataType, JType type) {
         String typeLiteral = "\"" + type.getParameterizedQualifiedSourceName() + "\"";
 
-        eventBus.post(new RegisterMetadataEvent(getClassDefinition().toString(), metadataType, typeLiteral));
+        eventBus.post(new RegisterMetadataEvent(getClassDefinition().getQualifiedName(), metadataType, typeLiteral));
 
         if (!Void.class.getCanonicalName().equals(type.getQualifiedSourceName()) && type.isPrimitive() == null) {
             eventBus.post(new RegisterSerializableTypeEvent(type));

@@ -23,7 +23,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind2.Parameter;
-import com.gwtplatform.dispatch.rest.rebind2.utils.ClassDefinition;
 
 public class ResourceMethodDefinition {
     private final JMethod method;
@@ -53,10 +52,6 @@ public class ResourceMethodDefinition {
 
     public List<Parameter> getInheritedParameters() {
         return Lists.newArrayList(inheritedParameters);
-    }
-
-    public void addImport(ClassDefinition actionDefinition) {
-        addImport(actionDefinition.toString());
     }
 
     public void addImport(String qualifiedClassName) {

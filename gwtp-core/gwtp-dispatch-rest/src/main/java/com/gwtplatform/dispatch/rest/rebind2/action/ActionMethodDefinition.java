@@ -38,7 +38,7 @@ public class ActionMethodDefinition extends ResourceMethodDefinition {
     public void addAction(ActionDefinition actionDefinition) {
         actionDefinitions.add(actionDefinition);
 
-        addImport(actionDefinition.toString());
+        addImport(actionDefinition.getQualifiedName());
     }
 
     public List<ActionDefinition> getActionDefinitions() {

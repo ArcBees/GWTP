@@ -46,7 +46,6 @@ public class ClassDefinition {
         return packageName + "." + className;
     }
 
-    // TODO: Used at many place to get the qualified source name. Should use the right method
     @Override
     public String toString() {
         return getQualifiedName();

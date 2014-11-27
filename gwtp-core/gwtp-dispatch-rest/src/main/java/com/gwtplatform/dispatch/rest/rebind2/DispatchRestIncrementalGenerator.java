@@ -43,6 +43,7 @@ public class DispatchRestIncrementalGenerator extends IncrementalGenerator {
     private TreeLogger logger;
     private GeneratorContext context;
     private String typeName;
+    private ClassDefinition lastGeneration;
 
     @Override
     public long getVersionId() {
@@ -52,16 +53,21 @@ public class DispatchRestIncrementalGenerator extends IncrementalGenerator {
     @Override
     public RebindResult generateIncrementally(TreeLogger logger, GeneratorContext context, String typeName)
             throws UnableToCompleteException {
+        if (lastGeneration != null) {
+            // Prevents unnecessary calls to the generator for every permutations.
+            // TODO: Try to really optimize for incremental generators (if possible at all)
+            return new RebindResult(RebindMode.USE_ALL_CACHED, lastGeneration.getQualifiedName());
+        }
+
         this.logger = logger;
         this.context = context;
         this.typeName = typeName;
 
         Injector injector = createInjector();
         DispatchRestGenerator generator = injector.getInstance(DispatchRestGenerator.class);
-        ClassDefinition result = generate(generator);
+        lastGeneration = generate(generator);
 
-        // TODO: Play with different rebind mode. Take advantage of incremental generation!
-        return new RebindResult(RebindMode.USE_ALL_NEW_WITH_NO_CACHING, result.toString());
+        return new RebindResult(RebindMode.USE_ALL_NEW, lastGeneration.getQualifiedName());
     }
 
     private ClassDefinition generate(DispatchRestGenerator generator)

@@ -39,7 +39,7 @@ public class SubResourceMethodDefinition extends ResourceMethodDefinition {
     public void addResource(ResourceDefinition resourceDefinition) {
         resourceDefinitions.add(resourceDefinition);
 
-        addImport(resourceDefinition.toString());
+        addImport(resourceDefinition.getQualifiedName());
     }
 
     public List<ResourceDefinition> getResourceDefinitions() {
