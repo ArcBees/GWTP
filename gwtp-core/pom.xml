@@ -145,7 +145,7 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.gwtplatform</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>gwtp-dispatch-rpc-client</artifactId>
                 <version>${project.version}</version>
             </dependency>

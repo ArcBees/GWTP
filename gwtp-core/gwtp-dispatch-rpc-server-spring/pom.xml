@@ -61,7 +61,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.gwtplatform</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-rpc-test</artifactId>
             <scope>test</scope>
         </dependency>

@@ -31,7 +31,7 @@
 
         <!-- Test dependencies -->
         <dependency>
-            <groupId>com.gwtplatform</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-rpc-test</artifactId>
             <scope>test</scope>
         </dependency>
