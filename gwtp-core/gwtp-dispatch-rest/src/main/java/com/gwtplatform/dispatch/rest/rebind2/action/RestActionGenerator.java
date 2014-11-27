@@ -137,7 +137,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
             mergeTemplate(printWriter);
-            getContext().commit(getLogger(), printWriter);
+            commit(printWriter);
 
             registerMetadata();
         }

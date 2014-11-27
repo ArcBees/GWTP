@@ -70,7 +70,7 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
             mergeTemplate(printWriter);
-            getContext().commit(getLogger(), printWriter);
+            commit(printWriter);
             registerGinBinding();
         } else {
             getLogger().debug("Action metadata provider already generated. Returning.");

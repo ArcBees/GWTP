@@ -75,7 +75,7 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
             mergeTemplate(printWriter);
-            getContext().commit(getLogger(), printWriter);
+            commit(printWriter);
             registerGinBinding();
         } else {
             getLogger().debug("Jackson Mapper Provider already generated. Returning.");

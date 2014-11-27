@@ -68,7 +68,7 @@ public class DefaultGinModuleGenerator extends AbstractVelocityGenerator impleme
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
             mergeTemplate(printWriter);
-            getContext().commit(getLogger(), printWriter);
+            commit(printWriter);
         }
 
         return getClassDefinition();

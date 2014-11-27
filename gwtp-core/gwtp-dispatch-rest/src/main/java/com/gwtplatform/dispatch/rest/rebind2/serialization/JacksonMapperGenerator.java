@@ -63,7 +63,7 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator
 
         if (printWriter != null) {
             mergeTemplate(printWriter);
-            getContext().commit(getLogger(), printWriter);
+            commit(printWriter);
         } else {
             getLogger().debug("Jackson Mapper already generated. Returning.");
         }
