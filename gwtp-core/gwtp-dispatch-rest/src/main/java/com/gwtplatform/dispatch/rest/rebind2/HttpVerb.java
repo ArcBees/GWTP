@@ -24,7 +24,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 /**
  * Represents the HTTP methods supported by the {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
  */
-public enum HttpVerbs {
+public enum HttpVerb {
     GET(HttpMethod.GET, javax.ws.rs.GET.class),
     POST(HttpMethod.POST, javax.ws.rs.POST.class),
     PUT(HttpMethod.PUT, javax.ws.rs.PUT.class),
@@ -34,7 +34,7 @@ public enum HttpVerbs {
     private final HttpMethod verb;
     private final Class<? extends Annotation> annotationClass;
 
-    HttpVerbs(
+    HttpVerb(
             HttpMethod verb,
             Class<? extends Annotation> annotationClass) {
         this.verb = verb;
@@ -42,7 +42,7 @@ public enum HttpVerbs {
     }
 
     public static boolean isHttpMethod(HasAnnotations hasAnnotations) {
-        for (HttpVerbs type : values()) {
+        for (HttpVerb type : values()) {
             if (hasAnnotations.isAnnotationPresent(type.getAnnotationClass())) {
                 return true;
             }

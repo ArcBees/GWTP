@@ -35,7 +35,7 @@ import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.client.MetadataType;
 import com.gwtplatform.dispatch.rest.rebind2.AbstractVelocityGenerator;
-import com.gwtplatform.dispatch.rest.rebind2.HttpVerbs;
+import com.gwtplatform.dispatch.rest.rebind2.HttpVerb;
 import com.gwtplatform.dispatch.rest.rebind2.Parameter;
 import com.gwtplatform.dispatch.rest.rebind2.events.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind2.events.RegisterSerializableTypeEvent;
@@ -207,7 +207,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         HttpMethod verb = null;
 
         // Should always resolve to a verb, as has already been verified
-        for (HttpVerbs annotation : HttpVerbs.values()) {
+        for (HttpVerb annotation : HttpVerb.values()) {
             if (method.isAnnotationPresent(annotation.getAnnotationClass())) {
                 verb = annotation.getVerb();
             }

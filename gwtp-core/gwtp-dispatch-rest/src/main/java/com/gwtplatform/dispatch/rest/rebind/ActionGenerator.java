@@ -52,7 +52,7 @@ import com.gwtplatform.dispatch.rest.rebind.type.ActionBinding;
 import com.gwtplatform.dispatch.rest.rebind.type.MethodCall;
 import com.gwtplatform.dispatch.rest.rebind.type.ResourceBinding;
 import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
-import com.gwtplatform.dispatch.rest.rebind2.HttpVerbs;
+import com.gwtplatform.dispatch.rest.rebind2.HttpVerb;
 import com.gwtplatform.dispatch.rest.rebind2.events.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind2.events.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind2.parameter.FormParamValueResolver;
@@ -301,7 +301,7 @@ public class ActionGenerator extends AbstractVelocityGenerator {
     private void retrieveHttpMethod() throws UnableToCompleteException {
         Boolean moreThanOneAnnotation = false;
 
-        for (HttpVerbs verb : HttpVerbs.values()) {
+        for (HttpVerb verb : HttpVerb.values()) {
             if (actionMethod.isAnnotationPresent(verb.getAnnotationClass())) {
                 moreThanOneAnnotation = moreThanOneAnnotation || httpMethod != null;
                 httpMethod = verb.getVerb();
