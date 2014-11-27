@@ -33,6 +33,4 @@ public interface GinjectorTestUtilGwt extends Ginjector {
     EventBus getEventBus();
 
     PlaceManager getPlaceManager();
-
-    InjectedLabel getInjectedLabel();
 }

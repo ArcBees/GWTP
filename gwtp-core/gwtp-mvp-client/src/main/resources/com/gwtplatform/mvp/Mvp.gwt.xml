@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.6.1//EN"
-        "https://raw.githubusercontent.com/gwtproject/gwt/2.6.1/distro-source/core/src/gwt-module.dtd">
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.7.0//EN"
+        "https://raw.githubusercontent.com/gwtproject/gwt/2.7.0/distro-source/core/src/gwt-module.dtd">
 <module>
     <!-- Inherit the core Web Toolkit stuff.                        -->
     <inherits name="com.google.gwt.inject.Inject"/>
@@ -56,7 +56,7 @@
     <generate-with class="com.gwtplatform.mvp.rebind.PlaceTokenRegistryGenerator">
         <when-type-assignable class="com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry"/>
     </generate-with>
-    
+
     <replace-with class="com.google.gwt.place.shared.PlaceHistoryHandler.DefaultHistorian">
         <when-type-assignable class="com.google.gwt.place.shared.PlaceHistoryHandler.Historian" />
     </replace-with>

@@ -41,20 +41,24 @@ public class CarMobileView extends ViewWithUiHandlers<CarUiHandlers> implements 
     interface Driver extends SimpleBeanEditorDriver<CarDto, CarMobileView> {
     }
 
+    @UiField(provided = true)
+    final ValueListBox<ManufacturerDto> manufacturer;
+    @UiField(provided = true)
+    final CarPropertiesEditor carProperties;
+
     @UiField
     TextBox model;
-    @UiField(provided = true)
-    ValueListBox<ManufacturerDto> manufacturer;
-    @UiField
-    CarPropertiesEditor carProperties;
 
     private final Driver driver;
 
     @Inject
-    CarMobileView(Binder uiBinder,
-                  Driver driver) {
-        manufacturer = new ValueListBox<>(new ManufacturerRenderer());
+    CarMobileView(
+            Binder uiBinder,
+            Driver driver,
+            CarPropertiesEditor carProperties) {
         this.driver = driver;
+        this.carProperties = carProperties;
+        manufacturer = new ValueListBox<>(new ManufacturerRenderer());
 
         initWidget(uiBinder.createAndBindUi(this));
 
