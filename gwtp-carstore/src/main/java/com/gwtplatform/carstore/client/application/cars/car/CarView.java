@@ -43,20 +43,23 @@ public class CarView extends ViewWithUiHandlers<CarUiHandlers> implements MyView
     interface Driver extends SimpleBeanEditorDriver<CarDto, CarView> {
     }
 
+    @UiField(provided = true)
+    final ValueListBox<ManufacturerDto> manufacturer;
+    @UiField(provided = true)
+    final CarPropertiesEditor carProperties;
+
     @UiField
     TextBox model;
-    @UiField(provided = true)
-    ValueListBox<ManufacturerDto> manufacturer;
-    @UiField
-    CarPropertiesEditor carProperties;
 
     private final Driver driver;
 
     @Inject
     CarView(Binder uiBinder,
-            Driver driver) {
-        manufacturer = new ValueListBox<>(new ManufacturerRenderer());
+            Driver driver,
+            CarPropertiesEditor carProperties) {
         this.driver = driver;
+        this.carProperties = carProperties;
+        manufacturer = new ValueListBox<>(new ManufacturerRenderer());
 
         initWidget(uiBinder.createAndBindUi(this));
 
