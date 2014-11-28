@@ -30,7 +30,7 @@ import com.gwtplatform.carstore.client.application.widget.message.MessageStyle;
 import com.gwtplatform.carstore.client.resources.HeaderMessages;
 import com.gwtplatform.carstore.client.security.CurrentUser;
 import com.gwtplatform.carstore.shared.api.SessionResource;
-import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
+import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;

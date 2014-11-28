@@ -3,6 +3,7 @@
         "https://raw.githubusercontent.com/gwtproject/gwt/2.7.0/distro-source/core/src/gwt-module.dtd">
 <module>
     <inherits name='com.gwtplatform.dispatch.rest.DispatchRest'/>
+    <inherits name='com.gwtplatform.dispatch.rest.delegates.ResourceDelegate'/>
     <inherits name="com.gwtplatform.mvp.MvpWithFormFactor"/>
 
     <!-- Inherit the default GWT style sheet. -->
