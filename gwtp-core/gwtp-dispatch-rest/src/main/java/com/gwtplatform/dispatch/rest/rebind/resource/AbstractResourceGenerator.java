@@ -110,7 +110,7 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
                 new ResourceMethodContext(getResourceDefinition(), getResourceContext(), method);
         ResourceMethodGenerator generator =
                 getGenerator(getLogger(), resourceMethodGenerators, methodContext);
-        ResourceMethodDefinition methodDefinition = generator.generate(methodContext);
+        MethodDefinition methodDefinition = generator.generate(methodContext);
 
         getResourceDefinition().addMethodDefinition(methodDefinition);
         imports.addAll(methodDefinition.getImports());

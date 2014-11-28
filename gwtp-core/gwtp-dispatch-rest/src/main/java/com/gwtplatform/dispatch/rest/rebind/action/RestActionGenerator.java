@@ -58,7 +58,7 @@ import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.F
 import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.isHttpParameter;
 
 public class RestActionGenerator extends AbstractVelocityGenerator implements ActionGenerator {
-    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/action/Action.vm";
+    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/action/Action.vm";
     private static final String MANY_POTENTIAL_BODY = "`%s#%s` has more than one potential body parameter.";
     private static final String FORM_AND_BODY_PARAM = "`%s#%s` has both @FormParam and a body parameter. "
             + "You must specify one or the other.";

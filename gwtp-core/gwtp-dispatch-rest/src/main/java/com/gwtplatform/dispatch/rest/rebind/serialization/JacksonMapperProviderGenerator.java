@@ -40,7 +40,7 @@ import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
         implements GeneratorWithoutInput<ClassDefinition> {
     private static final String TEMPLATE =
-            "com/gwtplatform/dispatch/rest/rebind2/serialization/JacksonMapperProvider.vm";
+            "com/gwtplatform/dispatch/rest/rebind/serialization/JacksonMapperProvider.vm";
 
     private final Map<JType, String> registeredTypes = Maps.newHashMap();
     private final EventBus eventBus;

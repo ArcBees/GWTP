@@ -21,17 +21,45 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 public class ClassDefinition {
     private final String packageName;
     private final String className;
+    private final String typeParameters;
 
     public ClassDefinition(
             JClassType classType) {
-        this(classType.getPackage().getName(), classType.getSimpleSourceName());
+        this(classType.getParameterizedQualifiedSourceName());
+    }
+
+    public ClassDefinition(
+            String parameterizedQualifiedName) {
+        String qualifiedClassName;
+        int typeParameterStart = parameterizedQualifiedName.indexOf("<");
+
+        if (typeParameterStart != -1) {
+            int typeParameterEnd = parameterizedQualifiedName.lastIndexOf(">");
+            typeParameters = parameterizedQualifiedName.substring(typeParameterStart + 1, typeParameterEnd);
+            qualifiedClassName = parameterizedQualifiedName.substring(0, typeParameterStart);
+        } else {
+            typeParameters = null;
+            qualifiedClassName = parameterizedQualifiedName;
+        }
+
+        int lastDot = qualifiedClassName.lastIndexOf('.');
+        packageName = qualifiedClassName.substring(0, lastDot);
+        className = qualifiedClassName.substring(lastDot + 1);
     }
 
     public ClassDefinition(
             String packageName,
             String className) {
+        this(packageName, className, null);
+    }
+
+    public ClassDefinition(
+            String packageName,
+            String className,
+            String typeParameters) {
         this.packageName = packageName;
         this.className = className;
+        this.typeParameters = typeParameters;
     }
 
     public String getPackageName() {
@@ -42,12 +70,36 @@ public class ClassDefinition {
         return className;
     }
 
+    public String getTypeParameters() {
+        return typeParameters;
+    }
+
+    public boolean isParameterized() {
+        return typeParameters != null;
+    }
+
     public String getQualifiedName() {
         return packageName + "." + className;
     }
 
+    public String getParameterizedClassName() {
+        return maybeAppendTypeParameters(getClassName());
+    }
+
+    public String getParameterizedQualifiedName() {
+        return maybeAppendTypeParameters(getQualifiedName());
+    }
+
     @Override
     public String toString() {
-        return getQualifiedName();
+        return getParameterizedQualifiedName();
+    }
+
+    private String maybeAppendTypeParameters(String name) {
+        if (isParameterized()) {
+            return name + "<" + typeParameters + ">";
+        }
+
+        return name;
     }
 }

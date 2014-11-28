@@ -6,3 +6,25 @@
 #set($null = "null")
 #if($element)$value#else$null#end
 #end
+
+#macro(generateMethodSignature $parameters)
+#foreach ($param in $parameters)
+
+            $param.qualifiedSourceName $param.variableName#commaIfNeeded($parameters)#end
+#end
+
+#macro(generateAppendedMethodSignature $parameters)
+#foreach ($param in $parameters),
+            $param.qualifiedSourceName $param.variableName#end
+#end
+
+#macro(generateCallSignature $parameters)
+#foreach ($param in $parameters)
+
+            $param.variableName#commaIfNeeded($parameters)#end
+#end
+
+#macro(generateAppendedCallSignature $parameters)
+#foreach ($param in $parameters),
+            $param.variableName#end
+#end

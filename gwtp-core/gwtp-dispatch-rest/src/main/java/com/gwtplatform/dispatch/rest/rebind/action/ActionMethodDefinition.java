@@ -22,9 +22,9 @@ import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
-import com.gwtplatform.dispatch.rest.rebind.resource.ResourceMethodDefinition;
+import com.gwtplatform.dispatch.rest.rebind.resource.MethodDefinition;
 
-public class ActionMethodDefinition extends ResourceMethodDefinition {
+public class ActionMethodDefinition extends MethodDefinition {
     private final JClassType resultType;
     private final List<ActionDefinition> actionDefinitions;
 

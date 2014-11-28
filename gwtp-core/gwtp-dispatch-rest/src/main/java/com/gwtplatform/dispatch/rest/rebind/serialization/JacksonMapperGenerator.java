@@ -35,7 +35,7 @@ import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
 public class JacksonMapperGenerator extends AbstractVelocityGenerator
         implements GeneratorWithInput<JType, ClassDefinition> {
-    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/serialization/JacksonMapper.vm";
+    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/serialization/JacksonMapper.vm";
 
     private JType type;
 

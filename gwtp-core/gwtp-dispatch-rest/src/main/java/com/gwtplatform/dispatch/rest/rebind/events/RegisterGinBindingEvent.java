@@ -39,7 +39,7 @@ public class RegisterGinBindingEvent {
     }
 
     public static void postSingleton(EventBus eventBus, ClassDefinition definition, ClassDefinition implementation) {
-        RegisterGinBindingEvent event = new RegisterGinBindingEvent(definition, implementation, false);
+        RegisterGinBindingEvent event = new RegisterGinBindingEvent(definition, implementation, true);
         eventBus.post(event);
     }
 

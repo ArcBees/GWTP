@@ -32,6 +32,7 @@ public class Parameter {
             JParameter parameter,
             String qualifiedSourceName,
             String variableName) {
+        // TODO: Handle parameterized types
         this.parameter = parameter;
         this.qualifiedSourceName = qualifiedSourceName;
         this.variableName = variableName;

@@ -34,7 +34,7 @@ import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 public class TopLevelResourceGenerator extends AbstractResourceGenerator {
-    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/resource/Resource.vm";
+    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/resource/Resource.vm";
 
     private final EventBus eventBus;
 

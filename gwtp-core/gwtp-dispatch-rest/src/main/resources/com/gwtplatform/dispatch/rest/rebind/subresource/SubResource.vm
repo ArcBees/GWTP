@@ -12,8 +12,7 @@ public class $impl implements $resourceType {
 #end
 
     ${impl}(
-            @DefaultDateFormat String defaultDateFormat#foreach ($param in $parameters),
-            $param.qualifiedSourceName $param.variableName#end) {
+            @DefaultDateFormat String defaultDateFormat#generateAppendedMethodSignature($parameters)) {
         this.defaultDateFormat = defaultDateFormat;
 #foreach ($param in $parameters)
         this.$param.variableName = $param.variableName;

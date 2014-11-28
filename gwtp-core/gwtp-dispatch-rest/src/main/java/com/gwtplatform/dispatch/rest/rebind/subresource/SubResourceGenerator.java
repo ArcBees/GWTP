@@ -40,7 +40,7 @@ import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 public class SubResourceGenerator extends AbstractResourceGenerator {
-    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/resource/SubResource.vm";
+    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/subresource/SubResource.vm";
 
     private SubResourceDefinition subResourceDefinition;
 
