@@ -51,7 +51,7 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator
     }
 
     @Override
-    public boolean canGenerate(JType input) throws UnableToCompleteException {
+    public boolean canGenerate(JType input) {
         return true;
     }
 

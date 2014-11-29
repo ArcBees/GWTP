@@ -52,7 +52,7 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
     }
 
     @Override
-    public boolean canGenerate(ResourceContext resourceContext) throws UnableToCompleteException {
+    public boolean canGenerate(ResourceContext resourceContext) {
         return canGenerateAllMethods();
     }
 
@@ -109,8 +109,7 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
     protected void generateMethod(JMethod method) throws UnableToCompleteException {
         MethodContext methodContext =
                 new MethodContext(getResourceDefinition(), getResourceContext(), method);
-        MethodGenerator generator =
-                getGenerator(getLogger(), methodGenerators, methodContext);
+        MethodGenerator generator = getGenerator(getLogger(), methodGenerators, methodContext);
         MethodDefinition methodDefinition = generator.generate(methodContext);
 
         getResourceDefinition().addMethodDefinition(methodDefinition);
@@ -125,7 +124,7 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
 
         for (JMethod enclosedMethod : methods) {
             MethodContext methodContext = new MethodContext(null, getResourceContext(), enclosedMethod);
-            MethodGenerator generator = findGenerator(getLogger(), methodGenerators, methodContext);
+            MethodGenerator generator = findGenerator(methodGenerators, methodContext);
 
             if (generator == null) {
                 canGenerate = false;

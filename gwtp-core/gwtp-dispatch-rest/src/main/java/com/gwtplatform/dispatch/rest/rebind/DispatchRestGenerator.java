@@ -79,7 +79,7 @@ public class DispatchRestGenerator extends AbstractGenerator implements Generato
     }
 
     @Override
-    public boolean canGenerate(String typeName) throws UnableToCompleteException {
+    public boolean canGenerate(String typeName) {
         return findType(typeName) != null;
     }
 
@@ -131,7 +131,7 @@ public class DispatchRestGenerator extends AbstractGenerator implements Generato
 
     private void maybeGenerateResource(JClassType type) throws UnableToCompleteException {
         ResourceContext resourceContext = new ResourceContext(type);
-        ResourceGenerator generator = findGenerator(getLogger(), resourceGenerators, resourceContext);
+        ResourceGenerator generator = findGenerator(resourceGenerators, resourceContext);
 
         if (generator != null) {
             ResourceDefinition resourceDefinition = generator.generate(resourceContext);
@@ -140,6 +140,7 @@ public class DispatchRestGenerator extends AbstractGenerator implements Generato
     }
 
     private void generateMetadataProvider() throws UnableToCompleteException {
+        // TODO: Use multibinder and access through `Generators`
         if (!actionMetadataProviderGenerator.canGenerate()) {
             getLogger().die("Unable to generate metadata provider. See previous log entries.");
         } else {
@@ -148,6 +149,7 @@ public class DispatchRestGenerator extends AbstractGenerator implements Generato
     }
 
     private void generateJacksonMapperProvider() throws UnableToCompleteException {
+        // TODO: Use multibinder and access through `Generators`
         if (!jacksonMapperProviderGenerator.canGenerate()) {
             getLogger().die("Unable to generate jackson mapper provider. See previous log entries.");
         } else {
@@ -156,6 +158,7 @@ public class DispatchRestGenerator extends AbstractGenerator implements Generato
     }
 
     private void generateGinModule() throws UnableToCompleteException {
+        // TODO: Use multibinder and access through `Generators`
         if (!ginModuleGenerator.canGenerate()) {
             getLogger().die("Unable to generate Gin Module. See previous log entries.");
         } else {
@@ -168,6 +171,7 @@ public class DispatchRestGenerator extends AbstractGenerator implements Generato
     }
 
     private void generateEntryPoint(String typeName) throws UnableToCompleteException {
+        // TODO: Use multibinder and access through `Generators`
         EntryPointGenerator entryPointGenerator = getGenerator(getLogger(), entryPointGenerators, typeName);
         entryPointDefinition = entryPointGenerator.generate(typeName);
     }

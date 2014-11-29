@@ -53,7 +53,7 @@ public class TopLevelResourceGenerator extends AbstractResourceGenerator {
     }
 
     @Override
-    public boolean canGenerate(ResourceContext context) throws UnableToCompleteException {
+    public boolean canGenerate(ResourceContext context) {
         setContext(context);
 
         return getResourceType().isInterface() != null

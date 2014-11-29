@@ -60,7 +60,7 @@ public class ActionMethodGenerator extends AbstractMethodGenerator {
     }
 
     @Override
-    public boolean canGenerate(MethodContext context) throws UnableToCompleteException {
+    public boolean canGenerate(MethodContext context) {
         setContext(context);
 
         JType returnType = getMethod().getReturnType();
@@ -126,8 +126,8 @@ public class ActionMethodGenerator extends AbstractMethodGenerator {
         methodDefinition.setOutput(writer.toString());
     }
 
-    private boolean isValidRestAction(JType type) throws UnableToCompleteException {
-        String restActionName = getType(RestAction.class).getQualifiedSourceName();
+    private boolean isValidRestAction(JType type) {
+        String restActionName = RestAction.class.getName();
         if (restActionName.equals(type.getQualifiedSourceName())) {
             JParameterizedType parameterizedType = type.isParameterized();
 
@@ -171,7 +171,7 @@ public class ActionMethodGenerator extends AbstractMethodGenerator {
 
     private boolean canGenerateAction() {
         ActionContext actionContext = new ActionContext(getMethodContext(), null);
-        ActionGenerator actionGenerator = findGenerator(getLogger(), actionGenerators, actionContext);
+        ActionGenerator actionGenerator = findGenerator(actionGenerators, actionContext);
 
         boolean canGenerate = actionGenerator != null;
         if (!canGenerate) {
