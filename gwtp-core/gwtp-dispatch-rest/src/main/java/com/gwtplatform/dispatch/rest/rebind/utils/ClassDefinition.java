@@ -16,7 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.rebind.utils;
 
-import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JType;
 
 public class ClassDefinition {
     private final String packageName;
@@ -24,8 +24,8 @@ public class ClassDefinition {
     private final String typeParameters;
 
     public ClassDefinition(
-            JClassType classType) {
-        this(classType.getParameterizedQualifiedSourceName());
+            JType type) {
+        this(type.getParameterizedQualifiedSourceName());
     }
 
     public ClassDefinition(
@@ -42,9 +42,15 @@ public class ClassDefinition {
             qualifiedClassName = parameterizedQualifiedName;
         }
 
+        // primitives won't have packages
         int lastDot = qualifiedClassName.lastIndexOf('.');
-        packageName = qualifiedClassName.substring(0, lastDot);
-        className = qualifiedClassName.substring(lastDot + 1);
+        if (lastDot != -1) {
+            packageName = qualifiedClassName.substring(0, lastDot);
+            className = qualifiedClassName.substring(lastDot + 1);
+        } else {
+            packageName = "";
+            className = qualifiedClassName;
+        }
     }
 
     public ClassDefinition(
@@ -79,7 +85,14 @@ public class ClassDefinition {
     }
 
     public String getQualifiedName() {
-        return packageName + "." + className;
+        String qualifiedName = packageName;
+        if (!qualifiedName.isEmpty()) {
+            qualifiedName += ".";
+        }
+
+        qualifiedName += className;
+
+        return qualifiedName;
     }
 
     public String getParameterizedClassName() {

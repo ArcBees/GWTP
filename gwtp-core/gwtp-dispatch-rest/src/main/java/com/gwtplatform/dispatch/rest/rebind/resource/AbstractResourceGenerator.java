@@ -30,6 +30,7 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
+import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGenerator;
@@ -76,7 +77,7 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
     @Override
     protected void populateTemplateVariables(Map<String, Object> variables) {
         variables.put("imports", imports);
-        variables.put("resourceType", getResourceType().getSimpleSourceName());
+        variables.put("resourceType", new ClassDefinition(getResourceType()).getParameterizedClassName());
         variables.put("methods", getResourceDefinition().getMethodDefinitions());
     }
 

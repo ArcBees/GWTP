@@ -8,7 +8,7 @@ import $import;
 public class $impl implements $resourceType {
     private final String defaultDateFormat;
 #foreach ($param in $parameters)
-    private final $param.qualifiedSourceName $param.variableName;
+    private final $param.getParameterizedQualifiedName() $param.variableName;
 #end
 
     ${impl}(

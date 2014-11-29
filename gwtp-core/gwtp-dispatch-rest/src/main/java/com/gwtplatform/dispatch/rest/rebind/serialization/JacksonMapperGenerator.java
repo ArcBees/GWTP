@@ -73,12 +73,10 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator
 
     @Override
     protected void populateTemplateVariables(Map<String, Object> variables) {
-        String importClause = type.getQualifiedSourceName();
-        String parameterizedSourceName = type.getParameterizedQualifiedSourceName()
-                .substring(importClause.lastIndexOf('.') + 1);
+        ClassDefinition typeDefinition = new ClassDefinition(type);
 
-        variables.put("import", importClause);
-        variables.put("type", parameterizedSourceName);
+        variables.put("import", typeDefinition.getQualifiedName());
+        variables.put("type", typeDefinition.getParameterizedClassName());
     }
 
     @Override

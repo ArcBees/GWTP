@@ -69,7 +69,7 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
     public ClassDefinition generate() throws UnableToCompleteException {
         for (JType type : registeredTypes.keySet()) {
             ClassDefinition mapperDefinition = jacksonMapperGenerator.generate(type);
-            registeredTypes.put(type, mapperDefinition.getClassName());
+            registeredTypes.put(type, mapperDefinition.getParameterizedClassName());
         }
 
         PrintWriter printWriter = tryCreate();

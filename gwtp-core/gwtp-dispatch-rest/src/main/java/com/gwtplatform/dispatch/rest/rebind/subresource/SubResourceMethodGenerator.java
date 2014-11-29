@@ -37,6 +37,7 @@ import com.gwtplatform.dispatch.rest.rebind.resource.MethodContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.MethodDefinition;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceGenerator;
+import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
@@ -104,7 +105,7 @@ public class SubResourceMethodGenerator extends AbstractMethodGenerator {
             subResourceParameters = Lists.newArrayList();
         }
 
-        variables.put("resourceType", returnInterface.getSimpleSourceName());
+        variables.put("resourceType", new ClassDefinition(returnInterface).getParameterizedClassName());
         variables.put("methodName", getMethod().getName());
         variables.put("parameters", methodDefinition.getParameters());
         variables.put("subResourceParameters", subResourceParameters);
