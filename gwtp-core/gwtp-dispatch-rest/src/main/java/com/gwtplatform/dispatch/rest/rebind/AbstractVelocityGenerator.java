@@ -16,7 +16,9 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Map;
 
@@ -25,6 +27,7 @@ import org.apache.velocity.app.VelocityEngine;
 
 import com.google.common.collect.Maps;
 import com.google.gwt.core.ext.GeneratorContext;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
@@ -47,6 +50,14 @@ public abstract class AbstractVelocityGenerator extends AbstractGenerator {
         return getContext().tryCreate(getLogger(), getPackageName(), getImplName());
     }
 
+    protected String mergeTemplate() throws UnableToCompleteException {
+        StringWriter writer = new StringWriter();
+
+        mergeTemplate(writer);
+
+        return writer.toString();
+    }
+
     protected void mergeTemplate(Writer writer) throws UnableToCompleteException {
         Map<String, Object> variables = Maps.newHashMap();
         populateTemplateVariables(variables);
@@ -56,7 +67,7 @@ public abstract class AbstractVelocityGenerator extends AbstractGenerator {
         velocityContext.put("impl", getImplName());
         velocityContext.put("package", getPackageName());
 
-        boolean success = velocityEngine.mergeTemplate(getTemplate(), ENCODING, velocityContext, writer);
+        boolean success = writeAndClose(writer, velocityContext);
         if (!success) {
             getLogger().die("An error occurred while generating '%s'. See previous entries for details.",
                     getClassDefinition());
@@ -75,4 +86,16 @@ public abstract class AbstractVelocityGenerator extends AbstractGenerator {
     protected abstract String getPackageName();
 
     protected abstract String getImplName();
+
+    private boolean writeAndClose(Writer writer, VelocityContext velocityContext) {
+        try {
+            return velocityEngine.mergeTemplate(getTemplate(), ENCODING, velocityContext, writer);
+        } finally {
+            try {
+                writer.close();
+            } catch (IOException e) {
+                getLogger().log(Type.ERROR, "Error while closing the print writer.", e);
+            }
+        }
+    }
 }

@@ -108,6 +108,24 @@ public class ClassDefinition {
         return getParameterizedQualifiedName();
     }
 
+    @Override
+    public int hashCode() {
+        return getParameterizedQualifiedName().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof ClassDefinition)) {
+            return false;
+        }
+
+        ClassDefinition other = (ClassDefinition) obj;
+        return getParameterizedQualifiedName().equals(other.getParameterizedQualifiedName());
+    }
+
     private String maybeAppendTypeParameters(String name) {
         if (isParameterized()) {
             return name + "<" + typeParameters + ">";

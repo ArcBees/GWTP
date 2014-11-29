@@ -122,8 +122,8 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     @Override
     public ActionDefinition generate(ActionContext context) throws UnableToCompleteException {
         setContext(context);
-
         resolveClassName();
+
         HttpMethod verb = resolveHttpVerb();
         String path = resolvePath();
         boolean secured = resolveSecured();
@@ -131,11 +131,12 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         String contentType = resolveContentType();
         filterParameters();
 
-        actionDefinition = new ActionDefinition(getPackageName(), getImplName(), verb, path, secured, contentType,
-                resultType, httpParameters, bodyParameter);
-
         PrintWriter printWriter = tryCreate();
+
         if (printWriter != null) {
+            actionDefinition = new ActionDefinition(getPackageName(), getImplName(), verb, path, secured, contentType,
+                    resultType, httpParameters, bodyParameter);
+
             mergeTemplate(printWriter);
             commit(printWriter);
 

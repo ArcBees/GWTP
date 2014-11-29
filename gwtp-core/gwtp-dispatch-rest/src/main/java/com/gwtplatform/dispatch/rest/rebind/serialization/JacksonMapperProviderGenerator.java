@@ -42,7 +42,7 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
     private static final String TEMPLATE =
             "com/gwtplatform/dispatch/rest/rebind/serialization/JacksonMapperProvider.vm";
 
-    private final Map<JType, String> registeredTypes = Maps.newHashMap();
+    private final Map<JType, String> registeredTypes;
     private final EventBus eventBus;
     private final JacksonMapperGenerator jacksonMapperGenerator;
 
@@ -55,6 +55,7 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
             JacksonMapperGenerator jacksonMapperGenerator) {
         super(logger, context, velocityEngine);
 
+        this.registeredTypes = Maps.newHashMap();
         this.eventBus = eventBus;
         this.jacksonMapperGenerator = jacksonMapperGenerator;
 
@@ -62,18 +63,19 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
     }
 
     @Override
-    public boolean canGenerate() throws UnableToCompleteException {
+    public boolean canGenerate() {
         return true;
     }
 
     public ClassDefinition generate() throws UnableToCompleteException {
-        for (JType type : registeredTypes.keySet()) {
-            ClassDefinition mapperDefinition = jacksonMapperGenerator.generate(type);
-            registeredTypes.put(type, mapperDefinition.getParameterizedClassName());
-        }
-
         PrintWriter printWriter = tryCreate();
+
         if (printWriter != null) {
+            for (JType type : registeredTypes.keySet()) {
+                ClassDefinition mapperDefinition = jacksonMapperGenerator.generate(type);
+                registeredTypes.put(type, mapperDefinition.getParameterizedClassName());
+            }
+
             mergeTemplate(printWriter);
             commit(printWriter);
             registerGinBinding();
