@@ -17,16 +17,16 @@
 package com.gwtplatform.dispatch.rest.rebind.subresource;
 
 import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.gwtplatform.dispatch.rest.rebind.resource.MethodContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceContext;
-import com.gwtplatform.dispatch.rest.rebind.resource.ResourceMethodContext;
 
 public class SubResourceContext extends ResourceContext {
-    private final ResourceMethodContext methodContext;
+    private final MethodContext methodContext;
     private final SubResourceMethodDefinition methodDefinition;
 
     public SubResourceContext(
             JClassType resourceType,
-            ResourceMethodContext methodContext,
+            MethodContext methodContext,
             SubResourceMethodDefinition methodDefinition) {
         super(resourceType);
 
@@ -34,7 +34,7 @@ public class SubResourceContext extends ResourceContext {
         this.methodDefinition = methodDefinition;
     }
 
-    public ResourceMethodContext getMethodContext() {
+    public MethodContext getMethodContext() {
         return methodContext;
     }
 

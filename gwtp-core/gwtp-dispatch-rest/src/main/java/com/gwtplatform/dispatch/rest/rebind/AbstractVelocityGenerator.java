@@ -58,7 +58,7 @@ public abstract class AbstractVelocityGenerator extends AbstractGenerator {
 
         boolean success = velocityEngine.mergeTemplate(getTemplate(), ENCODING, velocityContext, writer);
         if (!success) {
-            getLogger().die("An error occured while generating '%s'. See previous entries for details.",
+            getLogger().die("An error occurred while generating '%s'. See previous entries for details.",
                     getClassDefinition());
         }
     }

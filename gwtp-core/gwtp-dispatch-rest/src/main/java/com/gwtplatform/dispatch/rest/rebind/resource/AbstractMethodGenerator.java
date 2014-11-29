@@ -31,11 +31,10 @@ import com.gwtplatform.dispatch.rest.rebind.subresource.SubResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
-public abstract class AbstractResourceMethodGenerator extends AbstractVelocityGenerator
-        implements ResourceMethodGenerator {
-    private ResourceMethodContext methodContext;
+public abstract class AbstractMethodGenerator extends AbstractVelocityGenerator implements MethodGenerator {
+    private MethodContext methodContext;
 
-    protected AbstractResourceMethodGenerator(
+    protected AbstractMethodGenerator(
             Logger logger,
             GeneratorContext context,
             VelocityEngine velocityEngine) {
@@ -52,11 +51,11 @@ public abstract class AbstractResourceMethodGenerator extends AbstractVelocityGe
         return getParentDefinition().getClassName() + "#" + getMethod().getName();
     }
 
-    protected void setContext(ResourceMethodContext methodContext) {
+    protected void setContext(MethodContext methodContext) {
         this.methodContext = methodContext;
     }
 
-    protected ResourceMethodContext getMethodContext() {
+    protected MethodContext getMethodContext() {
         return methodContext;
     }
 

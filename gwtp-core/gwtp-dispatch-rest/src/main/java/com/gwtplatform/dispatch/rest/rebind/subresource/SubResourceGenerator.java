@@ -30,10 +30,10 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 import com.gwtplatform.dispatch.rest.rebind.resource.AbstractResourceGenerator;
+import com.gwtplatform.dispatch.rest.rebind.resource.MethodContext;
+import com.gwtplatform.dispatch.rest.rebind.resource.MethodGenerator;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
-import com.gwtplatform.dispatch.rest.rebind.resource.ResourceMethodContext;
-import com.gwtplatform.dispatch.rest.rebind.resource.ResourceMethodGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassNameGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
@@ -49,8 +49,8 @@ public class SubResourceGenerator extends AbstractResourceGenerator {
             Logger logger,
             GeneratorContext context,
             VelocityEngine velocityEngine,
-            Set<ResourceMethodGenerator> resourceMethodGenerators) {
-        super(logger, context, velocityEngine, resourceMethodGenerators);
+            Set<MethodGenerator> methodGenerators) {
+        super(logger, context, velocityEngine, methodGenerators);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class SubResourceGenerator extends AbstractResourceGenerator {
         variables.put("parameters", getSubResourceDefinition().getParameters());
     }
 
-    private ResourceMethodContext getMethodContext() {
+    private MethodContext getMethodContext() {
         return getResourceContext().getMethodContext();
     }
 

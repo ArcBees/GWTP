@@ -46,8 +46,8 @@ public class TopLevelResourceGenerator extends AbstractResourceGenerator {
             GeneratorContext context,
             EventBus eventBus,
             VelocityEngine velocityEngine,
-            Set<ResourceMethodGenerator> resourceMethodGenerators) {
-        super(logger, context, velocityEngine, resourceMethodGenerators);
+            Set<MethodGenerator> methodGenerators) {
+        super(logger, context, velocityEngine, methodGenerators);
 
         this.eventBus = eventBus;
     }

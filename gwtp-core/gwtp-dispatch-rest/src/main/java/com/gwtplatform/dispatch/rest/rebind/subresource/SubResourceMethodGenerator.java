@@ -32,17 +32,17 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
-import com.gwtplatform.dispatch.rest.rebind.resource.AbstractResourceMethodGenerator;
+import com.gwtplatform.dispatch.rest.rebind.resource.AbstractMethodGenerator;
+import com.gwtplatform.dispatch.rest.rebind.resource.MethodContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.MethodDefinition;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceGenerator;
-import com.gwtplatform.dispatch.rest.rebind.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGenerator;
 
-public class SubResourceMethodGenerator extends AbstractResourceMethodGenerator {
+public class SubResourceMethodGenerator extends AbstractMethodGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/subresource/SubResourceMethod.vm";
 
     private final Provider<Set<ResourceGenerator>> resourceGeneratorsProvider;
@@ -62,7 +62,7 @@ public class SubResourceMethodGenerator extends AbstractResourceMethodGenerator 
     }
 
     @Override
-    public boolean canGenerate(ResourceMethodContext context) throws UnableToCompleteException {
+    public boolean canGenerate(MethodContext context) throws UnableToCompleteException {
         setContext(context);
 
         JClassType restActionType = getType(RestAction.class);
@@ -74,7 +74,7 @@ public class SubResourceMethodGenerator extends AbstractResourceMethodGenerator 
     }
 
     @Override
-    public MethodDefinition generate(ResourceMethodContext context) throws UnableToCompleteException {
+    public MethodDefinition generate(MethodContext context) throws UnableToCompleteException {
         setContext(context);
 
         List<Parameter> parameters = resolveParameters();
@@ -112,7 +112,7 @@ public class SubResourceMethodGenerator extends AbstractResourceMethodGenerator 
     }
 
     @Override
-    protected void setContext(ResourceMethodContext methodContext) {
+    protected void setContext(MethodContext methodContext) {
         super.setContext(methodContext);
 
         this.returnInterface = getMethod().getReturnType().isInterface();

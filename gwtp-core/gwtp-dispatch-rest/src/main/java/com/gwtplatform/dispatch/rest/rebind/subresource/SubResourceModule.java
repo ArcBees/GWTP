@@ -18,13 +18,13 @@ package com.gwtplatform.dispatch.rest.rebind.subresource;
 
 import com.google.inject.AbstractModule;
 
+import static com.gwtplatform.dispatch.rest.rebind.resource.ResourceModule.addMethodGenerator;
 import static com.gwtplatform.dispatch.rest.rebind.resource.ResourceModule.addResourceGenerator;
-import static com.gwtplatform.dispatch.rest.rebind.resource.ResourceModule.addResourceMethodGenerator;
 
 public class SubResourceModule extends AbstractModule {
     @Override
     protected void configure() {
-        addResourceMethodGenerator(binder()).to(SubResourceMethodGenerator.class);
+        addMethodGenerator(binder()).to(SubResourceMethodGenerator.class);
         addResourceGenerator(binder()).to(SubResourceGenerator.class);
     }
 }

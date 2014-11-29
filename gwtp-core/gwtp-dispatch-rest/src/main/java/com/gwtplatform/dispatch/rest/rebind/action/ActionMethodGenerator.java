@@ -32,16 +32,16 @@ import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
-import com.gwtplatform.dispatch.rest.rebind.resource.AbstractResourceMethodGenerator;
+import com.gwtplatform.dispatch.rest.rebind.resource.AbstractMethodGenerator;
+import com.gwtplatform.dispatch.rest.rebind.resource.MethodContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.MethodDefinition;
-import com.gwtplatform.dispatch.rest.rebind.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGenerator;
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.getGenerator;
 
-public class ActionMethodGenerator extends AbstractResourceMethodGenerator {
+public class ActionMethodGenerator extends AbstractMethodGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/action/ActionMethod.vm";
 
     private final Set<ActionGenerator> actionGenerators;
@@ -60,7 +60,7 @@ public class ActionMethodGenerator extends AbstractResourceMethodGenerator {
     }
 
     @Override
-    public boolean canGenerate(ResourceMethodContext context) throws UnableToCompleteException {
+    public boolean canGenerate(MethodContext context) throws UnableToCompleteException {
         setContext(context);
 
         JType returnType = getMethod().getReturnType();
@@ -72,7 +72,7 @@ public class ActionMethodGenerator extends AbstractResourceMethodGenerator {
     }
 
     @Override
-    public MethodDefinition generate(ResourceMethodContext context) throws UnableToCompleteException {
+    public MethodDefinition generate(MethodContext context) throws UnableToCompleteException {
         setContext(context);
 
         List<Parameter> parameters = resolveParameters();
