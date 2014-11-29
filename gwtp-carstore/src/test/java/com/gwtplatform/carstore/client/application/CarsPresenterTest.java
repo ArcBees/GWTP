@@ -37,7 +37,7 @@ import com.gwtplatform.carstore.shared.api.CarResource;
 import com.gwtplatform.carstore.shared.api.CarsResource;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
+import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
@@ -46,7 +46,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import static com.gwtplatform.dispatch.rest.test.DelegateTestUtils.givenDelegate;
+import static com.gwtplatform.dispatch.rest.delegates.test.DelegateTestUtils.givenDelegate;
 
 @RunWith(JukitoRunner.class)
 public class CarsPresenterTest extends PresenterWidgetTestBase {
