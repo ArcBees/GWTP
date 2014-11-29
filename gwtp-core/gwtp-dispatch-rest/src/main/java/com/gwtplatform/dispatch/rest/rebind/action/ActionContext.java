@@ -16,20 +16,20 @@
 
 package com.gwtplatform.dispatch.rest.rebind.action;
 
-import com.gwtplatform.dispatch.rest.rebind.resource.ResourceMethodContext;
+import com.gwtplatform.dispatch.rest.rebind.resource.MethodContext;
 
 public class ActionContext {
-    private final ResourceMethodContext methodContext;
+    private final MethodContext methodContext;
     private final ActionMethodDefinition methodDefinition;
 
     public ActionContext(
-            ResourceMethodContext methodContext,
+            MethodContext methodContext,
             ActionMethodDefinition methodDefinition) {
         this.methodContext = methodContext;
         this.methodDefinition = methodDefinition;
     }
 
-    public ResourceMethodContext getMethodContext() {
+    public MethodContext getMethodContext() {
         return methodContext;
     }
 

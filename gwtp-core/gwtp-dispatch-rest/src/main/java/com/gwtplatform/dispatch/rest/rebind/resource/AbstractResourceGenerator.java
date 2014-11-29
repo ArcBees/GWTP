@@ -30,13 +30,14 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
+import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGenerator;
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.getGenerator;
 
 public abstract class AbstractResourceGenerator extends AbstractVelocityGenerator implements ResourceGenerator {
-    private final Set<ResourceMethodGenerator> resourceMethodGenerators;
+    private final Set<MethodGenerator> methodGenerators;
 
     private Set<String> imports;
     private ResourceContext resourceContext;
@@ -44,24 +45,24 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
     protected AbstractResourceGenerator(
             Logger logger,
             GeneratorContext context,
-            VelocityEngine velocityEngine, Set<ResourceMethodGenerator> resourceMethodGenerators) {
+            VelocityEngine velocityEngine, Set<MethodGenerator> methodGenerators) {
         super(logger, context, velocityEngine);
 
-        this.resourceMethodGenerators = resourceMethodGenerators;
+        this.methodGenerators = methodGenerators;
     }
 
     @Override
-    public boolean canGenerate(ResourceContext resourceContext) throws UnableToCompleteException {
+    public boolean canGenerate(ResourceContext resourceContext) {
         return canGenerateAllMethods();
     }
 
     @Override
     public ResourceDefinition generate(ResourceContext context) throws UnableToCompleteException {
         setContext(context);
-        imports = Sets.newTreeSet();
 
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
+            imports = Sets.newTreeSet();
             imports.add(getResourceType().getQualifiedSourceName());
 
             generateMethods();
@@ -76,7 +77,7 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
     @Override
     protected void populateTemplateVariables(Map<String, Object> variables) {
         variables.put("imports", imports);
-        variables.put("resourceType", getResourceType().getSimpleSourceName());
+        variables.put("resourceType", new ClassDefinition(getResourceType()).getParameterizedClassName());
         variables.put("methods", getResourceDefinition().getMethodDefinitions());
     }
 
@@ -106,10 +107,9 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
     }
 
     protected void generateMethod(JMethod method) throws UnableToCompleteException {
-        ResourceMethodContext methodContext =
-                new ResourceMethodContext(getResourceDefinition(), getResourceContext(), method);
-        ResourceMethodGenerator generator =
-                getGenerator(getLogger(), resourceMethodGenerators, methodContext);
+        MethodContext methodContext =
+                new MethodContext(getResourceDefinition(), getResourceContext(), method);
+        MethodGenerator generator = getGenerator(getLogger(), methodGenerators, methodContext);
         MethodDefinition methodDefinition = generator.generate(methodContext);
 
         getResourceDefinition().addMethodDefinition(methodDefinition);
@@ -123,8 +123,8 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
         boolean canGenerate = true;
 
         for (JMethod enclosedMethod : methods) {
-            ResourceMethodContext methodContext = new ResourceMethodContext(null, getResourceContext(), enclosedMethod);
-            ResourceMethodGenerator generator = findGenerator(getLogger(), resourceMethodGenerators, methodContext);
+            MethodContext methodContext = new MethodContext(null, getResourceContext(), enclosedMethod);
+            MethodGenerator generator = findGenerator(methodGenerators, methodContext);
 
             if (generator == null) {
                 canGenerate = false;

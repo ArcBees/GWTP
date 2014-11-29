@@ -61,7 +61,7 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator
     }
 
     @Override
-    public boolean canGenerate() throws UnableToCompleteException {
+    public boolean canGenerate() {
         return true;
     }
 
