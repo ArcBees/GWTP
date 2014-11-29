@@ -1,3 +1,2 @@
 #* @implicitly included *#
 #* @vtlmacrolibrary path="rebind/macros.vm" *#
-#* @vtlvariable name="serviceDefinitions" type="com.gwtplatform.dispatch.rest.rebind.type.ServiceDefinitions" *#
