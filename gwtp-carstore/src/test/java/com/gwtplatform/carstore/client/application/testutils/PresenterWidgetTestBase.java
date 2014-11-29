@@ -18,7 +18,7 @@ package com.gwtplatform.carstore.client.application.testutils;
 
 import org.junit.Before;
 
-import com.gwtplatform.dispatch.rest.test.DelegateTestUtils;
+import com.gwtplatform.dispatch.rest.delegates.test.DelegateTestUtils;
 
 /**
  * Basic configuration for PresenterWidgetTest, you test must extends this class, or don't forget to inject everything

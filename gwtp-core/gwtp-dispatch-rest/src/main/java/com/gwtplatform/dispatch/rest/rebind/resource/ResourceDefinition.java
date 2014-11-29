@@ -26,7 +26,7 @@ public class ResourceDefinition extends ClassDefinition {
     private final JClassType resourceInterface;
     private final String path;
     private final boolean secured;
-    private final List<ResourceMethodDefinition> methodDefinitions;
+    private final List<MethodDefinition> methodDefinitions;
 
     public ResourceDefinition(
             JClassType resourceInterface,
@@ -54,11 +54,11 @@ public class ResourceDefinition extends ClassDefinition {
         return secured;
     }
 
-    public void addMethodDefinition(ResourceMethodDefinition definition) {
+    public void addMethodDefinition(MethodDefinition definition) {
         methodDefinitions.add(definition);
     }
 
-    public List<ResourceMethodDefinition> getMethodDefinitions() {
+    public List<MethodDefinition> getMethodDefinitions() {
         return Lists.newArrayList(methodDefinitions);
     }
 }

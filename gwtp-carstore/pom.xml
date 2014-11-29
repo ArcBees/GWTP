@@ -150,6 +150,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>com.gwtplatform.extensions</groupId>
+            <artifactId>dispatch-rest-delegates</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-rest-shared</artifactId>
             <version>${project.version}</version>

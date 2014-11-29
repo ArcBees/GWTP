@@ -40,7 +40,7 @@ import com.gwtplatform.dispatch.rest.rebind.subresource.SubResourceModule;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
 public class DispatchRestRebindModule extends AbstractModule {
-    private static final String VELOCITY_PROPERTIES = "com/gwtplatform/dispatch/rest/rebind2/velocity.properties";
+    private static final String VELOCITY_PROPERTIES = "com/gwtplatform/dispatch/rest/rebind/velocity.properties";
 
     private final TreeLogger treeLogger;
     private final GeneratorContext context;

@@ -36,7 +36,7 @@ import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
 public class DefaultGinModuleGenerator extends AbstractVelocityGenerator implements GinModuleGenerator {
-    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/gin/GinModule.vm";
+    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/gin/GinModule.vm";
     private static final String GIN_MODULE_PROPERTY = "gwtp.dispatch.rest.ginModule";
 
     private String packageName;

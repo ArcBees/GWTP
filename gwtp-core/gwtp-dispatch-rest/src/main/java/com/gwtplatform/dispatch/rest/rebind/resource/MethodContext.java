@@ -18,12 +18,12 @@ package com.gwtplatform.dispatch.rest.rebind.resource;
 
 import com.google.gwt.core.ext.typeinfo.JMethod;
 
-public class ResourceMethodContext {
+public class MethodContext {
     private final ResourceDefinition resourceDefinition;
     private final ResourceContext resourceContext;
     private final JMethod method;
 
-    public ResourceMethodContext(
+    public MethodContext(
             ResourceDefinition resourceDefinition,
             ResourceContext resourceContext,
             JMethod method) {

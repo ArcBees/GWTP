@@ -34,7 +34,7 @@ import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 public class TopLevelResourceGenerator extends AbstractResourceGenerator {
-    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/resource/Resource.vm";
+    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/resource/Resource.vm";
 
     private final EventBus eventBus;
 
@@ -46,14 +46,14 @@ public class TopLevelResourceGenerator extends AbstractResourceGenerator {
             GeneratorContext context,
             EventBus eventBus,
             VelocityEngine velocityEngine,
-            Set<ResourceMethodGenerator> resourceMethodGenerators) {
-        super(logger, context, velocityEngine, resourceMethodGenerators);
+            Set<MethodGenerator> methodGenerators) {
+        super(logger, context, velocityEngine, methodGenerators);
 
         this.eventBus = eventBus;
     }
 
     @Override
-    public boolean canGenerate(ResourceContext context) throws UnableToCompleteException {
+    public boolean canGenerate(ResourceContext context) {
         setContext(context);
 
         return getResourceType().isInterface() != null

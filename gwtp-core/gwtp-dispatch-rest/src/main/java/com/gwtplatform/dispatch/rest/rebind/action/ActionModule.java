@@ -21,7 +21,7 @@ import com.google.inject.Binder;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.multibindings.Multibinder;
 
-import static com.gwtplatform.dispatch.rest.rebind.resource.ResourceModule.addResourceMethodGenerator;
+import static com.gwtplatform.dispatch.rest.rebind.resource.ResourceModule.addMethodGenerator;
 
 public class ActionModule extends AbstractModule {
     public static LinkedBindingBuilder<ActionGenerator> addActionGenerator(Binder binder) {
@@ -32,6 +32,6 @@ public class ActionModule extends AbstractModule {
     protected void configure() {
         addActionGenerator(binder()).to(RestActionGenerator.class);
 
-        addResourceMethodGenerator(binder()).to(ActionMethodGenerator.class);
+        addMethodGenerator(binder()).to(ActionMethodGenerator.class);
     }
 }

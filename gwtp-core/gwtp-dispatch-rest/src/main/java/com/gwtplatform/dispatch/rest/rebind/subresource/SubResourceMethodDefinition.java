@@ -21,10 +21,10 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
+import com.gwtplatform.dispatch.rest.rebind.resource.MethodDefinition;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
-import com.gwtplatform.dispatch.rest.rebind.resource.ResourceMethodDefinition;
 
-public class SubResourceMethodDefinition extends ResourceMethodDefinition {
+public class SubResourceMethodDefinition extends MethodDefinition {
     private final List<ResourceDefinition> resourceDefinitions;
 
     public SubResourceMethodDefinition(

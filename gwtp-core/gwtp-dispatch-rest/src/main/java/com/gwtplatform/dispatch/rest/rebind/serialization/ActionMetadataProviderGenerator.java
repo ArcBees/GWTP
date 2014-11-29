@@ -41,7 +41,7 @@ import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator
         implements GeneratorWithoutInput<ClassDefinition> {
     private static final String TEMPLATE =
-            "com/gwtplatform/dispatch/rest/rebind2/serialization/ActionMetadataProvider.vm";
+            "com/gwtplatform/dispatch/rest/rebind/serialization/ActionMetadataProvider.vm";
 
     private final Set<RegisterMetadataHolder> registeredMetadata;
     private final EventBus eventBus;
@@ -61,7 +61,7 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator
     }
 
     @Override
-    public boolean canGenerate() throws UnableToCompleteException {
+    public boolean canGenerate() {
         return true;
     }
 

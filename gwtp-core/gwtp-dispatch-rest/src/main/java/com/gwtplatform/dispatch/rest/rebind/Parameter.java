@@ -17,32 +17,28 @@
 package com.gwtplatform.dispatch.rest.rebind;
 
 import com.google.gwt.core.ext.typeinfo.JParameter;
+import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 
-public class Parameter {
+public class Parameter extends ClassDefinition {
     private final JParameter parameter;
-    private final String qualifiedSourceName;
     private final String variableName;
 
     public Parameter(
             JParameter parameter) {
-        this(parameter, parameter.getType().getParameterizedQualifiedSourceName(), parameter.getName());
+        this(parameter, parameter.getName());
     }
 
     public Parameter(
             JParameter parameter,
-            String qualifiedSourceName,
             String variableName) {
+        super(parameter.getType());
+
         this.parameter = parameter;
-        this.qualifiedSourceName = qualifiedSourceName;
         this.variableName = variableName;
     }
 
     public JParameter getParameter() {
         return parameter;
-    }
-
-    public String getQualifiedSourceName() {
-        return qualifiedSourceName;
     }
 
     public String getVariableName() {

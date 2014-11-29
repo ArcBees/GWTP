@@ -35,7 +35,7 @@ import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
 public class JacksonMapperGenerator extends AbstractVelocityGenerator
         implements GeneratorWithInput<JType, ClassDefinition> {
-    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/serialization/JacksonMapper.vm";
+    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/serialization/JacksonMapper.vm";
 
     private JType type;
 
@@ -51,7 +51,7 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator
     }
 
     @Override
-    public boolean canGenerate(JType input) throws UnableToCompleteException {
+    public boolean canGenerate(JType input) {
         return true;
     }
 
@@ -73,12 +73,10 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator
 
     @Override
     protected void populateTemplateVariables(Map<String, Object> variables) {
-        String importClause = type.getQualifiedSourceName();
-        String parameterizedSourceName = type.getParameterizedQualifiedSourceName()
-                .substring(importClause.lastIndexOf('.') + 1);
+        ClassDefinition typeDefinition = new ClassDefinition(type);
 
-        variables.put("import", importClause);
-        variables.put("type", parameterizedSourceName);
+        variables.put("import", typeDefinition.getQualifiedName());
+        variables.put("type", typeDefinition.getParameterizedClassName());
     }
 
     @Override

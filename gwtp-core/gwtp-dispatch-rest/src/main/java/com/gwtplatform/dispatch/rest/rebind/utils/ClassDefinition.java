@@ -16,22 +16,56 @@
 
 package com.gwtplatform.dispatch.rest.rebind.utils;
 
-import com.google.gwt.core.ext.typeinfo.JClassType;
+import com.google.gwt.core.ext.typeinfo.JType;
 
 public class ClassDefinition {
     private final String packageName;
     private final String className;
+    private final String typeParameters;
 
     public ClassDefinition(
-            JClassType classType) {
-        this(classType.getPackage().getName(), classType.getSimpleSourceName());
+            JType type) {
+        this(type.getParameterizedQualifiedSourceName());
+    }
+
+    public ClassDefinition(
+            String parameterizedQualifiedName) {
+        String qualifiedClassName;
+        int typeParameterStart = parameterizedQualifiedName.indexOf("<");
+
+        if (typeParameterStart != -1) {
+            int typeParameterEnd = parameterizedQualifiedName.lastIndexOf(">");
+            typeParameters = parameterizedQualifiedName.substring(typeParameterStart + 1, typeParameterEnd);
+            qualifiedClassName = parameterizedQualifiedName.substring(0, typeParameterStart);
+        } else {
+            typeParameters = null;
+            qualifiedClassName = parameterizedQualifiedName;
+        }
+
+        // primitives won't have packages
+        int lastDot = qualifiedClassName.lastIndexOf('.');
+        if (lastDot != -1) {
+            packageName = qualifiedClassName.substring(0, lastDot);
+            className = qualifiedClassName.substring(lastDot + 1);
+        } else {
+            packageName = "";
+            className = qualifiedClassName;
+        }
     }
 
     public ClassDefinition(
             String packageName,
             String className) {
+        this(packageName, className, null);
+    }
+
+    public ClassDefinition(
+            String packageName,
+            String className,
+            String typeParameters) {
         this.packageName = packageName;
         this.className = className;
+        this.typeParameters = typeParameters;
     }
 
     public String getPackageName() {
@@ -42,12 +76,61 @@ public class ClassDefinition {
         return className;
     }
 
+    public String getTypeParameters() {
+        return typeParameters;
+    }
+
+    public boolean isParameterized() {
+        return typeParameters != null;
+    }
+
     public String getQualifiedName() {
-        return packageName + "." + className;
+        String qualifiedName = packageName;
+        if (!qualifiedName.isEmpty()) {
+            qualifiedName += ".";
+        }
+
+        qualifiedName += className;
+
+        return qualifiedName;
+    }
+
+    public String getParameterizedClassName() {
+        return maybeAppendTypeParameters(getClassName());
+    }
+
+    public String getParameterizedQualifiedName() {
+        return maybeAppendTypeParameters(getQualifiedName());
     }
 
     @Override
     public String toString() {
-        return getQualifiedName();
+        return getParameterizedQualifiedName();
+    }
+
+    @Override
+    public int hashCode() {
+        return getParameterizedQualifiedName().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || !(obj instanceof ClassDefinition)) {
+            return false;
+        }
+
+        ClassDefinition other = (ClassDefinition) obj;
+        return getParameterizedQualifiedName().equals(other.getParameterizedQualifiedName());
+    }
+
+    private String maybeAppendTypeParameters(String name) {
+        if (isParameterized()) {
+            return name + "<" + typeParameters + ">";
+        }
+
+        return name;
     }
 }

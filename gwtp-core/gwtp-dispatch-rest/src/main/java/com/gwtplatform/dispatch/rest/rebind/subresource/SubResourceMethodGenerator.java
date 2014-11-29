@@ -32,18 +32,19 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
-import com.gwtplatform.dispatch.rest.rebind.resource.AbstractResourceMethodGenerator;
+import com.gwtplatform.dispatch.rest.rebind.resource.AbstractMethodGenerator;
+import com.gwtplatform.dispatch.rest.rebind.resource.MethodContext;
+import com.gwtplatform.dispatch.rest.rebind.resource.MethodDefinition;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceGenerator;
-import com.gwtplatform.dispatch.rest.rebind.resource.ResourceMethodContext;
-import com.gwtplatform.dispatch.rest.rebind.resource.ResourceMethodDefinition;
+import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGenerator;
 
-public class SubResourceMethodGenerator extends AbstractResourceMethodGenerator {
-    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind2/resource/SubResourceMethod.vm";
+public class SubResourceMethodGenerator extends AbstractMethodGenerator {
+    private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/subresource/SubResourceMethod.vm";
 
     private final Provider<Set<ResourceGenerator>> resourceGeneratorsProvider;
 
@@ -62,19 +63,20 @@ public class SubResourceMethodGenerator extends AbstractResourceMethodGenerator 
     }
 
     @Override
-    public boolean canGenerate(ResourceMethodContext context) throws UnableToCompleteException {
+    public boolean canGenerate(MethodContext context) {
         setContext(context);
 
-        JClassType restActionType = getType(RestAction.class);
+        JClassType restActionType = findType(RestAction.class);
 
-        return returnInterface != null
+        return restActionType != null
+                && returnInterface != null
                 && !returnInterface.isAssignableTo(restActionType)
                 && !HttpVerb.isHttpMethod(getMethod())
                 && canGenerateSubResource();
     }
 
     @Override
-    public ResourceMethodDefinition generate(ResourceMethodContext context) throws UnableToCompleteException {
+    public MethodDefinition generate(MethodContext context) throws UnableToCompleteException {
         setContext(context);
 
         List<Parameter> parameters = resolveParameters();
@@ -104,7 +106,7 @@ public class SubResourceMethodGenerator extends AbstractResourceMethodGenerator 
             subResourceParameters = Lists.newArrayList();
         }
 
-        variables.put("resourceType", returnInterface.getSimpleSourceName());
+        variables.put("resourceType", new ClassDefinition(returnInterface).getParameterizedClassName());
         variables.put("methodName", getMethod().getName());
         variables.put("parameters", methodDefinition.getParameters());
         variables.put("subResourceParameters", subResourceParameters);
@@ -112,7 +114,7 @@ public class SubResourceMethodGenerator extends AbstractResourceMethodGenerator 
     }
 
     @Override
-    protected void setContext(ResourceMethodContext methodContext) {
+    protected void setContext(MethodContext methodContext) {
         super.setContext(methodContext);
 
         this.returnInterface = getMethod().getReturnType().isInterface();
@@ -121,8 +123,7 @@ public class SubResourceMethodGenerator extends AbstractResourceMethodGenerator 
     private void generateResource() throws UnableToCompleteException {
         SubResourceContext subResourceContext =
                 new SubResourceContext(returnInterface, getMethodContext(), methodDefinition);
-        ResourceGenerator generator =
-                findGenerator(getLogger(), resourceGeneratorsProvider.get(), subResourceContext);
+        ResourceGenerator generator = findGenerator(resourceGeneratorsProvider.get(), subResourceContext);
         ResourceDefinition resourceDefinition = generator.generate(subResourceContext);
 
         methodDefinition.addResource(resourceDefinition);
@@ -138,8 +139,7 @@ public class SubResourceMethodGenerator extends AbstractResourceMethodGenerator 
 
     private boolean canGenerateSubResource() {
         SubResourceContext subResourceContext = new SubResourceContext(returnInterface, getMethodContext(), null);
-        ResourceGenerator generator =
-                findGenerator(getLogger(), resourceGeneratorsProvider.get(), subResourceContext);
+        ResourceGenerator generator = findGenerator(resourceGeneratorsProvider.get(), subResourceContext);
         String resourceTypeName = returnInterface.getQualifiedSourceName();
 
         boolean canGenerate = generator != null;

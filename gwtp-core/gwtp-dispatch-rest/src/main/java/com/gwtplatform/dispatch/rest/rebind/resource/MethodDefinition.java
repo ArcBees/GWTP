@@ -24,7 +24,7 @@ import com.google.common.collect.Sets;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 
-public class ResourceMethodDefinition {
+public class MethodDefinition {
     private final JMethod method;
     private final List<Parameter> parameters;
     private final List<Parameter> inheritedParameters;
@@ -32,7 +32,15 @@ public class ResourceMethodDefinition {
 
     private String output;
 
-    public ResourceMethodDefinition(
+    public MethodDefinition(
+            MethodDefinition definition) {
+        this(definition.getMethod(), definition.getParameters(), definition.getInheritedParameters());
+
+        setOutput(definition.getOutput());
+        imports.addAll(definition.getImports());
+    }
+
+    public MethodDefinition(
             JMethod method,
             List<Parameter> parameters,
             List<Parameter> inheritedParameters) {
