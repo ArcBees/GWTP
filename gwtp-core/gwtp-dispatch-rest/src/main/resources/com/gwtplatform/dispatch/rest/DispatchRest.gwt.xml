@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.7.0//EN"
-        "https://raw.githubusercontent.com/gwtproject/gwt/2.7.0/distro-source/core/src/gwt-module.dtd">
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.6.1//EN"
+        "https://raw.githubusercontent.com/gwtproject/gwt/2.6.1/distro-source/core/src/gwt-module.dtd">
 <module>
     <inherits name="com.gwtplatform.dispatch.DispatchCommonClient"/>
     <inherits name="com.gwtplatform.dispatch.rest.DispatchRestShared"/>
@@ -16,10 +16,14 @@
 
     <extend-configuration-property name="gin.classloading.exceptedPackages" value="javax.ws.rs"/>
 
+    <define-configuration-property name="gwtp.dispatch.rest.generatorModules" is-multi-valued="true"/>
+    <define-configuration-property name="gwtp.dispatch.rest.ginModule" is-multi-valued="false"/>
+    <set-configuration-property name="gwtp.dispatch.rest.ginModule"
+            value="com.gwtplatform.dispatch.rest.client.RestGinModule"/>
     <extend-configuration-property name="gin.ginjector.modules"
             value="com.gwtplatform.dispatch.rest.client.RestGinModule"/>
 
-    <generate-with class="com.gwtplatform.dispatch.rest.rebind.DispatchRestGenerator">
+    <generate-with class="com.gwtplatform.dispatch.rest.rebind.DispatchRestIncrementalGenerator">
         <when-type-is class="com.gwtplatform.dispatch.rest.client.DispatchRestEntryPoint"/>
     </generate-with>
 </module>

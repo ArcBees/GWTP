@@ -1,0 +1,35 @@
+#macro(printHttpParamMethodName $param)
+#if($param.type.name() == "HEADER")
+addHeaderParam#elseif($param.type.name() == "PATH")
+addPathParam#elseif($param.type.name() == "QUERY")
+addQueryParam#elseif($param.type.name() == "FORM")
+addFormParam#end
+#end
+package $package;
+
+import javax.ws.rs.core.HttpHeaders;
+
+import com.gwtplatform.dispatch.rest.client.AbstractRestAction;
+import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+
+public class $impl extends AbstractRestAction<$result> {
+    public ${impl}(
+            String defaultDateFormat#generateAppendedMethodSignature($parameters)) {
+        super(HttpMethod.$httpVerb, "$path", defaultDateFormat);
+
+#foreach($param in $httpParameters)
+        #printHttpParamMethodName($param)("$param.name", $param.variableName#if($param.dateFormat.isPresent()), "$param.dateFormat.get()"#end);
+#end
+#if($bodyParameterName)
+        setBodyParam($bodyParameterName);
+#end
+#if($contentType)
+        addHeaderParam(HttpHeaders.CONTENT_TYPE, "$contentType");
+#end
+    }
+
+    @Override
+    public boolean isSecured() {
+        return $secured;
+    }
+}
