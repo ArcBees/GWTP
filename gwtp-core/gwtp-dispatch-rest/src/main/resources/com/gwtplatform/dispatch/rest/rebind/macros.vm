@@ -7,15 +7,24 @@
 #if($element)$value#else$null#end
 #end
 
-#macro(concatArguments $arguments1 $arguments2)
-#if( "$arguments1" != "" && "$arguments2" != "" )$argumentsFromService,
-$actionArguments#else$argumentsFromService$actionArguments#end
+#macro(generateMethodSignature $parameters)
+#foreach ($param in $parameters)
+
+            $param.getParameterizedQualifiedName() $param.variableName#commaIfNeeded($parameters)#end
 #end
 
-#macro(importResources $bindings)
-#foreach ($binding in $bindings)
-#if($binding.getServiceInterface())
-import ${binding.getInterfacePackage()}.$binding.getServiceInterface();#end
-import ${binding.getImplPackage()}.$binding.getImplName();
+#macro(generateAppendedMethodSignature $parameters)
+#foreach ($param in $parameters),
+            $param.getParameterizedQualifiedName() $param.variableName#end
 #end
+
+#macro(generateCallSignature $parameters)
+#foreach ($param in $parameters)
+
+                $param.variableName#commaIfNeeded($parameters)#end
+#end
+
+#macro(generateAppendedCallSignature $parameters)
+#foreach ($param in $parameters),
+                $param.variableName#end
 #end

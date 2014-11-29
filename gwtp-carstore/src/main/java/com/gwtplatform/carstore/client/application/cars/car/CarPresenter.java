@@ -43,7 +43,7 @@ import com.gwtplatform.carstore.shared.api.CarsResource;
 import com.gwtplatform.carstore.shared.api.ManufacturersResource;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.ManufacturerDto;
-import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
+import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
