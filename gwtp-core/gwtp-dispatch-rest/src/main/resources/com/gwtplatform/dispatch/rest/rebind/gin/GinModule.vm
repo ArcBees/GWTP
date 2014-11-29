@@ -1,0 +1,30 @@
+package $package;
+
+import javax.inject.Singleton;
+
+import com.google.gwt.inject.client.AbstractGinModule;
+import com.google.inject.TypeLiteral;
+#foreach ($binding in $bindings)
+import $binding.definition.getQualifiedName();
+import $binding.implementation.getQualifiedName();
+#end
+
+public class $impl extends AbstractGinModule {
+    @Override
+    protected void configure() {
+#foreach ($binding in $bindings)
+#if($binding.definition.isParameterized())
+        bind(new TypeLiteral<$binding.definition.getParameterizedClassName()>() {})
+#else
+        bind(${binding.definition.className}.class)
+#end
+#if($binding.implementation.isParameterized())
+                .to(new TypeLiteral<$binding.implementation.getParameterizedClassName()>() {})
+#else
+                .to(${binding.implementation.className}.class)
+#end
+#if($binding.isSingleton())
+                .in(Singleton.class)#end;
+#end
+    }
+}
