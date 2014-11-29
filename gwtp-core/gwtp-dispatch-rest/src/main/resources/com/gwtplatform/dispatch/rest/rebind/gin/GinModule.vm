@@ -18,7 +18,11 @@ public class $impl extends AbstractGinModule {
 #else
         bind(${binding.definition.className}.class)
 #end
+#if($binding.implementation.isParameterized())
+                .to(new TypeLiteral<$binding.implementation.getParameterizedClassName()>() {})
+#else
                 .to(${binding.implementation.className}.class)
+#end
 #if($binding.isSingleton())
                 .in(Singleton.class)#end;
 #end

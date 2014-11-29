@@ -24,7 +24,10 @@ public class RegisterMetadataHolder {
     private final MetadataType metadataType;
     private final String metadata;
 
-    public RegisterMetadataHolder(String actionClass, MetadataType metadataType, String metadata) {
+    public RegisterMetadataHolder(
+            String actionClass,
+            MetadataType metadataType,
+            String metadata) {
         this.actionClass = actionClass;
         this.metadataType = metadataType;
         this.metadata = metadata;

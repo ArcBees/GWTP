@@ -19,6 +19,5 @@ package com.gwtplatform.dispatch.rest.rebind.resource;
 import com.gwtplatform.dispatch.rest.rebind.GeneratorWithInput;
 import com.gwtplatform.dispatch.rest.rebind.HasPriority;
 
-public interface ResourceMethodGenerator
-        extends HasPriority, GeneratorWithInput<ResourceMethodContext, MethodDefinition> {
+public interface MethodGenerator extends HasPriority, GeneratorWithInput<MethodContext, MethodDefinition> {
 }

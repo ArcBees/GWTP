@@ -41,9 +41,9 @@ import com.gwtplatform.dispatch.rest.rebind.events.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind.events.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameter;
 import com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.rebind.resource.MethodContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
-import com.gwtplatform.dispatch.rest.rebind.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.rebind.subresource.SubResourceContext;
 import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassNameGenerator;
@@ -122,8 +122,8 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     @Override
     public ActionDefinition generate(ActionContext context) throws UnableToCompleteException {
         setContext(context);
-
         resolveClassName();
+
         HttpMethod verb = resolveHttpVerb();
         String path = resolvePath();
         boolean secured = resolveSecured();
@@ -131,11 +131,12 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         String contentType = resolveContentType();
         filterParameters();
 
-        actionDefinition = new ActionDefinition(getPackageName(), getImplName(), verb, path, secured, contentType,
-                resultType, httpParameters, bodyParameter);
-
         PrintWriter printWriter = tryCreate();
+
         if (printWriter != null) {
+            actionDefinition = new ActionDefinition(getPackageName(), getImplName(), verb, path, secured, contentType,
+                    resultType, httpParameters, bodyParameter);
+
             mergeTemplate(printWriter);
             commit(printWriter);
 
@@ -179,7 +180,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     }
 
     private void setContext(ActionContext context) {
-        ResourceMethodContext methodContext = context.getMethodContext();
+        MethodContext methodContext = context.getMethodContext();
 
         this.context = context;
         this.methodDefinition = context.getMethodDefinition();
@@ -280,12 +281,12 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         }
     }
 
-    private List<JParameter> findAllParameters(ResourceMethodContext methodContext) {
+    private List<JParameter> findAllParameters(MethodContext methodContext) {
         List<JParameter> jParameters = Lists.newArrayList();
 
         ResourceContext resourceContext = methodContext.getResourceContext();
         if (resourceContext instanceof SubResourceContext) {
-            ResourceMethodContext parentMethodContext = ((SubResourceContext) resourceContext).getMethodContext();
+            MethodContext parentMethodContext = ((SubResourceContext) resourceContext).getMethodContext();
             List<JParameter> parentParameters = findAllParameters(parentMethodContext);
 
             jParameters.addAll(parentParameters);

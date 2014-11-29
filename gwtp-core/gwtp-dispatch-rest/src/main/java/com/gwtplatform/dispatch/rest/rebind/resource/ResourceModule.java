@@ -26,8 +26,8 @@ public class ResourceModule extends AbstractModule {
         return Multibinder.newSetBinder(binder, ResourceGenerator.class).addBinding();
     }
 
-    public static LinkedBindingBuilder<ResourceMethodGenerator> addResourceMethodGenerator(Binder binder) {
-        return Multibinder.newSetBinder(binder, ResourceMethodGenerator.class).addBinding();
+    public static LinkedBindingBuilder<MethodGenerator> addMethodGenerator(Binder binder) {
+        return Multibinder.newSetBinder(binder, MethodGenerator.class).addBinding();
     }
 
     @Override

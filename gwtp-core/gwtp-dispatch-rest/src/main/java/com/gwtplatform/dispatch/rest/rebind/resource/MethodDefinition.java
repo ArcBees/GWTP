@@ -33,6 +33,14 @@ public class MethodDefinition {
     private String output;
 
     public MethodDefinition(
+            MethodDefinition definition) {
+        this(definition.getMethod(), definition.getParameters(), definition.getInheritedParameters());
+
+        setOutput(definition.getOutput());
+        imports.addAll(definition.getImports());
+    }
+
+    public MethodDefinition(
             JMethod method,
             List<Parameter> parameters,
             List<Parameter> inheritedParameters) {

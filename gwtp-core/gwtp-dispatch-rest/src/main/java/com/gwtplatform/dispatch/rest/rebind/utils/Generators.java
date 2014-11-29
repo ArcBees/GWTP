@@ -41,7 +41,7 @@ public class Generators {
      */
     public static <T extends HasPriority & GeneratorWithInput<? super I, ?>, I> T getGenerator(
             Logger logger, Collection<T> generators, I input) throws UnableToCompleteException {
-        T generator = findGenerator(logger, generators, input);
+        T generator = findGenerator(generators, input);
 
         if (generator != null) {
             return generator;
@@ -56,16 +56,12 @@ public class Generators {
      * @return the best suited generator for input or {@code null} if none are found.
      */
     public static <T extends HasPriority & GeneratorWithInput<? super I, ?>, I> T findGenerator(
-            Logger logger, Collection<T> generators, I input) {
+            Collection<T> generators, I input) {
         List<T> sortedGenerators = sortGenerators(generators);
 
         for (T generator : sortedGenerators) {
-            try {
-                if (generator.canGenerate(input)) {
-                    return generator;
-                }
-            } catch (UnableToCompleteException e) {
-                logger.warn("Unexpected exception", e);
+            if (generator.canGenerate(input)) {
+                return generator;
             }
         }
 

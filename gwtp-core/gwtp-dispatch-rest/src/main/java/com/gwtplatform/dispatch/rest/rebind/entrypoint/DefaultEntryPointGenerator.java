@@ -44,10 +44,13 @@ public class DefaultEntryPointGenerator extends AbstractGenerator implements Ent
     }
 
     @Override
-    public boolean canGenerate(String typeName) throws UnableToCompleteException {
-        JClassType type = getType(typeName);
+    public boolean canGenerate(String typeName) {
+        JClassType type = findType(typeName);
+        JClassType entryPointType = findType(DispatchRestEntryPoint.class);
 
-        return type.isAssignableTo(getType(DispatchRestEntryPoint.class));
+        return type != null
+                && entryPointType != null
+                && type.isAssignableTo(entryPointType);
     }
 
     @Override
@@ -58,7 +61,11 @@ public class DefaultEntryPointGenerator extends AbstractGenerator implements Ent
         printWriter = tryCreate(packageName, className);
 
         if (printWriter != null) {
-            generateFile();
+            try {
+                generateFile();
+            } finally {
+                printWriter.close();
+            }
         }
 
         return new ClassDefinition(packageName, className);
