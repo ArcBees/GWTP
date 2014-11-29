@@ -48,7 +48,7 @@ public class ActionMethodGenerator extends AbstractMethodGenerator {
     private ActionMethodDefinition methodDefinition;
 
     @Inject
-    ActionMethodGenerator(
+    protected ActionMethodGenerator(
             Logger logger,
             GeneratorContext context,
             Set<ActionGenerator> actionGenerators,
@@ -105,41 +105,7 @@ public class ActionMethodGenerator extends AbstractMethodGenerator {
         variables.put("action", methodDefinition.getActionDefinitions().get(0));
     }
 
-    private JClassType resolveResultType() {
-        return getMethod().getReturnType().isParameterized().getTypeArgs()[0];
-    }
-
-    private void generateAction() throws UnableToCompleteException {
-        ActionContext actionContext = new ActionContext(getMethodContext(), methodDefinition);
-        ActionGenerator generator = getGenerator(getLogger(), actionGenerators, actionContext);
-        ActionDefinition definition = generator.generate(actionContext);
-
-        methodDefinition.addAction(definition);
-    }
-
-    private void generateMethod() throws UnableToCompleteException {
-        String output = mergeTemplate();
-        methodDefinition.setOutput(output);
-    }
-
-    private boolean isValidRestAction(JType type) {
-        String restActionName = RestAction.class.getName();
-        if (restActionName.equals(type.getQualifiedSourceName())) {
-            JParameterizedType parameterizedType = type.isParameterized();
-
-            boolean isValid = parameterizedType != null && parameterizedType.getTypeArgs().length == 1;
-            if (!isValid) {
-                getLogger().warn("RestAction<?> specified as a return type for `%s#%s`, but type argument is missing.",
-                        getContextParentName(), getMethod().getName());
-            }
-
-            return isValid;
-        }
-
-        return false;
-    }
-
-    private boolean hasExactlyOneHttpVerb() {
+    protected boolean hasExactlyOneHttpVerb() {
         int annotationsCount = 0;
 
         for (HttpVerb annotation : HttpVerb.values()) {
@@ -165,7 +131,7 @@ public class ActionMethodGenerator extends AbstractMethodGenerator {
         return hasOneAnnotation;
     }
 
-    private boolean canGenerateAction() {
+    protected boolean canGenerateAction() {
         ActionContext actionContext = new ActionContext(getMethodContext(), null);
         ActionGenerator actionGenerator = findGenerator(actionGenerators, actionContext);
 
@@ -176,6 +142,44 @@ public class ActionMethodGenerator extends AbstractMethodGenerator {
         }
 
         return canGenerate;
+    }
+
+    protected ActionDefinition generateAction(ActionContext actionContext) throws UnableToCompleteException {
+        ActionGenerator generator = getGenerator(getLogger(), actionGenerators, actionContext);
+        return generator.generate(actionContext);
+    }
+
+    private JClassType resolveResultType() {
+        return getMethod().getReturnType().isParameterized().getTypeArgs()[0];
+    }
+
+    private void generateAction() throws UnableToCompleteException {
+        ActionContext actionContext = new ActionContext(getMethodContext(), methodDefinition);
+        ActionDefinition definition = generateAction(actionContext);
+
+        methodDefinition.addAction(definition);
+    }
+
+    private void generateMethod() throws UnableToCompleteException {
+        String output = mergeTemplate();
+        methodDefinition.setOutput(output);
+    }
+
+    private boolean isValidRestAction(JType type) {
+        String restActionName = RestAction.class.getName();
+        if (restActionName.equals(type.getQualifiedSourceName())) {
+            JParameterizedType parameterizedType = type.isParameterized();
+
+            boolean isValid = parameterizedType != null && parameterizedType.getTypeArgs().length == 1;
+            if (!isValid) {
+                getLogger().warn("RestAction<?> specified as a return type for `%s#%s`, but type argument is missing.",
+                        getContextParentName(), getMethod().getName());
+            }
+
+            return isValid;
+        }
+
+        return false;
     }
 
     private String getContextParentName() {
