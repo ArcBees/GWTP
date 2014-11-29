@@ -24,8 +24,8 @@ package com.gwtplatform.dispatch.client.interceptor;
 public class InterceptorMismatchException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    private Class<?> requestedActionType;
-    private Class<?> supportedActionType;
+    private final Class<?> requestedActionType;
+    private final Class<?> supportedActionType;
 
     public InterceptorMismatchException(
             Class<?> requestedActionType,
@@ -36,6 +36,7 @@ public class InterceptorMismatchException extends RuntimeException {
 
     @SuppressWarnings("unused")
     private InterceptorMismatchException() {
+        this(null, null);
     }
 
     public Class<?> getRequestedActionType() {
@@ -49,7 +50,7 @@ public class InterceptorMismatchException extends RuntimeException {
     @Override
     public String toString() {
         return getClass().getName() +
-               " [requestedActionType=" + this.requestedActionType +
-               ", supportedActionType=" + this.supportedActionType + "]";
+                " [requestedActionType=" + this.requestedActionType +
+                ", supportedActionType=" + this.supportedActionType + "]";
     }
 }

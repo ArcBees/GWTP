@@ -8,4 +8,7 @@
     <inherits name="com.google.common.base.Base"/>
 
     <source path='client'/>
+
+    <extend-configuration-property name="rpc.blacklist"
+            value="com.gwtplatform.dispatch.client.interceptor.InterceptorMismatchException"/>
 </module>
