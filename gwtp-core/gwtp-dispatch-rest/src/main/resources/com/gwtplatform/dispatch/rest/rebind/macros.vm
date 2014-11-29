@@ -10,12 +10,12 @@
 #macro(generateMethodSignature $parameters)
 #foreach ($param in $parameters)
 
-            $param.qualifiedSourceName $param.variableName#commaIfNeeded($parameters)#end
+            $param.getParameterizedQualifiedName() $param.variableName#commaIfNeeded($parameters)#end
 #end
 
 #macro(generateAppendedMethodSignature $parameters)
 #foreach ($param in $parameters),
-            $param.qualifiedSourceName $param.variableName#end
+            $param.getParameterizedQualifiedName() $param.variableName#end
 #end
 
 #macro(generateCallSignature $parameters)

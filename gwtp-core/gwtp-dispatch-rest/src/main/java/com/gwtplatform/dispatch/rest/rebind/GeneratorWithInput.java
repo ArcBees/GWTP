@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.rest.rebind;
 import com.google.gwt.core.ext.UnableToCompleteException;
 
 public interface GeneratorWithInput<I, O> {
-    boolean canGenerate(I input) throws UnableToCompleteException;
+    boolean canGenerate(I input);
 
     O generate(I input) throws UnableToCompleteException;
 }

@@ -30,6 +30,7 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
+import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGenerator;
@@ -51,17 +52,17 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
     }
 
     @Override
-    public boolean canGenerate(ResourceContext resourceContext) throws UnableToCompleteException {
+    public boolean canGenerate(ResourceContext resourceContext) {
         return canGenerateAllMethods();
     }
 
     @Override
     public ResourceDefinition generate(ResourceContext context) throws UnableToCompleteException {
         setContext(context);
-        imports = Sets.newTreeSet();
 
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
+            imports = Sets.newTreeSet();
             imports.add(getResourceType().getQualifiedSourceName());
 
             generateMethods();
@@ -76,7 +77,7 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
     @Override
     protected void populateTemplateVariables(Map<String, Object> variables) {
         variables.put("imports", imports);
-        variables.put("resourceType", getResourceType().getSimpleSourceName());
+        variables.put("resourceType", new ClassDefinition(getResourceType()).getParameterizedClassName());
         variables.put("methods", getResourceDefinition().getMethodDefinitions());
     }
 
@@ -108,8 +109,7 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
     protected void generateMethod(JMethod method) throws UnableToCompleteException {
         MethodContext methodContext =
                 new MethodContext(getResourceDefinition(), getResourceContext(), method);
-        MethodGenerator generator =
-                getGenerator(getLogger(), methodGenerators, methodContext);
+        MethodGenerator generator = getGenerator(getLogger(), methodGenerators, methodContext);
         MethodDefinition methodDefinition = generator.generate(methodContext);
 
         getResourceDefinition().addMethodDefinition(methodDefinition);
@@ -124,7 +124,7 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
 
         for (JMethod enclosedMethod : methods) {
             MethodContext methodContext = new MethodContext(null, getResourceContext(), enclosedMethod);
-            MethodGenerator generator = findGenerator(getLogger(), methodGenerators, methodContext);
+            MethodGenerator generator = findGenerator(methodGenerators, methodContext);
 
             if (generator == null) {
                 canGenerate = false;

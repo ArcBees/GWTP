@@ -27,7 +27,7 @@ import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
  */
 public class EmptyExtension implements ExtensionGenerator {
     @Override
-    public boolean canGenerate(ExtensionContext context) throws UnableToCompleteException {
+    public boolean canGenerate(ExtensionContext context) {
         return false;
     }
 
