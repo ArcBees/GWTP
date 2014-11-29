@@ -252,15 +252,11 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
 
     private String resolveContentType() {
         Consumes consumes = method.getAnnotation(Consumes.class);
-        String contentType;
 
         if (consumes != null && consumes.value().length > 0) {
-            contentType = consumes.value()[0];
-        } else {
-            contentType = null;
+            return consumes.value()[0];
         }
-
-        return contentType;
+        return null;
     }
 
     private void registerMetadata() throws UnableToCompleteException {
