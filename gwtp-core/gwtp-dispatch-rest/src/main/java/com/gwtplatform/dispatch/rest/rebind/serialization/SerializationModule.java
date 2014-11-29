@@ -14,11 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind.gin;
+package com.gwtplatform.dispatch.rest.rebind.serialization;
 
-import com.gwtplatform.dispatch.rest.rebind.GeneratorWithoutInput;
-import com.gwtplatform.dispatch.rest.rebind.HasPriority;
-import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.google.inject.AbstractModule;
 
-public interface GinModuleGenerator extends GeneratorWithoutInput<ClassDefinition>, HasPriority {
+import static com.gwtplatform.dispatch.rest.rebind.extension.ExtensionModule.addExtensionGenerator;
+
+public class SerializationModule extends AbstractModule {
+    @Override
+    protected void configure() {
+        addExtensionGenerator(binder()).to(ActionMetadataProviderGenerator.class).asEagerSingleton();
+        addExtensionGenerator(binder()).to(JacksonMapperProviderGenerator.class).asEagerSingleton();
+    }
 }

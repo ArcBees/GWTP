@@ -77,7 +77,7 @@ public class DispatchRestIncrementalGenerator extends IncrementalGenerator {
             throw new UnableToCompleteException();
         }
 
-        return generator.generate(typeName);
+        return generator.generate(typeName).getEntryPointDefinition();
     }
 
     private Injector createInjector() {

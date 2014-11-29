@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rest.rebind.serialization;
 
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -25,6 +26,7 @@ import javax.inject.Inject;
 
 import org.apache.velocity.app.VelocityEngine;
 
+import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -32,14 +34,15 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
 import com.gwtplatform.dispatch.rest.client.MetadataType;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
-import com.gwtplatform.dispatch.rest.rebind.GeneratorWithoutInput;
 import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent;
 import com.gwtplatform.dispatch.rest.rebind.events.RegisterMetadataEvent;
+import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionContext;
+import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionGenerator;
+import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionPoint;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
-public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator
-        implements GeneratorWithoutInput<ClassDefinition> {
+public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator implements ExtensionGenerator {
     private static final String TEMPLATE =
             "com/gwtplatform/dispatch/rest/rebind/serialization/ActionMetadataProvider.vm";
 
@@ -61,12 +64,12 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator
     }
 
     @Override
-    public boolean canGenerate() {
-        return true;
+    public boolean canGenerate(ExtensionContext context) {
+        return context.getExtensionPoint() == ExtensionPoint.BEFORE_GIN;
     }
 
     @Override
-    public ClassDefinition generate() throws UnableToCompleteException {
+    public Collection<ClassDefinition> generate(ExtensionContext context) throws UnableToCompleteException {
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
             mergeTemplate(printWriter);
@@ -76,7 +79,7 @@ public class ActionMetadataProviderGenerator extends AbstractVelocityGenerator
             getLogger().debug("Action metadata provider already generated. Returning.");
         }
 
-        return getClassDefinition();
+        return Lists.newArrayList(getClassDefinition());
     }
 
     @Subscribe

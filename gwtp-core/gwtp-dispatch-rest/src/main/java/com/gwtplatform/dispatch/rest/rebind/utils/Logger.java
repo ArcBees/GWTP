@@ -82,15 +82,15 @@ public class Logger extends TreeLogger {
      * Post an error message and halt processing. This method always throws an {@link
      * com.google.gwt.core.ext.UnableToCompleteException UnableToCompleteException}.
      */
-    public <T> T die(String message, Object... params) throws UnableToCompleteException {
-        return die(message, null, params);
+    public void die(String message, Object... params) throws UnableToCompleteException {
+        die(message, null, params);
     }
 
     /**
      * Post an error message and halt processing. This method always throws an {@link
      * com.google.gwt.core.ext.UnableToCompleteException UnableToCompleteException}.
      */
-    public <T> T die(String message, Throwable caught, Object... params) throws UnableToCompleteException {
+    public void die(String message, Throwable caught, Object... params) throws UnableToCompleteException {
         error(message, caught, params);
         throw new UnableToCompleteException();
     }

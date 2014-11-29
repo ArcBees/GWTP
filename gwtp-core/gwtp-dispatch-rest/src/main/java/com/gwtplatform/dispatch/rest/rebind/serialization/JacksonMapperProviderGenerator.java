@@ -17,12 +17,15 @@
 package com.gwtplatform.dispatch.rest.rebind.serialization;
 
 import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.velocity.app.VelocityEngine;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -31,18 +34,19 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
-import com.gwtplatform.dispatch.rest.rebind.GeneratorWithoutInput;
 import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent;
 import com.gwtplatform.dispatch.rest.rebind.events.RegisterSerializableTypeEvent;
+import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionContext;
+import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionGenerator;
+import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionPoint;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
-public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
-        implements GeneratorWithoutInput<ClassDefinition> {
+public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator implements ExtensionGenerator {
     private static final String TEMPLATE =
             "com/gwtplatform/dispatch/rest/rebind/serialization/JacksonMapperProvider.vm";
 
-    private final Map<JType, String> registeredTypes;
+    private final Map<JType, ClassDefinition> registeredTypes;
     private final EventBus eventBus;
     private final JacksonMapperGenerator jacksonMapperGenerator;
 
@@ -63,17 +67,18 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
     }
 
     @Override
-    public boolean canGenerate() {
-        return true;
+    public boolean canGenerate(ExtensionContext context) {
+        return context.getExtensionPoint() == ExtensionPoint.BEFORE_GIN;
     }
 
-    public ClassDefinition generate() throws UnableToCompleteException {
+    @Override
+    public Collection<ClassDefinition> generate(ExtensionContext input) throws UnableToCompleteException {
         PrintWriter printWriter = tryCreate();
 
         if (printWriter != null) {
             for (JType type : registeredTypes.keySet()) {
                 ClassDefinition mapperDefinition = jacksonMapperGenerator.generate(type);
-                registeredTypes.put(type, mapperDefinition.getParameterizedClassName());
+                registeredTypes.put(type, mapperDefinition);
             }
 
             mergeTemplate(printWriter);
@@ -83,12 +88,14 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
             getLogger().debug("Jackson Mapper Provider already generated. Returning.");
         }
 
-        return getClassDefinition();
+        List<ClassDefinition> definitions = Lists.newArrayList(getClassDefinition());
+        definitions.addAll(registeredTypes.values());
+        return definitions;
     }
 
     @Subscribe
     public void onRegisterSerializableType(RegisterSerializableTypeEvent event) {
-        registeredTypes.put(event.getType(), "");
+        registeredTypes.put(event.getType(), null);
     }
 
     @Override

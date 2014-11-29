@@ -30,10 +30,6 @@ public class ExtensionContext {
     @Nullable
     private final Collection<ResourceDefinition> resourceDefinitions;
     @Nullable
-    private final ClassDefinition metadataProviderDefinition;
-    @Nullable
-    private final ClassDefinition jacksonMapperProviderDefinition;
-    @Nullable
     private final ClassDefinition ginModuleDefinition;
     @Nullable
     private final ClassDefinition entryPointDefinition;
@@ -42,15 +38,11 @@ public class ExtensionContext {
             ExtensionPoint extensionPoint,
             Collection<ClassDefinition> extensionDefinitions,
             @Nullable Collection<ResourceDefinition> resourceDefinitions,
-            @Nullable ClassDefinition metadataProviderDefinition,
-            @Nullable ClassDefinition jacksonMapperProviderDefinition,
             @Nullable ClassDefinition ginModuleDefinition,
             @Nullable ClassDefinition entryPointDefinition) {
         this.extensionPoint = extensionPoint;
         this.extensionDefinitions = extensionDefinitions;
         this.resourceDefinitions = resourceDefinitions;
-        this.metadataProviderDefinition = metadataProviderDefinition;
-        this.jacksonMapperProviderDefinition = jacksonMapperProviderDefinition;
         this.ginModuleDefinition = ginModuleDefinition;
         this.entryPointDefinition = entryPointDefinition;
     }
@@ -65,14 +57,6 @@ public class ExtensionContext {
 
     public Collection<ResourceDefinition> getResourceDefinitions() {
         return resourceDefinitions != null ? Lists.newArrayList(resourceDefinitions) : null;
-    }
-
-    public ClassDefinition getMetadataProviderDefinition() {
-        return metadataProviderDefinition;
-    }
-
-    public ClassDefinition getJacksonMapperProviderDefinition() {
-        return jacksonMapperProviderDefinition;
     }
 
     public ClassDefinition getGinModuleDefinition() {

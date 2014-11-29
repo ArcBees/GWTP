@@ -36,6 +36,7 @@ import com.gwtplatform.dispatch.rest.rebind.entrypoint.EntryPointModule;
 import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionModule;
 import com.gwtplatform.dispatch.rest.rebind.gin.GinModule;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceModule;
+import com.gwtplatform.dispatch.rest.rebind.serialization.SerializationModule;
 import com.gwtplatform.dispatch.rest.rebind.subresource.SubResourceModule;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
@@ -59,6 +60,7 @@ public class DispatchRestRebindModule extends AbstractModule {
         install(new ExtensionModule());
         install(new GinModule());
         install(new ResourceModule());
+        install(new SerializationModule());
         install(new SubResourceModule());
 
         bind(GeneratorContext.class).toInstance(context);
@@ -74,6 +76,7 @@ public class DispatchRestRebindModule extends AbstractModule {
     }
 
     @Provides
+    @Singleton
     @VelocityProperties
     Properties getVelocityProperties(Logger logger) throws UnableToCompleteException {
         Properties properties = new Properties();

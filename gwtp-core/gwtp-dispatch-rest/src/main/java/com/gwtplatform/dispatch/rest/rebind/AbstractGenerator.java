@@ -68,11 +68,14 @@ public abstract class AbstractGenerator implements HasPriority {
     }
 
     protected JClassType getType(String typeName) throws UnableToCompleteException {
+        JClassType type = null;
         try {
-            return getTypeOracle().getType(typeName);
+            type = getTypeOracle().getType(typeName);
         } catch (NotFoundException e) {
-            return getLogger().die("Cannot get type '%s'.", typeName);
+            getLogger().die("Cannot get type '%s'.", typeName);
         }
+
+        return type;
     }
 
     protected PrintWriter tryCreate(String packageName, String className) {

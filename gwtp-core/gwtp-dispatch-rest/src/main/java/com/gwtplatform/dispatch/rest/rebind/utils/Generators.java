@@ -24,6 +24,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.gwtplatform.dispatch.rest.rebind.GeneratorWithInput;
+import com.gwtplatform.dispatch.rest.rebind.GeneratorWithoutInput;
 import com.gwtplatform.dispatch.rest.rebind.HasPriority;
 
 public class Generators {
@@ -43,11 +44,11 @@ public class Generators {
             Logger logger, Collection<T> generators, I input) throws UnableToCompleteException {
         T generator = findGenerator(generators, input);
 
-        if (generator != null) {
-            return generator;
+        if (generator == null) {
+            logger.die("Unable to find an appropriate generator for '%s'", input);
         }
 
-        return logger.die("Unable to find an appropriate generator for '%s'", input);
+        return generator;
     }
 
     /**
@@ -61,6 +62,24 @@ public class Generators {
 
         for (T generator : sortedGenerators) {
             if (generator.canGenerate(input)) {
+                return generator;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Find the best suited generator for the given type.
+     *
+     * @return the best suited generator or {@code null} if none are found.
+     */
+    public static <T extends HasPriority & GeneratorWithoutInput<?>> T findGeneratorWithoutInput(
+            Collection<T> generators) {
+        List<T> sortedGenerators = sortGenerators(generators);
+
+        for (T generator : sortedGenerators) {
+            if (generator.canGenerate()) {
                 return generator;
             }
         }

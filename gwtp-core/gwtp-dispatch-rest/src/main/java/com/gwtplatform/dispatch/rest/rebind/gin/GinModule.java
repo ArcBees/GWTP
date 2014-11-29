@@ -16,13 +16,18 @@
 
 package com.gwtplatform.dispatch.rest.rebind.gin;
 
-import javax.inject.Singleton;
-
 import com.google.inject.AbstractModule;
+import com.google.inject.Binder;
+import com.google.inject.binder.LinkedBindingBuilder;
+import com.google.inject.multibindings.Multibinder;
 
 public class GinModule extends AbstractModule {
+    public static LinkedBindingBuilder<GinModuleGenerator> addGinModuleGenerator(Binder binder) {
+        return Multibinder.newSetBinder(binder, GinModuleGenerator.class).addBinding();
+    }
+
     @Override
     protected void configure() {
-        bind(GinModuleGenerator.class).to(DefaultGinModuleGenerator.class).in(Singleton.class);
+        addGinModuleGenerator(binder()).to(DefaultGinModuleGenerator.class).asEagerSingleton();
     }
 }

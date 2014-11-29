@@ -34,26 +34,20 @@ import com.gwtplatform.dispatch.rest.rebind.gin.GinModuleGenerator;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceGenerator;
-import com.gwtplatform.dispatch.rest.rebind.serialization.ActionMetadataProviderGenerator;
-import com.gwtplatform.dispatch.rest.rebind.serialization.JacksonMapperProviderGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGenerator;
-import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.getGenerator;
+import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGeneratorWithoutInput;
 
-public class DispatchRestGenerator extends AbstractGenerator implements GeneratorWithInput<String, ClassDefinition> {
+public class DispatchRestGenerator extends AbstractGenerator implements GeneratorWithInput<String, ExtensionContext> {
     private final Set<ExtensionGenerator> extensionGenerators;
     private final Set<EntryPointGenerator> entryPointGenerators;
     private final Set<ResourceGenerator> resourceGenerators;
-    private final ActionMetadataProviderGenerator actionMetadataProviderGenerator;
-    private final JacksonMapperProviderGenerator jacksonMapperProviderGenerator;
-    private final GinModuleGenerator ginModuleGenerator;
+    private final Set<GinModuleGenerator> ginModuleGenerators;
     private final List<ClassDefinition> extensionDefinitions;
 
     private List<ResourceDefinition> resourceDefinitions;
-    private ClassDefinition metadataProviderDefinition;
-    private ClassDefinition jacksonMapperProviderDefinition;
     private ClassDefinition ginModuleDefinition;
     private ClassDefinition entryPointDefinition;
 
@@ -64,17 +58,13 @@ public class DispatchRestGenerator extends AbstractGenerator implements Generato
             Set<ExtensionGenerator> extensionGenerators,
             Set<EntryPointGenerator> entryPointGenerators,
             Set<ResourceGenerator> resourceGenerators,
-            ActionMetadataProviderGenerator actionMetadataProviderGenerator,
-            JacksonMapperProviderGenerator jacksonMapperProviderGenerator,
-            GinModuleGenerator ginModuleGenerator) {
+            Set<GinModuleGenerator> ginModuleGenerators) {
         super(logger, context);
 
         this.extensionGenerators = extensionGenerators;
         this.entryPointGenerators = entryPointGenerators;
         this.resourceGenerators = resourceGenerators;
-        this.actionMetadataProviderGenerator = actionMetadataProviderGenerator;
-        this.jacksonMapperProviderGenerator = jacksonMapperProviderGenerator;
-        this.ginModuleGenerator = ginModuleGenerator;
+        this.ginModuleGenerators = ginModuleGenerators;
         this.extensionDefinitions = Lists.newArrayList();
     }
 
@@ -84,40 +74,21 @@ public class DispatchRestGenerator extends AbstractGenerator implements Generato
     }
 
     @Override
-    public ClassDefinition generate(String typeName) throws UnableToCompleteException {
+    public ExtensionContext generate(String typeName) throws UnableToCompleteException {
         executeExtensions(ExtensionPoint.BEFORE_EVERYTHING);
 
         generateResources();
-        generateMetadataProvider();
-        generateJacksonMapperProvider();
+        executeExtensions(ExtensionPoint.AFTER_RESOURCES);
+
+        executeExtensions(ExtensionPoint.BEFORE_GIN);
         generateGinModule();
+        executeExtensions(ExtensionPoint.AFTER_GIN);
+
         generateEntryPoint(typeName);
 
         executeExtensions(ExtensionPoint.AFTER_EVERYTHING);
 
-        return entryPointDefinition;
-    }
-
-    private void executeExtensions(ExtensionPoint extensionPoint) {
-        ExtensionContext extensionContext =
-                new ExtensionContext(extensionPoint, extensionDefinitions, resourceDefinitions,
-                        metadataProviderDefinition, jacksonMapperProviderDefinition, ginModuleDefinition,
-                        entryPointDefinition);
-
-        for (ExtensionGenerator generator : extensionGenerators) {
-            maybeExecuteExtension(extensionContext, generator);
-        }
-    }
-
-    private void maybeExecuteExtension(ExtensionContext extensionContext, ExtensionGenerator generator) {
-        try {
-            if (generator.canGenerate(extensionContext)) {
-                Collection<ClassDefinition> definitions = generator.generate(extensionContext);
-                extensionDefinitions.addAll(definitions);
-            }
-        } catch (UnableToCompleteException e) {
-            getLogger().warn("Unexpected exception executing extension.", e);
-        }
+        return createExtensionContext(null);
     }
 
     private void generateResources() throws UnableToCompleteException {
@@ -125,8 +96,6 @@ public class DispatchRestGenerator extends AbstractGenerator implements Generato
         for (JClassType type : getContext().getTypeOracle().getTypes()) {
             maybeGenerateResource(type);
         }
-
-        executeExtensions(ExtensionPoint.AFTER_RESOURCES);
     }
 
     private void maybeGenerateResource(JClassType type) throws UnableToCompleteException {
@@ -139,40 +108,47 @@ public class DispatchRestGenerator extends AbstractGenerator implements Generato
         }
     }
 
-    private void generateMetadataProvider() throws UnableToCompleteException {
-        // TODO: Use multibinder and access through `Generators`
-        if (!actionMetadataProviderGenerator.canGenerate()) {
-            getLogger().die("Unable to generate metadata provider. See previous log entries.");
-        } else {
-            metadataProviderDefinition = actionMetadataProviderGenerator.generate();
-        }
-    }
-
-    private void generateJacksonMapperProvider() throws UnableToCompleteException {
-        // TODO: Use multibinder and access through `Generators`
-        if (!jacksonMapperProviderGenerator.canGenerate()) {
-            getLogger().die("Unable to generate jackson mapper provider. See previous log entries.");
-        } else {
-            jacksonMapperProviderDefinition = jacksonMapperProviderGenerator.generate();
-        }
-    }
-
     private void generateGinModule() throws UnableToCompleteException {
-        // TODO: Use multibinder and access through `Generators`
-        if (!ginModuleGenerator.canGenerate()) {
-            getLogger().die("Unable to generate Gin Module. See previous log entries.");
+        GinModuleGenerator generator = findGeneratorWithoutInput(ginModuleGenerators);
+
+        if (generator != null) {
+            ginModuleDefinition = generator.generate();
         } else {
-            executeExtensions(ExtensionPoint.BEFORE_GIN);
-
-            ginModuleDefinition = ginModuleGenerator.generate();
-
-            executeExtensions(ExtensionPoint.AFTER_GIN);
+            getLogger().die("No gin module generators was found.");
         }
     }
 
     private void generateEntryPoint(String typeName) throws UnableToCompleteException {
-        // TODO: Use multibinder and access through `Generators`
-        EntryPointGenerator entryPointGenerator = getGenerator(getLogger(), entryPointGenerators, typeName);
-        entryPointDefinition = entryPointGenerator.generate(typeName);
+        EntryPointGenerator generator = findGenerator(entryPointGenerators, typeName);
+
+        if (generator != null) {
+            entryPointDefinition = generator.generate(typeName);
+        } else {
+            getLogger().die("No entry point generators was found.");
+        }
+    }
+
+    private void executeExtensions(ExtensionPoint extensionPoint) {
+        ExtensionContext extensionContext = createExtensionContext(extensionPoint);
+
+        for (ExtensionGenerator generator : extensionGenerators) {
+            maybeExecuteExtension(extensionContext, generator);
+        }
+    }
+
+    private void maybeExecuteExtension(ExtensionContext extensionContext, ExtensionGenerator generator) {
+        if (generator.canGenerate(extensionContext)) {
+            try {
+                Collection<ClassDefinition> definitions = generator.generate(extensionContext);
+                extensionDefinitions.addAll(definitions);
+            } catch (UnableToCompleteException e) {
+                getLogger().error("Unexpected exception executing extension.", e);
+            }
+        }
+    }
+
+    private ExtensionContext createExtensionContext(ExtensionPoint extensionPoint) {
+        return new ExtensionContext(extensionPoint, extensionDefinitions, resourceDefinitions, ginModuleDefinition,
+                entryPointDefinition);
     }
 }
