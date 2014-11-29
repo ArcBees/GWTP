@@ -34,7 +34,7 @@ import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.client.util.AbstractAsyncCallback;
 import com.gwtplatform.carstore.shared.api.RatingResource;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
-import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
+import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;

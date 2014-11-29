@@ -1,0 +1,13 @@
+package $package;
+
+import com.gwtplatform.dispatch.rest.client.MetadataType;
+
+public class $impl extends AbstractActionMetadataProvider {
+    public ActionMetadataProviderImpl() {
+#foreach ($data in $metadata)
+        register(#printNull(${data.actionClass} "${data.actionClass}.class"),
+                 #printNull(${data.metadataType} "MetadataType.${data.metadataType}"),
+                 ${data.metadata});
+#end
+    }
+}

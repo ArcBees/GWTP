@@ -1,0 +1,4 @@
+    @Override
+    public RestAction<$resultType> ${methodName}(#generateMethodSignature($methodParameters)) {
+        return new ${action.className}(defaultDateFormat#generateAppendedCallSignature($actionParameters));
+    }
