@@ -59,10 +59,10 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
     @Override
     public ResourceDefinition generate(ResourceContext context) throws UnableToCompleteException {
         setContext(context);
-        imports = Sets.newTreeSet();
 
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
+            imports = Sets.newTreeSet();
             imports.add(getResourceType().getQualifiedSourceName());
 
             generateMethods();

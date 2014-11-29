@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.rebind.action;
 
-import java.io.StringWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -119,11 +118,8 @@ public class ActionMethodGenerator extends AbstractMethodGenerator {
     }
 
     private void generateMethod() throws UnableToCompleteException {
-        StringWriter writer = new StringWriter();
-
-        mergeTemplate(writer);
-
-        methodDefinition.setOutput(writer.toString());
+        String output = mergeTemplate();
+        methodDefinition.setOutput(output);
     }
 
     private boolean isValidRestAction(JType type) {

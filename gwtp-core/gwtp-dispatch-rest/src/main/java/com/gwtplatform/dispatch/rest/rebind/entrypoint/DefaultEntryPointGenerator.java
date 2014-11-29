@@ -61,7 +61,11 @@ public class DefaultEntryPointGenerator extends AbstractGenerator implements Ent
         printWriter = tryCreate(packageName, className);
 
         if (printWriter != null) {
-            generateFile();
+            try {
+                generateFile();
+            } finally {
+                printWriter.close();
+            }
         }
 
         return new ClassDefinition(packageName, className);
