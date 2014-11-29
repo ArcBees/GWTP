@@ -33,7 +33,7 @@ import com.gwtplatform.carstore.shared.api.CarsResource;
 import com.gwtplatform.carstore.shared.api.RatingResource;
 import com.gwtplatform.carstore.shared.dto.CarDto;
 import com.gwtplatform.carstore.shared.dto.RatingDto;
-import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
+import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;

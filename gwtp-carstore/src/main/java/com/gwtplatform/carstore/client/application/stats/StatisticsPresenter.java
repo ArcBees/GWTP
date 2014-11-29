@@ -27,7 +27,7 @@ import com.gwtplatform.carstore.client.application.stats.StatisticsPresenter.MyP
 import com.gwtplatform.carstore.client.application.stats.StatisticsPresenter.MyView;
 import com.gwtplatform.carstore.client.place.NameTokens;
 import com.gwtplatform.carstore.shared.api.StatisticsResource;
-import com.gwtplatform.dispatch.rest.client.ResourceDelegate;
+import com.gwtplatform.dispatch.rest.delegates.client.ResourceDelegate;
 import com.gwtplatform.mvp.client.HasUiHandlers;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;

@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,115 +16,86 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
+import java.io.IOException;
 import java.io.PrintWriter;
-
-import javax.inject.Provider;
-import javax.ws.rs.Path;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.Map;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
+import com.google.common.collect.Maps;
+import com.google.gwt.core.ext.GeneratorContext;
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.HasAnnotations;
-import com.google.gwt.core.ext.typeinfo.TypeOracle;
-import com.gwtplatform.dispatch.rest.rebind.util.GeneratorUtil;
+import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
-public abstract class AbstractVelocityGenerator {
-    protected static final String SUFFIX = "Impl";
-    protected static final String SHARED_PACKAGE = "shared";
-    protected static final String CLIENT_PACKAGE = "client";
+public abstract class AbstractVelocityGenerator extends AbstractGenerator {
+    private static final String ENCODING = "UTF-8";
 
-    private final TypeOracle typeOracle;
-    private final Logger logger;
-    private final Provider<VelocityContext> velocityContextProvider;
     private final VelocityEngine velocityEngine;
-    private final GeneratorUtil generatorUtil;
 
     protected AbstractVelocityGenerator(
-            TypeOracle typeOracle,
             Logger logger,
-            Provider<VelocityContext> velocityContextProvider,
-            VelocityEngine velocityEngine,
-            GeneratorUtil generatorUtil) {
-        this.typeOracle = typeOracle;
-        this.logger = logger;
-        this.velocityContextProvider = velocityContextProvider;
+            GeneratorContext context,
+            VelocityEngine velocityEngine) {
+        super(logger, context);
+
         this.velocityEngine = velocityEngine;
-        this.generatorUtil = generatorUtil;
     }
 
-    protected GeneratorUtil getGeneratorUtil() {
-        return generatorUtil;
+    protected PrintWriter tryCreate() throws UnableToCompleteException {
+        return getContext().tryCreate(getLogger(), getPackageName(), getImplName());
     }
 
-    protected Logger getLogger() {
-        return logger;
+    protected String mergeTemplate() throws UnableToCompleteException {
+        StringWriter writer = new StringWriter();
+
+        mergeTemplate(writer);
+
+        return writer.toString();
     }
 
-    protected TypeOracle getTypeOracle() {
-        return typeOracle;
+    protected void mergeTemplate(Writer writer) throws UnableToCompleteException {
+        Map<String, Object> variables = Maps.newHashMap();
+        populateTemplateVariables(variables);
+
+        VelocityContext velocityContext = new VelocityContext(variables);
+        velocityContext.put("lf", "\n");
+        velocityContext.put("impl", getImplName());
+        velocityContext.put("package", getPackageName());
+
+        boolean success = writeAndClose(writer, velocityContext);
+        if (!success) {
+            getLogger().die("An error occurred while generating '%s'. See previous entries for details.",
+                    getClassDefinition());
+        }
     }
 
-    /**
-     * @param velocityTemplate
-     * @param implName
-     * @return false if the template was not merged;
-     * @throws UnableToCompleteException
-     */
-    protected boolean mergeTemplate(String velocityTemplate, String implName)
-            throws UnableToCompleteException {
-        PrintWriter printWriter = getGeneratorUtil().tryCreatePrintWriter(getPackage(), implName);
-        if (printWriter != null) {
+    protected void populateTemplateVariables(Map<String, Object> variables) {
+    }
+
+    protected ClassDefinition getClassDefinition() {
+        return new ClassDefinition(getPackageName(), getImplName());
+    }
+
+    protected abstract String getTemplate();
+
+    protected abstract String getPackageName();
+
+    protected abstract String getImplName();
+
+    private boolean writeAndClose(Writer writer, VelocityContext velocityContext) {
+        try {
+            return velocityEngine.mergeTemplate(getTemplate(), ENCODING, velocityContext, writer);
+        } finally {
             try {
-                VelocityContext velocityContext = velocityContextProvider.get();
-                velocityContext.put("lf", "\n");
-                velocityContext.put("implName", implName);
-                velocityContext.put("package", getPackage());
-
-                populateVelocityContext(velocityContext);
-
-                velocityEngine.mergeTemplate(velocityTemplate, "UTF-8", velocityContext, printWriter);
-                generatorUtil.closeDefinition(printWriter);
-            } finally {
-                printWriter.close();
+                writer.close();
+            } catch (IOException e) {
+                getLogger().log(Type.ERROR, "Error while closing the print writer.", e);
             }
-            return true;
         }
-        getLogger().debug(implName + "already generated. Returning.");
-        return false;
-    }
-
-    protected abstract String getPackage();
-
-    protected abstract void populateVelocityContext(VelocityContext velocityContext) throws UnableToCompleteException;
-
-    protected String extractPath(HasAnnotations type) {
-        String path = "";
-
-        if (type.isAnnotationPresent(Path.class)) {
-            path = normalizePath(type.getAnnotation(Path.class).value());
-        }
-
-        return path;
-    }
-
-    protected String concatenatePath(String prefix, String suffix) {
-        String normalizerPrefix = normalizePath(prefix);
-        String normalizedSuffix = normalizePath(suffix);
-
-        if (normalizerPrefix.endsWith("/") && !normalizedSuffix.isEmpty()) {
-            normalizedSuffix = normalizedSuffix.substring(1);
-        }
-
-        return normalizerPrefix + normalizedSuffix;
-    }
-
-    protected String normalizePath(String path) {
-        String normalizedPath = path;
-        if (!path.isEmpty() && !path.startsWith("/") && !path.startsWith("http://") && !path.startsWith("https://")) {
-            normalizedPath = "/" + path;
-        }
-
-        return normalizedPath;
     }
 }
