@@ -17,12 +17,11 @@
 package com.gwtplatform.mvp.client;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -347,8 +346,10 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
-    public <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getChildren(OrderedSlot<T> slot) {
-        return new TreeSet<T>(getSlotChildren(slot));
+    public <T extends PresenterWidget<?> & Comparable<T>> List<T> getChildren(OrderedSlot<T> slot) {
+        List<T> result = new ArrayList<T>(getSlotChildren(slot));
+        Collections.sort(result);
+        return result;
     }
 
     /**

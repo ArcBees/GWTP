@@ -16,8 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
+import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
 
 import com.gwtplatform.mvp.client.presenter.slots.ISingleSlot;
 import com.gwtplatform.mvp.client.presenter.slots.ISlot;
@@ -147,7 +147,7 @@ public interface HasSlots {
     /**
      * Get the children of an ordered slot.
      * @param slot - an ordered slot
-     * @return the children of the slot in a sorted set.
+     * @return the children of the slot in a sorted list.
      */
-    <T extends PresenterWidget<?> & Comparable<T>> SortedSet<T> getChildren(OrderedSlot<T> slot);
+    <T extends PresenterWidget<?> & Comparable<T>> List<T> getChildren(OrderedSlot<T> slot);
 }
