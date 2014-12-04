@@ -30,7 +30,7 @@ import com.google.gwt.user.client.ui.Widget;
  * <p/>
  * * <b>Important</b> call {@link #initWidget(IsWidget)} in your {@link View}'s constructor.
  */
-public abstract class ViewImpl implements View, Handler {
+public abstract class ViewImpl implements View {
     private Widget widget;
 
     @Override
@@ -50,21 +50,6 @@ public abstract class ViewImpl implements View, Handler {
         return widget;
     }
 
-    /**
-     * Rather than overriding this method, you should use directly {@link #onAttach()} or {@link #onDetach()} hook.
-     * <p/>
-     * This method will be promoted to final in GWTP 2.0
-     */
-    @Deprecated
-    @Override
-    public final void onAttachOrDetach(AttachEvent event) {
-        if (event.isAttached()) {
-            onAttach();
-        } else {
-            onDetach();
-        }
-    }
-
     protected void initWidget(IsWidget widget) {
         if (this.widget != null) {
             throw new IllegalStateException("ViewImpl.initWidget() may only be called once.");
@@ -74,7 +59,16 @@ public abstract class ViewImpl implements View, Handler {
 
         this.widget = widget.asWidget();
 
-        asWidget().addAttachHandler(this);
+        asWidget().addAttachHandler(new Handler() {
+            @Override
+            public void onAttachOrDetach(AttachEvent event) {
+                if (event.isAttached()) {
+                    onAttach();
+                } else {
+                    onDetach();
+                }
+            }
+        });
     }
 
     /**
