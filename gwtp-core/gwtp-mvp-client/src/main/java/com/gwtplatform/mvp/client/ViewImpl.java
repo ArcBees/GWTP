@@ -47,6 +47,10 @@ public abstract class ViewImpl implements View {
 
     @Override
     public Widget asWidget() {
+        if (widget == null) {
+            throw new NullPointerException("widget cannot be null, you should call ViewImpl.initWidget() before.");
+        }
+
         return widget;
     }
 
