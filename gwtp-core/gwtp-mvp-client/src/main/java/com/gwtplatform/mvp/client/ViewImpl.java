@@ -73,7 +73,7 @@ public abstract class ViewImpl implements View, Handler {
      * Method called after the view is attached to the DOM.
      * <p/>
      * You should override this method to perform any ui related initialization that needs to be done after
-     * that the view is   attached <b>and that the presenter doesn't have to be aware of</b> (attach event handlers
+     * that the view is attached <b>and that the presenter doesn't have to be aware of</b> (attach event handlers
      * for instance)
      */
     protected void onAttach() {
