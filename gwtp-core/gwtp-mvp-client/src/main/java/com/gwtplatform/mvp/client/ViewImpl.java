@@ -50,8 +50,14 @@ public abstract class ViewImpl implements View, Handler {
         return widget;
     }
 
+    /**
+     * Rather than overriding this method, you should use directly {@link #onAttach()} or {@link #onDetach()} hook.
+     * <p/>
+     * This method will be promoted to final in GWTP 2.0
+     */
+    @Deprecated
     @Override
-    public void onAttachOrDetach(AttachEvent event) {
+    public final void onAttachOrDetach(AttachEvent event) {
         if (event.isAttached()) {
             onAttach();
         } else {
