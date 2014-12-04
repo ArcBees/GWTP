@@ -66,8 +66,10 @@ public abstract class ViewImpl implements View, Handler {
     }
 
     protected void initWidget(IsWidget widget) {
-        if (widget == null) {
-            throw new NullPointerException("Widget cannot be null.");
+        if (this.widget != null) {
+            throw new IllegalStateException("ViewImpl.initWidget() may only be called once.");
+        } else if (widget == null) {
+            throw new NullPointerException("widget cannot be null");
         }
 
         this.widget = widget.asWidget();
