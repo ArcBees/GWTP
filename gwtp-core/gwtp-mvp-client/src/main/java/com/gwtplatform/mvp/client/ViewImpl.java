@@ -16,6 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.event.logical.shared.AttachEvent;
+import com.google.gwt.event.logical.shared.AttachEvent.Handler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -28,7 +30,7 @@ import com.google.gwt.user.client.ui.Widget;
  * <p/>
  * * <b>Important</b> call {@link #initWidget(IsWidget)} in your {@link View}'s constructor.
  */
-public abstract class ViewImpl implements View {
+public abstract class ViewImpl implements View, Handler {
     private Widget widget;
 
     @Override
@@ -48,11 +50,34 @@ public abstract class ViewImpl implements View {
         return widget;
     }
 
+    @Override
+    public void onAttachOrDetach(AttachEvent event) {
+        if (event.isAttached()) {
+            onAttach();
+        } else {
+            onDetach();
+        }
+    }
+
     protected void initWidget(IsWidget widget) {
         if (widget == null) {
             throw new NullPointerException("Widget cannot be null.");
         }
 
         this.widget = widget.asWidget();
+
+        asWidget().addAttachHandler(this);
+    }
+
+    /**
+     * Override to bind to onAttach event.
+     */
+    protected void onAttach() {
+    }
+
+    /**
+     * Override to bind to onAttach event.
+     */
+    protected void onDetach() {
     }
 }
