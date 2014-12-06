@@ -18,11 +18,6 @@ package com.gwtplatform.dispatch.rest.client.gin;
 
 import javax.inject.Singleton;
 
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
-import com.google.gwt.json.client.JSONArray;
-import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.json.client.JSONParser;
 import com.google.inject.Provides;
 import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
@@ -42,16 +37,14 @@ import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
-import com.gwtplatform.dispatch.rest.client.serialization.MultimapJsonSerializer;
+import com.gwtplatform.dispatch.rest.client.serialization.RestParameterBindingsSerializer;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
-import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.RestParameter;
+import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 
 /**
- * An implementation of {@link AbstractDispatchAsyncModule} that uses REST calls.
- * </p>
- * This gin module provides provides access to the {@link RestDispatch} singleton, which is used to make calls to the
- * server over HTTP. This module requires:
+ * An implementation of {@link AbstractDispatchAsyncModule} that uses REST calls. </p> This gin module provides provides
+ * access to the {@link RestDispatch} singleton, which is used to make calls to the server over HTTP. This module
+ * requires:
  * <p/>
  * <b>You must</b> manually bind {@literal @}{@link com.gwtplatform.dispatch.rest.client.RestApplicationPath} to point
  * to your server API root path.
@@ -66,7 +59,8 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static final String DEFAULT_XSRF_NAME = "X-CSRF-Token";
 
     private final RestDispatchAsyncModuleBuilder builder;
-    private final MultimapJsonSerializer multimapJsonSerializer = new MultimapJsonSerializer();
+    private final RestParameterBindingsSerializer restParameterBindingsSerializer =
+            new RestParameterBindingsSerializer();
 
     /**
      * Creates this module using the default values as specified by {@link RestDispatchAsyncModuleBuilder}.
@@ -93,10 +87,10 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bindConstant().annotatedWith(RequestTimeout.class).to(builder.getRequestTimeoutMs());
         bindConstant().annotatedWith(DefaultDateFormat.class).to(builder.getDefaultDateFormat());
 
-        String globalHeaderParams = multimapJsonSerializer.serialize(builder.getGlobalHeaderParams());
+        String globalHeaderParams = restParameterBindingsSerializer.serialize(builder.getGlobalHeaderParams());
         bindConstant().annotatedWith(GlobalHeaderParams.class).to(globalHeaderParams);
 
-        String globalQueryParams = multimapJsonSerializer.serialize(builder.getGlobalQueryParams());
+        String globalQueryParams = restParameterBindingsSerializer.serialize(builder.getGlobalQueryParams());
         bindConstant().annotatedWith(GlobalQueryParams.class).to(globalQueryParams);
 
         // Workflow
@@ -104,13 +98,9 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bind(RestRequestBuilderFactory.class).to(DefaultRestRequestBuilderFactory.class).in(Singleton.class);
         bind(RestResponseDeserializer.class).to(DefaultRestResponseDeserializer.class).in(Singleton.class);
 
-        // Hooks
+        // Cross-concern
         bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
-
-        // Interceptor Registry
         bind(RestInterceptorRegistry.class).to(builder.getInterceptorRegistry()).in(Singleton.class);
-
-        // Serialization
         bind(Serialization.class).to(builder.getSerializationClass()).in(Singleton.class);
 
         // Entry Point
@@ -120,35 +110,14 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     @Provides
     @Singleton
     @GlobalHeaderParams
-    Multimap<HttpMethod, RestParameter> getGlobalHeaderParams(@GlobalHeaderParams String encodedParams) {
-        return decodeParameters(encodedParams);
+    RestParameterBindings getGlobalHeaderParams(@GlobalHeaderParams String encodedParams) {
+        return restParameterBindingsSerializer.deserialize(encodedParams);
     }
 
     @Provides
     @Singleton
     @GlobalQueryParams
-    Multimap<HttpMethod, RestParameter> getGlobalQueryParams(@GlobalQueryParams String encodedParams) {
-        return decodeParameters(encodedParams);
-    }
-
-    private Multimap<HttpMethod, RestParameter> decodeParameters(String encodedParameters) {
-        Multimap<HttpMethod, RestParameter> parameters = LinkedHashMultimap.create();
-
-        JSONObject json = JSONParser.parseStrict(encodedParameters).isObject();
-        for (String method : json.keySet()) {
-            HttpMethod httpMethod = HttpMethod.valueOf(method);
-            JSONArray jsonParameters = json.get(method).isArray();
-
-            for (int i = 0; i < jsonParameters.size(); ++i) {
-                JSONObject jsonParameter = jsonParameters.get(i).isObject();
-                String key = jsonParameter.get("key").isString().stringValue();
-                String value = jsonParameter.get("value").isString().stringValue();
-                RestParameter parameter = new RestParameter(key, value);
-
-                parameters.put(httpMethod, parameter);
-            }
-        }
-
-        return parameters;
+    RestParameterBindings getGlobalQueryParams(@GlobalQueryParams String encodedParams) {
+        return restParameterBindingsSerializer.deserialize(encodedParams);
     }
 }

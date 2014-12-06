@@ -16,9 +16,9 @@
 
 package com.gwtplatform.dispatch.client.actionhandler;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Provider;
@@ -144,7 +144,7 @@ public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRe
     protected void register(Class<?> actionType,
                             IndirectProvider<ClientActionHandler<?, ?>> handlerProvider) {
         if (clientActionHandlers == null) {
-            clientActionHandlers = Maps.newHashMap();
+            clientActionHandlers = new HashMap<Class<?>, IndirectProvider<ClientActionHandler<?, ?>>>();
         }
 
         clientActionHandlers.put(actionType, handlerProvider);

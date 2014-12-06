@@ -18,20 +18,19 @@ package com.gwtplatform.dispatch.rest.client.serialization;
 
 import org.junit.Test;
 
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
+import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 import static org.junit.Assert.assertEquals;
 
-public class MultimapJsonSerializerTest {
-    private MultimapJsonSerializer serializer = new MultimapJsonSerializer();
+public class RestParameterBindingsJsonSerializerTest {
+    private final RestParameterBindingsSerializer serializer = new RestParameterBindingsSerializer();
 
     @Test
     public void serializeEmpty() {
         // given
-        Multimap<HttpMethod, RestParameter> map = LinkedHashMultimap.create();
+        RestParameterBindings map = new RestParameterBindings();
 
         // when
         String serialized = serializer.serialize(map);
@@ -43,7 +42,7 @@ public class MultimapJsonSerializerTest {
     @Test
     public void serializeSimple() {
         // given
-        Multimap<HttpMethod, RestParameter> map = LinkedHashMultimap.create();
+        RestParameterBindings map = new RestParameterBindings();
         map.put(HttpMethod.GET, new RestParameter("a", 1));
 
         // when
@@ -56,7 +55,7 @@ public class MultimapJsonSerializerTest {
     @Test
     public void serializeComplex() {
         // given
-        Multimap<HttpMethod, RestParameter> map = LinkedHashMultimap.create();
+        RestParameterBindings map = new RestParameterBindings();
         map.put(HttpMethod.GET, new RestParameter("a", 1));
         map.put(HttpMethod.GET, new RestParameter("b", false));
         map.put(HttpMethod.POST, new RestParameter("c", "some string"));
@@ -66,8 +65,8 @@ public class MultimapJsonSerializerTest {
         String serialized = serializer.serialize(map);
 
         // then
-        assertEquals("{\"GET\":[{\"key\": \"a\", \"value\": \"1\"}, {\"key\": \"b\", \"value\": \"false\"}]," +
-                "\"POST\":[{\"key\": \"c\", \"value\": \"some string\"}, {\"key\": \"d\", \"value\": \"29\"}]}",
+        assertEquals("{\"GET\":[{\"key\": \"a\", \"value\": \"1\"},{\"key\": \"b\", \"value\": \"false\"}]," +
+                        "\"POST\":[{\"key\": \"c\", \"value\": \"some string\"},{\"key\": \"d\", \"value\": \"29\"}]}",
                 serialized);
     }
 }

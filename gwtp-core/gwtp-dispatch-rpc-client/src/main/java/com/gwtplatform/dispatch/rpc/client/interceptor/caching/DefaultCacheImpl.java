@@ -17,9 +17,8 @@
 package com.gwtplatform.dispatch.rpc.client.interceptor.caching;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
-
-import com.google.common.collect.Maps;
 
 /**
  * Default Implementation for {@link Cache}, backed by an {@link java.util.HashMap}.
@@ -50,7 +49,7 @@ public class DefaultCacheImpl implements Cache {
      * Initializes the cache with auto expiration OFF.
      */
     public DefaultCacheImpl() {
-        this.map = Maps.newHashMap();
+        this.map = new HashMap<Object, CacheValue>();
         // By default, autoExpireTime is -1 so that objects never expire
         this.autoExpireTimeInMs = -1;
     }
@@ -61,7 +60,7 @@ public class DefaultCacheImpl implements Cache {
      * @param autoExpireTimeInMs Time in milliseconds after which entries in cache expire
      */
     public DefaultCacheImpl(long autoExpireTimeInMs) {
-        this.map = Maps.newHashMap();
+        this.map = new HashMap<Object, CacheValue>();
         this.autoExpireTimeInMs = autoExpireTimeInMs;
     }
 

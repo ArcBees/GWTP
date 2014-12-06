@@ -16,23 +16,24 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import com.google.common.base.Objects;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
- * An implementation of this class is generated at compile-time to provide additional information about generated
- * {@link com.gwtplatform.dispatch.rest.shared.RestAction}s. Possible metadata is enumerated in {@link MetadataType}.
+ * An implementation of this class is generated at compile-time to provide additional information about generated {@link
+ * com.gwtplatform.dispatch.rest.shared.RestAction}s. Possible metadata is enumerated in {@link MetadataType}.
  */
 public interface ActionMetadataProvider {
     /**
      * A key composed of {@link com.gwtplatform.dispatch.rest.shared.RestAction} and a {@link MetadataType}.
      */
+    @SuppressWarnings("rawtypes")
     class MetadataKey {
         private final Class<? extends RestAction> actionClass;
         private final MetadataType metadataType;
 
-        MetadataKey(Class<? extends RestAction> actionClass,
-                    MetadataType metadataType) {
+        MetadataKey(
+                Class<? extends RestAction> actionClass,
+                MetadataType metadataType) {
             this.actionClass = actionClass;
             this.metadataType = metadataType;
         }
@@ -42,30 +43,33 @@ public interface ActionMetadataProvider {
         }
 
         @Override
-        public int hashCode() {
-            return Objects.hashCode(actionClass, metadataType);
-        }
-
-        @Override
         public boolean equals(Object o) {
             if (this == o) {
                 return true;
             }
-
-            if (o == null || !(o instanceof MetadataKey)) {
+            if (o == null || getClass() != o.getClass()) {
                 return false;
             }
 
-            MetadataKey other = (MetadataKey) o;
-            return Objects.equal(actionClass, other.actionClass) && Objects.equal(metadataType, other.metadataType);
+            MetadataKey that = (MetadataKey) o;
+
+            return actionClass.equals(that.actionClass) && metadataType == that.metadataType;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = actionClass.hashCode();
+            result = 31 * result + metadataType.hashCode();
+            return result;
         }
     }
 
     /**
      * Retrieve metadata for the given action and {@link MetadataType} pair.
      *
-     * @param action       The action for which to retrieve metadata.
+     * @param action The action for which to retrieve metadata.
      * @param metadataType The kind of metadata to retrieve.
+     *
      * @return The stored value for the given parameters or <code>null</code> if there is no match.
      */
     Object getValue(RestAction<?> action, MetadataType metadataType);

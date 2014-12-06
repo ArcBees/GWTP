@@ -16,9 +16,9 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
@@ -26,13 +26,14 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * metadata in an {@link java.util.HashMap}.
  */
 public abstract class AbstractActionMetadataProvider implements ActionMetadataProvider {
-    private final Map<MetadataKey, Object> metadata = Maps.newHashMap();
+    private final Map<MetadataKey, Object> metadata = new HashMap<MetadataKey, Object>();
 
     @Override
     public Object getValue(RestAction<?> action, MetadataType metadataType) {
         return metadata.get(MetadataKey.create(action.getClass(), metadataType));
     }
 
+    @SuppressWarnings("rawtypes")
     protected void register(Class<? extends RestAction> actionClass, MetadataType metadataType, Object value) {
         metadata.put(MetadataKey.create(actionClass, metadataType), value);
     }

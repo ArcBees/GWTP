@@ -17,10 +17,10 @@
 package com.gwtplatform.dispatch.rpc.client.interceptor.caching;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.CallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
@@ -57,7 +57,8 @@ public abstract class AbstractCachingRpcInterceptor<A, R> extends AbstractRpcInt
     private final Cache cache;
 
     // Holds callbacks, so that for multiple requests before the first returns (is served), we save round trips as well
-    private Map<A, List<CallbackDispatchRequest<R>>> pendingRequestCallbackMap = Maps.newHashMap();
+    private Map<A, List<CallbackDispatchRequest<R>>> pendingRequestCallbackMap =
+            new HashMap<A, List<CallbackDispatchRequest<R>>>();
 
     public AbstractCachingRpcInterceptor(Class<A> actionType, Cache cache) {
         super(actionType);

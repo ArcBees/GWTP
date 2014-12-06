@@ -28,14 +28,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
 
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
 import com.google.inject.Provides;
 import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
-import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -72,8 +70,8 @@ public class DefaultRestRequestBuilderFactoryTest {
         @Provides
         @TestSingleton
         @GlobalHeaderParams
-        Multimap<HttpMethod, RestParameter> getHeaderParams() {
-            LinkedHashMultimap<HttpMethod, RestParameter> headers = LinkedHashMultimap.create();
+        RestParameterBindings getHeaderParams() {
+            RestParameterBindings headers = new RestParameterBindings();
             headers.put(GET, new RestParameter(KEY_1, DECODED_VALUE_1));
             headers.put(GET, new RestParameter(KEY_2, DECODED_VALUE_2));
             headers.put(POST, new RestParameter(KEY_3, DECODED_VALUE_3));
@@ -84,8 +82,8 @@ public class DefaultRestRequestBuilderFactoryTest {
         @Provides
         @TestSingleton
         @GlobalQueryParams
-        Multimap<HttpMethod, RestParameter> getQueryParams() {
-            LinkedHashMultimap<HttpMethod, RestParameter> queries = LinkedHashMultimap.create();
+        RestParameterBindings getQueryParams() {
+            RestParameterBindings queries = new RestParameterBindings();
             queries.put(GET, new RestParameter(KEY_1, DECODED_VALUE_1));
             queries.put(GET, new RestParameter(KEY_2, DECODED_VALUE_2));
             queries.put(POST, new RestParameter(KEY_3, DECODED_VALUE_3));
