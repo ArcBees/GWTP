@@ -16,7 +16,9 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,14 +27,11 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
 import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.rest.shared.RestParameter;
@@ -44,7 +43,7 @@ import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADE
  * Default implementation for {@link RestRequestBuilderFactory}.
  */
 public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFactory {
-    private static final Map<HttpMethod, Method> HTTP_METHODS = Maps.newEnumMap(HttpMethod.class);
+    private static final Map<HttpMethod, Method> HTTP_METHODS = new EnumMap<HttpMethod, Method>(HttpMethod.class);
     private static final String JSON_UTF8 = "application/json; charset=utf-8";
 
     static {
@@ -59,8 +58,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     private final Serialization serialization;
     private final HttpRequestBuilderFactory httpRequestBuilderFactory;
     private final UrlUtils urlUtils;
-    private final Multimap<HttpMethod, RestParameter> globalHeaderParams;
-    private final Multimap<HttpMethod, RestParameter> globalQueryParams;
+    private final RestParameterBindings globalHeaderParams;
+    private final RestParameterBindings globalQueryParams;
     private final String baseUrl;
     private final String securityHeaderName;
     private final Integer requestTimeoutMs;
@@ -71,8 +70,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
             Serialization serialization,
             HttpRequestBuilderFactory httpRequestBuilderFactory,
             UrlUtils urlUtils,
-            @GlobalHeaderParams Multimap<HttpMethod, RestParameter> globalHeaderParams,
-            @GlobalQueryParams Multimap<HttpMethod, RestParameter> globalQueryParams,
+            @GlobalHeaderParams RestParameterBindings globalHeaderParams,
+            @GlobalQueryParams RestParameterBindings globalQueryParams,
             @RestApplicationPath String baseUrl,
             @XsrfHeaderName String securityHeaderName,
             @RequestTimeout Integer requestTimeoutMs) {
@@ -103,30 +102,28 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     }
 
     /**
-     * Encodes the given {@link RestParameter} as a path parameter. The default implementation delegates to
-     * {@link UrlUtils#encodePathSegment(String)}.
+     * Encodes the given {@link RestParameter} as a path parameter. The default implementation delegates to {@link
+     * UrlUtils#encodePathSegment(String)}.
      *
      * @param value the value to encode.
      *
      * @return the encoded path parameter.
      *
      * @throws ActionException if an exception occurred while encoding the path parameter.
-     * @see #encode(RestParameter)
      */
     protected String encodePathParam(String value) throws ActionException {
         return urlUtils.encodePathSegment(value);
     }
 
     /**
-     * Encodes the given {@link RestParameter} as a query parameter. The default implementation delegates to
-     * {@link UrlUtils#encodeQueryString(String)}.
+     * Encodes the given {@link RestParameter} as a query parameter. The default implementation delegates to {@link
+     * UrlUtils#encodeQueryString(String)}.
      *
      * @param value the value to encode.
      *
      * @return the encoded query parameter.
      *
      * @throws ActionException if an exception occurred while encoding the query parameter.
-     * @see #encode(RestParameter)
      */
     protected String encodeQueryParam(String value) throws ActionException {
         return urlUtils.encodeQueryString(value);
@@ -170,7 +167,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
             requestBuilder.setHeader(MODULE_BASE_HEADER, baseUrl);
         }
 
-        if (!Strings.isNullOrEmpty(xsrfToken)) {
+        if (xsrfToken != null && !xsrfToken.isEmpty()) {
             requestBuilder.setHeader(securityHeaderName, xsrfToken);
         }
 
@@ -220,7 +217,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     }
 
     private List<RestParameter> getGlobalQueryParamsForAction(RestAction<?> action) {
-        List<RestParameter> queryParams = Lists.newArrayList();
+        List<RestParameter> queryParams = new ArrayList<RestParameter>();
 
         for (RestParameter parameter : globalQueryParams.get(action.getHttpMethod())) {
             String value = parameter.getStringValue();

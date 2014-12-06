@@ -16,9 +16,9 @@
 
 package com.gwtplatform.dispatch.rpc.client.interceptor;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Provider;
@@ -67,7 +67,8 @@ import com.gwtplatform.common.client.ProviderBundle;
  * </pre>
  */
 public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
-    private final Map<Class<?>, IndirectProvider<RpcInterceptor<?, ?>>> interceptors = Maps.newHashMap();
+    private final Map<Class<?>, IndirectProvider<RpcInterceptor<?, ?>>> interceptors =
+            new HashMap<Class<?>, IndirectProvider<RpcInterceptor<?, ?>>>();
 
     @Override
     public <A> IndirectProvider<RpcInterceptor<?, ?>> find(A action) {

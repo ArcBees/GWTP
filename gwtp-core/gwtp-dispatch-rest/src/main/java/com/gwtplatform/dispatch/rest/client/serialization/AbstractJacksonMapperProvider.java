@@ -16,18 +16,19 @@
 
 package com.gwtplatform.dispatch.rest.client.serialization;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Provider;
 
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
-import com.google.common.collect.Maps;
 
 /**
  * Abstract class providing utility methods to reduce the code generation complexity of {@link JacksonMapperProvider}.
  */
 public abstract class AbstractJacksonMapperProvider implements JacksonMapperProvider {
-    private final Map<String, Provider<? extends ObjectMapper<?>>> objectMapperProviders = Maps.newHashMap();
+    private final Map<String, Provider<? extends ObjectMapper<?>>> objectMapperProviders =
+            new HashMap<String, Provider<? extends ObjectMapper<?>>>();
 
     @SuppressWarnings("unchecked")
     @Override

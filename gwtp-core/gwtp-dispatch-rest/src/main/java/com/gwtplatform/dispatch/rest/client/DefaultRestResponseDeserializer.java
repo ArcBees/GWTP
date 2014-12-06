@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.rest.client;
 import javax.inject.Inject;
 
 import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
-import com.google.common.base.Strings;
 import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -82,7 +81,7 @@ public class DefaultRestResponseDeserializer implements RestResponseDeserializer
     private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {
         String resultType = (String) metadataProvider.getValue(action, MetadataType.RESPONSE_TYPE);
 
-        if (!Strings.isNullOrEmpty(resultType) && canDeserialize(resultType)) {
+        if (!isNullOrEmpty(resultType) && canDeserialize(resultType)) {
             try {
                 String json = response.getText();
                 return deserializeValue(resultType, json);
@@ -92,5 +91,9 @@ public class DefaultRestResponseDeserializer implements RestResponseDeserializer
         }
 
         throw new ActionException("Unable to deserialize response. No serializer found.");
+    }
+
+    private boolean isNullOrEmpty(String string) {
+        return string == null || string.isEmpty();
     }
 }

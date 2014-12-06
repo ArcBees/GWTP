@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -162,7 +161,6 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
         bodyParam = value;
     }
 
-    @VisibleForTesting
     protected String formatDate(Date date, String pattern) {
         if (date == null) {
             return null;
