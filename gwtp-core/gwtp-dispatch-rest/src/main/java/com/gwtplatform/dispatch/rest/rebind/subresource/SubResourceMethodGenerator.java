@@ -23,6 +23,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
+import javax.ws.rs.Path;
 
 import org.apache.velocity.app.VelocityEngine;
 
@@ -71,6 +72,7 @@ public class SubResourceMethodGenerator extends AbstractMethodGenerator {
         return restActionType != null
                 && returnInterface != null
                 && !returnInterface.isAssignableTo(restActionType)
+                && getMethod().isAnnotationPresent(Path.class)
                 && !HttpVerb.isHttpMethod(getMethod())
                 && canGenerateSubResource();
     }

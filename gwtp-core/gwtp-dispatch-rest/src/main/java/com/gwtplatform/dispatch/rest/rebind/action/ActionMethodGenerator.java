@@ -62,10 +62,7 @@ public class ActionMethodGenerator extends AbstractMethodGenerator {
     public boolean canGenerate(MethodContext context) {
         setContext(context);
 
-        JType returnType = getMethod().getReturnType();
-
-        return returnType != null
-                && isValidRestAction(returnType)
+        return hasValidReturnType()
                 && hasExactlyOneHttpVerb()
                 && canGenerateAction();
     }
@@ -165,10 +162,12 @@ public class ActionMethodGenerator extends AbstractMethodGenerator {
         methodDefinition.setOutput(output);
     }
 
-    private boolean isValidRestAction(JType type) {
+    private boolean hasValidReturnType() {
+        JType returnType = getMethod().getReturnType();
         String restActionName = RestAction.class.getName();
-        if (restActionName.equals(type.getQualifiedSourceName())) {
-            JParameterizedType parameterizedType = type.isParameterized();
+
+        if (returnType != null && restActionName.equals(returnType.getQualifiedSourceName())) {
+            JParameterizedType parameterizedType = returnType.isParameterized();
 
             boolean isValid = parameterizedType != null && parameterizedType.getTypeArgs().length == 1;
             if (!isValid) {
