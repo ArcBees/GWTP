@@ -62,6 +62,8 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     private static final String MANY_POTENTIAL_BODY = "`%s#%s` has more than one potential body parameter.";
     private static final String FORM_AND_BODY_PARAM = "`%s#%s` has both @FormParam and a body parameter. "
             + "You must specify one or the other.";
+    private static final String GET_WITH_BODY = "`%s#%s` annotated with @GET or @HEAD contains illegal Form or Body"
+            + "parameters.";
 
     private final EventBus eventBus;
     private final HttpParameterFactory httpParameterFactory;
@@ -106,17 +108,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
             }
         }
 
-        boolean canGenerate = true;
-        if (potentialBodyParametersCount > 1) {
-            canGenerate = false;
-            error(MANY_POTENTIAL_BODY);
-        }
-        if (potentialBodyParametersCount >= 1 && formParamDetected) {
-            canGenerate = false;
-            error(FORM_AND_BODY_PARAM);
-        }
-
-        return canGenerate;
+        return findPotentialErrors(potentialBodyParametersCount, formParamDetected);
     }
 
     @Override
@@ -204,7 +196,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         return ClassNameGenerator.prefixName(method, resourceClassName, methodName);
     }
 
-    private HttpMethod resolveHttpVerb() throws UnableToCompleteException {
+    private HttpMethod resolveHttpVerb() {
         HttpMethod verb = null;
 
         // Should always resolve to a verb, as has already been verified
@@ -230,7 +222,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         return methodDefinition.getResultType();
     }
 
-    private void filterParameters() throws UnableToCompleteException {
+    private void filterParameters() {
         List<Parameter> parameters = methodDefinition.getInheritedParameters();
         parameters.addAll(methodDefinition.getParameters());
 
@@ -259,7 +251,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         return null;
     }
 
-    private void registerMetadata() throws UnableToCompleteException {
+    private void registerMetadata() {
         if (bodyParameter != null) {
             registerMetadatum(BODY_TYPE, bodyParameter.getParameter().getType());
         }
@@ -290,6 +282,27 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
 
         jParameters.addAll(Arrays.asList(methodContext.getMethod().getParameters()));
         return jParameters;
+    }
+
+    private boolean findPotentialErrors(int potentialBodyParametersCount, boolean formParamDetected) {
+        HttpMethod verb = resolveHttpVerb();
+        boolean canGenerate = true;
+
+        if (potentialBodyParametersCount > 1) {
+            canGenerate = false;
+            error(MANY_POTENTIAL_BODY);
+        }
+        if (potentialBodyParametersCount >= 1 && formParamDetected) {
+            canGenerate = false;
+            error(FORM_AND_BODY_PARAM);
+        }
+        if ((verb == HttpMethod.GET || verb == HttpMethod.HEAD)
+                && (potentialBodyParametersCount >= 1 || formParamDetected)) {
+            canGenerate = false;
+            error(GET_WITH_BODY);
+        }
+
+        return canGenerate;
     }
 
     private void error(String message) {
