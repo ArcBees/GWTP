@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.client.gin;
 
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
@@ -25,9 +23,8 @@ import com.gwtplatform.dispatch.rest.client.interceptor.DefaultRestInterceptorRe
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
-import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 /**
  * A {@link RestDispatchAsyncModule} builder.
@@ -49,8 +46,8 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
     private Class<? extends Serialization> serializationClass = JsonSerialization.class;
     private int requestTimeoutMs;
     private String defaultDateFormat = DateFormat.DEFAULT;
-    private Multimap<HttpMethod, RestParameter> globalHeaderParams = LinkedHashMultimap.create();
-    private Multimap<HttpMethod, RestParameter> globalQueryParams = LinkedHashMultimap.create();
+    private RestParameterBindings globalHeaderParams = new RestParameterBindings();
+    private RestParameterBindings globalQueryParams = new RestParameterBindings();
     private Class<? extends RestDispatchHooks> dispatchHooks = DefaultRestDispatchHooks.class;
     private Class<? extends RestInterceptorRegistry> interceptorRegistry = DefaultRestInterceptorRegistry.class;
 
@@ -97,11 +94,11 @@ public class RestDispatchAsyncModuleBuilder extends AbstractDispatchAsyncModule.
         return defaultDateFormat;
     }
 
-    public Multimap<HttpMethod, RestParameter> getGlobalHeaderParams() {
+    public RestParameterBindings getGlobalHeaderParams() {
         return globalHeaderParams;
     }
 
-    public Multimap<HttpMethod, RestParameter> getGlobalQueryParams() {
+    public RestParameterBindings getGlobalQueryParams() {
         return globalQueryParams;
     }
 

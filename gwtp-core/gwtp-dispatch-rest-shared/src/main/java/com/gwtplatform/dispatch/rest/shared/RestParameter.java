@@ -67,7 +67,7 @@ public class RestParameter {
 
     @Override
     public String toString() {
-        return "{\"key\": \"" + name + "\", \"value\": \"" + stringValue + "\"}";
+        return "RestParameter{" + "name='" + name + '\'' + ", stringValue='" + stringValue + '\'' + '}';
     }
 
     @Override

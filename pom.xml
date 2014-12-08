@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -217,7 +218,6 @@
         <module>gwtp-build-tools</module>
         <module>gwtp-core</module>
         <module>gwtp-crawler-service</module>
-        <module>gwtp-carstore</module>
     </modules>
 
     <properties>
@@ -228,17 +228,14 @@
         <maven-site-plugin.skip>false</maven-site-plugin.skip>
 
         <!-- Maven -->
-        <build-helper-maven-plugin.version>1.7</build-helper-maven-plugin.version>
         <gwt-maven-plugin.version>2.7.0</gwt-maven-plugin.version>
         <maven-checkstyle-plugin.version>2.12.1</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
         <maven-deploy-plugin.version>2.8.1</maven-deploy-plugin.version>
-        <maven-gae-plugin.version>0.9.6</maven-gae-plugin.version>
         <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
         <maven-processor-plugin.version>2.2.4</maven-processor-plugin.version>
         <maven-source-plugin.version>2.3</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>2.17</maven-failsafe-plugin.version>
         <maven-project-info-reports-plugin.version>2.7</maven-project-info-reports-plugin.version>
         <maven-dependency-plugin.version>2.8</maven-dependency-plugin.version>
         <maven-site-plugin.version>3.4</maven-site-plugin.version>
@@ -249,12 +246,10 @@
         <gwt.version>2.7.0</gwt.version>
         <!-- when you update the gwt version please also update the dtds in all gwt.xml files -->
         <gin.version>2.1.2</gin.version>
-        <gwtquery.version>1.4.2</gwtquery.version>
         <gwt-jackson.version>0.6.1</gwt-jackson.version>
 
         <!-- Server -->
         <jax-rs.version>1.1.1</jax-rs.version>
-        <aopalliance.version>1.0</aopalliance.version>
         <cglib.version>2.2</cglib.version>
         <gae.version>1.9.7</gae.version>
         <guice.version>3.0</guice.version>
@@ -265,17 +260,13 @@
         <servlet-api.version>2.5</servlet-api.version>
         <spring.version>4.0.5.RELEASE</spring.version>
         <velocity.version>1.7</velocity.version>
-        <jbcrypt.version>0.3m</jbcrypt.version>
+        <htmlunit.version>2.14</htmlunit.version>
 
         <!-- Testing -->
         <jukito.version>1.4.1</jukito.version>
         <junit.version>4.11</junit.version>
         <mockito.version>1.9.5</mockito.version>
         <assertj-core.version>1.6.1</assertj-core.version>
-        <htmlunit.version>2.14</htmlunit.version>
-        <selenium.version>2.42.0</selenium.version>
-        <cucumber.version>1.1.7</cucumber.version>
-        <httpcore.version>4.3.2</httpcore.version>
 
         <!-- GitHub Sites -->
         <github.version>0.9</github.version>
@@ -376,39 +367,6 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>net.kindleit</groupId>
-                    <artifactId>maven-gae-plugin</artifactId>
-                    <version>${maven-gae-plugin.version}</version>
-
-                    <configuration>
-                        <unpackVersion>${gae.version}</unpackVersion>
-
-                        <!-- Add credentials to ~/.m2/settings.xml <id>appengine-credentials</id> -->
-                        <serverId>appengine-credentials</serverId>
-                        <splitJars>true</splitJars>
-                    </configuration>
-
-                    <dependencies>
-                        <dependency>
-                            <groupId>net.kindleit</groupId>
-                            <artifactId>gae-runtime</artifactId>
-                            <version>1.8.8</version>
-                            <type>pom</type>
-                        </dependency>
-                    </dependencies>
-
-                    <executions>
-                        <execution>
-                            <id>unpack</id>
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>unpack</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
                     <inherited>true</inherited>
 
@@ -478,7 +436,9 @@
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
-                    <arguments>-Psonatype-oss-release -Prelease -Dgpg.passphrase=${gpg.passphrase} -Dcheckstyle.skip -DskipTests</arguments>
+                    <arguments>-Psonatype-oss-release -Prelease -Dgpg.passphrase=${gpg.passphrase} -Dcheckstyle.skip
+                        -DskipTests
+                    </arguments>
                 </configuration>
             </plugin>
 

@@ -16,9 +16,9 @@
 
 package com.gwtplatform.dispatch.rest.client.interceptor;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Provider;
@@ -68,7 +68,8 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * </pre>
  */
 public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
-    private final Map<InterceptorContext, IndirectProvider<RestInterceptor>> interceptors = Maps.newHashMap();
+    private final Map<InterceptorContext, IndirectProvider<RestInterceptor>> interceptors =
+            new HashMap<InterceptorContext, IndirectProvider<RestInterceptor>>();
 
     @Override
     public <A> IndirectProvider<RestInterceptor> find(A action) {
