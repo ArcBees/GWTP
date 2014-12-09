@@ -19,24 +19,21 @@ package com.gwtplatform.dispatch.rest.client.interceptor;
 import com.gwtplatform.dispatch.rest.client.AbstractRestAction;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 /**
  * An exposed RestAction implementation used internally to compare similar contexts.
  */
 class InterceptRestAction extends AbstractRestAction<Object> {
-    protected InterceptRestAction(HttpMethod httpMethod,
-                                  String rawServicePath,
-                                  int queryCount) {
+    protected InterceptRestAction(
+            HttpMethod httpMethod,
+            String rawServicePath,
+            int queryCount) {
         super(httpMethod, rawServicePath, DateFormat.DEFAULT);
 
         // Add fake query params
         for (int i = 0; i < queryCount; i++) {
-            addQueryParam("param" + i, "value" + i);
+            addParam(Type.QUERY, "param" + i, "value" + i);
         }
-    }
-
-    @Override
-    public boolean isSecured() {
-        return false;
     }
 }

@@ -24,7 +24,7 @@ import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.RestParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 
 /**
  * Parses {@link com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings} from and to JSON.
@@ -36,7 +36,7 @@ public class RestParameterBindingsSerializer {
     public String serialize(RestParameterBindings parameterBindings) {
         StringBuilder result = new StringBuilder("{");
 
-        for (Entry<HttpMethod, Set<RestParameter>> entry : parameterBindings.entrySet()) {
+        for (Entry<HttpMethod, Set<HttpParameter>> entry : parameterBindings.entrySet()) {
             serializeValues(result, entry.getKey(), entry.getValue());
         }
 
@@ -63,7 +63,9 @@ public class RestParameterBindingsSerializer {
                 JSONObject jsonParameter = jsonParameters.get(i).isObject();
                 String key = jsonParameter.get("key").isString().stringValue();
                 String value = jsonParameter.get("value").isString().stringValue();
-                RestParameter parameter = new RestParameter(key, value);
+                HttpParameter.Type type =
+                        HttpParameter.Type.valueOf(jsonParameter.get("type").isString().stringValue());
+                HttpParameter parameter = new HttpParameter(type, key, value);
 
                 parameters.put(httpMethod, parameter);
             }
@@ -72,11 +74,12 @@ public class RestParameterBindingsSerializer {
         return parameters;
     }
 
-    private void serializeValues(StringBuilder result, HttpMethod method, Set<RestParameter> parameters) {
+    private void serializeValues(StringBuilder result, HttpMethod method, Set<HttpParameter> parameters) {
         result.append("\"").append(method.name()).append("\":[");
 
-        for (RestParameter parameter : parameters) {
-            result.append("{\"key\": \"").append(parameter.getName())
+        for (HttpParameter parameter : parameters) {
+            result.append("{\"type\": \"").append(parameter.getType().name())
+                    .append("\", \"key\": \"").append(parameter.getName())
                     .append("\", \"value\": \"").append(parameter.getStringValue()).append("\"},");
         }
 

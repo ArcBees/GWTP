@@ -20,13 +20,14 @@ import java.util.Date;
 
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 /**
  * Used by test code to expose protected methods from {@link AbstractRestAction}.
  * The goal is to help clean up the test code.
  */
 public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
-    public ExposedRestAction(HttpMethod httpMethod, String rawServicePath) {
+    protected ExposedRestAction(HttpMethod httpMethod, String rawServicePath) {
         super(httpMethod, rawServicePath, DateFormat.DEFAULT);
     }
 
@@ -36,23 +37,8 @@ public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
     }
 
     @Override
-    public void addPathParam(String name, Object value) {
-        super.addPathParam(name, value);
-    }
-
-    @Override
-    public void addQueryParam(String name, Object value) {
-        super.addQueryParam(name, value);
-    }
-
-    @Override
-    public void addFormParam(String name, Object value) {
-        super.addFormParam(name, value);
-    }
-
-    @Override
-    public void addHeaderParam(String name, Object value) {
-        super.addHeaderParam(name, value);
+    public void addParam(Type type, String name, Object value) {
+        super.addParam(type, name, value);
     }
 
     @Override

@@ -17,7 +17,6 @@
 package com.gwtplatform.dispatch.rest.client;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -33,8 +32,9 @@ import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestParameter;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
@@ -102,30 +102,26 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     }
 
     /**
-     * Encodes the given {@link RestParameter} as a path parameter. The default implementation delegates to {@link
-     * UrlUtils#encodePathSegment(String)}.
+     * Encodes the given {@link com.gwtplatform.dispatch.rest.shared.HttpParameter} as a path parameter. The default
+     * implementation delegates to {@link UrlUtils#encodePathSegment(String)}.
      *
      * @param value the value to encode.
      *
      * @return the encoded path parameter.
-     *
-     * @throws ActionException if an exception occurred while encoding the path parameter.
      */
-    protected String encodePathParam(String value) throws ActionException {
+    protected String encodePathParam(String value) {
         return urlUtils.encodePathSegment(value);
     }
 
     /**
-     * Encodes the given {@link RestParameter} as a query parameter. The default implementation delegates to {@link
-     * UrlUtils#encodeQueryString(String)}.
+     * Encodes the given {@link com.gwtplatform.dispatch.rest.shared.HttpParameter} as a query parameter. The default
+     * implementation delegates to {@link UrlUtils#encodeQueryString(String)}.
      *
      * @param value the value to encode.
      *
      * @return the encoded query parameter.
-     *
-     * @throws ActionException if an exception occurred while encoding the query parameter.
      */
-    protected String encodeQueryParam(String value) throws ActionException {
+    protected String encodeQueryParam(String value) {
         return urlUtils.encodeQueryString(value);
     }
 
@@ -153,40 +149,38 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         return serialization.serialize(object, bodyType);
     }
 
-    private void buildHeaders(RequestBuilder requestBuilder, String xsrfToken, RestAction<?> action)
-            throws ActionException {
-        String path = action.getPath();
-        List<RestParameter> actionParams = action.getHeaderParams();
-        Collection<RestParameter> applicableGlobalParams = globalHeaderParams.get(action.getHttpMethod());
+    private void buildHeaders(RequestBuilder requestBuilder, String xsrfToken, RestAction<?> action) {
+        List<HttpParameter> headerParams = getHeaderParameters(xsrfToken, action);
 
-        // By setting the most generic headers first, we make sure they can be overridden by more specific ones
-        requestBuilder.setHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON);
-        requestBuilder.setHeader(HttpHeaders.CONTENT_TYPE, JSON_UTF8);
-
-        if (!isAbsoluteUrl(path)) {
-            requestBuilder.setHeader(MODULE_BASE_HEADER, baseUrl);
-        }
-
-        if (xsrfToken != null && !xsrfToken.isEmpty()) {
-            requestBuilder.setHeader(securityHeaderName, xsrfToken);
-        }
-
-        for (RestParameter parameter : applicableGlobalParams) {
-            String value = parameter.getStringValue();
-
-            if (value != null) {
-                requestBuilder.setHeader(parameter.getName(), value);
-            }
-        }
-
-        for (RestParameter param : actionParams) {
+        for (HttpParameter param : headerParams) {
             requestBuilder.setHeader(param.getName(), param.getStringValue());
         }
     }
 
+    private List<HttpParameter> getHeaderParameters(String xsrfToken, RestAction<?> action) {
+        List<HttpParameter> headerParams = new ArrayList<HttpParameter>();
+
+        // By setting the most generic headers first, we make sure they can be overridden by more specific ones
+        headerParams.add(new HttpParameter(Type.HEADER, HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON));
+        headerParams.add(new HttpParameter(Type.HEADER, HttpHeaders.CONTENT_TYPE, JSON_UTF8));
+        headerParams.add(new HttpParameter(Type.HEADER, HttpHeaders.CONTENT_TYPE, JSON_UTF8));
+
+        if (!isAbsoluteUrl(action.getPath())) {
+            headerParams.add(new HttpParameter(Type.HEADER, MODULE_BASE_HEADER, baseUrl));
+        }
+        if (xsrfToken != null && !xsrfToken.isEmpty()) {
+            headerParams.add(new HttpParameter(Type.HEADER, securityHeaderName, xsrfToken));
+        }
+
+        headerParams.addAll(globalHeaderParams.get(action.getHttpMethod()));
+        headerParams.addAll(action.getParameters(Type.HEADER));
+
+        return headerParams;
+    }
+
     private <A extends RestAction<?>> void buildBody(RequestBuilder requestBuilder, A action) throws ActionException {
         if (action.hasFormParams()) {
-            requestBuilder.setRequestData(buildQueryString(action.getFormParams()));
+            requestBuilder.setRequestData(buildQueryString(action.getParameters(Type.FORM)));
         } else if (action.hasBodyParam()) {
             requestBuilder.setRequestData(getSerializedValue(action, action.getBodyParam()));
         } else {
@@ -197,16 +191,17 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         }
     }
 
-    private String buildUrl(RestAction<?> action) throws ActionException {
-        List<RestParameter> queryParams = getGlobalQueryParamsForAction(action);
-        queryParams.addAll(action.getQueryParams());
+    private String buildUrl(RestAction<?> action) {
+        List<HttpParameter> queryParams = new ArrayList<HttpParameter>();
+        queryParams.addAll(globalQueryParams.get(action.getHttpMethod()));
+        queryParams.addAll(action.getParameters(Type.QUERY));
 
         String queryString = buildQueryString(queryParams);
         if (!queryString.isEmpty()) {
             queryString = "?" + queryString;
         }
 
-        String path = buildPath(action.getPath(), action.getPathParams());
+        String path = buildPath(action.getPath(), action.getParameters(Type.PATH));
 
         String prefix = "";
         if (!isAbsoluteUrl(path)) {
@@ -216,28 +211,14 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         return prefix + path + queryString;
     }
 
-    private List<RestParameter> getGlobalQueryParamsForAction(RestAction<?> action) {
-        List<RestParameter> queryParams = new ArrayList<RestParameter>();
-
-        for (RestParameter parameter : globalQueryParams.get(action.getHttpMethod())) {
-            String value = parameter.getStringValue();
-
-            if (value != null) {
-                queryParams.add(new RestParameter(parameter.getName(), value));
-            }
-        }
-
-        return queryParams;
-    }
-
     private boolean isAbsoluteUrl(String path) {
         return path.startsWith("http://") || path.startsWith("https://");
     }
 
-    private String buildPath(String rawPath, List<RestParameter> params) throws ActionException {
+    private String buildPath(String rawPath, List<HttpParameter> params) {
         String path = rawPath;
 
-        for (RestParameter param : params) {
+        for (HttpParameter param : params) {
             String encodedParam = encodePathParam(param.getStringValue());
             path = path.replace("{" + param.getName() + "}", encodedParam);
         }
@@ -245,10 +226,10 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         return path;
     }
 
-    private String buildQueryString(List<RestParameter> params) throws ActionException {
+    private String buildQueryString(List<HttpParameter> params) {
         StringBuilder queryString = new StringBuilder();
 
-        for (RestParameter param : params) {
+        for (HttpParameter param : params) {
             queryString.append("&")
                     .append(param.getName())
                     .append("=")

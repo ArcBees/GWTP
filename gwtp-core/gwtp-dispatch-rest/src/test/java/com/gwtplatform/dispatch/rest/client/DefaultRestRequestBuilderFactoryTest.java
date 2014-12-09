@@ -34,8 +34,9 @@ import com.google.inject.Provides;
 import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestParameter;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 import static org.mockito.BDDMockito.given;
@@ -72,9 +73,9 @@ public class DefaultRestRequestBuilderFactoryTest {
         @GlobalHeaderParams
         RestParameterBindings getHeaderParams() {
             RestParameterBindings headers = new RestParameterBindings();
-            headers.put(GET, new RestParameter(KEY_1, DECODED_VALUE_1));
-            headers.put(GET, new RestParameter(KEY_2, DECODED_VALUE_2));
-            headers.put(POST, new RestParameter(KEY_3, DECODED_VALUE_3));
+            headers.put(GET, new HttpParameter(Type.HEADER, KEY_1, DECODED_VALUE_1));
+            headers.put(GET, new HttpParameter(Type.HEADER, KEY_2, DECODED_VALUE_2));
+            headers.put(POST, new HttpParameter(Type.HEADER, KEY_3, DECODED_VALUE_3));
 
             return headers;
         }
@@ -84,9 +85,9 @@ public class DefaultRestRequestBuilderFactoryTest {
         @GlobalQueryParams
         RestParameterBindings getQueryParams() {
             RestParameterBindings queries = new RestParameterBindings();
-            queries.put(GET, new RestParameter(KEY_1, DECODED_VALUE_1));
-            queries.put(GET, new RestParameter(KEY_2, DECODED_VALUE_2));
-            queries.put(POST, new RestParameter(KEY_3, DECODED_VALUE_3));
+            queries.put(GET, new HttpParameter(Type.QUERY, KEY_1, DECODED_VALUE_1));
+            queries.put(GET, new HttpParameter(Type.QUERY, KEY_2, DECODED_VALUE_2));
+            queries.put(POST, new HttpParameter(Type.QUERY, KEY_3, DECODED_VALUE_3));
 
             return queries;
         }
@@ -219,9 +220,9 @@ public class DefaultRestRequestBuilderFactoryTest {
     public void requestDataShouldBeEncodedQueryStringWhenActionHasFormParams() throws ActionException {
         // Given
         ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
-        action.addFormParam("Key1", DECODED_VALUE_1);
-        action.addFormParam("Key2", DECODED_VALUE_2);
-        action.addFormParam("Key3", DECODED_VALUE_3);
+        action.addParam(Type.FORM, "Key1", DECODED_VALUE_1);
+        action.addParam(Type.FORM, "Key2", DECODED_VALUE_2);
+        action.addParam(Type.FORM, "Key3", DECODED_VALUE_3);
 
         // When
         factory.build(action, SECURITY_TOKEN);
@@ -317,8 +318,8 @@ public class DefaultRestRequestBuilderFactoryTest {
     public void allActionQueriesShouldBeSet() throws ActionException {
         // Given
         ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
-        action.addQueryParam(ACTION_KEY_1, DECODED_VALUE_1);
-        action.addQueryParam(ACTION_KEY_2, DECODED_VALUE_2);
+        action.addParam(Type.QUERY, ACTION_KEY_1, DECODED_VALUE_1);
+        action.addParam(Type.QUERY, ACTION_KEY_2, DECODED_VALUE_2);
 
         // When
         factory.build(action, SECURITY_TOKEN);
@@ -332,8 +333,8 @@ public class DefaultRestRequestBuilderFactoryTest {
 
     private RestAction<Void> createActionWithHeaderParams() {
         ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
-        action.addHeaderParam(ACTION_KEY_1, DECODED_VALUE_1);
-        action.addHeaderParam(ACTION_KEY_2, DECODED_VALUE_2);
+        action.addParam(Type.HEADER, ACTION_KEY_1, DECODED_VALUE_1);
+        action.addParam(Type.HEADER, ACTION_KEY_2, DECODED_VALUE_2);
 
         return action;
     }

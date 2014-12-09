@@ -19,8 +19,9 @@ package com.gwtplatform.dispatch.rest.client.interceptor;
 import java.util.List;
 
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 /**
  * Context class used for the Rest Interceptor mappings.<br>
@@ -168,7 +169,7 @@ public class InterceptorContext {
         if (useTemplate()) {
             path = builder.template.getPath();
             httpMethod = builder.template.getHttpMethod();
-            queryCount = builder.template.getQueryParams().size();
+            queryCount = builder.template.getParameters(Type.QUERY).size();
         }
 
         // Path Check
@@ -189,12 +190,12 @@ public class InterceptorContext {
 
         // Query Parameters
         if (!builder.anyQueryCount) {
-            List<RestParameter> queryParams = action.getQueryParams();
+            List<HttpParameter> queryParams = action.getParameters(Type.QUERY);
             if (queryParams.size() != queryCount) {
                 return false;
             } else if (useTemplate()) {
                 // We can do some thorough checking with templates
-                if (!queryParams.equals(builder.template.getQueryParams())) {
+                if (!queryParams.equals(builder.template.getParameters(Type.QUERY))) {
                     return false;
                 }
             }
@@ -222,7 +223,7 @@ public class InterceptorContext {
         return builder.queryCount;
     }
 
-    public RestAction getTemplate() {
+    public RestAction<?> getTemplate() {
         return builder.template;
     }
 
@@ -240,7 +241,7 @@ public class InterceptorContext {
         }
 
         InterceptorContext that = (InterceptorContext) o;
-        RestAction action;
+        RestAction<?> action;
         if (that.useTemplate()) {
             action = that.getTemplate();
         } else {
