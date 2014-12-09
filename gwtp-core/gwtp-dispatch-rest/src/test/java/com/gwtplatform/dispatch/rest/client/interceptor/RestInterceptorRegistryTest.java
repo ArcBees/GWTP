@@ -23,6 +23,7 @@ import com.gwtplatform.dispatch.rest.client.ExposedRestAction;
 import com.gwtplatform.dispatch.rest.client.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.client.interceptor.InterceptorContext.Builder;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -36,7 +37,6 @@ public class RestInterceptorRegistryTest {
     private static final String PARAM_NAME_2 = "someOtherName";
     private static final String PARAM_VALUE_1 = "someValue";
     private static final int PARAM_VALUE_2 = 7;
-    private static final String PARAM_VALUE_FORMATTED_2 = "7";
 
     private DefaultRestInterceptorRegistry interceptorRegistry;
     private ExposedRestAction<Void> action;
@@ -48,12 +48,12 @@ public class RestInterceptorRegistryTest {
     }
 
     @Test
-     public void register_interceptor() {
+    public void register_interceptor() {
         // Given
         InterceptorContext context = new Builder()
-            .path(PATH_1)
-            .httpMethod(HttpMethod.GET)
-            .build();
+                .path(PATH_1)
+                .httpMethod(HttpMethod.GET)
+                .build();
 
         // When
         interceptorRegistry.register(new SampleRestInterceptor(context));
@@ -63,16 +63,16 @@ public class RestInterceptorRegistryTest {
     }
 
     @Test
-    public void register_interceptor_multipleparams() {
+    public void register_interceptor_multipleParams() {
         // Given
-        action.addQueryParam(PARAM_NAME_1, PARAM_VALUE_1);
-        action.addQueryParam(PARAM_NAME_2, PARAM_VALUE_2);
+        action.addParam(Type.QUERY, PARAM_NAME_1, PARAM_VALUE_1);
+        action.addParam(Type.QUERY, PARAM_NAME_2, PARAM_VALUE_2);
 
         InterceptorContext context = new Builder()
-            .path(PATH_1)
-            .httpMethod(HttpMethod.GET)
-            .queryCount(2)
-            .build();
+                .path(PATH_1)
+                .httpMethod(HttpMethod.GET)
+                .queryCount(2)
+                .build();
 
         // When
         interceptorRegistry.register(new SampleRestInterceptor(context));
@@ -82,16 +82,16 @@ public class RestInterceptorRegistryTest {
     }
 
     @Test
-    public void register_interceptor_multipleparams_invalid() {
+    public void register_interceptor_multipleParams_invalid() {
         // Given
-        action.addQueryParam(PARAM_NAME_1, PARAM_VALUE_1);
-        action.addQueryParam(PARAM_NAME_2, PARAM_VALUE_2);
+        action.addParam(Type.QUERY, PARAM_NAME_1, PARAM_VALUE_1);
+        action.addParam(Type.QUERY, PARAM_NAME_2, PARAM_VALUE_2);
 
         InterceptorContext context = new Builder()
-            .path(PATH_1)
-            .httpMethod(HttpMethod.GET)
-            .queryCount(1)
-            .build();
+                .path(PATH_1)
+                .httpMethod(HttpMethod.GET)
+                .queryCount(1)
+                .build();
 
         // When
         interceptorRegistry.register(new SampleRestInterceptor(context));
@@ -101,11 +101,11 @@ public class RestInterceptorRegistryTest {
     }
 
     @Test
-    public void register_interceptor_nohttpmethod() {
+    public void register_interceptor_noHttpMethod() {
         // Given
         InterceptorContext context = new Builder()
-            .path(PATH_1)
-            .build();
+                .path(PATH_1)
+                .build();
 
         // When
         interceptorRegistry.register(new SampleRestInterceptor(context));
@@ -118,9 +118,9 @@ public class RestInterceptorRegistryTest {
     public void register_interceptor_duplicate() {
         // Given
         InterceptorContext context = new Builder()
-            .path(PATH_1)
-            .transcendent(true)
-            .build();
+                .path(PATH_1)
+                .transcendent(true)
+                .build();
 
         // When
         interceptorRegistry.register(new SampleRestInterceptor(context));

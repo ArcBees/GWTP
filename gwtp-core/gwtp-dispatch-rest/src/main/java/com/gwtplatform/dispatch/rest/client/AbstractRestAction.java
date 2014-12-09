@@ -23,12 +23,13 @@ import java.util.List;
 import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 /**
- * Provides a basic implementation of {@link RestAction} to inheritors. This is used by GWTP code-generator to create
- * the actions defined by the services.
+ * Provides a basic implementation of {@link RestAction} to inheritors. This is used by GWTP's code-generators to create
+ * the actions defined by the resources.
  *
  * @param <R> the result type
  */
@@ -37,20 +38,14 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
     private HttpMethod httpMethod;
     private String rawServicePath;
 
-    private List<RestParameter> pathParams;
-    private List<RestParameter> headerParams;
-    private List<RestParameter> queryParams;
-    private List<RestParameter> formParams;
+    private List<HttpParameter> parameters;
 
     private Object bodyParam;
 
     protected AbstractRestAction() {
         defaultDateFormat = DateFormat.DEFAULT;
 
-        pathParams = new ArrayList<RestParameter>();
-        headerParams = new ArrayList<RestParameter>();
-        queryParams = new ArrayList<RestParameter>();
-        formParams = new ArrayList<RestParameter>();
+        parameters = new ArrayList<HttpParameter>();
     }
 
     protected AbstractRestAction(
@@ -75,23 +70,20 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
     }
 
     @Override
-    public List<RestParameter> getPathParams() {
-        return pathParams;
+    public List<HttpParameter> getParameters(Type type) {
+        List<HttpParameter> filteredParams = new ArrayList<HttpParameter>();
+        for (HttpParameter parameter : parameters) {
+            if (parameter.getType() == type && parameter.getObject() != null) {
+                filteredParams.add(parameter);
+            }
+        }
+
+        return filteredParams;
     }
 
     @Override
-    public List<RestParameter> getQueryParams() {
-        return queryParams;
-    }
-
-    @Override
-    public List<RestParameter> getFormParams() {
-        return formParams;
-    }
-
-    @Override
-    public List<RestParameter> getHeaderParams() {
-        return headerParams;
+    public boolean isSecured() {
+        return false;
     }
 
     @Override
@@ -101,7 +93,7 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
 
     @Override
     public Boolean hasFormParams() {
-        return !formParams.isEmpty();
+        return !getParameters(Type.FORM).isEmpty();
     }
 
     @Override
@@ -109,52 +101,17 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
         return bodyParam != null;
     }
 
-    protected void addPathParam(String name, Object value) {
-        addParam(pathParams, name, value);
+    protected void addParam(HttpParameter.Type type, String name, Date date) {
+        addParam(type, name, date, defaultDateFormat);
     }
 
-    protected void addPathParam(String name, Date date) {
-        addDateParam(pathParams, name, date);
+    protected void addParam(HttpParameter.Type type, String name, Date date, String pattern) {
+        String value = formatDate(date, pattern);
+        addParam(type, name, value);
     }
 
-    protected void addPathParam(String name, Date date, String pattern) {
-        addDateParam(pathParams, name, date, pattern);
-    }
-
-    protected void addQueryParam(String name, Object value) {
-        addParam(queryParams, name, value);
-    }
-
-    protected void addQueryParam(String name, Date date) {
-        addDateParam(queryParams, name, date);
-    }
-
-    protected void addQueryParam(String name, Date date, String pattern) {
-        addDateParam(queryParams, name, date, pattern);
-    }
-
-    protected void addFormParam(String name, Object value) {
-        addParam(formParams, name, value);
-    }
-
-    protected void addFormParam(String name, Date date) {
-        addDateParam(formParams, name, date);
-    }
-
-    protected void addFormParam(String name, Date date, String pattern) {
-        addDateParam(formParams, name, date, pattern);
-    }
-
-    protected void addHeaderParam(String name, Object value) {
-        addParam(headerParams, name, value);
-    }
-
-    protected void addHeaderParam(String name, Date date) {
-        addDateParam(headerParams, name, date);
-    }
-
-    protected void addHeaderParam(String name, Date date, String pattern) {
-        addDateParam(headerParams, name, date, pattern);
+    protected void addParam(HttpParameter.Type type, String name, Object value) {
+        parameters.add(new HttpParameter(type, name, value));
     }
 
     protected void setBodyParam(Object value) {
@@ -166,22 +123,6 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
             return null;
         } else {
             return DateTimeFormat.getFormat(pattern).format(date);
-        }
-    }
-
-    private void addDateParam(List<RestParameter> target, String name, Date date) {
-        String value = formatDate(date, defaultDateFormat);
-        addParam(target, name, value);
-    }
-
-    private void addDateParam(List<RestParameter> target, String name, Date date, String pattern) {
-        String value = formatDate(date, pattern);
-        addParam(target, name, value);
-    }
-
-    private void addParam(List<RestParameter> target, String name, Object value) {
-        if (value != null) {
-            target.add(new RestParameter(name, value));
         }
     }
 }
