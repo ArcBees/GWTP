@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.HttpHeaders;
@@ -153,7 +154,9 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         List<HttpParameter> headerParams = getHeaderParameters(xsrfToken, action);
 
         for (HttpParameter param : headerParams) {
-            requestBuilder.setHeader(param.getName(), param.getStringValue());
+            for (Entry<String, String> entry : param.getEntries(urlUtils)) {
+                requestBuilder.setHeader(entry.getKey(), entry.getValue());
+            }
         }
     }
 
@@ -219,21 +222,26 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         String path = rawPath;
 
         for (HttpParameter param : params) {
-            String encodedParam = encodePathParam(param.getStringValue());
-            path = path.replace("{" + param.getName() + "}", encodedParam);
+            List<Entry<String, String>> entries = param.getEntries(urlUtils);
+            assert entries.size() <= 1;
+
+            Entry<String, String> entry = entries.get(0);
+            path = path.replace("{" + entry.getKey() + "}", entry.getValue());
         }
 
         return path;
     }
 
-    private String buildQueryString(List<HttpParameter> params) {
+    private String buildQueryString(List<HttpParameter> parameters) {
         StringBuilder queryString = new StringBuilder();
 
-        for (HttpParameter param : params) {
-            queryString.append("&")
-                    .append(param.getName())
-                    .append("=")
-                    .append(encodeQueryParam(param.getStringValue()));
+        for (HttpParameter parameter : parameters) {
+            for (Entry<String, String> entry : parameter.getEntries(urlUtils)) {
+                queryString.append("&")
+                        .append(entry.getKey())
+                        .append("=")
+                        .append(entry.getValue());
+            }
         }
 
         if (queryString.length() != 0) {

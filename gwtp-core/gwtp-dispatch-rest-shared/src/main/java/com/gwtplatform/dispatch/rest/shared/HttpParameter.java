@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.gwtplatform.common.shared.UrlUtils;
+
 /**
  * This class is used by {@link com.gwtplatform.dispatch.rest.client.AbstractRestAction AbstractRestAction} to associate
  * a parameter name to a value.
@@ -74,9 +76,45 @@ public class HttpParameter {
         return object;
     }
 
-    // TODO: To be removed
-    public String getStringValue() {
-        return String.valueOf(object);
+    public List<Entry<String, String>> getEntries(UrlUtils urlUtils) {
+        // TODO: use subclassing to manage manage these rules individually
+
+        List<Map.Entry<String, String>> entries = new ArrayList<Entry<String, String>>();
+
+        // Spec. requires only List<T>, Set<T> or SortedSet<T>... but really?!
+        if ((type == Type.QUERY || type == Type.HEADER || type == Type.FORM)
+                && object instanceof Collection) {
+            for (Object o : ((Collection<?>) object)) {
+                entries.add(createEntry(urlUtils, o));
+            }
+        } else {
+            entries.add(createEntry(urlUtils, object));
+        }
+
+        return entries;
+    }
+
+    protected SimpleEntry<String, String> createEntry(UrlUtils urlUtils, Object object) {
+        String encoded;
+        String stringValue = object.toString();
+
+        switch (type) {
+            case QUERY:
+            case FORM:
+                encoded = urlUtils.encodeQueryString(stringValue);
+                break;
+            case PATH:
+                encoded = urlUtils.encodePathSegment(stringValue);
+                break;
+            case HEADER:
+                encoded = stringValue;
+                break;
+            default:
+                // Other params are not yet supported. Should not reach.
+                encoded = "";
+        }
+
+        return new SimpleEntry<String, String>(name, encoded);
     }
 
     @Override

@@ -22,14 +22,40 @@ import java.util.Set;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
+import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 /**
  * Parses {@link com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings} from and to JSON.
  */
 public class RestParameterBindingsSerializer {
+    private static final UrlUtils URL_UTILS = new UrlUtils() {
+        @Override
+        public String encodePathSegment(String decodedPathSegment) {
+            return encodeQueryString(decodedPathSegment);
+        }
+
+        @Override
+        public String encodeQueryString(String decodedUrlComponent) {
+            return decodedUrlComponent == null ? null : decodedUrlComponent.replace("\\", "\\\\").replace("\"", "\\\"");
+        }
+
+        @Override
+        public String decodePathSegment(String encodedPathSegment) {
+            // not needed
+            return null;
+        }
+
+        @Override
+        public String decodeQueryString(String encodedUrlComponent) {
+            // not needed
+            return null;
+        }
+    };
+
     /**
      * Used to serialize the bindings at compilation. Usage of GWT code is <b>not</b> allowed.
      */
@@ -63,8 +89,7 @@ public class RestParameterBindingsSerializer {
                 JSONObject jsonParameter = jsonParameters.get(i).isObject();
                 String key = jsonParameter.get("key").isString().stringValue();
                 String value = jsonParameter.get("value").isString().stringValue();
-                HttpParameter.Type type =
-                        HttpParameter.Type.valueOf(jsonParameter.get("type").isString().stringValue());
+                Type type = Type.valueOf(jsonParameter.get("type").isString().stringValue());
                 HttpParameter parameter = new HttpParameter(type, key, value);
 
                 parameters.put(httpMethod, parameter);
@@ -78,9 +103,11 @@ public class RestParameterBindingsSerializer {
         result.append("\"").append(method.name()).append("\":[");
 
         for (HttpParameter parameter : parameters) {
-            result.append("{\"type\": \"").append(parameter.getType().name())
-                    .append("\", \"key\": \"").append(parameter.getName())
-                    .append("\", \"value\": \"").append(parameter.getStringValue()).append("\"},");
+            for (Entry<String, String> entry : parameter.getEntries(URL_UTILS)) {
+                result.append("{\"type\": \"").append(parameter.getType().name())
+                        .append("\", \"key\": \"").append(entry.getKey())
+                        .append("\", \"value\": \"").append(entry.getValue()).append("\"},");
+            }
         }
 
         if (!parameters.isEmpty()) {

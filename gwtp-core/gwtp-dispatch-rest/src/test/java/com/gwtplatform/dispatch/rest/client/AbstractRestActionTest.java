@@ -62,4 +62,6 @@ public class AbstractRestActionTest {
                         tuple(PARAM_NAME_1, PARAM_VALUE_1),
                         tuple(PARAM_NAME_2, PARAM_VALUE_2));
     }
+
+    // TODO: test getParams remove null values
 }
