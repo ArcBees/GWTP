@@ -16,32 +16,31 @@
 
 package com.gwtplatform.dispatch.rpc.client.gin;
 
-import javax.inject.Singleton;
-
-import com.google.gwt.inject.client.AbstractGinModule;
-import com.google.inject.Provides;
-import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.client.PhoneGapDispatchAsync;
-import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
-import com.gwtplatform.dispatch.rpc.shared.DispatchService;
-import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 
 /**
  * This gin module provides provides access to a {@link DispatchAsync} singleton that will work when used in a Phone Gap
  * application.
  */
-public class PhoneGapDispatchAsyncModule extends AbstractGinModule {
-    @Override
-    protected void configure() {
-        bind(RpcDispatchCallFactory.class).to(DefaultRpcDispatchCallFactory.class).in(Singleton.class);
-
-        bind(DispatchAsync.class).to(PhoneGapDispatchAsync.class).in(Singleton.class);
+public class PhoneGapDispatchAsyncModule extends RpcDispatchAsyncModule {
+    public static class Builder extends RpcDispatchAsyncModule.Builder {
+        @Override
+        public PhoneGapDispatchAsyncModule build() {
+            return new PhoneGapDispatchAsyncModule(this);
+        }
     }
 
-    @Provides
-    @Singleton
-    DispatchServiceAsync provideDispatchServiceAsync(DispatchService dispatchService) {
-        return (DispatchServiceAsync) dispatchService;
+    public PhoneGapDispatchAsyncModule() {
+        this(new Builder());
+    }
+
+    protected PhoneGapDispatchAsyncModule(Builder builder) {
+        super(builder);
+    }
+
+    @Override
+    protected Class<? extends DispatchAsync> getDispatchAsyncClass() {
+        return PhoneGapDispatchAsync.class;
     }
 }
