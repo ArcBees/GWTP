@@ -24,18 +24,22 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
 import com.google.gwt.core.ext.typeinfo.HasAnnotations;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 public enum HttpParameterType {
-    HEADER(HeaderParam.class),
-    PATH(PathParam.class),
-    QUERY(QueryParam.class),
-    FORM(FormParam.class);
+    HEADER(HeaderParam.class, Type.HEADER),
+    PATH(PathParam.class, Type.PATH),
+    QUERY(QueryParam.class, Type.QUERY),
+    FORM(FormParam.class, Type.FORM);
 
     private final Class<? extends Annotation> annotationClass;
+    private final Type associatedType;
 
     HttpParameterType(
-            Class<? extends Annotation> annotationClass) {
+            Class<? extends Annotation> annotationClass,
+            Type associatedType) {
         this.annotationClass = annotationClass;
+        this.associatedType = associatedType;
     }
 
     public static boolean isHttpParameter(HasAnnotations hasAnnotations) {
@@ -50,5 +54,9 @@ public enum HttpParameterType {
 
     public Class<? extends Annotation> getAnnotationClass() {
         return annotationClass;
+    }
+
+    public Type getAssociatedType() {
+        return associatedType;
     }
 }

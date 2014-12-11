@@ -24,27 +24,29 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.RestParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 
 public class RestParameterBindings {
-    private final Map<HttpMethod, Set<RestParameter>> parametersMap;
+    private final Map<HttpMethod, Set<HttpParameter>> parametersMap;
 
     public RestParameterBindings() {
-        parametersMap = new EnumMap<HttpMethod, Set<RestParameter>>(HttpMethod.class);
+        parametersMap = new EnumMap<HttpMethod, Set<HttpParameter>>(HttpMethod.class);
     }
 
-    public void put(HttpMethod httpMethod, RestParameter parameter) {
-        Set<RestParameter> parameters = parametersMap.get(httpMethod);
+    public void put(HttpMethod httpMethod, HttpParameter parameter) {
+        Set<HttpParameter> parameters = parametersMap.get(httpMethod);
 
         if (parameters == null) {
-            parameters = new LinkedHashSet<RestParameter>();
+            parameters = new LinkedHashSet<HttpParameter>();
+        }
+        if (parameter.getObject() != null) {
             parametersMap.put(httpMethod, parameters);
         }
 
         parameters.add(parameter);
     }
 
-    public Set<RestParameter> get(HttpMethod httpMethod) {
+    public Set<HttpParameter> get(HttpMethod httpMethod) {
         if (!parametersMap.containsKey(httpMethod)) {
             return Collections.emptySet();
         }
@@ -52,12 +54,12 @@ public class RestParameterBindings {
         return Collections.unmodifiableSet(parametersMap.get(httpMethod));
     }
 
-    public Set<Entry<HttpMethod, Set<RestParameter>>> entrySet() {
+    public Set<Entry<HttpMethod, Set<HttpParameter>>> entrySet() {
         return Collections.unmodifiableSet(parametersMap.entrySet());
     }
 
     public boolean isEmpty() {
-        for (Set<RestParameter> parameters : parametersMap.values()) {
+        for (Set<HttpParameter> parameters : parametersMap.values()) {
             if (!parameters.isEmpty()) {
                 return false;
             }
