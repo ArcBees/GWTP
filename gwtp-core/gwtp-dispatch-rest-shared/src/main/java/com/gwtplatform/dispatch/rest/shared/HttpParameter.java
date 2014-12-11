@@ -142,7 +142,7 @@ public class HttpParameter {
                 break;
             default:
                 // Other params are not yet supported. Should not reach.
-                encoded = "";
+                encoded = stringValue;
         }
 
         return new SimpleEntry<String, String>(name, encoded);
