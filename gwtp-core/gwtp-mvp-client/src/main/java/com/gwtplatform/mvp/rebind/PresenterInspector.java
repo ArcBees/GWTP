@@ -26,14 +26,8 @@ import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.SourceWriter;
-import com.gwtplatform.mvp.client.annotations.ContentSlot;
-import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
-import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
+import com.gwtplatform.mvp.client.annotations.*;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle;
-import com.gwtplatform.mvp.client.annotations.ProxyEvent;
-import com.gwtplatform.mvp.client.annotations.ProxyStandard;
-import com.gwtplatform.mvp.client.annotations.TabInfo;
-import com.gwtplatform.mvp.client.annotations.TitleFunction;
 
 /**
  * A class used to inspect the presenter, the methods and inner interfaces it contains.
@@ -53,6 +47,7 @@ public class PresenterInspector {
     private ProxyStandard proxyStandardAnnotation;
     private ProxyCodeSplit proxyCodeSplitAnnotation;
     private ProxyCodeSplitBundle proxyCodeSplitBundleAnnotation;
+    private CustomProvider customProviderAnnotation;
     private String getPresenterMethodName;
     private String bundleClassName;
 
@@ -85,6 +80,7 @@ public class PresenterInspector {
         proxyStandardAnnotation = proxyInterface.getAnnotation(ProxyStandard.class);
         proxyCodeSplitAnnotation = proxyInterface.getAnnotation(ProxyCodeSplit.class);
         proxyCodeSplitBundleAnnotation = proxyInterface.getAnnotation(ProxyCodeSplitBundle.class);
+        customProviderAnnotation = proxyInterface.getAnnotation(CustomProvider.class);
 
         if (!shouldGenerate()) {
             return false;
@@ -205,20 +201,27 @@ public class PresenterInspector {
      */
     public void writeProviderAssignation(SourceWriter writer) {
 
-        if (proxyStandardAnnotation != null) {
-            writer.println("presenter = new StandardProvider<" + presenterClassName
-                    + ">( ginjector." + getPresenterMethodName + "() );");
-        } else if (proxyCodeSplitAnnotation != null) {
-            writer.println("presenter = new CodeSplitProvider<" + presenterClassName
-                    + ">( ginjector." + getPresenterMethodName + "() );");
+        if (customProviderAnnotation != null) {
+            JClassType customProvider = oracle.findType(customProviderAnnotation.value().getName());
+            writer.println("presenter = new " + customProvider.getQualifiedSourceName() + "<" + presenterClassName
+                        + ">( ginjector." + getPresenterMethodName + "() );");
+
         } else {
-            assert proxyCodeSplitBundleAnnotation != null;
-            writer.print("presenter = new CodeSplitBundleProvider<"
-                    + presenterClassName + ", " + bundleClassName + ">(ginjector." + getPresenterMethodName + "(), ");
-            if (ginjectorInspector.isGenerated()) {
-                writer.print(bundleClassName + "." + presenterClass.getSimpleSourceName().toUpperCase() + ");");
+            if (proxyStandardAnnotation != null) {
+                writer.println("presenter = new StandardProvider<" + presenterClassName
+                        + ">( ginjector." + getPresenterMethodName + "() );");
+            } else if (proxyCodeSplitAnnotation != null) {
+                writer.println("presenter = new CodeSplitProvider<" + presenterClassName
+                        + ">( ginjector." + getPresenterMethodName + "() );");
             } else {
-                writer.print(proxyCodeSplitBundleAnnotation.id() + ");");
+                assert proxyCodeSplitBundleAnnotation != null;
+                writer.print("presenter = new CodeSplitBundleProvider<"
+                        + presenterClassName + ", " + bundleClassName + ">(ginjector." + getPresenterMethodName + "(), ");
+                if (ginjectorInspector.isGenerated()) {
+                    writer.print(bundleClassName + "." + presenterClass.getSimpleSourceName().toUpperCase() + ");");
+                } else {
+                    writer.print(proxyCodeSplitBundleAnnotation.id() + ");");
+                }
             }
         }
     }
