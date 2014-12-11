@@ -77,13 +77,13 @@ public class HttpParameter {
     }
 
     public List<Entry<String, String>> getEntries(UrlUtils urlUtils) {
-        // TODO: use subclassing to manage manage these rules individually
+        // TODO: use subclassing to manage these rules individually
 
         List<Map.Entry<String, String>> entries = new ArrayList<Entry<String, String>>();
 
-        // Spec. requires only List<T>, Set<T> or SortedSet<T>... but really?!
         if ((type == Type.QUERY || type == Type.HEADER || type == Type.FORM)
                 && object instanceof Collection) {
+            // Spec. requires only List<T>, Set<T> or SortedSet<T>... but really?!
             for (Object o : ((Collection<?>) object)) {
                 entries.add(createEntry(urlUtils, o));
             }
@@ -92,29 +92,6 @@ public class HttpParameter {
         }
 
         return entries;
-    }
-
-    protected SimpleEntry<String, String> createEntry(UrlUtils urlUtils, Object object) {
-        String encoded;
-        String stringValue = object.toString();
-
-        switch (type) {
-            case QUERY:
-            case FORM:
-                encoded = urlUtils.encodeQueryString(stringValue);
-                break;
-            case PATH:
-                encoded = urlUtils.encodePathSegment(stringValue);
-                break;
-            case HEADER:
-                encoded = stringValue;
-                break;
-            default:
-                // Other params are not yet supported. Should not reach.
-                encoded = "";
-        }
-
-        return new SimpleEntry<String, String>(name, encoded);
     }
 
     @Override
@@ -146,5 +123,28 @@ public class HttpParameter {
         int result = name.hashCode();
         result = 31 * result + (object != null ? object.hashCode() : 0);
         return result;
+    }
+
+    protected Entry<String, String> createEntry(UrlUtils urlUtils, Object object) {
+        String encoded;
+        String stringValue = object.toString();
+
+        switch (type) {
+            case QUERY:
+            case FORM:
+                encoded = urlUtils.encodeQueryString(stringValue);
+                break;
+            case PATH:
+                encoded = urlUtils.encodePathSegment(stringValue);
+                break;
+            case HEADER:
+                encoded = stringValue;
+                break;
+            default:
+                // Other params are not yet supported. Should not reach.
+                encoded = "";
+        }
+
+        return new SimpleEntry<String, String>(name, encoded);
     }
 }
