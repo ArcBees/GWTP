@@ -26,8 +26,15 @@ import com.google.gwt.core.ext.typeinfo.JField;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.SourceWriter;
-import com.gwtplatform.mvp.client.annotations.*;
+import com.gwtplatform.mvp.client.annotations.ContentSlot;
+import com.gwtplatform.mvp.client.annotations.CustomProvider;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.annotations.TabInfo;
+import com.gwtplatform.mvp.client.annotations.TitleFunction;
 
 /**
  * A class used to inspect the presenter, the methods and inner interfaces it contains.
@@ -215,8 +222,8 @@ public class PresenterInspector {
                         + ">( ginjector." + getPresenterMethodName + "() );");
             } else {
                 assert proxyCodeSplitBundleAnnotation != null;
-                writer.print("presenter = new CodeSplitBundleProvider<"
-                        + presenterClassName + ", " + bundleClassName + ">(ginjector." + getPresenterMethodName + "(), ");
+                writer.print("presenter = new CodeSplitBundleProvider<" + presenterClassName
+                        + ", " + bundleClassName + ">(ginjector." + getPresenterMethodName + "(), ");
                 if (ginjectorInspector.isGenerated()) {
                     writer.print(bundleClassName + "." + presenterClass.getSimpleSourceName().toUpperCase() + ");");
                 } else {
