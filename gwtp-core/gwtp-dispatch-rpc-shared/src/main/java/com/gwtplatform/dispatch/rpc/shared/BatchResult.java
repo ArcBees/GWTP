@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.rpc.shared;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ import java.util.List;
 public class BatchResult implements Result {
     private static final long serialVersionUID = 1L;
 
-    private List<Result> results;
+    private ArrayList<Result> results;
 
     /**
      * Creates a new result with the list of results from the batch action, in order.
@@ -36,7 +37,7 @@ public class BatchResult implements Result {
      * @param results The list of results.
      */
     public BatchResult(List<Result> results) {
-        this.results = results;
+        this.results = new ArrayList<Result>(results);
     }
 
     /**

@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.shared;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,10 +36,10 @@ import java.util.List;
 public class MultipleResult<T> implements Result {
     private static final long serialVersionUID = 1L;
 
-    private List<T> value;
+    private ArrayList<T> value;
 
     public MultipleResult(List<T> value) {
-        this.value = value;
+        this.value = new ArrayList<T>(value);
     }
 
     protected MultipleResult() {
