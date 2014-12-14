@@ -3,17 +3,21 @@ package $package;
 import javax.inject.Inject;
 
 import com.gwtplatform.dispatch.rest.client.DefaultDateFormat;
+import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
 #foreach ($import in $imports)
 import $import;
 #end
 
 public class $impl implements $resourceType {
+    private final HttpParameterFactory httpParameterFactory;
     private final String defaultDateFormat;
 
     @Inject
     ${impl}(
+            HttpParameterFactory httpParameterFactory,
             @DefaultDateFormat String defaultDateFormat) {
         this.defaultDateFormat = defaultDateFormat;
+        this.httpParameterFactory = httpParameterFactory;
     }
 
 #foreach ($method in $methods)

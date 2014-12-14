@@ -19,6 +19,8 @@ package com.gwtplatform.dispatch.rest.client;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
@@ -36,7 +38,7 @@ public class AbstractRestActionTest {
 
     @Before
     public void setUp() {
-        action = new SecuredRestAction(HttpMethod.POST, "");
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST, "");
     }
 
     @Test
@@ -63,5 +65,16 @@ public class AbstractRestActionTest {
                         tuple(PARAM_NAME_2, PARAM_VALUE_2));
     }
 
-    // TODO: test getParams remove null values
+    @Test
+    public void getParams_stripsOutNulls() {
+        // When
+        action.addParam(Type.FORM, PARAM_NAME_1, null);
+        action.addParam(Type.FORM, PARAM_NAME_2, PARAM_VALUE_2);
+
+        // Then
+        assertThat(action.getParameters(Type.FORM))
+                .hasSize(1)
+                .extracting("name", "object")
+                .containsExactly(tuple(PARAM_NAME_2, PARAM_VALUE_2));
+    }
 }

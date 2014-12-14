@@ -3,13 +3,15 @@ package $package;
 import javax.ws.rs.core.HttpHeaders;
 
 import com.gwtplatform.dispatch.rest.client.AbstractRestAction;
+import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 public class $impl extends AbstractRestAction<$result> {
     public ${impl}(
+            HttpParameterFactory httpParameterFactory,
             String defaultDateFormat#generateAppendedMethodSignature($parameters)) {
-        super(HttpMethod.$httpVerb, "$path", defaultDateFormat);
+        super(httpParameterFactory, defaultDateFormat, HttpMethod.$httpVerb, "$path");
 
 #foreach($param in $httpParameters)
         addParam(Type.$param.type.getAssociatedType(), "$param.name", $param.variableName#if($param.dateFormat.isPresent()), "$param.dateFormat.get()"#end);

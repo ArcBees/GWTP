@@ -19,9 +19,10 @@ package com.gwtplatform.dispatch.rest.client.interceptor;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.gwtplatform.dispatch.rest.client.ExposedRestAction;
-import com.gwtplatform.dispatch.rest.client.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.client.interceptor.InterceptorContext.Builder;
+import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
+import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
@@ -43,7 +44,7 @@ public class RestInterceptorRegistryTest {
 
     @Before
     public void setUp() {
-        action = new SecuredRestAction(HttpMethod.GET, PATH_1);
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.GET, PATH_1);
         interceptorRegistry = new DefaultRestInterceptorRegistry();
     }
 

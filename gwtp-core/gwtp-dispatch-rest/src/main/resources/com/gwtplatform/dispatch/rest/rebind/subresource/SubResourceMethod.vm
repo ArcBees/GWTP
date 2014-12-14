@@ -1,4 +1,6 @@
     @Override
     public $resourceType ${methodName}(#generateMethodSignature($parameters)) {
-        return new ${subResource.className}(defaultDateFormat#generateAppendedCallSignature($subResourceParameters));
+        return new ${subResource.className}(
+                httpParameterFactory,
+                defaultDateFormat#generateAppendedCallSignature($subResourceParameters));
     }

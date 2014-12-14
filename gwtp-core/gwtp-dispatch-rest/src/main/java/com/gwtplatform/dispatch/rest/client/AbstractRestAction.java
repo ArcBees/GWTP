@@ -17,11 +17,9 @@
 package com.gwtplatform.dispatch.rest.client;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import com.google.gwt.i18n.shared.DateTimeFormat;
-import com.gwtplatform.dispatch.rest.shared.DateFormat;
+import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
@@ -34,29 +32,24 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * @param <R> the result type
  */
 public abstract class AbstractRestAction<R> implements RestAction<R> {
-    private String defaultDateFormat;
-    private HttpMethod httpMethod;
-    private String rawServicePath;
-
-    private List<HttpParameter> parameters;
+    private final HttpParameterFactory httpParameterFactory;
+    private final String defaultDateFormat;
+    private final HttpMethod httpMethod;
+    private final String rawServicePath;
+    private final List<HttpParameter> parameters;
 
     private Object bodyParam;
 
-    protected AbstractRestAction() {
-        defaultDateFormat = DateFormat.DEFAULT;
-
-        parameters = new ArrayList<HttpParameter>();
-    }
-
     protected AbstractRestAction(
+            HttpParameterFactory httpParameterFactory,
+            String defaultDateFormat,
             HttpMethod httpMethod,
-            String rawServicePath,
-            String defaultDateFormat) {
-        this();
-
+            String rawServicePath) {
+        this.httpParameterFactory = httpParameterFactory;
+        this.defaultDateFormat = defaultDateFormat;
         this.httpMethod = httpMethod;
         this.rawServicePath = rawServicePath;
-        this.defaultDateFormat = defaultDateFormat;
+        this.parameters = new ArrayList<HttpParameter>();
     }
 
     @Override
@@ -101,28 +94,16 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
         return bodyParam != null;
     }
 
-    protected void addParam(HttpParameter.Type type, String name, Date date) {
-        addParam(type, name, date, defaultDateFormat);
-    }
-
-    protected void addParam(HttpParameter.Type type, String name, Date date, String pattern) {
-        String value = formatDate(date, pattern);
-        addParam(type, name, value);
-    }
-
     protected void addParam(HttpParameter.Type type, String name, Object value) {
-        parameters.add(new HttpParameter(type, name, value));
+        addParam(type, name, value, defaultDateFormat);
+    }
+
+    protected void addParam(HttpParameter.Type type, String name, Object value, String dateFormat) {
+        HttpParameter parameter = httpParameterFactory.create(type, name, value, dateFormat);
+        parameters.add(parameter);
     }
 
     protected void setBodyParam(Object value) {
         bodyParam = value;
-    }
-
-    protected String formatDate(Date date, String pattern) {
-        if (date == null) {
-            return null;
-        } else {
-            return DateTimeFormat.getFormat(pattern).format(date);
-        }
     }
 }

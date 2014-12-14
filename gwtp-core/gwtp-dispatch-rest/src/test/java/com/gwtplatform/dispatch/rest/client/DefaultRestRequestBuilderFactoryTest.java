@@ -31,10 +31,13 @@ import org.mockito.InOrder;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
 import com.google.inject.Provides;
-import com.gwtplatform.common.shared.UrlUtils;
+import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
+import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
+import com.gwtplatform.dispatch.rest.client.testutils.UnsecuredRestAction;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
-import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -66,16 +69,18 @@ public class DefaultRestRequestBuilderFactoryTest {
 
             forceMock(HttpRequestBuilderFactory.class);
             forceMock(RequestBuilder.class);
+
+            bind(HttpParameterFactory.class).to(MockHttpParameterFactory.class);
         }
 
         @Provides
         @TestSingleton
         @GlobalHeaderParams
-        RestParameterBindings getHeaderParams() {
+        RestParameterBindings getHeaderParams(HttpParameterFactory parameterFactory) {
             RestParameterBindings headers = new RestParameterBindings();
-            headers.put(GET, new HttpParameter(Type.HEADER, KEY_1, DECODED_VALUE_1));
-            headers.put(GET, new HttpParameter(Type.HEADER, KEY_2, DECODED_VALUE_2));
-            headers.put(POST, new HttpParameter(Type.HEADER, KEY_3, DECODED_VALUE_3));
+            headers.put(GET, parameterFactory.create(Type.HEADER, KEY_1, VALUE_1));
+            headers.put(GET, parameterFactory.create(Type.HEADER, KEY_2, VALUE_2));
+            headers.put(POST, parameterFactory.create(Type.HEADER, KEY_3, VALUE_3));
 
             return headers;
         }
@@ -83,11 +88,11 @@ public class DefaultRestRequestBuilderFactoryTest {
         @Provides
         @TestSingleton
         @GlobalQueryParams
-        RestParameterBindings getQueryParams() {
+        RestParameterBindings getQueryParams(HttpParameterFactory parameterFactory) {
             RestParameterBindings queries = new RestParameterBindings();
-            queries.put(GET, new HttpParameter(Type.QUERY, KEY_1, DECODED_VALUE_1));
-            queries.put(GET, new HttpParameter(Type.QUERY, KEY_2, DECODED_VALUE_2));
-            queries.put(POST, new HttpParameter(Type.QUERY, KEY_3, DECODED_VALUE_3));
+            queries.put(GET, parameterFactory.create(Type.QUERY, KEY_1, VALUE_1));
+            queries.put(GET, parameterFactory.create(Type.QUERY, KEY_2, VALUE_2));
+            queries.put(POST, parameterFactory.create(Type.QUERY, KEY_3, VALUE_3));
 
             return queries;
         }
@@ -107,14 +112,9 @@ public class DefaultRestRequestBuilderFactoryTest {
     private static final String ACTION_KEY_1 = "action" + KEY_1;
     private static final String ACTION_KEY_2 = "action" + KEY_2;
 
-    private static final String DECODED_VALUE_1 = "Value1";
-    private static final String ENCODED_VALUE_1 = "Value1";
-
-    private static final String DECODED_VALUE_2 = "Value 2";
-    private static final String ENCODED_VALUE_2 = "Value%201";
-
-    private static final String DECODED_VALUE_3 = "Value 3";
-    private static final String ENCODED_VALUE_3 = "Value%2B3";
+    private static final String VALUE_1 = "Value1";
+    private static final String VALUE_2 = "Value 2";
+    private static final String VALUE_3 = "Value 3";
 
     @Inject
     private DefaultRestRequestBuilderFactory factory;
@@ -122,20 +122,18 @@ public class DefaultRestRequestBuilderFactoryTest {
     private HttpRequestBuilderFactory httpRequestBuilderFactory;
     @Inject
     private RequestBuilder requestBuilder;
+    @Inject
+    private HttpParameterFactory parameterFactory;
 
     @Before
-    public void setUp(HttpRequestBuilderFactory httpRequestBuilderFactory, UrlUtils urlUtils) {
+    public void setUp() {
         given(httpRequestBuilderFactory.create(any(Method.class), anyString())).willReturn(requestBuilder);
-
-        given(urlUtils.encodeQueryString(DECODED_VALUE_1)).willReturn(ENCODED_VALUE_1);
-        given(urlUtils.encodeQueryString(DECODED_VALUE_2)).willReturn(ENCODED_VALUE_2);
-        given(urlUtils.encodeQueryString(DECODED_VALUE_3)).willReturn(ENCODED_VALUE_3);
     }
 
     @Test
     public void build_noFormParamsNoBody_setsExplicitNullAsRequestData() throws ActionException {
         // Given
-        RestAction<Void> action = new UnsecuredRestAction(DELETE, RELATIVE_PATH);
+        RestAction<Void> action = new UnsecuredRestAction(parameterFactory, DELETE, RELATIVE_PATH);
 
         // When
         factory.build(action, SECURITY_TOKEN);
@@ -147,7 +145,7 @@ public class DefaultRestRequestBuilderFactoryTest {
     @Test
     public void absoluteUrlShouldNotChange() throws ActionException {
         // Given
-        RestAction<Void> action = new UnsecuredRestAction(GET, ABSOLUTE_PATH);
+        RestAction<Void> action = new UnsecuredRestAction(parameterFactory, GET, ABSOLUTE_PATH);
 
         // When
         factory.build(action, SECURITY_TOKEN);
@@ -159,7 +157,7 @@ public class DefaultRestRequestBuilderFactoryTest {
     @Test
     public void relativeUrlShouldBePrependedByApplicationPath() throws ActionException {
         // Given
-        RestAction<Void> action = new UnsecuredRestAction(GET, RELATIVE_PATH);
+        RestAction<Void> action = new UnsecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
 
         // When
         factory.build(action, SECURITY_TOKEN);
@@ -171,7 +169,7 @@ public class DefaultRestRequestBuilderFactoryTest {
     @Test
     public void securityHeaderShouldBeSetWhenTokenIsNotEmpty() throws ActionException {
         // Given
-        RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+        RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
 
         // When
         factory.build(action, SECURITY_TOKEN);
@@ -183,7 +181,7 @@ public class DefaultRestRequestBuilderFactoryTest {
     @Test
     public void securityHeaderShouldNotBeSetWhenSecurityTokenIsEmpty() throws ActionException {
         // Given
-        RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+        RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
 
         // When
         factory.build(action, "");
@@ -195,7 +193,7 @@ public class DefaultRestRequestBuilderFactoryTest {
     @Test
     public void securityHeaderShouldNotBeSetWhenActionIsNotSecured() throws ActionException {
         // Given
-        RestAction<Void> action = new UnsecuredRestAction(GET, RELATIVE_PATH);
+        RestAction<Void> action = new UnsecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
 
         // When
         factory.build(action, SECURITY_TOKEN);
@@ -207,7 +205,7 @@ public class DefaultRestRequestBuilderFactoryTest {
     @Test
     public void requestTimeoutShouldBeTheTimeoutProvided() throws ActionException {
         // Given
-        RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+        RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
 
         // When
         factory.build(action, SECURITY_TOKEN);
@@ -217,33 +215,30 @@ public class DefaultRestRequestBuilderFactoryTest {
     }
 
     @Test
-    public void requestDataShouldBeEncodedQueryStringWhenActionHasFormParams() throws ActionException {
+    public void requestDataShouldBeParsedFormParamsWhenActionHasFormParams() throws ActionException {
         // Given
-        ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
-        action.addParam(Type.FORM, "Key1", DECODED_VALUE_1);
-        action.addParam(Type.FORM, "Key2", DECODED_VALUE_2);
-        action.addParam(Type.FORM, "Key3", DECODED_VALUE_3);
+        ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        action.addParam(Type.FORM, "Key1", VALUE_1);
+        action.addParam(Type.FORM, "Key2", VALUE_2);
+        action.addParam(Type.FORM, "Key3", VALUE_3);
 
         // When
         factory.build(action, SECURITY_TOKEN);
 
         // Then
-        String expectedRequestData = "Key1=" + ENCODED_VALUE_1
-                + "&Key2=" + ENCODED_VALUE_2
-                + "&Key3=" + ENCODED_VALUE_3;
+        String expectedRequestData = "Key1=" + VALUE_1 + "&Key2=" + VALUE_2 + "&Key3=" + VALUE_3;
         verify(requestBuilder).setRequestData(eq(expectedRequestData));
     }
 
     @Test
     public void requestDataShouldBeSerializedStringWhenActionHasBody(Serialization serialization,
-            ActionMetadataProvider metadataProvider)
-            throws ActionException {
+            ActionMetadataProvider metadataProvider) throws ActionException {
         // Given
         Object unserializedObject = new Object();
         String serializationKey = "meta";
         String serializedValue = new Date().toString();
 
-        ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+        ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
         action.setBodyParam(unserializedObject);
 
         given(metadataProvider.getValue(action, BODY_TYPE)).willReturn(serializationKey);
@@ -260,19 +255,19 @@ public class DefaultRestRequestBuilderFactoryTest {
     @Test
     public void globalHeadersShouldBeSetForCorrespondingHttpMethod() throws ActionException {
         // Given
-        RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+        RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
 
         // When
         factory.build(action, SECURITY_TOKEN);
 
         // Then
-        verify(requestBuilder).setHeader(eq(KEY_1), eq(DECODED_VALUE_1));
-        verify(requestBuilder).setHeader(eq(KEY_2), eq(DECODED_VALUE_2));
-        verify(requestBuilder, never()).setHeader(eq(KEY_3), eq(DECODED_VALUE_3));
+        verify(requestBuilder).setHeader(eq(KEY_1), eq(VALUE_1));
+        verify(requestBuilder).setHeader(eq(KEY_2), eq(VALUE_2));
+        verify(requestBuilder, never()).setHeader(eq(KEY_3), eq(VALUE_3));
     }
 
     @Test
-    public void allActionHeadersShouldBeSet() throws ActionException {
+    public void allActionHeaderParamsShouldBeSet() throws ActionException {
         // Given
         RestAction<Void> action = createActionWithHeaderParams();
 
@@ -280,12 +275,12 @@ public class DefaultRestRequestBuilderFactoryTest {
         factory.build(action, SECURITY_TOKEN);
 
         // Then
-        verify(requestBuilder).setHeader(eq(ACTION_KEY_1), eq(DECODED_VALUE_1));
-        verify(requestBuilder).setHeader(eq(ACTION_KEY_2), eq(DECODED_VALUE_2));
+        verify(requestBuilder).setHeader(eq(ACTION_KEY_1), eq(VALUE_1));
+        verify(requestBuilder).setHeader(eq(ACTION_KEY_2), eq(VALUE_2));
     }
 
     @Test
-    public void actionHeadersShouldBeSetAfterGlobalHeaders() throws ActionException {
+    public void actionHeaderParamsShouldBeSetAfterGlobalHeaders() throws ActionException {
         // Given
         RestAction<Void> action = createActionWithHeaderParams();
 
@@ -301,40 +296,40 @@ public class DefaultRestRequestBuilderFactoryTest {
     }
 
     @Test
-    public void globalQueriesShouldBeSetForCorrespondingHttpMethod() throws ActionException {
+    public void globalQueryParamsShouldBeSetForCorrespondingHttpMethod() throws ActionException {
         // Given
-        RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+        RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
 
         // When
         factory.build(action, SECURITY_TOKEN);
 
         // Then
-        String expectedUrl = String.format("?%s=%s&%s=%s", KEY_1, ENCODED_VALUE_1, KEY_2, ENCODED_VALUE_2);
+        String expectedUrl = String.format("?%s=%s&%s=%s", KEY_1, VALUE_1, KEY_2, VALUE_2);
 
         verify(httpRequestBuilderFactory).create(eq(RequestBuilder.GET), endsWith(expectedUrl));
     }
 
     @Test
-    public void allActionQueriesShouldBeSet() throws ActionException {
+    public void allActionQueryParamsShouldBeSet() throws ActionException {
         // Given
-        ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
-        action.addParam(Type.QUERY, ACTION_KEY_1, DECODED_VALUE_1);
-        action.addParam(Type.QUERY, ACTION_KEY_2, DECODED_VALUE_2);
+        ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        action.addParam(Type.QUERY, ACTION_KEY_1, VALUE_1);
+        action.addParam(Type.QUERY, ACTION_KEY_2, VALUE_2);
 
         // When
         factory.build(action, SECURITY_TOKEN);
 
         // Then
-        String expectedUrl = String.format("?%s=%s&%s=%s&%s=%s&%s=%s", KEY_1, ENCODED_VALUE_1, KEY_2, ENCODED_VALUE_2,
-                ACTION_KEY_1, ENCODED_VALUE_1, ACTION_KEY_2, ENCODED_VALUE_2);
+        String expectedUrl = String.format("?%s=%s&%s=%s&%s=%s&%s=%s", KEY_1, VALUE_1, KEY_2, VALUE_2,
+                ACTION_KEY_1, VALUE_1, ACTION_KEY_2, VALUE_2);
 
         verify(httpRequestBuilderFactory).create(eq(RequestBuilder.GET), endsWith(expectedUrl));
     }
 
     private RestAction<Void> createActionWithHeaderParams() {
-        ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
-        action.addParam(Type.HEADER, ACTION_KEY_1, DECODED_VALUE_1);
-        action.addParam(Type.HEADER, ACTION_KEY_2, DECODED_VALUE_2);
+        ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        action.addParam(Type.HEADER, ACTION_KEY_1, VALUE_1);
+        action.addParam(Type.HEADER, ACTION_KEY_2, VALUE_2);
 
         return action;
     }

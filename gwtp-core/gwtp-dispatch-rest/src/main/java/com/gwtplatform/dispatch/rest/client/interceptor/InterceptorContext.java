@@ -66,7 +66,9 @@ public class InterceptorContext {
 
         /**
          * Explicitly provide a REST path string.
+         *
          * @param path the rest path.
+         *
          * @return this {@link Builder} object.
          */
         public Builder path(String path) {
@@ -76,7 +78,9 @@ public class InterceptorContext {
 
         /**
          * Explicitly provide an HttpMethod.
+         *
          * @param httpMethod the REST {@link HttpMethod}.
+         *
          * @return this {@link Builder} object.
          */
         public Builder httpMethod(HttpMethod httpMethod) {
@@ -86,7 +90,9 @@ public class InterceptorContext {
 
         /**
          * Explicitly provide a query count.
+         *
          * @param queryCount the query count.
+         *
          * @return this {@link Builder} object.
          */
         public Builder queryCount(int queryCount) {
@@ -96,8 +102,9 @@ public class InterceptorContext {
 
         /**
          * Allow for transcendent context mapping.
-         * @param transcendent Use a transcendent strategy on the path,
-         *                     e.g. /path will be detected using /path/2.
+         *
+         * @param transcendent Use a transcendent strategy on the path, e.g. /path will be detected using /path/2.
+         *
          * @return this {@link Builder} object.
          */
         public Builder transcendent(boolean transcendent) {
@@ -107,7 +114,9 @@ public class InterceptorContext {
 
         /**
          * Any {@link HttpMethod} for context mapping.
+         *
          * @param anyHttpMethod Allow any HTTP httpMethod when checking.
+         *
          * @return this {@link Builder} object.
          */
         public Builder anyHttpMethod(boolean anyHttpMethod) {
@@ -117,7 +126,9 @@ public class InterceptorContext {
 
         /**
          * Any query count for context mapping.
+         *
          * @param anyQueryCount true allows any query param count.
+         *
          * @return this {@link Builder} object.
          */
         public Builder anyQueryCount(boolean anyQueryCount) {
@@ -127,6 +138,7 @@ public class InterceptorContext {
 
         /**
          * Build the {@link InterceptorContext}.
+         *
          * @return built context.
          */
         public InterceptorContext build() {
@@ -245,7 +257,7 @@ public class InterceptorContext {
         if (that.useTemplate()) {
             action = that.getTemplate();
         } else {
-            action = new InterceptRestAction(that.getHttpMethod(), that.getPath(), that.getQueryCount());
+            action = new InterceptorContextRestAction(that.getHttpMethod(), that.getPath(), that.getQueryCount());
         }
         return canIntercept(action);
     }

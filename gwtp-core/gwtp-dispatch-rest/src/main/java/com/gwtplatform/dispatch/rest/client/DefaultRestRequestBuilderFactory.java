@@ -29,7 +29,7 @@ import javax.ws.rs.core.MediaType;
 import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
-import com.gwtplatform.common.shared.UrlUtils;
+import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -59,7 +59,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     private final ActionMetadataProvider metadataProvider;
     private final Serialization serialization;
     private final HttpRequestBuilderFactory httpRequestBuilderFactory;
-    private final UrlUtils urlUtils;
+    private final HttpParameterFactory httpParameterFactory;
     private final RestParameterBindings globalHeaderParams;
     private final RestParameterBindings globalQueryParams;
     private final String baseUrl;
@@ -71,7 +71,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
             ActionMetadataProvider metadataProvider,
             Serialization serialization,
             HttpRequestBuilderFactory httpRequestBuilderFactory,
-            UrlUtils urlUtils,
+            HttpParameterFactory httpParameterFactory,
             @GlobalHeaderParams RestParameterBindings globalHeaderParams,
             @GlobalQueryParams RestParameterBindings globalQueryParams,
             @RestApplicationPath String baseUrl,
@@ -80,7 +80,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         this.metadataProvider = metadataProvider;
         this.serialization = serialization;
         this.httpRequestBuilderFactory = httpRequestBuilderFactory;
-        this.urlUtils = urlUtils;
+        this.httpParameterFactory = httpParameterFactory;
         this.globalHeaderParams = globalHeaderParams;
         this.globalQueryParams = globalQueryParams;
         this.baseUrl = baseUrl;
@@ -131,7 +131,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         List<HttpParameter> headerParams = getHeaderParameters(xsrfToken, action);
 
         for (HttpParameter param : headerParams) {
-            for (Entry<String, String> entry : param.getEntries(urlUtils)) {
+            for (Entry<String, String> entry : param.getEntries()) {
                 requestBuilder.setHeader(entry.getKey(), entry.getValue());
             }
         }
@@ -141,15 +141,14 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         List<HttpParameter> headerParams = new ArrayList<HttpParameter>();
 
         // By setting the most generic headers first, we make sure they can be overridden by more specific ones
-        headerParams.add(new HttpParameter(Type.HEADER, HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON));
-        headerParams.add(new HttpParameter(Type.HEADER, HttpHeaders.CONTENT_TYPE, JSON_UTF8));
-        headerParams.add(new HttpParameter(Type.HEADER, HttpHeaders.CONTENT_TYPE, JSON_UTF8));
+        headerParams.add(httpParameterFactory.create(Type.HEADER, HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON));
+        headerParams.add(httpParameterFactory.create(Type.HEADER, HttpHeaders.CONTENT_TYPE, JSON_UTF8));
 
         if (!isAbsoluteUrl(action.getPath())) {
-            headerParams.add(new HttpParameter(Type.HEADER, MODULE_BASE_HEADER, baseUrl));
+            headerParams.add(httpParameterFactory.create(Type.HEADER, MODULE_BASE_HEADER, baseUrl));
         }
         if (xsrfToken != null && !xsrfToken.isEmpty()) {
-            headerParams.add(new HttpParameter(Type.HEADER, securityHeaderName, xsrfToken));
+            headerParams.add(httpParameterFactory.create(Type.HEADER, securityHeaderName, xsrfToken));
         }
 
         headerParams.addAll(globalHeaderParams.get(action.getHttpMethod()));
@@ -199,7 +198,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         String path = rawPath;
 
         for (HttpParameter param : params) {
-            List<Entry<String, String>> entries = param.getEntries(urlUtils);
+            List<Entry<String, String>> entries = param.getEntries();
             assert entries.size() <= 1;
 
             Entry<String, String> entry = entries.get(0);
@@ -213,7 +212,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
         StringBuilder queryString = new StringBuilder();
 
         for (HttpParameter parameter : parameters) {
-            for (Entry<String, String> entry : parameter.getEntries(urlUtils)) {
+            for (Entry<String, String> entry : parameter.getEntries()) {
                 queryString.append("&")
                         .append(entry.getKey())
                         .append("=")

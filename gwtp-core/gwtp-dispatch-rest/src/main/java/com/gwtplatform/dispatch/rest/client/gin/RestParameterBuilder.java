@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Set;
 
+import com.gwtplatform.dispatch.rest.client.parameters.ClientHttpParameter;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
@@ -72,7 +73,7 @@ public class RestParameterBuilder {
      * @return The module builder instance.
      */
     public RestDispatchAsyncModuleBuilder withValue(String value) {
-        HttpParameter parameter = new HttpParameter(type, key, value);
+        HttpParameter parameter = new ClientHttpParameter(type, key, value, null);
 
         for (HttpMethod httpMethod : httpMethods) {
             target.put(httpMethod, parameter);

@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,26 +14,33 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.interceptor;
+package com.gwtplatform.dispatch.rest.client.testutils;
 
 import com.gwtplatform.dispatch.rest.client.AbstractRestAction;
+import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 /**
- * An exposed RestAction implementation used internally to compare similar contexts.
+ * Used by test code to expose protected methods from {@link com.gwtplatform.dispatch.rest.client.AbstractRestAction
+ * AbstractRestAction}. The goal is to help clean up the test code.
  */
-class InterceptRestAction extends AbstractRestAction<Object> {
-    protected InterceptRestAction(
+public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
+    protected ExposedRestAction(
+            HttpParameterFactory factory,
             HttpMethod httpMethod,
-            String rawServicePath,
-            int queryCount) {
-        super(httpMethod, rawServicePath, DateFormat.DEFAULT);
+            String rawServicePath) {
+        super(factory, DateFormat.DEFAULT, httpMethod, rawServicePath);
+    }
 
-        // Add fake query params
-        for (int i = 0; i < queryCount; i++) {
-            addParam(Type.QUERY, "param" + i, "value" + i);
-        }
+    @Override
+    public void setBodyParam(Object value) {
+        super.setBodyParam(value);
+    }
+
+    @Override
+    public void addParam(Type type, String name, Object value) {
+        super.addParam(type, name, value);
     }
 }

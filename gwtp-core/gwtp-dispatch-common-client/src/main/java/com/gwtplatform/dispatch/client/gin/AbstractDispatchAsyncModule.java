@@ -27,9 +27,9 @@ import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
- * This gin module provides provides access to the dispatcher singleton, which is used to make calls to the server.
- * This module requires an {@link ExceptionHandler} and a {@link SecurityCookieAccessor}. By default,
- * these will be bound to {@link DefaultExceptionHandler}, {@link DefaultSecurityCookieAccessor} respectively.
+ * This gin module provides provides access to the dispatcher singleton, which is used to make calls to the server. This
+ * module requires an {@link ExceptionHandler} and a {@link SecurityCookieAccessor}. By default, these will be bound to
+ * {@link DefaultExceptionHandler}, {@link DefaultSecurityCookieAccessor} respectively.
  * <p/>
  * Install the module in one of your {@link #configure()} methods:
  * <p/>
@@ -47,20 +47,20 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
     /**
      * A {@link AbstractDispatchAsyncModule} builder.
      * <p/>
-     * By default, this builder configures the {@link AbstractDispatchAsyncModule} to use
-     * {@link DefaultExceptionHandler} and {@link DefaultSecurityCookieAccessor}.
+     * By default, this builder configures the {@link AbstractDispatchAsyncModule} to use {@link
+     * DefaultExceptionHandler} and {@link DefaultSecurityCookieAccessor}.
      *
      * @see com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule.Builder
      * @see com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule.Builder
      */
-    public abstract static class Builder {
+    public abstract static class Builder<B extends Builder<B>> {
         private Class<? extends ExceptionHandler> exceptionHandlerType = DefaultExceptionHandler.class;
         private Class<? extends SecurityCookieAccessor> sessionAccessorType = DefaultSecurityCookieAccessor.class;
 
         /**
          * Constructs {@link AbstractDispatchAsyncModule} builder.
          */
-        public Builder() {
+        protected Builder() {
         }
 
         /**
@@ -74,31 +74,35 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          * Specify an alternative exception handler.
          *
          * @param exceptionHandlerType The {@link ExceptionHandler} class.
+         *
          * @return a {@link Builder} object.
          */
-        public <T extends Builder> T exceptionHandler(final Class<? extends ExceptionHandler> exceptionHandlerType) {
+        public B exceptionHandler(final Class<? extends ExceptionHandler> exceptionHandlerType) {
             this.exceptionHandlerType = exceptionHandlerType;
-            return (T) this;
+            return self();
         }
 
         /**
          * Specify an alternate session accessor.
          *
          * @param sessionAccessorType The {@link SecurityCookieAccessor} class.
+         *
          * @return a {@link Builder} object.
          */
-        public <T extends Builder> T sessionAccessor(
+        public B sessionAccessor(
                 final Class<? extends SecurityCookieAccessor> sessionAccessorType) {
             this.sessionAccessorType = sessionAccessorType;
-            return (T) this;
+            return self();
         }
+
+        protected abstract B self();
     }
 
-    private final Builder builder;
+    private final Builder<?> builder;
     private final Class<? extends Annotation> annotationClass;
 
     protected AbstractDispatchAsyncModule(
-            Builder builder,
+            Builder<?> builder,
             Class<? extends Annotation> annotationClass) {
         this.builder = builder;
         this.annotationClass = annotationClass;
@@ -113,8 +117,8 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
     }
 
     /**
-     * Override this method to perform additional bindings in your implementation of
-     * {@link AbstractDispatchAsyncModule}.
+     * Override this method to perform additional bindings in your implementation of {@link
+     * AbstractDispatchAsyncModule}.
      */
     protected void configureDispatch() {
     }

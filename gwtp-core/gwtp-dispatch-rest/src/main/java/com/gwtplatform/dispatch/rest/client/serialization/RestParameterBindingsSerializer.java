@@ -23,6 +23,8 @@ import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.gwtplatform.common.shared.UrlUtils;
+import com.gwtplatform.dispatch.rest.client.parameters.DefaultHttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
@@ -55,6 +57,12 @@ public class RestParameterBindingsSerializer {
             return null;
         }
     };
+
+    private final HttpParameterFactory parameterFactory;
+
+    public RestParameterBindingsSerializer() {
+        parameterFactory = new DefaultHttpParameterFactory(URL_UTILS, null);
+    }
 
     /**
      * Used to serialize the bindings at compilation. Usage of GWT code is <b>not</b> allowed.
@@ -90,7 +98,7 @@ public class RestParameterBindingsSerializer {
                 String key = jsonParameter.get("key").isString().stringValue();
                 String value = jsonParameter.get("value").isString().stringValue();
                 Type type = Type.valueOf(jsonParameter.get("type").isString().stringValue());
-                HttpParameter parameter = new HttpParameter(type, key, value);
+                HttpParameter parameter = parameterFactory.create(type, key, value);
 
                 parameters.put(httpMethod, parameter);
             }
@@ -103,7 +111,7 @@ public class RestParameterBindingsSerializer {
         result.append("\"").append(method.name()).append("\":[");
 
         for (HttpParameter parameter : parameters) {
-            for (Entry<String, String> entry : parameter.getEntries(URL_UTILS)) {
+            for (Entry<String, String> entry : parameter.getEntries()) {
                 result.append("{\"type\": \"").append(parameter.getType().name())
                         .append("\", \"key\": \"").append(entry.getKey())
                         .append("\", \"value\": \"").append(entry.getValue()).append("\"},");
