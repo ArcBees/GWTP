@@ -30,7 +30,7 @@ import com.gwtplatform.mvp.client.Presenter;
  *
  * @param <T> The type of the return value, see {@link AsyncCallback}.
  */
-public class ManualRevealCallback<T> implements AsyncCallback<T> {
+public final class ManualRevealCallback<T> implements AsyncCallback<T> {
 
     private final Presenter<?, ? extends ProxyPlace<?>> presenter;
     private final AsyncCallback<T> callback;
