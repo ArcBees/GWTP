@@ -215,7 +215,6 @@
     </mailingLists>
 
     <modules>
-        <module>gwtp-build-tools</module>
         <module>gwtp-core</module>
         <module>gwtp-crawler-service</module>
     </modules>
