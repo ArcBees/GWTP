@@ -191,7 +191,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     }
 
     private boolean isAbsoluteUrl(String path) {
-        return path.startsWith("http://") || path.startsWith("https://");
+        String lowerCase = path.toLowerCase();
+        return lowerCase.startsWith("http://") || lowerCase.startsWith("https://");
     }
 
     private String buildPath(String rawPath, List<HttpParameter> params) {
