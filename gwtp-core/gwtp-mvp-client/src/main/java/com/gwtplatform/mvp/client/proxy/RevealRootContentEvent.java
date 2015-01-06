@@ -32,10 +32,14 @@ import com.gwtplatform.mvp.client.Presenter;
  * @see RevealRootLayoutContentEvent
  * @see RevealRootPopupContentEvent
  */
-public final class RevealRootContentEvent extends
-        GwtEvent<RevealRootContentHandler> {
-
+public final class RevealRootContentEvent extends GwtEvent<RevealRootContentHandler> {
     private static final Type<RevealRootContentHandler> TYPE = new Type<RevealRootContentHandler>();
+
+    private final Presenter<?, ?> content;
+
+    public RevealRootContentEvent(Presenter<?, ?> content) {
+        this.content = content;
+    }
 
     /**
      * Fires a {@link RevealRootContentEvent}
@@ -52,12 +56,6 @@ public final class RevealRootContentEvent extends
         return TYPE;
     }
 
-    private final Presenter<?, ?> content;
-
-    public RevealRootContentEvent(Presenter<?, ?> content) {
-        this.content = content;
-    }
-
     @Override
     public Type<RevealRootContentHandler> getAssociatedType() {
         return getType();
@@ -71,5 +69,4 @@ public final class RevealRootContentEvent extends
     protected void dispatch(RevealRootContentHandler handler) {
         handler.onRevealRootContent(this);
     }
-
 }

@@ -40,7 +40,7 @@ public class VelocityPlacetokenGenerator extends AbstractVelocityGenerator {
     }
 
     private static final String PACKAGE_NAME = PlaceTokenRegistry.class.getPackage().getName()
-           .replace(".shared.", ".client.");
+            .replace(".shared.", ".client.");
     private static final String SIMPLE_NAME = PlaceTokenRegistry.class.getSimpleName() + "Impl";
     private static final String FULL_NAME = PACKAGE_NAME + "." + SIMPLE_NAME;
     private static final String TEMPLATE = "com/gwtplatform/mvp/rebind/PlaceTokenRegistryImpl.vm";

@@ -31,6 +31,18 @@ import com.google.web.bindery.event.shared.EventBus;
 public class AsyncCallFailEvent extends GwtEvent<AsyncCallFailHandler> {
     private static final Type<AsyncCallFailHandler> TYPE = new Type<AsyncCallFailHandler>();
 
+    private final Throwable caught;
+
+    /**
+     * Creates an event indicating that an asynchronous call has failed, and attach a {@link Throwable}
+     * to it.
+     *
+     * @param caught failure encountered while executing a remote procedure call.
+     */
+    AsyncCallFailEvent(Throwable caught) {
+        this.caught = caught;
+    }
+
     /**
      * Fires a {@link AsyncCallFailEvent}
      * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
@@ -55,18 +67,6 @@ public class AsyncCallFailEvent extends GwtEvent<AsyncCallFailHandler> {
         source.fireEvent(new AsyncCallFailEvent(caught));
     }
 
-    private final Throwable caught;
-
-    /**
-     * Creates an event indicating that an asynchronous call has failed, and attach a {@link Throwable}
-     * to it.
-     *
-     * @param caught failure encountered while executing a remote procedure call.
-     */
-    AsyncCallFailEvent(Throwable caught) {
-        this.caught = caught;
-    }
-
     public static Type<AsyncCallFailHandler> getType() {
         return TYPE;
     }
@@ -74,11 +74,6 @@ public class AsyncCallFailEvent extends GwtEvent<AsyncCallFailHandler> {
     @Override
     public Type<AsyncCallFailHandler> getAssociatedType() {
         return getType();
-    }
-
-    @Override
-    protected void dispatch(AsyncCallFailHandler handler) {
-        handler.onAsyncCallFail(this);
     }
 
     /**
@@ -89,5 +84,10 @@ public class AsyncCallFailEvent extends GwtEvent<AsyncCallFailHandler> {
      */
     public Throwable getCaught() {
         return caught;
+    }
+
+    @Override
+    protected void dispatch(AsyncCallFailHandler handler) {
+        handler.onAsyncCallFail(this);
     }
 }

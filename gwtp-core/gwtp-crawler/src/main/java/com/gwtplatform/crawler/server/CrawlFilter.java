@@ -132,8 +132,7 @@ public final class CrawlFilter implements Filter {
         final String requestURI = req.getRequestURI();
 
         // Does this request contain an _escaped_fragment_?
-        if ((queryString != null)
-            && (queryString.contains(ESCAPED_FRAGMENT_FORMAT1))) {
+        if (queryString != null && queryString.contains(ESCAPED_FRAGMENT_FORMAT1)) {
             res.setHeader("Content-Type", "text/html; charset=" + CHAR_ENCODING);
 
             PrintWriter writer = res.getWriter();

@@ -109,7 +109,7 @@ public class MvpGwtTestInSuite extends GWTTestCase {
 
                 popupPresenter.getView().setCloseHandler(closeHandler);
                 popupPresenter.getView().hide();
-             }
+            }
         });
     }
 

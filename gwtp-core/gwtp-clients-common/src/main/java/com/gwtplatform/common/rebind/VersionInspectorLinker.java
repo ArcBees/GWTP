@@ -181,9 +181,9 @@ public class VersionInspectorLinker extends Linker {
     }
 
     /**
-     * Calls the Arcbees Stats service to retrieve data about a GWTP artifact.
-     * Note: We would use URL.openConnection, but because this code may be used in a GAE environment with hosted mode,
-     * this will cause fallback to the URLFetch Service. Using a socket bypasses this.
+     * Calls the Arcbees Stats service to retrieve data about a GWTP artifact. Note: We would use URL.openConnection,
+     * but because this code may be used in a GAE environment with hosted mode, this will cause fallback to the URLFetch
+     * Service. Using a socket bypasses this.
      *
      * @return The resulting plain text response
      */

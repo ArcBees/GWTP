@@ -24,22 +24,6 @@ import com.google.gwt.event.shared.HasHandlers;
  * presenters that should display their tabs within it.
  */
 public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
-
-    /**
-     * Fires a {@link RequestTabsEvent} with a specific
-     * {@link com.google.gwt.event.shared.GwtEvent.Type} into a source that has access to an
-     * {@link com.google.web.bindery.event.shared.EventBus}.
-     *
-     * @param source       The source that fires this event ({@link HasHandlers}).
-     * @param type         The specific event {@link com.google.gwt.event.shared.GwtEvent.Type}.
-     * @param tabContainer The {@link TabContainerPresenter} requesting the tabs.
-     */
-    public static void fire(final HasHandlers source,
-            final Type<RequestTabsHandler> type, TabContainerPresenter<?, ?> tabContainer) {
-
-        source.fireEvent(new RequestTabsEvent(type, tabContainer));
-    }
-
     private final TabContainerPresenter<?, ?> tabContainer;
     private final Type<RequestTabsHandler> type;
 
@@ -50,10 +34,25 @@ public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
      * @param type         The specific {@link com.google.gwt.event.shared.GwtEvent.Type} of this event.
      * @param tabContainer The {@link TabContainerPresenter} making the request.
      */
-    public RequestTabsEvent(final Type<RequestTabsHandler> type,
+    public RequestTabsEvent(
+            Type<RequestTabsHandler> type,
             TabContainerPresenter<?, ?> tabContainer) {
         this.type = type;
         this.tabContainer = tabContainer;
+    }
+
+    /**
+     * Fires a {@link RequestTabsEvent} with a specific
+     * {@link com.google.gwt.event.shared.GwtEvent.Type} into a source that has access to an
+     * {@link com.google.web.bindery.event.shared.EventBus}.
+     *
+     * @param source       The source that fires this event ({@link HasHandlers}).
+     * @param type         The specific event {@link com.google.gwt.event.shared.GwtEvent.Type}.
+     * @param tabContainer The {@link TabContainerPresenter} requesting the tabs.
+     */
+    public static void fire(HasHandlers source, Type<RequestTabsHandler> type,
+            TabContainerPresenter<?, ?> tabContainer) {
+        source.fireEvent(new RequestTabsEvent(type, tabContainer));
     }
 
     @Override
@@ -69,5 +68,4 @@ public final class RequestTabsEvent extends GwtEvent<RequestTabsHandler> {
     protected void dispatch(RequestTabsHandler handler) {
         handler.onRequestTabs(this);
     }
-
 }

@@ -33,8 +33,26 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * </ul>
  */
 class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
-
     private static Type<PlaceRequestInternalHandler> TYPE;
+
+    private final PlaceRequest request;
+    private final boolean updateBrowserHistory;
+
+    /**
+     * The handled flag can let others know when the event has been handled.
+     * Handlers should call {@link setHandled()} as soon as they figure they are
+     * be responsible for this event. Handlers should not process this event if
+     * {@link isHandled()} return {@code true}.
+     */
+    private boolean handled;
+    private boolean authorized = true;
+
+    public PlaceRequestInternalEvent(
+            PlaceRequest request,
+            boolean updateBrowserHistory) {
+        this.request = request;
+        this.updateBrowserHistory = updateBrowserHistory;
+    }
 
     /**
      * Fires a {@link PlaceRequestInternalEvent}
@@ -57,24 +75,6 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
             TYPE = new Type<PlaceRequestInternalHandler>();
         }
         return TYPE;
-    }
-
-    private boolean authorized = true;
-
-    /**
-     * The handled flag can let others know when the event has been handled.
-     * Handlers should call {@link setHandled()} as soon as they figure they are
-     * be responsible for this event. Handlers should not process this event if
-     * {@link isHandled()} return {@code true}.
-     */
-    private boolean handled;
-
-    private final PlaceRequest request;
-    private final boolean updateBrowserHistory;
-
-    public PlaceRequestInternalEvent(PlaceRequest request, boolean updateBrowserHistory) {
-        this.request = request;
-        this.updateBrowserHistory = updateBrowserHistory;
     }
 
     @Override

@@ -28,7 +28,7 @@ public class SampleRestInterceptor extends AbstractRestInterceptor {
 
     @Override
     public DispatchRequest execute(RestAction action, AsyncCallback<Object> resultCallback,
-           ExecuteCommand<RestAction, Object> executeCommand) {
+            ExecuteCommand<RestAction, Object> executeCommand) {
         return null;
     }
 }

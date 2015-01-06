@@ -32,6 +32,9 @@ import com.google.web.bindery.event.shared.EventBus;
 public class AsyncCallStartEvent extends GwtEvent<AsyncCallStartHandler> {
     private static final Type<AsyncCallStartHandler> TYPE = new Type<AsyncCallStartHandler>();
 
+    AsyncCallStartEvent() {
+    }
+
     /**
      * Fires a {@link AsyncCallStartEvent}
      * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
@@ -56,9 +59,6 @@ public class AsyncCallStartEvent extends GwtEvent<AsyncCallStartHandler> {
 
     public static Type<AsyncCallStartHandler> getType() {
         return TYPE;
-    }
-
-    AsyncCallStartEvent() {
     }
 
     @Override

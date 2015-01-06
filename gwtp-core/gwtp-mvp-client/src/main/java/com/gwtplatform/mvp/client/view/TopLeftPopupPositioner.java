@@ -13,10 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.gwtplatform.mvp.client.view;
 
 /**
- *  Positions the popup at the left and top coordinates.
+ * Positions the popup at the left and top coordinates.
  */
 public class TopLeftPopupPositioner extends PopupPositioner {
     private int left;
@@ -30,7 +31,7 @@ public class TopLeftPopupPositioner extends PopupPositioner {
 
     @Override
     protected int getLeft(int popupWidth) {
-       return left;
+        return left;
     }
 
     @Override

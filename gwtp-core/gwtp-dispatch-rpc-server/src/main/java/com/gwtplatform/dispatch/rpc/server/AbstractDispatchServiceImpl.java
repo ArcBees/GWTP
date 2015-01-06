@@ -184,7 +184,7 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
     }
 
     /**
-     * Recursively removes all stacktraces from a Throwable and its cause
+     * Recursively removes all stacktraces from a Throwable and its cause.
      */
     private void removeStacktraces(Throwable e) {
         if (e == null) {
