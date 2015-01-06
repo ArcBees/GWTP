@@ -18,14 +18,17 @@ package com.gwtplatform.dispatch.rest.client.serialization;
 
 import org.junit.Test;
 
+import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.RestParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 import static org.junit.Assert.assertEquals;
 
-public class RestParameterBindingsJsonSerializerTest {
+public class RestParameterBindingsSerializerTest {
     private final RestParameterBindingsSerializer serializer = new RestParameterBindingsSerializer();
+    private final HttpParameterFactory factory = new MockHttpParameterFactory();
 
     @Test
     public void serializeEmpty() {
@@ -43,30 +46,34 @@ public class RestParameterBindingsJsonSerializerTest {
     public void serializeSimple() {
         // given
         RestParameterBindings map = new RestParameterBindings();
-        map.put(HttpMethod.GET, new RestParameter("a", 1));
+        map.put(HttpMethod.GET, factory.create(Type.QUERY, "a", 1));
 
         // when
         String serialized = serializer.serialize(map);
 
         // then
-        assertEquals("{\"GET\":[{\"key\": \"a\", \"value\": \"1\"}]}", serialized);
+        assertEquals("{\"GET\":[{\"type\": \"QUERY\", \"key\": \"a\", \"value\": \"1\"}]}", serialized);
     }
 
     @Test
     public void serializeComplex() {
         // given
         RestParameterBindings map = new RestParameterBindings();
-        map.put(HttpMethod.GET, new RestParameter("a", 1));
-        map.put(HttpMethod.GET, new RestParameter("b", false));
-        map.put(HttpMethod.POST, new RestParameter("c", "some string"));
-        map.put(HttpMethod.POST, new RestParameter("d", 29L));
+        map.put(HttpMethod.GET, factory.create(Type.QUERY, "a", 1));
+        map.put(HttpMethod.GET, factory.create(Type.FORM, "b", false));
+        map.put(HttpMethod.POST, factory.create(Type.HEADER, "c", "some string"));
+        map.put(HttpMethod.POST, factory.create(Type.PATH, "d", 29L));
 
         // when
         String serialized = serializer.serialize(map);
 
         // then
-        assertEquals("{\"GET\":[{\"key\": \"a\", \"value\": \"1\"},{\"key\": \"b\", \"value\": \"false\"}]," +
-                        "\"POST\":[{\"key\": \"c\", \"value\": \"some string\"},{\"key\": \"d\", \"value\": \"29\"}]}",
+        assertEquals("{\"GET\":["
+                        + "{\"type\": \"QUERY\", \"key\": \"a\", \"value\": \"1\"},"
+                        + "{\"type\": \"FORM\", \"key\": \"b\", \"value\": \"false\"}]," +
+                        "\"POST\":["
+                        + "{\"type\": \"HEADER\", \"key\": \"c\", \"value\": \"some string\"},"
+                        + "{\"type\": \"PATH\", \"key\": \"d\", \"value\": \"29\"}]}",
                 serialized);
     }
 }

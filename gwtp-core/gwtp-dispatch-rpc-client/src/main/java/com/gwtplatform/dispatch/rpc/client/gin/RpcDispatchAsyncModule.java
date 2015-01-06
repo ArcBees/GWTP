@@ -51,7 +51,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
     /**
      * A {@link RpcDispatchAsyncModule} builder.
      */
-    public static class Builder extends AbstractDispatchAsyncModule.Builder {
+    public static class Builder extends AbstractDispatchAsyncModule.Builder<Builder> {
         private Class<? extends RpcDispatchHooks> dispatchHooks = DefaultRpcDispatchHooks.class;
         private Class<? extends RpcInterceptorRegistry> interceptorRegistry = DefaultRpcInterceptorRegistry.class;
 
@@ -109,6 +109,11 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
         public Builder clientActionHandlerRegistry(
                 final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
             this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
+            return this;
+        }
+
+        @Override
+        protected Builder self() {
             return this;
         }
     }

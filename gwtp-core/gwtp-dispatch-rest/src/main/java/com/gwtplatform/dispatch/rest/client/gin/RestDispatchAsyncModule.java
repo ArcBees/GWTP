@@ -37,6 +37,8 @@ import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
+import com.gwtplatform.dispatch.rest.client.parameters.DefaultHttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.serialization.RestParameterBindingsSerializer;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
@@ -59,8 +61,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static final String DEFAULT_XSRF_NAME = "X-CSRF-Token";
 
     private final RestDispatchAsyncModuleBuilder builder;
-    private final RestParameterBindingsSerializer restParameterBindingsSerializer =
-            new RestParameterBindingsSerializer();
+    private final RestParameterBindingsSerializer bindingsSerializer = new RestParameterBindingsSerializer();
 
     /**
      * Creates this module using the default values as specified by {@link RestDispatchAsyncModuleBuilder}.
@@ -83,20 +84,20 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         // Constants / Configurations
         // It's not possible to bind non-native type constants, so we must encode them at compile-time and decode them
         // at runtime (ie: Global Parameters)
+        String globalHeaderParams = bindingsSerializer.serialize(builder.getGlobalHeaderParams());
+        String globalQueryParams = bindingsSerializer.serialize(builder.getGlobalQueryParams());
+
         bindConstant().annotatedWith(XsrfHeaderName.class).to(builder.getXsrfTokenHeaderName());
         bindConstant().annotatedWith(RequestTimeout.class).to(builder.getRequestTimeoutMs());
         bindConstant().annotatedWith(DefaultDateFormat.class).to(builder.getDefaultDateFormat());
-
-        String globalHeaderParams = restParameterBindingsSerializer.serialize(builder.getGlobalHeaderParams());
         bindConstant().annotatedWith(GlobalHeaderParams.class).to(globalHeaderParams);
-
-        String globalQueryParams = restParameterBindingsSerializer.serialize(builder.getGlobalQueryParams());
         bindConstant().annotatedWith(GlobalQueryParams.class).to(globalQueryParams);
 
         // Workflow
         bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
         bind(RestRequestBuilderFactory.class).to(DefaultRestRequestBuilderFactory.class).in(Singleton.class);
         bind(RestResponseDeserializer.class).to(DefaultRestResponseDeserializer.class).in(Singleton.class);
+        bind(HttpParameterFactory.class).to(DefaultHttpParameterFactory.class).in(Singleton.class);
 
         // Cross-concern
         bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
@@ -111,13 +112,13 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     @Singleton
     @GlobalHeaderParams
     RestParameterBindings getGlobalHeaderParams(@GlobalHeaderParams String encodedParams) {
-        return restParameterBindingsSerializer.deserialize(encodedParams);
+        return bindingsSerializer.deserialize(encodedParams);
     }
 
     @Provides
     @Singleton
     @GlobalQueryParams
     RestParameterBindings getGlobalQueryParams(@GlobalQueryParams String encodedParams) {
-        return restParameterBindingsSerializer.deserialize(encodedParams);
+        return bindingsSerializer.deserialize(encodedParams);
     }
 }

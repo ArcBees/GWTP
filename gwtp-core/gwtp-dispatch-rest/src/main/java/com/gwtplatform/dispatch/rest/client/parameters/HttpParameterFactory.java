@@ -14,20 +14,12 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.client.parameters;
 
-import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 
-/**
- * Used by test code to create a secured {@link com.gwtplatform.dispatch.rest.shared.RestAction}.
- */
-public class SecuredRestAction extends ExposedRestAction<Void> {
-    public SecuredRestAction(HttpMethod httpMethod, String rawServicePath) {
-        super(httpMethod, rawServicePath);
-    }
+public interface HttpParameterFactory {
+    HttpParameter create(HttpParameter.Type type, String name, Object object);
 
-    @Override
-    public boolean isSecured() {
-        return true;
-    }
+    HttpParameter create(HttpParameter.Type type, String name, Object object, String dateFormat);
 }

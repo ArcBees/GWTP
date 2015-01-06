@@ -34,10 +34,15 @@ public class DispatchAsyncModule extends AbstractDispatchAsyncModule {
     /**
      * Default builder.
      */
-    public static class Builder extends AbstractDispatchAsyncModule.Builder {
+    public static class Builder extends AbstractDispatchAsyncModule.Builder<Builder> {
         @Override
         public DispatchAsyncModule build() {
             return new DispatchAsyncModule(this);
+        }
+
+        @Override
+        protected Builder self() {
+            return this;
         }
     }
 
