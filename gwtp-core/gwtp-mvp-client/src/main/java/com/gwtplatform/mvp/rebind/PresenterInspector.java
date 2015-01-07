@@ -212,23 +212,20 @@ public class PresenterInspector {
             JClassType customProvider = oracle.findType(customProviderAnnotation.value().getName());
             writer.println("presenter = new " + customProvider.getQualifiedSourceName() + "<" + presenterClassName
                         + ">( ginjector." + getPresenterMethodName + "() );");
-
+        } else if (proxyStandardAnnotation != null) {
+            writer.println("presenter = new StandardProvider<" + presenterClassName
+                    + ">( ginjector." + getPresenterMethodName + "() );");
+        } else if (proxyCodeSplitAnnotation != null) {
+            writer.println("presenter = new CodeSplitProvider<" + presenterClassName
+                    + ">( ginjector." + getPresenterMethodName + "() );");
         } else {
-            if (proxyStandardAnnotation != null) {
-                writer.println("presenter = new StandardProvider<" + presenterClassName
-                        + ">( ginjector." + getPresenterMethodName + "() );");
-            } else if (proxyCodeSplitAnnotation != null) {
-                writer.println("presenter = new CodeSplitProvider<" + presenterClassName
-                        + ">( ginjector." + getPresenterMethodName + "() );");
+            assert proxyCodeSplitBundleAnnotation != null;
+            writer.print("presenter = new CodeSplitBundleProvider<" + presenterClassName
+                    + ", " + bundleClassName + ">(ginjector." + getPresenterMethodName + "(), ");
+            if (ginjectorInspector.isGenerated()) {
+                writer.print(bundleClassName + "." + presenterClass.getSimpleSourceName().toUpperCase() + ");");
             } else {
-                assert proxyCodeSplitBundleAnnotation != null;
-                writer.print("presenter = new CodeSplitBundleProvider<" + presenterClassName
-                        + ", " + bundleClassName + ">(ginjector." + getPresenterMethodName + "(), ");
-                if (ginjectorInspector.isGenerated()) {
-                    writer.print(bundleClassName + "." + presenterClass.getSimpleSourceName().toUpperCase() + ");");
-                } else {
-                    writer.print(proxyCodeSplitBundleAnnotation.id() + ");");
-                }
+                writer.print(proxyCodeSplitBundleAnnotation.id() + ");");
             }
         }
     }
@@ -341,6 +338,9 @@ public class PresenterInspector {
             nbNonNullTags++;
         }
         if (proxyCodeSplitBundleAnnotation != null) {
+            nbNonNullTags++;
+        }
+        if (customProviderAnnotation != null) {
             nbNonNullTags++;
         }
 
