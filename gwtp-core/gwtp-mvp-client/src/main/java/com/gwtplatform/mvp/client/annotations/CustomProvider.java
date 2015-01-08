@@ -55,8 +55,6 @@ import com.gwtplatform.common.client.IndirectProvider;
  *     }
  * }
  * </pre>
- *
- * @author Harald Pehl
  */
 @Target(ElementType.TYPE)
 public @interface CustomProvider {
