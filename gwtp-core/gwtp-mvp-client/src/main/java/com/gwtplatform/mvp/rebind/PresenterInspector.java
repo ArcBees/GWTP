@@ -210,8 +210,9 @@ public class PresenterInspector {
 
         if (customProviderAnnotation != null) {
             JClassType customProvider = oracle.findType(customProviderAnnotation.value().getName());
-            writer.println("presenter = new " + customProvider.getQualifiedSourceName() + "<" + presenterClassName
-                        + ">( ginjector." + getPresenterMethodName + "() );");
+            writer.println("presenter = new " + customProvider.getQualifiedSourceName()
+                    + "( ginjector." + getPresenterMethodName + "() );");
+
         } else if (proxyStandardAnnotation != null) {
             writer.println("presenter = new StandardProvider<" + presenterClassName
                     + ">( ginjector." + getPresenterMethodName + "() );");
@@ -338,9 +339,6 @@ public class PresenterInspector {
             nbNonNullTags++;
         }
         if (proxyCodeSplitBundleAnnotation != null) {
-            nbNonNullTags++;
-        }
-        if (customProviderAnnotation != null) {
             nbNonNullTags++;
         }
 
