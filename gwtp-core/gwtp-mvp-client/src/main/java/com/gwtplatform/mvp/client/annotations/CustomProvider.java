@@ -34,6 +34,7 @@ import com.gwtplatform.common.client.IndirectProvider;
  * Here is an example use of {@code CustomProvider}:
  * <p/>
  * <pre>
+ * &#064;ProxyCodeSplit
  * &#064;CustomProvider(SecurityContextProvider.class)
  * public interface MyProxy extends ProxyPlace&lt;MyPresenter&gt; {
  * }
