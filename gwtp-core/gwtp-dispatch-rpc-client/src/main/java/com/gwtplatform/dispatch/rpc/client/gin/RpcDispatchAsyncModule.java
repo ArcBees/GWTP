@@ -90,7 +90,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
          * @param dispatchHooks The {@link com.gwtplatform.dispatch.rpc.client.RpcDispatchHooks} implementation.
          * @return this {@link RpcDispatchAsyncModule.Builder} object.
          */
-        public Builder dispatchHooks(final Class<? extends RpcDispatchHooks> dispatchHooks) {
+        public Builder dispatchHooks(Class<? extends RpcDispatchHooks> dispatchHooks) {
             this.dispatchHooks = dispatchHooks;
             return this;
         }
@@ -102,7 +102,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
          * @param dispatchAsync The {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync} implementation.
          * @return this {@link RpcDispatchAsyncModule.Builder} object.
          */
-        public Builder dispatchAsync(final Class<? extends DispatchAsync> dispatchAsync) {
+        public Builder dispatchAsync(Class<? extends DispatchAsync> dispatchAsync) {
             this.dispatchAsync = dispatchAsync;
             return this;
         }
@@ -115,7 +115,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
          *                            implementation.
          * @return this {@link RpcDispatchAsyncModule.Builder} object.
          */
-        public Builder dispatchCallFactory(final Class<? extends RpcDispatchCallFactory> dispatchCallFactory) {
+        public Builder dispatchCallFactory(Class<? extends RpcDispatchCallFactory> dispatchCallFactory) {
             this.dispatchCallFactory = dispatchCallFactory;
             return this;
         }
@@ -127,7 +127,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
          *
          * @return this {@link RpcDispatchAsyncModule.Builder builder} object.
          */
-        public Builder interceptorRegistry(final Class<? extends RpcInterceptorRegistry> interceptorRegistry) {
+        public Builder interceptorRegistry(Class<? extends RpcInterceptorRegistry> interceptorRegistry) {
             this.interceptorRegistry = interceptorRegistry;
             return this;
         }
@@ -143,7 +143,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
          */
         @Deprecated
         public Builder clientActionHandlerRegistry(
-                final Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
+                Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType) {
             this.clientActionHandlerRegistryType = clientActionHandlerRegistryType;
             return this;
         }

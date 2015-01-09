@@ -77,7 +77,7 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          *
          * @return a {@link Builder} object.
          */
-        public B exceptionHandler(final Class<? extends ExceptionHandler> exceptionHandlerType) {
+        public B exceptionHandler(Class<? extends ExceptionHandler> exceptionHandlerType) {
             this.exceptionHandlerType = exceptionHandlerType;
             return self();
         }
@@ -89,8 +89,7 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          *
          * @return a {@link Builder} object.
          */
-        public B sessionAccessor(
-                final Class<? extends SecurityCookieAccessor> sessionAccessorType) {
+        public B sessionAccessor(Class<? extends SecurityCookieAccessor> sessionAccessorType) {
             this.sessionAccessorType = sessionAccessorType;
             return self();
         }
