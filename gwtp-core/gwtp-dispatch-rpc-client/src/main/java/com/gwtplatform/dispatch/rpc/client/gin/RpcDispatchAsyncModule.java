@@ -52,6 +52,9 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
      * A {@link RpcDispatchAsyncModule} builder.
      */
     public static class Builder extends AbstractDispatchAsyncModule.Builder<Builder> {
+        protected Class<? extends DispatchAsync> dispatchAsync = RpcDispatchAsync.class;
+
+        private Class<? extends RpcDispatchCallFactory> dispatchCallFactory = DefaultRpcDispatchCallFactory.class;
         private Class<? extends RpcDispatchHooks> dispatchHooks = DefaultRpcDispatchHooks.class;
         private Class<? extends RpcInterceptorRegistry> interceptorRegistry = DefaultRpcInterceptorRegistry.class;
 
@@ -72,6 +75,14 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
             return interceptorRegistry;
         }
 
+        public Class<? extends DispatchAsync> getDispatchAsync() {
+            return dispatchAsync;
+        }
+
+        public Class<? extends RpcDispatchCallFactory> getDispatchCallFactory() {
+            return dispatchCallFactory;
+        }
+
         /**
          * Supply your own implementation of {@link com.gwtplatform.dispatch.rpc.client.RpcDispatchHooks}.
          * Default is {@link com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchHooks}
@@ -81,6 +92,31 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
          */
         public Builder dispatchHooks(final Class<? extends RpcDispatchHooks> dispatchHooks) {
             this.dispatchHooks = dispatchHooks;
+            return this;
+        }
+
+        /**
+         * Supply your own implementation of {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
+         * Default is {@link com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync}
+         *
+         * @param dispatchAsync The {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync} implementation.
+         * @return this {@link RpcDispatchAsyncModule.Builder} object.
+         */
+        public Builder dispatchAsync(final Class<? extends DispatchAsync> dispatchAsync) {
+            this.dispatchAsync = dispatchAsync;
+            return this;
+        }
+
+        /**
+         * Supply your own implementation of {@link com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory}.
+         * Default is {@link com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchCallFactory}
+         *
+         * @param dispatchCallFactory The {@link com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory}
+         *                            implementation.
+         * @return this {@link RpcDispatchAsyncModule.Builder} object.
+         */
+        public Builder dispatchCallFactory(final Class<? extends RpcDispatchCallFactory> dispatchCallFactory) {
+            this.dispatchCallFactory = dispatchCallFactory;
             return this;
         }
 
@@ -134,17 +170,13 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
     protected void configureDispatch() {
         bind(ClientActionHandlerRegistry.class).to(builder.clientActionHandlerRegistryType).asEagerSingleton();
 
-        bind(RpcDispatchCallFactory.class).to(DefaultRpcDispatchCallFactory.class).in(Singleton.class);
+        bind(RpcDispatchCallFactory.class).to(builder.getDispatchCallFactory()).in(Singleton.class);
 
-        bind(DispatchAsync.class).to(getDispatchAsyncClass()).in(Singleton.class);
+        bind(DispatchAsync.class).to(builder.getDispatchAsync()).in(Singleton.class);
 
         bind(RpcInterceptorRegistry.class).to(builder.getInterceptorRegistry()).in(Singleton.class);
 
         bind(RpcDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
-    }
-
-    protected Class<? extends DispatchAsync> getDispatchAsyncClass() {
-        return RpcDispatchAsync.class;
     }
 
     @Provides

@@ -24,23 +24,29 @@ import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
  * application.
  */
 public class PhoneGapDispatchAsyncModule extends RpcDispatchAsyncModule {
+    /**
+     * A {@link PhoneGapDispatchAsyncModule} builder.
+     */
     public static class Builder extends RpcDispatchAsyncModule.Builder {
+        public Builder() {
+            dispatchAsync = PhoneGapDispatchAsync.class;
+        }
+
         @Override
         public PhoneGapDispatchAsyncModule build() {
             return new PhoneGapDispatchAsyncModule(this);
         }
     }
 
+    /**
+     * @deprecated Use the PhoneGapDispatchAsyncModule.Builder class
+     */
+    @Deprecated
     public PhoneGapDispatchAsyncModule() {
         this(new Builder());
     }
 
     protected PhoneGapDispatchAsyncModule(Builder builder) {
         super(builder);
-    }
-
-    @Override
-    protected Class<? extends DispatchAsync> getDispatchAsyncClass() {
-        return PhoneGapDispatchAsync.class;
     }
 }
