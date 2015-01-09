@@ -1,0 +1,9 @@
+language: java
+
+jdk:
+  - oraclejdk7
+  - openjdk7
+
+notifications:
+  slack: # Would be nice to have only master notif, on slack. See issue: http://goo.gl/yVRsqn
+    secure: G9DuGi6VAERi3Am5yoZeuLZHNIpvdyRkjMlGDsXGO7yvN+CN1284YeEOuhgAQSUuq7ccRdCggnP9kI5ncgeDfbEhAf4WgXvZB/Z5oIe+Dpdw6zOIVbACIZ3SwOH7/FiJDU6rODoL3KMRpGSm4rn2qYXPdrmJvSOlUvztLIB1RVs=

@@ -34,6 +34,10 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-clients-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>gwtp-dispatch-common-shared</artifactId>
         </dependency>
 

@@ -39,34 +39,19 @@ public interface RestAction<R> extends TypedAction<R>, HasSecured {
     String getPath();
 
     /**
-     * @return the {@link com.gwtplatform.dispatch.rest.client.HttpMethod} used to send this action over HTTP.
+     * @return the {@link com.gwtplatform.dispatch.rest.shared.HttpMethod} designator used to send this action over
+     * HTTP.
      */
     HttpMethod getHttpMethod();
 
     /**
-     * @return a {@link List} of the {@link javax.ws.rs.Path @Path} parameters for this action.
+     * @return a {@link List} of the parameters of {@code type} for this action.
      */
-    List<RestParameter> getPathParams();
+    List<HttpParameter> getParameters(HttpParameter.Type type);
 
     /**
-     * @return a {@link List} of the {@link javax.ws.rs.QueryParam @QueryParam} parameters for this action.
-     */
-    List<RestParameter> getQueryParams();
-
-    /**
-     * @return a {@link List} of the {@link javax.ws.rs.FormParam @FormParam} parameters for this action. {@link
-     * #getBodyParam()} should return {@code null}.
-     */
-    List<RestParameter> getFormParams();
-
-    /**
-     * @return a {@link List} of the {@link javax.ws.rs.HeaderParam @HeaderParam} parameters for this action.
-     */
-    List<RestParameter> getHeaderParams();
-
-    /**
-     * @return The object that will be serialized and used for the body of this action. {@link #getFormParams()} should
-     * return an empty list.
+     * @return The object that will be serialized and used for the body of this action. There are no {@link
+     * com.gwtplatform.dispatch.rest.shared.HttpParameter.Type#FORM @FormParam} parameters.
      */
     Object getBodyParam();
 

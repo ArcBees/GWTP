@@ -14,20 +14,25 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.client.parameters;
 
-import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.common.shared.UrlUtils;
 
-/**
- * Used by test code to create an unsecured {@link com.gwtplatform.dispatch.rest.shared.RestAction}.
- */
-public class UnsecuredRestAction extends ExposedRestAction<Void> {
-    public UnsecuredRestAction(HttpMethod httpMethod, String rawServicePath) {
-        super(httpMethod, rawServicePath);
+public class PathParameter extends ClientHttpParameter {
+    private final UrlUtils urlUtils;
+
+    public PathParameter(
+            String name,
+            Object object,
+            String dateFormat,
+            UrlUtils urlUtils) {
+        super(Type.PATH, name, object, dateFormat);
+
+        this.urlUtils = urlUtils;
     }
 
     @Override
-    public boolean isSecured() {
-        return false;
+    protected String encode(String value) {
+        return urlUtils.encodePathSegment(value);
     }
 }

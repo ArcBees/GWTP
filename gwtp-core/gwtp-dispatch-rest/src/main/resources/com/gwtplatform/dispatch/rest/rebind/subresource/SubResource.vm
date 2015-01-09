@@ -1,18 +1,21 @@
 package $package;
 
-import com.gwtplatform.dispatch.rest.client.DefaultDateFormat;
+import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
 #foreach ($import in $imports)
 import $import;
 #end
 
 public class $impl implements $resourceType {
+    private final HttpParameterFactory httpParameterFactory;
     private final String defaultDateFormat;
 #foreach ($param in $parameters)
     private final $param.getParameterizedQualifiedName() $param.variableName;
 #end
 
     ${impl}(
-            @DefaultDateFormat String defaultDateFormat#generateAppendedMethodSignature($parameters)) {
+            HttpParameterFactory httpParameterFactory,
+            String defaultDateFormat#generateAppendedMethodSignature($parameters)) {
+        this.httpParameterFactory = httpParameterFactory;
         this.defaultDateFormat = defaultDateFormat;
 #foreach ($param in $parameters)
         this.$param.variableName = $param.variableName;

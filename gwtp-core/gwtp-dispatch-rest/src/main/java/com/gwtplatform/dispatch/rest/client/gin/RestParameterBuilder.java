@@ -20,24 +20,29 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Set;
 
+import com.gwtplatform.dispatch.rest.client.parameters.ClientHttpParameter;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.RestParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 /**
  * Configure a global parameter to be sent with every HTTP requests.
  */
 public class RestParameterBuilder {
     private final RestDispatchAsyncModuleBuilder moduleBuilder;
+    private final Type type;
     private final RestParameterBindings target;
     private final String key;
     private final Set<HttpMethod> httpMethods = EnumSet.allOf(HttpMethod.class);
 
     RestParameterBuilder(
             RestDispatchAsyncModuleBuilder moduleBuilder,
+            Type type,
             RestParameterBindings target,
             String key) {
         this.moduleBuilder = moduleBuilder;
+        this.type = type;
         this.target = target;
         this.key = key;
     }
@@ -68,7 +73,7 @@ public class RestParameterBuilder {
      * @return The module builder instance.
      */
     public RestDispatchAsyncModuleBuilder withValue(String value) {
-        RestParameter parameter = new RestParameter(key, value);
+        HttpParameter parameter = new ClientHttpParameter(type, key, value, null);
 
         for (HttpMethod httpMethod : httpMethods) {
             target.put(httpMethod, parameter);

@@ -22,21 +22,55 @@ import java.util.Set;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
+import com.gwtplatform.common.shared.UrlUtils;
+import com.gwtplatform.dispatch.rest.client.parameters.DefaultHttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.RestParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 /**
  * Parses {@link com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings} from and to JSON.
  */
 public class RestParameterBindingsSerializer {
+    private static final UrlUtils URL_UTILS = new UrlUtils() {
+        @Override
+        public String encodePathSegment(String decodedPathSegment) {
+            return encodeQueryString(decodedPathSegment);
+        }
+
+        @Override
+        public String encodeQueryString(String decodedUrlComponent) {
+            return decodedUrlComponent == null ? null : decodedUrlComponent.replace("\\", "\\\\").replace("\"", "\\\"");
+        }
+
+        @Override
+        public String decodePathSegment(String encodedPathSegment) {
+            // not needed
+            return null;
+        }
+
+        @Override
+        public String decodeQueryString(String encodedUrlComponent) {
+            // not needed
+            return null;
+        }
+    };
+
+    private final HttpParameterFactory parameterFactory;
+
+    public RestParameterBindingsSerializer() {
+        parameterFactory = new DefaultHttpParameterFactory(URL_UTILS, null);
+    }
+
     /**
      * Used to serialize the bindings at compilation. Usage of GWT code is <b>not</b> allowed.
      */
     public String serialize(RestParameterBindings parameterBindings) {
         StringBuilder result = new StringBuilder("{");
 
-        for (Entry<HttpMethod, Set<RestParameter>> entry : parameterBindings.entrySet()) {
+        for (Entry<HttpMethod, Set<HttpParameter>> entry : parameterBindings.entrySet()) {
             serializeValues(result, entry.getKey(), entry.getValue());
         }
 
@@ -63,7 +97,8 @@ public class RestParameterBindingsSerializer {
                 JSONObject jsonParameter = jsonParameters.get(i).isObject();
                 String key = jsonParameter.get("key").isString().stringValue();
                 String value = jsonParameter.get("value").isString().stringValue();
-                RestParameter parameter = new RestParameter(key, value);
+                Type type = Type.valueOf(jsonParameter.get("type").isString().stringValue());
+                HttpParameter parameter = parameterFactory.create(type, key, value);
 
                 parameters.put(httpMethod, parameter);
             }
@@ -72,12 +107,15 @@ public class RestParameterBindingsSerializer {
         return parameters;
     }
 
-    private void serializeValues(StringBuilder result, HttpMethod method, Set<RestParameter> parameters) {
+    private void serializeValues(StringBuilder result, HttpMethod method, Set<HttpParameter> parameters) {
         result.append("\"").append(method.name()).append("\":[");
 
-        for (RestParameter parameter : parameters) {
-            result.append("{\"key\": \"").append(parameter.getName())
-                    .append("\", \"value\": \"").append(parameter.getStringValue()).append("\"},");
+        for (HttpParameter parameter : parameters) {
+            for (Entry<String, String> entry : parameter.getEntries()) {
+                result.append("{\"type\": \"").append(parameter.getType().name())
+                        .append("\", \"key\": \"").append(entry.getKey())
+                        .append("\", \"value\": \"").append(entry.getValue()).append("\"},");
+            }
         }
 
         if (!parameters.isEmpty()) {

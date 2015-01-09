@@ -19,8 +19,9 @@ package com.gwtplatform.dispatch.rest.client.interceptor;
 import java.util.List;
 
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.rest.shared.RestParameter;
 
 /**
  * Context class used for the Rest Interceptor mappings.<br>
@@ -65,7 +66,9 @@ public class InterceptorContext {
 
         /**
          * Explicitly provide a REST path string.
+         *
          * @param path the rest path.
+         *
          * @return this {@link Builder} object.
          */
         public Builder path(String path) {
@@ -75,7 +78,9 @@ public class InterceptorContext {
 
         /**
          * Explicitly provide an HttpMethod.
+         *
          * @param httpMethod the REST {@link HttpMethod}.
+         *
          * @return this {@link Builder} object.
          */
         public Builder httpMethod(HttpMethod httpMethod) {
@@ -85,7 +90,9 @@ public class InterceptorContext {
 
         /**
          * Explicitly provide a query count.
+         *
          * @param queryCount the query count.
+         *
          * @return this {@link Builder} object.
          */
         public Builder queryCount(int queryCount) {
@@ -95,8 +102,9 @@ public class InterceptorContext {
 
         /**
          * Allow for transcendent context mapping.
-         * @param transcendent Use a transcendent strategy on the path,
-         *                     e.g. /path will be detected using /path/2.
+         *
+         * @param transcendent Use a transcendent strategy on the path, e.g. /path will be detected using /path/2.
+         *
          * @return this {@link Builder} object.
          */
         public Builder transcendent(boolean transcendent) {
@@ -106,7 +114,9 @@ public class InterceptorContext {
 
         /**
          * Any {@link HttpMethod} for context mapping.
+         *
          * @param anyHttpMethod Allow any HTTP httpMethod when checking.
+         *
          * @return this {@link Builder} object.
          */
         public Builder anyHttpMethod(boolean anyHttpMethod) {
@@ -116,7 +126,9 @@ public class InterceptorContext {
 
         /**
          * Any query count for context mapping.
+         *
          * @param anyQueryCount true allows any query param count.
+         *
          * @return this {@link Builder} object.
          */
         public Builder anyQueryCount(boolean anyQueryCount) {
@@ -126,6 +138,7 @@ public class InterceptorContext {
 
         /**
          * Build the {@link InterceptorContext}.
+         *
          * @return built context.
          */
         public InterceptorContext build() {
@@ -168,7 +181,7 @@ public class InterceptorContext {
         if (useTemplate()) {
             path = builder.template.getPath();
             httpMethod = builder.template.getHttpMethod();
-            queryCount = builder.template.getQueryParams().size();
+            queryCount = builder.template.getParameters(Type.QUERY).size();
         }
 
         // Path Check
@@ -189,12 +202,12 @@ public class InterceptorContext {
 
         // Query Parameters
         if (!builder.anyQueryCount) {
-            List<RestParameter> queryParams = action.getQueryParams();
+            List<HttpParameter> queryParams = action.getParameters(Type.QUERY);
             if (queryParams.size() != queryCount) {
                 return false;
             } else if (useTemplate()) {
                 // We can do some thorough checking with templates
-                if (!queryParams.equals(builder.template.getQueryParams())) {
+                if (!queryParams.equals(builder.template.getParameters(Type.QUERY))) {
                     return false;
                 }
             }
@@ -222,7 +235,7 @@ public class InterceptorContext {
         return builder.queryCount;
     }
 
-    public RestAction getTemplate() {
+    public RestAction<?> getTemplate() {
         return builder.template;
     }
 
@@ -240,11 +253,11 @@ public class InterceptorContext {
         }
 
         InterceptorContext that = (InterceptorContext) o;
-        RestAction action;
+        RestAction<?> action;
         if (that.useTemplate()) {
             action = that.getTemplate();
         } else {
-            action = new InterceptRestAction(that.getHttpMethod(), that.getPath(), that.getQueryCount());
+            action = new InterceptorContextRestAction(that.getHttpMethod(), that.getPath(), that.getQueryCount());
         }
         return canIntercept(action);
     }

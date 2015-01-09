@@ -27,6 +27,7 @@ import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.mvp.client.annotations.ContentSlot;
+import com.gwtplatform.mvp.client.annotations.CustomProvider;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle;
@@ -53,6 +54,7 @@ public class PresenterInspector {
     private ProxyStandard proxyStandardAnnotation;
     private ProxyCodeSplit proxyCodeSplitAnnotation;
     private ProxyCodeSplitBundle proxyCodeSplitBundleAnnotation;
+    private CustomProvider customProviderAnnotation;
     private String getPresenterMethodName;
     private String bundleClassName;
 
@@ -85,6 +87,7 @@ public class PresenterInspector {
         proxyStandardAnnotation = proxyInterface.getAnnotation(ProxyStandard.class);
         proxyCodeSplitAnnotation = proxyInterface.getAnnotation(ProxyCodeSplit.class);
         proxyCodeSplitBundleAnnotation = proxyInterface.getAnnotation(ProxyCodeSplitBundle.class);
+        customProviderAnnotation = proxyInterface.getAnnotation(CustomProvider.class);
 
         if (!shouldGenerate()) {
             return false;
@@ -205,7 +208,12 @@ public class PresenterInspector {
      */
     public void writeProviderAssignation(SourceWriter writer) {
 
-        if (proxyStandardAnnotation != null) {
+        if (customProviderAnnotation != null) {
+            JClassType customProvider = oracle.findType(customProviderAnnotation.value().getName());
+            writer.println("presenter = new " + customProvider.getQualifiedSourceName()
+                    + "( ginjector." + getPresenterMethodName + "() );");
+
+        } else if (proxyStandardAnnotation != null) {
             writer.println("presenter = new StandardProvider<" + presenterClassName
                     + ">( ginjector." + getPresenterMethodName + "() );");
         } else if (proxyCodeSplitAnnotation != null) {
@@ -213,8 +221,8 @@ public class PresenterInspector {
                     + ">( ginjector." + getPresenterMethodName + "() );");
         } else {
             assert proxyCodeSplitBundleAnnotation != null;
-            writer.print("presenter = new CodeSplitBundleProvider<"
-                    + presenterClassName + ", " + bundleClassName + ">(ginjector." + getPresenterMethodName + "(), ");
+            writer.print("presenter = new CodeSplitBundleProvider<" + presenterClassName
+                    + ", " + bundleClassName + ">(ginjector." + getPresenterMethodName + "(), ");
             if (ginjectorInspector.isGenerated()) {
                 writer.print(bundleClassName + "." + presenterClass.getSimpleSourceName().toUpperCase() + ");");
             } else {
