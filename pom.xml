@@ -275,6 +275,8 @@
         <gpg.passphrase>SetAsParam</gpg.passphrase>
         <github.username>SetAsParam</github.username>
         <github.password>SetAsParam</github.password>
+
+        <release.fast>-Dcheckstyle.skip -DskipTests -Dmaven.test.skip</release.fast>
     </properties>
 
     <build>
@@ -436,8 +438,8 @@
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
-                    <arguments>-Psonatype-oss-release -Prelease -Dgpg.passphrase=${gpg.passphrase} -Dcheckstyle.skip
-                        -DskipTests
+                    <arguments>
+                        -Psonatype-oss-release -Prelease -Dgpg.passphrase=${gpg.passphrase} ${release.fast}
                     </arguments>
                 </configuration>
             </plugin>
