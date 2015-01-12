@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.rebind.parameter;
 
 import java.lang.annotation.Annotation;
 
+import javax.ws.rs.CookieParam;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
@@ -30,7 +31,8 @@ public enum HttpParameterType {
     HEADER(HeaderParam.class, Type.HEADER),
     PATH(PathParam.class, Type.PATH),
     QUERY(QueryParam.class, Type.QUERY),
-    FORM(FormParam.class, Type.FORM);
+    FORM(FormParam.class, Type.FORM),
+    COOKIE(CookieParam.class, Type.COOKIE);
 
     private final Class<? extends Annotation> annotationClass;
     private final Type associatedType;

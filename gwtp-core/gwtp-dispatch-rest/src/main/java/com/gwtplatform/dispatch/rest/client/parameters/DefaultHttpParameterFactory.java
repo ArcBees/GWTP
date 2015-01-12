@@ -51,6 +51,8 @@ public class DefaultHttpParameterFactory implements HttpParameterFactory {
                 return new PathParameter(name, object, dateFormat, urlUtils);
             case QUERY:
                 return new QueryParameter(name, object, dateFormat, urlUtils);
+            case COOKIE:
+                return new CookieParameter(name, object, dateFormat);
             default:
                 return new ClientHttpParameter(type, name, object, dateFormat);
         }

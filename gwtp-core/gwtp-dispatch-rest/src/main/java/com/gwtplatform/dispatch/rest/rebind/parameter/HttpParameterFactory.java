@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.rebind.parameter;
 import java.util.Date;
 
 import javax.inject.Inject;
+import javax.ws.rs.CookieParam;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
@@ -42,6 +43,7 @@ public class HttpParameterFactory {
     private final PathParamValueResolver pathParamValueResolver;
     private final QueryParamValueResolver queryParamValueResolver;
     private final FormParamValueResolver formParamValueResolver;
+    private final CookieParamValueResolver cookieParamValueResolver;
 
     @Inject
     HttpParameterFactory(
@@ -49,16 +51,17 @@ public class HttpParameterFactory {
             HeaderParamValueResolver headerParamValueResolver,
             PathParamValueResolver pathParamValueResolver,
             QueryParamValueResolver queryParamValueResolver,
-            FormParamValueResolver formParamValueResolver) {
+            FormParamValueResolver formParamValueResolver,
+            CookieParamValueResolver cookieParamValueResolver) {
         this.logger = logger;
         this.headerParamValueResolver = headerParamValueResolver;
         this.pathParamValueResolver = pathParamValueResolver;
         this.queryParamValueResolver = queryParamValueResolver;
         this.formParamValueResolver = formParamValueResolver;
+        this.cookieParamValueResolver = cookieParamValueResolver;
     }
 
-    public HttpParameter create(
-            JParameter parameter) {
+    public HttpParameter create(JParameter parameter) {
         HttpParameterType type = findParameterType(parameter);
         String name = extractName(parameter, type);
         String dateFormat = extractDateFormat(parameter);
@@ -106,6 +109,8 @@ public class HttpParameterFactory {
                 return queryParamValueResolver.resolve(parameter.getAnnotation(QueryParam.class));
             case FORM:
                 return formParamValueResolver.resolve(parameter.getAnnotation(FormParam.class));
+            case COOKIE:
+                return cookieParamValueResolver.resolve(parameter.getAnnotation(CookieParam.class));
             default:
                 return null;
         }
