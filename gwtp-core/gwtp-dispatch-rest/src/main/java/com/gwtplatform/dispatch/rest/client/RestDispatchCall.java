@@ -28,6 +28,7 @@ import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
+import com.gwtplatform.dispatch.rest.client.core.CookieManager;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptedAsyncCallback;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptor;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
@@ -44,6 +45,7 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  */
 public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R> {
     private final RestRequestBuilderFactory requestBuilderFactory;
+    private final CookieManager cookieManager;
     private final RestResponseDeserializer restResponseDeserializer;
     private final RestInterceptorRegistry interceptorRegistry;
     private final RestDispatchHooks dispatchHooks;
@@ -53,6 +55,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
             RestInterceptorRegistry interceptorRegistry,
             SecurityCookieAccessor securityCookieAccessor,
             RestRequestBuilderFactory requestBuilderFactory,
+            CookieManager cookieManager,
             RestResponseDeserializer restResponseDeserializer,
             RestDispatchHooks dispatchHooks,
             A action,
@@ -60,6 +63,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
         super(exceptionHandler, securityCookieAccessor, action, callback);
 
         this.requestBuilderFactory = requestBuilderFactory;
+        this.cookieManager = cookieManager;
         this.restResponseDeserializer = restResponseDeserializer;
         this.interceptorRegistry = interceptorRegistry;
         this.dispatchHooks = dispatchHooks;
@@ -91,6 +95,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
     protected DispatchRequest processCall() {
         try {
             RequestBuilder requestBuilder = buildRequest();
+            cookieManager.saveCookiesFromAction(getAction());
 
             return new GwtHttpDispatchRequest(requestBuilder.send());
         } catch (RequestException e) {
@@ -121,7 +126,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
 
     private void assignResponse(Response response) {
         if (getCallback() instanceof RestCallback) {
-            ((RestCallback) getCallback()).setResponse(response);
+            ((RestCallback<?>) getCallback()).setResponse(response);
         }
     }
 

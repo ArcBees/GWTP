@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,12 +16,18 @@
 
 package com.gwtplatform.dispatch.rest.rebind.parameter;
 
-import java.lang.annotation.Annotation;
+import javax.ws.rs.CookieParam;
 
 import com.google.gwt.core.ext.typeinfo.HasAnnotations;
 
-public interface HttpParamValueResolver<T extends Annotation> {
-    String resolve(HasAnnotations hasAnnotations);
+public class CookieParamValueResolver implements HttpParamValueResolver<CookieParam> {
+    @Override
+    public String resolve(HasAnnotations hasAnnotations) {
+        return resolve(hasAnnotations.getAnnotation(CookieParam.class));
+    }
 
-    String resolve(T annotation);
+    @Override
+    public String resolve(CookieParam annotation) {
+        return annotation.value();
+    }
 }

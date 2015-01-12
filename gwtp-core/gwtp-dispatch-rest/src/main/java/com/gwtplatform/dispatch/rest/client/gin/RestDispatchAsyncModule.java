@@ -36,6 +36,7 @@ import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
+import com.gwtplatform.dispatch.rest.client.core.CoreModule;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.parameters.DefaultHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
@@ -80,6 +81,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     protected void configureDispatch() {
         // Common
         install(new CommonGinModule());
+        install(new CoreModule());
 
         // Constants / Configurations
         // It's not possible to bind non-native type constants, so we must encode them at compile-time and decode them

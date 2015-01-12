@@ -70,8 +70,7 @@ public class DispatchRestIncrementalGenerator extends IncrementalGenerator {
         return new RebindResult(RebindMode.USE_ALL_NEW, lastGeneration.getQualifiedName());
     }
 
-    private ClassDefinition generate(DispatchRestGenerator generator)
-            throws UnableToCompleteException {
+    private ClassDefinition generate(DispatchRestGenerator generator) throws UnableToCompleteException {
         if (!generator.canGenerate(typeName)) {
             logger.log(Type.ERROR, "Unable to locate " + typeName + ". Cannot initiate Rest-Dispatch generation.");
             throw new UnableToCompleteException();

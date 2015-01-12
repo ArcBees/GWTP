@@ -20,6 +20,7 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.rest.client.core.CookieManager;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
@@ -32,6 +33,7 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
     private final RestInterceptorRegistry interceptorRegistry;
     private final SecurityCookieAccessor securityCookieAccessor;
     private final RestRequestBuilderFactory requestBuilderFactory;
+    private final CookieManager cookieManager;
     private final RestResponseDeserializer restResponseDeserializer;
     private final RestDispatchHooks dispatchHooks;
 
@@ -41,12 +43,14 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
             @RestBinding SecurityCookieAccessor securityCookieAccessor,
             RestInterceptorRegistry interceptorRegistry,
             RestRequestBuilderFactory requestBuilderFactory,
+            CookieManager cookieManager,
             RestResponseDeserializer restResponseDeserializer,
             RestDispatchHooks dispatchHooks) {
         this.exceptionHandler = exceptionHandler;
         this.interceptorRegistry = interceptorRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
         this.requestBuilderFactory = requestBuilderFactory;
+        this.cookieManager = cookieManager;
         this.restResponseDeserializer = restResponseDeserializer;
         this.dispatchHooks = dispatchHooks;
     }
@@ -54,6 +58,6 @@ public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
     @Override
     public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback) {
         return new RestDispatchCall<A, R>(exceptionHandler, interceptorRegistry, securityCookieAccessor,
-                requestBuilderFactory, restResponseDeserializer, dispatchHooks, action, callback);
+                requestBuilderFactory, cookieManager, restResponseDeserializer, dispatchHooks, action, callback);
     }
 }

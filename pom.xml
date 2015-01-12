@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -230,7 +231,7 @@
         <maven-checkstyle-plugin.version>2.13</maven-checkstyle-plugin.version>
         <checkstyle.version>6.2</checkstyle.version>
         <arcbees-checkstyle.version>1.0</arcbees-checkstyle.version>
-        <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
         <maven-deploy-plugin.version>2.8.1</maven-deploy-plugin.version>
         <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
         <maven-processor-plugin.version>2.2.4</maven-processor-plugin.version>
@@ -255,7 +256,7 @@
         <gae.version>1.9.7</gae.version>
         <guice.version>3.0</guice.version>
         <javax.inject.version>1</javax.inject.version>
-        <guava.version>17.0</guava.version>
+        <guava.version>18.0</guava.version>
         <objectify.version>5.0.2</objectify.version>
         <persistence-api.version>1.0</persistence-api.version>
         <servlet-api.version>2.5</servlet-api.version>
@@ -267,6 +268,7 @@
         <jukito.version>1.4.1</jukito.version>
         <junit.version>4.11</junit.version>
         <mockito.version>1.9.5</mockito.version>
+        <gwtmockito.version>1.1.4</gwtmockito.version>
         <assertj-core.version>1.6.1</assertj-core.version>
 
         <!-- GitHub Sites -->
@@ -493,7 +495,6 @@
                         <link>http://google-guice.googlecode.com/svn/trunk/javadoc/</link>
                         <link>http://aopalliance.sourceforge.net/doc/</link>
                         <link>https://developers.google.com/appengine/docs/java/javadoc/</link>
-                        <link>http://docs.guava-libraries.googlecode.com/git/javadoc/</link>
                     </links>
 
                     <excludes>

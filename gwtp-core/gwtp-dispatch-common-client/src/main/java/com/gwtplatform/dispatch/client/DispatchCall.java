@@ -24,7 +24,7 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
- * An class representing a call made to the server through {@link com.gwtplatform.dispatch.rest.shared.RestDispatch
+ * An class representing a call made to the server through {@link com.gwtplatform.dispatch.rest.client.RestDispatch
  * RestDispatch} or {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync}.
  * <p/>
  * This class will perform the work shared by all dispatch modules. It will delegate exceptions to the bound {@link

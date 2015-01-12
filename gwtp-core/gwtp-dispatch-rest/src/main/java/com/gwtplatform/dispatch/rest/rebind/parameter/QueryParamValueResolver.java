@@ -18,7 +18,14 @@ package com.gwtplatform.dispatch.rest.rebind.parameter;
 
 import javax.ws.rs.QueryParam;
 
+import com.google.gwt.core.ext.typeinfo.HasAnnotations;
+
 public class QueryParamValueResolver implements HttpParamValueResolver<QueryParam> {
+    @Override
+    public String resolve(HasAnnotations hasAnnotations) {
+        return resolve(hasAnnotations.getAnnotation(QueryParam.class));
+    }
+
     @Override
     public String resolve(QueryParam annotation) {
         return annotation.value();
