@@ -21,8 +21,7 @@ package com.gwtplatform.dispatch.annotation;
  */
 @GenProxy(
         targetPackage = "com.gwtplatform.dispatch.annotation.proxy",
-        isEmbeddedType = true
-)
+        isEmbeddedType = true)
 public class Address {
     public String street;
 }

@@ -29,8 +29,13 @@ import com.google.gwt.event.shared.HasHandlers;
  * Override {@link com.gwtplatform.mvp.client.RootPresenter#lockInteraction(boolean)} to customize the behaviour.
  */
 public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
-
     private static Type<LockInteractionHandler> TYPE;
+
+    private final boolean lock;
+
+    public LockInteractionEvent(boolean lock) {
+        this.lock = lock;
+    }
 
     /**
      * Fires a {@link LockInteractionEvent}
@@ -51,12 +56,6 @@ public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
         return TYPE;
     }
 
-    private final boolean lock;
-
-    public LockInteractionEvent(boolean lock) {
-        this.lock = lock;
-    }
-
     @Override
     public Type<LockInteractionHandler> getAssociatedType() {
         return getType();
@@ -70,5 +69,4 @@ public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
     protected void dispatch(LockInteractionHandler handler) {
         handler.onLockInteraction(this);
     }
-
 }

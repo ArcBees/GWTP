@@ -24,8 +24,8 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * Simple abstract super-class for {@link RestInterceptor}
  * implementations that forces the action class to be passed in as a constructor to the handler.
  */
-public abstract class AbstractRestInterceptor extends AbstractInterceptor<RestAction, Object> implements
-        RestInterceptor {
+public abstract class AbstractRestInterceptor extends AbstractInterceptor<RestAction, Object>
+        implements RestInterceptor {
     private final InterceptorContext[] interceptorContexts;
 
     protected AbstractRestInterceptor(InterceptorContext... interceptorContexts) {
@@ -42,8 +42,7 @@ public abstract class AbstractRestInterceptor extends AbstractInterceptor<RestAc
     @Override
     public boolean canExecute(TypedAction action) {
         if (action instanceof RestAction) {
-            InterceptorContext subjectContext = new InterceptorContext
-                .Builder((RestAction) action).build();
+            InterceptorContext subjectContext = new InterceptorContext.Builder((RestAction) action).build();
 
             for (InterceptorContext context : interceptorContexts) {
                 // Must have at least one supporting context

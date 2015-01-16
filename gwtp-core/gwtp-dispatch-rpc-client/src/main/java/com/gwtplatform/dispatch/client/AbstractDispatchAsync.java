@@ -39,8 +39,8 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
     private final SecurityCookieAccessor securityCookieAccessor;
 
     public AbstractDispatchAsync(ExceptionHandler exceptionHandler,
-                                 SecurityCookieAccessor securityCookieAccessor,
-                                 ClientActionHandlerRegistry clientActionHandlerRegistry) {
+            SecurityCookieAccessor securityCookieAccessor,
+            ClientActionHandlerRegistry clientActionHandlerRegistry) {
         this.exceptionHandler = exceptionHandler;
         this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
@@ -65,23 +65,23 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
                     if (clientActionHandler.getActionType() != action.getClass()) {
                         dispatchRequest.cancel();
                         callback.onFailure(new ClientActionHandlerMismatchException(
-                                 action.getClass(), clientActionHandler.getActionType()));
+                                action.getClass(), clientActionHandler.getActionType()));
                         return;
                     }
 
                     if (dispatchRequest.isPending()) {
                         dispatchRequest.setDelegate(((ClientActionHandler<A, R>) clientActionHandler).execute(
                                 action, callback, new ExecuteCommand<A, R>() {
-                            @Override
-                            public DispatchRequest execute(A action,
-                                    AsyncCallback<R> resultCallback) {
-                                if (dispatchRequest.isPending()) {
-                                    return doExecute(securityCookie, action, resultCallback);
-                                } else {
-                                    return null;
-                                }
-                            }
-                        }));
+                                    @Override
+                                    public DispatchRequest execute(A action,
+                                            AsyncCallback<R> resultCallback) {
+                                        if (dispatchRequest.isPending()) {
+                                            return doExecute(securityCookie, action, resultCallback);
+                                        } else {
+                                            return null;
+                                        }
+                                    }
+                                }));
                     }
                 }
 
@@ -92,7 +92,6 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
                 }
             });
             return dispatchRequest;
-
         } else {
             return doExecute(securityCookie, action, callback);
         }
@@ -123,16 +122,16 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
                         dispatchRequest.setDelegate(((ClientActionHandler<A, R>) clientActionHandler).undo(
                                 action, result, callback, new UndoCommand<A, R>() {
 
-                            @Override
-                            public DispatchRequest undo(A action, R result,
-                                    AsyncCallback<Void> callback) {
-                                if (dispatchRequest.isPending()) {
-                                    return doUndo(securityCookie, action, result, callback);
-                                } else {
-                                    return null;
-                                }
-                            }
-                        }));
+                                    @Override
+                                    public DispatchRequest undo(A action, R result,
+                                            AsyncCallback<Void> callback) {
+                                        if (dispatchRequest.isPending()) {
+                                            return doUndo(securityCookie, action, result, callback);
+                                        } else {
+                                            return null;
+                                        }
+                                    }
+                                }));
                     }
                 }
 
@@ -143,7 +142,6 @@ public abstract class AbstractDispatchAsync implements DispatchAsync {
                 }
             });
             return dispatchRequest;
-
         } else {
             return doUndo(securityCookie, action, result, callback);
         }

@@ -35,6 +35,19 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 public final class NavigationEvent extends GwtEvent<NavigationHandler> {
     private static final Type<NavigationHandler> TYPE = new Type<NavigationHandler>();
 
+    private final PlaceRequest request;
+
+    /**
+     * Create a navigation event and attach it to a place request. You can pass
+     * {@code null} as a request if it's unknown, for example when revealing a
+     * default place or an error place.
+     *
+     * @param request The {@link PlaceRequest}.
+     */
+    public NavigationEvent(PlaceRequest request) {
+        this.request = request;
+    }
+
     /**
      * Fires a {@link NavigationEvent}
      * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
@@ -48,19 +61,6 @@ public final class NavigationEvent extends GwtEvent<NavigationHandler> {
 
     public static Type<NavigationHandler> getType() {
         return TYPE;
-    }
-
-    private final PlaceRequest request;
-
-    /**
-     * Create a navigation event and attach it to a place request. You can pass
-     * {@code null} as a request if it's unknown, for example when revealing a
-     * default place or an error place.
-     *
-     * @param request The {@link PlaceRequest}.
-     */
-    public NavigationEvent(PlaceRequest request) {
-        this.request = request;
     }
 
     @Override

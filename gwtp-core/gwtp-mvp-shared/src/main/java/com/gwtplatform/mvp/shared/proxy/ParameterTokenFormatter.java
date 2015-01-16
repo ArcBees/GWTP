@@ -161,7 +161,7 @@ public class ParameterTokenFormatter implements TokenFormatter {
             throw new TokenFormatException("Place history token is missing.");
         } else if (split == -1) {
             // No parameters.
-           return new PlaceRequest.Builder().nameToken(customUnescape(unescapedPlaceToken)).build();
+            return new PlaceRequest.Builder().nameToken(customUnescape(unescapedPlaceToken)).build();
         } else if (split >= 0) {
             PlaceRequest.Builder reqBuilder = new PlaceRequest.Builder().nameToken(customUnescape(unescapedPlaceToken
                     .substring(0, split)));

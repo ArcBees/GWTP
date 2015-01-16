@@ -24,16 +24,16 @@ import javax.inject.Inject;
 public class InstantiationCounterTestUtilGwt {
     private static int counter;
 
+    @Inject
+    public InstantiationCounterTestUtilGwt() {
+        counter++;
+    }
+
     public static void resetCounter() {
         counter = 0;
     }
 
     public static int getCounter() {
         return counter;
-    }
-
-    @Inject
-    public InstantiationCounterTestUtilGwt() {
-        counter++;
     }
 }

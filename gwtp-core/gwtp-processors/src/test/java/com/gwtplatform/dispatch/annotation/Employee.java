@@ -25,8 +25,7 @@ import java.util.ArrayList;
         targetPackage = "com.gwtplatform.dispatch.annotation.proxy",
         filterSetter = {"id"},
         filterGetter = {"version"},
-        locator = EmployeeLocator.class
-)
+        locator = EmployeeLocator.class)
 public class Employee {
     private String displayName;
     private Long supervisorKey;

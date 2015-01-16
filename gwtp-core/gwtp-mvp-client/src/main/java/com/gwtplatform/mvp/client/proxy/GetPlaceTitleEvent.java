@@ -29,8 +29,25 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * {@link PlaceManager#getTitle(int, SetPlaceTitleHandler)}.
  */
 public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
-
     private static Type<GetPlaceTitleHandler> TYPE;
+
+    private final SetPlaceTitleHandler handler;
+    private final PlaceRequest request;
+
+    /**
+     * The handled flag can let others know when the event has been handled.
+     * Handlers should call {@link #setHandled()} as soon as they figure they are
+     * be responsible for this event. Handlers should not process this event if
+     * {@link #isHandled()} return {@code true}.
+     */
+    private boolean handled;
+
+    public GetPlaceTitleEvent(
+            PlaceRequest request,
+            SetPlaceTitleHandler handler) {
+        this.request = request;
+        this.handler = handler;
+    }
 
     /**
      * Fires a {@link GetPlaceTitleEvent}
@@ -44,8 +61,7 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
      * @param handler The {@link SetPlaceTitleHandler} that will be invoked when
      *                the title is obtained.
      */
-    public static void fire(HasHandlers source, PlaceRequest request,
-            SetPlaceTitleHandler handler) {
+    public static void fire(HasHandlers source, PlaceRequest request, SetPlaceTitleHandler handler) {
         source.fireEvent(new GetPlaceTitleEvent(request, handler));
     }
 
@@ -54,23 +70,6 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
             TYPE = new Type<GetPlaceTitleHandler>();
         }
         return TYPE;
-    }
-
-    /**
-     * The handled flag can let others know when the event has been handled.
-     * Handlers should call {@link #setHandled()} as soon as they figure they are
-     * be responsible for this event. Handlers should not process this event if
-     * {@link #isHandled()} return {@code true}.
-     */
-    private boolean handled;
-
-    private final SetPlaceTitleHandler handler;
-
-    private final PlaceRequest request;
-
-    public GetPlaceTitleEvent(PlaceRequest request, SetPlaceTitleHandler handler) {
-        this.request = request;
-        this.handler = handler;
     }
 
     @Override

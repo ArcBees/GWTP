@@ -139,21 +139,21 @@ public class RouteTokenFormatterTest {
     @Test
     public void testToPlaceTokenWithEmbeddedUrlUnsafeParam() {
         // Given
-        final PlaceRequest placeRequest = new PlaceRequest.Builder()
-        .nameToken("/user/{userId}/albums/{albumId}")
-        .with("userId", "Two Words")
-        .with("albumId", "Then Three Words")
-        .build();
-        final String expectedPlacePattern = "/user/Two+Words/albums/Then+Three+Words";
+        PlaceRequest placeRequest = new PlaceRequest.Builder()
+                .nameToken("/user/{userId}/albums/{albumId}")
+                .with("userId", "Two Words")
+                .with("albumId", "Then Three Words")
+                .build();
+        String expectedPlacePattern = "/user/Two+Words/albums/Then+Three+Words";
 
         // When
-        final String placeToken = tokenFormatter.toPlaceToken(placeRequest);
+        String placeToken = tokenFormatter.toPlaceToken(placeRequest);
 
         // Then
         assertTrue(placeToken.equals(expectedPlacePattern));
 
         // And in reverse
-        final PlaceRequest placeRequest1 = tokenFormatter.toPlaceRequest(placeToken);
+        PlaceRequest placeRequest1 = tokenFormatter.toPlaceRequest(placeToken);
 
         assertEquals(placeRequest1.getParameter("userId", ""), "Two Words");
     }
