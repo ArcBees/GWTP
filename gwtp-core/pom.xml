@@ -90,10 +90,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-build-tools</artifactId>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>

@@ -549,15 +549,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- This dependency is required by maven-checkstyle-plugin. -->
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>gwtp-build-tools</artifactId>
-                <version>${project.version}</version>
-                <scope>provided</scope>
-                <optional>true</optional>
-            </dependency>
-
             <!-- Testing -->
             <dependency>
                 <groupId>junit</groupId>
