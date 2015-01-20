@@ -43,6 +43,8 @@ import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADE
 /**
  * Default implementation for {@link RestRequestBuilderFactory}.
  */
+// TODO: This class is handling too much. See following TODOs for improvements.
+// Also maybe remove those silly `Rest` prefixes while in experimental
 public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFactory {
     private static final Map<HttpMethod, Method> HTTP_METHOD_TO_REQUEST_BUILDER
             = new EnumMap<HttpMethod, Method>(HttpMethod.class);
@@ -138,6 +140,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     }
 
     private List<HttpParameter> getHeaderParameters(String xsrfToken, RestAction<?> action) {
+        // TODO: Extract header logic to `HeaderFactory`
+
         List<HttpParameter> headerParams = new ArrayList<HttpParameter>();
 
         // By setting the most generic headers first, we make sure they can be overridden by more specific ones
@@ -158,6 +162,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     }
 
     private <A extends RestAction<?>> void buildBody(RequestBuilder requestBuilder, A action) throws ActionException {
+        // TODO: Extract body logic to `BodyFactory`
+
         if (action.hasFormParams()) {
             requestBuilder.setRequestData(buildQueryString(action.getParameters(Type.FORM)));
         } else if (action.hasBodyParam()) {
@@ -171,6 +177,8 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     }
 
     private String buildUrl(RestAction<?> action) {
+        // TODO: Extract URL logic (path, matrix [eventually] and query params) to `UrlFactory`
+
         List<HttpParameter> queryParams = new ArrayList<HttpParameter>();
         queryParams.addAll(globalQueryParams.get(action.getHttpMethod()));
         queryParams.addAll(action.getParameters(Type.QUERY));

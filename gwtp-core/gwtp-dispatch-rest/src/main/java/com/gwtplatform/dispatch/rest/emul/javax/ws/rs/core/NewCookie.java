@@ -19,8 +19,6 @@ package javax.ws.rs.core;
 public class NewCookie extends Cookie {
     public static final int DEFAULT_MAX_AGE = -1;
 
-    private static final String COOKIE_PARTS_PATTERN = "[;,]";
-
     private String comment;
     private int maxAge = DEFAULT_MAX_AGE;
     private boolean secure;

@@ -83,6 +83,7 @@ public class HttpParameterFactory {
         } else if (parameter.isAnnotationPresent(DateFormat.class) && !isDate(parameter)) {
             error(parameter, DATE_FORMAT_NOT_DATE);
         }
+        // TODO: CookieParam must be Cookie, primitive/boxed, String, Date or a Collection<Cookie>
 
         // No annotations is not valid, but is valid for body params
         return annotationsCount == 1;

@@ -19,7 +19,7 @@ package javax.ws.rs.core;
 public class Cookie {
     public static final int DEFAULT_VERSION = 1;
 
-    private static final String COOKIE_PARTS_PATTERN = "[;,]";
+    protected static final String COOKIE_PARTS_PATTERN = "[;,]";
 
     private String name;
     private String value;
