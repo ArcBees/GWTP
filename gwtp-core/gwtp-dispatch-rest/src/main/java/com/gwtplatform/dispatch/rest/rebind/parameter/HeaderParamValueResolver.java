@@ -18,7 +18,14 @@ package com.gwtplatform.dispatch.rest.rebind.parameter;
 
 import javax.ws.rs.HeaderParam;
 
+import com.google.gwt.core.ext.typeinfo.HasAnnotations;
+
 public class HeaderParamValueResolver implements HttpParamValueResolver<HeaderParam> {
+    @Override
+    public String resolve(HasAnnotations hasAnnotations) {
+        return resolve(hasAnnotations.getAnnotation(HeaderParam.class));
+    }
+
     @Override
     public String resolve(HeaderParam annotation) {
         return annotation.value();

@@ -21,6 +21,7 @@ import java.lang.annotation.Annotation;
 import javax.ws.rs.CookieParam;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.MatrixParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
@@ -32,7 +33,8 @@ public enum HttpParameterType {
     PATH(PathParam.class, Type.PATH),
     QUERY(QueryParam.class, Type.QUERY),
     FORM(FormParam.class, Type.FORM),
-    COOKIE(CookieParam.class, Type.COOKIE);
+    COOKIE(CookieParam.class, Type.COOKIE),
+    MATRIX(MatrixParam.class, Type.MATRIX);
 
     private final Class<? extends Annotation> annotationClass;
     private final Type associatedType;

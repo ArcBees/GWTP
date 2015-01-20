@@ -18,7 +18,14 @@ package com.gwtplatform.dispatch.rest.rebind.parameter;
 
 import javax.ws.rs.PathParam;
 
+import com.google.gwt.core.ext.typeinfo.HasAnnotations;
+
 public class PathParamValueResolver implements HttpParamValueResolver<PathParam> {
+    @Override
+    public String resolve(HasAnnotations hasAnnotations) {
+        return resolve(hasAnnotations.getAnnotation(PathParam.class));
+    }
+
     @Override
     public String resolve(PathParam annotation) {
         return annotation.value();

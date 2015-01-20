@@ -47,7 +47,8 @@ public class CookieParameter extends CollectionSupportedParameter {
     }
 
     private String parseCookie(NewCookie cookie) {
-        String result = cookie.getName() + '=' + cookie.getValue();
+        // Don't use cookie.getName(). `Cookie` is meant for server usage, so we pull the name from the annotation
+        String result = getName() + '=' + cookie.getValue();
         result += maxAgeOrEmpty(cookie);
         result += domainOrEmpty(cookie);
         result += pathOrEmpty(cookie);

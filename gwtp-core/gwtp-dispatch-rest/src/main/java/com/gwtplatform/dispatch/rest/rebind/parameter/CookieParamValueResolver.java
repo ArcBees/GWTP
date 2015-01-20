@@ -18,7 +18,14 @@ package com.gwtplatform.dispatch.rest.rebind.parameter;
 
 import javax.ws.rs.CookieParam;
 
+import com.google.gwt.core.ext.typeinfo.HasAnnotations;
+
 public class CookieParamValueResolver implements HttpParamValueResolver<CookieParam> {
+    @Override
+    public String resolve(HasAnnotations hasAnnotations) {
+        return resolve(hasAnnotations.getAnnotation(CookieParam.class));
+    }
+
     @Override
     public String resolve(CookieParam annotation) {
         return annotation.value();
