@@ -184,8 +184,7 @@
         <connection>scm:git:git@github.com:ArcBees/GWTP.git</connection>
         <developerConnection>scm:git:git@github.com:ArcBees/GWTP.git</developerConnection>
         <url>https://github.com/ArcBees/GWTP</url>
-      <tag>HEAD</tag>
-  </scm>
+    </scm>
 
     <issueManagement>
         <url>https://github.com/ArcBees/GWTP/issues</url>
