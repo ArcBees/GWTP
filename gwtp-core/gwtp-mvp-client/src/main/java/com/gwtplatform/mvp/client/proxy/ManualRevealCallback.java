@@ -20,9 +20,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.mvp.client.Presenter;
 
 /**
- * This implementation of {@link AsyncCallback} can be used when fetching data
- * from the server within {@link Presenter#prepareFromRequest(com.gwtplatform.mvp.shared.proxy.PlaceRequest)} for
- * a presenter that uses manual reveal (see {@link Presenter#useManualReveal()}.
+ * This implementation of {@link AsyncCallback} can be used when fetching data from the server within {@link
+ * Presenter#prepareFromRequest(com.gwtplatform.mvp.shared.proxy.PlaceRequest)} for a presenter that uses manual reveal
+ * (see {@link Presenter#useManualReveal()}.
  * <p/>
  * Use {@link #create(Presenter, AsyncCallback)} to attach that callback to your own.
  * <p/>
@@ -31,25 +31,14 @@ import com.gwtplatform.mvp.client.Presenter;
  * @param <T> The type of the return value, see {@link AsyncCallback}.
  */
 public class ManualRevealCallback<T> implements AsyncCallback<T> {
-
     private final Presenter<?, ? extends ProxyPlace<?>> presenter;
     private final AsyncCallback<T> callback;
-
-    /**
-     * Creates an {@link ManualRevealCallback} that is attached to another {@link AsyncCallback}.
-     *
-     * @param presenter The presenter that will be revealed upon successful completion of this callback.
-     * @see #ManualRevealCallback(Presenter, AsyncCallback)
-     */
-    public static <T> ManualRevealCallback<T> create(Presenter<?, ? extends ProxyPlace<?>> presenter,
-            AsyncCallback<T> callback) {
-        return new ManualRevealCallback<T>(presenter, callback);
-    }
 
     /**
      * Creates an {@link ManualRevealCallback} that is not attached to another {@link AsyncCallback}.
      *
      * @param presenter The presenter that will be revealed upon successful completion of this callback.
+     *
      * @see #ManualRevealCallback(Presenter, AsyncCallback)
      */
     public ManualRevealCallback(Presenter<?, ? extends ProxyPlace<?>> presenter) {
@@ -57,9 +46,23 @@ public class ManualRevealCallback<T> implements AsyncCallback<T> {
         this.callback = null;
     }
 
-    ManualRevealCallback(Presenter<?, ? extends ProxyPlace<?>> presenter, AsyncCallback<T> callback) {
+    ManualRevealCallback(
+            Presenter<?, ? extends ProxyPlace<?>> presenter,
+            AsyncCallback<T> callback) {
         this.presenter = presenter;
         this.callback = callback;
+    }
+
+    /**
+     * Creates an {@link ManualRevealCallback} that is attached to another {@link AsyncCallback}.
+     *
+     * @param presenter The presenter that will be revealed upon successful completion of this callback.
+     *
+     * @see #ManualRevealCallback(Presenter, AsyncCallback)
+     */
+    public static <T> ManualRevealCallback<T> create(Presenter<?, ? extends ProxyPlace<?>> presenter,
+            AsyncCallback<T> callback) {
+        return new ManualRevealCallback<T>(presenter, callback);
     }
 
     @Override
@@ -77,5 +80,4 @@ public class ManualRevealCallback<T> implements AsyncCallback<T> {
         }
         presenter.getProxy().manualReveal(presenter);
     }
-
 }

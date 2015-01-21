@@ -31,6 +31,9 @@ import com.google.web.bindery.event.shared.EventBus;
 public class AsyncCallSucceedEvent extends GwtEvent<AsyncCallSucceedHandler> {
     private static final Type<AsyncCallSucceedHandler> TYPE = new Type<AsyncCallSucceedHandler>();
 
+    AsyncCallSucceedEvent() {
+    }
+
     /**
      * Fires a {@link AsyncCallSucceedEvent}
      * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
@@ -51,9 +54,6 @@ public class AsyncCallSucceedEvent extends GwtEvent<AsyncCallSucceedHandler> {
     @Deprecated
     public static void fire(final HasHandlers source) {
         source.fireEvent(new AsyncCallSucceedEvent());
-    }
-
-    AsyncCallSucceedEvent() {
     }
 
     public static Type<AsyncCallSucceedHandler> getType() {

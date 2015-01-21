@@ -25,22 +25,6 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * its information.
  */
 public final class ChangeTabEvent extends GwtEvent<ChangeTabHandler> {
-
-    /**
-     * Fires a {@link ChangeTabEvent} with a specific
-     * {@link com.google.gwt.event.shared.GwtEvent.Type} into a source that has access to an
-     * {@link com.google.web.bindery.event.shared.EventBus}.
-     *
-     * @param source          The source that fires this event ({@link HasHandlers}).
-     * @param type            The specific event {@link com.google.gwt.event.shared.GwtEvent.Type}.
-     * @param tabContentProxy The {@link TabContentProxy} for this tab, with modified information.
-     */
-    public static void fire(final HasHandlers source,
-            final Type<ChangeTabHandler> type, TabContentProxy<?> tabContentProxy) {
-
-        source.fireEvent(new ChangeTabEvent(type, tabContentProxy));
-    }
-
     private final TabContentProxy<?> tabContentProxy;
     private final Type<ChangeTabHandler> type;
 
@@ -51,10 +35,24 @@ public final class ChangeTabEvent extends GwtEvent<ChangeTabHandler> {
      * @param type            The specific {@link com.google.gwt.event.shared.GwtEvent.Type} of this event.
      * @param tabContentProxy The {@link TabContentProxy} for this tab, with modified information.
      */
-    public ChangeTabEvent(final Type<ChangeTabHandler> type,
+    public ChangeTabEvent(
+            Type<ChangeTabHandler> type,
             TabContentProxy<?> tabContentProxy) {
         this.type = type;
         this.tabContentProxy = tabContentProxy;
+    }
+
+    /**
+     * Fires a {@link ChangeTabEvent} with a specific
+     * {@link com.google.gwt.event.shared.GwtEvent.Type} into a source that has access to an
+     * {@link com.google.web.bindery.event.shared.EventBus}.
+     *
+     * @param source          The source that fires this event ({@link HasHandlers}).
+     * @param type            The specific event {@link com.google.gwt.event.shared.GwtEvent.Type}.
+     * @param tabContentProxy The {@link TabContentProxy} for this tab, with modified information.
+     */
+    public static void fire(HasHandlers source, Type<ChangeTabHandler> type, TabContentProxy<?> tabContentProxy) {
+        source.fireEvent(new ChangeTabEvent(type, tabContentProxy));
     }
 
     @Override
@@ -70,5 +68,4 @@ public final class ChangeTabEvent extends GwtEvent<ChangeTabHandler> {
     protected void dispatch(ChangeTabHandler handler) {
         handler.onChangeTab(this);
     }
-
 }

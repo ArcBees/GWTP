@@ -37,12 +37,10 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * This class is an implementation of {@link DispatchAsync} for use with test
- * cases that configure guice using a {@link MockHandlerModule}.
+ * This class is an implementation of {@link DispatchAsync} for use with test cases that configure guice using a {@link
+ * MockHandlerModule}.
  */
-
 public class TestDispatchAsync implements DispatchAsync {
-
     private DispatchService service;
     private Map<Class<?>, ClientActionHandler<?, ?>> clientActionHandlers;
 
@@ -86,12 +84,12 @@ public class TestDispatchAsync implements DispatchAsync {
             DelegatingDispatchRequest request = new DelegatingDispatchRequest();
             ((ClientActionHandler<A, R>) clientActionHandler).execute(action,
                     callback, new ExecuteCommand<A, R>() {
-                @Override
-                public DispatchRequest execute(A action,
-                        AsyncCallback<R> resultCallback) {
-                    return serviceExecute(action, resultCallback);
-                }
-            });
+                        @Override
+                        public DispatchRequest execute(A action,
+                                AsyncCallback<R> resultCallback) {
+                            return serviceExecute(action, resultCallback);
+                        }
+                    });
             return request;
         } else {
             serviceExecute(action, callback);
@@ -127,11 +125,11 @@ public class TestDispatchAsync implements DispatchAsync {
             DelegatingDispatchRequest request = new DelegatingDispatchRequest();
             ((ClientActionHandler<A, R>) clientActionHandler).undo(action, result,
                     callback, new UndoCommand<A, R>() {
-                @Override
-                public DispatchRequest undo(A action, R result, AsyncCallback<Void> callback) {
-                    return serviceUndo(action, result, callback);
-                }
-            });
+                        @Override
+                        public DispatchRequest undo(A action, R result, AsyncCallback<Void> callback) {
+                            return serviceUndo(action, result, callback);
+                        }
+                    });
             return request;
         } else {
             serviceUndo(action, result, callback);

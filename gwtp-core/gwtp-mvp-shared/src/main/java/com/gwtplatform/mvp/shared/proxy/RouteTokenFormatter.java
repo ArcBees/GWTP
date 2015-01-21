@@ -252,8 +252,8 @@ public class RouteTokenFormatter implements TokenFormatter {
 
     private Map<String, String> decodeEmbeddedParams(Map<String, String> parameters) {
         if (parameters != null) {
-            for (Entry<String, String> entry: parameters.entrySet()) {
-                 entry.setValue(urlUtils.decodeQueryString(entry.getValue()));
+            for (Entry<String, String> entry : parameters.entrySet()) {
+                entry.setValue(urlUtils.decodeQueryString(entry.getValue()));
             }
         }
         return parameters;

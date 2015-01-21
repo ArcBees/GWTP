@@ -259,7 +259,7 @@ public class CrawlServiceServlet extends HttpServlet {
 
         // Keep the matching page only if it has not expired
         if (matchingPage == null ||
-            currDate.getTime() > matchingPage.getFetchDate().getTime() + cachedPageTimeoutSec * 1000) {
+                currDate.getTime() > matchingPage.getFetchDate().getTime() + cachedPageTimeoutSec * 1000) {
             matchingPage = null;
         } else {
             deprecatedPages.remove(Key.create(CachedPage.class, matchingPage.getId()));

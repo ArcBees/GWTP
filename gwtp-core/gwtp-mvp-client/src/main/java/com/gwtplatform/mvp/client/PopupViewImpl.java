@@ -107,11 +107,11 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
             }
             autoHideHandler = eventBus.addHandler(NavigationEvent.getType(),
                     new NavigationHandler() {
-                @Override
-                public void onNavigation(NavigationEvent navigationEvent) {
-                    hide();
-                }
-            });
+                        @Override
+                        public void onNavigation(NavigationEvent navigationEvent) {
+                            hide();
+                        }
+                    });
         } else {
             if (autoHideHandler != null) {
                 autoHideHandler.removeHandler();
