@@ -138,40 +138,31 @@ public class GinjectorGenerator extends AbstractGenerator {
 
             for (Class<? extends Annotation> annotation : annotations) {
                 if (type.isAnnotationPresent(annotation)) {
-                  presenterDefinitions.addStandardPresenter(type);
-                  break;
-              }
+                    presenterDefinitions.addStandardPresenter(type);
+                    break;
+                }
             }
         }
     }
 
-    private List<Class<? extends Annotation>> findGinjectorAnnotations()
-        throws UnableToCompleteException
-    {
-        List<Class<? extends Annotation>> annotations =
-            new ArrayList<Class<? extends Annotation>>();
+    private List<Class<? extends Annotation>> findGinjectorAnnotations() throws UnableToCompleteException {
+        List<Class<? extends Annotation>> annotations = new ArrayList<Class<? extends Annotation>>();
 
         List<String> values = findConfigurationProperty(GIN_GINJECTOR_ANNOTATION).getValues();
         if (values.size() > 0) {
-            for (String annotationClassName : values) {
-                annotationClassName = annotationClassName.trim();
+            for (String value : values) {
+                String annotationClassName = value.trim();
 
                 if (!annotationClassName.isEmpty()) {
                     try {
-                        annotations.add(Class.forName(annotationClassName).asSubclass(
-                            Annotation.class));
+                        annotations.add(Class.forName(annotationClassName).asSubclass(Annotation.class));
                     } catch (ClassNotFoundException e) {
-                        getTreeLogger().log(
-                            TreeLogger.ERROR,
-                            "Cannot find the class '" + annotationClassName + "' used in '"
-                                    + GIN_GINJECTOR_ANNOTATION + "' property.");
+                        getTreeLogger().log(TreeLogger.ERROR, "Cannot find the class '" + annotationClassName
+                                    + "' used in '" + GIN_GINJECTOR_ANNOTATION + "' property.");
                         throw new UnableToCompleteException();
                     } catch (ClassCastException e) {
-                        getTreeLogger().log(
-                            TreeLogger.ERROR,
-                                "Class '" + annotationClassName + "' used in '"
-                                        + GIN_GINJECTOR_ANNOTATION
-                                        + "' property is not an Annotation.");
+                        getTreeLogger().log(TreeLogger.ERROR, "Class '" + annotationClassName + "' used in '"
+                                    + GIN_GINJECTOR_ANNOTATION + "' property is not an Annotation.");
                         throw new UnableToCompleteException();
                     }
                 }
