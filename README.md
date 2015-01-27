@@ -17,6 +17,10 @@ Get high quality support through ArcBees.
 * [GWTP Samples](https://github.com/ArcBees/GWTP-Samples) - Find Sample GWT-Platform projects here.
 * [GWTP Archetypes](https://github.com/ArcBees/ArcBees-tools/tree/master/archetypes) - Start a project from a template here.
 
+##Plugins
+* [Eclipse Plugin](https://github.com/ArcBees/gwtp-eclipse-plugin) - Create project and presenters
+* [IntelliJ IDEA Plugin](https://github.com/ArcBees/gwtp-idea-plugin) - Create project and presenters
+
 ##Community
 * [Join the GWT-Platform G+ Community](https://plus.google.com/communities/113139554133824081251) - See whats happening in the community.
 * [GWTP Google Group](https://groups.google.com/forum/?fromgroups#!forum/gwt-platform) - Ask for help here.
@@ -30,13 +34,10 @@ Get high quality support through ArcBees.
 * See the manual dependency download section in [Maven Configuration Instructions](https://github.com/ArcBees/GWTP/wiki/Maven-Configuration) 
 
 ###Current Release
-1.3 - Released on 04 August 2014
+1.4 - Released on 12 January 2015
 
 ###Current Snapshot
-1.3-SNAPSHOT
-
-###Archetypes
-* [Archetype Project Creation](https://github.com/ArcBees/ArcBees-tools/tree/master/archetypes)
+1.5-SNAPSHOT
 
 ##Demos
 * [GWTP Samples Project Home](https://github.com/ArcBees/GWTP-Samples)
@@ -79,13 +80,6 @@ Get high quality support through ArcBees.
 
 ##Javadocs
 * [Javadocs](http://arcbees.github.com/GWTP/javadoc/apidocs/index.html)
-
-##Plugins
-* [Eclipse Plugin](https://github.com/ArcBees/gwtp-eclipse-plugin) - Create project and presenters
-* [IntelliJ IDEA Plugin](https://github.com/ArcBees/gwtp-idea-plugin) - Create project and presenters
-
-##Moving From 
-* While we move, you can find the documentation here: http://gwt-platform.googlecode.com
 
 ##License
 * GWTP is freely distributable under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html)
