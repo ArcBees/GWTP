@@ -27,6 +27,7 @@ import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
@@ -222,6 +223,20 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
     @Override
     public void fireEvent(GwtEvent<?> event) {
+        fireEvent((Event<?>) event);
+    }
+
+   /**
+    * Fires the given event to the handlers listening to the event's type.
+    * <p>
+    * Any exceptions thrown by handlers will be bundled into a
+    * {@link UmbrellaException} and then re-thrown after all handlers have
+    * completed. An exception thrown by a handler will not prevent other handlers
+    * from executing.
+    * 
+    * @param event the event
+    */
+    public void fireEvent(Event<?> event) {
         getEventBus().fireEventFromSource(event, this);
     }
 
