@@ -149,22 +149,20 @@ public class GinjectorGenerator extends AbstractGenerator {
         List<Class<? extends Annotation>> annotations = new ArrayList<Class<? extends Annotation>>();
 
         List<String> values = findConfigurationProperty(GIN_GINJECTOR_ANNOTATION).getValues();
-        if (values.size() > 0) {
-            for (String value : values) {
-                String annotationClassName = value.trim();
+        for (String value : values) {
+            String annotationClassName = value.trim();
 
-                if (!annotationClassName.isEmpty()) {
-                    try {
-                        annotations.add(Class.forName(annotationClassName).asSubclass(Annotation.class));
-                    } catch (ClassNotFoundException e) {
-                        getTreeLogger().log(TreeLogger.ERROR, "Cannot find the class '" + annotationClassName
-                                    + "' used in '" + GIN_GINJECTOR_ANNOTATION + "' property.");
-                        throw new UnableToCompleteException();
-                    } catch (ClassCastException e) {
-                        getTreeLogger().log(TreeLogger.ERROR, "Class '" + annotationClassName + "' used in '"
-                                    + GIN_GINJECTOR_ANNOTATION + "' property is not an Annotation.");
-                        throw new UnableToCompleteException();
-                    }
+            if (!annotationClassName.isEmpty()) {
+                try {
+                    annotations.add(Class.forName(annotationClassName).asSubclass(Annotation.class));
+                } catch (ClassNotFoundException e) {
+                    getTreeLogger().log(TreeLogger.ERROR, "Cannot find the class '" + annotationClassName
+                                + "' used in '" + GIN_GINJECTOR_ANNOTATION + "' property.");
+                    throw new UnableToCompleteException();
+                } catch (ClassCastException e) {
+                    getTreeLogger().log(TreeLogger.ERROR, "Class '" + annotationClassName + "' used in '"
+                                + GIN_GINJECTOR_ANNOTATION + "' property is not an Annotation.");
+                    throw new UnableToCompleteException();
                 }
             }
         }
@@ -199,13 +197,11 @@ public class GinjectorGenerator extends AbstractGenerator {
 
     private void addExtensionInterfaces(ClassSourceFileComposerFactory composer) throws UnableToCompleteException {
         List<String> values = findConfigurationProperty(GIN_GINJECTOR_EXTENSION).getValues();
-        if (values.size() > 0) {
-            for (String extension : values) {
-                if (!extension.isEmpty()) {
-                    final JClassType extensionType = getType(extension.trim());
-                    composer.addImport(extensionType.getQualifiedSourceName());
-                    composer.addImplementedInterface(extensionType.getName());
-                }
+        for (String extension : values) {
+            if (!extension.isEmpty()) {
+                final JClassType extensionType = getType(extension.trim());
+                composer.addImport(extensionType.getQualifiedSourceName());
+                composer.addImplementedInterface(extensionType.getName());
             }
         }
     }
