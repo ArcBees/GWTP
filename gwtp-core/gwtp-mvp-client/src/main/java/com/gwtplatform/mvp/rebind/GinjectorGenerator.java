@@ -17,6 +17,8 @@
 package com.gwtplatform.mvp.rebind;
 
 import java.io.PrintWriter;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +53,8 @@ import com.gwtplatform.mvp.rebind.velocity.RebindModule;
  * Will generate a Ginjector from Ginjector.
  */
 public class GinjectorGenerator extends AbstractGenerator {
+    static final String GIN_GINJECTOR_ANNOTATION = "gin.ginjector.annotation";
+
     static final String DEFAULT_NAME = "ClientGinjector";
     static final String DEFAULT_FQ_NAME = DEFAULT_PACKAGE + "." + DEFAULT_NAME;
 
@@ -113,6 +117,8 @@ public class GinjectorGenerator extends AbstractGenerator {
     }
 
     private void findAllPresenters(PresenterDefinitions presenterDefinitions) throws UnableToCompleteException {
+        List<Class<? extends Annotation>> annotations = findGinjectorAnnotations();
+
         for (JClassType type : getTypeOracle().getTypes()) {
             if (type.isAnnotationPresent(ProxyStandard.class)) {
                 presenterDefinitions.addStandardPresenter(type.getEnclosingType());
@@ -129,7 +135,39 @@ public class GinjectorGenerator extends AbstractGenerator {
             } else if (type.isAnnotationPresent(DefaultGatekeeper.class)) {
                 presenterDefinitions.addGatekeeper(type);
             }
+
+            for (Class<? extends Annotation> annotation : annotations) {
+                if (type.isAnnotationPresent(annotation)) {
+                    presenterDefinitions.addStandardPresenter(type);
+                    break;
+                }
+            }
         }
+    }
+
+    private List<Class<? extends Annotation>> findGinjectorAnnotations() throws UnableToCompleteException {
+        List<Class<? extends Annotation>> annotations = new ArrayList<Class<? extends Annotation>>();
+
+        List<String> values = findConfigurationProperty(GIN_GINJECTOR_ANNOTATION).getValues();
+        for (String value : values) {
+            String annotationClassName = value.trim();
+
+            if (!annotationClassName.isEmpty()) {
+                try {
+                    annotations.add(Class.forName(annotationClassName).asSubclass(Annotation.class));
+                } catch (ClassNotFoundException e) {
+                    getTreeLogger().log(TreeLogger.ERROR, "Cannot find the class '" + annotationClassName
+                                + "' used in '" + GIN_GINJECTOR_ANNOTATION + "' property.");
+                    throw new UnableToCompleteException();
+                } catch (ClassCastException e) {
+                    getTreeLogger().log(TreeLogger.ERROR, "Class '" + annotationClassName + "' used in '"
+                                + GIN_GINJECTOR_ANNOTATION + "' property is not an Annotation.");
+                    throw new UnableToCompleteException();
+                }
+            }
+        }
+
+        return annotations;
     }
 
     private void verifyCodeSplitBundleConfiguration(String presenter, ProxyCodeSplitBundle annotation)
@@ -159,13 +197,11 @@ public class GinjectorGenerator extends AbstractGenerator {
 
     private void addExtensionInterfaces(ClassSourceFileComposerFactory composer) throws UnableToCompleteException {
         List<String> values = findConfigurationProperty(GIN_GINJECTOR_EXTENSION).getValues();
-        if (values.size() > 0) {
-            for (String extension : values) {
-                if (!extension.isEmpty()) {
-                    final JClassType extensionType = getType(extension.trim());
-                    composer.addImport(extensionType.getQualifiedSourceName());
-                    composer.addImplementedInterface(extensionType.getName());
-                }
+        for (String extension : values) {
+            if (!extension.isEmpty()) {
+                final JClassType extensionType = getType(extension.trim());
+                composer.addImport(extensionType.getQualifiedSourceName());
+                composer.addImplementedInterface(extensionType.getName());
             }
         }
     }
