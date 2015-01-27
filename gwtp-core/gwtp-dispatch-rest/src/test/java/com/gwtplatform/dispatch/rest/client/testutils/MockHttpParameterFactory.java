@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.gwtplatform.dispatch.rest.client.parameters.CookieParameter;
 import com.gwtplatform.dispatch.rest.client.parameters.FormParameter;
 import com.gwtplatform.dispatch.rest.client.parameters.HeaderParameter;
 import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
@@ -56,9 +57,10 @@ public class MockHttpParameterFactory implements HttpParameterFactory {
                 return mock(PathParameter.class);
             case QUERY:
                 return mock(QueryParameter.class);
-            default:
             case COOKIE:
+                return mock(CookieParameter.class);
             case MATRIX:
+            default:
                 return mock(HttpParameter.class);
         }
     }

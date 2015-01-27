@@ -72,12 +72,20 @@ public class DefaultHttpParameterFactoryTest {
     }
 
     @Test
-    public void createOtherType() {
+    public void createCookieParam() {
+        // when
+        HttpParameter param = factory.create(Type.COOKIE, SOME_KEY, SOME_VALUE, null);
+
+        // then
+        assertThat(param).isInstanceOf(CookieParameter.class);
+    }
+
+    @Test
+    public void createMatrixParam() {
         // when
         HttpParameter param = factory.create(Type.MATRIX, SOME_KEY, SOME_VALUE, null);
 
         // then
-        assertThat(param)
-                .isExactlyInstanceOf(ClientHttpParameter.class);
+        assertThat(param).isExactlyInstanceOf(ClientHttpParameter.class);
     }
 }
