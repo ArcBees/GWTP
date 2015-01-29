@@ -28,8 +28,9 @@ import com.google.gwt.http.client.RequestException;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.rest.client.core.CookieManager;
-import com.gwtplatform.dispatch.rest.client.core.RestRequestBuilderFactory;
-import com.gwtplatform.dispatch.rest.client.core.RestResponseDeserializer;
+import com.gwtplatform.dispatch.rest.client.core.RequestBuilderFactory;
+import com.gwtplatform.dispatch.rest.client.core.ResponseDeserializer;
+import com.gwtplatform.dispatch.rest.client.core.RestDispatchCall;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
@@ -65,11 +66,11 @@ public class RestDispatchCallTest {
     @Inject
     private SecurityCookieAccessor securityCookieAccessor;
     @Inject
-    private RestRequestBuilderFactory requestBuilderFactory;
+    private RequestBuilderFactory requestBuilderFactory;
     @Inject
     private CookieManager cookieManager;
     @Inject
-    private RestResponseDeserializer restResponseDeserializer;
+    private ResponseDeserializer responseDeserializer;
     @Inject
     private RestDispatchHooks dispatchHooks;
 
@@ -98,6 +99,6 @@ public class RestDispatchCallTest {
 
     private <A extends RestAction<R>, R> RestDispatchCall<A, R> createCall(A action, AsyncCallback<R> callback) {
         return new RestDispatchCall<A, R>(exceptionHandler, interceptorRegistry, securityCookieAccessor,
-                requestBuilderFactory, cookieManager, restResponseDeserializer, dispatchHooks, action, callback);
+                requestBuilderFactory, cookieManager, responseDeserializer, dispatchHooks, action, callback);
     }
 }

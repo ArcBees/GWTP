@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.client.core;
 
 import com.google.gwt.http.client.Header;
 import com.google.gwt.http.client.Response;

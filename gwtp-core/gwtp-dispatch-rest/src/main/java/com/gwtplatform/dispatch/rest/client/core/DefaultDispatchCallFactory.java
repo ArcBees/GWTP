@@ -14,54 +14,51 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.client.core;
 
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.annotations.RestBinding;
-import com.gwtplatform.dispatch.rest.client.core.CookieManager;
-import com.gwtplatform.dispatch.rest.client.core.RestDispatchCallFactory;
-import com.gwtplatform.dispatch.rest.client.core.RestRequestBuilderFactory;
-import com.gwtplatform.dispatch.rest.client.core.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
- * The default implementation for {@link com.gwtplatform.dispatch.rest.client.core.RestDispatchCallFactory}.
+ * The default implementation for {@link com.gwtplatform.dispatch.rest.client.core.DispatchCallFactory}.
  */
-public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
+public class DefaultDispatchCallFactory implements DispatchCallFactory {
     private final ExceptionHandler exceptionHandler;
     private final RestInterceptorRegistry interceptorRegistry;
     private final SecurityCookieAccessor securityCookieAccessor;
-    private final RestRequestBuilderFactory requestBuilderFactory;
+    private final RequestBuilderFactory requestBuilderFactory;
     private final CookieManager cookieManager;
-    private final RestResponseDeserializer restResponseDeserializer;
+    private final ResponseDeserializer responseDeserializer;
     private final RestDispatchHooks dispatchHooks;
 
     @Inject
-    DefaultRestDispatchCallFactory(
+    DefaultDispatchCallFactory(
             @RestBinding ExceptionHandler exceptionHandler,
             @RestBinding SecurityCookieAccessor securityCookieAccessor,
             RestInterceptorRegistry interceptorRegistry,
-            RestRequestBuilderFactory requestBuilderFactory,
+            RequestBuilderFactory requestBuilderFactory,
             CookieManager cookieManager,
-            RestResponseDeserializer restResponseDeserializer,
+            ResponseDeserializer responseDeserializer,
             RestDispatchHooks dispatchHooks) {
         this.exceptionHandler = exceptionHandler;
         this.interceptorRegistry = interceptorRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
         this.requestBuilderFactory = requestBuilderFactory;
         this.cookieManager = cookieManager;
-        this.restResponseDeserializer = restResponseDeserializer;
+        this.responseDeserializer = responseDeserializer;
         this.dispatchHooks = dispatchHooks;
     }
 
     @Override
     public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback) {
         return new RestDispatchCall<A, R>(exceptionHandler, interceptorRegistry, securityCookieAccessor,
-                requestBuilderFactory, cookieManager, restResponseDeserializer, dispatchHooks, action, callback);
+                requestBuilderFactory, cookieManager, responseDeserializer, dispatchHooks, action, callback);
     }
 }

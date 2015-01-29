@@ -27,14 +27,14 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
- * Default implementation for {@link RestResponseDeserializer}.
+ * Default implementation for {@link ResponseDeserializer}.
  */
-public class DefaultRestResponseDeserializer implements RestResponseDeserializer {
+public class DefaultResponseDeserializer implements ResponseDeserializer {
     private final ActionMetadataProvider metadataProvider;
     private final Serialization serialization;
 
     @Inject
-    protected DefaultRestResponseDeserializer(
+    protected DefaultResponseDeserializer(
             ActionMetadataProvider metadataProvider,
             Serialization serialization) {
         this.metadataProvider = metadataProvider;

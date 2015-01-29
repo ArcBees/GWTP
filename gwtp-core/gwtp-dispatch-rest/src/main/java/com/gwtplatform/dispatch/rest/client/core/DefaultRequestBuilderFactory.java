@@ -29,9 +29,9 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
- * Default implementation for {@link RestRequestBuilderFactory}.
+ * Default implementation for {@link RequestBuilderFactory}.
  */
-public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFactory {
+public class DefaultRequestBuilderFactory implements RequestBuilderFactory {
     private static final Map<HttpMethod, Method> HTTP_METHOD_TO_REQUEST_BUILDER;
 
     static {
@@ -50,7 +50,7 @@ public class DefaultRestRequestBuilderFactory implements RestRequestBuilderFacto
     private final Integer requestTimeoutMs;
 
     @Inject
-    protected DefaultRestRequestBuilderFactory(
+    protected DefaultRequestBuilderFactory(
             HttpRequestBuilderFactory httpRequestBuilderFactory,
             BodyFactory bodyFactory,
             HeaderFactory headerFactory,

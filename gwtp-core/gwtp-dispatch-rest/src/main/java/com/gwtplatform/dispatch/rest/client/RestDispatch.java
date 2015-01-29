@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.core;
+package com.gwtplatform.dispatch.rest.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -30,7 +30,7 @@ public interface RestDispatch {
      *
      * @param action   the {@link com.gwtplatform.dispatch.rest.shared.RestAction} to execute.
      * @param callback the {@link AsyncCallback} to call when the execution is done.
-     * @see com.gwtplatform.dispatch.rest.client.RestDispatchCall#execute()
+     * @see com.gwtplatform.dispatch.rest.client.core.RestDispatchCall#execute()
      */
     <A extends RestAction<R>, R> DispatchRequest execute(A action, AsyncCallback<R> callback);
 }

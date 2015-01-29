@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 
 import com.google.gwt.http.client.RequestBuilder;
 import com.gwtplatform.dispatch.rest.client.annotations.RequestTimeout;
-import com.gwtplatform.dispatch.rest.client.core.DefaultRestRequestBuilderFactory;
+import com.gwtplatform.dispatch.rest.client.core.DefaultRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.core.HttpRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
@@ -41,7 +41,7 @@ import static org.mockito.Mockito.verify;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.GET;
 
 @RunWith(JukitoRunner.class)
-public class DefaultRestRequestBuilderFactoryTest {
+public class DefaultRequestBuilderFactoryTest {
     public static class Module extends JukitoModule {
         @Override
         protected void configureTest() {
@@ -59,7 +59,7 @@ public class DefaultRestRequestBuilderFactoryTest {
     private static final int TIMEOUT = 1000;
 
     @Inject
-    private DefaultRestRequestBuilderFactory factory;
+    private DefaultRequestBuilderFactory factory;
     @Inject
     private HttpRequestBuilderFactory httpRequestBuilderFactory;
     @Inject
