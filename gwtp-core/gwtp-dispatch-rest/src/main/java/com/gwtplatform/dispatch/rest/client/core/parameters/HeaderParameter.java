@@ -14,21 +14,13 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.testutils;
+package com.gwtplatform.dispatch.rest.client.core.parameters;
 
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
-import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-
-/**
- * Used by test code to create a secured {@link com.gwtplatform.dispatch.rest.shared.RestAction}.
- */
-public class SecuredRestAction extends ExposedRestAction<Void> {
-    public SecuredRestAction(HttpParameterFactory factory, HttpMethod httpMethod, String rawServicePath) {
-        super(factory, httpMethod, rawServicePath);
-    }
-
-    @Override
-    public boolean isSecured() {
-        return true;
+public class HeaderParameter extends CollectionSupportedParameter {
+    public HeaderParameter(
+            String name,
+            Object object,
+            String dateFormat) {
+        super(Type.HEADER, name, object, dateFormat);
     }
 }

@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.rest.client.core;
 import java.util.List;
 import java.util.Map.Entry;
 
-import com.gwtplatform.dispatch.rest.client.parameters.CookieParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.CookieParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;

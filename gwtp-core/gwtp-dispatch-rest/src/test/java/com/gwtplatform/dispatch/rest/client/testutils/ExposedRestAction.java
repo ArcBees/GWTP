@@ -17,7 +17,7 @@
 package com.gwtplatform.dispatch.rest.client.testutils;
 
 import com.gwtplatform.dispatch.rest.client.AbstractRestAction;
-import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;

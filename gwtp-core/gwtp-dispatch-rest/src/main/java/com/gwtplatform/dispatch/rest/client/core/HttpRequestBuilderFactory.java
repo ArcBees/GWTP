@@ -14,21 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.testutils;
+package com.gwtplatform.dispatch.rest.client.core;
 
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
-import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestBuilder.Method;
 
 /**
- * Used by test code to create a secured {@link com.gwtplatform.dispatch.rest.shared.RestAction}.
+ * A simple factory to create RequestBuilder instances. Useful for verifying RequestBuilder calls from unit tests.
+ *
+ * @see RequestBuilder
  */
-public class SecuredRestAction extends ExposedRestAction<Void> {
-    public SecuredRestAction(HttpParameterFactory factory, HttpMethod httpMethod, String rawServicePath) {
-        super(factory, httpMethod, rawServicePath);
-    }
-
-    @Override
-    public boolean isSecured() {
-        return true;
+public class HttpRequestBuilderFactory {
+    /**
+     * @see RequestBuilder#RequestBuilder(Method, String)
+     */
+    public RequestBuilder create(Method httpMethod, String url) {
+        return new RequestBuilder(httpMethod, url);
     }
 }

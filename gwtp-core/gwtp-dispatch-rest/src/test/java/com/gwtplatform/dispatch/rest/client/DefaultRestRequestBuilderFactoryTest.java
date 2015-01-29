@@ -24,7 +24,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.gwt.http.client.RequestBuilder;
-import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.annotations.RequestTimeout;
+import com.gwtplatform.dispatch.rest.client.core.DefaultRestRequestBuilderFactory;
+import com.gwtplatform.dispatch.rest.client.core.HttpRequestBuilderFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.RestAction;

@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,11 +16,13 @@
 
 package com.gwtplatform.dispatch.rest.client.core;
 
-import com.gwtplatform.dispatch.rest.client.core.parameters.CookieParameter;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.rest.client.RestDispatchCall;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
-public interface CookieManager {
-    void saveCookiesFromAction(RestAction<?> action);
-
-    void saveCookiesFromParameter(CookieParameter parameter);
+/**
+ * A factory used to create {@link com.gwtplatform.dispatch.client.DispatchCall} instances.
+ */
+public interface RestDispatchCallFactory {
+    <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback);
 }

@@ -22,7 +22,8 @@ import com.google.gwt.core.ext.typeinfo.HasAnnotations;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**
- * Represents the HTTP methods supported by the {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
+ * Represents the HTTP methods supported by the {@link com.gwtplatform.dispatch.rest.client.core.RestDispatch
+ * RestDispatch}.
  */
 public enum HttpVerb {
     GET(HttpMethod.GET, javax.ws.rs.GET.class),
