@@ -25,9 +25,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.inject.Provides;
-import com.gwtplatform.dispatch.rest.client.GlobalQueryParams;
-import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
-import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.annotations.GlobalQueryParams;
+import com.gwtplatform.dispatch.rest.client.annotations.RestApplicationPath;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;

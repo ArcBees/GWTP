@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import com.gwtplatform.dispatch.rest.client.parameters.CookieParameter;
-import com.gwtplatform.dispatch.rest.client.parameters.FormParameter;
-import com.gwtplatform.dispatch.rest.client.parameters.HeaderParameter;
-import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
-import com.gwtplatform.dispatch.rest.client.parameters.PathParameter;
-import com.gwtplatform.dispatch.rest.client.parameters.QueryParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.CookieParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.FormParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HeaderParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.PathParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.QueryParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 

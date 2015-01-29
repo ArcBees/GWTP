@@ -29,6 +29,8 @@ import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.rest.client.core.CookieManager;
+import com.gwtplatform.dispatch.rest.client.core.RestRequestBuilderFactory;
+import com.gwtplatform.dispatch.rest.client.core.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptedAsyncCallback;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptor;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;

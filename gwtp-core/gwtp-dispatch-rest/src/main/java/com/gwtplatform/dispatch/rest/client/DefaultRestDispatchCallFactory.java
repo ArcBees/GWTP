@@ -20,13 +20,17 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.rest.client.annotations.RestBinding;
 import com.gwtplatform.dispatch.rest.client.core.CookieManager;
+import com.gwtplatform.dispatch.rest.client.core.RestDispatchCallFactory;
+import com.gwtplatform.dispatch.rest.client.core.RestRequestBuilderFactory;
+import com.gwtplatform.dispatch.rest.client.core.RestResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
- * The default implementation for {@link RestDispatchCallFactory}.
+ * The default implementation for {@link com.gwtplatform.dispatch.rest.client.core.RestDispatchCallFactory}.
  */
 public class DefaultRestDispatchCallFactory implements RestDispatchCallFactory {
     private final ExceptionHandler exceptionHandler;

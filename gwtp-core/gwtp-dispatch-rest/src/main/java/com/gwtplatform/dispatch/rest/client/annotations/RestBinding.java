@@ -14,21 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.testutils;
+package com.gwtplatform.dispatch.rest.client.annotations;
 
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
-import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import com.google.inject.BindingAnnotation;
 
 /**
- * Used by test code to create a secured {@link com.gwtplatform.dispatch.rest.shared.RestAction}.
+ * Annotation used to inject implementations specific to dispatch-rest of shared components.
  */
-public class SecuredRestAction extends ExposedRestAction<Void> {
-    public SecuredRestAction(HttpParameterFactory factory, HttpMethod httpMethod, String rawServicePath) {
-        super(factory, httpMethod, rawServicePath);
-    }
-
-    @Override
-    public boolean isSecured() {
-        return true;
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.PARAMETER})
+@BindingAnnotation
+public @interface RestBinding {
 }

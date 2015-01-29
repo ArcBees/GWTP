@@ -22,8 +22,8 @@ import java.util.Map.Entry;
 
 import javax.inject.Inject;
 
-import com.gwtplatform.dispatch.rest.client.GlobalQueryParams;
-import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
+import com.gwtplatform.dispatch.rest.client.annotations.GlobalQueryParams;
+import com.gwtplatform.dispatch.rest.client.annotations.RestApplicationPath;
 import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;

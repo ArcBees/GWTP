@@ -27,10 +27,10 @@ import org.mockito.InOrder;
 
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.inject.Provides;
-import com.gwtplatform.dispatch.rest.client.GlobalHeaderParams;
-import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
-import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
-import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.annotations.GlobalHeaderParams;
+import com.gwtplatform.dispatch.rest.client.annotations.RestApplicationPath;
+import com.gwtplatform.dispatch.rest.client.annotations.XsrfHeaderName;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;

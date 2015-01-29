@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,13 +14,12 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.core;
+package com.gwtplatform.dispatch.rest.client.core.parameters;
 
-import com.gwtplatform.dispatch.rest.client.core.parameters.CookieParameter;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 
-public interface CookieManager {
-    void saveCookiesFromAction(RestAction<?> action);
+public interface HttpParameterFactory {
+    HttpParameter create(HttpParameter.Type type, String name, Object object);
 
-    void saveCookiesFromParameter(CookieParameter parameter);
+    HttpParameter create(HttpParameter.Type type, String name, Object object, String dateFormat);
 }

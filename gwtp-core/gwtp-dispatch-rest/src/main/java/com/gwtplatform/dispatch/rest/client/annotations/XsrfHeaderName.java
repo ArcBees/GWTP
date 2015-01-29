@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,13 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.core;
+package com.gwtplatform.dispatch.rest.client.annotations;
 
-import com.gwtplatform.dispatch.rest.client.core.parameters.CookieParameter;
-import com.gwtplatform.dispatch.rest.shared.RestAction;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public interface CookieManager {
-    void saveCookiesFromAction(RestAction<?> action);
+import com.google.inject.BindingAnnotation;
 
-    void saveCookiesFromParameter(CookieParameter parameter);
+/**
+ * Binding annotation used to bind a XSRF protection token.
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
+@BindingAnnotation
+public @interface XsrfHeaderName {
 }
