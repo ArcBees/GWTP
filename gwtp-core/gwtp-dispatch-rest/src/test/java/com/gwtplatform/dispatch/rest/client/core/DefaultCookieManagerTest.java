@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InOrder;
 
 import com.google.gwtmockito.GwtMockitoTestRunner;
-import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;

@@ -21,36 +21,25 @@ import javax.inject.Singleton;
 import com.google.inject.Provides;
 import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
-import com.gwtplatform.dispatch.rest.client.DefaultDateFormat;
-import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchCallFactory;
-import com.gwtplatform.dispatch.rest.client.DefaultRestRequestBuilderFactory;
-import com.gwtplatform.dispatch.rest.client.DefaultRestResponseDeserializer;
-import com.gwtplatform.dispatch.rest.client.GlobalHeaderParams;
-import com.gwtplatform.dispatch.rest.client.GlobalQueryParams;
-import com.gwtplatform.dispatch.rest.client.RequestTimeout;
-import com.gwtplatform.dispatch.rest.client.RestBinding;
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
-import com.gwtplatform.dispatch.rest.client.RestDispatchAsync;
-import com.gwtplatform.dispatch.rest.client.RestDispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
-import com.gwtplatform.dispatch.rest.client.RestRequestBuilderFactory;
-import com.gwtplatform.dispatch.rest.client.RestResponseDeserializer;
-import com.gwtplatform.dispatch.rest.client.XsrfHeaderName;
+import com.gwtplatform.dispatch.rest.client.annotations.DefaultDateFormat;
+import com.gwtplatform.dispatch.rest.client.annotations.GlobalHeaderParams;
+import com.gwtplatform.dispatch.rest.client.annotations.GlobalQueryParams;
+import com.gwtplatform.dispatch.rest.client.annotations.RequestTimeout;
+import com.gwtplatform.dispatch.rest.client.annotations.RestBinding;
+import com.gwtplatform.dispatch.rest.client.annotations.XsrfHeaderName;
 import com.gwtplatform.dispatch.rest.client.core.CoreModule;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
-import com.gwtplatform.dispatch.rest.client.parameters.DefaultHttpParameterFactory;
-import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
-import com.gwtplatform.dispatch.rest.client.serialization.RestParameterBindingsSerializer;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
-import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses REST calls. </p> This gin module provides provides
  * access to the {@link RestDispatch} singleton, which is used to make calls to the server over HTTP. This module
  * requires:
  * <p/>
- * <b>You must</b> manually bind {@literal @}{@link com.gwtplatform.dispatch.rest.client.RestApplicationPath} to point
- * to your server API root path.
+ * <b>You must</b> manually bind {@literal @}{@link com.gwtplatform.dispatch.rest.client.RestApplicationPath
+ * RestApplicationPath} to point to your server API root path.
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     /**
@@ -95,19 +84,10 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bindConstant().annotatedWith(GlobalHeaderParams.class).to(globalHeaderParams);
         bindConstant().annotatedWith(GlobalQueryParams.class).to(globalQueryParams);
 
-        // Workflow
-        bind(RestDispatchCallFactory.class).to(DefaultRestDispatchCallFactory.class).in(Singleton.class);
-        bind(RestRequestBuilderFactory.class).to(DefaultRestRequestBuilderFactory.class).in(Singleton.class);
-        bind(RestResponseDeserializer.class).to(DefaultRestResponseDeserializer.class).in(Singleton.class);
-        bind(HttpParameterFactory.class).to(DefaultHttpParameterFactory.class).in(Singleton.class);
-
         // Cross-concern
         bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
         bind(RestInterceptorRegistry.class).to(builder.getInterceptorRegistry()).in(Singleton.class);
         bind(Serialization.class).to(builder.getSerializationClass()).in(Singleton.class);
-
-        // Entry Point
-        bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
     }
 
     @Provides

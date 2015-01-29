@@ -19,19 +19,21 @@ package com.gwtplatform.dispatch.rest.client.core;
 import javax.inject.Singleton;
 
 import com.google.gwt.inject.client.AbstractGinModule;
+import com.gwtplatform.dispatch.rest.client.RestDispatch;
+import com.gwtplatform.dispatch.rest.client.core.parameters.DefaultHttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 
 public class CoreModule extends AbstractGinModule {
     @Override
     protected void configure() {
-        // TODO: Move all core classes to this package
-        // parameters.* should become core.parameters.*
-        // Classes used only by code-gen should go in core.codegen.*
-        // Root package should be for the public API
-        // Remove those silly `Rest` prefixes while in experimental
-
         bind(BodyFactory.class).to(DefaultBodyFactory.class).in(Singleton.class);
         bind(CookieManager.class).to(DefaultCookieManager.class).in(Singleton.class);
         bind(HeaderFactory.class).to(DefaultHeaderFactory.class).in(Singleton.class);
         bind(UriFactory.class).to(DefaultUriFactory.class).in(Singleton.class);
+        bind(DispatchCallFactory.class).to(DefaultDispatchCallFactory.class).in(Singleton.class);
+        bind(RequestBuilderFactory.class).to(DefaultRequestBuilderFactory.class).in(Singleton.class);
+        bind(ResponseDeserializer.class).to(DefaultResponseDeserializer.class).in(Singleton.class);
+        bind(HttpParameterFactory.class).to(DefaultHttpParameterFactory.class).in(Singleton.class);
+        bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
     }
 }

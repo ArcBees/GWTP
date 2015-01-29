@@ -179,7 +179,7 @@ public abstract class AbstractCachingRpcInterceptor<A, R> extends AbstractRpcInt
     }
 
     @Override
-    public boolean canExecute(TypedAction action) {
+    public boolean canExecute(TypedAction<?> action) {
         return action.getClass().equals(getActionType());
     }
 }

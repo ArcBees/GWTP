@@ -27,8 +27,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.gwt.http.client.RequestBuilder;
-import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
-import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
@@ -44,7 +43,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.verify;
 
-import static com.gwtplatform.dispatch.rest.client.MetadataType.BODY_TYPE;
+import static com.gwtplatform.dispatch.rest.client.core.MetadataType.BODY_TYPE;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.DELETE;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.GET;
 

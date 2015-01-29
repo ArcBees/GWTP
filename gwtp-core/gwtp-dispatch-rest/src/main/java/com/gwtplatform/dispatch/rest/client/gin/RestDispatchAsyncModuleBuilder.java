@@ -23,7 +23,6 @@ import com.gwtplatform.dispatch.rest.client.interceptor.DefaultRestInterceptorRe
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
-import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
@@ -33,7 +32,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
  * The possible configurations are: <ul> <li>All configuration methods listed by {@link
  * com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder AbstractDispatchAsyncModule.Builder}</li>
  * <li>{@link #xsrfTokenHeaderName(String) XSRF Token Header Name}: A {@link
- * com.gwtplatform.dispatch.rest.client.XsrfHeaderName XsrfHeaderName}.
+ * com.gwtplatform.dispatch.rest.client.annotations.XsrfHeaderName XsrfHeaderName}.
  * The default value is {@link RestDispatchAsyncModule#DEFAULT_XSRF_NAME}.</li> <li>{@link #serialization(Class)
  * Serialization Implementation}: A {@link Serialization} implementation. The default is {@link JsonSerialization}.</li>
  * <li>{@link #requestTimeout(int) Request timeout}: The number of milliseconds to wait for a request to complete. The

@@ -16,7 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.client.core;
 
-import com.gwtplatform.dispatch.rest.client.parameters.CookieParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.CookieParameter;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 public interface CookieManager {
