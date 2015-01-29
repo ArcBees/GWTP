@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.client.core;
 
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -28,9 +28,8 @@ import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
-import com.gwtplatform.dispatch.rest.client.core.CookieManager;
-import com.gwtplatform.dispatch.rest.client.core.RestRequestBuilderFactory;
-import com.gwtplatform.dispatch.rest.client.core.RestResponseDeserializer;
+import com.gwtplatform.dispatch.rest.client.RestCallback;
+import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptedAsyncCallback;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptor;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
@@ -46,9 +45,9 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * @param <R> the result type for this action.
  */
 public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R> {
-    private final RestRequestBuilderFactory requestBuilderFactory;
+    private final RequestBuilderFactory requestBuilderFactory;
     private final CookieManager cookieManager;
-    private final RestResponseDeserializer restResponseDeserializer;
+    private final ResponseDeserializer responseDeserializer;
     private final RestInterceptorRegistry interceptorRegistry;
     private final RestDispatchHooks dispatchHooks;
 
@@ -56,9 +55,9 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
             ExceptionHandler exceptionHandler,
             RestInterceptorRegistry interceptorRegistry,
             SecurityCookieAccessor securityCookieAccessor,
-            RestRequestBuilderFactory requestBuilderFactory,
+            RequestBuilderFactory requestBuilderFactory,
             CookieManager cookieManager,
-            RestResponseDeserializer restResponseDeserializer,
+            ResponseDeserializer responseDeserializer,
             RestDispatchHooks dispatchHooks,
             A action,
             AsyncCallback<R> callback) {
@@ -66,7 +65,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
 
         this.requestBuilderFactory = requestBuilderFactory;
         this.cookieManager = cookieManager;
-        this.restResponseDeserializer = restResponseDeserializer;
+        this.responseDeserializer = responseDeserializer;
         this.interceptorRegistry = interceptorRegistry;
         this.dispatchHooks = dispatchHooks;
     }
@@ -150,7 +149,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
         Response wrappedResponse = new ResponseWrapper(response);
 
         try {
-            R result = restResponseDeserializer.deserialize(getAction(), wrappedResponse);
+            R result = responseDeserializer.deserialize(getAction(), wrappedResponse);
 
             onExecuteSuccess(result, wrappedResponse);
         } catch (ActionException e) {

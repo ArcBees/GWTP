@@ -23,7 +23,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 /**
  * Factory used to create {@link RequestBuilder} objects for a given {@link RestAction}.
  */
-public interface RestRequestBuilderFactory {
+public interface RequestBuilderFactory {
     /**
      * Build a {@link RequestBuilder} object for the given action.
      *

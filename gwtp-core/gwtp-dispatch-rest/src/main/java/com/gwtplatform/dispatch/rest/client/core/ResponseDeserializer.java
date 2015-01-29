@@ -23,7 +23,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 /**
  * Deserializes a response for a given action.
  */
-public interface RestResponseDeserializer {
+public interface ResponseDeserializer {
     /**
      * Deserializes the provided <code>response</code> for the given <code>action</code>.
      *

@@ -17,12 +17,11 @@
 package com.gwtplatform.dispatch.rest.client.core;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.rest.client.RestDispatchCall;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
  * A factory used to create {@link com.gwtplatform.dispatch.client.DispatchCall} instances.
  */
-public interface RestDispatchCallFactory {
+public interface DispatchCallFactory {
     <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback);
 }

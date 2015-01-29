@@ -27,9 +27,9 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * {@link #onFailure(RestAction, Response, Throwable)} will be called when any action fails.
  */
 public interface RestDispatchHooks {
-    void onExecute(RestAction action);
+    void onExecute(RestAction<?> action);
 
-    void onSuccess(RestAction action, Response response, Object result);
+    void onSuccess(RestAction<?> action, Response response, Object result);
 
-    void onFailure(RestAction action, Response response, Throwable caught);
+    void onFailure(RestAction<?> action, Response response, Throwable caught);
 }
