@@ -27,7 +27,11 @@ public class CoreModule extends AbstractGinModule {
         // parameters.* should become core.parameters.*
         // Classes used only by code-gen should go in core.codegen.*
         // Root package should be for the public API
+        // Remove those silly `Rest` prefixes while in experimental
 
+        bind(BodyFactory.class).to(DefaultBodyFactory.class).in(Singleton.class);
         bind(CookieManager.class).to(DefaultCookieManager.class).in(Singleton.class);
+        bind(HeaderFactory.class).to(DefaultHeaderFactory.class).in(Singleton.class);
+        bind(UriFactory.class).to(DefaultUriFactory.class).in(Singleton.class);
     }
 }
