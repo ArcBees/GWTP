@@ -91,14 +91,14 @@ public abstract class ObjectifyDao<T> {
     }
 
     public List<T> listByProperty(String propName, Object propValue) {
-        Query<T> q = load();
-        q.filter(propName, propValue);
+        Query<T> q = load().filter(propName, propValue);
+
         return q.list();
     }
 
     public List<Key<T>> listKeysByProperty(String propName, Object propValue) {
-        Query<T> q = load();
-        q.filter(propName, propValue);
+        Query<T> q = load().filter(propName, propValue);
+
         return q.keys().list();
     }
 
