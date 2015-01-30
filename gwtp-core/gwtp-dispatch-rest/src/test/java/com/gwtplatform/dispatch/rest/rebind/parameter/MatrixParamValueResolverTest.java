@@ -66,9 +66,6 @@ public class MatrixParamValueResolverTest {
         HasAnnotations hasAnnotations = mock(HasAnnotations.class);
 
         // when
-        String value = resolver.resolve(hasAnnotations);
-
-        // then
-        assertThat(value).isEqualTo(VALUE);
+        resolver.resolve(hasAnnotations);
     }
 }
