@@ -44,5 +44,5 @@ public interface HttpParameter {
 
     Object getObject();
 
-    List<Entry<String, String>> getEntries();
+    List<Entry<String, String>> getEncodedEntries();
 }

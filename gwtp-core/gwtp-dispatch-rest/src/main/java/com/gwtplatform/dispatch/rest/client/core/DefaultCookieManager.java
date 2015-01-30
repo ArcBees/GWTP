@@ -37,7 +37,7 @@ public class DefaultCookieManager implements CookieManager {
 
     @Override
     public void saveCookiesFromParameter(CookieParameter parameter) {
-        for (Entry<String, String> cookie : parameter.getEntries()) {
+        for (Entry<String, String> cookie : parameter.getEncodedEntries()) {
             saveCookie(cookie.getValue());
         }
     }

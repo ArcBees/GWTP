@@ -51,7 +51,7 @@ public class HeaderParameterTest {
         HeaderParameter param = new HeaderParameter(SOME_KEY, VALUE_1, null);
 
         // when
-        List<Entry<String, String>> entries = param.getEntries();
+        List<Entry<String, String>> entries = param.getEncodedEntries();
 
         // then
         assertThat(entries)
@@ -67,7 +67,7 @@ public class HeaderParameterTest {
         HeaderParameter param = new HeaderParameter(SOME_KEY, objects, null);
 
         // when
-        List<Entry<String, String>> entries = param.getEntries();
+        List<Entry<String, String>> entries = param.getEncodedEntries();
 
         // then
         assertThat(entries)

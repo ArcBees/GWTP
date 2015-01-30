@@ -64,7 +64,7 @@ public class DefaultHeaderFactory implements HeaderFactory {
 
     private void addHeaders(RequestBuilder requestBuilder, List<HttpParameter> parameters) {
         for (HttpParameter parameter : parameters) {
-            for (Entry<String, String> entry : parameter.getEntries()) {
+            for (Entry<String, String> entry : parameter.getEncodedEntries()) {
                 requestBuilder.setHeader(entry.getKey(), entry.getValue());
             }
         }
