@@ -135,4 +135,21 @@ public class DefaultUriFactoryTest {
 
         assertThat(url).endsWith(expectedUrl);
     }
+
+    @Test
+    public void allMatrixParamsShouldBeSet() {
+        // Given
+        ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        action.addParam(Type.MATRIX, ACTION_KEY_1, VALUE_1);
+        action.addParam(Type.MATRIX, ACTION_KEY_2, VALUE_2);
+
+        // When
+        String url = factory.buildUrl(action);
+
+        // Then
+        String expectedUrl = String.format(";%s=%s;%s=%s?%s=%s&%s=%s", ACTION_KEY_1, VALUE_1, ACTION_KEY_2, VALUE_2,
+                KEY_1, VALUE_1, KEY_2, VALUE_2);
+
+        assertThat(url).endsWith(expectedUrl);
+    }
 }

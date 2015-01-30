@@ -56,6 +56,35 @@ public class RouteTokenFormatterTest {
     static class UrlUtilsTestImpl implements UrlUtils {
         @Override
         public String decodePathSegment(final String encodedPathSegment) {
+            return decode(encodedPathSegment);
+        }
+
+        @Override
+        public String decodeQueryString(final String encodedUrlComponent) {
+            return decode(encodedUrlComponent);
+        }
+
+        @Override
+        public String decodeMatrixParameter(String encodedMatrixParameter) {
+            return decode(encodedMatrixParameter);
+        }
+
+        @Override
+        public String encodePathSegment(final String decodedPathSegment) {
+            return encode(decodedPathSegment);
+        }
+
+        @Override
+        public String encodeQueryString(final String decodedUrlComponent) {
+            return encode(decodedUrlComponent);
+        }
+
+        @Override
+        public String encodeMatrixParameter(String decodedMatrixParameter) {
+            return encodePathSegment(decodedMatrixParameter);
+        }
+
+        private String decode(String encodedPathSegment) {
             try {
                 return URLDecoder.decode(encodedPathSegment, "UTF-8");
             } catch (final UnsupportedEncodingException e) {
@@ -64,30 +93,9 @@ public class RouteTokenFormatterTest {
             }
         }
 
-        @Override
-        public String decodeQueryString(final String encodedUrlComponent) {
-            try {
-                return URLDecoder.decode(encodedUrlComponent, "UTF-8");
-            } catch (final UnsupportedEncodingException e) {
-                // THIS won't happen
-                return null;
-            }
-        }
-
-        @Override
-        public String encodePathSegment(final String decodedPathSegment) {
+        private String encode(String decodedPathSegment) {
             try {
                 return URLEncoder.encode(decodedPathSegment, "UTF-8");
-            } catch (final UnsupportedEncodingException e) {
-                // THIS won't happen
-                return null;
-            }
-        }
-
-        @Override
-        public String encodeQueryString(final String decodedUrlComponent) {
-            try {
-                return URLEncoder.encode(decodedUrlComponent, "UTF-8");
             } catch (final UnsupportedEncodingException e) {
                 // THIS won't happen
                 return null;
@@ -99,16 +107,16 @@ public class RouteTokenFormatterTest {
         @Override
         public Set<String> getAllPlaceTokens() {
             return ImmutableSet.<String>builder()
-                               .add("/user/{userId}/groups/{groupId}")
-                               .add("/user/{userId}/albums/{albumId}")
-                               .add("/user/{userId}/albums/staticAlbumId")
-                               .add("/user/staticUserId/albums/{albumId}")
-                               .add("/user/staticUserId/albums/staticAlbumId")
-                               .add("/{vanityId}")
-                               .add("!/crawl/{vanityId}")
-                               .add("/privacy")
-                               .add("/")
-                               .build();
+                    .add("/user/{userId}/groups/{groupId}")
+                    .add("/user/{userId}/albums/{albumId}")
+                    .add("/user/{userId}/albums/staticAlbumId")
+                    .add("/user/staticUserId/albums/{albumId}")
+                    .add("/user/staticUserId/albums/staticAlbumId")
+                    .add("/{vanityId}")
+                    .add("!/crawl/{vanityId}")
+                    .add("/privacy")
+                    .add("/")
+                    .build();
         }
     }
 

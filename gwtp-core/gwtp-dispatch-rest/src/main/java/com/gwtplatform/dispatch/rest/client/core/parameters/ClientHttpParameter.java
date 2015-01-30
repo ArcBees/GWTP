@@ -103,9 +103,10 @@ public class ClientHttpParameter implements HttpParameter {
 
     protected Entry<String, String> createEntry(Object object) {
         String value = parseObject(object);
-        String encoded = encode(value);
+        String encodedValue = encodeValue(value);
+        String encodedKey = encodeKey(name);
 
-        return new SimpleEntry<String, String>(name, encoded);
+        return new SimpleEntry<String, String>(encodedKey, encodedValue);
     }
 
     protected String parseObject(Object object) {
@@ -118,7 +119,11 @@ public class ClientHttpParameter implements HttpParameter {
         }
     }
 
-    protected String encode(String value) {
+    protected String encodeKey(String key) {
+        return key;
+    }
+
+    protected String encodeValue(String value) {
         return value;
     }
 }

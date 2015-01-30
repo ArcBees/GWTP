@@ -27,4 +27,8 @@ public interface UrlUtils {
     String decodePathSegment(String encodedPathSegment);
 
     String encodePathSegment(String decodedPathSegment);
+
+    String decodeMatrixParameter(String encodedMatrixParameter);
+
+    String encodeMatrixParameter(String decodedMatrixParameter);
 }

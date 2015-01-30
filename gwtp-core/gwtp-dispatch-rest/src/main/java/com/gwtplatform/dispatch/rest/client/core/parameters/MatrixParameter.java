@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,26 +18,26 @@ package com.gwtplatform.dispatch.rest.client.core.parameters;
 
 import com.gwtplatform.common.shared.UrlUtils;
 
-public class FormParameter extends CollectionSupportedParameter {
+public class MatrixParameter extends CollectionSupportedParameter {
     private final UrlUtils urlUtils;
 
-    public FormParameter(
+    public MatrixParameter(
             String name,
             Object object,
             String dateFormat,
             UrlUtils urlUtils) {
-        super(Type.FORM, name, object, dateFormat);
+        super(Type.MATRIX, name, object, dateFormat);
 
         this.urlUtils = urlUtils;
     }
 
     @Override
     protected String encodeKey(String key) {
-        return urlUtils.encodeQueryString(key);
+        return urlUtils.encodeMatrixParameter(key);
     }
 
     @Override
     protected String encodeValue(String value) {
-        return urlUtils.encodeQueryString(value);
+        return urlUtils.encodeMatrixParameter(value);
     }
 }

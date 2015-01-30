@@ -37,7 +37,8 @@ import static org.mockito.BDDMockito.given;
 
 @RunWith(JukitoRunner.class)
 public class QueryParameterTest {
-    private static final String SOME_KEY = "some-key";
+    private static final String KEY = "key";
+    private static final String ENCODED_KEY = "^31337$";
     private static final String VALUE_1 = "some-value-1";
     private static final String VALUE_2 = "some-value-2";
     private static final String ENCODED_VALUE_1 = "123456@1";
@@ -48,14 +49,15 @@ public class QueryParameterTest {
 
     @Before
     public void setUp() {
+        given(urlUtils.encodeQueryString(KEY)).willReturn(ENCODED_KEY);
         given(urlUtils.encodeQueryString(VALUE_1)).willReturn(ENCODED_VALUE_1);
         given(urlUtils.encodeQueryString(VALUE_2)).willReturn(ENCODED_VALUE_2);
     }
 
     @Test
-    public void getType_returnsForm() {
+    public void getType_returnsQuery() {
         // given
-        QueryParameter param = new QueryParameter(SOME_KEY, VALUE_1, null, urlUtils);
+        QueryParameter param = new QueryParameter(KEY, VALUE_1, null, urlUtils);
 
         // when
         Type type = param.getType();
@@ -67,7 +69,7 @@ public class QueryParameterTest {
     @Test
     public void getEntries_anyValue_encodesValue() {
         // given
-        QueryParameter param = new QueryParameter(SOME_KEY, VALUE_1, null, urlUtils);
+        QueryParameter param = new QueryParameter(KEY, VALUE_1, null, urlUtils);
 
         // when
         List<Entry<String, String>> entries = param.getEntries();
@@ -76,14 +78,14 @@ public class QueryParameterTest {
         assertThat(entries)
                 .hasSize(1)
                 .extracting("key", "value")
-                .containsExactly(tuple(SOME_KEY, ENCODED_VALUE_1));
+                .containsExactly(tuple(ENCODED_KEY, ENCODED_VALUE_1));
     }
 
     @Test
     public void getEntries_collection_returnMultipleEntries() {
         // given
         Collection<String> objects = Arrays.asList(VALUE_1, VALUE_2);
-        QueryParameter param = new QueryParameter(SOME_KEY, objects, null, urlUtils);
+        QueryParameter param = new QueryParameter(KEY, objects, null, urlUtils);
 
         // when
         List<Entry<String, String>> entries = param.getEntries();
@@ -93,7 +95,7 @@ public class QueryParameterTest {
                 .hasSameSizeAs(objects)
                 .extracting("key", "value")
                 .containsExactly(
-                        tuple(SOME_KEY, ENCODED_VALUE_1),
-                        tuple(SOME_KEY, ENCODED_VALUE_2));
+                        tuple(ENCODED_KEY, ENCODED_VALUE_1),
+                        tuple(ENCODED_KEY, ENCODED_VALUE_2));
     }
 }
