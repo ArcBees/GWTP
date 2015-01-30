@@ -19,14 +19,14 @@ package javax.ws.rs.core;
 public class NewCookie extends Cookie {
     public static final int DEFAULT_MAX_AGE = -1;
 
-    private String comment;
-    private int maxAge = DEFAULT_MAX_AGE;
-    private boolean secure;
+    private final String comment;
+    private final int maxAge;
+    private final boolean secure;
 
     public NewCookie(
             String name,
             String value) {
-        super(name, value);
+        this(name, value, null, null, null, DEFAULT_MAX_AGE, false);
     }
 
     public NewCookie(
@@ -37,11 +37,7 @@ public class NewCookie extends Cookie {
             String comment,
             int maxAge,
             boolean secure) {
-        super(name, value, path, domain);
-
-        this.comment = comment;
-        this.maxAge = maxAge;
-        this.secure = secure;
+        this(name, value, path, domain, DEFAULT_VERSION, comment, maxAge, secure);
     }
 
     public NewCookie(
@@ -61,11 +57,7 @@ public class NewCookie extends Cookie {
     }
 
     public NewCookie(Cookie cookie) {
-        super(cookie == null ? null : cookie.getName(),
-                cookie == null ? null : cookie.getValue(),
-                cookie == null ? null : cookie.getPath(),
-                cookie == null ? null : cookie.getDomain(),
-                cookie == null ? DEFAULT_VERSION : cookie.getVersion());
+        this(cookie, null, DEFAULT_MAX_AGE, false);
     }
 
     public NewCookie(
@@ -73,7 +65,12 @@ public class NewCookie extends Cookie {
             String comment,
             int maxAge,
             boolean secure) {
-        this(cookie);
+        super(cookie == null ? null : cookie.getName(),
+                cookie == null ? null : cookie.getValue(),
+                cookie == null ? null : cookie.getPath(),
+                cookie == null ? null : cookie.getDomain(),
+                cookie == null ? DEFAULT_VERSION : cookie.getVersion()
+        );
 
         this.comment = comment;
         this.maxAge = maxAge;

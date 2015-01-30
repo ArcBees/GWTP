@@ -66,9 +66,6 @@ public class CookieParamValueResolverTest {
         HasAnnotations hasAnnotations = mock(HasAnnotations.class);
 
         // when
-        String value = resolver.resolve(hasAnnotations);
-
-        // then
-        assertThat(value).isEqualTo(SOME_VALUE);
+        resolver.resolve(hasAnnotations);
     }
 }

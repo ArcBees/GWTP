@@ -21,11 +21,11 @@ public class Cookie {
 
     protected static final String COOKIE_PARTS_PATTERN = "[;,]";
 
-    private String name;
-    private String value;
-    private int version;
-    private String path;
-    private String domain;
+    private final String name;
+    private final String value;
+    private final int version;
+    private final String path;
+    private final String domain;
 
     public Cookie(
             String name,

@@ -42,6 +42,7 @@ public class DefaultCookieManager implements CookieManager {
         }
     }
 
+    /** Visible for testing. */
     native void saveCookie(String value) /*-{
         $doc.cookie = value;
     }-*/;
