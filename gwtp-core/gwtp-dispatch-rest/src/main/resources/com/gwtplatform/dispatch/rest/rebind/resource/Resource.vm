@@ -2,8 +2,8 @@ package $package;
 
 import javax.inject.Inject;
 
-import com.gwtplatform.dispatch.rest.client.DefaultDateFormat;
-import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.annotations.DefaultDateFormat;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 #foreach ($import in $imports)
 import $import;
 #end

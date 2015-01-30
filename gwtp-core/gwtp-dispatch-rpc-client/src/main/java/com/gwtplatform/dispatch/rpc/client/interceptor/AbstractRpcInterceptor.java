@@ -32,7 +32,7 @@ public abstract class AbstractRpcInterceptor<A, R> extends AbstractInterceptor<A
     }
 
     @Override
-    public boolean canExecute(TypedAction action) {
+    public boolean canExecute(TypedAction<?> action) {
         return getActionType().equals(action.getClass());
     }
 }
