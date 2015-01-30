@@ -63,7 +63,7 @@ public class DefaultUriFactory implements UriFactory {
         StringBuilder queryString = new StringBuilder();
 
         for (HttpParameter parameter : parameters) {
-            for (Entry<String, String> entry : parameter.getEntries()) {
+            for (Entry<String, String> entry : parameter.getEncodedEntries()) {
                 queryString.append("&")
                         .append(entry.getKey())
                         .append("=")
@@ -92,7 +92,7 @@ public class DefaultUriFactory implements UriFactory {
         String path = action.getPath();
 
         for (HttpParameter param : params) {
-            List<Entry<String, String>> entries = param.getEntries();
+            List<Entry<String, String>> entries = param.getEncodedEntries();
             assert entries.size() == 1;
 
             Entry<String, String> entry = entries.get(0);
@@ -107,7 +107,7 @@ public class DefaultUriFactory implements UriFactory {
         StringBuilder matrixString = new StringBuilder();
 
         for (HttpParameter parameter : parameters) {
-            for (Entry<String, String> entry : parameter.getEntries()) {
+            for (Entry<String, String> entry : parameter.getEncodedEntries()) {
                 matrixString.append(';')
                         .append(entry.getKey())
                         .append('=')

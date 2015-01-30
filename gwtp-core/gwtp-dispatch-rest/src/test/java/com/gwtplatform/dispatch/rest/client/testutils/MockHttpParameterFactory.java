@@ -72,6 +72,6 @@ public class MockHttpParameterFactory implements HttpParameterFactory {
         given(mock.getType()).willReturn(type);
         given(mock.getName()).willReturn(key);
         given(mock.getObject()).willReturn(value);
-        given(mock.getEntries()).willReturn(entries);
+        given(mock.getEncodedEntries()).willReturn(entries);
     }
 }

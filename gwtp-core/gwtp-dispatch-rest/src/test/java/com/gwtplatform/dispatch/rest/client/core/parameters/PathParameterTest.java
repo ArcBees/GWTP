@@ -71,7 +71,7 @@ public class PathParameterTest {
         PathParameter param = new PathParameter(SOME_KEY, VALUE_1, null, urlUtils);
 
         // when
-        List<Entry<String, String>> entries = param.getEntries();
+        List<Entry<String, String>> entries = param.getEncodedEntries();
 
         // then
         assertThat(entries)
@@ -87,7 +87,7 @@ public class PathParameterTest {
         PathParameter param = new PathParameter(SOME_KEY, objects, null, urlUtils);
 
         // when
-        List<Entry<String, String>> entries = param.getEntries();
+        List<Entry<String, String>> entries = param.getEncodedEntries();
 
         // then
         assertThat(entries)

@@ -32,7 +32,7 @@ public class CollectionSupportedParameter extends ClientHttpParameter {
     }
 
     @Override
-    public List<Entry<String, String>> getEntries() {
+    public List<Entry<String, String>> getEncodedEntries() {
         List<Map.Entry<String, String>> entries = new ArrayList<Entry<String, String>>();
 
         if (getObject() instanceof Collection) {

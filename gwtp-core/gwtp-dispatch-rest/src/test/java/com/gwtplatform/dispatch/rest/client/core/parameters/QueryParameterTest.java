@@ -72,7 +72,7 @@ public class QueryParameterTest {
         QueryParameter param = new QueryParameter(KEY, VALUE_1, null, urlUtils);
 
         // when
-        List<Entry<String, String>> entries = param.getEntries();
+        List<Entry<String, String>> entries = param.getEncodedEntries();
 
         // then
         assertThat(entries)
@@ -88,7 +88,7 @@ public class QueryParameterTest {
         QueryParameter param = new QueryParameter(KEY, objects, null, urlUtils);
 
         // when
-        List<Entry<String, String>> entries = param.getEntries();
+        List<Entry<String, String>> entries = param.getEncodedEntries();
 
         // then
         assertThat(entries)

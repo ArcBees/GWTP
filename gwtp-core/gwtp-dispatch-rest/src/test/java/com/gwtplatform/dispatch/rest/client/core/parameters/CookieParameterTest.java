@@ -86,7 +86,7 @@ public class CookieParameterTest {
         CookieParameter parameter = new CookieParameter(COOKIE_NAME, SOME_VALUE, "");
 
         // when
-        List<Entry<String, String>> entries = parameter.getEntries();
+        List<Entry<String, String>> entries = parameter.getEncodedEntries();
 
         // then
         assertThat(entries)
@@ -105,7 +105,7 @@ public class CookieParameterTest {
         CookieParameter parameter = new CookieParameter(PARAM_NAME, newCookie, "");
 
         // when
-        List<Entry<String, String>> entries = parameter.getEntries();
+        List<Entry<String, String>> entries = parameter.getEncodedEntries();
 
         // then
         assertThat(entries)
@@ -122,7 +122,7 @@ public class CookieParameterTest {
         CookieParameter parameter = new CookieParameter(PARAM_NAME, newCookie, "");
 
         // when
-        List<Entry<String, String>> entries = parameter.getEntries();
+        List<Entry<String, String>> entries = parameter.getEncodedEntries();
 
         // then
         assertThat(entries)
@@ -137,7 +137,7 @@ public class CookieParameterTest {
         CookieParameter parameter = new CookieParameter(PARAM_NAME, cookie, "");
 
         // when
-        List<Entry<String, String>> entries = parameter.getEntries();
+        List<Entry<String, String>> entries = parameter.getEncodedEntries();
 
         // then
         assertThat(entries)
@@ -159,7 +159,7 @@ public class CookieParameterTest {
         CookieParameter parameter = new CookieParameter(PARAM_NAME, cookies, "");
 
         // when
-        List<Entry<String, String>> entries = parameter.getEntries();
+        List<Entry<String, String>> entries = parameter.getEncodedEntries();
 
         // then
         assertThat(entries)
@@ -178,6 +178,6 @@ public class CookieParameterTest {
         CookieParameter parameter = new CookieParameter(PARAM_NAME, cookies, "");
 
         // when
-        parameter.getEntries();
+        parameter.getEncodedEntries();
     }
 }

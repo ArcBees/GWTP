@@ -122,7 +122,7 @@ public class RestParameterBindingsSerializer {
         result.append("\"").append(method.name()).append("\":[");
 
         for (HttpParameter parameter : parameters) {
-            for (Entry<String, String> entry : parameter.getEntries()) {
+            for (Entry<String, String> entry : parameter.getEncodedEntries()) {
                 result.append("{\"type\": \"").append(parameter.getType().name())
                         .append("\", \"key\": \"").append(entry.getKey())
                         .append("\", \"value\": \"").append(entry.getValue()).append("\"},");
