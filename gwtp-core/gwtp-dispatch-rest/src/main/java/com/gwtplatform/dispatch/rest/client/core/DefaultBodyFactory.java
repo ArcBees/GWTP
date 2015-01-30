@@ -20,8 +20,6 @@ import javax.inject.Inject;
 
 import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
 import com.google.gwt.http.client.RequestBuilder;
-import com.gwtplatform.dispatch.rest.client.ActionMetadataProvider;
-import com.gwtplatform.dispatch.rest.client.MetadataType;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;

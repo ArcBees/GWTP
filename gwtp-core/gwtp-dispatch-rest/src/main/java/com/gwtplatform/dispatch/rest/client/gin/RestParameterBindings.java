@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.utils;
+package com.gwtplatform.dispatch.rest.client.gin;
 
 import java.util.Collections;
 import java.util.EnumMap;

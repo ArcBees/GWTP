@@ -2,8 +2,8 @@ package $package;
 
 import javax.ws.rs.core.HttpHeaders;
 
-import com.gwtplatform.dispatch.rest.client.AbstractRestAction;
-import com.gwtplatform.dispatch.rest.client.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.codegen.AbstractRestAction;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 

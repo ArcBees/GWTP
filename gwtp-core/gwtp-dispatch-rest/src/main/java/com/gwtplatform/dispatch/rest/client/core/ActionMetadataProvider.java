@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.client.core;
 
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 

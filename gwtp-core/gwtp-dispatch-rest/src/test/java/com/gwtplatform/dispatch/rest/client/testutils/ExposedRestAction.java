@@ -16,15 +16,16 @@
 
 package com.gwtplatform.dispatch.rest.client.testutils;
 
-import com.gwtplatform.dispatch.rest.client.AbstractRestAction;
+import com.gwtplatform.dispatch.rest.client.codegen.AbstractRestAction;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 /**
- * Used by test code to expose protected methods from {@link com.gwtplatform.dispatch.rest.client.AbstractRestAction
- * AbstractRestAction}. The goal is to help clean up the test code.
+ * Used by test code to expose protected methods from
+ * {@link com.gwtplatform.dispatch.rest.client.codegen.AbstractRestAction AbstractRestAction}. The goal is to help clean
+ * up the test code.
  */
 public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
     protected ExposedRestAction(

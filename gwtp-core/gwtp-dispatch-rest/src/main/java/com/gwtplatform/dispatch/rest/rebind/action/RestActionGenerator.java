@@ -33,7 +33,7 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JType;
-import com.gwtplatform.dispatch.rest.client.MetadataType;
+import com.gwtplatform.dispatch.rest.client.core.MetadataType;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
@@ -52,8 +52,8 @@ import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
-import static com.gwtplatform.dispatch.rest.client.MetadataType.BODY_TYPE;
-import static com.gwtplatform.dispatch.rest.client.MetadataType.RESPONSE_TYPE;
+import static com.gwtplatform.dispatch.rest.client.core.MetadataType.BODY_TYPE;
+import static com.gwtplatform.dispatch.rest.client.core.MetadataType.RESPONSE_TYPE;
 import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.FORM;
 import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.isHttpParameter;
 

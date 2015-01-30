@@ -31,16 +31,14 @@ import com.gwtplatform.dispatch.rest.client.annotations.RestBinding;
 import com.gwtplatform.dispatch.rest.client.annotations.XsrfHeaderName;
 import com.gwtplatform.dispatch.rest.client.core.CoreModule;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
-import com.gwtplatform.dispatch.rest.client.serialization.RestParameterBindingsSerializer;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
-import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses REST calls. </p> This gin module provides provides
  * access to the {@link RestDispatch} singleton, which is used to make calls to the server over HTTP. This module
  * requires:
  * <p/>
- * <b>You must</b> manually bind {@literal @}{@link com.gwtplatform.dispatch.rest.client.annotations.RestApplicationPath
+ * <b>You must</b> manually bind {@literal @}{@link com.gwtplatform.dispatch.rest.client.RestApplicationPath
  * RestApplicationPath} to point to your server API root path.
  */
 public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {

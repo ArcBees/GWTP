@@ -14,16 +14,19 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.client.codegen;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import com.gwtplatform.dispatch.rest.client.core.ActionMetadataProvider;
+import com.gwtplatform.dispatch.rest.client.core.MetadataType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
- * This class offers helper methods to help the generated implementation of {@link ActionMetadataProvider} register
- * metadata in an {@link java.util.HashMap}.
+ * This class offers helper methods to help the generated implementation of
+ * {@link com.gwtplatform.dispatch.rest.client.core.ActionMetadataProvider ActionMetadataProvider} register metadata in
+ * an {@link HashMap}.
  */
 public abstract class AbstractActionMetadataProvider implements ActionMetadataProvider {
     private final Map<MetadataKey, Object> metadata = new HashMap<MetadataKey, Object>();

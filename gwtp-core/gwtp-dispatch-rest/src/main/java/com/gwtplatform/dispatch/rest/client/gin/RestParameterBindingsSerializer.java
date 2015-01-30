@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.serialization;
+package com.gwtplatform.dispatch.rest.client.gin;
 
 import java.util.Map.Entry;
 import java.util.Set;
@@ -25,13 +25,12 @@ import com.google.gwt.json.client.JSONParser;
 import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.core.parameters.DefaultHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
-import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 /**
- * Parses {@link com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings} from and to JSON.
+ * Parses {@link com.gwtplatform.dispatch.rest.client.gin.RestParameterBindings} from and to JSON.
  */
 public class RestParameterBindingsSerializer {
     private static final UrlUtils URL_UTILS = new UrlUtils() {

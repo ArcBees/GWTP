@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,13 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.client.codegen;
+
+import com.gwtplatform.dispatch.rest.client.DispatchRestEntryPoint;
 
 /**
- * Used to associate some metadata to generated classes without cluttering the generated classes.
- *
- * @see com.gwtplatform.dispatch.rest.client.ActionMetadataProvider.MetadataKey
+ * Abstract implementation extended by the generated implementation of
+ * {@link com.gwtplatform.dispatch.rest.client.DispatchRestEntryPoint DispatchRestEntryPoint}.
  */
-public enum MetadataType {
-    BODY_TYPE, RESPONSE_TYPE
+public abstract class AbstractDispatchRestEntryPoint implements DispatchRestEntryPoint {
+    @Override
+    public void onModuleLoad() {
+    }
 }

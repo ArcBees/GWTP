@@ -21,7 +21,6 @@ import java.util.EnumSet;
 import java.util.Set;
 
 import com.gwtplatform.dispatch.rest.client.core.parameters.ClientHttpParameter;
-import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
