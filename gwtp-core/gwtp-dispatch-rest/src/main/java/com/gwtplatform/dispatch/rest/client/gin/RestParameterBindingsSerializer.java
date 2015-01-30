@@ -45,6 +45,12 @@ public class RestParameterBindingsSerializer {
         }
 
         @Override
+        public String encodeMatrixParameter(String decodedMatrixParameter) {
+            // Matrix param not supported in global params
+            return null;
+        }
+
+        @Override
         public String decodePathSegment(String encodedPathSegment) {
             // not needed
             return null;
@@ -52,6 +58,12 @@ public class RestParameterBindingsSerializer {
 
         @Override
         public String decodeQueryString(String encodedUrlComponent) {
+            // not needed
+            return null;
+        }
+
+        @Override
+        public String decodeMatrixParameter(String encodedMatrixParameter) {
             // not needed
             return null;
         }

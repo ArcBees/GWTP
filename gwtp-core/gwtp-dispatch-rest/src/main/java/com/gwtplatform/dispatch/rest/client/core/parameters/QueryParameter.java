@@ -32,7 +32,12 @@ public class QueryParameter extends CollectionSupportedParameter {
     }
 
     @Override
-    protected String encode(String value) {
+    protected String encodeKey(String key) {
+        return urlUtils.encodeQueryString(key);
+    }
+
+    @Override
+    protected String encodeValue(String value) {
         return urlUtils.encodeQueryString(value);
     }
 }

@@ -45,9 +45,10 @@ public class DefaultUriFactory implements UriFactory {
     public String buildUrl(RestAction<?> action) {
         String prefix = buildPrefix(action);
         String path = buildPath(action);
+        String matrixString = buildMatrixString(action);
         String queryString = buildQueryString(action, Type.QUERY);
 
-        StringBuilder url = new StringBuilder(prefix).append(path);
+        StringBuilder url = new StringBuilder(prefix).append(path).append(matrixString);
 
         if (!queryString.isEmpty()) {
             url.append('?').append(queryString);
@@ -86,26 +87,42 @@ public class DefaultUriFactory implements UriFactory {
         return prefix;
     }
 
-    private List<HttpParameter> getParameters(RestAction<?> action, Type type) {
-        List<HttpParameter> queryParams = new ArrayList<HttpParameter>();
-        queryParams.addAll(globalQueryParams.get(action.getHttpMethod()));
-        queryParams.addAll(action.getParameters(type));
-        return queryParams;
-    }
-
     private String buildPath(RestAction<?> action) {
         List<HttpParameter> params = action.getParameters(Type.PATH);
         String path = action.getPath();
 
         for (HttpParameter param : params) {
             List<Entry<String, String>> entries = param.getEntries();
-            assert entries.size() <= 1;
+            assert entries.size() == 1;
 
             Entry<String, String> entry = entries.get(0);
             path = path.replace("{" + entry.getKey() + "}", entry.getValue());
         }
 
         return path;
+    }
+
+    private String buildMatrixString(RestAction<?> action) {
+        List<HttpParameter> parameters = action.getParameters(Type.MATRIX);
+        StringBuilder matrixString = new StringBuilder();
+
+        for (HttpParameter parameter : parameters) {
+            for (Entry<String, String> entry : parameter.getEntries()) {
+                matrixString.append(';')
+                        .append(entry.getKey())
+                        .append('=')
+                        .append(entry.getValue());
+            }
+        }
+
+        return matrixString.toString();
+    }
+
+    private List<HttpParameter> getParameters(RestAction<?> action, Type type) {
+        List<HttpParameter> queryParams = new ArrayList<HttpParameter>();
+        queryParams.addAll(globalQueryParams.get(action.getHttpMethod()));
+        queryParams.addAll(action.getParameters(type));
+        return queryParams;
     }
 
     private boolean isAbsoluteUrl(String path) {

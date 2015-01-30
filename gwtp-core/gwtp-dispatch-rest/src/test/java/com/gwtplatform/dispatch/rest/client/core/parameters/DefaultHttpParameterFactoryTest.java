@@ -86,6 +86,6 @@ public class DefaultHttpParameterFactoryTest {
         HttpParameter param = factory.create(Type.MATRIX, SOME_KEY, SOME_VALUE, null);
 
         // then
-        assertThat(param).isExactlyInstanceOf(ClientHttpParameter.class);
+        assertThat(param).isInstanceOf(MatrixParameter.class);
     }
 }

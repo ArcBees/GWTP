@@ -48,6 +48,7 @@ public class HttpParameterFactory {
     private final HeaderParamValueResolver headerParamValueResolver;
     private final PathParamValueResolver pathParamValueResolver;
     private final QueryParamValueResolver queryParamValueResolver;
+    private final MatrixParamValueResolver matrixParamValueResolver;
     private final FormParamValueResolver formParamValueResolver;
     private final CookieParamValueResolver cookieParamValueResolver;
 
@@ -58,6 +59,7 @@ public class HttpParameterFactory {
             HeaderParamValueResolver headerParamValueResolver,
             PathParamValueResolver pathParamValueResolver,
             QueryParamValueResolver queryParamValueResolver,
+            MatrixParamValueResolver matrixParamValueResolver,
             FormParamValueResolver formParamValueResolver,
             CookieParamValueResolver cookieParamValueResolver) {
         this.logger = logger;
@@ -65,6 +67,7 @@ public class HttpParameterFactory {
         this.headerParamValueResolver = headerParamValueResolver;
         this.pathParamValueResolver = pathParamValueResolver;
         this.queryParamValueResolver = queryParamValueResolver;
+        this.matrixParamValueResolver = matrixParamValueResolver;
         this.formParamValueResolver = formParamValueResolver;
         this.cookieParamValueResolver = cookieParamValueResolver;
     }
@@ -103,6 +106,8 @@ public class HttpParameterFactory {
                 return pathParamValueResolver;
             case QUERY:
                 return queryParamValueResolver;
+            case MATRIX:
+                return matrixParamValueResolver;
             case FORM:
                 return formParamValueResolver;
             case COOKIE:

@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,25 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.core.parameters;
+package com.gwtplatform.dispatch.rest.rebind.parameter;
 
-import com.gwtplatform.common.shared.UrlUtils;
+import javax.ws.rs.MatrixParam;
 
-public class PathParameter extends ClientHttpParameter {
-    private final UrlUtils urlUtils;
+import com.google.gwt.core.ext.typeinfo.HasAnnotations;
 
-    public PathParameter(
-            String name,
-            Object object,
-            String dateFormat,
-            UrlUtils urlUtils) {
-        super(Type.PATH, name, object, dateFormat);
-
-        this.urlUtils = urlUtils;
+public class MatrixParamValueResolver implements HttpParamValueResolver<MatrixParam> {
+    @Override
+    public String resolve(HasAnnotations hasAnnotations) {
+        return resolve(hasAnnotations.getAnnotation(MatrixParam.class));
     }
 
     @Override
-    protected String encodeValue(String value) {
-        return urlUtils.encodePathSegment(value);
+    public String resolve(MatrixParam annotation) {
+        return annotation.value();
     }
 }

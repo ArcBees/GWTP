@@ -36,12 +36,12 @@ import static org.assertj.core.api.Assertions.tuple;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(JukitoRunner.class)
-public class FormParameterTest {
-    private static final String KEY = "some-key";
-    private static final String ENCODED_KEY = "123key123";
+public class MatrixParameterTest {
+    private static final String KEY = "key";
+    private static final String ENCODED_KEY = "^31337$";
     private static final String VALUE_1 = "some-value-1";
-    private static final String ENCODED_VALUE_1 = "123456@1";
     private static final String VALUE_2 = "some-value-2";
+    private static final String ENCODED_VALUE_1 = "123456@1";
     private static final String ENCODED_VALUE_2 = "123456@2";
 
     @Inject
@@ -49,27 +49,27 @@ public class FormParameterTest {
 
     @Before
     public void setUp() {
-        given(urlUtils.encodeQueryString(KEY)).willReturn(ENCODED_KEY);
-        given(urlUtils.encodeQueryString(VALUE_1)).willReturn(ENCODED_VALUE_1);
-        given(urlUtils.encodeQueryString(VALUE_2)).willReturn(ENCODED_VALUE_2);
+        given(urlUtils.encodeMatrixParameter(KEY)).willReturn(ENCODED_KEY);
+        given(urlUtils.encodeMatrixParameter(VALUE_1)).willReturn(ENCODED_VALUE_1);
+        given(urlUtils.encodeMatrixParameter(VALUE_2)).willReturn(ENCODED_VALUE_2);
     }
 
     @Test
-    public void getType_returnsForm() {
+    public void getType_returnsMatrix() {
         // given
-        FormParameter param = new FormParameter(KEY, VALUE_1, null, urlUtils);
+        MatrixParameter param = new MatrixParameter(KEY, VALUE_1, null, urlUtils);
 
         // when
         Type type = param.getType();
 
         // then
-        assertThat(type).isSameAs(Type.FORM);
+        assertThat(type).isSameAs(Type.MATRIX);
     }
 
     @Test
     public void getEntries_anyValue_encodesValue() {
         // given
-        FormParameter param = new FormParameter(KEY, VALUE_1, null, urlUtils);
+        MatrixParameter param = new MatrixParameter(KEY, VALUE_1, null, urlUtils);
 
         // when
         List<Entry<String, String>> entries = param.getEntries();
@@ -85,7 +85,7 @@ public class FormParameterTest {
     public void getEntries_collection_returnMultipleEntries() {
         // given
         Collection<String> objects = Arrays.asList(VALUE_1, VALUE_2);
-        FormParameter param = new FormParameter(KEY, objects, null, urlUtils);
+        MatrixParameter param = new MatrixParameter(KEY, objects, null, urlUtils);
 
         // when
         List<Entry<String, String>> entries = param.getEntries();

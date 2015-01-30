@@ -23,6 +23,9 @@ import com.gwtplatform.common.shared.UrlUtils;
  * Helper implementation which wraps calls to code which require a running GWT environment and make testing slow.
  */
 public class ClientUrlUtils implements UrlUtils {
+    // TODO: Review what should be encoded in various parameter types. Don't rely on GWT's code.
+    // RestEasy's Encode is a good example to look at http://goo.gl/238Qbh
+
     @Override
     public String decodeQueryString(String encodedUrlComponent) {
         return URL.decodeQueryString(encodedUrlComponent);
@@ -41,5 +44,15 @@ public class ClientUrlUtils implements UrlUtils {
     @Override
     public String encodePathSegment(String decodedPathSegment) {
         return URL.encodePathSegment(decodedPathSegment);
+    }
+
+    @Override
+    public String decodeMatrixParameter(String encodedMatrixParameter) {
+        return decodePathSegment(encodedMatrixParameter);
+    }
+
+    @Override
+    public String encodeMatrixParameter(String decodedMatrixParameter) {
+        return encodePathSegment(decodedMatrixParameter);
     }
 }
