@@ -29,14 +29,14 @@ import com.gwtplatform.dispatch.rest.client.annotations.GlobalQueryParams;
 import com.gwtplatform.dispatch.rest.client.annotations.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.annotations.RestBinding;
 import com.gwtplatform.dispatch.rest.client.annotations.XsrfHeaderName;
-import com.gwtplatform.dispatch.rest.client.core.CoreModule;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 
 /**
- * An implementation of {@link AbstractDispatchAsyncModule} that uses REST calls. </p> This gin module provides provides
- * access to the {@link RestDispatch} singleton, which is used to make calls to the server over HTTP. This module
- * requires:
+ * An implementation of {@link AbstractDispatchAsyncModule} that binds classes used by a restful dispatch.
+ * <p/>
+ * This gin module provides access to the {@link RestDispatch} singleton, which is used to make calls to the server over
+ * HTTP.
  * <p/>
  * <b>You must</b> manually bind {@literal @}{@link com.gwtplatform.dispatch.rest.client.RestApplicationPath
  * RestApplicationPath} to point to your server API root path.
@@ -50,7 +50,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
     public static final String DEFAULT_XSRF_NAME = "X-CSRF-Token";
 
-    private final RestDispatchAsyncModuleBuilder builder;
+    private final BaseRestDispatchModuleBuilder<?> builder;
     private final RestParameterBindingsSerializer bindingsSerializer = new RestParameterBindingsSerializer();
 
     /**
@@ -60,7 +60,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         this(new RestDispatchAsyncModuleBuilder());
     }
 
-    RestDispatchAsyncModule(RestDispatchAsyncModuleBuilder builder) {
+    RestDispatchAsyncModule(BaseRestDispatchModuleBuilder<?> builder) {
         super(builder, RestBinding.class);
 
         this.builder = builder;
@@ -70,7 +70,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     protected void configureDispatch() {
         // Common
         install(new CommonGinModule());
-        install(new CoreModule());
+        install(builder.getCoreModule());
 
         // Constants / Configurations
         // It's not possible to bind non-native type constants, so we must encode them at compile-time and decode them
