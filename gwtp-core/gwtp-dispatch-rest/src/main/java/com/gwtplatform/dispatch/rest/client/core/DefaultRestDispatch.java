@@ -26,11 +26,11 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 /**
  * The default implementation for {@link com.gwtplatform.dispatch.rest.client.RestDispatch}.
  */
-public class RestDispatchAsync implements RestDispatch {
+public class DefaultRestDispatch implements RestDispatch {
     private final DispatchCallFactory callFactory;
 
     @Inject
-    protected RestDispatchAsync(
+    protected DefaultRestDispatch(
             DispatchCallFactory callFactory) {
         this.callFactory = callFactory;
     }

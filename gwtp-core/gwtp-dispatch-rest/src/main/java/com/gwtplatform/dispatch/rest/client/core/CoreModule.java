@@ -20,20 +20,25 @@ import javax.inject.Singleton;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
-import com.gwtplatform.dispatch.rest.client.core.parameters.DefaultHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 
 public class CoreModule extends AbstractGinModule {
+    private final CoreModuleBuilder builder;
+
+    CoreModule(CoreModuleBuilder builder) {
+        this.builder = builder;
+    }
+
     @Override
     protected void configure() {
-        bind(BodyFactory.class).to(DefaultBodyFactory.class).in(Singleton.class);
-        bind(CookieManager.class).to(DefaultCookieManager.class).in(Singleton.class);
-        bind(HeaderFactory.class).to(DefaultHeaderFactory.class).in(Singleton.class);
-        bind(UriFactory.class).to(DefaultUriFactory.class).in(Singleton.class);
-        bind(DispatchCallFactory.class).to(DefaultDispatchCallFactory.class).in(Singleton.class);
-        bind(RequestBuilderFactory.class).to(DefaultRequestBuilderFactory.class).in(Singleton.class);
-        bind(ResponseDeserializer.class).to(DefaultResponseDeserializer.class).in(Singleton.class);
-        bind(HttpParameterFactory.class).to(DefaultHttpParameterFactory.class).in(Singleton.class);
-        bind(RestDispatch.class).to(RestDispatchAsync.class).in(Singleton.class);
+        bind(BodyFactory.class).to(builder.getBodyFactory()).in(Singleton.class);
+        bind(CookieManager.class).to(builder.getCookieManager()).in(Singleton.class);
+        bind(HeaderFactory.class).to(builder.getHeaderFactory()).in(Singleton.class);
+        bind(UriFactory.class).to(builder.getUriFactory()).in(Singleton.class);
+        bind(DispatchCallFactory.class).to(builder.getDispatchCallFactory()).in(Singleton.class);
+        bind(RequestBuilderFactory.class).to(builder.getRequestBuilderFactory()).in(Singleton.class);
+        bind(ResponseDeserializer.class).to(builder.getResponseDeserializer()).in(Singleton.class);
+        bind(HttpParameterFactory.class).to(builder.getHttpParameterFactory()).in(Singleton.class);
+        bind(RestDispatch.class).to(builder.getRestDispatch()).in(Singleton.class);
     }
 }
