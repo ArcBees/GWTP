@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.rebind.serialization;
 
 import java.io.PrintWriter;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -29,13 +30,16 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
-import com.gwtplatform.dispatch.rest.rebind.GeneratorWithInput;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
-public class JacksonMapperGenerator extends AbstractVelocityGenerator
-        implements GeneratorWithInput<JType, ClassDefinition> {
+public class JacksonMapperGenerator extends AbstractVelocityGenerator implements SerializationGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/serialization/JacksonMapper.vm";
+    private static final Pattern SANITIZE_NAME_PATTERN = Pattern.compile("[^a-zA-Z0-9_]");
+    private static final String PACKAGE = JacksonMapperProvider.class.getPackage().getName() + ".mappers";
+    private static final String NAME_SUFFIX = "Mapper";
+
+    private final JacksonMapperProviderGenerator jacksonMapperProviderGenerator;
 
     private JType type;
 
@@ -44,26 +48,31 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator
             Logger logger,
             GeneratorContext context,
             VelocityEngine velocityEngine,
-            EventBus eventBus) {
+            EventBus eventBus,
+            JacksonMapperProviderGenerator jacksonMapperProviderGenerator) {
         super(logger, context, velocityEngine);
+
+        this.jacksonMapperProviderGenerator = jacksonMapperProviderGenerator;
 
         eventBus.register(this);
     }
 
     @Override
-    public boolean canGenerate(JType input) {
+    public boolean canGenerate(SerializationContext input) {
         return true;
     }
 
     @Override
-    public ClassDefinition generate(JType type) throws UnableToCompleteException {
-        this.type = type;
+    public SerializationDefinition generate(SerializationContext context) throws UnableToCompleteException {
+        this.type = context.getType();
 
         PrintWriter printWriter = tryCreate();
 
         if (printWriter != null) {
             mergeTemplate(printWriter);
             commit(printWriter);
+
+            jacksonMapperProviderGenerator.addDefinition(getClassDefinition());
         } else {
             getLogger().debug("Jackson Mapper already generated. Returning.");
         }
@@ -80,20 +89,25 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator
     }
 
     @Override
+    protected SerializationDefinition getClassDefinition() {
+        return new SerializationDefinition(getPackageName(), getImplName(), type);
+    }
+
+    @Override
     protected String getTemplate() {
         return TEMPLATE;
     }
 
     @Override
     protected String getPackageName() {
-        return JacksonMapperProvider.class.getPackage().getName() + ".mappers";
+        return PACKAGE;
     }
 
     @Override
     protected String getImplName() {
         String implName = type.getParameterizedQualifiedSourceName();
-        implName = implName.replaceAll("[ ,<>\\.\\?]", "_");
-        implName += "Mapper";
+        implName = SANITIZE_NAME_PATTERN.matcher(implName).replaceAll("_");
+        implName += NAME_SUFFIX;
 
         return implName;
     }

@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.rebind.action;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -36,15 +37,17 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
-import com.gwtplatform.dispatch.rest.rebind.events.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameter;
 import com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.rebind.resource.MethodContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
+import com.gwtplatform.dispatch.rest.rebind.serialization.SerializationContext;
+import com.gwtplatform.dispatch.rest.rebind.serialization.SerializationGenerator;
 import com.gwtplatform.dispatch.rest.rebind.subresource.SubResourceContext;
 import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassNameGenerator;
+import com.gwtplatform.dispatch.rest.rebind.utils.Generators;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -63,6 +66,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
 
     private final EventBus eventBus;
     private final HttpParameterFactory httpParameterFactory;
+    private final Set<SerializationGenerator> serializationGenerators;
 
     private ActionContext context;
     private ResourceDefinition resourceDefinition;
@@ -80,11 +84,13 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
             GeneratorContext context,
             VelocityEngine velocityEngine,
             EventBus eventBus,
-            HttpParameterFactory httpParameterFactory) {
+            HttpParameterFactory httpParameterFactory,
+            Set<SerializationGenerator> serializationGenerators) {
         super(logger, context, velocityEngine);
 
         this.eventBus = eventBus;
         this.httpParameterFactory = httpParameterFactory;
+        this.serializationGenerators = serializationGenerators;
     }
 
     @Override
@@ -254,7 +260,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         return null;
     }
 
-    private void registerMetadata() {
+    private void registerMetadata() throws UnableToCompleteException {
         if (bodyParameter != null) {
             generateSerializer(bodyParameter.getParameter().getType());
         }
@@ -262,10 +268,19 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         generateSerializer(actionDefinition.getResultType());
     }
 
-    private void generateSerializer(JType type) {
-        if (!Void.class.getCanonicalName().equals(type.getQualifiedSourceName()) && type.isPrimitive() == null) {
-            RegisterSerializableTypeEvent.post(eventBus, type);
+    private void generateSerializer(JType type) throws UnableToCompleteException {
+        SerializationContext serializationContext = new SerializationContext(context, type);
+        SerializationGenerator generator = Generators.findGenerator(serializationGenerators, serializationContext);
+
+        if (generator != null) {
+            generator.generate(serializationContext);
         }
+
+        // TODO: Filter out void and primitives? Convert primitives to boxed type?
+        //        if (!Void.class.getCanonicalName().equals(type.getQualifiedSourceName()) && type.isPrimitive() ==
+        // null) {
+        //            RegisterSerializableTypeEvent.post(eventBus, type);
+        //        }
     }
 
     private List<JParameter> findAllParameters(MethodContext methodContext) {

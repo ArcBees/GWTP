@@ -18,24 +18,21 @@ package com.gwtplatform.dispatch.rest.rebind.serialization;
 
 import java.io.PrintWriter;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
-import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent;
-import com.gwtplatform.dispatch.rest.rebind.events.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionContext;
 import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionGenerator;
 import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionPoint;
@@ -45,25 +42,22 @@ import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator implements ExtensionGenerator {
     private static final String TEMPLATE =
             "com/gwtplatform/dispatch/rest/rebind/serialization/JacksonMapperProvider.vm";
+    private static final String PACKAGE = JacksonMapperProvider.class.getPackage().getName();
+    private static final String CLASS_NAME = JacksonMapperProvider.class.getSimpleName() + IMPL;
 
-    private final Map<JType, ClassDefinition> registeredTypes;
+    private final Set<SerializationDefinition> serializerDefinitions;
     private final EventBus eventBus;
-    private final JacksonMapperGenerator jacksonMapperGenerator;
 
     @Inject
     JacksonMapperProviderGenerator(
             GeneratorContext context,
             Logger logger,
             VelocityEngine velocityEngine,
-            EventBus eventBus,
-            JacksonMapperGenerator jacksonMapperGenerator) {
+            EventBus eventBus) {
         super(logger, context, velocityEngine);
 
-        this.registeredTypes = Maps.newHashMap();
+        this.serializerDefinitions = Sets.newHashSet();
         this.eventBus = eventBus;
-        this.jacksonMapperGenerator = jacksonMapperGenerator;
-
-        eventBus.register(this);
     }
 
     @Override
@@ -76,11 +70,6 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator im
         PrintWriter printWriter = tryCreate();
 
         if (printWriter != null) {
-            for (JType type : registeredTypes.keySet()) {
-                ClassDefinition mapperDefinition = jacksonMapperGenerator.generate(type);
-                registeredTypes.put(type, mapperDefinition);
-            }
-
             mergeTemplate(printWriter);
             commit(printWriter);
             registerGinBinding();
@@ -88,19 +77,12 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator im
             getLogger().debug("Jackson Mapper Provider already generated. Returning.");
         }
 
-        List<ClassDefinition> definitions = Lists.newArrayList(getClassDefinition());
-        definitions.addAll(registeredTypes.values());
-        return definitions;
-    }
-
-    @Subscribe
-    public void onRegisterSerializableType(RegisterSerializableTypeEvent event) {
-        registeredTypes.put(event.getType(), null);
+        return Lists.newArrayList(getClassDefinition());
     }
 
     @Override
     protected void populateTemplateVariables(Map<String, Object> variables) {
-        variables.put("types", registeredTypes);
+        variables.put("definitions", serializerDefinitions);
     }
 
     @Override
@@ -110,12 +92,16 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator im
 
     @Override
     protected String getPackageName() {
-        return JacksonMapperProvider.class.getPackage().getName();
+        return PACKAGE;
     }
 
     @Override
     protected String getImplName() {
-        return JacksonMapperProvider.class.getSimpleName() + IMPL;
+        return CLASS_NAME;
+    }
+
+    void addDefinition(SerializationDefinition definition) {
+        serializerDefinitions.add(definition);
     }
 
     private void registerGinBinding() throws UnableToCompleteException {
