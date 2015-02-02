@@ -28,4 +28,14 @@ public class $impl extends AbstractRestAction<$result> {
     public boolean isSecured() {
         return $secured;
     }
+
+    @Override
+    public String getBodyClass() {
+        return #if($body)"$body"#{else}null#end;
+    }
+
+    @Override
+    public String getResultClass() {
+        return "$result";
+    }
 }

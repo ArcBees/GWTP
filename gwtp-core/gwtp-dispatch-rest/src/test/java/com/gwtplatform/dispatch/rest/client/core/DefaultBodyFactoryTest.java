@@ -43,7 +43,6 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.verify;
 
-import static com.gwtplatform.dispatch.rest.client.core.MetadataType.BODY_TYPE;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.DELETE;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.GET;
 
@@ -101,8 +100,8 @@ public class DefaultBodyFactoryTest {
     }
 
     @Test
-    public void requestDataShouldBeSerializedStringWhenActionHasBody(Serialization serialization,
-            ActionMetadataProvider metadataProvider) throws ActionException {
+    public void requestDataShouldBeSerializedStringWhenActionHasBody(Serialization serialization)
+            throws ActionException {
         // Given
         Object unserializedObject = new Object();
         String serializationKey = "meta";
@@ -110,8 +109,8 @@ public class DefaultBodyFactoryTest {
 
         ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
         action.setBodyParam(unserializedObject);
+        action.setBodyClass(serializationKey);
 
-        given(metadataProvider.getValue(action, BODY_TYPE)).willReturn(serializationKey);
         given(serialization.canSerialize(serializationKey)).willReturn(true);
         given(serialization.serialize(unserializedObject, serializationKey)).willReturn(serializedValue);
 

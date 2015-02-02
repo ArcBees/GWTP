@@ -80,4 +80,14 @@ class InterceptorContextRestAction implements RestAction<Object> {
     public boolean isSecured() {
         return false;
     }
+
+    @Override
+    public String getBodyClass() {
+        return null;
+    }
+
+    @Override
+    public String getResultClass() {
+        return null;
+    }
 }
