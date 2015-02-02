@@ -16,13 +16,25 @@
 
 package com.gwtplatform.dispatch.rest.rebind.serialization;
 
+import javax.inject.Singleton;
+
 import com.google.inject.AbstractModule;
+import com.google.inject.Binder;
+import com.google.inject.binder.LinkedBindingBuilder;
+import com.google.inject.multibindings.Multibinder;
 
 import static com.gwtplatform.dispatch.rest.rebind.extension.ExtensionModule.addExtensionGenerator;
 
 public class SerializationModule extends AbstractModule {
+    public static LinkedBindingBuilder<SerializationGenerator> addSerialisationGenerator(Binder binder) {
+        return Multibinder.newSetBinder(binder, SerializationGenerator.class).addBinding();
+    }
+
     @Override
     protected void configure() {
-        addExtensionGenerator(binder()).to(JacksonMapperProviderGenerator.class).asEagerSingleton();
+        addSerialisationGenerator(binder()).to(JacksonMapperGenerator.class);
+        addExtensionGenerator(binder()).to(JacksonMapperProviderGenerator.class);
+
+        bind(JacksonMapperProviderGenerator.class).in(Singleton.class);
     }
 }

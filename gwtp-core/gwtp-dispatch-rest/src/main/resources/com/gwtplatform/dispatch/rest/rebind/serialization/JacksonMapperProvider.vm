@@ -4,16 +4,15 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import com.google.inject.TypeLiteral;
-#if (!$types.isEmpty())
+#if (!$definitions.isEmpty())
 import ${package}.mappers.*;
 #end
 
 public class $impl extends AbstractJacksonMapperProvider {
-#set ($entries = $types.entrySet())
     @Inject
-    $impl(#foreach ($type in $entries)Provider<$type.value.getParameterizedClassName()> ${type.value.className}Provider#commaIfNeeded($entries)$lf#end) {
-#foreach ($type in $entries)
-        addProvider("$type.key.getParameterizedQualifiedSourceName()", ${type.value.className}Provider);
+    $impl(#foreach ($definition in $definitions)Provider<$definition.getParameterizedClassName()> ${definition.className}Provider#commaIfNeeded($definitions)$lf#end) {
+#foreach ($definition in $definitions)
+        addProvider("$definition.serializableType.getParameterizedQualifiedSourceName()", ${definition.className}Provider);
 #end
     }
 }
