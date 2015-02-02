@@ -23,11 +23,14 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 /**
- * Used by test code to expose protected methods from
- * {@link com.gwtplatform.dispatch.rest.client.codegen.AbstractRestAction AbstractRestAction}. The goal is to help clean
- * up the test code.
+ * Used by test code to expose protected methods from {@link com.gwtplatform.dispatch.rest.client.codegen
+ * .AbstractRestAction
+ * AbstractRestAction}. The goal is to help clean up the test code.
  */
 public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
+    private String bodyClass;
+    private String resultClass;
+
     protected ExposedRestAction(
             HttpParameterFactory factory,
             HttpMethod httpMethod,
@@ -43,5 +46,23 @@ public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
     @Override
     public void addParam(Type type, String name, Object value) {
         super.addParam(type, name, value);
+    }
+
+    public void setBodyClass(String bodyClass) {
+        this.bodyClass = bodyClass;
+    }
+
+    public void setResultClass(String resultClass) {
+        this.resultClass = resultClass;
+    }
+
+    @Override
+    public String getBodyClass() {
+        return bodyClass;
+    }
+
+    @Override
+    public String getResultClass() {
+        return resultClass;
     }
 }

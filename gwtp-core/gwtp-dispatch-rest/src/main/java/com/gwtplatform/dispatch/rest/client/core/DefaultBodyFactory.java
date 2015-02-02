@@ -26,16 +26,13 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 public class DefaultBodyFactory implements BodyFactory {
-    private final ActionMetadataProvider metadataProvider;
     private final Serialization serialization;
     private final UriFactory uriFactory;
 
     @Inject
     DefaultBodyFactory(
-            ActionMetadataProvider metadataProvider,
             Serialization serialization,
             UriFactory uriFactory) {
-        this.metadataProvider = metadataProvider;
         this.serialization = serialization;
         this.uriFactory = uriFactory;
     }
@@ -50,14 +47,14 @@ public class DefaultBodyFactory implements BodyFactory {
     }
 
     /**
-     * Verify if the provided <code>bodyType</code> can be serialized.
+     * Verify if the provided <code>bodyClass</code> can be serialized.
      *
-     * @param bodyType the parameterized type to verify if it can be serialized.
+     * @param bodyClass the parameterized type to verify if it can be serialized.
      *
-     * @return <code>true</code> if <code>bodyType</code> can be serialized, otherwise <code>false</code>.
+     * @return <code>true</code> if <code>bodyClass</code> can be serialized, otherwise <code>false</code>.
      */
-    protected boolean canSerialize(String bodyType) {
-        return serialization.canSerialize(bodyType);
+    protected boolean canSerialize(String bodyClass) {
+        return serialization.canSerialize(bodyClass);
     }
 
     /**
@@ -65,12 +62,12 @@ public class DefaultBodyFactory implements BodyFactory {
      * exception may be thrown.
      *
      * @param object the object to serialize.
-     * @param bodyType The parameterized type of the object to serialize.
+     * @param bodyClass The parameterized type of the object to serialize.
      *
      * @return The serialized string.
      */
-    protected String serialize(Object object, String bodyType) {
-        return serialization.serialize(object, bodyType);
+    protected String serialize(Object object, String bodyClass) {
+        return serialization.serialize(object, bodyClass);
     }
 
     private void assignBodyFromForm(RequestBuilder requestBuilder, RestAction<?> action) {
@@ -94,11 +91,11 @@ public class DefaultBodyFactory implements BodyFactory {
     }
 
     private String getSerializedValue(RestAction<?> action, Object object) throws ActionException {
-        String bodyType = (String) metadataProvider.getValue(action, MetadataType.BODY_TYPE);
+        String bodyClass = action.getBodyClass();
 
-        if (bodyType != null && canSerialize(bodyType)) {
+        if (bodyClass != null && canSerialize(bodyClass)) {
             try {
-                return serialize(object, bodyType);
+                return serialize(object, bodyClass);
             } catch (JsonMappingException e) {
                 throw new ActionException("Unable to serialize request body. An unexpected error occurred.", e);
             }

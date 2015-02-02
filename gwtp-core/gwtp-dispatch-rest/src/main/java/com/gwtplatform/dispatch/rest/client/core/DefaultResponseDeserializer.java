@@ -28,14 +28,11 @@ import com.gwtplatform.dispatch.shared.ActionException;
  * Default implementation for {@link ResponseDeserializer}.
  */
 public class DefaultResponseDeserializer implements ResponseDeserializer {
-    private final ActionMetadataProvider metadataProvider;
     private final Serialization serialization;
 
     @Inject
     protected DefaultResponseDeserializer(
-            ActionMetadataProvider metadataProvider,
             Serialization serialization) {
-        this.metadataProvider = metadataProvider;
         this.serialization = serialization;
     }
 
@@ -60,16 +57,16 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
     }
 
     /**
-     * Deserializes the json as an object of the <code>resultType</code> type.
+     * Deserializes the json as an object of the <code>resultClass</code> type.
      *
-     * @param resultType the parameterized type of the object once deserialized.
+     * @param resultClass the parameterized type of the object once deserialized.
      * @param json the json to deserialize.
      * @param <R> the type of the object once deserialized
      *
      * @return The deserialized object.
      */
-    protected <R> R deserializeValue(String resultType, String json) {
-        return serialization.deserialize(json, resultType);
+    protected <R> R deserializeValue(String resultClass, String json) {
+        return serialization.deserialize(json, resultClass);
     }
 
     private boolean isSuccessStatusCode(Response response) {
@@ -79,21 +76,17 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
     }
 
     private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {
-        String resultType = (String) metadataProvider.getValue(action, MetadataType.RESPONSE_TYPE);
+        String resultClass = action.getResultClass();
 
-        if (!isNullOrEmpty(resultType) && canDeserialize(resultType)) {
+        if (resultClass != null && canDeserialize(resultClass)) {
             try {
                 String json = response.getText();
-                return deserializeValue(resultType, json);
+                return deserializeValue(resultClass, json);
             } catch (JsonMappingException e) {
                 throw new ActionException("Unable to deserialize response. An unexpected error occurred.", e);
             }
         }
 
         throw new ActionException("Unable to deserialize response. No serializer found.");
-    }
-
-    private boolean isNullOrEmpty(String string) {
-        return string == null || string.isEmpty();
     }
 }

@@ -23,7 +23,6 @@ import static com.gwtplatform.dispatch.rest.rebind.extension.ExtensionModule.add
 public class SerializationModule extends AbstractModule {
     @Override
     protected void configure() {
-        addExtensionGenerator(binder()).to(ActionMetadataProviderGenerator.class).asEagerSingleton();
         addExtensionGenerator(binder()).to(JacksonMapperProviderGenerator.class).asEagerSingleton();
     }
 }

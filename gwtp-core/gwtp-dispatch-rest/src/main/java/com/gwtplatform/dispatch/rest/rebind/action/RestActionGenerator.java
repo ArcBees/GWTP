@@ -33,11 +33,9 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.google.gwt.core.ext.typeinfo.JType;
-import com.gwtplatform.dispatch.rest.client.core.MetadataType;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
-import com.gwtplatform.dispatch.rest.rebind.events.RegisterMetadataEvent;
 import com.gwtplatform.dispatch.rest.rebind.events.RegisterSerializableTypeEvent;
 import com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameter;
 import com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterFactory;
@@ -52,8 +50,6 @@ import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
-import static com.gwtplatform.dispatch.rest.client.core.MetadataType.BODY_TYPE;
-import static com.gwtplatform.dispatch.rest.client.core.MetadataType.RESPONSE_TYPE;
 import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.FORM;
 import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.isHttpParameter;
 
@@ -141,8 +137,14 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     @Override
     protected void populateTemplateVariables(Map<String, Object> variables) {
         String resultTypeName = actionDefinition.getResultType().getParameterizedQualifiedSourceName();
-        String bodyParameterName =
-                actionDefinition.hasBody() ? actionDefinition.getBodyParameter().getVariableName() : null;
+
+        String bodyTypeName = null;
+        String bodyParameterName = null;
+        if (actionDefinition.hasBody()) {
+            bodyParameterName = actionDefinition.getBodyParameter().getVariableName();
+            bodyTypeName = bodyParameter.getParameterizedQualifiedName();
+        }
+
         List<Parameter> parameters = methodDefinition.getInheritedParameters();
         parameters.addAll(methodDefinition.getParameters());
 
@@ -150,6 +152,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         variables.put("secured", actionDefinition.isSecured());
         variables.put("httpVerb", actionDefinition.getVerb());
         variables.put("path", actionDefinition.getPath());
+        variables.put("body", bodyTypeName);
         variables.put("bodyParameterName", bodyParameterName);
         variables.put("parameters", parameters);
         variables.put("httpParameters", actionDefinition.getHttpParameters());
@@ -253,17 +256,13 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
 
     private void registerMetadata() {
         if (bodyParameter != null) {
-            registerMetadatum(BODY_TYPE, bodyParameter.getParameter().getType());
+            generateSerializer(bodyParameter.getParameter().getType());
         }
 
-        registerMetadatum(RESPONSE_TYPE, actionDefinition.getResultType());
+        generateSerializer(actionDefinition.getResultType());
     }
 
-    private void registerMetadatum(MetadataType metadataType, JType type) {
-        String typeLiteral = "\"" + type.getParameterizedQualifiedSourceName() + "\"";
-
-        RegisterMetadataEvent.post(eventBus, getClassDefinition().getQualifiedName(), metadataType, typeLiteral);
-
+    private void generateSerializer(JType type) {
         if (!Void.class.getCanonicalName().equals(type.getQualifiedSourceName()) && type.isPrimitive() == null) {
             RegisterSerializableTypeEvent.post(eventBus, type);
         }
