@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rest.rebind.resource;
 
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -26,6 +27,8 @@ public class ResourceDefinition extends ClassDefinition {
     private final JClassType resourceInterface;
     private final String path;
     private final boolean secured;
+    private final Set<String> consumes;
+    private final Set<String> produces;
     private final List<MethodDefinition> methodDefinitions;
 
     public ResourceDefinition(
@@ -33,12 +36,16 @@ public class ResourceDefinition extends ClassDefinition {
             String packageName,
             String className,
             String path,
-            boolean secured) {
+            boolean secured,
+            Set<String> consumes,
+            Set<String> produces) {
         super(packageName, className);
 
         this.resourceInterface = resourceInterface;
         this.path = path;
         this.secured = secured;
+        this.consumes = consumes;
+        this.produces = produces;
         this.methodDefinitions = Lists.newArrayList();
     }
 
@@ -52,6 +59,14 @@ public class ResourceDefinition extends ClassDefinition {
 
     public boolean isSecured() {
         return secured;
+    }
+
+    public Set<String> getConsumes() {
+        return consumes;
+    }
+
+    public Set<String> getProduces() {
+        return produces;
     }
 
     public void addMethodDefinition(MethodDefinition definition) {

@@ -29,6 +29,7 @@ import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.rebind.utils.ContentTypeResolver;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
@@ -83,9 +84,11 @@ public class TopLevelResourceGenerator extends AbstractResourceGenerator {
         if (resourceDefinition == null) {
             String path = resolvePath();
             boolean secured = resolveSecured();
+            Set<String> consumes = resolveConsumes();
+            Set<String> produces = resolveProduces();
 
-            resourceDefinition =
-                    new ResourceDefinition(getResourceType(), getPackageName(), getImplName(), path, secured);
+            resourceDefinition = new ResourceDefinition(getResourceType(), getPackageName(), getImplName(), path,
+                    secured, consumes, produces);
         }
 
         return resourceDefinition;
@@ -104,6 +107,14 @@ public class TopLevelResourceGenerator extends AbstractResourceGenerator {
 
     private boolean resolveSecured() {
         return !getResourceType().isAnnotationPresent(NoXsrfHeader.class);
+    }
+
+    protected Set<String> resolveConsumes() {
+        return ContentTypeResolver.resolveConsumes(getResourceType());
+    }
+
+    protected Set<String> resolveProduces() {
+        return ContentTypeResolver.resolveProduces(getResourceType());
     }
 
     private void registerResourceBinding() {

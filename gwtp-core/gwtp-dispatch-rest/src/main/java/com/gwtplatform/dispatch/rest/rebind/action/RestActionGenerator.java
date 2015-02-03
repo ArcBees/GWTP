@@ -231,13 +231,11 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     }
 
     private Set<String> resolveConsumes() {
-        // TODO: Resolve going from method -> sub-resource -> method -> resource...
-        return ContentTypeResolver.resolveConsumes(method);
+        return ContentTypeResolver.resolveConsumes(method, resourceDefinition.getConsumes());
     }
 
     private Set<String> resolveProduces() {
-        // TODO: Resolve going from method -> sub-resource -> method -> resource...
-        return ContentTypeResolver.resolveProduces(method);
+        return ContentTypeResolver.resolveProduces(method, resourceDefinition.getConsumes());
     }
 
     private void filterParameters() {

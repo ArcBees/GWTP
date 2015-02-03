@@ -23,17 +23,17 @@ import java.util.regex.Pattern;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import com.google.gwt.core.ext.typeinfo.HasAnnotations;
 
 public class ContentTypeResolver {
-    private static final String ALL = "*";
     private static final Set<String> DEFAULT_FALLBACK;
     private static final Pattern MULTIPLE_CONTENT_TYPE_PATTERN = Pattern.compile("[,]");
 
     static {
         Set<String> contentTypes = new HashSet<String>();
-        contentTypes.add(ALL);
+        contentTypes.add(MediaType.WILDCARD);
 
         DEFAULT_FALLBACK = Collections.unmodifiableSet(contentTypes);
     }
@@ -69,7 +69,9 @@ public class ContentTypeResolver {
 
         for (String contentType : contentTypes) {
             String[] parts = MULTIPLE_CONTENT_TYPE_PATTERN.split(contentType);
-            Collections.addAll(result, parts);
+            for (String part : parts) {
+                result.add(part.toLowerCase());
+            }
         }
 
         if (result.isEmpty()) {
