@@ -22,6 +22,7 @@ public class $impl extends AbstractRestAction<$result> {
 #if($contentType)
         addParam(Type.HEADER, HttpHeaders.CONTENT_TYPE, "$contentType");
 #end
+        addParam(Type.HEADER, HttpHeaders.CONTENT_TYPE, "$accept");
     }
 
     @Override

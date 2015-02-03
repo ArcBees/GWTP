@@ -35,6 +35,7 @@ import com.gwtplatform.dispatch.rest.rebind.resource.MethodGenerator;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassNameGenerator;
+import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
 import com.gwtplatform.dispatch.rest.rebind.utils.ContentTypeResolver;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
@@ -129,8 +130,8 @@ public class SubResourceGenerator extends AbstractResourceGenerator {
         if (subResourceDefinition == null) {
             String path = resolvePath();
             boolean secured = resolveSecured();
-            Set<String> consumes = resolveConsumes();
-            Set<String> produces = resolveProduces();
+            Set<ContentType> consumes = resolveConsumes();
+            Set<ContentType> produces = resolveProduces();
             List<Parameter> parameters = resolveParameters();
 
             subResourceDefinition = new SubResourceDefinition(getResourceType(), getPackageName(), getImplName(),
@@ -150,17 +151,17 @@ public class SubResourceGenerator extends AbstractResourceGenerator {
                 && !getResourceType().isAnnotationPresent(NoXsrfHeader.class);
     }
 
-    private Set<String> resolveConsumes() {
+    private Set<ContentType> resolveConsumes() {
         // In order: Sub-resource -> Method -> Parent [sub-]resource
-        Set<String> parentConsumes = getParentDefinition().getConsumes();
-        Set<String> methodConsumes = ContentTypeResolver.resolveProduces(getMethod(), parentConsumes);
+        Set<ContentType> parentConsumes = getParentDefinition().getConsumes();
+        Set<ContentType> methodConsumes = ContentTypeResolver.resolveProduces(getMethod(), parentConsumes);
         return ContentTypeResolver.resolveConsumes(getResourceType(), methodConsumes);
     }
 
-    private Set<String> resolveProduces() {
+    private Set<ContentType> resolveProduces() {
         // In order: Sub-resource -> Method -> Parent [sub-]resource
-        Set<String> parentProduces = getParentDefinition().getProduces();
-        Set<String> methodProduces = ContentTypeResolver.resolveProduces(getMethod(), parentProduces);
+        Set<ContentType> parentProduces = getParentDefinition().getProduces();
+        Set<ContentType> methodProduces = ContentTypeResolver.resolveProduces(getMethod(), parentProduces);
         return ContentTypeResolver.resolveProduces(getResourceType(), methodProduces);
     }
 

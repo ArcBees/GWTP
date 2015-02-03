@@ -18,7 +18,6 @@ package com.gwtplatform.dispatch.rest.rebind.serialization;
 
 import java.io.PrintWriter;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
@@ -33,6 +32,7 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
 import static com.gwtplatform.dispatch.rest.rebind.utils.JPrimitives.classTypeOrConvertToBoxed;
@@ -42,7 +42,7 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
     private static final Pattern SANITIZE_NAME_PATTERN = Pattern.compile("[^a-zA-Z0-9_]");
     private static final String PACKAGE = JacksonMapperProvider.class.getPackage().getName() + ".mappers";
     private static final String NAME_SUFFIX = "Mapper";
-    private static final String APPLICATION_WILDCARD = "application/*";
+    private static final ContentType APPLICATION_JSON = ContentType.valueOf(MediaType.APPLICATION_JSON);
 
     private final JacksonMapperProviderGenerator jacksonMapperProviderGenerator;
 
@@ -64,10 +64,13 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
 
     @Override
     public boolean canGenerate(SerializationContext context) {
-        Set<String> contentTypes = context.getContentTypes();
-        return contentTypes.contains(MediaType.WILDCARD)
-                || contentTypes.contains(APPLICATION_WILDCARD)
-                || contentTypes.contains(MediaType.APPLICATION_JSON);
+        for (ContentType contentType : context.getContentTypes()) {
+            if (APPLICATION_JSON.isCompatible(contentType)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override

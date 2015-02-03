@@ -22,13 +22,14 @@ import java.util.Set;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
 
 public class ResourceDefinition extends ClassDefinition {
     private final JClassType resourceInterface;
     private final String path;
     private final boolean secured;
-    private final Set<String> consumes;
-    private final Set<String> produces;
+    private final Set<ContentType> consumes;
+    private final Set<ContentType> produces;
     private final List<MethodDefinition> methodDefinitions;
 
     public ResourceDefinition(
@@ -37,8 +38,8 @@ public class ResourceDefinition extends ClassDefinition {
             String className,
             String path,
             boolean secured,
-            Set<String> consumes,
-            Set<String> produces) {
+            Set<ContentType> consumes,
+            Set<ContentType> produces) {
         super(packageName, className);
 
         this.resourceInterface = resourceInterface;
@@ -61,11 +62,11 @@ public class ResourceDefinition extends ClassDefinition {
         return secured;
     }
 
-    public Set<String> getConsumes() {
+    public Set<ContentType> getConsumes() {
         return consumes;
     }
 
-    public Set<String> getProduces() {
+    public Set<ContentType> getProduces() {
         return produces;
     }
 

@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
+import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
 
 public class SubResourceDefinition extends ResourceDefinition {
     private final List<Parameter> parameters;
@@ -34,8 +35,8 @@ public class SubResourceDefinition extends ResourceDefinition {
             List<Parameter> parameters,
             String path,
             boolean secured,
-            Set<String> consumes,
-            Set<String> produces) {
+            Set<ContentType> consumes,
+            Set<ContentType> produces) {
         super(resourceInterface, packageName, className, path, secured, consumes, produces);
 
         this.parameters = parameters;

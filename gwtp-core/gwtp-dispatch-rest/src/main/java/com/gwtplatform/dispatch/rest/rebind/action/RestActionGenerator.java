@@ -45,6 +45,7 @@ import com.gwtplatform.dispatch.rest.rebind.serialization.SerializationGenerator
 import com.gwtplatform.dispatch.rest.rebind.subresource.SubResourceContext;
 import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassNameGenerator;
+import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
 import com.gwtplatform.dispatch.rest.rebind.utils.ContentTypeResolver;
 import com.gwtplatform.dispatch.rest.rebind.utils.Generators;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
@@ -118,8 +119,8 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         String path = resolvePath();
         boolean secured = resolveSecured();
         JClassType resultType = resolveResultType();
-        Set<String> consumes = resolveConsumes();
-        Set<String> produces = resolveProduces();
+        Set<ContentType> consumes = resolveConsumes();
+        Set<ContentType> produces = resolveProduces();
         filterParameters();
 
         PrintWriter printWriter = tryCreate();
@@ -159,7 +160,6 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         variables.put("bodyParameterName", bodyParameterName);
         variables.put("parameters", parameters);
         variables.put("httpParameters", actionDefinition.getHttpParameters());
-        // TODO: Add Accept (from produces)
         // TODO: Don't generate but rather let the serializer add the header at runtime
         variables.put("contentType", actionDefinition.getConsumes().iterator().next());
     }
@@ -230,11 +230,11 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         return methodDefinition.getResultType();
     }
 
-    private Set<String> resolveConsumes() {
+    private Set<ContentType> resolveConsumes() {
         return ContentTypeResolver.resolveConsumes(method, resourceDefinition.getConsumes());
     }
 
-    private Set<String> resolveProduces() {
+    private Set<ContentType> resolveProduces() {
         return ContentTypeResolver.resolveProduces(method, resourceDefinition.getConsumes());
     }
 
@@ -266,7 +266,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         generateSerializer(actionDefinition.getResultType(), actionDefinition.getProduces());
     }
 
-    private void generateSerializer(JType type, Set<String> contentTypes) throws UnableToCompleteException {
+    private void generateSerializer(JType type, Set<ContentType> contentTypes) throws UnableToCompleteException {
         SerializationContext serializationContext = new SerializationContext(context, type, contentTypes);
         Generators.executeAll(serializationGenerators, serializationContext);
     }
