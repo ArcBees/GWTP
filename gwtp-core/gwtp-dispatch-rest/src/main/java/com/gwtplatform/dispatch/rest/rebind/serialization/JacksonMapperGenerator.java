@@ -22,6 +22,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
+import javax.ws.rs.core.MediaType;
 
 import org.apache.velocity.app.VelocityEngine;
 
@@ -41,6 +42,7 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
     private static final Pattern SANITIZE_NAME_PATTERN = Pattern.compile("[^a-zA-Z0-9_]");
     private static final String PACKAGE = JacksonMapperProvider.class.getPackage().getName() + ".mappers";
     private static final String NAME_SUFFIX = "Mapper";
+    private static final String APPLICATION_WILDCARD = "application/*";
 
     private final JacksonMapperProviderGenerator jacksonMapperProviderGenerator;
 
@@ -63,9 +65,9 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
     @Override
     public boolean canGenerate(SerializationContext context) {
         Set<String> contentTypes = context.getContentTypes();
-        return contentTypes.contains("*")
-                || contentTypes.contains("application/*")
-                || contentTypes.contains("application/json");
+        return contentTypes.contains(MediaType.WILDCARD)
+                || contentTypes.contains(APPLICATION_WILDCARD)
+                || contentTypes.contains(MediaType.APPLICATION_JSON);
     }
 
     @Override

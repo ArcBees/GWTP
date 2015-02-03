@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rest.rebind.subresource;
 
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -32,8 +33,10 @@ public class SubResourceDefinition extends ResourceDefinition {
             String className,
             List<Parameter> parameters,
             String path,
-            boolean secured) {
-        super(resourceInterface, packageName, className, path, secured);
+            boolean secured,
+            Set<String> consumes,
+            Set<String> produces) {
+        super(resourceInterface, packageName, className, path, secured, consumes, produces);
 
         this.parameters = parameters;
     }
