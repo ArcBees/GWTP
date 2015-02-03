@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.rebind.serialization;
 
 import java.io.PrintWriter;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
@@ -32,6 +33,8 @@ import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
+
+import static com.gwtplatform.dispatch.rest.rebind.utils.JPrimitives.classTypeOrConvertToBoxed;
 
 public class JacksonMapperGenerator extends AbstractVelocityGenerator implements SerializationGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/serialization/JacksonMapper.vm";
@@ -58,16 +61,18 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
     }
 
     @Override
-    public boolean canGenerate(SerializationContext input) {
-        return true;
+    public boolean canGenerate(SerializationContext context) {
+        Set<String> contentTypes = context.getContentTypes();
+        return contentTypes.contains("*")
+                || contentTypes.contains("application/*")
+                || contentTypes.contains("application/json");
     }
 
     @Override
     public SerializationDefinition generate(SerializationContext context) throws UnableToCompleteException {
-        this.type = context.getType();
+        this.type = classTypeOrConvertToBoxed(getContext().getTypeOracle(), context.getType());
 
         PrintWriter printWriter = tryCreate();
-
         if (printWriter != null) {
             mergeTemplate(printWriter);
             commit(printWriter);

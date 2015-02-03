@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rest.rebind.action;
 
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -29,7 +30,8 @@ public class ActionDefinition extends ClassDefinition {
     private final HttpMethod verb;
     private final String path;
     private final boolean secured;
-    private final String contentType;
+    private final Set<String> consumes;
+    private final Set<String> produces;
     private final JClassType resultType;
     private final List<HttpParameter> httpParameters;
     private final Parameter bodyParameter;
@@ -40,7 +42,8 @@ public class ActionDefinition extends ClassDefinition {
             HttpMethod verb,
             String path,
             boolean secured,
-            String contentType,
+            Set<String> consumes,
+            Set<String> produces,
             JClassType resultType,
             List<HttpParameter> httpParameters,
             Parameter bodyParameter) {
@@ -49,7 +52,8 @@ public class ActionDefinition extends ClassDefinition {
         this.verb = verb;
         this.path = path;
         this.secured = secured;
-        this.contentType = contentType;
+        this.consumes = consumes;
+        this.produces = produces;
         this.resultType = resultType;
         this.httpParameters = httpParameters;
         this.bodyParameter = bodyParameter;
@@ -67,8 +71,12 @@ public class ActionDefinition extends ClassDefinition {
         return secured;
     }
 
-    public String getContentType() {
-        return contentType;
+    public Set<String> getConsumes() {
+        return consumes;
+    }
+
+    public Set<String> getProduces() {
+        return produces;
     }
 
     public JClassType getResultType() {
