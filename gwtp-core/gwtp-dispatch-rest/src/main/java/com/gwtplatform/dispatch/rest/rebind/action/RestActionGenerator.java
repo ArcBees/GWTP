@@ -267,14 +267,8 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     }
 
     private void generateSerializer(JType type, Set<String> contentTypes) throws UnableToCompleteException {
-        // TODO: Fine grain the context by specifying what is needed: serializer/deserializer/all
         SerializationContext serializationContext = new SerializationContext(context, type, contentTypes);
-        // TODO: Multiple serializers may be appropriate. Generate them all
-        SerializationGenerator generator = Generators.findGenerator(serializationGenerators, serializationContext);
-
-        if (generator != null) {
-            generator.generate(serializationContext);
-        }
+        Generators.executeAll(serializationGenerators, serializationContext);
     }
 
     private List<JParameter> findAllParameters(MethodContext methodContext) {
