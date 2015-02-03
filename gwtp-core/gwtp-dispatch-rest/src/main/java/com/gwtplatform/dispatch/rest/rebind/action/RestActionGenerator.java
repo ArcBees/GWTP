@@ -22,12 +22,10 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.common.collect.Lists;
-import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -47,6 +45,7 @@ import com.gwtplatform.dispatch.rest.rebind.serialization.SerializationGenerator
 import com.gwtplatform.dispatch.rest.rebind.subresource.SubResourceContext;
 import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassNameGenerator;
+import com.gwtplatform.dispatch.rest.rebind.utils.ContentTypeResolver;
 import com.gwtplatform.dispatch.rest.rebind.utils.Generators;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
@@ -64,7 +63,6 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     private static final String GET_WITH_BODY = "`%s#%s` annotated with @GET or @HEAD contains illegal Form or Body"
             + "parameters.";
 
-    private final EventBus eventBus;
     private final HttpParameterFactory httpParameterFactory;
     private final Set<SerializationGenerator> serializationGenerators;
 
@@ -83,12 +81,10 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
             Logger logger,
             GeneratorContext context,
             VelocityEngine velocityEngine,
-            EventBus eventBus,
             HttpParameterFactory httpParameterFactory,
             Set<SerializationGenerator> serializationGenerators) {
         super(logger, context, velocityEngine);
 
-        this.eventBus = eventBus;
         this.httpParameterFactory = httpParameterFactory;
         this.serializationGenerators = serializationGenerators;
     }
@@ -122,19 +118,20 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         String path = resolvePath();
         boolean secured = resolveSecured();
         JClassType resultType = resolveResultType();
-        String contentType = resolveContentType();
+        Set<String> consumes = resolveConsumes();
+        Set<String> produces = resolveProduces();
         filterParameters();
 
         PrintWriter printWriter = tryCreate();
 
         if (printWriter != null) {
-            actionDefinition = new ActionDefinition(getPackageName(), getImplName(), verb, path, secured, contentType,
-                    resultType, httpParameters, bodyParameter);
+            actionDefinition = new ActionDefinition(getPackageName(), getImplName(), verb, path, secured, consumes,
+                    produces, resultType, httpParameters, bodyParameter);
 
             mergeTemplate(printWriter);
             commit(printWriter);
 
-            registerMetadata();
+            generateSerializers();
         }
 
         return actionDefinition;
@@ -162,7 +159,9 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         variables.put("bodyParameterName", bodyParameterName);
         variables.put("parameters", parameters);
         variables.put("httpParameters", actionDefinition.getHttpParameters());
-        variables.put("contentType", actionDefinition.getContentType());
+        // TODO: Add Accept (from produces)
+        // TODO: Don't generate but rather let the serializer add the header at runtime
+        variables.put("contentType", actionDefinition.getConsumes().iterator().next());
     }
 
     @Override
@@ -231,6 +230,16 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         return methodDefinition.getResultType();
     }
 
+    private Set<String> resolveConsumes() {
+        // TODO: Resolve going from method -> sub-resource -> method -> resource...
+        return ContentTypeResolver.resolveConsumes(method);
+    }
+
+    private Set<String> resolveProduces() {
+        // TODO: Resolve going from method -> sub-resource -> method -> resource...
+        return ContentTypeResolver.resolveProduces(method);
+    }
+
     private void filterParameters() {
         List<Parameter> parameters = methodDefinition.getInheritedParameters();
         parameters.addAll(methodDefinition.getParameters());
@@ -251,36 +260,23 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         }
     }
 
-    private String resolveContentType() {
-        Consumes consumes = method.getAnnotation(Consumes.class);
-
-        if (consumes != null && consumes.value().length > 0) {
-            return consumes.value()[0];
-        }
-        return null;
-    }
-
-    private void registerMetadata() throws UnableToCompleteException {
+    private void generateSerializers() throws UnableToCompleteException {
         if (bodyParameter != null) {
-            generateSerializer(bodyParameter.getParameter().getType());
+            generateSerializer(bodyParameter.getParameter().getType(), actionDefinition.getConsumes());
         }
 
-        generateSerializer(actionDefinition.getResultType());
+        generateSerializer(actionDefinition.getResultType(), actionDefinition.getProduces());
     }
 
-    private void generateSerializer(JType type) throws UnableToCompleteException {
-        SerializationContext serializationContext = new SerializationContext(context, type);
+    private void generateSerializer(JType type, Set<String> contentTypes) throws UnableToCompleteException {
+        // TODO: Fine grain the context by specifying what is needed: serializer/deserializer/all
+        SerializationContext serializationContext = new SerializationContext(context, type, contentTypes);
+        // TODO: Multiple serializers may be appropriate. Generate them all
         SerializationGenerator generator = Generators.findGenerator(serializationGenerators, serializationContext);
 
         if (generator != null) {
             generator.generate(serializationContext);
         }
-
-        // TODO: Filter out void and primitives? Convert primitives to boxed type?
-        //        if (!Void.class.getCanonicalName().equals(type.getQualifiedSourceName()) && type.isPrimitive() ==
-        // null) {
-        //            RegisterSerializableTypeEvent.post(eventBus, type);
-        //        }
     }
 
     private List<JParameter> findAllParameters(MethodContext methodContext) {

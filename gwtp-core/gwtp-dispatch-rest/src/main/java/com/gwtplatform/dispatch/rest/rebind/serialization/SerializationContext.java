@@ -16,18 +16,23 @@
 
 package com.gwtplatform.dispatch.rest.rebind.serialization;
 
+import java.util.Set;
+
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.rebind.action.ActionContext;
 
 public class SerializationContext {
     private final ActionContext context;
     private final JType type;
+    private final Set<String> contentTypes;
 
     public SerializationContext(
             ActionContext context,
-            JType type) {
+            JType type,
+            Set<String> contentTypes) {
         this.context = context;
         this.type = type;
+        this.contentTypes = contentTypes;
     }
 
     public ActionContext getContext() {
@@ -36,5 +41,9 @@ public class SerializationContext {
 
     public JType getType() {
         return type;
+    }
+
+    public Set<String> getContentTypes() {
+        return contentTypes;
     }
 }
