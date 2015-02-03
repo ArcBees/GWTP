@@ -72,8 +72,12 @@ public class DefaultRequestBuilderFactory implements RequestBuilderFactory {
         requestBuilder.setTimeoutMillis(requestTimeoutMs);
 
         headerFactory.buildHeaders(requestBuilder, action, securityToken);
-
         bodyFactory.buildBody(requestBuilder, action);
+
+        // TODO: Add Accept header. Should contain content types from all serializers that canDeserialize()
+
+        // TODO: Add Content-Type header. Should be the content type from the serializer that generated the body
+        // What should it be when data is from @FormParam?
 
         return requestBuilder;
     }

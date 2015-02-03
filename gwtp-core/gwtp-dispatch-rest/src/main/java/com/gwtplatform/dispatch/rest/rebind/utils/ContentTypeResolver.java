@@ -28,21 +28,21 @@ import javax.ws.rs.core.MediaType;
 import com.google.gwt.core.ext.typeinfo.HasAnnotations;
 
 public class ContentTypeResolver {
-    private static final Set<String> DEFAULT_FALLBACK;
+    private static final Set<ContentType> DEFAULT_FALLBACK;
     private static final Pattern MULTIPLE_CONTENT_TYPE_PATTERN = Pattern.compile("[,]");
 
     static {
-        Set<String> contentTypes = new HashSet<String>();
-        contentTypes.add(MediaType.WILDCARD);
+        Set<ContentType> contentTypes = new HashSet<ContentType>();
+        contentTypes.add(ContentType.valueOf(MediaType.WILDCARD));
 
         DEFAULT_FALLBACK = Collections.unmodifiableSet(contentTypes);
     }
 
-    public static Set<String> resolveConsumes(HasAnnotations hasAnnotations) {
+    public static Set<ContentType> resolveConsumes(HasAnnotations hasAnnotations) {
         return resolveConsumes(hasAnnotations, DEFAULT_FALLBACK);
     }
 
-    public static Set<String> resolveConsumes(HasAnnotations hasAnnotations, Set<String> fallback) {
+    public static Set<ContentType> resolveConsumes(HasAnnotations hasAnnotations, Set<ContentType> fallback) {
         Consumes consumes = hasAnnotations.getAnnotation(Consumes.class);
         if (consumes != null && consumes.value().length > 0) {
             return resolveContentTypes(consumes.value(), fallback);
@@ -51,11 +51,11 @@ public class ContentTypeResolver {
         return fallback;
     }
 
-    public static Set<String> resolveProduces(HasAnnotations hasAnnotations) {
+    public static Set<ContentType> resolveProduces(HasAnnotations hasAnnotations) {
         return resolveProduces(hasAnnotations, DEFAULT_FALLBACK);
     }
 
-    public static Set<String> resolveProduces(HasAnnotations hasAnnotations, Set<String> fallback) {
+    public static Set<ContentType> resolveProduces(HasAnnotations hasAnnotations, Set<ContentType> fallback) {
         Produces produces = hasAnnotations.getAnnotation(Produces.class);
         if (produces != null) {
             return resolveContentTypes(produces.value(), fallback);
@@ -64,13 +64,13 @@ public class ContentTypeResolver {
         return fallback;
     }
 
-    private static Set<String> resolveContentTypes(String[] contentTypes, Set<String> fallback) {
-        Set<String> result = new HashSet<String>(contentTypes.length);
+    private static Set<ContentType> resolveContentTypes(String[] values, Set<ContentType> fallback) {
+        Set<ContentType> result = new HashSet<ContentType>(values.length);
 
-        for (String contentType : contentTypes) {
-            String[] parts = MULTIPLE_CONTENT_TYPE_PATTERN.split(contentType);
+        for (String value : values) {
+            String[] parts = MULTIPLE_CONTENT_TYPE_PATTERN.split(value);
             for (String part : parts) {
-                result.add(part.toLowerCase());
+                result.add(ContentType.valueOf(part));
             }
         }
 

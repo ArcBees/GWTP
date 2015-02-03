@@ -20,16 +20,17 @@ import java.util.Set;
 
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.rebind.action.ActionContext;
+import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
 
 public class SerializationContext {
     private final ActionContext context;
     private final JType type;
-    private final Set<String> contentTypes;
+    private final Set<ContentType> contentTypes;
 
     public SerializationContext(
             ActionContext context,
             JType type,
-            Set<String> contentTypes) {
+            Set<ContentType> contentTypes) {
         this.context = context;
         this.type = type;
         this.contentTypes = contentTypes;
@@ -43,7 +44,7 @@ public class SerializationContext {
         return type;
     }
 
-    public Set<String> getContentTypes() {
+    public Set<ContentType> getContentTypes() {
         return contentTypes;
     }
 }
