@@ -32,6 +32,7 @@ import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -322,7 +323,7 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentC) {
 
         // Given
-        Object slotBC = new Object();
+        Slot<PresenterWidget<?>> slotBC = new Slot<PresenterWidget<?>>();
         presenterWidgetA.internalReveal();
 
         // When
@@ -373,7 +374,7 @@ public class PresenterWidgetTest {
             PresenterWidgetA presenterWidgetA,
             PresenterWidgetB contentB) {
         // Given
-        Object slotB = new Object();
+        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
         presenterWidgetA.internalReveal();
         presenterWidgetA.setInSlot(slotB, contentB);
 
@@ -397,8 +398,8 @@ public class PresenterWidgetTest {
             PresenterWidgetA presenterWidgetA,
             PresenterWidgetB contentB) {
         // Given
-        Object slotA = new Object();
-        Object slotB = new Object();
+        Slot<PresenterWidget<?>> slotA = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
         presenterWidgetA.internalReveal();
 
         // When
@@ -418,7 +419,7 @@ public class PresenterWidgetTest {
             PresenterWidgetB contentB,
             PresenterWidgetC contentC) {
         // Given
-        Object slotBC = new Object();
+        Slot<PresenterWidget<?>> slotBC = new Slot<PresenterWidget<?>>();
         presenterWidgetA.internalReveal();
         presenterWidgetA.addToSlot(slotBC, contentB);
         presenterWidgetA.addToSlot(slotBC, contentC);
@@ -440,8 +441,8 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentCinB) {
         // Given
         // slot is empty in presenterWidgets, and it is NOT visible
-        Object slotB = new Object();
-        Object slotC = new Object();
+        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotC = new Slot<PresenterWidget<?>>();
         assertFalse(presenterWidgetA.isVisible());
         assertFalse(contentB.isVisible());
 
@@ -480,8 +481,8 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentCinB) {
         // Given
         // slot is empty in presenterWidgets, and it is NOT visible
-        Object slotB = new Object();
-        Object slotC = new Object();
+        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotC = new Slot<PresenterWidget<?>>();
         assertFalse(presenterWidgetA.isVisible());
         assertFalse(contentB.isVisible());
 
@@ -523,8 +524,8 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentCinB) {
 
         // Given
-        Object slotB = new Object();
-        Object slotC = new Object();
+        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotC = new Slot<PresenterWidget<?>>();
         presenterWidgetA.internalReveal();
 
         // When
@@ -556,8 +557,8 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentC) {
         // Given
         // slot is empty in presenterWidget, and it is NOT visible
-        Object slotB = new Object();
-        Object slotC = new Object();
+        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotC = new Slot<PresenterWidget<?>>();
         assertFalse(presenterWidgetA.isVisible());
 
         // When
@@ -594,8 +595,8 @@ public class PresenterWidgetTest {
             PresenterWidgetB contentB,
             PresenterWidgetC contentC) {
         // Given
-        Object slotB = new Object();
-        Object slotC = new Object();
+        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotC = new Slot<PresenterWidget<?>>();
         presenterWidgetA.internalReveal();
 
         // When
@@ -624,7 +625,7 @@ public class PresenterWidgetTest {
             PresenterWidgetA presenterWidgetA,
             PresenterWidgetB contentB) {
         // Given
-        Object slotB = new Object();
+        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
         presenterWidgetA.internalReveal();
         presenterWidgetA.setInSlot(slotB, contentB);
 
@@ -686,8 +687,8 @@ public class PresenterWidgetTest {
             PresenterWidgetB presenterWidgetB,
             PresenterWidgetC contentC) {
         // Given
-        Object slotCinA = new Object();
-        Object slotCinB = new Object();
+        Slot<PresenterWidget<?>> slotCinA = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotCinB = new Slot<PresenterWidget<?>>();
         presenterWidgetA.internalReveal();
         presenterWidgetB.internalReveal();
 
@@ -706,8 +707,8 @@ public class PresenterWidgetTest {
             PresenterWidgetB presenterWidgetB,
             PresenterWidgetC contentC) {
         // Given
-        Object slotCinA = new Object();
-        Object slotCinB = new Object();
+        Slot<PresenterWidget<?>> slotCinA = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotCinB = new Slot<PresenterWidget<?>>();
         presenterWidgetA.internalReveal();
         presenterWidgetB.internalReveal();
 

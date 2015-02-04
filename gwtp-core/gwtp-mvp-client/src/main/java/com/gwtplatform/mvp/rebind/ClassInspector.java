@@ -261,9 +261,10 @@ public class ClassInspector {
                 if (field.getAnnotation(annotation) != null) {
                     JParameterizedType parameterizedType = field.getType().isParameterized();
                     if (!field.isStatic()
-                            || parameterizedType == null
-                            || !type.isAssignableFrom(parameterizedType)
-                            || !typeParameter.isAssignableFrom(parameterizedType.getTypeArgs()[0])) {
+                             || (typeParameter != null
+                             && (parameterizedType == null
+                             || !type.isAssignableFrom(parameterizedType)
+                             || !typeParameter.isAssignableFrom(parameterizedType.getTypeArgs()[0])))) {
                         logger.log(
                                 TreeLogger.ERROR, "Found the annotation @" + annotation.getSimpleName()
                                 + " on the invalid field '" + classType.getName() + "." + field.getName()
@@ -271,6 +272,19 @@ public class ClassInspector {
                                 + "<" + typeParameter.getName() + ">.", null);
                         throw new UnableToCompleteException();
                     }
+                    collection.add(field);
+                }
+            }
+        }
+    }
+
+    public void collectStaticFields(JClassType type,
+            List<JField> collection) throws UnableToCompleteException {
+        for (JClassType classType : inspectedClass.getFlattenedSupertypeHierarchy()) {
+            for (JField field : classType.getFields()) {
+                if (field.isStatic()
+                        && field.getType().getParameterizedQualifiedSourceName()
+                            .equals(type.getParameterizedQualifiedSourceName())) {
                     collection.add(field);
                 }
             }
