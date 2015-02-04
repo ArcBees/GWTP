@@ -43,7 +43,22 @@ public class CookieParameter extends CollectionSupportedParameter {
                     "Cookie value must be a primitive, NewCookie or a collection of NewCookie");
         }
 
+        validateCookie(cookie);
+
         return parseCookie(cookie);
+    }
+
+    private void validateCookie(Cookie cookie) {
+        String name = cookie.getName();
+        String value = cookie.getValue();
+
+        assert !(name.contains("=")
+                || name.contains(";")
+                || name.contains(",")
+                || name.startsWith("$")
+                || name.matches(".*\\s+.*"))
+                : "Invalid Cookie Name. = , ; and whitespaces are not allowed. It can't start with $.";
+        assert !(value.contains("=") || value.contains(";")) : "Invalid Cookie Value. = and ; are not allowed.";
     }
 
     private String parseCookie(NewCookie cookie) {
