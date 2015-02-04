@@ -22,4 +22,7 @@ import com.gwtplatform.crawlerservice.server.domain.CachedPage;
  * The DAO for a {@link CachedPage}.
  */
 public class CachedPageDao extends ObjectifyDao<CachedPage> {
+    public CachedPageDao() {
+        super(CachedPage.class);
+    }
 }
