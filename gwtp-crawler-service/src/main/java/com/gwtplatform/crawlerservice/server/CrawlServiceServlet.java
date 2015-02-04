@@ -19,10 +19,9 @@ package com.gwtplatform.crawlerservice.server;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,7 +64,7 @@ public class CrawlServiceServlet extends HttpServlet {
     @Inject(optional = true)
     @HtmlUnitTimeoutMillis
     private long timeoutMillis = 12000;
-    private long jsTimeoutMillis = 1000;
+    private long jsTimeoutMillis = 2000;
     private long pageWaitMillis = 200;
     private int maxLoopChecks = 2;
 
@@ -81,10 +80,11 @@ public class CrawlServiceServlet extends HttpServlet {
     private final CachedPageDao cachedPageDao;
 
     @Inject
-    CrawlServiceServlet(Provider<WebClient> webClientProvider,
-                        Logger log,
-                        CachedPageDao cachedPageDao,
-                        @ServiceKey String key) {
+    CrawlServiceServlet(
+            Provider<WebClient> webClientProvider,
+            Logger log,
+            CachedPageDao cachedPageDao,
+            @ServiceKey String key) {
         this.webClientProvider = webClientProvider;
         this.log = log;
         this.key = key;
@@ -104,16 +104,12 @@ public class CrawlServiceServlet extends HttpServlet {
                 response.setCharacterEncoding(CHAR_ENCODING);
                 response.setHeader("Content-Type", "text/plain; charset=" + CHAR_ENCODING);
 
-                List<Key<CachedPage>> keys = cachedPageDao.listKeysByProperty("url", url);
-                Map<Key<CachedPage>, CachedPage> deprecatedPages = cachedPageDao.get(keys);
+                CachedPage cachedPage = cachedPageDao.get(Key.create(CachedPage.class, url));
 
                 Date currDate = new Date();
 
-                CachedPage matchingPage = extractMatchingPage(deprecatedPages, currDate);
-                cachedPageDao.deleteKeys(deprecatedPages.keySet());
-
-                if (needToFetchPage(matchingPage, currDate, out)) {
-                    CachedPage cachedPage = createPlaceholderPage(url, currDate);
+                if (needToFetchPage(cachedPage, currDate, out)) {
+                    cachedPage = createPlaceholderPage(url, currDate);
                     String renderedHtml = renderPage(url);
                     storeFetchedPage(cachedPage, renderedHtml);
                     out.println(renderedHtml);
@@ -154,7 +150,7 @@ public class CrawlServiceServlet extends HttpServlet {
     }
 
     /**
-     * Checks if the page {@link matchingPage} needs to be fetched. If it does not need to be fetched, but a fetch is
+     * Checks if the page needs to be fetched. If it does not need to be fetched, but a fetch is
      * already in progress, then it prints out {@code FETCH_IN_PROGRESS} to the specified {@link PrintWriter}.
      *
      * @param matchingPage The matching page, can be {@code null} if no page matches.
@@ -163,7 +159,7 @@ public class CrawlServiceServlet extends HttpServlet {
      * @return {@code true} if the page needs to be fetched, {@code false} otherwise.
      */
     private boolean needToFetchPage(CachedPage matchingPage, Date currDate, PrintWriter out) {
-        if (matchingPage == null) {
+        if (matchingPage == null || matchingPage.isExpired(cachedPageTimeoutSec)) {
             return true;
         }
 
@@ -212,11 +208,13 @@ public class CrawlServiceServlet extends HttpServlet {
         webClient.getOptions().setCssEnabled(false);
         webClient.getOptions().setJavaScriptEnabled(true);
         webClient.getOptions().setThrowExceptionOnScriptError(false);
-        webClient.getOptions().setRedirectEnabled(false);
+        webClient.getOptions().setRedirectEnabled(true);
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
         webClient.setAjaxController(new SyncAllAjaxController());
         webClient.setCssErrorHandler(new SilentCssErrorHandler());
 
-        HtmlPage page = webClient.getPage(url);
+        WebRequest webRequest = new WebRequest(new URL(url), "text/html");
+        HtmlPage page = webClient.getPage(webRequest);
         webClient.getJavaScriptEngine().pumpEventLoop(timeoutMillis);
 
         int waitForBackgroundJavaScript = webClient.waitForBackgroundJavaScript(jsTimeoutMillis);
@@ -245,37 +243,4 @@ public class CrawlServiceServlet extends HttpServlet {
 
         return page.asXml();
     }
-
-    /**
-     * Checks if there is a page from {@code deprecatedPages} that is not expired. If there is more than one, choose the
-     * most recent. If one is found it is removed from the {@code deprecatedPages} list.
-     *
-     * @param deprecatedPages The list of pages that match the URL but that are expected to be.
-     * @param currDate        The current date, to check for expiration.
-     * @return The non-expired matching page if found, {@code null} otherwise.
-     */
-    private CachedPage extractMatchingPage(Map<Key<CachedPage>, CachedPage> deprecatedPages, Date currDate) {
-        CachedPage matchingPage = findMostRecentPage(deprecatedPages);
-
-        // Keep the matching page only if it has not expired
-        if (matchingPage == null ||
-                currDate.getTime() > matchingPage.getFetchDate().getTime() + cachedPageTimeoutSec * 1000) {
-            matchingPage = null;
-        } else {
-            deprecatedPages.remove(Key.create(CachedPage.class, matchingPage.getId()));
-        }
-
-        return matchingPage;
-    }
-
-    private CachedPage findMostRecentPage(Map<Key<CachedPage>, CachedPage> pages) {
-        CachedPage result = null;
-        for (CachedPage page : pages.values()) {
-            if (result == null || page.getFetchDate().after(result.getFetchDate())) {
-                result = page;
-            }
-        }
-        return result;
-    }
-
 }
