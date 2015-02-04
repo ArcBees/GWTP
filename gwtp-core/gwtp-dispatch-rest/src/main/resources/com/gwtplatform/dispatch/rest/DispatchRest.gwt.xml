@@ -10,7 +10,8 @@
     <inherits name="com.github.nmorel.gwtjackson.GwtJackson"/>
 
     <!-- Specify the paths for translatable code -->
-    <source path='client'/>
+    <source path="client"/>
+    <super-source path="emul"/>
 
     <entry-point class="com.gwtplatform.dispatch.rest.client.DispatchRestEntryPoint"/>
 

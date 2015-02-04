@@ -18,7 +18,14 @@ package com.gwtplatform.dispatch.rest.rebind.parameter;
 
 import javax.ws.rs.FormParam;
 
+import com.google.gwt.core.ext.typeinfo.HasAnnotations;
+
 public class FormParamValueResolver implements HttpParamValueResolver<FormParam> {
+    @Override
+    public String resolve(HasAnnotations hasAnnotations) {
+        return resolve(hasAnnotations.getAnnotation(FormParam.class));
+    }
+
     @Override
     public String resolve(FormParam annotation) {
         return annotation.value();

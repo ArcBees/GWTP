@@ -1,6 +1,7 @@
 package $package;
 
-import com.gwtplatform.dispatch.rest.client.MetadataType;
+import com.gwtplatform.dispatch.rest.client.codegen.AbstractActionMetadataProvider;
+import com.gwtplatform.dispatch.rest.client.core.MetadataType;
 
 public class $impl extends AbstractActionMetadataProvider {
     public ActionMetadataProviderImpl() {

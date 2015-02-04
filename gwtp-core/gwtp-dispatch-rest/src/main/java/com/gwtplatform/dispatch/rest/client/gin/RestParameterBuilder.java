@@ -20,8 +20,7 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Set;
 
-import com.gwtplatform.dispatch.rest.client.parameters.ClientHttpParameter;
-import com.gwtplatform.dispatch.rest.client.utils.RestParameterBindings;
+import com.gwtplatform.dispatch.rest.client.core.parameters.ClientHttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
@@ -29,15 +28,15 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 /**
  * Configure a global parameter to be sent with every HTTP requests.
  */
-public class RestParameterBuilder {
-    private final RestDispatchAsyncModuleBuilder moduleBuilder;
+public class RestParameterBuilder<B extends BaseRestDispatchModuleBuilder<B>> {
+    private final B moduleBuilder;
     private final Type type;
     private final RestParameterBindings target;
     private final String key;
     private final Set<HttpMethod> httpMethods = EnumSet.allOf(HttpMethod.class);
 
     RestParameterBuilder(
-            RestDispatchAsyncModuleBuilder moduleBuilder,
+            B moduleBuilder,
             Type type,
             RestParameterBindings target,
             String key) {
@@ -56,7 +55,7 @@ public class RestParameterBuilder {
      *
      * @return this builder instance.
      */
-    public RestParameterBuilder toHttpMethods(HttpMethod httpMethod, HttpMethod... otherHttpMethods) {
+    public RestParameterBuilder<B> toHttpMethods(HttpMethod httpMethod, HttpMethod... otherHttpMethods) {
         httpMethods.clear();
 
         httpMethods.add(httpMethod);
@@ -72,7 +71,7 @@ public class RestParameterBuilder {
      *
      * @return The module builder instance.
      */
-    public RestDispatchAsyncModuleBuilder withValue(String value) {
+    public B withValue(String value) {
         HttpParameter parameter = new ClientHttpParameter(type, key, value, null);
 
         for (HttpMethod httpMethod : httpMethods) {

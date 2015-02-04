@@ -17,7 +17,7 @@
 package com.gwtplatform.dispatch.rest.rebind.serialization;
 
 import com.google.common.base.Objects;
-import com.gwtplatform.dispatch.rest.client.MetadataType;
+import com.gwtplatform.dispatch.rest.client.core.MetadataType;
 
 public class RegisterMetadataHolder {
     private final String actionClass;

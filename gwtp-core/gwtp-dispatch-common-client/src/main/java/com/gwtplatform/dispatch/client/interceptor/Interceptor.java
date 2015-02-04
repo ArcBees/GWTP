@@ -60,5 +60,5 @@ public interface Interceptor<A, R> {
      *
      * @return true if this action can be executed, false if not.
      */
-    boolean canExecute(TypedAction action);
+    boolean canExecute(TypedAction<?> action);
 }

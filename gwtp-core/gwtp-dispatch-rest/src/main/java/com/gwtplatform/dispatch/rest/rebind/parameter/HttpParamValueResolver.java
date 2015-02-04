@@ -18,6 +18,10 @@ package com.gwtplatform.dispatch.rest.rebind.parameter;
 
 import java.lang.annotation.Annotation;
 
+import com.google.gwt.core.ext.typeinfo.HasAnnotations;
+
 public interface HttpParamValueResolver<T extends Annotation> {
+    String resolve(HasAnnotations hasAnnotations);
+
     String resolve(T annotation);
 }
