@@ -95,6 +95,8 @@ public class PresenterInspector {
 
         findGetPresenterMethodName();
 
+        classInspector.collectStaticFields(classCollection.nestedSlotClass, contentSlots);
+
         classInspector.collectStaticAnnotatedFields(classCollection.typeClass,
                 classCollection.revealContentHandlerClass, ContentSlot.class, contentSlots);
 

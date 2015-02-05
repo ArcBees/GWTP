@@ -30,6 +30,9 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+import com.gwtplatform.mvp.client.presenter.slots.IsSlot;
+import com.gwtplatform.mvp.client.presenter.slots.MultiSlot;
+import com.gwtplatform.mvp.client.presenter.slots.RemovableSlot;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 
 /**
@@ -173,6 +176,12 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
+    public <T extends PresenterWidget<?>> void addToSlot(MultiSlot<T> slot, T child) {
+        addToSlot((Object) slot, child);
+    }
+
+    @Override
+    @Deprecated
     public void addToSlot(Object slot, PresenterWidget<?> child) {
         assert child != null : "cannot add null to a slot";
 
@@ -196,6 +205,12 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
+    public void clearSlot(RemovableSlot<?> slot) {
+        clearSlot((Object) slot);
+    }
+
+    @Override
+    @Deprecated
     public void clearSlot(Object slot) {
         internalClearSlot(slot, null);
         getView().setInSlot(slot, null);
@@ -294,6 +309,12 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
+    public <T extends PresenterWidget<?>> void removeFromSlot(RemovableSlot<T> slot, T child) {
+        removeFromSlot((Object) slot, child);
+    }
+
+    @Deprecated
+    @Override
     public void removeFromSlot(Object slot, PresenterWidget<?> child) {
         if (child == null || child.slot != slot) {
             return;
@@ -307,10 +328,22 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
+    public <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child) {
+        setInSlot(slot, child, true);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child, boolean performReset) {
+        setInSlot((Object) slot, child, true);
+    }
+
+    @Deprecated
+    @Override
     public void setInSlot(Object slot, PresenterWidget<?> child) {
         setInSlot(slot, child, true);
     }
 
+    @Deprecated
     @Override
     public void setInSlot(Object slot, PresenterWidget<?> child, boolean performReset) {
         if (child == null) {

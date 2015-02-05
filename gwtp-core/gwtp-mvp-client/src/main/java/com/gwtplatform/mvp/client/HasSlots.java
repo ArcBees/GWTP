@@ -16,6 +16,10 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.gwtplatform.mvp.client.presenter.slots.IsSlot;
+import com.gwtplatform.mvp.client.presenter.slots.MultiSlot;
+import com.gwtplatform.mvp.client.presenter.slots.RemovableSlot;
+
 /**
  * Interface of objects containing slots in which {@link PresenterWidget} can
  * be inserted.
@@ -38,85 +42,169 @@ package com.gwtplatform.mvp.client;
  */
 public interface HasSlots {
     /**
-     * This method adds some content in a specific slot of the {@link Presenter}.
-     * The attached {@link View} should manage this slot when its
-     * {@link View#addToSlot(Object, com.google.gwt.user.client.ui.Widget)} is called.
-     * <p/>
-     * Contrary to the {@link #setInSlot} method, no
-     * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired,
-     * so {@link PresenterWidget#onReset()} is not invoked.
-     * <p/>
-     * For more details on slots, see {@link HasSlots}.
-     *
-     * @param slot    An opaque object identifying which slot this content is being
-     *                added into.
-     * @param content The content, a {@link PresenterWidget}. Passing {@code null}
-     *                will not add anything.
-     */
+    * This method adds some content in a specific slot of the {@link Presenter}.
+    * The attached {@link View} should manage this slot when its
+    * {@link View#addToSlot(Object, com.google.gwt.user.client.ui.Widget)} is called.
+    * <p/>
+    * Contrary to the {@link #setInSlot} method, no
+    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired,
+    * so {@link PresenterWidget#onReset()} is not invoked.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot this content is being
+    * added into.
+    * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+    * will not add anything.
+    * @deprecated use {@link #addToSlot(MultiSlot, PresenterWidget)} instead.
+    */
+    @Deprecated
     void addToSlot(Object slot, PresenterWidget<?> content);
-
     /**
-     * This method clears the content in a specific slot. No
-     * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired.
-     * The attached {@link View} should manage this slot when its
-     * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear
-     * the slot when the {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} method is
-     * called with {@code null} as a parameter.
-     * <p/>
-     * For more details on slots, see {@link HasSlots}.
-     *
-     * @param slot An opaque object identifying which slot to clear.
-     */
+    * This method clears the content in a specific slot. No
+    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired.
+    * The attached {@link View} should manage this slot when its
+    * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear
+    * the slot when the {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} method is
+    * called with {@code null} as a parameter.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot to clear.
+    * @deprecated use {@link #clearSlot(RemovableSlot)} instead.
+    */
+    @Deprecated
     void clearSlot(Object slot);
-
     /**
-     * This method removes some content in a specific slot of the
-     * {@link Presenter}. No
-     * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired.
-     * The attached {@link View} should manage this slot when its
-     * {@link View#removeFromSlot(Object, com.google.gwt.user.client.ui.Widget)} is called.
-     * <p/>
-     * For more details on slots, see {@link HasSlots}.
-     *
-     * @param slot    An opaque object identifying which slot this content is being
-     *                removed from.
-     * @param content The content, a {@link PresenterWidget}. Passing {@code null}
-     *                will not remove anything.
-     */
+    * This method removes some content in a specific slot of the
+    * {@link Presenter}. No
+    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired.
+    * The attached {@link View} should manage this slot when its
+    * {@link View#removeFromSlot(Object, com.google.gwt.user.client.ui.Widget)} is called.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot this content is being
+    * removed from.
+    * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+    * will not remove anything.
+    * @deprecated use {@link #removeFromSlot(RemovableSlot, PresenterWidget)} instead.
+    */
+    @Deprecated
     void removeFromSlot(Object slot, PresenterWidget<?> content);
-
     /**
-     * This method sets some content in a specific slot of the {@link Presenter}.
-     * A {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} will be fired
-     * after the top-most visible presenter is revealed, resulting in a call to
-     * {@link PresenterWidget#onReset()}.
-     * <p/>
-     * For more details on slots, see {@link HasSlots}.
-     *
-     * @param slot    An opaque object identifying which slot this content is being
-     *                set into. The attached view should know what to do with this slot.
-     * @param content The content, a {@link PresenterWidget}. Passing {@code null}
-     *                will clear the slot.
-     */
+    * This method sets some content in a specific slot of the {@link Presenter}.
+    * A {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} will be fired
+    * after the top-most visible presenter is revealed, resulting in a call to
+    * {@link PresenterWidget#onReset()}.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot this content is being
+    * set into. The attached view should know what to do with this slot.
+    * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+    * will clear the slot.
+    * @deprecated use {@link #setInSlot(IsSlot, PresenterWidget) instead.
+    */
+    @Deprecated
     void setInSlot(Object slot, PresenterWidget<?> content);
-
     /**
-     * This method sets some content in a specific slot of the {@link Presenter}.
-     * The attached {@link View} should manage this slot when its
-     * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear the
-     * slot when the {@code setInSlot} method is called with {@code null} as a
-     * parameter.
-     * <p/>
-     * For more details on slots, see {@link HasSlots}.
-     *
-     * @param slot         An opaque object identifying which slot this content is being
-     *                     set into.
-     * @param content      The content, a {@link PresenterWidget}. Passing {@code null}
-     *                     will clear the slot.
-     * @param performReset Pass {@code true} if you want a
-     *                     {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} to be fired
-     *                     after the content has been added and this presenter is visible, pass
-     *                     {@code false} otherwise.
-     */
+    * This method sets some content in a specific slot of the {@link Presenter}.
+    * The attached {@link View} should manage this slot when its
+    * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear the
+    * slot when the {@code setInSlot} method is called with {@code null} as a
+    * parameter.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot this content is being
+    * set into.
+    * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+    * will clear the slot.
+    * @param performReset Pass {@code true} if you want a
+    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} to be fired
+    * after the content has been added and this presenter is visible, pass
+    * {@code false} otherwise.
+    * @deprecated use {@link #setInSlot(IsSlot, PresenterWidget, boolean)} instead.
+    */
+    @Deprecated
     void setInSlot(Object slot, PresenterWidget<?> content, boolean performReset);
+    /**
+    * This method adds some content in a specific slot of the {@link Presenter}.
+    * The attached {@link View} should manage this slot when its
+    * {@link View#addToSlot(Object, com.google.gwt.user.client.ui.Widget)} is called.
+    * <p/>
+    * Contrary to the {@link #setInSlot} method, no
+    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired,
+    * so {@link PresenterWidget#onReset()} is not invoked.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot this content is being
+    * added into.
+    * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+    * will not add anything.
+    */
+    <T extends PresenterWidget<?>> void addToSlot(MultiSlot<T> slot, T child);
+    /**
+    * This method clears the content in a specific slot. No
+    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired.
+    * The attached {@link View} should manage this slot when its
+    * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear
+    * the slot when the {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} method is
+    * called with {@code null} as a parameter.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot to clear.
+    */
+    void clearSlot(RemovableSlot<?> slot);
+    /**
+    * This method removes some content in a specific slot of the
+    * {@link Presenter}. No
+    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired.
+    * The attached {@link View} should manage this slot when its
+    * {@link View#removeFromSlot(Object, com.google.gwt.user.client.ui.Widget)} is called.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot this content is being
+    * removed from.
+    * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+    * will not remove anything.
+    */
+    <T extends PresenterWidget<?>> void removeFromSlot(RemovableSlot<T> slot, T child);
+    /**
+    * This method sets some content in a specific slot of the {@link Presenter}.
+    * A {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} will be fired
+    * after the top-most visible presenter is revealed, resulting in a call to
+    * {@link PresenterWidget#onReset()}.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot this content is being
+    * set into. The attached view should know what to do with this slot.
+    * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+    * will clear the slot.
+    */
+    <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child);
+    /**
+    * This method sets some content in a specific slot of the {@link Presenter}.
+    * The attached {@link View} should manage this slot when its
+    * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear the
+    * slot when the {@code setInSlot} method is called with {@code null} as a
+    * parameter.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot this content is being
+    * set into.
+    * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+    * will clear the slot.
+    * @param performReset Pass {@code true} if you want a
+    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} to be fired
+    * after the content has been added and this presenter is visible, pass
+    * {@code false} otherwise.
+    */
+    <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child, boolean performReset);
 }
