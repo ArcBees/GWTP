@@ -17,10 +17,10 @@ package com.gwtplatform.mvp.client.presenter.slots;
 
 import com.gwtplatform.mvp.client.PresenterWidget;
 
-public interface ISlot<T extends PresenterWidget<?>> {
-    boolean isPopup();
-
-    boolean isRemovable();
-
-    Object getRawSlot();
+/**
+ * A slot that can only hold one presenter at a time.
+ *
+ * @param <T> the presenter type
+ */
+public interface IsSingleSlot<T extends PresenterWidget<?>> extends IsSlot<T> {
 }

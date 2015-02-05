@@ -22,12 +22,9 @@ public abstract class MultiSlot<T extends PresenterWidget<?>> implements Removab
     public boolean isRemovable() {
         return true;
     }
+
     @Override
     public boolean isPopup() {
         return false;
-    }
-    @Override
-    public Object getRawSlot() {
-        return this;
     }
 }

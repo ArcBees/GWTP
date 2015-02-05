@@ -17,11 +17,8 @@ package com.gwtplatform.mvp.client.presenter.slots;
 
 import com.gwtplatform.mvp.client.PresenterWidget;
 
-/**
- * The Interface ISingleSlot.
- *
- * @param <T> the generic type
- */
-public interface ISingleSlot<T extends PresenterWidget<?>> extends ISlot<T> {
+public interface IsSlot<T extends PresenterWidget<?>> {
+    boolean isPopup();
 
+    boolean isRemovable();
 }

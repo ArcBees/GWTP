@@ -22,6 +22,6 @@ import com.gwtplatform.mvp.client.PresenterWidget;
  * Slots must implement RemovableSlot to allow presenters to be
  * removed once they are added to the slot.
  */
-public interface RemovableSlot<T extends PresenterWidget<?>> extends ISlot<T> {
+public interface RemovableSlot<T extends PresenterWidget<?>> extends IsSlot<T> {
 
 }

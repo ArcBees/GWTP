@@ -30,7 +30,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
-import com.gwtplatform.mvp.client.presenter.slots.ISlot;
+import com.gwtplatform.mvp.client.presenter.slots.IsSlot;
 import com.gwtplatform.mvp.client.presenter.slots.MultiSlot;
 import com.gwtplatform.mvp.client.presenter.slots.RemovableSlot;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
@@ -328,12 +328,12 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     }
 
     @Override
-    public <T extends PresenterWidget<?>> void setInSlot(ISlot<T> slot, T child) {
+    public <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child) {
         setInSlot(slot, child, true);
     }
 
     @Override
-    public <T extends PresenterWidget<?>> void setInSlot(ISlot<T> slot, T child, boolean performReset) {
+    public <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child, boolean performReset) {
         setInSlot((Object) slot, child, true);
     }
 

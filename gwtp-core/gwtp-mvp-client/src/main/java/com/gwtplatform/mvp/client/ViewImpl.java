@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtplatform.mvp.client.presenter.slots.ISingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.IsSingleSlot;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 
 /**
@@ -87,7 +87,7 @@ public abstract class ViewImpl implements View {
      * @param slot - the slot
      * @param container - the container must implement HasWidgets.ForIsWidget.
      */
-    protected void bindSlot(ISingleSlot<?> slot, HasWidgets container) {
+    protected void bindSlot(IsSingleSlot<?> slot, HasWidgets container) {
         internalBindSlot(slot, container);
     }
 
