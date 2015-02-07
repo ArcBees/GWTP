@@ -13,19 +13,37 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.gwtplatform.mvp.client.presenter.slots;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
+
+import com.google.gwt.core.shared.GWT;
 
 public class LegacySlotConvertor {
-    private static Map<Object, LegacySlot> legacySlotMap =
+    static String WARNING_MESSAGE = "Warning: You're using an untyped slot!\n"
+            + "Untyped slots are dangerous! Please upgrade your slots using\n"
+            + "the Arcbee's easy upgrade tool at\n"
+            + "https://arcbees.github.io/gwtp-slot-upgrader";
+
+    private static final Logger LOGGER = Logger.getLogger(LegacySlotConvertor.class.getName());
+
+    private static LegacySlotConvertor INSTANCE = GWT.create(LegacySlotConvertor.class);
+
+    private Map<Object, LegacySlot> legacySlotMap =
             new HashMap<Object, LegacySlot>();
 
-    public static LegacySlot convert(Object slot) {
+    protected LegacySlot get(Object slot) {
         if (!legacySlotMap.containsKey(slot)) {
+            LOGGER.severe(WARNING_MESSAGE);
             legacySlotMap.put(slot, new LegacySlot(slot));
         }
         return legacySlotMap.get(slot);
+    }
+
+    public static LegacySlot convert(Object slot) {
+        return INSTANCE.get(slot);
     }
 }
