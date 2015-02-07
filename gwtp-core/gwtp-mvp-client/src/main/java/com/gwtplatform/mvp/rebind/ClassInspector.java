@@ -261,10 +261,9 @@ public class ClassInspector {
                 if (field.getAnnotation(annotation) != null) {
                     JParameterizedType parameterizedType = field.getType().isParameterized();
                     if (!field.isStatic()
-                             || (typeParameter != null
-                             && (parameterizedType == null
+                             || parameterizedType == null
                              || !type.isAssignableFrom(parameterizedType)
-                             || !typeParameter.isAssignableFrom(parameterizedType.getTypeArgs()[0])))) {
+                             || !typeParameter.isAssignableFrom(parameterizedType.getTypeArgs()[0])) {
                         logger.log(
                                 TreeLogger.ERROR, "Found the annotation @" + annotation.getSimpleName()
                                 + " on the invalid field '" + classType.getName() + "." + field.getName()

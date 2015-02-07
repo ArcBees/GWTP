@@ -19,8 +19,8 @@ package com.gwtplatform.mvp.client;
 import java.util.List;
 import java.util.Set;
 
-import com.gwtplatform.mvp.client.presenter.slots.ISingleSlot;
-import com.gwtplatform.mvp.client.presenter.slots.ISlot;
+import com.gwtplatform.mvp.client.presenter.slots.IsSingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.IsSlot;
 import com.gwtplatform.mvp.client.presenter.slots.MultiSlot;
 import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
 import com.gwtplatform.mvp.client.presenter.slots.RemovableSlot;
@@ -62,6 +62,7 @@ public interface HasSlots {
     * added into.
     * @param content The content, a {@link PresenterWidget}. Passing {@code null}
     * will not add anything.
+    * @deprecated since 1.5. Use {@link #addToSlot(MultiSlot, PresenterWidget)} instead.
     */
     @Deprecated
     void addToSlot(Object slot, PresenterWidget<?> content);
@@ -77,6 +78,7 @@ public interface HasSlots {
     * For more details on slots, see {@link HasSlots}.
     *
     * @param slot An opaque object identifying which slot to clear.
+    * @deprecated since 1.5. Use {@link #clearSlot(RemovableSlot)} instead.
     */
     @Deprecated
     void clearSlot(Object slot);
@@ -94,6 +96,7 @@ public interface HasSlots {
     * removed from.
     * @param content The content, a {@link PresenterWidget}. Passing {@code null}
     * will not remove anything.
+    * @deprecated since 1.5. Use {@link #removeFromSlot(RemovableSlot, PresenterWidget)} instead.
     */
     @Deprecated
     void removeFromSlot(Object slot, PresenterWidget<?> content);
@@ -110,6 +113,7 @@ public interface HasSlots {
     * set into. The attached view should know what to do with this slot.
     * @param content The content, a {@link PresenterWidget}. Passing {@code null}
     * will clear the slot.
+    * @deprecated since 1.5. Use {@link #setInSlot(IsSlot, PresenterWidget)} instead.
     */
     @Deprecated
     void setInSlot(Object slot, PresenterWidget<?> content);
@@ -131,6 +135,7 @@ public interface HasSlots {
     * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} to be fired
     * after the content has been added and this presenter is visible, pass
     * {@code false} otherwise.
+    * @deprecated since 1.5. Use {@link #setInSlot(IsSlot, PresenterWidget, boolean)} instead.
     */
     @Deprecated
     void setInSlot(Object slot, PresenterWidget<?> content, boolean performReset);
@@ -196,7 +201,7 @@ public interface HasSlots {
      * @param content The content, a {@link PresenterWidget}. Passing {@code null}
      *                will clear the slot.
      */
-    <T extends PresenterWidget<?>> void setInSlot(ISlot<T> slot, T child);
+    <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child);
 
     /**
      * This method sets some content in a specific slot of the {@link Presenter}.
@@ -216,14 +221,14 @@ public interface HasSlots {
      *                     after the content has been added and this presenter is visible, pass
      *                     {@code false} otherwise.
      */
-    <T extends PresenterWidget<?>> void setInSlot(ISlot<T> slot, T child, boolean performReset);
+    <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child, boolean performReset);
 
     /**
      * Get the child of SingleSlot.
      * @param slot - the slot
      * @return the child of the slot or null if the slot is empty.
      */
-    <T extends PresenterWidget<?>> T getChild(ISingleSlot<T> slot);
+    <T extends PresenterWidget<?>> T getChild(IsSingleSlot<T> slot);
 
     /**
      * Get the children of a slot.

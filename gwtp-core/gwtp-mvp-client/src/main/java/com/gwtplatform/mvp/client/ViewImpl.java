@@ -29,7 +29,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.gwtplatform.mvp.client.presenter.slots.ISingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.IsSingleSlot;
 import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
 
@@ -46,7 +46,7 @@ public abstract class ViewImpl implements View {
     private Widget widget;
     private Map<Object, HasOneWidget> oneWidgetSlots = new HashMap<Object, HasOneWidget>();
 
-    private Map<Object,HasWidgets> hasWidgetSlots = new HashMap<Object, HasWidgets>();
+    private Map<Object, HasWidgets> hasWidgetSlots = new HashMap<Object, HasWidgets>();
 
     private Map<OrderedSlot<?>, List<Comparable<Comparable<?>>>> orderedSlots
             = new HashMap<OrderedSlot<?>, List<Comparable<Comparable<?>>>>();
@@ -55,17 +55,15 @@ public abstract class ViewImpl implements View {
     @Override
     public void addToSlot(Object slot, IsWidget content) {
         if (hasWidgetSlots.containsKey(slot)) {
-            if (orderedSlots.containsKey(slot)) {
-                List<Comparable<Comparable<?>>> list = orderedSlots.get(slot);
-                list.add((Comparable<Comparable<?>>) content);
-                Collections.sort(list);
-                int index = Collections.binarySearch(list, (Comparable<Comparable<?>>) content);
+            hasWidgetSlots.get(slot).add(content.asWidget());
+        } else if (orderedSlots.containsKey(slot)) {
+            List<Comparable<Comparable<?>>> list = orderedSlots.get(slot);
+            list.add((Comparable<Comparable<?>>) content);
+            Collections.sort(list);
+            int index = Collections.binarySearch(list, (Comparable<Comparable<?>>) content);
 
-                InsertPanel insertPanel = (InsertPanel) hasWidgetSlots.get(slot);
-                insertPanel.insert(content.asWidget(), index);
-            } else {
-                hasWidgetSlots.get(slot).add(content.asWidget());
-            }
+            InsertPanel insertPanel = (InsertPanel) hasWidgetSlots.get(slot);
+            insertPanel.insert(content.asWidget(), index);
         }
     }
 
@@ -77,9 +75,8 @@ public abstract class ViewImpl implements View {
             }
         } else if (hasWidgetSlots.containsKey(slot)) {
             hasWidgetSlots.get(slot).remove(content.asWidget());
-            if (orderedSlots.containsKey(slot)) {
-                orderedSlots.get(slot).remove(content);
-            }
+        } else if (orderedSlots.containsKey(slot)) {
+            orderedSlots.get(slot).remove(content);
         }
     }
 
@@ -93,11 +90,10 @@ public abstract class ViewImpl implements View {
             if (content != null) {
                 hasWidgetSlots.get(slot).add(content.asWidget());
             }
-            if (orderedSlots.containsKey(slot)) {
-                orderedSlots.get(slot).clear();
-                if (content != null) {
-                    orderedSlots.get(slot).add((Comparable<Comparable<?>>) content);
-                }
+        } else if (orderedSlots.containsKey(slot)) {
+            orderedSlots.get(slot).clear();
+            if (content != null) {
+                orderedSlots.get(slot).add((Comparable<Comparable<?>>) content);
             }
         }
     }
@@ -114,16 +110,16 @@ public abstract class ViewImpl implements View {
     /**
      * Link a slot to a container.
      * @param slot - the slot
-     * @param container - the container must implement HasWidgets.ForIsWidget.
+     * @param container - the container must implement HasWidgets.
      */
-    protected void bindSlot(ISingleSlot<?> slot, HasWidgets container) {
+    protected void bindSlot(IsSingleSlot<?> slot, HasWidgets container) {
         internalBindSlot(slot, container);
     }
 
     /**
      * Link a slot to a container.
      * @param slot - the slot
-     * @param container - the container must implement HasWidgets.ForIsWidget.
+     * @param container - the container must implement HasWidgets.
      */
     protected void bindSlot(Slot<?> slot, HasWidgets container) {
         internalBindSlot(slot, container);
@@ -132,12 +128,11 @@ public abstract class ViewImpl implements View {
     /**
      * Link a slot to a container.
      * @param slot - the slot
-     * @param container - the container must implement HasWidgets.ForIsWidget.
+     * @param container - the container must implement HasWidgets & InsertPanel.
      */
     protected <T extends HasWidgets & InsertPanel> void bindSlot(
             OrderedSlot<?> slot, T container) {
         orderedSlots.put(slot, new ArrayList<Comparable<Comparable<?>>>());
-        hasWidgetSlots.put(slot, container);
     }
 
     protected void initWidget(IsWidget widget) {

@@ -22,7 +22,7 @@ import com.gwtplatform.mvp.client.PresenterWidget;
  *
  * @param <T> - the type of presenter that this slot can take.
  */
-public class SingleSlot<T extends PresenterWidget<?>> implements ISingleSlot<T>, RemovableSlot<T> {
+public class SingleSlot<T extends PresenterWidget<?>> implements IsSingleSlot<T>, RemovableSlot<T> {
     @Override
     public boolean isPopup() {
         return false;
