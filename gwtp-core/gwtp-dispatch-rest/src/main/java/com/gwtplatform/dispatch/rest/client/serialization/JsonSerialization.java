@@ -37,9 +37,9 @@ public class JsonSerialization implements Serialization {
     JsonSerialization(JacksonMapperProvider jacksonMapperProvider) {
         this.jacksonMapperProvider = jacksonMapperProvider;
 
-        deserializationContext = new JsonDeserializationContext.Builder()
+        deserializationContext = JsonDeserializationContext.builder()
                 .failOnUnknownProperties(false);
-        serializationContext = new JsonSerializationContext.Builder();
+        serializationContext = JsonSerializationContext.builder();
     }
 
     @Override
