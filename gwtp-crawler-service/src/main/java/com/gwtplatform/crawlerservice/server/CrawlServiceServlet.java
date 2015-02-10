@@ -95,14 +95,16 @@ public class CrawlServiceServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out = null;
         try {
+            // Encoding needs to be set BEFORE calling response.getWriter()
+            response.setCharacterEncoding(CHAR_ENCODING);
+            response.setHeader("Content-Type", "text/html; charset=" + CHAR_ENCODING);
+
             out = response.getWriter();
             validateKey(request);
 
             String url = request.getParameter("url");
             if (!Strings.isNullOrEmpty(url)) {
                 url = URLDecoder.decode(url, CHAR_ENCODING);
-                response.setCharacterEncoding(CHAR_ENCODING);
-                response.setHeader("Content-Type", "text/plain; charset=" + CHAR_ENCODING);
 
                 CachedPage cachedPage = cachedPageDao.get(Key.create(CachedPage.class, url));
 
