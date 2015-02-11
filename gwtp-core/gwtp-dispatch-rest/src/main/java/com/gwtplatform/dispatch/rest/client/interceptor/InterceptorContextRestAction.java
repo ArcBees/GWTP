@@ -27,6 +27,7 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 /**
  * A RestAction stub used internally to compare interceptor contexts.
  */
+// TODO: Consider not implementing RestAction because it brings unneeded methods
 class InterceptorContextRestAction implements RestAction<Object> {
     private final HttpMethod httpMethod;
     private final String path;
@@ -88,6 +89,16 @@ class InterceptorContextRestAction implements RestAction<Object> {
 
     @Override
     public String getResultClass() {
+        return null;
+    }
+
+    @Override
+    public List<String> getClientProducedContentTypes() {
+        return null;
+    }
+
+    @Override
+    public List<String> getClientConsumedContentTypes() {
         return null;
     }
 }

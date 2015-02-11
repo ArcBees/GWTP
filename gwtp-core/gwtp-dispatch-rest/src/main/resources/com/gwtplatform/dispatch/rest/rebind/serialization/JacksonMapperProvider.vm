@@ -12,7 +12,7 @@ public class $impl extends AbstractJacksonMapperProvider {
     @Inject
     $impl(#foreach ($definition in $definitions)Provider<$definition.getParameterizedClassName()> ${definition.className}Provider#commaIfNeeded($definitions)$lf#end) {
 #foreach ($definition in $definitions)
-        addProvider("$definition.serializableType.getParameterizedQualifiedSourceName()", ${definition.className}Provider);
+        registerProvider("$definition.serializableType.getParameterizedQualifiedSourceName()", ${definition.className}Provider);
 #end
     }
 }

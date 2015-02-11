@@ -22,7 +22,6 @@ import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
 
 import com.google.gwt.http.client.RequestBuilder;
 import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
@@ -37,8 +36,6 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
 
 public class DefaultHeaderFactory implements HeaderFactory {
-    private static final String JSON_UTF8 = "application/json; charset=utf-8";
-
     private final HttpParameterFactory httpParameterFactory;
     private final RestParameterBindings globalParams;
     private final String securityHeaderName;
@@ -73,7 +70,7 @@ public class DefaultHeaderFactory implements HeaderFactory {
     private List<HttpParameter> buildParameters(RestAction<?> action, String securityToken) {
         List<HttpParameter> headerParams = new ArrayList<HttpParameter>();
 
-        addMediaTypes(headerParams);
+        addMediaTypes(action, headerParams);
         maybeAddModuleBase(action, headerParams);
         maybeAddSecurityToken(securityToken, action, headerParams);
         addGlobalHeaders(action, headerParams);
@@ -82,9 +79,19 @@ public class DefaultHeaderFactory implements HeaderFactory {
         return headerParams;
     }
 
-    private void addMediaTypes(List<HttpParameter> headerParams) {
-        headerParams.add(httpParameterFactory.create(Type.HEADER, HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON));
-        headerParams.add(httpParameterFactory.create(Type.HEADER, HttpHeaders.CONTENT_TYPE, JSON_UTF8));
+    private void addMediaTypes(RestAction<?> action, List<HttpParameter> headerParams) {
+        List<String> contentTypes = action.getClientConsumedContentTypes();
+        StringBuilder accept = new StringBuilder();
+
+        for (String contentType : contentTypes) {
+            accept.append(",").append(contentType);
+        }
+
+        if (accept.length() > 0) {
+            accept.deleteCharAt(0);
+        }
+
+        headerParams.add(httpParameterFactory.create(Type.HEADER, HttpHeaders.ACCEPT, accept));
     }
 
     private void maybeAddModuleBase(RestAction<?> action, List<HttpParameter> headerParams) {

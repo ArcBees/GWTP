@@ -160,8 +160,10 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         variables.put("bodyParameterName", bodyParameterName);
         variables.put("parameters", parameters);
         variables.put("httpParameters", actionDefinition.getHttpParameters());
-        // TODO: Don't generate but rather let the serializer add the header at runtime
-        variables.put("contentType", actionDefinition.getConsumes().iterator().next());
+
+        // TODO: filter values based on generated de/serializers only
+        variables.put("consumes", actionDefinition.getConsumes());
+        variables.put("produces", actionDefinition.getProduces());
     }
 
     @Override

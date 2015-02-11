@@ -17,10 +17,11 @@
 package com.gwtplatform.dispatch.rest.client.core;
 
 import javax.inject.Inject;
+import javax.ws.rs.core.HttpHeaders;
 
-import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
 import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.client.serialization.SerializationException;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
@@ -49,24 +50,28 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
      * Verify if the provided <code>resultType</code> can be deserialized.
      *
      * @param resultType the parameterized type to verify if it can be deserialized.
+     * @param contentType the contentType of the value that requires deserialization.
      *
      * @return <code>true</code> if <code>resultType</code> can be deserialized, <code>false</code> otherwise.
      */
-    protected boolean canDeserialize(String resultType) {
-        return serialization.canDeserialize(resultType);
+    protected boolean canDeserialize(String resultType, String contentType) {
+        // TODO: Loop over all deserializers
+        return serialization.canDeserialize(resultType, contentType);
     }
 
     /**
-     * Deserializes the json as an object of the <code>resultClass</code> type.
+     * Deserializes the data as an object of the <code>resultClass</code> type.
      *
      * @param resultClass the parameterized type of the object once deserialized.
-     * @param json the json to deserialize.
+     * @param contentType the contentType of <code>data</code>.
+     * @param data the data to deserialize.
      * @param <R> the type of the object once deserialized
      *
      * @return The deserialized object.
      */
-    protected <R> R deserializeValue(String resultClass, String json) {
-        return serialization.deserialize(json, resultClass);
+    protected <R> R deserializeValue(String resultClass, String contentType, String data) {
+        // TODO: Loop over all deserializers
+        return serialization.deserialize(resultClass, contentType, data);
     }
 
     private boolean isSuccessStatusCode(Response response) {
@@ -77,13 +82,13 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
 
     private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {
         String resultClass = action.getResultClass();
+        String contentType = response.getHeader(HttpHeaders.CONTENT_TYPE);
 
-        if (resultClass != null && canDeserialize(resultClass)) {
+        if (resultClass != null && canDeserialize(resultClass, contentType)) {
             try {
-                String json = response.getText();
-                return deserializeValue(resultClass, json);
-            } catch (JsonMappingException e) {
-                throw new ActionException("Unable to deserialize response. An unexpected error occurred.", e);
+                return deserializeValue(resultClass, contentType, response.getText());
+            } catch (SerializationException e) {
+                throw new ActionException(e);
             }
         }
 

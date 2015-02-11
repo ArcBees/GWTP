@@ -1,5 +1,8 @@
 package $package;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.core.HttpHeaders;
 
 import com.gwtplatform.dispatch.rest.client.codegen.AbstractRestAction;
@@ -19,10 +22,6 @@ public class $impl extends AbstractRestAction<$result> {
 #if($bodyParameterName)
         setBodyParam($bodyParameterName);
 #end
-#if($contentType)
-        addParam(Type.HEADER, HttpHeaders.CONTENT_TYPE, "$contentType");
-#end
-        addParam(Type.HEADER, HttpHeaders.CONTENT_TYPE, "$accept");
     }
 
     @Override
@@ -38,5 +37,25 @@ public class $impl extends AbstractRestAction<$result> {
     @Override
     public String getResultClass() {
         return "$result";
+    }
+
+    @Override
+    public List<String> getClientProducedContentTypes() {
+        List<String> contentTypes = new ArrayList<String>();
+#foreach($consume in $consumes)
+        contentTypes.add("$consume");
+#end
+
+        return contentTypes;
+    }
+
+    @Override
+    public List<String> getClientConsumedContentTypes() {
+        List<String> contentTypes = new ArrayList<String>();
+#foreach($produce in $produces)
+        contentTypes.add("$produce");
+#end
+
+        return contentTypes;
     }
 }
