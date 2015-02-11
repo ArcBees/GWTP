@@ -16,6 +16,9 @@
 
 package com.gwtplatform.dispatch.rest.client.testutils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gwtplatform.dispatch.rest.client.codegen.AbstractRestAction;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
@@ -24,8 +27,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 /**
  * Used by test code to expose protected methods from {@link com.gwtplatform.dispatch.rest.client.codegen
- * .AbstractRestAction
- * AbstractRestAction}. The goal is to help clean up the test code.
+ * .AbstractRestAction AbstractRestAction}. The goal is to help clean up the test code.
  */
 public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
     private String bodyClass;
@@ -64,5 +66,15 @@ public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
     @Override
     public String getResultClass() {
         return resultClass;
+    }
+
+    @Override
+    public List<String> getClientProducedContentTypes() {
+        return new ArrayList<String>();
+    }
+
+    @Override
+    public List<String> getClientConsumedContentTypes() {
+        return new ArrayList<String>();
     }
 }

@@ -29,6 +29,7 @@ import org.junit.runner.RunWith;
 import com.google.gwt.http.client.RequestBuilder;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.client.serialization.SerializedValue;
 import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
@@ -39,6 +40,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.verify;
@@ -111,8 +113,9 @@ public class DefaultBodyFactoryTest {
         action.setBodyParam(unserializedObject);
         action.setBodyClass(serializationKey);
 
-        given(serialization.canSerialize(serializationKey)).willReturn(true);
-        given(serialization.serialize(unserializedObject, serializationKey)).willReturn(serializedValue);
+        given(serialization.canSerialize(eq(serializationKey), anyListOf(String.class))).willReturn(true);
+        given(serialization.serialize(eq(serializationKey), anyListOf(String.class), eq(unserializedObject)))
+                .willReturn(new SerializedValue("", serializedValue));
 
         // When
         factory.buildBody(requestBuilder, action);

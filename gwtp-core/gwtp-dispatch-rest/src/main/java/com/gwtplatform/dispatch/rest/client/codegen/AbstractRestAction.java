@@ -75,11 +75,6 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
     }
 
     @Override
-    public boolean isSecured() {
-        return false;
-    }
-
-    @Override
     public Object getBodyParam() {
         return bodyParam;
     }

@@ -82,4 +82,16 @@ public interface RestAction<R> extends TypedAction<R>, HasSecured {
      * @return {@code true} if this method contains body object, otherwise {@code false}.
      */
     Boolean hasBodyParam();
+
+    /**
+     * Get a list of content types the client is allowed to produce. These content types are usually enumerated in the
+     * {@link javax.ws.rs.Consumes @Consumes} annotation.
+     */
+    List<String> getClientProducedContentTypes();
+
+    /**
+     * Get a list of content types the client is allowed to produce. These content types are usually enumerated in the
+     * {@link javax.ws.rs.Produces @Produces} annotation.
+     */
+    List<String> getClientConsumedContentTypes();
 }

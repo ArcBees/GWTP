@@ -55,7 +55,7 @@ public class ContentType {
         Map<String, String> parameters = new HashMap<String, String>();
 
         if (types.length > 0) {
-            subType = types[0];
+            subType = types[1];
         }
 
         // Element 0 is type/sub-type
@@ -79,6 +79,29 @@ public class ContentType {
         }
 
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        ContentType that = (ContentType) o;
+        return parameters.equals(that.parameters)
+                && subType.equals(that.subType)
+                && type.equals(that.type);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = type.hashCode();
+        result = 31 * result + subType.hashCode();
+        result = 31 * result + parameters.hashCode();
+        return result;
     }
 
     public String getType() {

@@ -16,11 +16,15 @@
 
 package com.gwtplatform.dispatch.rest.client.core;
 
-import javax.inject.Inject;
+import java.util.List;
 
-import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
+import javax.inject.Inject;
+import javax.ws.rs.core.HttpHeaders;
+
 import com.google.gwt.http.client.RequestBuilder;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.client.serialization.SerializationException;
+import com.gwtplatform.dispatch.rest.client.serialization.SerializedValue;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -50,28 +54,34 @@ public class DefaultBodyFactory implements BodyFactory {
      * Verify if the provided <code>bodyClass</code> can be serialized.
      *
      * @param bodyClass the parameterized type to verify if it can be serialized.
+     * @param contentTypes A list of content types a serializer is allowed to return.
      *
      * @return <code>true</code> if <code>bodyClass</code> can be serialized, otherwise <code>false</code>.
      */
-    protected boolean canSerialize(String bodyClass) {
-        return serialization.canSerialize(bodyClass);
+    protected boolean canSerialize(String bodyClass, List<String> contentTypes) {
+        // TODO: Loop over all deserializers
+        return serialization.canSerialize(bodyClass, contentTypes);
     }
 
     /**
-     * Serialize the given object. We assume {@link #canSerialize(String)} returns <code>true</code> or a runtime
-     * exception may be thrown.
+     * Serialize the given object. We assume {@link #canSerialize(String, java.util.List)} returns <code>true</code> or
+     * a runtime exception may be thrown.
      *
      * @param object the object to serialize.
      * @param bodyClass The parameterized type of the object to serialize.
+     * @param contentTypes A list of content types a serializer is allowed to return.
      *
      * @return The serialized string.
      */
-    protected String serialize(Object object, String bodyClass) {
-        return serialization.serialize(object, bodyClass);
+    protected SerializedValue serialize(Object object, String bodyClass, List<String> contentTypes) {
+        // TODO: Loop over all deserializers
+        return serialization.serialize(bodyClass, contentTypes, object);
     }
 
     private void assignBodyFromForm(RequestBuilder requestBuilder, RestAction<?> action) {
         String queryString = uriFactory.buildQueryString(action, Type.FORM);
+
+        // TODO: Set Header
         requestBuilder.setRequestData(queryString);
     }
 
@@ -79,7 +89,10 @@ public class DefaultBodyFactory implements BodyFactory {
             throws ActionException {
         String data;
         if (action.hasBodyParam()) {
-            data = getSerializedValue(action, action.getBodyParam());
+            SerializedValue serializedValue = getSerializedValue(action, action.getBodyParam());
+            data = serializedValue.getData();
+
+            requestBuilder.setHeader(HttpHeaders.CONTENT_TYPE, serializedValue.getContentType());
         } else {
             // Fixes an issue for all IE versions (IE 11 is the latest at this time). If request data is not
             // explicitly set to 'null', the JS 'undefined' will be sent as the request body on IE. Other
@@ -90,14 +103,15 @@ public class DefaultBodyFactory implements BodyFactory {
         requestBuilder.setRequestData(data);
     }
 
-    private String getSerializedValue(RestAction<?> action, Object object) throws ActionException {
+    private SerializedValue getSerializedValue(RestAction<?> action, Object object) throws ActionException {
         String bodyClass = action.getBodyClass();
+        List<String> contentTypes = action.getClientProducedContentTypes();
 
-        if (bodyClass != null && canSerialize(bodyClass)) {
+        if (bodyClass != null && canSerialize(bodyClass, contentTypes)) {
             try {
-                return serialize(object, bodyClass);
-            } catch (JsonMappingException e) {
-                throw new ActionException("Unable to serialize request body. An unexpected error occurred.", e);
+                return serialize(object, bodyClass, contentTypes);
+            } catch (SerializationException e) {
+                throw new ActionException(e);
             }
         }
 
