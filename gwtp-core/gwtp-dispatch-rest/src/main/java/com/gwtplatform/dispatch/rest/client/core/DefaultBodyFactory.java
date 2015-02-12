@@ -17,9 +17,11 @@
 package com.gwtplatform.dispatch.rest.client.core;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
 
 import com.google.gwt.http.client.RequestBuilder;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
@@ -30,14 +32,14 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 public class DefaultBodyFactory implements BodyFactory {
-    private final Serialization serialization;
+    private final Set<Serialization> serializations;
     private final UriFactory uriFactory;
 
     @Inject
     DefaultBodyFactory(
-            Serialization serialization,
+            Set<Serialization> serializations,
             UriFactory uriFactory) {
-        this.serialization = serialization;
+        this.serializations = serializations;
         this.uriFactory = uriFactory;
     }
 
@@ -51,37 +53,46 @@ public class DefaultBodyFactory implements BodyFactory {
     }
 
     /**
-     * Verify if the provided <code>bodyClass</code> can be serialized.
+     * Find a serializer capable of handling <code>bodyClass</code> and <code>contentTypes</code>.
      *
      * @param bodyClass the parameterized type to verify if it can be serialized.
      * @param contentTypes A list of content types a serializer is allowed to return.
      *
      * @return <code>true</code> if <code>bodyClass</code> can be serialized, otherwise <code>false</code>.
      */
-    protected boolean canSerialize(String bodyClass, List<String> contentTypes) {
-        // TODO: Loop over all deserializers
-        return serialization.canSerialize(bodyClass, contentTypes);
+    protected Serialization findSerialization(String bodyClass, List<String> contentTypes) {
+        for (Serialization serialization : serializations) {
+            if (serialization.canSerialize(bodyClass, contentTypes)) {
+                return serialization;
+            }
+        }
+
+        return null;
     }
 
     /**
-     * Serialize the given object. We assume {@link #canSerialize(String, java.util.List)} returns <code>true</code> or
-     * a runtime exception may be thrown.
+     * Serialize the given object using the given <code>serialization</code> instance.
      *
+     * @param serialization the serialization object to be used.
      * @param object the object to serialize.
      * @param bodyClass The parameterized type of the object to serialize.
      * @param contentTypes A list of content types a serializer is allowed to return.
      *
      * @return The serialized string.
      */
-    protected SerializedValue serialize(Object object, String bodyClass, List<String> contentTypes) {
-        // TODO: Loop over all deserializers
-        return serialization.serialize(bodyClass, contentTypes, object);
+    protected SerializedValue serialize(Serialization serialization, Object object, String bodyClass,
+            List<String> contentTypes) throws ActionException {
+        try {
+            return serialization.serialize(bodyClass, contentTypes, object);
+        } catch (SerializationException e) {
+            throw new ActionException(e);
+        }
     }
 
     private void assignBodyFromForm(RequestBuilder requestBuilder, RestAction<?> action) {
         String queryString = uriFactory.buildQueryString(action, Type.FORM);
 
-        // TODO: Set Header
+        requestBuilder.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED);
         requestBuilder.setRequestData(queryString);
     }
 
@@ -107,11 +118,11 @@ public class DefaultBodyFactory implements BodyFactory {
         String bodyClass = action.getBodyClass();
         List<String> contentTypes = action.getClientProducedContentTypes();
 
-        if (bodyClass != null && canSerialize(bodyClass, contentTypes)) {
-            try {
-                return serialize(object, bodyClass, contentTypes);
-            } catch (SerializationException e) {
-                throw new ActionException(e);
+        if (bodyClass != null) {
+            Serialization serialization = findSerialization(bodyClass, contentTypes);
+
+            if (serialization != null) {
+                return serialize(serialization, object, bodyClass, contentTypes);
             }
         }
 

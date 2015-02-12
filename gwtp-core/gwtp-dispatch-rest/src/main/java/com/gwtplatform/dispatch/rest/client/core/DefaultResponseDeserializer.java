@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.client.core;
 
+import java.util.Set;
+
 import javax.inject.Inject;
 import javax.ws.rs.core.HttpHeaders;
 
@@ -29,12 +31,12 @@ import com.gwtplatform.dispatch.shared.ActionException;
  * Default implementation for {@link ResponseDeserializer}.
  */
 public class DefaultResponseDeserializer implements ResponseDeserializer {
-    private final Serialization serialization;
+    private final Set<Serialization> serializations;
 
     @Inject
     protected DefaultResponseDeserializer(
-            Serialization serialization) {
-        this.serialization = serialization;
+            Set<Serialization> serializations) {
+        this.serializations = serializations;
     }
 
     @Override
@@ -47,31 +49,40 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
     }
 
     /**
-     * Verify if the provided <code>resultType</code> can be deserialized.
+     * Find a deserializer capable of handling <code>resultType</code> and <code>contentType</code>.
      *
      * @param resultType the parameterized type to verify if it can be deserialized.
      * @param contentType the contentType of the value that requires deserialization.
      *
      * @return <code>true</code> if <code>resultType</code> can be deserialized, <code>false</code> otherwise.
      */
-    protected boolean canDeserialize(String resultType, String contentType) {
-        // TODO: Loop over all deserializers
-        return serialization.canDeserialize(resultType, contentType);
+    protected Serialization findSerialization(String resultType, String contentType) {
+        for (Serialization serialization : serializations) {
+            if (serialization.canDeserialize(resultType, contentType)) {
+                return serialization;
+            }
+        }
+
+        return null;
     }
 
     /**
-     * Deserializes the data as an object of the <code>resultClass</code> type.
+     * Deserializes the data as an object of the <code>resultClass</code> type using the given
+     * <code>serialization</code> instance.
      *
+     * @param <R> the type of the object once deserialized
+     * @param serialization the serialization object to be used.
      * @param resultClass the parameterized type of the object once deserialized.
      * @param contentType the contentType of <code>data</code>.
-     * @param data the data to deserialize.
-     * @param <R> the type of the object once deserialized
-     *
-     * @return The deserialized object.
+     * @param data the data to deserialize.    @return The deserialized object.
      */
-    protected <R> R deserializeValue(String resultClass, String contentType, String data) {
-        // TODO: Loop over all deserializers
-        return serialization.deserialize(resultClass, contentType, data);
+    protected <R> R deserializeValue(Serialization serialization, String resultClass, String contentType, String data)
+            throws ActionException {
+        try {
+            return serialization.deserialize(resultClass, contentType, data);
+        } catch (SerializationException e) {
+            throw new ActionException(e);
+        }
     }
 
     private boolean isSuccessStatusCode(Response response) {
@@ -84,11 +95,11 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
         String resultClass = action.getResultClass();
         String contentType = response.getHeader(HttpHeaders.CONTENT_TYPE);
 
-        if (resultClass != null && canDeserialize(resultClass, contentType)) {
-            try {
-                return deserializeValue(resultClass, contentType, response.getText());
-            } catch (SerializationException e) {
-                throw new ActionException(e);
+        if (resultClass != null) {
+            Serialization serialization = findSerialization(resultClass, contentType);
+
+            if (serialization != null) {
+                return deserializeValue(serialization, resultClass, contentType, response.getText());
             }
         }
 
