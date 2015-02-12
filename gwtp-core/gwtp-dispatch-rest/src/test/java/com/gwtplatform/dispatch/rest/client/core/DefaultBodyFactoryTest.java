@@ -27,6 +27,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.gwt.http.client.RequestBuilder;
+import com.google.inject.multibindings.Multibinder;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.serialization.SerializedValue;
@@ -43,6 +44,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isNull;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.DELETE;
@@ -56,6 +58,11 @@ public class DefaultBodyFactoryTest {
             forceMock(RequestBuilder.class);
 
             bind(HttpParameterFactory.class).to(MockHttpParameterFactory.class);
+
+            Serialization serialization = mock(Serialization.class);
+            bind(Serialization.class).toInstance(serialization);
+
+            Multibinder.newSetBinder(binder(), Serialization.class).addBinding().toInstance(serialization);
         }
     }
 

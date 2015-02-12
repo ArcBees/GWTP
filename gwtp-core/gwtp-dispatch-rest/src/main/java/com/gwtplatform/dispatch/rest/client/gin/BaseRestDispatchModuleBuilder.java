@@ -22,8 +22,6 @@ import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.core.CoreModule;
 import com.gwtplatform.dispatch.rest.client.interceptor.DefaultRestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
-import com.gwtplatform.dispatch.rest.client.serialization.JsonSerialization;
-import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
@@ -33,7 +31,6 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
  */
 public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchModuleBuilder<B>> extends Builder<B> {
     private String xsrfTokenHeaderName = RestDispatchAsyncModule.DEFAULT_XSRF_NAME;
-    private Class<? extends Serialization> serializationClass = JsonSerialization.class;
     private int requestTimeoutMs;
     private String defaultDateFormat = DateFormat.DEFAULT;
     private RestParameterBindings globalHeaderParams = new RestParameterBindings();
@@ -46,7 +43,6 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
 
     protected BaseRestDispatchModuleBuilder(BaseRestDispatchModuleBuilder<?> copy) {
         xsrfTokenHeaderName = copy.xsrfTokenHeaderName;
-        serializationClass = copy.serializationClass;
         requestTimeoutMs = copy.requestTimeoutMs;
         defaultDateFormat = copy.defaultDateFormat;
         globalHeaderParams = copy.globalHeaderParams;
@@ -108,20 +104,6 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
      */
     public B requestTimeout(int timeoutMs) {
         this.requestTimeoutMs = timeoutMs;
-        return self();
-    }
-
-    /**
-     * Specify the serialization implementation to use. Default is {@link com.gwtplatform.dispatch.rest.client
-     * .serialization.JsonSerialization}.
-     *
-     * @param serializationClass The {@link com.gwtplatform.dispatch.rest.client.serialization.Serialization}
-     * implementation to use.
-     *
-     * @return this {@link com.gwtplatform.dispatch.rest.client.gin.BaseRestDispatchModuleBuilder builder} object.
-     */
-    public B serialization(Class<? extends Serialization> serializationClass) {
-        this.serializationClass = serializationClass;
         return self();
     }
 
@@ -190,10 +172,6 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
 
     int getRequestTimeoutMs() {
         return requestTimeoutMs;
-    }
-
-    Class<? extends Serialization> getSerializationClass() {
-        return serializationClass;
     }
 
     String getXsrfTokenHeaderName() {

@@ -30,7 +30,7 @@ import com.gwtplatform.dispatch.rest.client.annotations.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.annotations.RestBinding;
 import com.gwtplatform.dispatch.rest.client.annotations.XsrfHeaderName;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
-import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.client.serialization.SerializationModule;
 
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that binds classes used by a restful dispatch.
@@ -70,6 +70,7 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
     protected void configureDispatch() {
         // Common
         install(new CommonGinModule());
+        install(new SerializationModule());
         install(builder.getCoreModule());
 
         // Constants / Configurations
@@ -87,7 +88,6 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         // Cross-concern
         bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
         bind(RestInterceptorRegistry.class).to(builder.getInterceptorRegistry()).in(Singleton.class);
-        bind(Serialization.class).to(builder.getSerializationClass()).in(Singleton.class);
     }
 
     @Provides
