@@ -55,15 +55,17 @@ public abstract class ViewImpl implements View {
     @Override
     public void addToSlot(Object slot, IsWidget content) {
         if (hasWidgetSlots.containsKey(slot)) {
-            hasWidgetSlots.get(slot).add(content.asWidget());
-        } else if (orderedSlots.containsKey(slot)) {
-            List<Comparable<Comparable<?>>> list = orderedSlots.get(slot);
-            list.add((Comparable<Comparable<?>>) content);
-            Collections.sort(list);
-            int index = Collections.binarySearch(list, (Comparable<Comparable<?>>) content);
+            if (orderedSlots.containsKey(slot)) {
+                List<Comparable<Comparable<?>>> list = orderedSlots.get(slot);
+                list.add((Comparable<Comparable<?>>) content);
+                Collections.sort(list);
+                int index = Collections.binarySearch(list, (Comparable<Comparable<?>>) content);
 
-            InsertPanel insertPanel = (InsertPanel) hasWidgetSlots.get(slot);
-            insertPanel.insert(content.asWidget(), index);
+                InsertPanel insertPanel = (InsertPanel) hasWidgetSlots.get(slot);
+                insertPanel.insert(content.asWidget(), index);
+            } else {
+                hasWidgetSlots.get(slot).add(content.asWidget());
+            }
         }
     }
 
@@ -75,8 +77,9 @@ public abstract class ViewImpl implements View {
             }
         } else if (hasWidgetSlots.containsKey(slot)) {
             hasWidgetSlots.get(slot).remove(content.asWidget());
-        } else if (orderedSlots.containsKey(slot)) {
-            orderedSlots.get(slot).remove(content);
+            if (orderedSlots.containsKey(slot)) {
+                orderedSlots.get(slot).remove(content);
+            }
         }
     }
 
@@ -90,10 +93,11 @@ public abstract class ViewImpl implements View {
             if (content != null) {
                 hasWidgetSlots.get(slot).add(content.asWidget());
             }
-        } else if (orderedSlots.containsKey(slot)) {
-            orderedSlots.get(slot).clear();
-            if (content != null) {
-                orderedSlots.get(slot).add((Comparable<Comparable<?>>) content);
+            if (orderedSlots.containsKey(slot)) {
+                orderedSlots.get(slot).clear();
+                if (content != null) {
+                    orderedSlots.get(slot).add((Comparable<Comparable<?>>) content);
+                }
             }
         }
     }
@@ -128,11 +132,12 @@ public abstract class ViewImpl implements View {
     /**
      * Link a slot to a container.
      * @param slot - the slot
-     * @param container - the container must implement HasWidgets & InsertPanel.
+     * @param container - the container must implement HasWidgets &amp; InsertPanel.
      */
     protected <T extends HasWidgets & InsertPanel> void bindSlot(
             OrderedSlot<?> slot, T container) {
         orderedSlots.put(slot, new ArrayList<Comparable<Comparable<?>>>());
+        hasWidgetSlots.put(slot, container);
     }
 
     protected void initWidget(IsWidget widget) {
