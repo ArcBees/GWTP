@@ -31,6 +31,7 @@ import com.gwtplatform.mvp.client.DelayedBind;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.RequestTabsHandler;
 import com.gwtplatform.mvp.client.TabData;
+import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxy;
 import com.gwtplatform.mvp.client.proxy.NonLeafTabContentProxyImpl;
@@ -81,6 +82,7 @@ public class ClassCollection {
     static final String tabContentProxyPlaceImplClassName =
             TabContentProxyPlaceImpl.class.getCanonicalName();
     static final String typeClassName = Type.class.getCanonicalName();
+    static final String nestedSlotClassName = NestedSlot.class.getCanonicalName();
     static final String tabDataClassName = TabData.class.getCanonicalName();
     final JGenericType asyncProviderClass;
     final JClassType baseGinjectorClass;
@@ -101,6 +103,7 @@ public class ClassCollection {
     final JClassType tabContentProxyClass;
     final JClassType nonLeafTabContentProxyClass;
     final JClassType typeClass;
+    final JClassType nestedSlotClass;
 
     public ClassCollection(TypeOracle oracle) {
         // Find the required base types
@@ -123,5 +126,6 @@ public class ClassCollection {
         eventHandlerClass = oracle.findType(eventHandlerClassName);
         setPlaceTitleHandlerClass = oracle.findType(setPlaceTitleHandlerClassName);
         tabDataClass = oracle.findType(tabDataClassName);
+        nestedSlotClass = oracle.findType(nestedSlotClassName);
     }
 }

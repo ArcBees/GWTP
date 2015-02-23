@@ -276,4 +276,17 @@ public class ClassInspector {
             }
         }
     }
+
+    public void collectStaticFields(JClassType type,
+            List<JField> collection) throws UnableToCompleteException {
+        for (JClassType classType : inspectedClass.getFlattenedSupertypeHierarchy()) {
+            for (JField field : classType.getFields()) {
+                if (field.isStatic()
+                        && field.getType().getParameterizedQualifiedSourceName()
+                            .equals(type.getParameterizedQualifiedSourceName())) {
+                    collection.add(field);
+                }
+            }
+        }
+    }
 }

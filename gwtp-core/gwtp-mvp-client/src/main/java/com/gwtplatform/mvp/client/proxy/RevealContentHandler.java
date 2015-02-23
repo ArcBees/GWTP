@@ -21,6 +21,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.user.client.Command;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 
 /**
  * This is the handler class for {@link RevealContentEvent}. It should be used
@@ -62,8 +63,13 @@ public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHan
                     @Override
                     public void execute() {
                         presenter.forceReveal();
-                        presenter.setInSlot(revealContentEvent.getAssociatedType(),
-                                revealContentEvent.getContent());
+                        if (revealContentEvent.getAssociatedType() instanceof NestedSlot) {
+                            presenter.setInSlot((NestedSlot) revealContentEvent.getAssociatedType(),
+                                    revealContentEvent.getContent());
+                        } else {
+                            presenter.setInSlot(revealContentEvent.getAssociatedType(),
+                                    revealContentEvent.getContent());
+                        }
                     }
                 });
             }

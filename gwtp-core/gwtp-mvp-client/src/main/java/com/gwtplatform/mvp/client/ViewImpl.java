@@ -16,10 +16,22 @@
 
 package com.gwtplatform.mvp.client;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.logical.shared.AttachEvent.Handler;
+import com.google.gwt.user.client.ui.HasOneWidget;
+import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+import com.gwtplatform.mvp.client.presenter.slots.IsSingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 
 /**
  * A simple implementation of {@link View} that simply disregard every call to {@link #setInSlot(Object, IsWidget)},
@@ -32,17 +44,62 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public abstract class ViewImpl implements View {
     private Widget widget;
+    private Map<Object, HasOneWidget> oneWidgetSlots = new HashMap<Object, HasOneWidget>();
 
+    private Map<Object, HasWidgets> hasWidgetSlots = new HashMap<Object, HasWidgets>();
+
+    private Map<OrderedSlot<?>, List<Comparable<Comparable<?>>>> orderedSlots
+            = new HashMap<OrderedSlot<?>, List<Comparable<Comparable<?>>>>();
+
+    @SuppressWarnings("unchecked")
     @Override
     public void addToSlot(Object slot, IsWidget content) {
+        if (hasWidgetSlots.containsKey(slot)) {
+            if (orderedSlots.containsKey(slot)) {
+                List<Comparable<Comparable<?>>> list = orderedSlots.get(slot);
+                list.add((Comparable<Comparable<?>>) content);
+                Collections.sort(list);
+                int index = Collections.binarySearch(list, (Comparable<Comparable<?>>) content);
+
+                InsertPanel insertPanel = (InsertPanel) hasWidgetSlots.get(slot);
+                insertPanel.insert(content.asWidget(), index);
+            } else {
+                hasWidgetSlots.get(slot).add(content.asWidget());
+            }
+        }
     }
 
     @Override
     public void removeFromSlot(Object slot, IsWidget content) {
+        if (oneWidgetSlots.containsKey(slot)) {
+            if (oneWidgetSlots.get(slot).getWidget() == content.asWidget()) {
+                oneWidgetSlots.get(slot).setWidget(null);
+            }
+        } else if (hasWidgetSlots.containsKey(slot)) {
+            hasWidgetSlots.get(slot).remove(content.asWidget());
+            if (orderedSlots.containsKey(slot)) {
+                orderedSlots.get(slot).remove(content);
+            }
+        }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void setInSlot(Object slot, IsWidget content) {
+        if (oneWidgetSlots.containsKey(slot)) {
+            oneWidgetSlots.get(slot).setWidget(content);
+        } else if (hasWidgetSlots.containsKey(slot)) {
+            hasWidgetSlots.get(slot).clear();
+            if (content != null) {
+                hasWidgetSlots.get(slot).add(content.asWidget());
+            }
+            if (orderedSlots.containsKey(slot)) {
+                orderedSlots.get(slot).clear();
+                if (content != null) {
+                    orderedSlots.get(slot).add((Comparable<Comparable<?>>) content);
+                }
+            }
+        }
     }
 
     @Override
@@ -52,6 +109,35 @@ public abstract class ViewImpl implements View {
         }
 
         return widget;
+    }
+
+    /**
+     * Link a slot to a container.
+     * @param slot - the slot
+     * @param container - the container must implement HasWidgets.
+     */
+    protected void bindSlot(IsSingleSlot<?> slot, HasWidgets container) {
+        internalBindSlot(slot, container);
+    }
+
+    /**
+     * Link a slot to a container.
+     * @param slot - the slot
+     * @param container - the container must implement HasWidgets.
+     */
+    protected void bindSlot(Slot<?> slot, HasWidgets container) {
+        internalBindSlot(slot, container);
+    }
+
+    /**
+     * Link a slot to a container.
+     * @param slot - the slot
+     * @param container - the container must implement HasWidgets &amp; InsertPanel.
+     */
+    protected <T extends HasWidgets & InsertPanel> void bindSlot(
+            OrderedSlot<?> slot, T container) {
+        orderedSlots.put(slot, new ArrayList<Comparable<Comparable<?>>>());
+        hasWidgetSlots.put(slot, container);
     }
 
     protected void initWidget(IsWidget widget) {
@@ -92,5 +178,13 @@ public abstract class ViewImpl implements View {
      * call to {@link #onAttach()}
      */
     protected void onDetach() {
+    }
+
+    private void internalBindSlot(Object slot, HasWidgets container) {
+        if (container instanceof HasOneWidget) {
+            oneWidgetSlots.put(slot, (HasOneWidget) container);
+        } else {
+            hasWidgetSlots.put(slot, container);
+        }
     }
 }

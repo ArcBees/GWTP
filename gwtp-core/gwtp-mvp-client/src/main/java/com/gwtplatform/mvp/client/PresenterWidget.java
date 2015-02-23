@@ -17,7 +17,9 @@
 package com.gwtplatform.mvp.client;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -30,6 +32,14 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.Event;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
+import com.gwtplatform.mvp.client.presenter.slots.IsSingleSlot;
+import com.gwtplatform.mvp.client.presenter.slots.IsSlot;
+import com.gwtplatform.mvp.client.presenter.slots.LegacySlotConvertor;
+import com.gwtplatform.mvp.client.presenter.slots.MultiSlot;
+import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
+import com.gwtplatform.mvp.client.presenter.slots.PopupSlot;
+import com.gwtplatform.mvp.client.presenter.slots.RemovableSlot;
+import com.gwtplatform.mvp.client.presenter.slots.Slot;
 import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 
 /**
@@ -116,19 +126,21 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         }
     }
 
-    private static final Object POPUP_SLOT = new Object();
+    private static final PopupSlot<PresenterWidget<? extends PopupView>>
+            POPUP_SLOT = new PopupSlot<PresenterWidget<? extends PopupView>>();
 
+    // Package-private because in JDK 7 you can no longer access private members of the same type.
+    // http://bugs.java.com/view_bug.do?bug_id=6904536
+    PresenterWidget<?> parent;
+    IsSlot<?> slot;
     boolean visible;
 
     private final EventBus eventBus;
     private final V view;
-    private final List<HandlerInformation<? extends EventHandler>> visibleHandlers =
-            new ArrayList<HandlerInformation<? extends EventHandler>>();
+    private final List<HandlerInformation<? extends EventHandler>>
+            visibleHandlers = new ArrayList<HandlerInformation<? extends EventHandler>>();
     private final List<HandlerRegistration> visibleHandlerRegistrations = new ArrayList<HandlerRegistration>();
     private final Set<PresenterWidget<?>> children = new HashSet<PresenterWidget<?>>();
-
-    private PresenterWidget<?> parent;
-    private Object slot;
 
     /**
      * Creates a {@link PresenterWidget} that is not necessarily using automatic
@@ -172,8 +184,31 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         addToPopupSlot(child);
     }
 
+    /**
+     * This method adds some content in a specific slot of the {@link Presenter}.
+     * The attached {@link View} should manage this slot when its
+     * {@link View#addToSlot(Object, com.google.gwt.user.client.ui.Widget)} is called.
+     * <p/>
+     * Contrary to the {@link #setInSlot} method, no
+     * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired,
+     * so {@link PresenterWidget#onReset()} is not invoked.
+     * <p/>
+     * For more details on slots, see {@link HasSlots}.
+     *
+     * @param slot An opaque object identifying which slot this content is being
+     * added into.
+     * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+     * will not add anything.
+     * @deprecated since 1.5. Use {@link #addToSlot(MultiSlot, PresenterWidget)} instead.
+     */
     @Override
-    public void addToSlot(Object slot, PresenterWidget<?> child) {
+    @Deprecated
+    public void addToSlot(Object slot, PresenterWidget<?> content) {
+        addToSlot(LegacySlotConvertor.convert(slot), content);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> void addToSlot(MultiSlot<T> slot, T child) {
         assert child != null : "cannot add null to a slot";
 
         if (child.slot == slot && child.parent == this) {
@@ -183,7 +218,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         adoptChild(slot, child);
 
         if (!child.isPopup()) {
-            getView().addToSlot(slot, child);
+            getView().addToSlot(slot.getRawSlot(), child);
         }
         if (isVisible()) {
             child.internalReveal();
@@ -195,13 +230,32 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         return getView().asWidget();
     }
 
+    /**
+    * This method clears the content in a specific slot. No
+    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired.
+    * The attached {@link View} should manage this slot when its
+    * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear
+    * the slot when the {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} method is
+    * called with {@code null} as a parameter.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot to clear.
+    * @deprecated since 1.5. Use {@link #clearSlot(RemovableSlot)} instead.
+    */
     @Override
+    @Deprecated
     public void clearSlot(Object slot) {
-        internalClearSlot(slot, null);
-        getView().setInSlot(slot, null);
+        clearSlot(LegacySlotConvertor.convert(slot));
     }
 
-    private void internalClearSlot(Object slot, PresenterWidget<?> dontRemove) {
+    @Override
+    public void clearSlot(RemovableSlot<?> slot) {
+        internalClearSlot(slot, null);
+        getView().setInSlot(slot.getRawSlot(), null);
+    }
+
+    private void internalClearSlot(IsSlot<?> slot, PresenterWidget<?> dontRemove) {
         // use new set to prevent concurrent modification
         for (PresenterWidget<?> child: new HashSet<PresenterWidget<?>>(children)) {
             if (child.slot == slot && !child.equals(dontRemove)) {
@@ -285,7 +339,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
             return;
         }
 
-        parent.removeFromSlot(slot, this);
+        parent.rawRemoveFromSlot(slot, this);
     }
 
     @Override
@@ -293,28 +347,98 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         removeFromSlot(POPUP_SLOT, child);
     }
 
+    /**
+    * This method removes some content in a specific slot of the
+    * {@link Presenter}. No
+    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired.
+    * The attached {@link View} should manage this slot when its
+    * {@link View#removeFromSlot(Object, com.google.gwt.user.client.ui.Widget)} is called.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot this content is being
+    * removed from.
+    * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+    * will not remove anything.
+    * @deprecated since 1.5. Use {@link #removeFromSlot(RemovableSlot, PresenterWidget)} instead.
+    */
     @Override
-    public void removeFromSlot(Object slot, PresenterWidget<?> child) {
+    @Deprecated
+    public void removeFromSlot(Object slot, PresenterWidget<?> content) {
+        removeFromSlot(LegacySlotConvertor.convert(slot), content);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> void removeFromSlot(RemovableSlot<T> slot, T child) {
+        rawRemoveFromSlot(slot, child);
+    }
+
+    private void rawRemoveFromSlot(IsSlot<?> slot, PresenterWidget<?> child) {
         if (child == null || child.slot != slot) {
             return;
         }
 
         if (!child.isPopup()) {
-            getView().removeFromSlot(slot, child);
+            getView().removeFromSlot(slot.getRawSlot(), child);
         }
 
         child.orphan();
     }
 
+    /**
+    * This method sets some content in a specific slot of the {@link Presenter}.
+    * A {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} will be fired
+    * after the top-most visible presenter is revealed, resulting in a call to
+    * {@link PresenterWidget#onReset()}.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot this content is being
+    * set into. The attached view should know what to do with this slot.
+    * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+    * will clear the slot.
+    * @deprecated since 1.5. Use {@link #setInSlot(IsSlot, PresenterWidget)} instead.
+    */
     @Override
-    public void setInSlot(Object slot, PresenterWidget<?> child) {
+    @Deprecated
+    public void setInSlot(Object slot, PresenterWidget<?> content) {
+        setInSlot(slot, content, true);
+    }
+
+    /**
+    * This method sets some content in a specific slot of the {@link Presenter}.
+    * The attached {@link View} should manage this slot when its
+    * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear the
+    * slot when the {@code setInSlot} method is called with {@code null} as a
+    * parameter.
+    * <p/>
+    * For more details on slots, see {@link HasSlots}.
+    *
+    * @param slot An opaque object identifying which slot this content is being
+    * set into.
+    * @param content The content, a {@link PresenterWidget}. Passing {@code null}
+    * will clear the slot.
+    * @param performReset Pass {@code true} if you want a
+    * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} to be fired
+    * after the content has been added and this presenter is visible, pass
+    * {@code false} otherwise.
+    * @deprecated since 1.5. Use {@link #setInSlot(IsSlot, PresenterWidget, boolean)} instead.
+    */
+    @Override
+    @Deprecated
+    public void setInSlot(Object slot, PresenterWidget<?> content, boolean performReset) {
+        setInSlot(LegacySlotConvertor.convert(slot), content, performReset);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child) {
         setInSlot(slot, child, true);
     }
 
     @Override
-    public void setInSlot(Object slot, PresenterWidget<?> child, boolean performReset) {
+    public <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child, boolean performReset) {
         if (child == null) {
-            clearSlot(slot);
+            clearSlot((RemovableSlot<?>) slot);
             return;
         }
 
@@ -322,13 +446,34 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
 
         internalClearSlot(slot, child);
 
-        getView().setInSlot(slot, child);
+        if (!child.isPopup()) {
+            getView().setInSlot(slot.getRawSlot(), child);
+        }
+
         if (isVisible()) {
             child.internalReveal();
             if (performReset) {
                 ResetPresentersEvent.fire(this);
             }
         }
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> T getChild(IsSingleSlot<T> slot) {
+        Iterator<T> it = getSlotChildren(slot).iterator();
+        return it.hasNext() ? it.next() : null;
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> Set<T> getChildren(Slot<T> slot) {
+        return getSlotChildren(slot);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?> & Comparable<T>> List<T> getChildren(OrderedSlot<T> slot) {
+        List<T> result = new ArrayList<T>(getSlotChildren(slot));
+        Collections.sort(result);
+        return result;
     }
 
     /**
@@ -543,9 +688,12 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * @param slot
      * @param child
      */
-    private void adoptChild(Object slot, PresenterWidget<?> child) {
+    private <T extends PresenterWidget<?>> void adoptChild(IsSlot<T> slot, PresenterWidget<?> child) {
         if (child.parent != this) {
             if (child.parent != null) {
+                if (!child.slot.isRemovable()) {
+                    throw new IllegalArgumentException("Cannot move a child of a permanent slot to another slot");
+                }
                 child.parent.children.remove(child);
             }
             child.parent = this;
@@ -554,8 +702,8 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         child.slot = slot;
     }
 
-    private boolean isPopup() {
-        return slot == POPUP_SLOT;
+    boolean isPopup() {
+        return slot != null && slot.isPopup();
     }
 
     /**
@@ -580,6 +728,12 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * Disconnects a child from its parent.
      */
     private void orphan() {
+        if (slot == null) {
+            return;
+        }
+        if (!slot.isRemovable()) {
+            throw new IllegalArgumentException("Cannot remove a child from a permanent slot");
+        }
         if (parent != null) {
             internalHide();
 
@@ -606,5 +760,16 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         }
 
         visibleHandlerRegistrations.clear();
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T extends PresenterWidget<?>> Set<T> getSlotChildren(IsSlot<T> slot) {
+        Set<T> result = new HashSet<T>();
+        for (PresenterWidget<?> child : children) {
+            if (child.slot == slot) {
+                result.add((T) child);
+            }
+        }
+        return result;
     }
 }
