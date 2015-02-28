@@ -134,6 +134,7 @@ public final class CrawlFilter implements Filter {
         // Does this request contain an _escaped_fragment_?
         if (queryString != null && queryString.contains(ESCAPED_FRAGMENT_FORMAT1)) {
             res.setHeader("Content-Type", "text/html; charset=" + CHAR_ENCODING);
+            res.setCharacterEncoding(CHAR_ENCODING);
 
             PrintWriter writer = res.getWriter();
             try {
@@ -163,7 +164,8 @@ public final class CrawlFilter implements Filter {
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                         connection.setConnectTimeout(10000);
                         connection.setReadTimeout(10000);
-                        reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+                        connection.setRequestProperty("charset", CHAR_ENCODING);
+                        reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), CHAR_ENCODING));
                         String line;
                         line = reader.readLine();
                         if (!"FETCH_IN_PROGRESS".equals(line)) {
