@@ -23,6 +23,10 @@ import java.util.regex.Pattern;
 
 import static javax.ws.rs.core.MediaType.MEDIA_TYPE_WILDCARD;
 
+/**
+ * Represent each parts of a content type. Formatting is based on
+ * <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.7">RFC 2616, section 3.7</a>.
+ */
 public class ContentType {
     private static final Pattern PARAMETER_SPLIT_PATTERN = Pattern.compile("[;]");
     private static final Pattern TYPE_SPLIT_PATTERN = Pattern.compile("[/]");
@@ -54,11 +58,11 @@ public class ContentType {
         String subType = MEDIA_TYPE_WILDCARD;
         Map<String, String> parameters = new HashMap<String, String>();
 
-        if (types.length > 0) {
+        if (types.length > 1) {
             subType = types[1];
         }
 
-        // Element 0 is type/sub-type
+        // Element 0 is type/sub-type, others are parameters
         for (int i = 1; i < parts.length; ++i) {
             String[] keyValue = KEY_VALUE_SPLIT_PATTERN.split(parts[i]);
 

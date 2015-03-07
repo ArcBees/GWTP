@@ -32,6 +32,8 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
     private String bodyClass;
     private String resultClass;
+    private List<String> produced = new ArrayList<String>();
+    private List<String> consumed = new ArrayList<String>();
 
     protected ExposedRestAction(
             HttpParameterFactory factory,
@@ -70,11 +72,19 @@ public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
 
     @Override
     public List<String> getClientProducedContentTypes() {
-        return new ArrayList<String>();
+        return produced;
     }
 
     @Override
     public List<String> getClientConsumedContentTypes() {
-        return new ArrayList<String>();
+        return consumed;
+    }
+
+    public void setClientProducedContentTypes(List<String> produced) {
+        this.produced = produced;
+    }
+
+    public void setClientConsumedContentTypes(List<String> consumed) {
+        this.consumed = consumed;
     }
 }

@@ -74,8 +74,6 @@ public class DefaultRequestBuilderFactory implements RequestBuilderFactory {
         headerFactory.buildHeaders(requestBuilder, action, securityToken);
         bodyFactory.buildBody(requestBuilder, action);
 
-        // What should it be when data is from @FormParam?
-
         return requestBuilder;
     }
 }
