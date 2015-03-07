@@ -22,12 +22,12 @@ import com.google.gwt.inject.client.binder.GinLinkedBindingBuilder;
 import com.google.gwt.inject.client.multibindings.GinMultibinder;
 
 public class SerializationModule extends AbstractGinModule {
-    public static GinLinkedBindingBuilder<Serialization> addSerializationBinding(GinBinder binder) {
+    public static GinLinkedBindingBuilder<Serialization> registerSerializationBinding(GinBinder binder) {
         return GinMultibinder.newSetBinder(binder, Serialization.class).addBinding();
     }
 
     @Override
     protected void configure() {
-        addSerializationBinding(binder()).to(JsonSerialization.class);
+        registerSerializationBinding(binder()).to(JsonSerialization.class);
     }
 }
