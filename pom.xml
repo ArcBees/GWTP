@@ -228,17 +228,17 @@
 
         <!-- Maven -->
         <gwt-maven-plugin.version>2.7.0</gwt-maven-plugin.version>
-        <maven-checkstyle-plugin.version>2.13</maven-checkstyle-plugin.version>
-        <checkstyle.version>6.2</checkstyle.version>
-        <arcbees-checkstyle.version>1.0</arcbees-checkstyle.version>
+        <maven-checkstyle-plugin.version>2.15</maven-checkstyle-plugin.version>
+        <checkstyle.version>6.4.1</checkstyle.version>
+        <arcbees-checkstyle.version>1.1</arcbees-checkstyle.version>
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
-        <maven-deploy-plugin.version>2.8.1</maven-deploy-plugin.version>
-        <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+        <maven-javadoc-plugin.version>2.10.2</maven-javadoc-plugin.version>
         <maven-processor-plugin.version>2.2.4</maven-processor-plugin.version>
-        <maven-source-plugin.version>2.3</maven-source-plugin.version>
+        <maven-source-plugin.version>2.4</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
-        <maven-project-info-reports-plugin.version>2.7</maven-project-info-reports-plugin.version>
-        <maven-dependency-plugin.version>2.8</maven-dependency-plugin.version>
+        <maven-project-info-reports-plugin.version>2.8</maven-project-info-reports-plugin.version>
+        <maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
         <maven-site-plugin.version>3.4</maven-site-plugin.version>
         <jasmine-maven-plugin.version>1.3.1.5</jasmine-maven-plugin.version>
         <versions-maven-plugin.version>2.1</versions-maven-plugin.version>
@@ -272,7 +272,7 @@
         <assertj-core.version>1.6.1</assertj-core.version>
 
         <!-- GitHub Sites -->
-        <github.version>0.9</github.version>
+        <github.version>0.11</github.version>
 
         <!-- Used for releasing to sonatype as command line parameter -->
         <gpg.passphrase>SetAsParam</gpg.passphrase>
