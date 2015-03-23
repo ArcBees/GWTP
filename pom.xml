@@ -417,7 +417,7 @@
                 <version>${versions-maven-plugin.version}</version>
                 <configuration>
                     <rulesUri>
-                        https://raw.githubusercontent.com/ArcBees/ArcBees-tools/master/resources/versions-ruleset.xml
+                        https://raw.githubusercontent.com/ArcBees/Arcbees-Archetypes/master/resources/versions-ruleset.xml
                     </rulesUri>
                 </configuration>
             </plugin>
