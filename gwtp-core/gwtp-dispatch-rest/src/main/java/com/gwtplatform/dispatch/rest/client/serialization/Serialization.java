@@ -18,6 +18,8 @@ package com.gwtplatform.dispatch.rest.client.serialization;
 
 import java.util.List;
 
+import com.gwtplatform.dispatch.rest.shared.ContentType;
+
 /**
  * Offers basic serialization methods. The results depends on the implementation used.
  *
@@ -32,48 +34,48 @@ public interface Serialization {
      * Verify if the given parameterized type can be serialized.
      *
      * @param parameterizedType the parameterized type.
-     * @param contentTypes a list of content acceptable content types for the serialized output. Usage of wildcards is
-     * allowed (eg.: application/*).
+     * @param contentTypes a list of content acceptable {@link ContentType content types} for the serialized output.
+     * Usage of wildcards is allowed (eg.: application/*).
      *
      * @return {@code true} if <code>parameterizedType</code> can be serialized, otherwise {@code false}.
      */
-    boolean canSerialize(String parameterizedType, List<String> contentTypes);
+    boolean canSerialize(String parameterizedType, List<ContentType> contentTypes);
 
     /**
      * Serializes the object as a type represented by <code>parameterizedType</code>.
      *
      * @param <T> the type of the object.
      * @param parameterizedType the parameterized type of the object to serialize.
-     * @param contentTypes the content types allowed for the serialized value. Usage of wildcards is allowed (eg.:
-     * application/*).
+     * @param contentTypes the {@link ContentType content types} allowed for the serialized value. Usage of wildcards is
+     * allowed (eg.: application/*).
      * @param object the object to serialized.
      *
      * @return the {@link SerializedValue} resulting from the serialization of <code>object</code>.
      */
-    <T> SerializedValue serialize(String parameterizedType, List<String> contentTypes, T object);
+    <T> SerializedValue serialize(String parameterizedType, List<ContentType> contentTypes, T object);
 
     /**
      * Verify if the given parameterized type can be deserialized.
      *
      * @param parameterizedType the parameterized type.
-     * @param contentType the content type of the checked input. Usage of wildcards is <b>NOT</b> allowed (eg.:
-     * application/*).
+     * @param contentType the {@link ContentType content type} of the checked input. Usage of wildcards is <b>NOT</b>
+     * allowed (eg.: application/*).
      *
      * @return {@code true} if an object of type <code>parameterizedType</code> with <code>contentType</code> can be
      * deserialized, otherwise {@code false}.
      */
-    boolean canDeserialize(String parameterizedType, String contentType);
+    boolean canDeserialize(String parameterizedType, ContentType contentType);
 
     /**
      * Deserializes the object to the type represented by <code>parameterizedType</code>.
      *
      * @param <T> the return type.
      * @param parameterizedType the parameterized type of the expected return type.
-     * @param contentType the content type of <code>serializedObject</code>. Usage of wildcards is <b>NOT</b> allowed
-     * (eg.: application/*).
+     * @param contentType the {@link ContentType content type} of <code>serializedObject</code>. Usage of wildcards is
+     * <b>NOT</b> allowed (eg.: application/*).
      * @param serializedObject the String representing the serialized object.
      *
      * @return The deserialized object of type <code>T</code>.
      */
-    <T> T deserialize(String parameterizedType, String contentType, String serializedObject);
+    <T> T deserialize(String parameterizedType, ContentType contentType, String serializedObject);
 }

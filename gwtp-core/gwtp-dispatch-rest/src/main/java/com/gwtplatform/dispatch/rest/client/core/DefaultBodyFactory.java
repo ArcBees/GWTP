@@ -27,6 +27,7 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.serialization.SerializationException;
 import com.gwtplatform.dispatch.rest.client.serialization.SerializedValue;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -60,7 +61,7 @@ public class DefaultBodyFactory implements BodyFactory {
      *
      * @return <code>true</code> if <code>bodyClass</code> can be serialized, otherwise <code>false</code>.
      */
-    protected Serialization findSerialization(String bodyClass, List<String> contentTypes) {
+    protected Serialization findSerialization(String bodyClass, List<ContentType> contentTypes) {
         for (Serialization serialization : serializations) {
             if (serialization.canSerialize(bodyClass, contentTypes)) {
                 return serialization;
@@ -81,7 +82,7 @@ public class DefaultBodyFactory implements BodyFactory {
      * @return The serialized string.
      */
     protected SerializedValue serialize(Serialization serialization, Object object, String bodyClass,
-            List<String> contentTypes) throws ActionException {
+            List<ContentType> contentTypes) throws ActionException {
         try {
             return serialization.serialize(bodyClass, contentTypes, object);
         } catch (SerializationException e) {
@@ -101,9 +102,10 @@ public class DefaultBodyFactory implements BodyFactory {
         String data;
         if (action.hasBodyParam()) {
             SerializedValue serializedValue = getSerializedValue(action, action.getBodyParam());
+            ContentType contentType = serializedValue.getContentType();
             data = serializedValue.getData();
 
-            requestBuilder.setHeader(HttpHeaders.CONTENT_TYPE, serializedValue.getContentType());
+            requestBuilder.setHeader(HttpHeaders.CONTENT_TYPE, contentType.toString());
         } else {
             // Fixes an issue for all IE versions (IE 11 is the latest at this time). If request data is not
             // explicitly set to 'null', the JS 'undefined' will be sent as the request body on IE. Other
@@ -116,9 +118,9 @@ public class DefaultBodyFactory implements BodyFactory {
 
     private SerializedValue getSerializedValue(RestAction<?> action, Object object) throws ActionException {
         String bodyClass = action.getBodyClass();
-        List<String> contentTypes = action.getClientProducedContentTypes();
 
         if (bodyClass != null) {
+            List<ContentType> contentTypes = action.getClientProducedContentTypes();
             Serialization serialization = findSerialization(bodyClass, contentTypes);
 
             if (serialization != null) {

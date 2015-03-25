@@ -35,10 +35,10 @@ import com.gwtplatform.dispatch.rest.rebind.resource.MethodGenerator;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassNameGenerator;
-import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
 import com.gwtplatform.dispatch.rest.rebind.utils.ContentTypeResolver;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 public class SubResourceGenerator extends AbstractResourceGenerator {

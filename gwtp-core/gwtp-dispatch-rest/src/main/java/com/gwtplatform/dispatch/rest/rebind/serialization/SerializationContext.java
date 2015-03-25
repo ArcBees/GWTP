@@ -20,7 +20,7 @@ import java.util.Set;
 
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.rebind.action.ActionContext;
-import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
 public class SerializationContext {
     private final ActionContext context;

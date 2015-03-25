@@ -25,16 +25,15 @@ import com.github.nmorel.gwtjackson.client.JsonDeserializationContext;
 import com.github.nmorel.gwtjackson.client.JsonSerializationContext;
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
 import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
 /**
  * JSON implementation of {@link Serialization}. It acts as a facade to <a href="https://github.com/nmorel/gwt-jackson">
  * gwt-jackson</a>.
  */
 public class JsonSerialization implements Serialization {
-    private static final String VOID = "java.lang.Void";
-    // TODO: Consider using com.gwtplatform.dispatch.rest.rebind.utils.ContentType to help with wildcards.
-    private static final String CONTENT_TYPE = MediaType.APPLICATION_JSON;
-    private static final String CONTENT_TYPE_CHARSET = MediaType.APPLICATION_JSON + "; charset=utf-8";
+    private static final String VOID = Void.class.getName();
+    private static final ContentType CONTENT_TYPE = ContentType.valueOf(MediaType.APPLICATION_JSON + "; charset=utf-8");
 
     private final JacksonMapperProvider jacksonMapperProvider;
     private final JsonSerializationContext.Builder serializationContext;
@@ -50,19 +49,20 @@ public class JsonSerialization implements Serialization {
     }
 
     @Override
-    public boolean canSerialize(String type, List<String> contentTypes) {
-        return contentTypes.contains(CONTENT_TYPE) &&
+    public boolean canSerialize(String type, List<ContentType> contentTypes) {
+        return matchesContentType(contentTypes) &&
                 (VOID.equals(type) || jacksonMapperProvider.hasMapper(type));
     }
 
     @Override
-    public boolean canDeserialize(String type, String contentType) {
+    public boolean canDeserialize(String type, ContentType contentType) {
+        assert !contentType.isWildcard() : "Usage of wildcards is not allowed.";
         return VOID.equals(type)
-                || (CONTENT_TYPE.equals(contentType) && jacksonMapperProvider.hasMapper(type));
+                || (CONTENT_TYPE.isCompatible(contentType) && jacksonMapperProvider.hasMapper(type));
     }
 
     @Override
-    public <T> SerializedValue serialize(String type, List<String> contentTypes, T o) {
+    public <T> SerializedValue serialize(String type, List<ContentType> contentTypes, T o) {
         if (VOID.equals(type) || o == null) {
             return null;
         }
@@ -75,11 +75,13 @@ public class JsonSerialization implements Serialization {
             throw new SerializationException("Unable to serialize request body. An unexpected error occurred.", e);
         }
 
-        return new SerializedValue(CONTENT_TYPE_CHARSET, json);
+        return new SerializedValue(CONTENT_TYPE, json);
     }
 
     @Override
-    public <T> T deserialize(String type, String contentType, String json) {
+    public <T> T deserialize(String type, ContentType contentType, String json) {
+        assert !contentType.isWildcard() : "Usage of wildcards is not allowed.";
+
         if (VOID.equals(type) || json == null || json.isEmpty()) {
             return null;
         }
@@ -99,5 +101,16 @@ public class JsonSerialization implements Serialization {
 
     protected JsonDeserializationContext.Builder getDeserializationContext() {
         return deserializationContext;
+    }
+
+    private boolean matchesContentType(List<ContentType> contentTypes) {
+        boolean contentTypeMatch = false;
+        for (ContentType contentType : contentTypes) {
+            if (CONTENT_TYPE.isCompatible(contentType)) {
+                contentTypeMatch = true;
+                break;
+            }
+        }
+        return contentTypeMatch;
     }
 }

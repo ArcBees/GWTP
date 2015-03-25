@@ -23,7 +23,7 @@ import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
-import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
 public class SubResourceDefinition extends ResourceDefinition {
     private final List<Parameter> parameters;

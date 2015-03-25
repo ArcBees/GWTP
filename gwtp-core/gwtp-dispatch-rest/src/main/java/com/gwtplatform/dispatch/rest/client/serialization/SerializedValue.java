@@ -16,18 +16,20 @@
 
 package com.gwtplatform.dispatch.rest.client.serialization;
 
+import com.gwtplatform.dispatch.rest.shared.ContentType;
+
 public class SerializedValue {
-    private final String contentType;
+    private final ContentType contentType;
     private final String data;
 
     public SerializedValue(
-            String contentType,
+            ContentType contentType,
             String data) {
         this.contentType = contentType;
         this.data = data;
     }
 
-    public String getContentType() {
+    public ContentType getContentType() {
         return contentType;
     }
 

@@ -87,11 +87,11 @@ public interface RestAction<R> extends TypedAction<R>, HasSecured {
      * Get a list of content types the client is allowed to produce. These content types are usually enumerated in the
      * {@link javax.ws.rs.Consumes @Consumes} annotation.
      */
-    List<String> getClientProducedContentTypes();
+    List<ContentType> getClientProducedContentTypes();
 
     /**
      * Get a list of content types the client is allowed to produce. These content types are usually enumerated in the
      * {@link javax.ws.rs.Produces @Produces} annotation.
      */
-    List<String> getClientConsumedContentTypes();
+    List<ContentType> getClientConsumedContentTypes();
 }

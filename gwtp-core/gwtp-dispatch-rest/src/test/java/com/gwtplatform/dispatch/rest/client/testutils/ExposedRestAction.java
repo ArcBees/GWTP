@@ -21,6 +21,7 @@ import java.util.List;
 
 import com.gwtplatform.dispatch.rest.client.codegen.AbstractRestAction;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
@@ -32,8 +33,8 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
     private String bodyClass;
     private String resultClass;
-    private List<String> produced = new ArrayList<String>();
-    private List<String> consumed = new ArrayList<String>();
+    private List<ContentType> produced = new ArrayList<ContentType>();
+    private List<ContentType> consumed = new ArrayList<ContentType>();
 
     protected ExposedRestAction(
             HttpParameterFactory factory,
@@ -71,20 +72,20 @@ public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
     }
 
     @Override
-    public List<String> getClientProducedContentTypes() {
+    public List<ContentType> getClientProducedContentTypes() {
         return produced;
     }
 
     @Override
-    public List<String> getClientConsumedContentTypes() {
+    public List<ContentType> getClientConsumedContentTypes() {
         return consumed;
     }
 
-    public void setClientProducedContentTypes(List<String> produced) {
+    public void setClientProducedContentTypes(List<ContentType> produced) {
         this.produced = produced;
     }
 
-    public void setClientConsumedContentTypes(List<String> consumed) {
+    public void setClientConsumedContentTypes(List<ContentType> consumed) {
         this.consumed = consumed;
     }
 }

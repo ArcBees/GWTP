@@ -45,11 +45,11 @@ import com.gwtplatform.dispatch.rest.rebind.serialization.SerializationGenerator
 import com.gwtplatform.dispatch.rest.rebind.subresource.SubResourceContext;
 import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassNameGenerator;
-import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
 import com.gwtplatform.dispatch.rest.rebind.utils.ContentTypeResolver;
 import com.gwtplatform.dispatch.rest.rebind.utils.Generators;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
@@ -61,7 +61,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     private static final String MANY_POTENTIAL_BODY = "`%s#%s` has more than one potential body parameter.";
     private static final String FORM_AND_BODY_PARAM = "`%s#%s` has both @FormParam and a body parameter. "
             + "You must specify one or the other.";
-    private static final String GET_WITH_BODY = "`%s#%s` annotated with @GET or @HEAD contains illegal Form or Body"
+    private static final String GET_WITH_BODY = "`%s#%s` annotated with @GET or @HEAD contains illegal Form or Body "
             + "parameters.";
 
     private final HttpParameterFactory httpParameterFactory;

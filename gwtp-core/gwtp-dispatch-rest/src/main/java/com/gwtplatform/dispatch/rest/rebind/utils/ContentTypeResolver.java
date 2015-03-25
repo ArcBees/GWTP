@@ -26,6 +26,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gwt.core.ext.typeinfo.HasAnnotations;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
 public class ContentTypeResolver {
     private static final Set<ContentType> DEFAULT_FALLBACK;

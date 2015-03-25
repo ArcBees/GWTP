@@ -32,8 +32,8 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
-import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
 import static com.gwtplatform.dispatch.rest.rebind.utils.JPrimitives.classTypeOrConvertToBoxed;
 

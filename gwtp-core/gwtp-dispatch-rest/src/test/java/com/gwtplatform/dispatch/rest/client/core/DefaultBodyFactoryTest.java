@@ -37,6 +37,7 @@ import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.UnsecuredRestAction;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -120,15 +121,15 @@ public class DefaultBodyFactoryTest {
         Object unserializedObject = new Object();
         String serializationKey = "meta";
         String serializedData = new Date().toString();
-        String contentType = "json-abc";
+        ContentType contentType = ContentType.valueOf("json-abc");
         SerializedValue serializedValue = new SerializedValue(contentType, serializedData);
 
         ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
         action.setBodyParam(unserializedObject);
         action.setBodyClass(serializationKey);
 
-        given(serialization.canSerialize(eq(serializationKey), anyListOf(String.class))).willReturn(true);
-        given(serialization.serialize(eq(serializationKey), anyListOf(String.class), eq(unserializedObject)))
+        given(serialization.canSerialize(eq(serializationKey), anyListOf(ContentType.class))).willReturn(true);
+        given(serialization.serialize(eq(serializationKey), anyListOf(ContentType.class), eq(unserializedObject)))
                 .willReturn(serializedValue);
 
         // When
@@ -136,7 +137,7 @@ public class DefaultBodyFactoryTest {
 
         // Then
         verify(requestBuilder).setRequestData(eq(serializedData));
-        verify(requestBuilder).setHeader(HttpHeaders.CONTENT_TYPE, contentType);
+        verify(requestBuilder).setHeader(HttpHeaders.CONTENT_TYPE, contentType.toString());
     }
 
     @Test(expected = ActionException.class)
@@ -149,7 +150,7 @@ public class DefaultBodyFactoryTest {
         action.setBodyParam(unserializedObject);
         action.setBodyClass(serializationKey);
 
-        given(serialization.canSerialize(eq(serializationKey), anyListOf(String.class))).willReturn(false);
+        given(serialization.canSerialize(eq(serializationKey), anyListOf(ContentType.class))).willReturn(false);
 
         // When
         factory.buildBody(requestBuilder, action);

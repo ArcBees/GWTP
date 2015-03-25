@@ -24,6 +24,7 @@ import javax.ws.rs.core.HttpHeaders;
 import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.serialization.SerializationException;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
@@ -56,7 +57,7 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
      *
      * @return <code>true</code> if <code>resultType</code> can be deserialized, <code>false</code> otherwise.
      */
-    protected Serialization findSerialization(String resultType, String contentType) {
+    protected Serialization findSerialization(String resultType, ContentType contentType) {
         for (Serialization serialization : serializations) {
             if (serialization.canDeserialize(resultType, contentType)) {
                 return serialization;
@@ -70,14 +71,14 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
      * Deserializes the data as an object of the <code>resultClass</code> type using the given
      * <code>serialization</code> instance.
      *
-     * @param <R> the type of the object once deserialized
+     * @param <R> the type of the object once deserialized.
      * @param serialization the serialization object to be used.
      * @param resultClass the parameterized type of the object once deserialized.
      * @param contentType the contentType of <code>data</code>.
      * @param data the data to deserialize.    @return The deserialized object.
      */
-    protected <R> R deserializeValue(Serialization serialization, String resultClass, String contentType, String data)
-            throws ActionException {
+    protected <R> R deserializeValue(Serialization serialization, String resultClass, ContentType contentType,
+            String data) throws ActionException {
         try {
             return serialization.deserialize(resultClass, contentType, data);
         } catch (SerializationException e) {
@@ -93,9 +94,9 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
 
     private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {
         String resultClass = action.getResultClass();
-        String contentType = response.getHeader(HttpHeaders.CONTENT_TYPE);
 
         if (resultClass != null) {
+            ContentType contentType = ContentType.valueOf(response.getHeader(HttpHeaders.CONTENT_TYPE));
             Serialization serialization = findSerialization(resultClass, contentType);
 
             if (serialization != null) {

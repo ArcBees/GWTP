@@ -7,6 +7,7 @@ import javax.ws.rs.core.HttpHeaders;
 
 import com.gwtplatform.dispatch.rest.client.codegen.AbstractRestAction;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
@@ -40,20 +41,20 @@ public class $impl extends AbstractRestAction<$result> {
     }
 
     @Override
-    public List<String> getClientProducedContentTypes() {
-        List<String> contentTypes = new ArrayList<String>();
+    public List<ContentType> getClientProducedContentTypes() {
+        List<ContentType> contentTypes = new ArrayList<ContentType>();
 #foreach($consume in $consumes)
-        contentTypes.add("$consume");
+        contentTypes.add(#recreateContentType($consume));
 #end
 
         return contentTypes;
     }
 
     @Override
-    public List<String> getClientConsumedContentTypes() {
-        List<String> contentTypes = new ArrayList<String>();
+    public List<ContentType> getClientConsumedContentTypes() {
+        List<ContentType> contentTypes = new ArrayList<ContentType>();
 #foreach($produce in $produces)
-        contentTypes.add("$produce");
+        contentTypes.add(#recreateContentType($produce));
 #end
 
         return contentTypes;
