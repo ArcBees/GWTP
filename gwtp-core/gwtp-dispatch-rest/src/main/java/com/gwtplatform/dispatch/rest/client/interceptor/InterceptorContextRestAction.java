@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.client.interceptor;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
@@ -93,12 +94,12 @@ class InterceptorContextRestAction implements RestAction<Object> {
     }
 
     @Override
-    public List<String> getClientProducedContentTypes() {
+    public List<ContentType> getClientProducedContentTypes() {
         return null;
     }
 
     @Override
-    public List<String> getClientConsumedContentTypes() {
+    public List<ContentType> getClientConsumedContentTypes() {
         return null;
     }
 }

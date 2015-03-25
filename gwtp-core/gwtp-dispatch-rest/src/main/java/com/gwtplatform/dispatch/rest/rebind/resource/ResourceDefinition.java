@@ -22,7 +22,7 @@ import java.util.Set;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
-import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
 public class ResourceDefinition extends ClassDefinition {
     private final JClassType resourceInterface;

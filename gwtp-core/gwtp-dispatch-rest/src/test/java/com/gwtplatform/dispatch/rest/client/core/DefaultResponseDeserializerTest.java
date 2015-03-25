@@ -30,6 +30,7 @@ import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.UnsecuredRestAction;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.shared.ActionException;
 
@@ -90,6 +91,7 @@ public class DefaultResponseDeserializerTest {
 
         Response response = mock(Response.class);
         given(response.getStatusCode()).willReturn(200);
+        given(response.getHeader(HttpHeaders.CONTENT_TYPE)).willReturn("any");
 
         // when
         deserializer.deserialize(action, response);
@@ -99,7 +101,7 @@ public class DefaultResponseDeserializerTest {
     public void deserialize_serialization_delegates() throws ActionException {
         // given
         String resultType = "MyClass<Hey<Ho>>>";
-        String contentType = "that-content-type";
+        ContentType contentType = ContentType.valueOf("that-content-type");
         String serializedContent = "agakrybatgfkasfh";
         Object expectedResult = new Object();
 
@@ -108,7 +110,7 @@ public class DefaultResponseDeserializerTest {
 
         Response response = mock(Response.class);
         given(response.getStatusCode()).willReturn(200);
-        given(response.getHeader(HttpHeaders.CONTENT_TYPE)).willReturn(contentType);
+        given(response.getHeader(HttpHeaders.CONTENT_TYPE)).willReturn(contentType.toString());
         given(response.getText()).willReturn(serializedContent);
 
         given(serialization.canDeserialize(resultType, contentType)).willReturn(true);

@@ -38,6 +38,7 @@ import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.UnsecuredRestAction;
 import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
@@ -179,13 +180,13 @@ public class DefaultHeaderFactoryTest {
     public void build_acceptContentTypes_acceptHeaderIsSet() {
         // given
         UnsecuredRestAction action = new UnsecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
-        action.setClientConsumedContentTypes(Arrays.asList("a", "b"));
+        action.setClientConsumedContentTypes(Arrays.asList(ContentType.valueOf("a"), ContentType.valueOf("b")));
 
         // when
         factory.buildHeaders(requestBuilder, action, SECURITY_TOKEN);
 
         // then
-        verify(requestBuilder).setHeader(eq(HttpHeaders.ACCEPT), eq("a,b"));
+        verify(requestBuilder).setHeader(eq(HttpHeaders.ACCEPT), eq("a/*,b/*"));
     }
 
     private RestAction<Void> createActionWithHeaderParams() {

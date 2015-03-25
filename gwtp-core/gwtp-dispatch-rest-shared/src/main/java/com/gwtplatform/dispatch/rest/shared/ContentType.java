@@ -14,23 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind.utils;
+package com.gwtplatform.dispatch.rest.shared;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.regex.Pattern;
-
-import static javax.ws.rs.core.MediaType.MEDIA_TYPE_WILDCARD;
 
 /**
  * Represent each parts of a content type. Formatting is based on
  * <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.7">RFC 2616, section 3.7</a>.
  */
 public class ContentType {
-    private static final Pattern PARAMETER_SPLIT_PATTERN = Pattern.compile("[;]");
-    private static final Pattern TYPE_SPLIT_PATTERN = Pattern.compile("[/]");
-    private static final Pattern KEY_VALUE_SPLIT_PATTERN = Pattern.compile("[=]");
+    private static final String KEY_VALUE_DELIMITER = "=";
+    private static final String PARAMETER_DELIMITER = ";";
+    private static final String TYPE_DELIMITER = "/";
+    private static final String WILDCARD = "*";
 
     private final String type;
     private final String subType;
@@ -40,8 +38,8 @@ public class ContentType {
             String type,
             String subType,
             Map<String, String> parameters) {
-        this.type = type.trim().toLowerCase();
-        this.subType = subType.trim().toLowerCase();
+        this.type = valueOrWildcard(type);
+        this.subType = valueOrWildcard(subType);
         this.parameters = parameters;
     }
 
@@ -51,12 +49,16 @@ public class ContentType {
      * application/json; charset=utf-8; q=0.9
      */
     public static ContentType valueOf(String value) {
-        String[] parts = PARAMETER_SPLIT_PATTERN.split(value);
-        String[] types = TYPE_SPLIT_PATTERN.split(parts[0]);
+        String[] parts = value.split(PARAMETER_DELIMITER);
+        String[] types = parts[0].split(TYPE_DELIMITER);
 
-        String type = types[0];
-        String subType = MEDIA_TYPE_WILDCARD;
+        String type = WILDCARD;
+        String subType = WILDCARD;
         Map<String, String> parameters = new HashMap<String, String>();
+
+        if (types.length > 0) {
+            type = types[0];
+        }
 
         if (types.length > 1) {
             subType = types[1];
@@ -64,7 +66,7 @@ public class ContentType {
 
         // Element 0 is type/sub-type, others are parameters
         for (int i = 1; i < parts.length; ++i) {
-            String[] keyValue = KEY_VALUE_SPLIT_PATTERN.split(parts[i]);
+            String[] keyValue = parts[i].split(KEY_VALUE_DELIMITER);
 
             if (keyValue.length == 2) {
                 parameters.put(keyValue[0].trim(), keyValue[1].trim());
@@ -112,8 +114,35 @@ public class ContentType {
         return type;
     }
 
+    /**
+     * Checks if the primary type is a wildcard.
+     *
+     * @return <code>true</code> if the primary type is a wildcard.
+     */
+    public boolean isWildcardType() {
+        return getType().equals(WILDCARD);
+    }
+
     public String getSubType() {
         return subType;
+    }
+
+    /**
+     * Checks if the sub type is a wildcard.
+     *
+     * @return <code>true</code> if the sub type is a wildcard.
+     */
+    public boolean isWildcardSubType() {
+        return getSubType().equals(WILDCARD);
+    }
+
+    /**
+     * Checks if either the primary type or the sub type is a wildcard.
+     *
+     * @return <code>true</code> if the primary type or sub type is a wildcard.
+     */
+    public boolean isWildcard() {
+        return isWildcardType() || isWildcardSubType();
     }
 
     public Map<String, String> getParameters() {
@@ -123,14 +152,18 @@ public class ContentType {
     public boolean isCompatible(ContentType other) {
         if (other == null) {
             return false;
-        } else if (getType().equals(MEDIA_TYPE_WILDCARD) || other.getType().equals(MEDIA_TYPE_WILDCARD)) {
+        } else if (getType().equals(WILDCARD) || other.getType().equals(WILDCARD)) {
             return true;
         } else if (getType().equals(other.getType())) {
-            return getSubType().equals(MEDIA_TYPE_WILDCARD)
-                    || other.getSubType().equals(MEDIA_TYPE_WILDCARD)
+            return getSubType().equals(WILDCARD)
+                    || other.getSubType().equals(WILDCARD)
                     || getSubType().equals(other.getSubType());
         }
 
         return false;
+    }
+
+    private String valueOrWildcard(String type) {
+        return type == null || type.trim().isEmpty() ? WILDCARD : type.trim().toLowerCase();
     }
 }

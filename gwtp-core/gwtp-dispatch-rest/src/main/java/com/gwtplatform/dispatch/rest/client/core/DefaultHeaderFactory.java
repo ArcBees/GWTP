@@ -29,6 +29,7 @@ import com.gwtplatform.dispatch.rest.client.annotations.GlobalHeaderParams;
 import com.gwtplatform.dispatch.rest.client.annotations.XsrfHeaderName;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.gin.RestParameterBindings;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -80,10 +81,10 @@ public class DefaultHeaderFactory implements HeaderFactory {
     }
 
     private void addMediaTypes(RestAction<?> action, List<HttpParameter> headerParams) {
-        List<String> contentTypes = action.getClientConsumedContentTypes();
+        List<ContentType> contentTypes = action.getClientConsumedContentTypes();
         StringBuilder accept = new StringBuilder();
 
-        for (String contentType : contentTypes) {
+        for (ContentType contentType : contentTypes) {
             accept.append(",").append(contentType);
         }
 

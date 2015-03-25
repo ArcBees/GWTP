@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind.utils;
+package com.gwtplatform.dispatch.rest.shared;
 
 import java.util.HashMap;
 

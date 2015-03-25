@@ -26,6 +26,7 @@ import org.junit.Test;
 
 import com.google.common.collect.Sets;
 import com.google.gwt.core.ext.typeinfo.HasAnnotations;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;

@@ -28,3 +28,8 @@
 #foreach ($param in $parameters),
                 $param.variableName#end
 #end
+
+## TODO: Use `new ContentType(...)`. For now it's easier to reparse because of the parameters map
+#macro(recreateContentType $contentType)
+ContentType.valueOf("$contentType")
+#end

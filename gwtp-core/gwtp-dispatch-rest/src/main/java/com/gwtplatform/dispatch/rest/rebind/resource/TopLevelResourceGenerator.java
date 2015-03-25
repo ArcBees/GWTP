@@ -29,10 +29,10 @@ import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
-import com.gwtplatform.dispatch.rest.rebind.utils.ContentType;
 import com.gwtplatform.dispatch.rest.rebind.utils.ContentTypeResolver;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 public class TopLevelResourceGenerator extends AbstractResourceGenerator {
