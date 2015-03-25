@@ -15,7 +15,7 @@
     <properties>
         <maven-site-plugin.skip>true</maven-site-plugin.skip>
 
-        <maven-assembly-plugin.version>2.4</maven-assembly-plugin.version>
+        <maven-assembly-plugin.version>2.5.3</maven-assembly-plugin.version>
     </properties>
 
     <!-- The compound jar consist of the following dependencies -->
