@@ -17,6 +17,8 @@
 package com.gwtplatform.dispatch.rest.rebind.serialization;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -46,6 +48,7 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
 
     private final JacksonMapperProviderGenerator jacksonMapperProviderGenerator;
 
+    private SerializationContext context;
     private JType type;
 
     @Inject
@@ -64,17 +67,15 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
 
     @Override
     public boolean canGenerate(SerializationContext context) {
-        for (ContentType contentType : context.getContentTypes()) {
-            if (APPLICATION_JSON.isCompatible(contentType)) {
-                return true;
-            }
-        }
+        this.context = context;
 
-        return false;
+        List<ContentType> contentTypes = matchContentTypes();
+        return !contentTypes.isEmpty();
     }
 
     @Override
     public SerializationDefinition generate(SerializationContext context) throws UnableToCompleteException {
+        this.context = context;
         this.type = classTypeOrConvertToBoxed(getContext().getTypeOracle(), context.getType());
 
         PrintWriter printWriter = tryCreate();
@@ -100,7 +101,7 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
 
     @Override
     protected SerializationDefinition getClassDefinition() {
-        return new SerializationDefinition(getPackageName(), getImplName(), type);
+        return new SerializationDefinition(getPackageName(), getImplName(), type, matchContentTypes());
     }
 
     @Override
@@ -120,5 +121,16 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
         implName += NAME_SUFFIX;
 
         return implName;
+    }
+
+    private List<ContentType> matchContentTypes() {
+        List<ContentType> matches = new ArrayList<ContentType>();
+        for (ContentType contentType : context.getContentTypes()) {
+            if (APPLICATION_JSON.isCompatible(contentType)) {
+                matches.add(contentType);
+            }
+        }
+
+        return matches;
     }
 }
