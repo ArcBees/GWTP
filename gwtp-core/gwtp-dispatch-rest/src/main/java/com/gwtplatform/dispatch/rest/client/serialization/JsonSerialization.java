@@ -56,7 +56,6 @@ public class JsonSerialization implements Serialization {
 
     @Override
     public boolean canDeserialize(String type, ContentType contentType) {
-        assert !contentType.isWildcard() : "Usage of wildcards is not allowed.";
         return VOID.equals(type)
                 || (CONTENT_TYPE.isCompatible(contentType) && jacksonMapperProvider.hasMapper(type));
     }
@@ -80,8 +79,6 @@ public class JsonSerialization implements Serialization {
 
     @Override
     public <T> T deserialize(String type, ContentType contentType, String json) {
-        assert !contentType.isWildcard() : "Usage of wildcards is not allowed.";
-
         if (VOID.equals(type) || json == null || json.isEmpty()) {
             return null;
         }
