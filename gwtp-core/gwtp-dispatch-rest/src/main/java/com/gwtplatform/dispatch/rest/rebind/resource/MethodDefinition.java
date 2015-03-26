@@ -16,11 +16,11 @@
 
 package com.gwtplatform.dispatch.rest.rebind.resource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 
@@ -47,7 +47,7 @@ public class MethodDefinition {
         this.method = method;
         this.parameters = parameters;
         this.inheritedParameters = inheritedParameters;
-        this.imports = Sets.newTreeSet();
+        this.imports = new TreeSet<String>();
     }
 
     public JMethod getMethod() {
@@ -55,11 +55,11 @@ public class MethodDefinition {
     }
 
     public List<Parameter> getParameters() {
-        return Lists.newArrayList(parameters);
+        return new ArrayList<Parameter>(parameters);
     }
 
     public List<Parameter> getInheritedParameters() {
-        return Lists.newArrayList(inheritedParameters);
+        return new ArrayList<Parameter>(inheritedParameters);
     }
 
     public void addImport(String qualifiedClassName) {
@@ -67,7 +67,7 @@ public class MethodDefinition {
     }
 
     public Set<String> getImports() {
-        return Sets.newTreeSet(imports);
+        return new TreeSet<String>(imports);
     }
 
     public void setOutput(String output) {

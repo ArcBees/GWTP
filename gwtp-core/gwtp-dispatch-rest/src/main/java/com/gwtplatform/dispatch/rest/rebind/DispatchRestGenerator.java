@@ -16,13 +16,13 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -65,7 +65,7 @@ public class DispatchRestGenerator extends AbstractGenerator implements Generato
         this.entryPointGenerators = entryPointGenerators;
         this.resourceGenerators = resourceGenerators;
         this.ginModuleGenerators = ginModuleGenerators;
-        this.extensionDefinitions = Lists.newArrayList();
+        this.extensionDefinitions = new ArrayList<ClassDefinition>();
     }
 
     @Override
@@ -92,7 +92,7 @@ public class DispatchRestGenerator extends AbstractGenerator implements Generato
     }
 
     private void generateResources() throws UnableToCompleteException {
-        resourceDefinitions = Lists.newArrayList();
+        resourceDefinitions = new ArrayList<ResourceDefinition>();
         for (JClassType type : getContext().getTypeOracle().getTypes()) {
             maybeGenerateResource(type);
         }

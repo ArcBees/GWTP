@@ -16,10 +16,10 @@
 
 package com.gwtplatform.dispatch.rest.rebind.resource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
@@ -47,7 +47,7 @@ public class ResourceDefinition extends ClassDefinition {
         this.secured = secured;
         this.consumes = consumes;
         this.produces = produces;
-        this.methodDefinitions = Lists.newArrayList();
+        this.methodDefinitions = new ArrayList<MethodDefinition>();
     }
 
     public JClassType getResourceInterface() {
@@ -75,6 +75,6 @@ public class ResourceDefinition extends ClassDefinition {
     }
 
     public List<MethodDefinition> getMethodDefinitions() {
-        return Lists.newArrayList(methodDefinitions);
+        return new ArrayList<MethodDefinition>(methodDefinitions);
     }
 }

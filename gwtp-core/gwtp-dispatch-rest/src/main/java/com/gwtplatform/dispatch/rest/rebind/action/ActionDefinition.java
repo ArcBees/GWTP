@@ -16,10 +16,10 @@
 
 package com.gwtplatform.dispatch.rest.rebind.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 import com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameter;
@@ -85,7 +85,7 @@ public class ActionDefinition extends ClassDefinition {
     }
 
     public List<HttpParameter> getHttpParameters() {
-        return Lists.newArrayList(httpParameters);
+        return new ArrayList<HttpParameter>(httpParameters);
     }
 
     public Parameter getBodyParameter() {
