@@ -28,7 +28,6 @@ import javax.inject.Inject;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -303,7 +302,7 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
     }
 
     private List<JParameter> findAllParameters(MethodContext methodContext) {
-        List<JParameter> jParameters = Lists.newArrayList();
+        List<JParameter> jParameters = new ArrayList<JParameter>();
 
         ResourceContext resourceContext = methodContext.getResourceContext();
         if (resourceContext instanceof SubResourceContext) {

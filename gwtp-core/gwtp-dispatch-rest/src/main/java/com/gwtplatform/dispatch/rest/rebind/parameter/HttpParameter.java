@@ -16,14 +16,13 @@
 
 package com.gwtplatform.dispatch.rest.rebind.parameter;
 
-import com.google.common.base.Optional;
 import com.google.gwt.core.ext.typeinfo.JParameter;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 
 public class HttpParameter extends Parameter {
     private final HttpParameterType type;
     private final String name;
-    private final Optional<String> dateFormat;
+    private final String dateFormat;
 
     public HttpParameter(
             JParameter parameter,
@@ -34,7 +33,7 @@ public class HttpParameter extends Parameter {
 
         this.type = type;
         this.name = name;
-        this.dateFormat = Optional.fromNullable(dateFormat);
+        this.dateFormat = dateFormat;
     }
 
     public HttpParameterType getType() {
@@ -45,7 +44,7 @@ public class HttpParameter extends Parameter {
         return name;
     }
 
-    public Optional<String> getDateFormat() {
+    public String getDateFormat() {
         return dateFormat;
     }
 }

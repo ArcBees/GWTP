@@ -27,7 +27,6 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JType;
@@ -56,13 +55,10 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
             Logger logger,
             GeneratorContext context,
             VelocityEngine velocityEngine,
-            EventBus eventBus,
             JacksonMapperProviderGenerator jacksonMapperProviderGenerator) {
         super(logger, context, velocityEngine);
 
         this.jacksonMapperProviderGenerator = jacksonMapperProviderGenerator;
-
-        eventBus.register(this);
     }
 
     @Override

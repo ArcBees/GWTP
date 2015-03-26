@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rest.rebind.subresource;
 
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,7 +28,6 @@ import javax.ws.rs.Path;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -105,7 +105,7 @@ public class SubResourceMethodGenerator extends AbstractMethodGenerator {
         if (subResource instanceof SubResourceDefinition) {
             subResourceParameters = ((SubResourceDefinition) subResource).getParameters();
         } else {
-            subResourceParameters = Lists.newArrayList();
+            subResourceParameters = new ArrayList<Parameter>();
         }
 
         variables.put("resourceType", new ClassDefinition(returnInterface).getParameterizedClassName());

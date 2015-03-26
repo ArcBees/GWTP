@@ -20,12 +20,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.collect.Maps;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -59,7 +59,7 @@ public abstract class AbstractVelocityGenerator extends AbstractGenerator {
     }
 
     protected void mergeTemplate(Writer writer) throws UnableToCompleteException {
-        Map<String, Object> variables = Maps.newHashMap();
+        Map<String, Object> variables = new HashMap<String, Object>();
         populateTemplateVariables(variables);
 
         VelocityContext velocityContext = new VelocityContext(variables);

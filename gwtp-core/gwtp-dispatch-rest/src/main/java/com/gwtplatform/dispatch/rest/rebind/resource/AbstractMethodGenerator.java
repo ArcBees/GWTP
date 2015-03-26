@@ -16,12 +16,11 @@
 
 package com.gwtplatform.dispatch.rest.rebind.resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.google.gwt.core.ext.typeinfo.JParameter;
@@ -69,13 +68,13 @@ public abstract class AbstractMethodGenerator extends AbstractVelocityGenerator 
 
     protected List<Parameter> resolveParameters() {
         List<JParameter> jParameters = Arrays.asList(getMethod().getParameters());
+        List<Parameter> parameters = new ArrayList<Parameter>();
 
-        return Lists.transform(jParameters, new Function<JParameter, Parameter>() {
-            @Override
-            public Parameter apply(JParameter jParameter) {
-                return new Parameter(jParameter);
-            }
-        });
+        for (JParameter jParameter : jParameters) {
+            parameters.add(new Parameter(jParameter));
+        }
+
+        return parameters;
     }
 
     protected List<Parameter> resolveInheritedParameters() {
@@ -84,7 +83,7 @@ public abstract class AbstractMethodGenerator extends AbstractVelocityGenerator 
         if (getParentDefinition() instanceof SubResourceDefinition) {
             inheritedParameters = ((SubResourceDefinition) getParentDefinition()).getParameters();
         } else {
-            inheritedParameters = Lists.newArrayList();
+            inheritedParameters = new ArrayList<Parameter>();
         }
 
         return inheritedParameters;

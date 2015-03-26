@@ -16,10 +16,10 @@
 
 package com.gwtplatform.dispatch.rest.rebind.subresource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
@@ -43,6 +43,6 @@ public class SubResourceDefinition extends ResourceDefinition {
     }
 
     public List<Parameter> getParameters() {
-        return Lists.newArrayList(parameters);
+        return new ArrayList<Parameter>(parameters);
     }
 }

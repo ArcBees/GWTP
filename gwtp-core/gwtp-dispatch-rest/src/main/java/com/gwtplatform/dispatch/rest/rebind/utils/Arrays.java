@@ -16,10 +16,9 @@
 
 package com.gwtplatform.dispatch.rest.rebind.utils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import com.google.common.collect.Lists;
 
 public class Arrays {
     /**
@@ -28,7 +27,7 @@ public class Arrays {
      * Reason: Some introspection methods used by the generators return null arrays.
      */
     public static <T> List<T> asList(T... array) {
-        List<T> list = Lists.newArrayList();
+        List<T> list = new ArrayList<T>();
 
         if (array != null) {
             Collections.addAll(list, array);
