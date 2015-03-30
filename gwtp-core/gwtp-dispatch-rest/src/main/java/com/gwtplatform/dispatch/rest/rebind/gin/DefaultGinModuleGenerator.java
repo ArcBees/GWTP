@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rest.rebind.gin;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,15 +25,14 @@ import javax.inject.Inject;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.collect.Lists;
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent;
+import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent.RegisterGinBindingListener;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.rebind.utils.EventBus;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
 public class DefaultGinModuleGenerator extends AbstractVelocityGenerator implements GinModuleGenerator {
@@ -51,9 +51,9 @@ public class DefaultGinModuleGenerator extends AbstractVelocityGenerator impleme
             VelocityEngine velocityEngine) {
         super(logger, context, velocityEngine);
 
-        bindings = Lists.newArrayList();
+        bindings = new ArrayList<RegisterGinBindingEvent>();
 
-        eventBus.register(this);
+        eventBus.register(RegisterGinBindingEvent.class, (RegisterGinBindingListener) this);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class DefaultGinModuleGenerator extends AbstractVelocityGenerator impleme
         return getClassDefinition();
     }
 
-    @Subscribe
+    @Override
     public void onGinBindingRegistered(RegisterGinBindingEvent event) {
         bindings.add(event);
     }

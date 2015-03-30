@@ -18,7 +18,9 @@ package com.gwtplatform.dispatch.rest.rebind.gin;
 
 import com.gwtplatform.dispatch.rest.rebind.GeneratorWithoutInput;
 import com.gwtplatform.dispatch.rest.rebind.HasPriority;
+import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent.RegisterGinBindingListener;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 
-public interface GinModuleGenerator extends GeneratorWithoutInput<ClassDefinition>, HasPriority {
+public interface GinModuleGenerator
+        extends GeneratorWithoutInput<ClassDefinition>, HasPriority, RegisterGinBindingListener {
 }

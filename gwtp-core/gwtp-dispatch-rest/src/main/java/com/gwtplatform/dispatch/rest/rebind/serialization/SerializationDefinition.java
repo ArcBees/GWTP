@@ -16,22 +16,32 @@
 
 package com.gwtplatform.dispatch.rest.rebind.serialization;
 
+import java.util.Collection;
+
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
 public class SerializationDefinition extends ClassDefinition {
     private final JType serializableType;
+    private final Collection<ContentType> contentTypes;
 
     public SerializationDefinition(
             String packageName,
             String className,
-            JType serializableType) {
+            JType serializableType,
+            Collection<ContentType> contentTypes) {
         super(packageName, className);
 
         this.serializableType = serializableType;
+        this.contentTypes = contentTypes;
     }
 
     public JType getSerializableType() {
         return serializableType;
+    }
+
+    public Collection<ContentType> getContentTypes() {
+        return contentTypes;
     }
 }

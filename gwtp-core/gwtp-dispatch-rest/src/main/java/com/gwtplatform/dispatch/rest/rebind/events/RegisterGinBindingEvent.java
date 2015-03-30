@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -16,10 +16,16 @@
 
 package com.gwtplatform.dispatch.rest.rebind.events;
 
-import com.google.common.eventbus.EventBus;
+import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent.RegisterGinBindingListener;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.rebind.utils.EventBus;
+import com.gwtplatform.dispatch.rest.rebind.utils.EventBus.Event;
 
-public class RegisterGinBindingEvent {
+public class RegisterGinBindingEvent implements Event<RegisterGinBindingListener> {
+    public interface RegisterGinBindingListener {
+        void onGinBindingRegistered(RegisterGinBindingEvent event);
+    }
+
     private final ClassDefinition definition;
     private final ClassDefinition implementation;
     private final boolean isSingleton;
@@ -53,5 +59,10 @@ public class RegisterGinBindingEvent {
 
     public boolean isSingleton() {
         return isSingleton;
+    }
+
+    @Override
+    public void dispatch(RegisterGinBindingListener listener) {
+        listener.onGinBindingRegistered(this);
     }
 }

@@ -20,10 +20,10 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.collect.Sets;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -62,7 +62,7 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
 
         PrintWriter printWriter = tryCreate();
         if (printWriter != null) {
-            imports = Sets.newTreeSet();
+            imports = new TreeSet<String>();
             imports.add(getResourceType().getQualifiedSourceName());
 
             generateMethods();

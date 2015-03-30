@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.rebind.serialization;
 
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,9 +26,6 @@ import javax.inject.Inject;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
@@ -36,7 +34,9 @@ import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent;
 import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionContext;
 import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionGenerator;
 import com.gwtplatform.dispatch.rest.rebind.extension.ExtensionPoint;
+import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.rebind.utils.EventBus;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
 public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator implements ExtensionGenerator {
@@ -56,7 +56,7 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator im
             EventBus eventBus) {
         super(logger, context, velocityEngine);
 
-        this.serializerDefinitions = Sets.newHashSet();
+        this.serializerDefinitions = new HashSet<SerializationDefinition>();
         this.eventBus = eventBus;
     }
 
@@ -77,7 +77,7 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator im
             getLogger().debug("Jackson Mapper Provider already generated. Returning.");
         }
 
-        return Lists.newArrayList(getClassDefinition());
+        return Arrays.asList(getClassDefinition());
     }
 
     @Override
