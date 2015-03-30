@@ -16,9 +16,9 @@
 
 package com.gwtplatform.dispatch.rest.rebind.subresource;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 import com.gwtplatform.dispatch.rest.rebind.resource.MethodDefinition;
@@ -33,7 +33,7 @@ public class SubResourceMethodDefinition extends MethodDefinition {
             List<Parameter> inheritedParameters) {
         super(method, parameters, inheritedParameters);
 
-        resourceDefinitions = Lists.newArrayList();
+        resourceDefinitions = new ArrayList<ResourceDefinition>();
     }
 
     public void addResource(ResourceDefinition resourceDefinition) {
@@ -43,6 +43,6 @@ public class SubResourceMethodDefinition extends MethodDefinition {
     }
 
     public List<ResourceDefinition> getResourceDefinitions() {
-        return Lists.newArrayList(resourceDefinitions);
+        return new ArrayList<ResourceDefinition>(resourceDefinitions);
     }
 }

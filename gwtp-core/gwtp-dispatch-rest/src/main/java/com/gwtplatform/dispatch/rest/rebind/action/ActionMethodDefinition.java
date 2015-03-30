@@ -16,9 +16,9 @@
 
 package com.gwtplatform.dispatch.rest.rebind.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JMethod;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
@@ -36,7 +36,7 @@ public class ActionMethodDefinition extends MethodDefinition {
         super(method, parameters, inheritedParameters);
 
         this.resultType = resultType;
-        this.actionDefinitions = Lists.newArrayList();
+        this.actionDefinitions = new ArrayList<ActionDefinition>();
     }
 
     public JClassType getResultType() {
@@ -50,6 +50,6 @@ public class ActionMethodDefinition extends MethodDefinition {
     }
 
     public List<ActionDefinition> getActionDefinitions() {
-        return Lists.newArrayList(actionDefinitions);
+        return new ArrayList<ActionDefinition>(actionDefinitions);
     }
 }

@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.gwtplatform.dispatch.rest.rebind.GeneratorWithInput;
 import com.gwtplatform.dispatch.rest.rebind.GeneratorWithoutInput;
@@ -129,7 +128,7 @@ public class Generators {
      * Sort the provided generators by weight without modifying the original collection.
      */
     private static <T extends HasPriority> List<T> sortGenerators(Collection<T> generators) {
-        List<T> sortedGenerators = Lists.newArrayList(generators);
+        List<T> sortedGenerators = new ArrayList<T>(generators);
         Collections.sort(sortedGenerators, COMPARATOR);
 
         return sortedGenerators;

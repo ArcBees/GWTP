@@ -18,7 +18,7 @@ public class $impl extends AbstractRestAction<$result> {
         super(httpParameterFactory, defaultDateFormat, HttpMethod.$httpVerb, "$path");
 
 #foreach($param in $httpParameters)
-        addParam(Type.$param.type.getAssociatedType(), "$param.name", $param.variableName#if($param.dateFormat.isPresent()), "$param.dateFormat.get()"#end);
+        addParam(Type.$param.type.getAssociatedType(), "$param.name", $param.variableName#if($param.dateFormat), "$param.dateFormat"#end);
 #end
 #if($bodyParameterName)
         setBodyParam($bodyParameterName);

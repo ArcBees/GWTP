@@ -16,11 +16,11 @@
 
 package com.gwtplatform.dispatch.rest.rebind.extension;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.Nullable;
 
-import com.google.common.collect.Lists;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 
@@ -52,11 +52,11 @@ public class ExtensionContext {
     }
 
     public Collection<ClassDefinition> getExtensionDefinitions() {
-        return Lists.newArrayList(extensionDefinitions);
+        return new ArrayList<ClassDefinition>(extensionDefinitions);
     }
 
     public Collection<ResourceDefinition> getResourceDefinitions() {
-        return resourceDefinitions != null ? Lists.newArrayList(resourceDefinitions) : null;
+        return resourceDefinitions != null ? new ArrayList<ResourceDefinition>(resourceDefinitions) : null;
     }
 
     public ClassDefinition getGinModuleDefinition() {
