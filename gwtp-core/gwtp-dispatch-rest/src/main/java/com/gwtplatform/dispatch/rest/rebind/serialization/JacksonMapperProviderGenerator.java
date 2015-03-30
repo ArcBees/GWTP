@@ -39,7 +39,8 @@ import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.EventBus;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 
-public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator implements ExtensionGenerator {
+public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
+        implements ExtensionGenerator, JacksonMapperDefinitions {
     private static final String TEMPLATE =
             "com/gwtplatform/dispatch/rest/rebind/serialization/JacksonMapperProvider.vm";
     private static final String PACKAGE = JacksonMapperProvider.class.getPackage().getName();
@@ -58,6 +59,11 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator im
 
         this.serializerDefinitions = new HashSet<SerializationDefinition>();
         this.eventBus = eventBus;
+    }
+
+    @Override
+    public void addDefinition(SerializationDefinition definition) {
+        serializerDefinitions.add(definition);
     }
 
     @Override
@@ -98,10 +104,6 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator im
     @Override
     protected String getImplName() {
         return CLASS_NAME;
-    }
-
-    void addDefinition(SerializationDefinition definition) {
-        serializerDefinitions.add(definition);
     }
 
     private void registerGinBinding() throws UnableToCompleteException {

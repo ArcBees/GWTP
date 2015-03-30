@@ -45,7 +45,7 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
     private static final String NAME_SUFFIX = "Mapper";
     private static final ContentType APPLICATION_JSON = ContentType.valueOf(MediaType.APPLICATION_JSON);
 
-    private final JacksonMapperProviderGenerator jacksonMapperProviderGenerator;
+    private final JacksonMapperDefinitions definitions;
 
     private SerializationContext context;
     private JType type;
@@ -55,10 +55,10 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
             Logger logger,
             GeneratorContext context,
             VelocityEngine velocityEngine,
-            JacksonMapperProviderGenerator jacksonMapperProviderGenerator) {
+            JacksonMapperDefinitions definitions) {
         super(logger, context, velocityEngine);
 
-        this.jacksonMapperProviderGenerator = jacksonMapperProviderGenerator;
+        this.definitions = definitions;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator implements
             mergeTemplate(printWriter);
             commit(printWriter);
 
-            jacksonMapperProviderGenerator.addDefinition(getClassDefinition());
+            definitions.addDefinition(getClassDefinition());
         } else {
             getLogger().debug("Jackson Mapper already generated. Returning.");
         }

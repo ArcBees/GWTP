@@ -35,6 +35,7 @@ public class SerializationModule extends AbstractModule {
         addSerialisationGenerator(binder()).to(JacksonMapperGenerator.class);
         addExtensionGenerator(binder()).to(JacksonMapperProviderGenerator.class);
 
+        bind(JacksonMapperDefinitions.class).to(JacksonMapperProviderGenerator.class);
         bind(JacksonMapperProviderGenerator.class).in(Singleton.class);
     }
 }
