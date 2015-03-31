@@ -3,16 +3,29 @@ package $package;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import com.github.nmorel.gwtjackson.client.ObjectMapper;
 import com.google.inject.TypeLiteral;
+import com.google.gwt.core.client.GWT;
 #if (!$definitions.isEmpty())
 import ${package}.mappers.*;
 #end
 
 public class $impl extends AbstractJacksonMapperProvider {
-    @Inject
-    $impl(#foreach ($definition in $definitions)Provider<$definition.getParameterizedClassName()> ${definition.className}Provider#commaIfNeeded($definitions)$lf#end) {
+    $impl() {
 #foreach ($definition in $definitions)
-        registerProvider("$definition.serializableType.getParameterizedQualifiedSourceName()", ${definition.className}Provider);
+        registerProvider("$definition.serializableType.getParameterizedQualifiedSourceName()",
+                new Provider<ObjectMapper<?>>() {
+                    private ObjectMapper<?> mapper;
+
+                    @Override
+                    public ObjectMapper<?> get() {
+                        if (mapper == null){
+                            mapper = (ObjectMapper<?>) GWT.create(${definition.className}.class);
+                        }
+
+                        return mapper;
+                    }
+                });
 #end
     }
 }

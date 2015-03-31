@@ -27,4 +27,12 @@
     <generate-with class="com.gwtplatform.dispatch.rest.rebind.DispatchRestIncrementalGenerator">
         <when-type-is class="com.gwtplatform.dispatch.rest.client.DispatchRestEntryPoint"/>
     </generate-with>
+
+    <!-- Fallbacks -->
+    <generate-with class="com.gwtplatform.dispatch.rest.rebind.FallThroughGenerator">
+        <when-type-assignable class="com.gwtplatform.dispatch.rest.client.annotations.Resource"/>
+    </generate-with>
+    <generate-with class="com.gwtplatform.dispatch.rest.rebind.FallThroughGenerator">
+        <when-type-is class="com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider"/>
+    </generate-with>
 </module>
