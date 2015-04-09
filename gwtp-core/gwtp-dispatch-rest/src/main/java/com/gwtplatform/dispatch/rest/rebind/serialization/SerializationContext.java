@@ -1,5 +1,5 @@
 /**
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,25 +14,37 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind.events;
+package com.gwtplatform.dispatch.rest.rebind.serialization;
 
-import com.google.common.eventbus.EventBus;
+import java.util.Set;
+
 import com.google.gwt.core.ext.typeinfo.JType;
+import com.gwtplatform.dispatch.rest.rebind.action.ActionContext;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
-public class RegisterSerializableTypeEvent {
+public class SerializationContext {
+    private final ActionContext context;
     private final JType type;
+    private final Set<ContentType> contentTypes;
 
-    RegisterSerializableTypeEvent(
-            JType type) {
+    public SerializationContext(
+            ActionContext context,
+            JType type,
+            Set<ContentType> contentTypes) {
+        this.context = context;
         this.type = type;
+        this.contentTypes = contentTypes;
     }
 
-    public static void post(EventBus eventBus, JType type) {
-        RegisterSerializableTypeEvent event = new RegisterSerializableTypeEvent(type);
-        eventBus.post(event);
+    public ActionContext getContext() {
+        return context;
     }
 
     public JType getType() {
         return type;
+    }
+
+    public Set<ContentType> getContentTypes() {
+        return contentTypes;
     }
 }

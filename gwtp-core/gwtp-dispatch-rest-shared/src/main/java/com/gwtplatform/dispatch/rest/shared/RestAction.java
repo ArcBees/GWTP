@@ -56,6 +56,20 @@ public interface RestAction<R> extends TypedAction<R>, HasSecured {
     Object getBodyParam();
 
     /**
+     * Returns the parameterized qualified class name of the body type or <code>null</code> if there are no body
+     * parameters. The type returned is a <code>String</code> because it is easier to compare the parameter type
+     * information without reflection. This may change later on.
+     */
+    String getBodyClass();
+
+    /**
+     * Returns the parameterized qualified class name of the return type or <code>null</code> if there are no body
+     * parameters. The type returned is a <code>String</code> because it is easier to compare the parameter type
+     * information without reflection. This may change later on.
+     */
+    String getResultClass();
+
+    /**
      * Verify if this action contains FORM parameters. {@link #hasBodyParam()} should return {@code false}.
      *
      * @return {@code true} if this method contains form parameters, otherwise {@code false}.
@@ -68,4 +82,16 @@ public interface RestAction<R> extends TypedAction<R>, HasSecured {
      * @return {@code true} if this method contains body object, otherwise {@code false}.
      */
     Boolean hasBodyParam();
+
+    /**
+     * Get a list of content types the client is allowed to produce. These content types are usually enumerated in the
+     * {@link javax.ws.rs.Consumes @Consumes} annotation.
+     */
+    List<ContentType> getClientProducedContentTypes();
+
+    /**
+     * Get a list of content types the client is allowed to produce. These content types are usually enumerated in the
+     * {@link javax.ws.rs.Produces @Produces} annotation.
+     */
+    List<ContentType> getClientConsumedContentTypes();
 }

@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rest.client.core;
 
 import javax.inject.Inject;
+import javax.ws.rs.core.HttpHeaders;
 
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
@@ -36,6 +37,8 @@ import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.UnsecuredRestAction;
+import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
@@ -95,7 +98,7 @@ public class DefaultHeaderFactoryTest {
     private RequestBuilder requestBuilder;
 
     @Test
-    public void securityHeaderShouldBeSetWhenTokenIsNotEmpty() {
+    public void build_securityToken_securityHeaderIsSet() {
         // Given
         RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
 
@@ -107,7 +110,7 @@ public class DefaultHeaderFactoryTest {
     }
 
     @Test
-    public void securityHeaderShouldNotBeSetWhenSecurityTokenIsEmpty() {
+    public void build_emptySecurityToken_securityHeaderIsNotSet() {
         // Given
         RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
 
@@ -119,7 +122,7 @@ public class DefaultHeaderFactoryTest {
     }
 
     @Test
-    public void securityHeaderShouldNotBeSetWhenActionIsNotSecured() {
+    public void build_actionNotSecured_securityHeaderIsNotSet() {
         // Given
         RestAction<Void> action = new UnsecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
 
@@ -131,7 +134,7 @@ public class DefaultHeaderFactoryTest {
     }
 
     @Test
-    public void globalHeadersShouldBeSetForCorrespondingHttpMethod() {
+    public void build_globalHeadersWithHttpMethod_areSetForSameHttpMethod() {
         // Given
         RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
 
@@ -145,7 +148,7 @@ public class DefaultHeaderFactoryTest {
     }
 
     @Test
-    public void allActionHeaderParamsShouldBeSet() {
+    public void build_actionHeaders_areSet() {
         // Given
         RestAction<Void> action = createActionWithHeaderParams();
 
@@ -158,7 +161,7 @@ public class DefaultHeaderFactoryTest {
     }
 
     @Test
-    public void actionHeaderParamsShouldBeSetAfterGlobalHeaders() {
+    public void build_actionHeaderAreSetAfterGlobalHeaders() {
         // Given
         RestAction<Void> action = createActionWithHeaderParams();
 
@@ -171,6 +174,19 @@ public class DefaultHeaderFactoryTest {
         inOrder.verify(requestBuilder).setHeader(eq(KEY_2), anyString());
         inOrder.verify(requestBuilder).setHeader(eq(ACTION_KEY_1), anyString());
         inOrder.verify(requestBuilder).setHeader(eq(ACTION_KEY_2), anyString());
+    }
+
+    @Test
+    public void build_acceptContentTypes_acceptHeaderIsSet() {
+        // given
+        UnsecuredRestAction action = new UnsecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        action.setClientConsumedContentTypes(Arrays.asList(ContentType.valueOf("a"), ContentType.valueOf("b")));
+
+        // when
+        factory.buildHeaders(requestBuilder, action, SECURITY_TOKEN);
+
+        // then
+        verify(requestBuilder).setHeader(eq(HttpHeaders.ACCEPT), eq("a/*,b/*"));
     }
 
     private RestAction<Void> createActionWithHeaderParams() {

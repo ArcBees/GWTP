@@ -16,12 +16,14 @@
 
 package com.gwtplatform.dispatch.rest.rebind.subresource;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
 public class SubResourceDefinition extends ResourceDefinition {
     private final List<Parameter> parameters;
@@ -32,13 +34,15 @@ public class SubResourceDefinition extends ResourceDefinition {
             String className,
             List<Parameter> parameters,
             String path,
-            boolean secured) {
-        super(resourceInterface, packageName, className, path, secured);
+            boolean secured,
+            Set<ContentType> consumes,
+            Set<ContentType> produces) {
+        super(resourceInterface, packageName, className, path, secured, consumes, produces);
 
         this.parameters = parameters;
     }
 
     public List<Parameter> getParameters() {
-        return Lists.newArrayList(parameters);
+        return new ArrayList<Parameter>(parameters);
     }
 }

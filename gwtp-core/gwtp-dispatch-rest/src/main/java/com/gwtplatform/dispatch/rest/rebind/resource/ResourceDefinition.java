@@ -16,16 +16,20 @@
 
 package com.gwtplatform.dispatch.rest.rebind.resource;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
 public class ResourceDefinition extends ClassDefinition {
     private final JClassType resourceInterface;
     private final String path;
     private final boolean secured;
+    private final Set<ContentType> consumes;
+    private final Set<ContentType> produces;
     private final List<MethodDefinition> methodDefinitions;
 
     public ResourceDefinition(
@@ -33,13 +37,17 @@ public class ResourceDefinition extends ClassDefinition {
             String packageName,
             String className,
             String path,
-            boolean secured) {
+            boolean secured,
+            Set<ContentType> consumes,
+            Set<ContentType> produces) {
         super(packageName, className);
 
         this.resourceInterface = resourceInterface;
         this.path = path;
         this.secured = secured;
-        this.methodDefinitions = Lists.newArrayList();
+        this.consumes = consumes;
+        this.produces = produces;
+        this.methodDefinitions = new ArrayList<MethodDefinition>();
     }
 
     public JClassType getResourceInterface() {
@@ -54,11 +62,19 @@ public class ResourceDefinition extends ClassDefinition {
         return secured;
     }
 
+    public Set<ContentType> getConsumes() {
+        return consumes;
+    }
+
+    public Set<ContentType> getProduces() {
+        return produces;
+    }
+
     public void addMethodDefinition(MethodDefinition definition) {
         methodDefinitions.add(definition);
     }
 
     public List<MethodDefinition> getMethodDefinitions() {
-        return Lists.newArrayList(methodDefinitions);
+        return new ArrayList<MethodDefinition>(methodDefinitions);
     }
 }

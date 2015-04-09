@@ -72,7 +72,6 @@ public class DefaultRequestBuilderFactory implements RequestBuilderFactory {
         requestBuilder.setTimeoutMillis(requestTimeoutMs);
 
         headerFactory.buildHeaders(requestBuilder, action, securityToken);
-
         bodyFactory.buildBody(requestBuilder, action);
 
         return requestBuilder;

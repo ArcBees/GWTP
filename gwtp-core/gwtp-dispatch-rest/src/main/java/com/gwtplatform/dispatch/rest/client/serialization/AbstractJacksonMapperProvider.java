@@ -47,7 +47,7 @@ public abstract class AbstractJacksonMapperProvider implements JacksonMapperProv
         return objectMapperProviders.containsKey(type);
     }
 
-    protected void addProvider(String type, Provider<? extends ObjectMapper<?>> mapperProvider) {
+    protected void registerProvider(String type, Provider<? extends ObjectMapper<?>> mapperProvider) {
         objectMapperProviders.put(type, mapperProvider);
     }
 }

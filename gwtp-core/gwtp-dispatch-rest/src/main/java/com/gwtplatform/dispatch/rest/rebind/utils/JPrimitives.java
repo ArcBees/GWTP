@@ -16,8 +16,12 @@
 
 package com.gwtplatform.dispatch.rest.rebind.utils;
 
+import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JPrimitiveType;
 import com.google.gwt.core.ext.typeinfo.JType;
+import com.google.gwt.core.ext.typeinfo.TypeOracle;
+import com.google.gwt.core.ext.typeinfo.TypeOracleException;
 
 public class JPrimitives {
     public static boolean isPrimitiveOrBoxed(JType type) {
@@ -38,5 +42,32 @@ public class JPrimitives {
         }
 
         return false;
+    }
+
+    public static JClassType classTypeOrConvertToBoxed(TypeOracle typeOracle, JType type)
+            throws UnableToCompleteException {
+        JPrimitiveType primitiveType = type.isPrimitive();
+        JClassType classType;
+
+        if (primitiveType != null) {
+            classType = convertToBoxed(typeOracle, primitiveType);
+        } else {
+            classType = type.isClassOrInterface();
+        }
+
+        return classType;
+    }
+
+    public static JClassType convertToBoxed(TypeOracle typeOracle, JPrimitiveType primitive)
+            throws UnableToCompleteException {
+        JClassType boxedType;
+        try {
+            String boxedSourceName = primitive.getQualifiedBoxedSourceName();
+            boxedType = typeOracle.parse(boxedSourceName).isClass();
+        } catch (TypeOracleException e) {
+            boxedType = null;
+        }
+
+        return boxedType;
     }
 }

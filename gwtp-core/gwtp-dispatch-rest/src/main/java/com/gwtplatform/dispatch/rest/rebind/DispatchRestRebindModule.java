@@ -16,16 +16,10 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import java.net.URL;
-import java.util.Properties;
-
 import javax.inject.Singleton;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.eventbus.EventBus;
-import com.google.common.io.ByteSource;
-import com.google.common.io.Resources;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -38,11 +32,11 @@ import com.gwtplatform.dispatch.rest.rebind.gin.GinModule;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceModule;
 import com.gwtplatform.dispatch.rest.rebind.serialization.SerializationModule;
 import com.gwtplatform.dispatch.rest.rebind.subresource.SubResourceModule;
+import com.gwtplatform.dispatch.rest.rebind.utils.EventBus;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
+import com.gwtplatform.dispatch.rest.rebind.utils.VelocityProperties;
 
 public class DispatchRestRebindModule extends AbstractModule {
-    private static final String VELOCITY_PROPERTIES = "com/gwtplatform/dispatch/rest/rebind/velocity.properties";
-
     private final TreeLogger treeLogger;
     private final GeneratorContext context;
 
@@ -65,6 +59,7 @@ public class DispatchRestRebindModule extends AbstractModule {
 
         bind(GeneratorContext.class).toInstance(context);
 
+        bind(VelocityProperties.class).in(Singleton.class);
         bind(EventBus.class).in(Singleton.class);
     }
 
@@ -77,25 +72,7 @@ public class DispatchRestRebindModule extends AbstractModule {
 
     @Provides
     @Singleton
-    @VelocityProperties
-    Properties getVelocityProperties(Logger logger) throws UnableToCompleteException {
-        Properties properties = new Properties();
-
-        try {
-            URL url = Resources.getResource(VELOCITY_PROPERTIES);
-            ByteSource byteSource = Resources.asByteSource(url);
-
-            properties.load(byteSource.openStream());
-        } catch (Exception e) {
-            logger.die("Unable to load velocity properties from '%s'.", e, VELOCITY_PROPERTIES);
-        }
-
-        return properties;
-    }
-
-    @Provides
-    @Singleton
-    VelocityEngine getVelocityEngine(@VelocityProperties Properties properties) {
-        return new VelocityEngine(properties);
+    VelocityEngine getVelocityEngine(VelocityProperties properties) throws UnableToCompleteException {
+        return new VelocityEngine(properties.asProperties());
     }
 }

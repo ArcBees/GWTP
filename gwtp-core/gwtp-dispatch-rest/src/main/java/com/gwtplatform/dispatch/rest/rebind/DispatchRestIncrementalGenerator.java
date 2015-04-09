@@ -16,9 +16,9 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -80,7 +80,7 @@ public class DispatchRestIncrementalGenerator extends IncrementalGenerator {
     }
 
     private Injector createInjector() {
-        List<Module> modules = Lists.newArrayList();
+        List<Module> modules = new ArrayList<Module>();
         modules.add(new DispatchRestRebindModule(logger, context));
 
         loadExtensionModules(modules);

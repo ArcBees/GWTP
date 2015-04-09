@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,13 +14,26 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind.gin;
+package com.gwtplatform.dispatch.rest.client.serialization;
 
-import com.gwtplatform.dispatch.rest.rebind.GeneratorWithoutInput;
-import com.gwtplatform.dispatch.rest.rebind.HasPriority;
-import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent.RegisterGinBindingListener;
-import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
-public interface GinModuleGenerator
-        extends GeneratorWithoutInput<ClassDefinition>, HasPriority, RegisterGinBindingListener {
+public class SerializedValue {
+    private final ContentType contentType;
+    private final String data;
+
+    public SerializedValue(
+            ContentType contentType,
+            String data) {
+        this.contentType = contentType;
+        this.data = data;
+    }
+
+    public ContentType getContentType() {
+        return contentType;
+    }
+
+    public String getData() {
+        return data;
+    }
 }

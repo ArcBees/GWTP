@@ -16,6 +16,10 @@
 
 package com.gwtplatform.dispatch.rest.client.serialization;
 
+import java.util.List;
+
+import com.gwtplatform.dispatch.rest.shared.ContentType;
+
 /**
  * Offers basic serialization methods. The results depends on the implementation used.
  *
@@ -30,35 +34,44 @@ public interface Serialization {
      * Verify if the given parameterized type can be serialized.
      *
      * @param parameterizedType the parameterized type.
+     * @param contentTypes a list of content acceptable {@link ContentType content types} for the serialized output.
+     *
      * @return {@code true} if <code>parameterizedType</code> can be serialized, otherwise {@code false}.
      */
-    boolean canSerialize(String parameterizedType);
+    boolean canSerialize(String parameterizedType, List<ContentType> contentTypes);
 
     /**
      * Serializes the object as a type represented by <code>parameterizedType</code>.
      *
-     * @param object            the object to serialized.
+     * @param <T> the type of the object.
      * @param parameterizedType the parameterized type of the object to serialize.
-     * @param <T>               the type of the object.
-     * @return the serialized object as a String.
+     * @param contentTypes the {@link ContentType content types} allowed for the serialized value.
+     * @param object the object to serialized.
+     *
+     * @return the {@link SerializedValue} resulting from the serialization of <code>object</code>.
      */
-    <T> String serialize(T object, String parameterizedType);
+    <T> SerializedValue serialize(String parameterizedType, List<ContentType> contentTypes, T object);
 
     /**
      * Verify if the given parameterized type can be deserialized.
      *
      * @param parameterizedType the parameterized type.
-     * @return {@code true} if <code>parameterizedType</code> can be deserialized, otherwise {@code false}.
+     * @param contentType the {@link ContentType content type} of the checked input.
+     *
+     * @return {@code true} if an object of type <code>parameterizedType</code> with <code>contentType</code> can be
+     * deserialized, otherwise {@code false}.
      */
-    boolean canDeserialize(String parameterizedType);
+    boolean canDeserialize(String parameterizedType, ContentType contentType);
 
     /**
      * Deserializes the object to the type represented by <code>parameterizedType</code>.
      *
-     * @param serializedObject  the String representing the serialized object.
+     * @param <T> the return type.
      * @param parameterizedType the parameterized type of the expected return type.
-     * @param <T>               the return type.
+     * @param contentType the {@link ContentType content type} of <code>serializedObject</code>.
+     * @param serializedObject the String representing the serialized object.
+     *
      * @return The deserialized object of type <code>T</code>.
      */
-    <T> T deserialize(String serializedObject, String parameterizedType);
+    <T> T deserialize(String parameterizedType, ContentType contentType, String serializedObject);
 }

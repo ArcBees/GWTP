@@ -16,27 +16,31 @@
 
 package com.gwtplatform.dispatch.rest.client.core;
 
-import javax.inject.Inject;
+import java.util.List;
+import java.util.Set;
 
-import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
+import javax.inject.Inject;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+
 import com.google.gwt.http.client.RequestBuilder;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.client.serialization.SerializationException;
+import com.gwtplatform.dispatch.rest.client.serialization.SerializedValue;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 public class DefaultBodyFactory implements BodyFactory {
-    private final ActionMetadataProvider metadataProvider;
-    private final Serialization serialization;
+    private final Set<Serialization> serializations;
     private final UriFactory uriFactory;
 
     @Inject
     DefaultBodyFactory(
-            ActionMetadataProvider metadataProvider,
-            Serialization serialization,
+            Set<Serialization> serializations,
             UriFactory uriFactory) {
-        this.metadataProvider = metadataProvider;
-        this.serialization = serialization;
+        this.serializations = serializations;
         this.uriFactory = uriFactory;
     }
 
@@ -50,31 +54,46 @@ public class DefaultBodyFactory implements BodyFactory {
     }
 
     /**
-     * Verify if the provided <code>bodyType</code> can be serialized.
+     * Find a serializer capable of handling <code>bodyClass</code> and <code>contentTypes</code>.
      *
-     * @param bodyType the parameterized type to verify if it can be serialized.
+     * @param bodyClass the parameterized type to verify if it can be serialized.
+     * @param contentTypes A list of content types a serializer is allowed to return.
      *
-     * @return <code>true</code> if <code>bodyType</code> can be serialized, otherwise <code>false</code>.
+     * @return <code>true</code> if <code>bodyClass</code> can be serialized, otherwise <code>false</code>.
      */
-    protected boolean canSerialize(String bodyType) {
-        return serialization.canSerialize(bodyType);
+    protected Serialization findSerialization(String bodyClass, List<ContentType> contentTypes) {
+        for (Serialization serialization : serializations) {
+            if (serialization.canSerialize(bodyClass, contentTypes)) {
+                return serialization;
+            }
+        }
+
+        return null;
     }
 
     /**
-     * Serialize the given object. We assume {@link #canSerialize(String)} returns <code>true</code> or a runtime
-     * exception may be thrown.
+     * Serialize the given object using the given <code>serialization</code> instance.
      *
+     * @param serialization the serialization object to be used.
      * @param object the object to serialize.
-     * @param bodyType The parameterized type of the object to serialize.
+     * @param bodyClass The parameterized type of the object to serialize.
+     * @param contentTypes A list of content types a serializer is allowed to return.
      *
      * @return The serialized string.
      */
-    protected String serialize(Object object, String bodyType) {
-        return serialization.serialize(object, bodyType);
+    protected SerializedValue serialize(Serialization serialization, Object object, String bodyClass,
+            List<ContentType> contentTypes) throws ActionException {
+        try {
+            return serialization.serialize(bodyClass, contentTypes, object);
+        } catch (SerializationException e) {
+            throw new ActionException(e);
+        }
     }
 
     private void assignBodyFromForm(RequestBuilder requestBuilder, RestAction<?> action) {
         String queryString = uriFactory.buildQueryString(action, Type.FORM);
+
+        requestBuilder.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED);
         requestBuilder.setRequestData(queryString);
     }
 
@@ -82,7 +101,11 @@ public class DefaultBodyFactory implements BodyFactory {
             throws ActionException {
         String data;
         if (action.hasBodyParam()) {
-            data = getSerializedValue(action, action.getBodyParam());
+            SerializedValue serializedValue = getSerializedValue(action, action.getBodyParam());
+            ContentType contentType = serializedValue.getContentType();
+            data = serializedValue.getData();
+
+            requestBuilder.setHeader(HttpHeaders.CONTENT_TYPE, contentType.toString());
         } else {
             // Fixes an issue for all IE versions (IE 11 is the latest at this time). If request data is not
             // explicitly set to 'null', the JS 'undefined' will be sent as the request body on IE. Other
@@ -93,14 +116,15 @@ public class DefaultBodyFactory implements BodyFactory {
         requestBuilder.setRequestData(data);
     }
 
-    private String getSerializedValue(RestAction<?> action, Object object) throws ActionException {
-        String bodyType = (String) metadataProvider.getValue(action, MetadataType.BODY_TYPE);
+    private SerializedValue getSerializedValue(RestAction<?> action, Object object) throws ActionException {
+        String bodyClass = action.getBodyClass();
 
-        if (bodyType != null && canSerialize(bodyType)) {
-            try {
-                return serialize(object, bodyType);
-            } catch (JsonMappingException e) {
-                throw new ActionException("Unable to serialize request body. An unexpected error occurred.", e);
+        if (bodyClass != null) {
+            List<ContentType> contentTypes = action.getClientProducedContentTypes();
+            Serialization serialization = findSerialization(bodyClass, contentTypes);
+
+            if (serialization != null) {
+                return serialize(serialization, object, bodyClass, contentTypes);
             }
         }
 

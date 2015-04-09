@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,13 +14,21 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind.gin;
+package com.gwtplatform.dispatch.rest.client.serialization;
 
-import com.gwtplatform.dispatch.rest.rebind.GeneratorWithoutInput;
-import com.gwtplatform.dispatch.rest.rebind.HasPriority;
-import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent.RegisterGinBindingListener;
-import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+public class SerializationException extends RuntimeException {
+    public SerializationException() {
+    }
 
-public interface GinModuleGenerator
-        extends GeneratorWithoutInput<ClassDefinition>, HasPriority, RegisterGinBindingListener {
+    public SerializationException(String message) {
+        super(message);
+    }
+
+    public SerializationException(Throwable cause) {
+        super(cause);
+    }
+
+    public SerializationException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

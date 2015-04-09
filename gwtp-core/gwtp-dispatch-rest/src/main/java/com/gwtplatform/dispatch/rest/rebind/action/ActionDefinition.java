@@ -16,20 +16,23 @@
 
 package com.gwtplatform.dispatch.rest.rebind.action;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-import com.google.common.collect.Lists;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 import com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameter;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 public class ActionDefinition extends ClassDefinition {
     private final HttpMethod verb;
     private final String path;
     private final boolean secured;
-    private final String contentType;
+    private final Set<ContentType> consumes;
+    private final Set<ContentType> produces;
     private final JClassType resultType;
     private final List<HttpParameter> httpParameters;
     private final Parameter bodyParameter;
@@ -40,7 +43,8 @@ public class ActionDefinition extends ClassDefinition {
             HttpMethod verb,
             String path,
             boolean secured,
-            String contentType,
+            Set<ContentType> consumes,
+            Set<ContentType> produces,
             JClassType resultType,
             List<HttpParameter> httpParameters,
             Parameter bodyParameter) {
@@ -49,7 +53,8 @@ public class ActionDefinition extends ClassDefinition {
         this.verb = verb;
         this.path = path;
         this.secured = secured;
-        this.contentType = contentType;
+        this.consumes = consumes;
+        this.produces = produces;
         this.resultType = resultType;
         this.httpParameters = httpParameters;
         this.bodyParameter = bodyParameter;
@@ -67,8 +72,12 @@ public class ActionDefinition extends ClassDefinition {
         return secured;
     }
 
-    public String getContentType() {
-        return contentType;
+    public Set<ContentType> getConsumes() {
+        return consumes;
+    }
+
+    public Set<ContentType> getProduces() {
+        return produces;
     }
 
     public JClassType getResultType() {
@@ -76,7 +85,7 @@ public class ActionDefinition extends ClassDefinition {
     }
 
     public List<HttpParameter> getHttpParameters() {
-        return Lists.newArrayList(httpParameters);
+        return new ArrayList<HttpParameter>(httpParameters);
     }
 
     public Parameter getBodyParameter() {

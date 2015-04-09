@@ -1,5 +1,5 @@
-/**
- * Copyright 2011 ArcBees Inc.
+/*
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,13 +14,8 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.core;
+package com.gwtplatform.dispatch.rest.rebind.serialization;
 
-/**
- * Used to associate some metadata to generated classes without cluttering the generated classes.
- *
- * @see com.gwtplatform.dispatch.rest.client.core.ActionMetadataProvider.MetadataKey
- */
-public enum MetadataType {
-    BODY_TYPE, RESPONSE_TYPE
+public interface JacksonMapperDefinitions {
+    void addDefinition(SerializationDefinition definition);
 }

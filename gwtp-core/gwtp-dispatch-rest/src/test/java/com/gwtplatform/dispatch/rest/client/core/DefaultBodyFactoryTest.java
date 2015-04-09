@@ -19,6 +19,8 @@ package com.gwtplatform.dispatch.rest.client.core;
 import java.util.Date;
 
 import javax.inject.Inject;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
 
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
@@ -27,23 +29,29 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.gwt.http.client.RequestBuilder;
+import com.google.inject.multibindings.Multibinder;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.client.serialization.SerializedValue;
 import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.UnsecuredRestAction;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyListOf;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-import static com.gwtplatform.dispatch.rest.client.core.MetadataType.BODY_TYPE;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.DELETE;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.GET;
 
@@ -55,6 +63,11 @@ public class DefaultBodyFactoryTest {
             forceMock(RequestBuilder.class);
 
             bind(HttpParameterFactory.class).to(MockHttpParameterFactory.class);
+
+            Serialization serialization = mock(Serialization.class);
+            bind(Serialization.class).toInstance(serialization);
+
+            Multibinder.newSetBinder(binder(), Serialization.class).addBinding().toInstance(serialization);
         }
     }
 
@@ -85,10 +98,11 @@ public class DefaultBodyFactoryTest {
 
         // Then
         verify(requestBuilder).setRequestData(isNull(String.class));
+        verify(requestBuilder, never()).setHeader(anyString(), anyString());
     }
 
     @Test
-    public void requestDataShouldBeParsedFormParamsWhenActionHasFormParams() throws ActionException {
+    public void build_formParams_requestContainsOnlyFormParams() throws ActionException {
         // Given
         ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
         action.addParam(Type.FORM, "Key1", "Some Value");
@@ -98,27 +112,47 @@ public class DefaultBodyFactoryTest {
 
         // Then
         verify(requestBuilder).setRequestData(eq(QUERY_STRING));
+        verify(requestBuilder).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED);
     }
 
     @Test
-    public void requestDataShouldBeSerializedStringWhenActionHasBody(Serialization serialization,
-            ActionMetadataProvider metadataProvider) throws ActionException {
+    public void build_body_requestContainsSerializedString(Serialization serialization) throws ActionException {
         // Given
         Object unserializedObject = new Object();
         String serializationKey = "meta";
-        String serializedValue = new Date().toString();
+        String serializedData = new Date().toString();
+        ContentType contentType = ContentType.valueOf("json-abc");
+        SerializedValue serializedValue = new SerializedValue(contentType, serializedData);
 
         ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
         action.setBodyParam(unserializedObject);
+        action.setBodyClass(serializationKey);
 
-        given(metadataProvider.getValue(action, BODY_TYPE)).willReturn(serializationKey);
-        given(serialization.canSerialize(serializationKey)).willReturn(true);
-        given(serialization.serialize(unserializedObject, serializationKey)).willReturn(serializedValue);
+        given(serialization.canSerialize(eq(serializationKey), anyListOf(ContentType.class))).willReturn(true);
+        given(serialization.serialize(eq(serializationKey), anyListOf(ContentType.class), eq(unserializedObject)))
+                .willReturn(serializedValue);
 
         // When
         factory.buildBody(requestBuilder, action);
 
         // Then
-        verify(requestBuilder).setRequestData(eq(serializedValue));
+        verify(requestBuilder).setRequestData(eq(serializedData));
+        verify(requestBuilder).setHeader(HttpHeaders.CONTENT_TYPE, contentType.toString());
+    }
+
+    @Test(expected = ActionException.class)
+    public void build_body_noSerializer_throws(Serialization serialization) throws ActionException {
+        // Given
+        Object unserializedObject = new Object();
+        String serializationKey = "meta";
+
+        ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        action.setBodyParam(unserializedObject);
+        action.setBodyClass(serializationKey);
+
+        given(serialization.canSerialize(eq(serializationKey), anyListOf(ContentType.class))).willReturn(false);
+
+        // When
+        factory.buildBody(requestBuilder, action);
     }
 }

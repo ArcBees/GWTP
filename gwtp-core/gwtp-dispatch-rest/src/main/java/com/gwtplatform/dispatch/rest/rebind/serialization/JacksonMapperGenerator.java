@@ -17,26 +17,37 @@
 package com.gwtplatform.dispatch.rest.rebind.serialization;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
+import javax.ws.rs.core.MediaType;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
 import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
-import com.gwtplatform.dispatch.rest.rebind.GeneratorWithInput;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 
-public class JacksonMapperGenerator extends AbstractVelocityGenerator
-        implements GeneratorWithInput<JType, ClassDefinition> {
+import static com.gwtplatform.dispatch.rest.rebind.utils.JPrimitives.classTypeOrConvertToBoxed;
+
+public class JacksonMapperGenerator extends AbstractVelocityGenerator implements SerializationGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/serialization/JacksonMapper.vm";
+    private static final Pattern SANITIZE_NAME_PATTERN = Pattern.compile("[^a-zA-Z0-9_]");
+    private static final String PACKAGE = JacksonMapperProvider.class.getPackage().getName() + ".mappers";
+    private static final String NAME_SUFFIX = "Mapper";
+    private static final ContentType APPLICATION_JSON = ContentType.valueOf(MediaType.APPLICATION_JSON);
 
+    private final JacksonMapperDefinitions definitions;
+
+    private SerializationContext context;
     private JType type;
 
     @Inject
@@ -44,26 +55,31 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator
             Logger logger,
             GeneratorContext context,
             VelocityEngine velocityEngine,
-            EventBus eventBus) {
+            JacksonMapperDefinitions definitions) {
         super(logger, context, velocityEngine);
 
-        eventBus.register(this);
+        this.definitions = definitions;
     }
 
     @Override
-    public boolean canGenerate(JType input) {
-        return true;
+    public boolean canGenerate(SerializationContext context) {
+        this.context = context;
+
+        List<ContentType> contentTypes = matchContentTypes();
+        return !contentTypes.isEmpty();
     }
 
     @Override
-    public ClassDefinition generate(JType type) throws UnableToCompleteException {
-        this.type = type;
+    public SerializationDefinition generate(SerializationContext context) throws UnableToCompleteException {
+        this.context = context;
+        this.type = classTypeOrConvertToBoxed(getContext().getTypeOracle(), context.getType());
 
         PrintWriter printWriter = tryCreate();
-
         if (printWriter != null) {
             mergeTemplate(printWriter);
             commit(printWriter);
+
+            definitions.addDefinition(getClassDefinition());
         } else {
             getLogger().debug("Jackson Mapper already generated. Returning.");
         }
@@ -80,21 +96,37 @@ public class JacksonMapperGenerator extends AbstractVelocityGenerator
     }
 
     @Override
+    protected SerializationDefinition getClassDefinition() {
+        return new SerializationDefinition(getPackageName(), getImplName(), type, matchContentTypes());
+    }
+
+    @Override
     protected String getTemplate() {
         return TEMPLATE;
     }
 
     @Override
     protected String getPackageName() {
-        return JacksonMapperProvider.class.getPackage().getName() + ".mappers";
+        return PACKAGE;
     }
 
     @Override
     protected String getImplName() {
         String implName = type.getParameterizedQualifiedSourceName();
-        implName = implName.replaceAll("[ ,<>\\.\\?]", "_");
-        implName += "Mapper";
+        implName = SANITIZE_NAME_PATTERN.matcher(implName).replaceAll("_");
+        implName += NAME_SUFFIX;
 
         return implName;
+    }
+
+    private List<ContentType> matchContentTypes() {
+        List<ContentType> matches = new ArrayList<ContentType>();
+        for (ContentType contentType : context.getContentTypes()) {
+            if (APPLICATION_JSON.isCompatible(contentType)) {
+                matches.add(contentType);
+            }
+        }
+
+        return matches;
     }
 }

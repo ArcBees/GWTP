@@ -16,11 +16,15 @@
 
 package com.gwtplatform.dispatch.rest.client.core;
 
-import javax.inject.Inject;
+import java.util.Set;
 
-import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
+import javax.inject.Inject;
+import javax.ws.rs.core.HttpHeaders;
+
 import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
+import com.gwtplatform.dispatch.rest.client.serialization.SerializationException;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
@@ -28,15 +32,12 @@ import com.gwtplatform.dispatch.shared.ActionException;
  * Default implementation for {@link ResponseDeserializer}.
  */
 public class DefaultResponseDeserializer implements ResponseDeserializer {
-    private final ActionMetadataProvider metadataProvider;
-    private final Serialization serialization;
+    private final Set<Serialization> serializations;
 
     @Inject
     protected DefaultResponseDeserializer(
-            ActionMetadataProvider metadataProvider,
-            Serialization serialization) {
-        this.metadataProvider = metadataProvider;
-        this.serialization = serialization;
+            Set<Serialization> serializations) {
+        this.serializations = serializations;
     }
 
     @Override
@@ -49,27 +50,40 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
     }
 
     /**
-     * Verify if the provided <code>resultType</code> can be deserialized.
+     * Find a deserializer capable of handling <code>resultType</code> and <code>contentType</code>.
      *
      * @param resultType the parameterized type to verify if it can be deserialized.
+     * @param contentType the contentType of the value that requires deserialization.
      *
      * @return <code>true</code> if <code>resultType</code> can be deserialized, <code>false</code> otherwise.
      */
-    protected boolean canDeserialize(String resultType) {
-        return serialization.canDeserialize(resultType);
+    protected Serialization findSerialization(String resultType, ContentType contentType) {
+        for (Serialization serialization : serializations) {
+            if (serialization.canDeserialize(resultType, contentType)) {
+                return serialization;
+            }
+        }
+
+        return null;
     }
 
     /**
-     * Deserializes the json as an object of the <code>resultType</code> type.
+     * Deserializes the data as an object of the <code>resultClass</code> type using the given
+     * <code>serialization</code> instance.
      *
-     * @param resultType the parameterized type of the object once deserialized.
-     * @param json the json to deserialize.
-     * @param <R> the type of the object once deserialized
-     *
-     * @return The deserialized object.
+     * @param <R> the type of the object once deserialized.
+     * @param serialization the serialization object to be used.
+     * @param resultClass the parameterized type of the object once deserialized.
+     * @param contentType the contentType of <code>data</code>.
+     * @param data the data to deserialize.    @return The deserialized object.
      */
-    protected <R> R deserializeValue(String resultType, String json) {
-        return serialization.deserialize(json, resultType);
+    protected <R> R deserializeValue(Serialization serialization, String resultClass, ContentType contentType,
+            String data) throws ActionException {
+        try {
+            return serialization.deserialize(resultClass, contentType, data);
+        } catch (SerializationException e) {
+            throw new ActionException(e);
+        }
     }
 
     private boolean isSuccessStatusCode(Response response) {
@@ -79,21 +93,17 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
     }
 
     private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {
-        String resultType = (String) metadataProvider.getValue(action, MetadataType.RESPONSE_TYPE);
+        String resultClass = action.getResultClass();
 
-        if (!isNullOrEmpty(resultType) && canDeserialize(resultType)) {
-            try {
-                String json = response.getText();
-                return deserializeValue(resultType, json);
-            } catch (JsonMappingException e) {
-                throw new ActionException("Unable to deserialize response. An unexpected error occurred.", e);
+        if (resultClass != null) {
+            ContentType contentType = ContentType.valueOf(response.getHeader(HttpHeaders.CONTENT_TYPE));
+            Serialization serialization = findSerialization(resultClass, contentType);
+
+            if (serialization != null) {
+                return deserializeValue(serialization, resultClass, contentType, response.getText());
             }
         }
 
         throw new ActionException("Unable to deserialize response. No serializer found.");
-    }
-
-    private boolean isNullOrEmpty(String string) {
-        return string == null || string.isEmpty();
     }
 }

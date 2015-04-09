@@ -24,13 +24,15 @@ import javax.ws.rs.Path;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import com.google.common.eventbus.EventBus;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
+import com.gwtplatform.dispatch.rest.rebind.utils.ContentTypeResolver;
+import com.gwtplatform.dispatch.rest.rebind.utils.EventBus;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 
 public class TopLevelResourceGenerator extends AbstractResourceGenerator {
@@ -83,9 +85,11 @@ public class TopLevelResourceGenerator extends AbstractResourceGenerator {
         if (resourceDefinition == null) {
             String path = resolvePath();
             boolean secured = resolveSecured();
+            Set<ContentType> consumes = resolveConsumes();
+            Set<ContentType> produces = resolveProduces();
 
-            resourceDefinition =
-                    new ResourceDefinition(getResourceType(), getPackageName(), getImplName(), path, secured);
+            resourceDefinition = new ResourceDefinition(getResourceType(), getPackageName(), getImplName(), path,
+                    secured, consumes, produces);
         }
 
         return resourceDefinition;
@@ -104,6 +108,14 @@ public class TopLevelResourceGenerator extends AbstractResourceGenerator {
 
     private boolean resolveSecured() {
         return !getResourceType().isAnnotationPresent(NoXsrfHeader.class);
+    }
+
+    protected Set<ContentType> resolveConsumes() {
+        return ContentTypeResolver.resolveConsumes(getResourceType());
+    }
+
+    protected Set<ContentType> resolveProduces() {
+        return ContentTypeResolver.resolveProduces(getResourceType());
     }
 
     private void registerResourceBinding() {

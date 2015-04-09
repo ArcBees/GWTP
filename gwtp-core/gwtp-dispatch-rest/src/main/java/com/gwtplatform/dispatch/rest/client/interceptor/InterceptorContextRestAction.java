@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.client.interceptor;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
@@ -27,6 +28,7 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 /**
  * A RestAction stub used internally to compare interceptor contexts.
  */
+// TODO: Consider not implementing RestAction because it brings unneeded methods
 class InterceptorContextRestAction implements RestAction<Object> {
     private final HttpMethod httpMethod;
     private final String path;
@@ -79,5 +81,25 @@ class InterceptorContextRestAction implements RestAction<Object> {
     @Override
     public boolean isSecured() {
         return false;
+    }
+
+    @Override
+    public String getBodyClass() {
+        return null;
+    }
+
+    @Override
+    public String getResultClass() {
+        return null;
+    }
+
+    @Override
+    public List<ContentType> getClientProducedContentTypes() {
+        return null;
+    }
+
+    @Override
+    public List<ContentType> getClientConsumedContentTypes() {
+        return null;
     }
 }
