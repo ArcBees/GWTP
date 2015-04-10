@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
@@ -33,14 +34,14 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 public class DefaultBodyFactory implements BodyFactory {
-    private final Set<Serialization> serializations;
+    private final Provider<Set<Serialization>> serializationsProvider;
     private final UriFactory uriFactory;
 
     @Inject
     DefaultBodyFactory(
-            Set<Serialization> serializations,
+            Provider<Set<Serialization>> serializationsProvider,
             UriFactory uriFactory) {
-        this.serializations = serializations;
+        this.serializationsProvider = serializationsProvider;
         this.uriFactory = uriFactory;
     }
 
@@ -62,7 +63,7 @@ public class DefaultBodyFactory implements BodyFactory {
      * @return <code>true</code> if <code>bodyClass</code> can be serialized, otherwise <code>false</code>.
      */
     protected Serialization findSerialization(String bodyClass, List<ContentType> contentTypes) {
-        for (Serialization serialization : serializations) {
+        for (Serialization serialization : serializationsProvider.get()) {
             if (serialization.canSerialize(bodyClass, contentTypes)) {
                 return serialization;
             }

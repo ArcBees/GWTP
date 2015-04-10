@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2013 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.client.core;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.ws.rs.core.HttpHeaders;
 
 import com.google.gwt.http.client.Response;
@@ -32,12 +33,12 @@ import com.gwtplatform.dispatch.shared.ActionException;
  * Default implementation for {@link ResponseDeserializer}.
  */
 public class DefaultResponseDeserializer implements ResponseDeserializer {
-    private final Set<Serialization> serializations;
+    private final Provider<Set<Serialization>> serializationsProvider;
 
     @Inject
     protected DefaultResponseDeserializer(
-            Set<Serialization> serializations) {
-        this.serializations = serializations;
+            Provider<Set<Serialization>> serializationsProvider) {
+        this.serializationsProvider = serializationsProvider;
     }
 
     @Override
@@ -58,7 +59,7 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
      * @return <code>true</code> if <code>resultType</code> can be deserialized, <code>false</code> otherwise.
      */
     protected Serialization findSerialization(String resultType, ContentType contentType) {
-        for (Serialization serialization : serializations) {
+        for (Serialization serialization : serializationsProvider.get()) {
             if (serialization.canDeserialize(resultType, contentType)) {
                 return serialization;
             }
