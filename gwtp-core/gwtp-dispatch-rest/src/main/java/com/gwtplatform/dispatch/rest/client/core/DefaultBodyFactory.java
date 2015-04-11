@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -37,6 +37,8 @@ public class DefaultBodyFactory implements BodyFactory {
     private final Provider<Set<Serialization>> serializationsProvider;
     private final UriFactory uriFactory;
 
+    private Set<Serialization> serializations;
+
     @Inject
     DefaultBodyFactory(
             Provider<Set<Serialization>> serializationsProvider,
@@ -63,7 +65,7 @@ public class DefaultBodyFactory implements BodyFactory {
      * @return <code>true</code> if <code>bodyClass</code> can be serialized, otherwise <code>false</code>.
      */
     protected Serialization findSerialization(String bodyClass, List<ContentType> contentTypes) {
-        for (Serialization serialization : serializationsProvider.get()) {
+        for (Serialization serialization : getSerializations()) {
             if (serialization.canSerialize(bodyClass, contentTypes)) {
                 return serialization;
             }
@@ -130,5 +132,13 @@ public class DefaultBodyFactory implements BodyFactory {
         }
 
         throw new ActionException("Unable to serialize request body. No serializer found.");
+    }
+
+    private Set<Serialization> getSerializations() {
+        if (serializations == null) {
+            serializations = serializationsProvider.get();
+        }
+
+        return serializations;
     }
 }

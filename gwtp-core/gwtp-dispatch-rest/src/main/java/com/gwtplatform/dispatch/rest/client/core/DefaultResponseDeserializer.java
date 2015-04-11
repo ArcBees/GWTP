@@ -35,6 +35,8 @@ import com.gwtplatform.dispatch.shared.ActionException;
 public class DefaultResponseDeserializer implements ResponseDeserializer {
     private final Provider<Set<Serialization>> serializationsProvider;
 
+    private Set<Serialization> serializations;
+
     @Inject
     protected DefaultResponseDeserializer(
             Provider<Set<Serialization>> serializationsProvider) {
@@ -59,7 +61,7 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
      * @return <code>true</code> if <code>resultType</code> can be deserialized, <code>false</code> otherwise.
      */
     protected Serialization findSerialization(String resultType, ContentType contentType) {
-        for (Serialization serialization : serializationsProvider.get()) {
+        for (Serialization serialization : getSerializations()) {
             if (serialization.canDeserialize(resultType, contentType)) {
                 return serialization;
             }
@@ -106,5 +108,13 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
         }
 
         throw new ActionException("Unable to deserialize response. No serializer found.");
+    }
+
+    private Set<Serialization> getSerializations() {
+        if (serializations == null) {
+            serializations = serializationsProvider.get();
+        }
+
+        return serializations;
     }
 }
