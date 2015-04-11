@@ -45,7 +45,8 @@ public abstract class AbstractResourceGenerator extends AbstractVelocityGenerato
     protected AbstractResourceGenerator(
             Logger logger,
             GeneratorContext context,
-            VelocityEngine velocityEngine, Set<MethodGenerator> methodGenerators) {
+            VelocityEngine velocityEngine,
+            Set<MethodGenerator> methodGenerators) {
         super(logger, context, velocityEngine);
 
         this.methodGenerators = methodGenerators;
