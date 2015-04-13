@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.client.serialization;
 
+import javax.inject.Singleton;
+
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.inject.client.binder.GinBinder;
 import com.google.gwt.inject.client.binder.GinLinkedBindingBuilder;
@@ -28,6 +30,6 @@ public class SerializationModule extends AbstractGinModule {
 
     @Override
     protected void configure() {
-        registerSerializationBinding(binder()).to(JsonSerialization.class);
+        registerSerializationBinding(binder()).to(JsonSerialization.class).in(Singleton.class);
     }
 }
