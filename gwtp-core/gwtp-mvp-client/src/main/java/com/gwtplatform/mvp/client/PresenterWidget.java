@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -287,7 +287,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     * {@link UmbrellaException} and then re-thrown after all handlers have
     * completed. An exception thrown by a handler will not prevent other handlers
     * from executing.
-    * 
+    *
     * @param event the event
     */
     public void fireEvent(Event<?> event) {
