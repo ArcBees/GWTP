@@ -23,17 +23,16 @@ import java.util.logging.Logger;
 import com.google.gwt.core.shared.GWT;
 
 public class LegacySlotConvertor {
-    static String WARNING_MESSAGE = "Warning: You're using an untyped slot!\n"
+    static final String WARNING_MESSAGE = "Warning: You're using an untyped slot!\n"
             + "Untyped slots are dangerous! Please upgrade your slots using\n"
             + "the Arcbee's easy upgrade tool at\n"
             + "https://arcbees.github.io/gwtp-slot-upgrader";
 
     private static final Logger LOGGER = Logger.getLogger(LegacySlotConvertor.class.getName());
 
-    private static LegacySlotConvertor INSTANCE = GWT.create(LegacySlotConvertor.class);
+    private static LegacySlotConvertor INSTANCE;
 
-    private Map<Object, LegacySlot> legacySlotMap =
-            new HashMap<Object, LegacySlot>();
+    private final Map<Object, LegacySlot> legacySlotMap = new HashMap<Object, LegacySlot>();
 
     protected LegacySlot get(Object slot) {
         if (!legacySlotMap.containsKey(slot)) {
@@ -44,6 +43,14 @@ public class LegacySlotConvertor {
     }
 
     public static LegacySlot convert(Object slot) {
+        if (INSTANCE == null) {
+            if (GWT.isScript()) {
+                INSTANCE = GWT.create(LegacySlotConvertor.class);
+            } else {
+                INSTANCE = new LegacySlotConvertor();
+            }
+        }
+
         return INSTANCE.get(slot);
     }
 }

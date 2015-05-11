@@ -21,8 +21,7 @@
     <!-- Specify the paths for translatable code                    -->
     <source path='client' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java"/>
 
-    <!-- gin.ginjector is set to a default value, no other value must be set for Ginjector generation -->
-    <!-- if another value is set, it must point to a valid manual Ginjector class -->
+    <!-- gin.ginjector is set to a default value, no other value must be set for Ginjector generation --><!-- if another value is set, it must point to a valid manual Ginjector class -->
     <define-configuration-property name="gin.ginjector" is-multi-valued="false"/>
     <set-configuration-property name="gin.ginjector" value="com.gwtplatform.mvp.client.ClientGinjector"/>
 
@@ -30,10 +29,10 @@
     <define-configuration-property name="gin.ginjector.extensions" is-multi-valued="true"/>
     <set-configuration-property name="gin.ginjector.extensions" value=""/>
 
-   <!-- 
-     optional comma separated list of annotation classes which can be added to widget presenter for
-     declaration in ginjector 
-   -->
+    <!--
+      optional comma separated list of annotation classes which can be added to widget presenter for
+      declaration in ginjector
+    -->
     <define-configuration-property name="gin.ginjector.annotation" is-multi-valued="true"/>
     <set-configuration-property name="gin.ginjector.annotation" value=""/>
 
@@ -65,25 +64,25 @@
     </generate-with>
 
     <replace-with class="com.google.gwt.place.shared.PlaceHistoryHandler.DefaultHistorian">
-        <when-type-assignable class="com.google.gwt.place.shared.PlaceHistoryHandler.Historian" />
+        <when-type-assignable class="com.google.gwt.place.shared.PlaceHistoryHandler.Historian"/>
     </replace-with>
-    
-    <!-- 
+
+    <!--
     When set to true gwtp projects will crash in dev mode when a legacy slot is used!
     Use this to be confident that no deprecated slot methods are used.
-    It will not change the behavior of compiled code. 
+    It will not change the behavior of compiled code.
     -->
     <define-property values="true, false" name="gwtp.crashOnLegacySlot"/>
     <set-property name="gwtp.crashOnLegacySlot" value="false"/>
-    
+
     <replace-with class="com.gwtplatform.mvp.client.presenter.slots.LegacySlotConvertor">
-    	<when-type-is class="com.gwtplatform.mvp.client.presenter.slots.LegacySlotConvertor"/>
-  	</replace-with>
-  	
-  	<replace-with class="com.gwtplatform.mvp.client.presenter.slots.CrashingLegacySlotConvertor">
-    	<when-type-is class="com.gwtplatform.mvp.client.presenter.slots.LegacySlotConvertor"/>
-    	<all>
-    		<when-property-is name="gwtp.crashOnLegacySlot" value="true"/>
-    	</all>
-  	</replace-with>
+        <when-type-is class="com.gwtplatform.mvp.client.presenter.slots.LegacySlotConvertor"/>
+    </replace-with>
+
+    <replace-with class="com.gwtplatform.mvp.client.presenter.slots.CrashingLegacySlotConvertor">
+        <when-type-is class="com.gwtplatform.mvp.client.presenter.slots.LegacySlotConvertor"/>
+        <all>
+            <when-property-is name="gwtp.crashOnLegacySlot" value="true"/>
+        </all>
+    </replace-with>
 </module>
