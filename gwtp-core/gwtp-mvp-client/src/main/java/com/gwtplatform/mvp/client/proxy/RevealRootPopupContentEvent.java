@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -28,7 +28,7 @@ import com.gwtplatform.mvp.client.PresenterWidget;
  * parent.<br/>
  * Use this type of event to reveal popup content that should get added at the
  * root of the presenter hierarchy.
- * 
+ *
  * @see RevealContentEvent
  * @see RevealRootContentEvent
  * @see RevealRootLayoutContentEvent
@@ -53,7 +53,7 @@ public final class RevealRootPopupContentEvent extends
     /**
      * Fires a {@link RevealRootPopupContentEvent} into a source that has access
      * to an {@link com.google.web.bindery.event.shared.EventBus}.
-     * 
+     *
      * @param source
      *            The source that fires this event ({@link HasHandlers}).
      * @param content
@@ -68,7 +68,7 @@ public final class RevealRootPopupContentEvent extends
     /**
      * Fires a {@link RevealRootPopupContentEvent} into a source that has access
      * to an {@link com.google.web.bindery.event.shared.EventBus}.
-     * 
+     *
      * @param source
      *            The source that fires this event ({@link HasHandlers}).
      * @param content

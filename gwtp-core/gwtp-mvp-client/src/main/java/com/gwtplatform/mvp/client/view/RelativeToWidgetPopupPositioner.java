@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -29,7 +29,7 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
 
     /**
      * @param widget - the widget relative to which the popup will be shown.
-     * 
+     *
      * If there is enough space to the right, the left edge of the popup will be positioned flush with
      * the left edge of the widget.<p>
      * <pre>
@@ -49,7 +49,7 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
      *     |popup panel|
      *     -------------
      * </pre>
-     * 
+     *
      * If there is not enough space to the left or the right and clipToWindow is on. The popup will be
      * positioned on the left edge of the screen.<p>
      * <pre>
@@ -59,7 +59,7 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
      *      ||popup panel|
      *      |-------------
      * </pre>
-     * 
+     *
      * If you would prefer the popupPanel to always be flush with the widget call
      * {@link #RelativeToWidgetPopupPositioner(IsWidget, boolean)}
      * and set clipToWindow to false
@@ -71,7 +71,7 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
     /**
      * @param widget - the widget relative to which the popup will be shown.
      * @param clipToWindow - set to false to always position the popup flush to an edge of the widget.
-     * 
+     *
      * If there is enough space to the right, the left edge of the popup will be positioned flush with
      * the left edge of the widget.<p>
      * <pre>
@@ -91,7 +91,7 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
      *     |popup panel|
      *     -------------
      * </pre>
-     * 
+     *
      * If there is not enough space to the left or the right and clipToWindow is on. The popup will be
      * positioned on the left edge of the screen.<p>
      * <pre>
@@ -101,7 +101,7 @@ public class RelativeToWidgetPopupPositioner extends PopupPositioner {
      *      ||popup panel|
      *      |-------------
      * </pre>
-     * 
+     *
      * Set clipToWindow to false to always position the popup flush to an edge of the widget and expand
      * the screen when it will not fit.
      */
