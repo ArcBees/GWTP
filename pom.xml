@@ -262,7 +262,7 @@
         <servlet-api.version>2.5</servlet-api.version>
         <spring.version>4.0.5.RELEASE</spring.version>
         <velocity.version>1.7</velocity.version>
-        <htmlunit.version>2.14</htmlunit.version>
+        <htmlunit.version>2.15</htmlunit.version>
 
         <!-- Testing -->
         <jukito.version>1.4.1</jukito.version>

@@ -24,6 +24,7 @@ import java.net.URLDecoder;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import javax.inject.Provider;
 import javax.inject.Singleton;
@@ -63,10 +64,10 @@ public class CrawlServiceServlet extends HttpServlet {
 
     @Inject(optional = true)
     @HtmlUnitTimeoutMillis
-    private long timeoutMillis = 12000;
+    private long timeoutMillis = 5000;
     private long jsTimeoutMillis = 2000;
-    private long pageWaitMillis = 200;
-    private int maxLoopChecks = 2;
+    private long pageWaitMillis = 100;
+    private long maxLoopChecks = 2;
 
     @Inject(optional = true)
     @CachedPageTimeoutSec
@@ -80,7 +81,7 @@ public class CrawlServiceServlet extends HttpServlet {
     private final CachedPageDao cachedPageDao;
 
     @Inject
-    CrawlServiceServlet(
+    protected CrawlServiceServlet(
             Provider<WebClient> webClientProvider,
             Logger log,
             CachedPageDao cachedPageDao,
@@ -97,7 +98,7 @@ public class CrawlServiceServlet extends HttpServlet {
         try {
             // Encoding needs to be set BEFORE calling response.getWriter()
             response.setCharacterEncoding(CHAR_ENCODING);
-            response.setHeader("Content-Type", "text/html; charset=" + CHAR_ENCODING);
+            response.setHeader("Content-Type", "text/plain; charset=" + CHAR_ENCODING);
 
             out = response.getWriter();
             validateKey(request);
@@ -243,6 +244,8 @@ public class CrawlServiceServlet extends HttpServlet {
 
         webClient.closeAllWindows();
 
-        return page.asXml();
+        return Pattern.compile("<style>.*?</style>", Pattern.DOTALL)
+                .matcher(page.asXml().replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", ""))
+                .replaceAll("");
     }
 }
