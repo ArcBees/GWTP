@@ -43,13 +43,12 @@ import com.gwtplatform.mvp.client.presenter.slots.Slot;
  * * <b>Important</b> call {@link #initWidget(IsWidget)} in your {@link View}'s constructor.
  */
 public abstract class ViewImpl implements View {
-    private Widget widget;
-    private Map<Object, HasOneWidget> oneWidgetSlots = new HashMap<Object, HasOneWidget>();
-
-    private Map<Object, HasWidgets> hasWidgetSlots = new HashMap<Object, HasWidgets>();
-
-    private Map<OrderedSlot<?>, List<Comparable<Comparable<?>>>> orderedSlots
+    private final Map<Object, HasOneWidget> oneWidgetSlots = new HashMap<Object, HasOneWidget>();
+    private final Map<Object, HasWidgets> hasWidgetSlots = new HashMap<Object, HasWidgets>();
+    private final Map<OrderedSlot<?>, List<Comparable<Comparable<?>>>> orderedSlots
             = new HashMap<OrderedSlot<?>, List<Comparable<Comparable<?>>>>();
+
+    private Widget widget;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -112,30 +111,39 @@ public abstract class ViewImpl implements View {
     }
 
     /**
-     * Link a slot to a container.
-     * @param slot - the slot
-     * @param container - the container must implement HasWidgets.
+     * Link a {@link IsSingleSlot} sub-type to a container. The container must implement either {@link HasOneWidget} or
+     * {@link HasWidgets}. Here we accept {@code Object} to prevent the hassle of of casting {@code container} if it
+     * implements both interfaces.
+     * <p/>
+     * {@link HasOneWidget} has checked first.
+     *
+     * @param slot the slot
+     * @param container the container must implement {@link HasOneWidget}.
+     *
+     * @throws IllegalArgumentException if {@code container} implements neither of {@link HasOneWidget} or {@link
+     * HasWidgets}.
      */
-    protected void bindSlot(IsSingleSlot<?> slot, HasWidgets container) {
+    protected void bindSlot(IsSingleSlot<?> slot, Object container) {
         internalBindSlot(slot, container);
     }
 
     /**
-     * Link a slot to a container.
-     * @param slot - the slot
-     * @param container - the container must implement HasWidgets.
+     * Link a {@link Slot} to a container.
+     *
+     * @param slot the slot
+     * @param container the container must implement HasWidgets.
      */
     protected void bindSlot(Slot<?> slot, HasWidgets container) {
         internalBindSlot(slot, container);
     }
 
     /**
-     * Link a slot to a container.
-     * @param slot - the slot
-     * @param container - the container must implement HasWidgets &amp; InsertPanel.
+     * Link an {@link OrderedSlot} to a container.
+     *
+     * @param slot the slot
+     * @param container the container must implement {@link HasWidgets} &amp; {@link InsertPanel}.
      */
-    protected <T extends HasWidgets & InsertPanel> void bindSlot(
-            OrderedSlot<?> slot, T container) {
+    protected <T extends HasWidgets & InsertPanel> void bindSlot(OrderedSlot<?> slot, T container) {
         orderedSlots.put(slot, new ArrayList<Comparable<Comparable<?>>>());
         hasWidgetSlots.put(slot, container);
     }
@@ -164,9 +172,8 @@ public abstract class ViewImpl implements View {
     /**
      * Method called after the view is attached to the DOM.
      * <p/>
-     * You should override this method to perform any ui related initialization that needs to be done after
-     * that the view is attached <b>and that the presenter doesn't have to be aware of</b> (attach event handlers
-     * for instance)
+     * You should override this method to perform any ui related initialization that needs to be done after that the
+     * view is attached <b>and that the presenter doesn't have to be aware of</b> (attach event handlers for instance)
      */
     protected void onAttach() {
     }
@@ -174,17 +181,19 @@ public abstract class ViewImpl implements View {
     /**
      * Method called after the view is detached to the DOM.
      * <p/>
-     * You should override this method to release any resources created directly or indirectly during the
-     * call to {@link #onAttach()}
+     * You should override this method to release any resources created directly or indirectly during the call to {@link
+     * #onAttach()}
      */
     protected void onDetach() {
     }
 
-    private void internalBindSlot(Object slot, HasWidgets container) {
+    private void internalBindSlot(Object slot, Object container) {
         if (container instanceof HasOneWidget) {
             oneWidgetSlots.put(slot, (HasOneWidget) container);
-        } else {
-            hasWidgetSlots.put(slot, container);
+        } else if (container instanceof HasWidgets) {
+            hasWidgetSlots.put(slot, (HasWidgets) container);
         }
+
+        throw new IllegalArgumentException("Containers must implement either HasOneWidget or HasWidgets.");
     }
 }
