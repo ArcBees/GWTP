@@ -192,8 +192,8 @@ public abstract class ViewImpl implements View {
             oneWidgetSlots.put(slot, (HasOneWidget) container);
         } else if (container instanceof HasWidgets) {
             hasWidgetSlots.put(slot, (HasWidgets) container);
+        } else {
+            throw new IllegalArgumentException("Containers must implement either HasOneWidget or HasWidgets.");
         }
-
-        throw new IllegalArgumentException("Containers must implement either HasOneWidget or HasWidgets.");
     }
 }
