@@ -28,7 +28,6 @@ import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.presenter.slots.IsSingleSlot;
 import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
@@ -44,12 +43,13 @@ import com.gwtplatform.mvp.client.presenter.slots.Slot;
  * * <b>Important</b> call {@link #initWidget(IsWidget)} in your {@link View}'s constructor.
  */
 public abstract class ViewImpl implements View {
-    private final Map<Object, HasOneWidget> oneWidgetSlots = new HashMap<Object, HasOneWidget>();
-    private final Map<Object, HasWidgets> hasWidgetSlots = new HashMap<Object, HasWidgets>();
-    private final Map<OrderedSlot<?>, List<Comparable<Comparable<?>>>> orderedSlots
-            = new HashMap<OrderedSlot<?>, List<Comparable<Comparable<?>>>>();
-
     private Widget widget;
+    private Map<Object, HasOneWidget> oneWidgetSlots = new HashMap<Object, HasOneWidget>();
+
+    private Map<Object, HasWidgets> hasWidgetSlots = new HashMap<Object, HasWidgets>();
+
+    private Map<OrderedSlot<?>, List<Comparable<Comparable<?>>>> orderedSlots
+            = new HashMap<OrderedSlot<?>, List<Comparable<Comparable<?>>>>();
 
     @SuppressWarnings("unchecked")
     @Override
@@ -112,56 +112,30 @@ public abstract class ViewImpl implements View {
     }
 
     /**
-     * Link a {@link IsSingleSlot} sub-type to a container. This method uses the base {@link Panel} type because many
-     * GWT panels (ie: {@link com.google.gwt.user.client.ui.SimplePanel SimplePanel}) implement both {@link
-     * HasOneWidget} and {@link HasWidgets}. This method saves the hassle of casting to prevent an ambiguous call.
-     * <p/>
-     * {@code Panel} implements {@code HasWidgets} so a call to this method is safe.
-     *
-     * @param slot the slot
-     * @param container the container must implement {@link HasOneWidget}.
-     */
-    protected void bindSlot(IsSingleSlot<?> slot, Panel container) {
-        internalBindSlot(slot, container);
-    }
-
-    /**
-     * Link a {@link IsSingleSlot} sub-type to a container.
-     *
-     * @param slot the slot
-     * @param container the container must implement {@link HasOneWidget}.
-     */
-    protected void bindSlot(IsSingleSlot<?> slot, HasOneWidget container) {
-        internalBindSlot(slot, container);
-    }
-
-    /**
-     * Link a {@link IsSingleSlot} sub-type to a container.
-     *
-     * @param slot the slot
-     * @param container the container must implement {@link HasWidgets}.
+     * Link a slot to a container.
+     * @param slot - the slot
+     * @param container - the container must implement HasWidgets.
      */
     protected void bindSlot(IsSingleSlot<?> slot, HasWidgets container) {
         internalBindSlot(slot, container);
     }
 
     /**
-     * Link a {@link Slot} to a container.
-     *
-     * @param slot the slot
-     * @param container the container must implement HasWidgets.
+     * Link a slot to a container.
+     * @param slot - the slot
+     * @param container - the container must implement HasWidgets.
      */
     protected void bindSlot(Slot<?> slot, HasWidgets container) {
         internalBindSlot(slot, container);
     }
 
     /**
-     * Link an {@link OrderedSlot} to a container.
-     *
-     * @param slot the slot
-     * @param container the container must implement {@link HasWidgets} &amp; {@link InsertPanel}.
+     * Link a slot to a container.
+     * @param slot - the slot
+     * @param container - the container must implement HasWidgets &amp; InsertPanel.
      */
-    protected <T extends HasWidgets & InsertPanel> void bindSlot(OrderedSlot<?> slot, T container) {
+    protected <T extends HasWidgets & InsertPanel> void bindSlot(
+            OrderedSlot<?> slot, T container) {
         orderedSlots.put(slot, new ArrayList<Comparable<Comparable<?>>>());
         hasWidgetSlots.put(slot, container);
     }
@@ -190,8 +164,9 @@ public abstract class ViewImpl implements View {
     /**
      * Method called after the view is attached to the DOM.
      * <p/>
-     * You should override this method to perform any ui related initialization that needs to be done after that the
-     * view is attached <b>and that the presenter doesn't have to be aware of</b> (attach event handlers for instance)
+     * You should override this method to perform any ui related initialization that needs to be done after
+     * that the view is attached <b>and that the presenter doesn't have to be aware of</b> (attach event handlers
+     * for instance)
      */
     protected void onAttach() {
     }
@@ -199,17 +174,17 @@ public abstract class ViewImpl implements View {
     /**
      * Method called after the view is detached to the DOM.
      * <p/>
-     * You should override this method to release any resources created directly or indirectly during the call to {@link
-     * #onAttach()}
+     * You should override this method to release any resources created directly or indirectly during the
+     * call to {@link #onAttach()}
      */
     protected void onDetach() {
     }
 
-    private void internalBindSlot(Object slot, Object container) {
+    private void internalBindSlot(Object slot, HasWidgets container) {
         if (container instanceof HasOneWidget) {
             oneWidgetSlots.put(slot, (HasOneWidget) container);
-        } else if (container instanceof HasWidgets) {
-            hasWidgetSlots.put(slot, (HasWidgets) container);
+        } else {
+            hasWidgetSlots.put(slot, container);
         }
     }
 }
