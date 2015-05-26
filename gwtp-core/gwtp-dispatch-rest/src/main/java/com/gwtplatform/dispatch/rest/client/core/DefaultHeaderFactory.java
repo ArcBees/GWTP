@@ -96,7 +96,7 @@ public class DefaultHeaderFactory implements HeaderFactory {
     }
 
     private void maybeAddModuleBase(RestAction<?> action, List<HttpParameter> headerParams) {
-        if (!isAbsoluteUrl(action.getPath())) {
+        if (!isAbsoluteUrl(action.getPath()) && !applicationPath.isEmpty()) {
             headerParams.add(httpParameterFactory.create(Type.HEADER, MODULE_BASE_HEADER, applicationPath));
         }
     }
