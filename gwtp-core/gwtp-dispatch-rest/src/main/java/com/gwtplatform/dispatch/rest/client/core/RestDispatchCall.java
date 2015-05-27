@@ -41,17 +41,20 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 /**
  * A class representing an execute call to be sent to the server over HTTP.
  *
- * @param <A> the {@link com.gwtplatform.dispatch.rest.shared.RestAction} type.
+ * @param <A> the {@link RestAction} type.
  * @param <R> the result type for this action.
  */
 public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R> {
+    private final DispatchCallFactory dispatchCallFactory;
     private final RequestBuilderFactory requestBuilderFactory;
     private final CookieManager cookieManager;
     private final ResponseDeserializer responseDeserializer;
     private final RestInterceptorRegistry interceptorRegistry;
     private final RestDispatchHooks dispatchHooks;
 
+    // TODO: Too many dependencies, split the logic
     public RestDispatchCall(
+            DispatchCallFactory dispatchCallFactory,
             ExceptionHandler exceptionHandler,
             RestInterceptorRegistry interceptorRegistry,
             SecurityCookieAccessor securityCookieAccessor,
@@ -63,6 +66,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
             AsyncCallback<R> callback) {
         super(exceptionHandler, securityCookieAccessor, action, callback);
 
+        this.dispatchCallFactory = dispatchCallFactory;
         this.requestBuilderFactory = requestBuilderFactory;
         this.cookieManager = cookieManager;
         this.responseDeserializer = responseDeserializer;
@@ -75,21 +79,23 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
         A action = getAction();
         dispatchHooks.onExecute(action);
 
-        IndirectProvider<RestInterceptor> interceptorProvider = interceptorRegistry.find(action);
+        if (!isIntercepted()) {
+            IndirectProvider<RestInterceptor> interceptorProvider = interceptorRegistry.find(action);
 
-        // Attempt to intercept the dispatch request
-        if (interceptorProvider != null) {
-            DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
-            RestInterceptedAsyncCallback<A, R> delegatingCallback =
-                    new RestInterceptedAsyncCallback<A, R>(this, action, getCallback(), dispatchRequest);
+            // Attempt to intercept the dispatch request
+            if (interceptorProvider != null) {
+                DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
+                RestInterceptedAsyncCallback<A, R> delegatingCallback = new RestInterceptedAsyncCallback<A, R>(
+                        dispatchCallFactory, this, action, getCallback(), dispatchRequest);
 
-            interceptorProvider.get(delegatingCallback);
+                interceptorProvider.get(delegatingCallback);
 
-            return dispatchRequest;
-        } else {
-            // Execute the request as given
-            return processCall();
+                return dispatchRequest;
+            }
         }
+
+        // Execute the request as given
+        return processCall();
     }
 
     @Override

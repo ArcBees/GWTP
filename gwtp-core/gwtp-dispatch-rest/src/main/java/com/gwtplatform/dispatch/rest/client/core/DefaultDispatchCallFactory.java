@@ -27,7 +27,7 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
- * The default implementation for {@link com.gwtplatform.dispatch.rest.client.core.DispatchCallFactory}.
+ * The default implementation for {@link DispatchCallFactory}.
  */
 public class DefaultDispatchCallFactory implements DispatchCallFactory {
     private final ExceptionHandler exceptionHandler;
@@ -58,7 +58,7 @@ public class DefaultDispatchCallFactory implements DispatchCallFactory {
 
     @Override
     public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback) {
-        return new RestDispatchCall<A, R>(exceptionHandler, interceptorRegistry, securityCookieAccessor,
+        return new RestDispatchCall<A, R>(this, exceptionHandler, interceptorRegistry, securityCookieAccessor,
                 requestBuilderFactory, cookieManager, responseDeserializer, dispatchHooks, action, callback);
     }
 }

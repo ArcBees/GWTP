@@ -98,7 +98,7 @@ public class RestDispatchCallTest {
     }
 
     private <A extends RestAction<R>, R> RestDispatchCall<A, R> createCall(A action, AsyncCallback<R> callback) {
-        return new RestDispatchCall<A, R>(exceptionHandler, interceptorRegistry, securityCookieAccessor,
+        return new RestDispatchCall<A, R>(null, exceptionHandler, interceptorRegistry, securityCookieAccessor,
                 requestBuilderFactory, cookieManager, responseDeserializer, dispatchHooks, action, callback);
     }
 }
