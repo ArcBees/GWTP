@@ -20,6 +20,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.DelegatingAsyncCallback;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
+import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
+import com.gwtplatform.dispatch.rpc.client.RpcDispatchExecuteCall;
+import com.gwtplatform.dispatch.rpc.shared.Action;
+import com.gwtplatform.dispatch.rpc.shared.Result;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
@@ -30,13 +35,29 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * @param <A> the {@link TypedAction} type.
  * @param <R> the result type for this action.
  */
-public class RpcInterceptedAsyncCallback<A extends TypedAction<R>, R>
+public class RpcInterceptedAsyncCallback<A extends Action<R>, R extends Result>
         extends DelegatingAsyncCallback<A, R, RpcInterceptor<?, ?>> {
+    private final RpcDispatchCallFactory dispatchCallFactory;
+
     public RpcInterceptedAsyncCallback(
+            RpcDispatchCallFactory dispatchCallFactory,
             DispatchCall<A, R> dispatchCall,
             A action,
             AsyncCallback<R> callback,
             DelegatingDispatchRequest dispatchRequest) {
         super(dispatchCall, action, callback, dispatchRequest);
+        this.dispatchCallFactory = dispatchCallFactory;
+    }
+
+    @Override
+    public DispatchRequest execute(A action, AsyncCallback<R> resultCallback) {
+        if (getDispatchRequest().isPending()) {
+            RpcDispatchExecuteCall<A, R> newDispatchCall = dispatchCallFactory.create(action, resultCallback);
+            newDispatchCall.setIntercepted(true);
+
+            return newDispatchCall.execute();
+        } else {
+            return null;
+        }
     }
 }

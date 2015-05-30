@@ -41,12 +41,14 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * @param <R> the {@link Result} type for this action.
  */
 public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> extends DispatchCall<A, R> {
+    private final RpcDispatchCallFactory dispatchCallFactory;
     private final DispatchServiceAsync dispatchService;
     private final RpcDispatchHooks dispatchHooks;
     private final RpcInterceptorRegistry interceptorRegistry;
     private final ClientActionHandlerRegistry clientActionHandlerRegistry;
 
     RpcDispatchExecuteCall(
+            RpcDispatchCallFactory dispatchCallFactory,
             DispatchServiceAsync dispatchService,
             ExceptionHandler exceptionHandler,
             ClientActionHandlerRegistry clientActionHandlerRegistry,
@@ -57,6 +59,7 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
             AsyncCallback<R> callback) {
         super(exceptionHandler, securityCookieAccessor, action, callback);
 
+        this.dispatchCallFactory = dispatchCallFactory;
         this.dispatchService = dispatchService;
         this.dispatchHooks = dispatchHooks;
         this.interceptorRegistry = interceptorRegistry;
@@ -68,24 +71,26 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
         A action = getAction();
         dispatchHooks.onExecute(action, false);
 
-        IndirectProvider<RpcInterceptor<?, ?>> interceptorIndirectProvider = interceptorRegistry.find(action);
+        if (!isIntercepted()) {
+            IndirectProvider<RpcInterceptor<?, ?>> interceptorIndirectProvider = interceptorRegistry.find(action);
 
-        if (interceptorIndirectProvider != null) {
-            DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
-            RpcInterceptedAsyncCallback<A, R> delegatingCallback = new RpcInterceptedAsyncCallback<A, R>(
-                    this, action, getCallback(), dispatchRequest);
+            if (interceptorIndirectProvider != null) {
+                DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
+                RpcInterceptedAsyncCallback<A, R> delegatingCallback = new RpcInterceptedAsyncCallback<A, R>(
+                        dispatchCallFactory, this, action, getCallback(), dispatchRequest);
 
-            interceptorIndirectProvider.get(delegatingCallback);
+                interceptorIndirectProvider.get(delegatingCallback);
 
-            return dispatchRequest;
-        } else {
-            // Maintaining support for client action handlers
-            DispatchRequest dispatchRequest = findClientActionHandlerRequest();
-            if (dispatchRequest == null) {
-                return processCall();
-            } else {
                 return dispatchRequest;
             }
+        }
+
+        // Maintaining support for client action handlers
+        DispatchRequest dispatchRequest = findClientActionHandlerRequest();
+        if (dispatchRequest == null) {
+            return processCall();
+        } else {
+            return dispatchRequest;
         }
     }
 
@@ -93,12 +98,14 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
     protected DispatchRequest processCall() {
         return new GwtHttpDispatchRequest(dispatchService.execute(getSecurityCookie(), getAction(),
                 new AsyncCallback<R>() {
+                    @Override
                     public void onFailure(Throwable caught) {
                         RpcDispatchExecuteCall.this.onExecuteFailure(caught);
 
                         dispatchHooks.onFailure(getAction(), caught, false);
                     }
 
+                    @Override
                     public void onSuccess(R result) {
                         RpcDispatchExecuteCall.this.onExecuteSuccess(result);
 

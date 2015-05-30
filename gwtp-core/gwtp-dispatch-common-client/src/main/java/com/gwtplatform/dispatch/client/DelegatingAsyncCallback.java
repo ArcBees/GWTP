@@ -20,7 +20,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
 import com.gwtplatform.dispatch.client.interceptor.Interceptor;
 import com.gwtplatform.dispatch.client.interceptor.InterceptorMismatchException;
-import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
@@ -38,7 +37,7 @@ public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T ext
     private final AsyncCallback<R> callback;
     private final DelegatingDispatchRequest dispatchRequest;
 
-    public DelegatingAsyncCallback(
+    protected DelegatingAsyncCallback(
             DispatchCall<A, R> dispatchCall,
             A action,
             AsyncCallback<R> callback,
@@ -65,15 +64,6 @@ public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T ext
         dispatchCall.onExecuteFailure(caught);
     }
 
-    @Override
-    public DispatchRequest execute(A action, AsyncCallback<R> resultCallback) {
-        if (dispatchRequest.isPending()) {
-            return dispatchCall.processCall(resultCallback);
-        } else {
-            return null;
-        }
-    }
-
     protected void delegateFailure(Interceptor interceptor) {
         InterceptorMismatchException exception =
                 new InterceptorMismatchException(action.getClass(), interceptor.getActionType());
@@ -90,7 +80,7 @@ public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T ext
         return dispatchRequest;
     }
 
-    protected TypedAction getAction() {
+    protected TypedAction<R> getAction() {
         return action;
     }
 }

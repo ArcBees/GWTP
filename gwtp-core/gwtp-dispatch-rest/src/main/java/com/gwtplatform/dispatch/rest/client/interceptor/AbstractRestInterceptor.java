@@ -16,26 +16,39 @@
 
 package com.gwtplatform.dispatch.rest.client.interceptor;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.gwtplatform.dispatch.client.interceptor.AbstractInterceptor;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
- * Simple abstract super-class for {@link RestInterceptor}
- * implementations that forces the action class to be passed in as a constructor to the handler.
+ * Simple abstract super-class for {@link RestInterceptor} implementations that forces the action class to be passed in
+ * as a constructor to the handler.
  */
 public abstract class AbstractRestInterceptor extends AbstractInterceptor<RestAction, Object>
         implements RestInterceptor {
-    private final InterceptorContext[] interceptorContexts;
+    private final List<InterceptorContext> interceptorContexts;
 
-    protected AbstractRestInterceptor(InterceptorContext... interceptorContexts) {
-        super(RestAction.class); // catch all
+    protected AbstractRestInterceptor(
+            InterceptorContext context,
+            InterceptorContext... moreContexts) {
+        super(RestAction.class);
 
-        this.interceptorContexts = interceptorContexts;
+        List<InterceptorContext> contexts = new ArrayList<InterceptorContext>();
+        contexts.add(context);
+
+        if (moreContexts != null) {
+            Collections.addAll(contexts, moreContexts);
+        }
+
+        interceptorContexts = Collections.unmodifiableList(contexts);
     }
 
     @Override
-    public InterceptorContext[] getInterceptorContexts() {
+    public List<InterceptorContext> getInterceptorContexts() {
         return interceptorContexts;
     }
 

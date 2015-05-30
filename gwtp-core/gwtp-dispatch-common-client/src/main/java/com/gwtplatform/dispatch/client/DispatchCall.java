@@ -39,10 +39,11 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     private final A action;
     private final ExceptionHandler exceptionHandler;
     private final SecurityCookieAccessor securityCookieAccessor;
+    private final AsyncCallback<R> callback;
 
-    private AsyncCallback<R> callback;
+    private boolean intercepted;
 
-    public DispatchCall(
+    protected DispatchCall(
             ExceptionHandler exceptionHandler,
             SecurityCookieAccessor securityCookieAccessor,
             A action,
@@ -51,6 +52,18 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
         this.callback = callback;
         this.exceptionHandler = exceptionHandler;
         this.securityCookieAccessor = securityCookieAccessor;
+    }
+
+    public void setIntercepted(boolean intercepted) {
+        if (this.intercepted && !intercepted) {
+            throw new IllegalStateException("Can not overwrite the intercepted state of a DispatchCall.");
+        }
+
+        this.intercepted = intercepted;
+    }
+
+    public boolean isIntercepted() {
+        return intercepted;
     }
 
     /**
@@ -67,18 +80,6 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
      * @return a {@link DispatchRequest} object.
      */
     protected abstract DispatchRequest processCall();
-
-    /**
-     * Execute the call overriding the existing callback. Used by {@link DelegatingAsyncCallback}.
-     *
-     * @param callback overriding callback.
-     *
-     * @return a {@link DispatchRequest} object.
-     */
-    protected DispatchRequest processCall(AsyncCallback<R> callback) {
-        this.callback = callback;
-        return processCall();
-    }
 
     /**
      * Returns the {@link TypedAction} wrapped by this {@link DispatchCall}.
