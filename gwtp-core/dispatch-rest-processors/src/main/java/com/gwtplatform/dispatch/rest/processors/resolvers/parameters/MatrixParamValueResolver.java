@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,18 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind;
+package com.gwtplatform.dispatch.rest.processors.resolvers.parameters;
 
-import java.util.Comparator;
+import javax.ws.rs.MatrixParam;
 
-public interface HasPriority {
-    Comparator<HasPriority> COMPARATOR = new Comparator<HasPriority>() {
-        @Override
-        public int compare(HasPriority o1, HasPriority o2) {
-            return o1.getPriority() - o2.getPriority();
-        }
-    };
-    int DEFAULT_PRIORITY = 15;
+import com.google.auto.service.AutoService;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
-    byte getPriority();
+@AutoService(HttpParamValueResolver.class)
+public class MatrixParamValueResolver extends HttpParamValueResolver {
+    @Override
+    public Class<MatrixParam> getAssociatedClass() {
+        return MatrixParam.class;
+    }
+
+    @Override
+    public Type getAssociatedType() {
+        return Type.MATRIX;
+    }
 }

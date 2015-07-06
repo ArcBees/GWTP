@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,18 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind;
+package com.gwtplatform.dispatch.rest.processors.annotations;
 
-import java.util.Comparator;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public interface HasPriority {
-    Comparator<HasPriority> COMPARATOR = new Comparator<HasPriority>() {
-        @Override
-        public int compare(HasPriority o1, HasPriority o2) {
-            return o1.getPriority() - o2.getPriority();
-        }
-    };
-    int DEFAULT_PRIORITY = 15;
+@Target(ElementType.PARAMETER)
+@Retention(RetentionPolicy.SOURCE)
+public @interface RestSerializable {
 
-    byte getPriority();
 }

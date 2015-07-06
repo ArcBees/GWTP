@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.rest.rebind.utils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -28,13 +27,6 @@ import com.gwtplatform.dispatch.rest.rebind.GeneratorWithoutInput;
 import com.gwtplatform.dispatch.rest.rebind.HasPriority;
 
 public class Generators {
-    private static final Comparator<HasPriority> COMPARATOR = new Comparator<HasPriority>() {
-        @Override
-        public int compare(HasPriority o1, HasPriority o2) {
-            return o1.getPriority() - o2.getPriority();
-        }
-    };
-
     /**
      * Get the best suited generator for the given type.
      *
@@ -129,7 +121,7 @@ public class Generators {
      */
     private static <T extends HasPriority> List<T> sortGenerators(Collection<T> generators) {
         List<T> sortedGenerators = new ArrayList<T>(generators);
-        Collections.sort(sortedGenerators, COMPARATOR);
+        Collections.sort(sortedGenerators, HasPriority.COMPARATOR);
 
         return sortedGenerators;
     }

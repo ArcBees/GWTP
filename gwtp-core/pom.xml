@@ -21,6 +21,7 @@
         <module>gwtp-dispatch-common-shared</module>
         <module>gwtp-dispatch-rest</module>
         <module>gwtp-dispatch-rest-shared</module>
+        <module>dispatch-rest-processors</module>
         <module>gwtp-dispatch-rpc-client</module>
         <module>gwtp-dispatch-rpc-shared</module>
         <module>gwtp-dispatch-rpc-server</module>

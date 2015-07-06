@@ -1,0 +1,25 @@
+#* @vtlvariable name="methods" type="java.util.List<com.gwtplatform.dispatch.rest.processors.endpoint.EndPointMethodDefinition>" *#
+#* @vtlvariable name="resource" type="com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition" *#
+package $impl.packageName;
+
+import com.gwtplatform.dispatch.rest.client.core.StaticParametersFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.processors.annotations.RestImplementation;
+
+import javax.annotation.Generated;
+
+#printImports($imports)
+
+@RestImplementation(singleton = true)
+@Generated("$processor.qualifiedName")
+public class $impl.parameterizedName implements $resource.parameterizedName {
+    private final HttpParameterFactory httpParameterFactory;
+    private final String defaultDateFormat;
+
+    ${impl.simpleName}() {
+        this.defaultDateFormat = StaticParametersFactory.getDefaultDateFormat();
+        this.httpParameterFactory = StaticParametersFactory.getHttpParameterFactory();
+    }
+
+#foreach ($method in $methods)$method.codeSnippet.code#end
+}

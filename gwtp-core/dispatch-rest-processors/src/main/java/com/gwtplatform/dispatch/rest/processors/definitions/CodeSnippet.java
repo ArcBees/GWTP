@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,18 +14,27 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind;
+package com.gwtplatform.dispatch.rest.processors.definitions;
 
-import java.util.Comparator;
+import java.util.Collection;
 
-public interface HasPriority {
-    Comparator<HasPriority> COMPARATOR = new Comparator<HasPriority>() {
-        @Override
-        public int compare(HasPriority o1, HasPriority o2) {
-            return o1.getPriority() - o2.getPriority();
-        }
-    };
-    int DEFAULT_PRIORITY = 15;
+public class CodeSnippet implements HasImports {
+    private final String code;
+    private final Collection<String> imports;
 
-    byte getPriority();
+    public CodeSnippet(
+            String code,
+            Collection<String> imports) {
+        this.code = code;
+        this.imports = imports;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    @Override
+    public Collection<String> getImports() {
+        return imports;
+    }
 }

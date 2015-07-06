@@ -1,0 +1,64 @@
+package $impl.packageName;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Generated;
+
+import com.gwtplatform.dispatch.rest.client.codegen.AbstractRestAction;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.shared.ContentType;
+import com.gwtplatform.dispatch.rest.shared.HttpMethod;
+
+#printImports($imports)
+
+@Generated("$processor.qualifiedName")
+public class $impl.parameterizedName extends AbstractRestAction<$endPoint.result.parameterizedName> {
+    public ${impl.simpleName}(
+            HttpParameterFactory httpParameterFactory,
+            String defaultDateFormat#appendParameterDefinitions($fields)) {
+        super(httpParameterFactory, defaultDateFormat, HttpMethod.$endPoint.verb.name(), "$endPoint.path");
+
+#foreach($param in $endPoint.httpParameters)
+        addParam(Type.$param.httpAnnotation.parameterType.name(), "$param.httpAnnotation.name", $param.name#if($param.dateFormat), "$param.dateFormat"#end);
+#end
+#if($endPoint.body.isPresent())
+        setBodyParam($endPoint.body.get().name);
+#end
+    }
+
+    @Override
+    public boolean isSecured() {
+        return $endPoint.secured;
+    }
+
+    @Override
+    public String getBodyClass() {
+        return #if($endPoint.body.isPresent())"$endPoint.body.get().type.qualifiedParameterizedName"#{else}null#end;
+    }
+
+    @Override
+    public String getResultClass() {
+        return "$endPoint.result.qualifiedParameterizedName";
+    }
+
+    @Override
+    public List<ContentType> getClientProducedContentTypes() {
+        List<ContentType> contentTypes = new ArrayList<ContentType>();
+#foreach($consume in $endPoint.consumes)
+        contentTypes.add(#recreateContentType($consume));
+#end
+
+        return contentTypes;
+    }
+
+    @Override
+    public List<ContentType> getClientConsumedContentTypes() {
+        List<ContentType> contentTypes = new ArrayList<ContentType>();
+#foreach($produce in $endPoint.produces)
+        contentTypes.add(#recreateContentType($produce));
+#end
+
+        return contentTypes;
+    }
+}

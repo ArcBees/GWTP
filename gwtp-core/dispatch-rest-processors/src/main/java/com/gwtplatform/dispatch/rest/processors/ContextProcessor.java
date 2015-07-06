@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,18 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind;
+package com.gwtplatform.dispatch.rest.processors;
 
-import java.util.Comparator;
+import javax.annotation.processing.ProcessingEnvironment;
 
-public interface HasPriority {
-    Comparator<HasPriority> COMPARATOR = new Comparator<HasPriority>() {
-        @Override
-        public int compare(HasPriority o1, HasPriority o2) {
-            return o1.getPriority() - o2.getPriority();
-        }
-    };
-    int DEFAULT_PRIORITY = 15;
+public interface ContextProcessor<I, O> {
+    void init(ProcessingEnvironment processingEnv);
 
-    byte getPriority();
+    boolean isInitialized();
+
+    boolean canProcess(I context);
+
+    O process(I context);
 }
