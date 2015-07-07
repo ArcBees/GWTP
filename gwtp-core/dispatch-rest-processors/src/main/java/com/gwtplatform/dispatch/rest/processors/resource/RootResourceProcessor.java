@@ -58,7 +58,7 @@ public class RootResourceProcessor extends AbstractContextProcessor<Element, Res
     public boolean canProcess(Element element) {
         ElementKind kind = element.getKind();
         if (kind == ElementKind.CLASS) {
-            logger.warning("Resource `%s` is concrete. To be generated it must be an interface.",
+            logger.warning().context(element).log("Resource `%s` is concrete. To be generated it must be an interface.",
                     asType(element).getQualifiedName());
         }
 

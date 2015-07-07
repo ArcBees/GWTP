@@ -22,12 +22,12 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.util.SimpleTypeVisitor6;
 
-import com.gwtplatform.dispatch.rest.processors.NameFactory;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 
 import static com.google.auto.common.MoreElements.asType;
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
+import static com.gwtplatform.dispatch.rest.processors.NameFactory.parentName;
 
 public class DateFormatResolver {
     private static final String DATE_FORMAT_NOT_DATE =
@@ -51,7 +51,7 @@ public class DateFormatResolver {
                 || element.asType().accept(DATE_TYPE_VALIDATION_VISITOR, null);
 
         if (!valid) {
-            logger.error(DATE_FORMAT_NOT_DATE, NameFactory.parentName(element), element.getSimpleName());
+            logger.error().context(element).log(DATE_FORMAT_NOT_DATE, parentName(element), element.getSimpleName());
         }
         return valid;
     }

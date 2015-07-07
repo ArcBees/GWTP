@@ -71,7 +71,7 @@ public class Outputter {
             merge(builder, writer);
             return writer.toString();
         } catch (IOException e) {
-            logger.error("Can not parse `%s`.", e, builder.getErrorLogParameter());
+            logger.error().throwable(e).log("Can not parse `%s`.", builder.getErrorLogParameter());
             throw new UnableToProcessException();
         }
     }
@@ -83,7 +83,7 @@ public class Outputter {
         try (Writer writer = classFile.openWriter()) {
             merge(builder, writer);
         } catch (IOException e) {
-            logger.error("Can not write `%s`.", e, typeDefinition.getQualifiedName());
+            logger.error().throwable(e).log("Can not write `%s`.", typeDefinition.getQualifiedName());
             throw new UnableToProcessException();
         }
     }
@@ -92,7 +92,7 @@ public class Outputter {
         try {
             return filer.createSourceFile(typeDefinition.getQualifiedName());
         } catch (IOException e) {
-            logger.error("Can not create source file `%s`.", e, typeDefinition.getQualifiedName());
+            logger.error().throwable(e).log("Can not create source file `%s`.", typeDefinition.getQualifiedName());
             throw new UnableToProcessException();
         }
     }

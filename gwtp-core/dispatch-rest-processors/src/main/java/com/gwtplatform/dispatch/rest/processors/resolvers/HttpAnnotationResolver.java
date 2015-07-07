@@ -52,7 +52,7 @@ public class HttpAnnotationResolver {
         }
 
         if (annotationsCount > 1) {
-            logger.error(MANY_REST_ANNOTATIONS, parentName(element), element.getSimpleName());
+            logger.error().context(element).log(MANY_REST_ANNOTATIONS, parentName(element), element.getSimpleName());
         }
 
         return annotationsCount <= 1;

@@ -45,7 +45,7 @@ public class HttpVerbResolver {
 
         boolean hasOneAnnotation = annotationsCount == 1;
         if (!hasOneAnnotation) {
-            logger.warning(INVALID_VERB_COUNT, annotationsCount,
+            logger.warning().context(element).log(INVALID_VERB_COUNT, annotationsCount,
                     asType(element.getEnclosingElement()).getQualifiedName(), element.getSimpleName());
         }
 

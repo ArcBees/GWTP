@@ -83,7 +83,7 @@ public class EndPointResolver {
         if (restActionName.equals(returnTypeName)) {
             boolean isValid = returnType.getTypeArguments().size() == 1;
             if (!isValid) {
-                logger.warning(BAD_REST_ACTION, methodName(element));
+                logger.warning().context(element).log(BAD_REST_ACTION, methodName(element));
             }
 
             return isValid;
@@ -119,18 +119,18 @@ public class EndPointResolver {
         String methodName = methodName(element);
 
         if (bodyCount != 0 && hasForms) {
-            logger.error(FORM_AND_BODY_PARAM, methodName);
+            logger.error().context(element).log(FORM_AND_BODY_PARAM, methodName);
             valid = false;
         }
 
         if (bodyCount > 1) {
-            logger.error(MANY_POTENTIAL_BODY, methodName);
+            logger.error().context(element).log(MANY_POTENTIAL_BODY, methodName);
             valid = false;
         }
 
         HttpVerb verb = httpVerbResolver.resolve(element);
         if (verb == HttpVerb.GET || verb == HttpVerb.HEAD) {
-            logger.error(GET_WITH_BODY, methodName);
+            logger.error().context(element).log(GET_WITH_BODY, methodName);
             valid = false;
         }
 

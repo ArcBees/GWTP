@@ -35,7 +35,7 @@ public class ContentTypeResolver {
     private static final Pattern MULTIPLE_CONTENT_TYPE_PATTERN = Pattern.compile("[,]");
 
     static {
-        Set<ContentType> contentTypes = new HashSet<ContentType>();
+        Set<ContentType> contentTypes = new HashSet<>();
         contentTypes.add(ContentType.valueOf(MediaType.WILDCARD));
 
         DEFAULT_FALLBACK = Collections.unmodifiableSet(contentTypes);
@@ -74,7 +74,7 @@ public class ContentTypeResolver {
     }
 
     private static Set<ContentType> resolveContentTypes(String[] values, Set<ContentType> fallback) {
-        Set<ContentType> result = new HashSet<ContentType>(values.length);
+        Set<ContentType> result = new HashSet<>(values.length);
 
         for (String value : values) {
             String[] parts = MULTIPLE_CONTENT_TYPE_PATTERN.split(value);

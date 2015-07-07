@@ -19,7 +19,12 @@ package com.gwtplatform.dispatch.rest.processors.logger;
 import java.util.Map;
 
 import javax.annotation.processing.Messager;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.AnnotationValue;
+import javax.lang.model.element.Element;
 import javax.tools.Diagnostic.Kind;
+
+import static java.lang.String.format;
 
 public class Logger {
     public static final String DEBUG_OPTION = "debug";
@@ -39,55 +44,65 @@ public class Logger {
     }
 
     public void other(String message, Object... arguments) {
-        messager.printMessage(Kind.OTHER, format(message, arguments));
+        other().log(message, arguments);
+    }
+
+    public LogBuilder other() {
+        return new LogBuilder(this, Kind.OTHER);
     }
 
     public void debug(String message, Object... arguments) {
-        if (debug) {
-            messager.printMessage(Kind.NOTE, format(message, arguments));
-        }
+        debug().log(message, arguments);
+    }
+
+    public LogBuilder debug() {
+        return new LogBuilder(this, Kind.OTHER, true);
     }
 
     public void note(String message, Object... arguments) {
-        messager.printMessage(Kind.NOTE, format(message, arguments));
+        note().log(message, arguments);
+    }
+
+    public LogBuilder note() {
+        return new LogBuilder(this, Kind.NOTE);
     }
 
     public void warning(String message, Object... arguments) {
-        messager.printMessage(Kind.WARNING, format(message, arguments));
+        warning().log(message, arguments);
     }
 
-    public void warning(String message, Throwable throwable, Object... arguments) {
-        messager.printMessage(Kind.WARNING, format(message, arguments));
-
-        printStackTrace(throwable);
+    public LogBuilder warning() {
+        return new LogBuilder(this, Kind.WARNING);
     }
 
     public void mandatoryWarning(String message, Object... arguments) {
-        messager.printMessage(Kind.MANDATORY_WARNING, format(message, arguments));
+        mandatoryWarning().log(message, arguments);
     }
 
-    public void mandatoryWarning(String message, Throwable throwable, Object... arguments) {
-        messager.printMessage(Kind.MANDATORY_WARNING, format(message, arguments));
-
-        printStackTrace(throwable);
+    public LogBuilder mandatoryWarning() {
+        return new LogBuilder(this, Kind.MANDATORY_WARNING);
     }
 
     public void error(String message, Object... arguments) {
-        messager.printMessage(Kind.ERROR, format(message, arguments));
+        error().log(message, arguments);
     }
 
-    public void error(String message, Throwable throwable, Object... arguments) {
-        messager.printMessage(Kind.ERROR, format(message, arguments));
-
-        printStackTrace(throwable);
+    public LogBuilder error() {
+        return new LogBuilder(this, Kind.ERROR);
     }
 
-    private String format(String message, Object[] arguments) {
-        return String.format(message, arguments);
-    }
-
-    private void printStackTrace(Throwable throwable) {
+    void debug(Kind kind, String message, Throwable throwable, Object[] arguments, Element element,
+            AnnotationMirror annotationMirror, AnnotationValue annotationValue) {
         if (debug) {
+            log(kind, "[DEBUG] " + message, throwable, arguments, element, annotationMirror, annotationValue);
+        }
+    }
+
+    void log(Kind kind, String message, Throwable throwable, Object[] arguments, Element element,
+            AnnotationMirror annotationMirror, AnnotationValue annotationValue) {
+        messager.printMessage(kind, format(message, arguments), element, annotationMirror, annotationValue);
+
+        if (debug && throwable != null) {
             throwable.printStackTrace();
         }
     }

@@ -78,7 +78,7 @@ public class CookieParamValueResolver extends HttpParamValueResolver {
                 element.asType().accept(VALID_COOKIE_TYPE_VISITOR, this);
 
         if (!valid) {
-            logger.error(COOKIE_BAD_RETURN_TYPE, parentName(element), element.getSimpleName());
+            logger.error().context(element).log(COOKIE_BAD_RETURN_TYPE, parentName(element), element.getSimpleName());
         }
 
         return valid;

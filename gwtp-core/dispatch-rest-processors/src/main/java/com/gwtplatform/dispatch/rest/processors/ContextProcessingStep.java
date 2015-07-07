@@ -32,10 +32,14 @@ import com.google.common.collect.Sets;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 
 public class ContextProcessingStep<P extends ContextProcessor<Element, O>, O> implements ProcessingStep {
+    private static final String UNABLE_TO_PROCESS_EXCEPTION = "Unable to process Rest-Dispatch classes. See previous "
+            + "log entries for details or compile with -A%s for additional details.";
+    private static final String UNRESOLVABLE_EXCEPTION =
+            "Unresolvable exception. Compile with -A%s for additional details.";
+
     private final Logger logger;
     private final ContextProcessors contextProcessors;
     private final Class<? extends Annotation> annotationClass;
-    private final boolean ignoreUnresolvableElements;
     private final Class<P> processorClass;
     private final Collection<O> outputs;
 
@@ -43,12 +47,10 @@ public class ContextProcessingStep<P extends ContextProcessor<Element, O>, O> im
             Logger logger,
             ContextProcessors contextProcessors,
             Class<? extends Annotation> annotationClass,
-            boolean ignoreUnresolvableElements,
             Class<P> processorClass) {
         this.logger = logger;
         this.contextProcessors = contextProcessors;
         this.annotationClass = annotationClass;
-        this.ignoreUnresolvableElements = ignoreUnresolvableElements;
         this.processorClass = processorClass;
         this.outputs = Collections.synchronizedCollection(new ArrayList<O>());
     }
@@ -66,9 +68,9 @@ public class ContextProcessingStep<P extends ContextProcessor<Element, O>, O> im
         try {
             process(elements);
         } catch (UnableToProcessException e) {
-            logger.error("Unable to process Rest-Dispatch classes. See previous log entries for details.");
+            logger.error(UNABLE_TO_PROCESS_EXCEPTION, Logger.DEBUG_OPTION);
         } catch (Exception e) {
-            logger.error("Unresolvable exception.", e);
+            logger.error().throwable(e).log(UNRESOLVABLE_EXCEPTION, Logger.DEBUG_OPTION);
         }
     }
 
@@ -83,10 +85,14 @@ public class ContextProcessingStep<P extends ContextProcessor<Element, O>, O> im
         Optional<P> processor = contextProcessors.getOptionalProcessor(processorClass, element);
 
         if (processor.isPresent()) {
-            O output = processor.get().process(element);
+            O output = process(element, processor.get());
 
             outputs.add(output);
         }
+    }
+
+    protected O process(Element element, P processor) {
+        return processor.process(element);
     }
 
     public Collection<O> getOutputs() {

@@ -26,6 +26,6 @@ public class ResourceProcessingStep extends ContextProcessingStep<ResourceProces
     public ResourceProcessingStep(
             Logger logger,
             ContextProcessors contextProcessors) {
-        super(logger, contextProcessors, Path.class, true, ResourceProcessor.class);
+        super(logger, contextProcessors, Path.class, ResourceProcessor.class);
     }
 }
