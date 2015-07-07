@@ -75,4 +75,8 @@ public class NameFactory {
 
         return className + "#" + methodName;
     }
+
+    public static String methodName(TypeDefinition parent, ExecutableElement element) {
+        return parent.getQualifiedName() + "#" + element.getSimpleName();
+    }
 }

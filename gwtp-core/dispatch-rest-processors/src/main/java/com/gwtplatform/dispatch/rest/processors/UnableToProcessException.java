@@ -14,9 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.endpoint;
+package com.gwtplatform.dispatch.rest.processors;
 
-import com.gwtplatform.dispatch.rest.processors.ContextProcessor;
-
-public interface EndPointImplProcessor extends ContextProcessor<EndPointImplContext, EndPointImplDefinition> {
+public class UnableToProcessException extends RuntimeException {
 }

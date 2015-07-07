@@ -22,11 +22,11 @@ import com.google.common.base.Function;
 
 public interface HasImports {
     Function<HasImports, Iterable<String>> EXTRACT_IMPORTS_FUNCTION = new Function<HasImports, Iterable<String>>() {
-                @Override
-                public Iterable<String> apply(HasImports hasImports) {
-                    return hasImports.getImports();
-                }
-            };
+        @Override
+        public Iterable<String> apply(HasImports hasImports) {
+            return hasImports.getImports();
+        }
+    };
 
     Collection<String> getImports();
 }

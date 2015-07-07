@@ -17,23 +17,29 @@
 package com.gwtplatform.dispatch.rest.processors.resource;
 
 import java.util.Collection;
+import java.util.List;
 
+import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
 import com.gwtplatform.dispatch.rest.processors.definitions.HasImports;
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.endpoint.EndPointMethodDefinition;
 
 public class ResourceDefinition implements HasImports {
     private final TypeDefinition impl;
     private final TypeDefinition resource;
     private final EndPointDefinition endPoint;
+    private final List<EndPointMethodDefinition> methods;
 
     public ResourceDefinition(
             TypeDefinition impl,
             TypeDefinition resource,
-            EndPointDefinition endPoint) {
+            EndPointDefinition endPoint,
+            List<EndPointMethodDefinition> methods) {
         this.impl = impl;
         this.resource = resource;
         this.endPoint = endPoint;
+        this.methods = methods;
     }
 
     public TypeDefinition getImpl() {
@@ -48,8 +54,15 @@ public class ResourceDefinition implements HasImports {
         return endPoint;
     }
 
+    public List<EndPointMethodDefinition> getMethods() {
+        return methods;
+    }
+
     @Override
     public Collection<String> getImports() {
-        return resource.getImports();
+        return FluentIterable.from(methods)
+                .transformAndConcat(HasImports.EXTRACT_IMPORTS_FUNCTION)
+                .append(resource.getImports())
+                .toList();
     }
 }

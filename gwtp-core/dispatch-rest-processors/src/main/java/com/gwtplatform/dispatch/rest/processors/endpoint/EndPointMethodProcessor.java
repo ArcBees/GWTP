@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.processors.endpoint;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -24,6 +23,7 @@ import javax.annotation.Generated;
 
 import com.google.auto.service.AutoService;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
+import com.gwtplatform.dispatch.rest.processors.ContextProcessors;
 import com.gwtplatform.dispatch.rest.processors.definitions.CodeSnippet;
 import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
 import com.gwtplatform.dispatch.rest.processors.definitions.MethodDefinition;
@@ -32,16 +32,20 @@ import com.gwtplatform.dispatch.rest.processors.resolvers.MethodResolver;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessor;
 
+import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
+
 @AutoService(ResourceMethodProcessor.class)
 public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMethodContext, EndPointMethodDefinition>
         implements ResourceMethodProcessor {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm";
 
+    private ContextProcessors contextProcessors;
     private EndPointResolver endPointResolver;
     private MethodResolver methodResolver;
 
     @Override
     public void init() {
+        contextProcessors = new ContextProcessors(processingEnv, logger);
         endPointResolver = new EndPointResolver(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils());
         methodResolver = new MethodResolver();
     }
@@ -58,48 +62,34 @@ public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMe
 
     @Override
     public EndPointMethodDefinition process(ResourceMethodContext context) {
-        logger.debug("Generating end-point method `%s`.", context);
+        String methodName = methodName(context.getParent(), context.getElement());
+        logger.debug("Generating end-point method `%s`.", methodName);
 
-        // TODO: HttpVariables and Variables are different. Add an order to HttpVariables and converge both
+        // TODO: Add an order to HttpVariables and converge both HttpVariables and Variables. This is not an issue until
+        // sub-resources are implemented
         MethodDefinition method = methodResolver.resolve(context.getElement());
         EndPointDefinition endPoint = endPointResolver.resolve(context.getElement(), context.getEndPoint());
         EndPointImplDefinition impl = processEndPointImpl(context, method, endPoint);
 
-        try {
-            CodeSnippet codeSnippet = write(method, impl);
+        CodeSnippet codeSnippet = parse(methodName, method, impl);
 
-            return new EndPointMethodDefinition(method, endPoint, impl, codeSnippet);
-        } catch (IOException e) {
-            logger.warning("Can not write end-point method `%s`.", e, context);
-            return null;
-        }
+        return new EndPointMethodDefinition(method, endPoint, impl, codeSnippet);
     }
 
     private EndPointImplDefinition processEndPointImpl(ResourceMethodContext context, MethodDefinition method,
             EndPointDefinition endPoint) {
-        EndPointImplProcessor processor = new EndPointImplProcessor();
-        processor.init(processingEnv);
-
         EndPointImplContext endPointImplContext = new EndPointImplContext(context, method, endPoint);
+        EndPointImplProcessor processor =
+                contextProcessors.getProcessor(EndPointImplProcessor.class, endPointImplContext);
 
-        if (processor.canProcess(endPointImplContext)) {
-            EndPointImplDefinition definition = processor.process(endPointImplContext);
-            if (definition == null) {
-                logger.error("Can not generate end-point implementation `%s`.", context);
-            }
-
-            return definition;
-        } else {
-            logger.error("Can not find a generator for input `%s`.", context);
-
-            return null;
-        }
+        return processor.process(endPointImplContext);
     }
 
-    private CodeSnippet write(MethodDefinition method, EndPointImplDefinition impl) throws IOException {
+    public CodeSnippet parse(String methodName, MethodDefinition method, EndPointImplDefinition impl) {
         String code = outputter.withTemplateFile(TEMPLATE)
                 .withParam("method", method)
                 .withParam("endPointImpl", impl)
+                .withErrorLogParameter(methodName)
                 .parse();
         Collection<String> imports = Arrays.asList(Generated.class.getCanonicalName());
 

@@ -25,11 +25,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Ordering;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
-import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodContext;
-import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessor;
-import com.gwtplatform.dispatch.rest.rebind.HasPriority;
 
 public class ContextProcessors {
     private static class Loaders {
@@ -41,7 +37,7 @@ public class ContextProcessors {
             this.serviceLoaders = new HashMap<>();
         }
 
-        public static Loaders get() {
+        public static synchronized Loaders get() {
             if (instance == null) {
                 instance = new Loaders();
             }
@@ -50,7 +46,7 @@ public class ContextProcessors {
         }
 
         @SuppressWarnings("unchecked")
-        public <C extends ContextProcessor<?, ?>> ServiceLoader<C> get(Class<C> clazz) {
+        public synchronized <C extends ContextProcessor<?, ?>> ServiceLoader<C> get(Class<C> clazz) {
             if (!serviceLoaders.containsKey(clazz)) {
                 // In the processor context, the current thread class loader can't load SPIs
                 serviceLoaders.put(clazz, ServiceLoader.load(clazz, getClass().getClassLoader()));
@@ -60,43 +56,47 @@ public class ContextProcessors {
         }
     }
 
-    private final ProcessingEnvironment processingEnvironment;
+    private final ProcessingEnvironment processingEnv;
     private final Logger logger;
     private final Loaders loaders;
 
-    public ContextProcessors(ProcessingEnvironment processingEnv) {
-        this.processingEnvironment = processingEnv;
-        this.logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
+    public ContextProcessors(
+            ProcessingEnvironment processingEnv,
+            Logger logger) {
+        this.processingEnv = processingEnv;
+        this.logger = logger;
         this.loaders = Loaders.get();
     }
 
-    public ResourceMethodProcessor getResourceMethodProcessor(ResourceMethodContext context) {
-        return getProcessor(ResourceMethodProcessor.class, context);
+    public <P extends ContextProcessor<I, ?>, I> P getProcessor(Class<P> clazz, final I input) {
+        Optional<P> processor = getOptionalProcessor(clazz, input);
+
+        if (!processor.isPresent()) {
+            logger.error("Can not find a `%s` for input `%s`.", clazz.getSimpleName(), input);
+            throw new UnableToProcessException();
+        }
+
+        return processor.get();
     }
 
-    public <P extends ContextProcessor<I, ?> & HasPriority, I> P getProcessor(Class<P> clazz, final I input) {
-        ServiceLoader<P> processors = loaders.get(clazz);
-        Optional<P> processor = FluentIterable.from(sort(processors))
-                .firstMatch(new Predicate<P>() {
+    public <P extends ContextProcessor<I, ?>, I> Optional<P> getOptionalProcessor(Class<P> clazz, I input) {
+        return FluentIterable.from(getProcessors(clazz, input)).first();
+    }
+
+    public <P extends ContextProcessor<I, ?>, I> Iterable<P> getProcessors(Class<P> clazz, final I input) {
+        return FluentIterable.from(loaders.get(clazz))
+                .filter(new Predicate<P>() {
                     @Override
                     public boolean apply(P processor) {
                         return canProcess(processor, input);
                     }
-                });
-
-        if (!processor.isPresent()) {
-            logger.error("Can not find a `%s` for input `%s`.", clazz.getSimpleName(), input);
-        }
-        return processor.orNull();
+                })
+                .toSortedList(ContextProcessor.COMPARATOR);
     }
 
-    private <P extends HasPriority> Iterable<P> sort(Iterable<P> items) {
-        return Ordering.from(HasPriority.COMPARATOR).sortedCopy(items);
-    }
-
-    private <P extends ContextProcessor<I, ?>, I> boolean canProcess(P processor, I input) {
+    private synchronized <P extends ContextProcessor<I, ?>, I> boolean canProcess(P processor, I input) {
         if (!processor.isInitialized()) {
-            processor.init(processingEnvironment);
+            processor.init(processingEnv);
         }
 
         return processor.canProcess(input);

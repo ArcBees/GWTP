@@ -35,7 +35,9 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Ordering;
+import com.gwtplatform.dispatch.rest.processors.UnableToProcessException;
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 
 import static com.google.common.base.Predicates.containsPattern;
 import static com.google.common.base.Predicates.not;
@@ -45,14 +47,17 @@ public class Outputter {
     private static final String PROPERTIES = "/com/gwtplatform/dispatch/rest/processors/velocity.properties";
     private static final String ENCODING = "UTF-8";
 
+    private final Logger logger;
     private final TypeDefinition processorDefinition;
     private final Filer filer;
 
     private VelocityEngine velocityEngine;
 
     public Outputter(
+            Logger logger,
             TypeDefinition processorDefinition,
             Filer filer) {
+        this.logger = logger;
         this.processorDefinition = processorDefinition;
         this.filer = filer;
     }
@@ -61,19 +66,34 @@ public class Outputter {
         return new OutputBuilder(this, processorDefinition, templateFile);
     }
 
-    String parse(OutputBuilder builder) throws IOException {
+    String parse(OutputBuilder builder) {
         try (Writer writer = new StringWriter()) {
             merge(builder, writer);
             return writer.toString();
+        } catch (IOException e) {
+            logger.error("Can not parse `%s`.", e, builder.getErrorLogParameter());
+            throw new UnableToProcessException();
         }
     }
 
-    void writeSource(OutputBuilder builder) throws IOException {
+    void writeSource(OutputBuilder builder) {
         TypeDefinition typeDefinition = builder.getTypeDefinition().get();
-        JavaFileObject classFile = filer.createSourceFile(typeDefinition.getQualifiedName());
+        JavaFileObject classFile = createSourceFile(typeDefinition);
 
         try (Writer writer = classFile.openWriter()) {
             merge(builder, writer);
+        } catch (IOException e) {
+            logger.error("Can not write `%s`.", e, typeDefinition.getQualifiedName());
+            throw new UnableToProcessException();
+        }
+    }
+
+    private JavaFileObject createSourceFile(TypeDefinition typeDefinition) {
+        try {
+            return filer.createSourceFile(typeDefinition.getQualifiedName());
+        } catch (IOException e) {
+            logger.error("Can not create source file `%s`.", e, typeDefinition.getQualifiedName());
+            throw new UnableToProcessException();
         }
     }
 

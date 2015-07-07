@@ -24,7 +24,6 @@ import com.gwtplatform.dispatch.rest.processors.outputter.Outputter;
 
 public abstract class AbstractContextProcessor<I, O> implements ContextProcessor<I, O> {
     protected ProcessingEnvironment processingEnv;
-    protected ContextProcessors contextProcessors;
     protected Outputter outputter;
     protected Logger logger;
 
@@ -32,14 +31,15 @@ public abstract class AbstractContextProcessor<I, O> implements ContextProcessor
 
     @Override
     public final void init(ProcessingEnvironment processingEnv) {
-        this.processingEnv = processingEnv;
-        this.contextProcessors = new ContextProcessors(processingEnv);
-        this.outputter = new Outputter(new TypeDefinition(getClass()), processingEnv.getFiler());
-        this.logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
+        if (!initialized) {
+            this.processingEnv = processingEnv;
+            this.outputter = new Outputter(logger, new TypeDefinition(getClass()), processingEnv.getFiler());
+            this.logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
 
-        init();
+            init();
 
-        this.initialized = true;
+            this.initialized = true;
+        }
     }
 
     protected void init() {

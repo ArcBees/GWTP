@@ -34,6 +34,10 @@ public class Logger {
         this.debug = options.containsKey(DEBUG_OPTION);
     }
 
+    public boolean debugEnabled() {
+        return debug;
+    }
+
     public void other(String message, Object... arguments) {
         messager.printMessage(Kind.OTHER, format(message, arguments));
     }

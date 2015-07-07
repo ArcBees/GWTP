@@ -21,6 +21,8 @@ import javax.lang.model.element.ExecutableElement;
 import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
 
+import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
+
 public class ResourceMethodContext {
     private final TypeDefinition parent;
     private final EndPointDefinition endPoint;
@@ -49,6 +51,6 @@ public class ResourceMethodContext {
 
     @Override
     public String toString() {
-        return parent.getQualifiedName() + "#" + element.getSimpleName();
+        return methodName(parent, element);
     }
 }

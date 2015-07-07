@@ -14,9 +14,18 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.endpoint;
+package com.gwtplatform.dispatch.rest.processors.resource;
 
-import com.gwtplatform.dispatch.rest.processors.ContextProcessor;
+import javax.ws.rs.Path;
 
-public interface EndPointImplProcessor extends ContextProcessor<EndPointImplContext, EndPointImplDefinition> {
+import com.gwtplatform.dispatch.rest.processors.ContextProcessingStep;
+import com.gwtplatform.dispatch.rest.processors.ContextProcessors;
+import com.gwtplatform.dispatch.rest.processors.logger.Logger;
+
+public class ResourceProcessingStep extends ContextProcessingStep<ResourceProcessor, ResourceDefinition> {
+    public ResourceProcessingStep(
+            Logger logger,
+            ContextProcessors contextProcessors) {
+        super(logger, contextProcessors, Path.class, true, ResourceProcessor.class);
+    }
 }

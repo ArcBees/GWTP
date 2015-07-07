@@ -40,21 +40,20 @@ import static com.gwtplatform.dispatch.rest.processors.NameFactory.parentName;
 
 @AutoService(HttpParamValueResolver.class)
 public class CookieParamValueResolver extends HttpParamValueResolver {
-    private static final String COOKIE_BAD_RETURN_TYPE =
-            "Method `%s` parameter's `%s` is annotated with @CookieParam but has a bad return type. "
-                    + "It may only be a primitive, `Cookie` or a `Collection<Cookie>`.";
-    private static final SimpleTypeVisitor6<Boolean, CookieParamValueResolver>
-            VALID_COOKIE_TYPE_VISITOR = new SimpleTypeVisitor6<Boolean, CookieParamValueResolver>(false) {
-        @Override
-        public Boolean visitPrimitive(PrimitiveType type, CookieParamValueResolver resolver) {
-            return true;
-        }
+    private static final String COOKIE_BAD_RETURN_TYPE = "Method `%s` parameter's `%s` is annotated with @CookieParam "
+            + "but has a bad return type. It may only be a primitive, `Cookie` or a `Collection<Cookie>`.";
+    private static final SimpleTypeVisitor6<Boolean, CookieParamValueResolver> VALID_COOKIE_TYPE_VISITOR =
+            new SimpleTypeVisitor6<Boolean, CookieParamValueResolver>(false) {
+                @Override
+                public Boolean visitPrimitive(PrimitiveType type, CookieParamValueResolver resolver) {
+                    return true;
+                }
 
-        @Override
-        public Boolean visitDeclared(DeclaredType type, CookieParamValueResolver resolver) {
-            return resolver.isValidCookieType(type);
-        }
-    };
+                @Override
+                public Boolean visitDeclared(DeclaredType type, CookieParamValueResolver resolver) {
+                    return resolver.isValidCookieType(type);
+                }
+            };
 
     private UnconstrainedTypes unconstrainedTypes;
 
@@ -109,9 +108,9 @@ public class CookieParamValueResolver extends HttpParamValueResolver {
         Optional<TypeMirror> typeArg = extractCollectionTypeArg(type);
 
         return types.isAssignable(type, collectionType)
-                 && typeArg.isPresent()
-                 && isType(typeArg.get())
-                 && asTypeElement(typeArg.get()).getQualifiedName().contentEquals(Cookie.class.getCanonicalName());
+                && typeArg.isPresent()
+                && isType(typeArg.get())
+                && asTypeElement(typeArg.get()).getQualifiedName().contentEquals(Cookie.class.getCanonicalName());
     }
 
     private Optional<TypeMirror> extractCollectionTypeArg(DeclaredType type) {

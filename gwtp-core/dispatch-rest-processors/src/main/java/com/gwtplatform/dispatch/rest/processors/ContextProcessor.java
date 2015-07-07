@@ -16,9 +16,23 @@
 
 package com.gwtplatform.dispatch.rest.processors;
 
+import java.util.Comparator;
+
 import javax.annotation.processing.ProcessingEnvironment;
 
+import com.gwtplatform.dispatch.rest.rebind.HasPriority;
+
 public interface ContextProcessor<I, O> {
+    Comparator<ContextProcessor<?, ?>> COMPARATOR = new Comparator<ContextProcessor<?, ?>>() {
+        @Override
+        public int compare(ContextProcessor<?, ?> p1, ContextProcessor<?, ?> p2) {
+            if (p1 instanceof HasPriority && p2 instanceof HasPriority) {
+                return HasPriority.COMPARATOR.compare((HasPriority) p1, (HasPriority) p2);
+            }
+            return 0;
+        }
+    };
+
     void init(ProcessingEnvironment processingEnv);
 
     boolean isInitialized();

@@ -45,4 +45,9 @@ public class EndPointImplContext {
     public ResourceMethodContext getResourceMethodContext() {
         return resourceMethodContext;
     }
+
+    @Override
+    public String toString() {
+        return resourceMethodContext.toString();
+    }
 }

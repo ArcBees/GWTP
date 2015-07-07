@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.processors.outputter;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
@@ -39,6 +38,7 @@ public class OutputBuilder {
     private final Collection<String> imports;
 
     private Optional<TypeDefinition> typeDefinition;
+    private Optional<String> errorLogParameter;
 
     OutputBuilder(
             Outputter outputter,
@@ -50,6 +50,7 @@ public class OutputBuilder {
         this.context = new VelocityContext();
         this.imports = new HashSet<>();
         this.typeDefinition = Optional.absent();
+        this.errorLogParameter = Optional.absent();
     }
 
     public OutputBuilder withParams(Map<String, Object> params) {
@@ -87,13 +88,22 @@ public class OutputBuilder {
         return this;
     }
 
-    public void writeTo(TypeDefinition typeDefinition) throws IOException {
+    public OutputBuilder withErrorLogParameter(String errorLogParameter) {
+        this.errorLogParameter = Optional.of(errorLogParameter);
+        return this;
+    }
+
+    public void writeTo(TypeDefinition typeDefinition) {
         this.typeDefinition = Optional.of(typeDefinition);
+
+        if (!errorLogParameter.isPresent()) {
+            errorLogParameter = Optional.of(typeDefinition.getQualifiedName());
+        }
 
         outputter.writeSource(this);
     }
 
-    public String parse() throws IOException {
+    public String parse() {
         return outputter.parse(this);
     }
 
@@ -115,5 +125,9 @@ public class OutputBuilder {
 
     Optional<TypeDefinition> getTypeDefinition() {
         return typeDefinition;
+    }
+
+    Optional<String> getErrorLogParameter() {
+        return errorLogParameter;
     }
 }
