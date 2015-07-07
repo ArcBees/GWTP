@@ -3,8 +3,6 @@
 *goo-teepee*
 A complete model-view-presenter framework to simplify your next GWT project.
 
-Wanna help? [![Stories in Ready](https://badge.waffle.io/arcbees/gwtp.png?label=ready&title=Ready)](https://waffle.io/arcbees/gwtp)
-
 ##Enterprise Support
 Get high quality support through ArcBees.
 
