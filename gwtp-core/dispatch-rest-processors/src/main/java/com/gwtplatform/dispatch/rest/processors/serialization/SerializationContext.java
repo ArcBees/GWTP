@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.processors.serialization;
 
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 
@@ -51,5 +52,14 @@ public class SerializationContext {
 
     public IO getIo() {
         return io;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("type", type)
+                .add("contentTypes", contentTypes)
+                .add("io", io)
+                .toString();
     }
 }

@@ -79,12 +79,6 @@ public abstract class ContextProcessingStep<P extends ContextProcessor<Element, 
         return processor.process(element);
     }
 
-    public void processLast() {
-        for (P processor : contextProcessors.getProcessors(processorClass())) {
-            processor.processLast();
-        }
-    }
-
     public Collection<O> getOutputs() {
         return ImmutableList.copyOf(outputs);
     }

@@ -21,6 +21,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.tools.JavaFileObject;
+
 import org.apache.velocity.VelocityContext;
 
 import com.google.common.base.Optional;
@@ -37,7 +39,8 @@ public class OutputBuilder {
     private final VelocityContext context;
     private final Collection<String> imports;
 
-    private Optional<TypeDefinition> typeDefinition;
+    private Optional<JavaFileObject> javaFile;
+    private Optional<TypeDefinition> type;
     private Optional<String> errorLogParameter;
 
     OutputBuilder(
@@ -49,7 +52,8 @@ public class OutputBuilder {
         this.templateFile = templateFile;
         this.context = new VelocityContext();
         this.imports = new HashSet<>();
-        this.typeDefinition = Optional.absent();
+        this.javaFile = Optional.absent();
+        this.type = Optional.absent();
         this.errorLogParameter = Optional.absent();
     }
 
@@ -93,11 +97,22 @@ public class OutputBuilder {
         return this;
     }
 
-    public void writeTo(TypeDefinition typeDefinition) {
-        this.typeDefinition = Optional.of(typeDefinition);
+    public void writeTo(TypeDefinition type) {
+        this.type = Optional.of(type);
 
         if (!errorLogParameter.isPresent()) {
-            errorLogParameter = Optional.of(typeDefinition.getQualifiedName());
+            errorLogParameter = Optional.of(type.getQualifiedName());
+        }
+
+        outputter.writeSource(this);
+    }
+
+    public void writeTo(TypeDefinition type, JavaFileObject javaFile) {
+        this.type = Optional.of(type);
+        this.javaFile = Optional.of(javaFile);
+
+        if (!errorLogParameter.isPresent()) {
+            errorLogParameter = Optional.of(type.getQualifiedName());
         }
 
         outputter.writeSource(this);
@@ -123,8 +138,12 @@ public class OutputBuilder {
         return imports;
     }
 
-    Optional<TypeDefinition> getTypeDefinition() {
-        return typeDefinition;
+    Optional<JavaFileObject> getJavaFile() {
+        return javaFile;
+    }
+
+    Optional<TypeDefinition> getType() {
+        return type;
     }
 
     Optional<String> getErrorLogParameter() {

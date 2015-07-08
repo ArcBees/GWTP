@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.processors.resource;
 
 import java.util.List;
 
+import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
@@ -50,7 +51,9 @@ public class RootResourceProcessor extends AbstractContextProcessor<Element, Res
     private EndPointResolver endPointResolver;
 
     @Override
-    protected void init() {
+    public synchronized void init(ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+
         contextProcessors = new ContextProcessors(processingEnv, logger);
         endPointResolver = new EndPointResolver(logger, utils);
     }

@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import javax.annotation.Generated;
+import javax.annotation.processing.ProcessingEnvironment;
 
 import com.google.auto.service.AutoService;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
@@ -44,7 +45,9 @@ public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMe
     private MethodResolver methodResolver;
 
     @Override
-    public void init() {
+    public synchronized void init(ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+
         contextProcessors = new ContextProcessors(processingEnv, logger);
         endPointResolver = new EndPointResolver(logger, utils);
         methodResolver = new MethodResolver();

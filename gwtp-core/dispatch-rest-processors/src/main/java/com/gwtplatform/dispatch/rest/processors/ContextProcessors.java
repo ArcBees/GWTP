@@ -22,6 +22,7 @@ import java.util.ServiceLoader;
 
 import javax.annotation.processing.ProcessingEnvironment;
 
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
@@ -29,6 +30,17 @@ import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 
 public class ContextProcessors {
     private static class Loaders {
+        private static final Function<ServiceLoader<? extends ContextProcessor<?, ?>>,
+                Iterable<? extends ContextProcessor<?, ?>>> ALL_PROCESSORS_FUNCTION =
+                new Function<ServiceLoader<? extends ContextProcessor<?, ?>>,
+                        Iterable<? extends ContextProcessor<?, ?>>>() {
+                    @Override
+                    public Iterable<? extends ContextProcessor<?, ?>> apply(
+                            ServiceLoader<? extends ContextProcessor<?, ?>> processors) {
+                        return processors;
+                    }
+                };
+
         private static Loaders instance;
 
         private final Map<Class<?>, ServiceLoader<? extends ContextProcessor<?, ?>>> serviceLoaders;
@@ -54,6 +66,10 @@ public class ContextProcessors {
 
             return (ServiceLoader<C>) serviceLoaders.get(clazz);
         }
+
+        public synchronized Iterable<ContextProcessor<?, ?>> getAll() {
+            return FluentIterable.from(serviceLoaders.values()).transformAndConcat(ALL_PROCESSORS_FUNCTION);
+        }
     }
 
     private final ProcessingEnvironment processingEnv;
@@ -66,6 +82,10 @@ public class ContextProcessors {
         this.processingEnv = processingEnv;
         this.logger = logger;
         this.loaders = Loaders.get();
+    }
+
+    public Iterable<ContextProcessor<?, ?>> getAllProcessors() {
+        return loaders.getAll();
     }
 
     public <P extends ContextProcessor<I, ?>, I> P getProcessor(Class<P> clazz, final I input) {
@@ -104,7 +124,7 @@ public class ContextProcessors {
         return processor.canProcess(input);
     }
 
-    private synchronized  <P extends ContextProcessor<?, ?>> void ensureInitialized(P processor) {
+    private synchronized <P extends ContextProcessor<?, ?>> void ensureInitialized(P processor) {
         if (!processor.isInitialized()) {
             processor.init(processingEnv);
         }

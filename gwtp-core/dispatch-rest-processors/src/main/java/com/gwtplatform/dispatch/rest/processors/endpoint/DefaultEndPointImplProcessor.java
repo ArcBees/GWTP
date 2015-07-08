@@ -18,15 +18,23 @@ package com.gwtplatform.dispatch.rest.processors.endpoint;
 
 import java.util.List;
 
+import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.util.Elements;
 
 import com.google.auto.service.AutoService;
+import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
+import com.gwtplatform.dispatch.rest.processors.ContextProcessors;
 import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
+import com.gwtplatform.dispatch.rest.processors.definitions.HttpVariableDefinition;
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
 import com.gwtplatform.dispatch.rest.processors.definitions.VariableDefinition;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodContext;
+import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
+import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext.IO;
+import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessor;
 
+import static com.google.common.collect.Iterables.isEmpty;
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.endPointName;
 
 @AutoService(EndPointImplProcessor.class)
@@ -34,10 +42,14 @@ public class DefaultEndPointImplProcessor extends AbstractContextProcessor<EndPo
         implements EndPointImplProcessor {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm";
 
+    private ContextProcessors contextProcessors;
     private Elements elements;
 
     @Override
-    protected void init() {
+    public synchronized void init(ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+
+        contextProcessors = new ContextProcessors(processingEnv, logger);
         elements = processingEnv.getElementUtils();
     }
 
@@ -51,6 +63,8 @@ public class DefaultEndPointImplProcessor extends AbstractContextProcessor<EndPo
         logger.debug("Generating end-point implementation for `%s`.", context);
 
         EndPointImplDefinition definition = processImplDefinition(context);
+
+        generateSerializers(definition);
 
         outputter.withTemplateFile(TEMPLATE)
                 .withParam("endPoint", definition.getEndPoint())
@@ -67,5 +81,29 @@ public class DefaultEndPointImplProcessor extends AbstractContextProcessor<EndPo
         List<VariableDefinition> fields = context.getMethodDefinition().getParameters();
 
         return new EndPointImplDefinition(impl, fields, endPoint);
+    }
+
+    private void generateSerializers(EndPointImplDefinition definition) {
+        EndPointDefinition endPoint = definition.getEndPoint();
+        Optional<HttpVariableDefinition> body = endPoint.getBody();
+
+        if (body.isPresent()) {
+            processSerialization(new SerializationContext(body.get().getType(), endPoint.getConsumes(), IO.READ));
+        }
+
+        processSerialization(new SerializationContext(endPoint.getResult(), endPoint.getProduces(), IO.WRITE));
+    }
+
+    private void processSerialization(SerializationContext context) {
+        Iterable<SerializationProcessor> processors =
+                contextProcessors.getProcessors(SerializationProcessor.class, context);
+
+        for (SerializationProcessor processor : processors) {
+            processor.process(context);
+        }
+
+        if (isEmpty(processors)) {
+            logger.mandatoryWarning("No serialization policy found for context `%s`.", context);
+        }
     }
 }

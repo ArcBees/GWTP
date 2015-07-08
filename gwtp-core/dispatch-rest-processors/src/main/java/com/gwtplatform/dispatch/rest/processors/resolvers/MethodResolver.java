@@ -56,8 +56,7 @@ public class MethodResolver {
     }
 
     private VariableDefinition processParameter(VariableElement element) {
-        DeclaredType type = asDeclared(element.asType());
-        TypeDefinition typeDefinition = new TypeDefinition(type);
+        TypeDefinition typeDefinition = new TypeDefinition(element.asType());
         String name = element.getSimpleName().toString();
 
         return new VariableDefinition(typeDefinition, name);

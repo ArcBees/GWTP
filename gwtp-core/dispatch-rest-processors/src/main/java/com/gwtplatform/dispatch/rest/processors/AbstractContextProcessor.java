@@ -38,12 +38,7 @@ public abstract class AbstractContextProcessor<I, O> implements ContextProcessor
         this.utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
         this.outputter = new Outputter(logger, new TypeDefinition(getClass()), processingEnv.getFiler());
 
-        init();
-
         this.initialized = true;
-    }
-
-    protected void init() {
     }
 
     @Override

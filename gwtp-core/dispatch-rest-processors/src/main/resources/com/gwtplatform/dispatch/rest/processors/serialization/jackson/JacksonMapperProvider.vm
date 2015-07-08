@@ -1,0 +1,32 @@
+package $impl.packageName;
+
+import javax.annotation.Generated;
+import javax.inject.Inject;
+import javax.inject.Provider;
+
+import com.github.nmorel.gwtjackson.client.ObjectMapper;
+import com.google.gwt.core.client.GWT;
+
+#printImports($imports)
+
+@Generated("$processor.qualifiedName")
+public class $impl.simpleName extends AbstractJacksonMapperProvider {
+    ${impl.simpleName}() {
+#foreach ($mapper in $mappers)
+        registerProvider(
+                "$mapper.mapped.qualifiedParameterizedName",
+                new Provider<ObjectMapper<?>>() {
+                    private ObjectMapper<?> mapper;
+
+                    @Override
+                    public ObjectMapper<?> get() {
+                        if (mapper == null){
+                            mapper = (ObjectMapper<?>) GWT.create(${mapper.impl.simpleName}.class);
+                        }
+
+                        return mapper;
+                    }
+                });
+#end
+    }
+}

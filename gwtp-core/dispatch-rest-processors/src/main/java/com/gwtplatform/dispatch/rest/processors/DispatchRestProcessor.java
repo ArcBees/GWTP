@@ -56,21 +56,22 @@ public class DispatchRestProcessor extends AbstractProcessor {
 
     private Logger logger;
     private ServiceLoader<? extends ContextProcessingStep<?, ?>> processingStepsLoader;
+    private ContextProcessors contextProcessors;
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         return delegate.getSupportedAnnotationTypes();
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
-        processingStepsLoader =
-                ServiceLoader.<ContextProcessingStep<?, ?>>load((Class) ContextProcessingStep.class,
-                        getClass().getClassLoader());
+        processingStepsLoader = ServiceLoader.<ContextProcessingStep<?, ?>>load(
+                (Class) ContextProcessingStep.class, getClass().getClassLoader());
+        contextProcessors = new ContextProcessors(processingEnv, logger);
 
         delegate.init(processingEnv);
     }
@@ -106,8 +107,8 @@ public class DispatchRestProcessor extends AbstractProcessor {
     }
 
     private void processLastRound() {
-        for (ContextProcessingStep<?, ?> processingStep : processingStepsLoader) {
-            processingStep.processLast();
+        for (ContextProcessor<?, ?> processor : contextProcessors.getAllProcessors()) {
+            processor.processLast();
         }
     }
 }

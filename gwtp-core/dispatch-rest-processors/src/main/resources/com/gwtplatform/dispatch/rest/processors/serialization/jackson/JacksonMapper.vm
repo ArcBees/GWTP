@@ -1,0 +1,11 @@
+package $impl.packageName;
+
+import javax.annotation.Generated;
+
+import com.github.nmorel.gwtjackson.client.ObjectMapper;
+
+#printImports($imports)
+
+@Generated("$processor.qualifiedName")
+public interface $impl.simpleName extends ObjectMapper<$mapped.parameterizedName> {
+}

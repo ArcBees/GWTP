@@ -38,6 +38,7 @@ import com.google.common.collect.Ordering;
 import com.gwtplatform.dispatch.rest.processors.UnableToProcessException;
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
+import com.gwtplatform.dispatch.rest.processors.utils.Primitives;
 
 import static com.google.common.base.Predicates.containsPattern;
 import static com.google.common.base.Predicates.not;
@@ -77,33 +78,41 @@ public class Outputter {
     }
 
     void writeSource(OutputBuilder builder) {
-        TypeDefinition typeDefinition = builder.getTypeDefinition().get();
-        JavaFileObject classFile = createSourceFile(typeDefinition);
+        JavaFileObject classFile = prepareSource(builder);
 
         try (Writer writer = classFile.openWriter()) {
             merge(builder, writer);
         } catch (IOException e) {
-            logger.error().throwable(e).log("Can not write `%s`.", typeDefinition.getQualifiedName());
+            logger.error().throwable(e).log("Can not write `%s`.", builder.getErrorLogParameter());
             throw new UnableToProcessException();
         }
     }
 
-    private JavaFileObject createSourceFile(TypeDefinition typeDefinition) {
+    private JavaFileObject prepareSource(OutputBuilder builder) {
+        Optional<JavaFileObject> javaFile = builder.getJavaFile();
+        if (javaFile.isPresent()) {
+            return javaFile.get();
+        } else {
+            return prepareSource(builder.getType().get());
+        }
+    }
+
+    public JavaFileObject prepareSource(TypeDefinition type) {
         try {
-            return filer.createSourceFile(typeDefinition.getQualifiedName());
+            return filer.createSourceFile(type.getQualifiedName());
         } catch (IOException e) {
-            logger.error().throwable(e).log("Can not create source file `%s`.", typeDefinition.getQualifiedName());
+            logger.error().throwable(e).log("Can not create source file `%s`.", type.getQualifiedName());
             throw new UnableToProcessException();
         }
     }
 
     private void merge(OutputBuilder builder, Writer writer) throws IOException {
         VelocityContext context = builder.getContext();
-        Optional<TypeDefinition> typeDefinition = builder.getTypeDefinition();
-        Collection<String> imports = cleanupImports(builder.getImports(), typeDefinition);
+        Optional<TypeDefinition> type = builder.getType();
+        Collection<String> imports = cleanupImports(builder.getImports(), type);
 
-        if (typeDefinition.isPresent()) {
-            context.put("impl", typeDefinition.get());
+        if (type.isPresent()) {
+            context.put("impl", type.get());
         }
 
         context.put("processor", builder.getProcessorDefinition());
@@ -113,13 +122,14 @@ public class Outputter {
                 .merge(context, writer);
     }
 
-    private Collection<String> cleanupImports(Collection<String> imports, Optional<TypeDefinition> typeDefinition) {
+    private Collection<String> cleanupImports(Collection<String> imports, Optional<TypeDefinition> type) {
         List<Predicate<CharSequence>> predicates = new ArrayList<>();
         predicates.add(Predicates.<CharSequence>isNull());
+        predicates.add(Primitives.IS_PRIMITIVE_PREDICATE);
         predicates.add(containsPattern("^java\\.lang\\.[^.]+$"));
 
-        if (typeDefinition.isPresent()) {
-            String packageName = typeDefinition.get().getPackageName();
+        if (type.isPresent()) {
+            String packageName = type.get().getPackageName();
             predicates.add(containsPattern("^" + packageName.replace(".", "\\.") + "\\.[^.]+$"));
         }
 
