@@ -22,7 +22,6 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.type.DeclaredType;
-import javax.lang.model.util.Elements;
 
 import com.google.auto.service.AutoService;
 import com.google.common.base.Function;
@@ -47,15 +46,13 @@ public class RootResourceProcessor extends AbstractContextProcessor<Element, Res
         implements ResourceProcessor {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/resource/RootResource.vm";
 
-    private Elements elements;
     private ContextProcessors contextProcessors;
     private EndPointResolver endPointResolver;
 
     @Override
     protected void init() {
-        elements = processingEnv.getElementUtils();
         contextProcessors = new ContextProcessors(processingEnv, logger);
-        endPointResolver = new EndPointResolver(logger, processingEnv.getTypeUtils(), elements);
+        endPointResolver = new EndPointResolver(logger, utils);
     }
 
     @Override
@@ -95,7 +92,7 @@ public class RootResourceProcessor extends AbstractContextProcessor<Element, Res
 
     private List<EndPointMethodDefinition> processMethods(final TypeDefinition impl, final EndPointDefinition endPoint,
             DeclaredType type) {
-        List<ExecutableElement> methodElements = methodsIn(elements.getAllMembers(asTypeElement(type)));
+        List<ExecutableElement> methodElements = methodsIn(utils.getAllMembers(asTypeElement(type), Object.class));
 
         return FluentIterable.from(methodElements)
                 .transform(new Function<ExecutableElement, EndPointMethodDefinition>() {

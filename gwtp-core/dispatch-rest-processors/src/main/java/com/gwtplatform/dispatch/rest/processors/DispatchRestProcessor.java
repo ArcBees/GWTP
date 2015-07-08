@@ -26,7 +26,6 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedOptions;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
-import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
 import com.google.auto.common.BasicAnnotationProcessor;
@@ -56,8 +55,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
     };
 
     private Logger logger;
-    @SuppressWarnings("rawtypes")
-    private ServiceLoader<? extends ContextProcessingStep<? extends Element, ?>> processingStepsLoader;
+    private ServiceLoader<? extends ContextProcessingStep<?, ?>> processingStepsLoader;
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
@@ -70,8 +68,9 @@ public class DispatchRestProcessor extends AbstractProcessor {
         super.init(processingEnv);
 
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
-        processingStepsLoader = (ServiceLoader<? extends ContextProcessingStep<? extends Element, ?>>)
-                ServiceLoader.load(ContextProcessingStep.class, getClass().getClassLoader());
+        processingStepsLoader =
+                ServiceLoader.<ContextProcessingStep<?, ?>>load((Class) ContextProcessingStep.class,
+                        getClass().getClassLoader());
 
         delegate.init(processingEnv);
     }

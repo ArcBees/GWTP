@@ -25,14 +25,13 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
-import javax.lang.model.util.Elements;
-import javax.lang.model.util.Types;
 
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
 import com.gwtplatform.dispatch.rest.processors.definitions.HttpVariableDefinition;
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
+import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
@@ -49,7 +48,7 @@ public class EndPointResolver {
     private static final String FORM_AND_BODY_PARAM = "Method `%s` has both a @FormParam and a body parameter. "
             + "Specify one or the other.";
     private static final String GET_WITH_BODY = "End-point method annotated with @GET or @HEAD contains illegal "
-            + "parameters. Verify that `%s#%s` contains no body or @FormParam parameters.";
+            + "parameters. Verify that `%s` contains no body or @FormParam parameters.";
     private static final String BAD_REST_ACTION = "Method `%s` returns a RestAction<> without a type argument.";
 
     private final Logger logger;
@@ -58,11 +57,10 @@ public class EndPointResolver {
 
     public EndPointResolver(
             Logger logger,
-            Types types,
-            Elements elements) {
+            Utils utils) {
         this.logger = logger;
         this.httpVerbResolver = new HttpVerbResolver(logger);
-        this.httpVariableResolver = new HttpVariableResolver(logger, types, elements);
+        this.httpVariableResolver = new HttpVariableResolver(logger, utils);
     }
 
     public boolean canResolve(ExecutableElement element, EndPointDefinition parent) {
@@ -129,7 +127,7 @@ public class EndPointResolver {
         }
 
         HttpVerb verb = httpVerbResolver.resolve(element);
-        if (verb == HttpVerb.GET || verb == HttpVerb.HEAD) {
+        if ((verb == HttpVerb.GET || verb == HttpVerb.HEAD) && (bodyCount != 0 || hasForms)) {
             logger.error().context(element).log(GET_WITH_BODY, methodName);
             valid = false;
         }

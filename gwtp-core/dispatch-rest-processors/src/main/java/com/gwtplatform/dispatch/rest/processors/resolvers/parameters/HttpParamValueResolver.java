@@ -24,14 +24,13 @@ import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
-import javax.lang.model.util.Elements;
-import javax.lang.model.util.Types;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
+import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 import static com.google.auto.common.MoreElements.getAnnotationMirror;
@@ -41,14 +40,12 @@ import static com.google.common.collect.Maps.filterKeys;
 public abstract class HttpParamValueResolver {
     private static ServiceLoader<HttpParamValueResolver> serviceLoader;
 
-    protected Types types;
-    protected Elements elements;
+    protected Utils utils;
     protected Logger logger;
 
     private boolean initialized;
 
-    public static Iterable<HttpParamValueResolver> getResolvers(final Logger logger, final Types types,
-            final Elements elements) {
+    public static Iterable<HttpParamValueResolver> getResolvers(final Logger logger, final Utils utils) {
         if (serviceLoader == null) {
             Class<HttpParamValueResolver> clazz = HttpParamValueResolver.class;
             serviceLoader = ServiceLoader.load(clazz, clazz.getClassLoader());
@@ -60,16 +57,15 @@ public abstract class HttpParamValueResolver {
                     @Override
                     public HttpParamValueResolver apply(HttpParamValueResolver resolver) {
                         if (!resolver.initialized) {
-                            resolver.init(types, elements, logger);
+                            resolver.init(utils, logger);
                         }
                         return resolver;
                     }
                 });
     }
 
-    private void init(Types types, Elements elements, Logger logger) {
-        this.types = types;
-        this.elements = elements;
+    private void init(Utils utils, Logger logger) {
+        this.utils = utils;
         this.logger = logger;
         this.initialized = true;
 

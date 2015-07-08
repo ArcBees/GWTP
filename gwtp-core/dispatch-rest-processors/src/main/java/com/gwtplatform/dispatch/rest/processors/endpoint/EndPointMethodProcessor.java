@@ -46,7 +46,7 @@ public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMe
     @Override
     public void init() {
         contextProcessors = new ContextProcessors(processingEnv, logger);
-        endPointResolver = new EndPointResolver(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils());
+        endPointResolver = new EndPointResolver(logger, utils);
         methodResolver = new MethodResolver();
     }
 

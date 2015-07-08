@@ -21,19 +21,22 @@ import javax.annotation.processing.ProcessingEnvironment;
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.outputter.Outputter;
+import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 
 public abstract class AbstractContextProcessor<I, O> implements ContextProcessor<I, O> {
     protected ProcessingEnvironment processingEnv;
-    protected Outputter outputter;
     protected Logger logger;
+    protected Utils utils;
+    protected Outputter outputter;
 
     private boolean initialized;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         this.processingEnv = processingEnv;
-        this.outputter = new Outputter(logger, new TypeDefinition(getClass()), processingEnv.getFiler());
         this.logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
+        this.utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
+        this.outputter = new Outputter(logger, new TypeDefinition(getClass()), processingEnv.getFiler());
 
         init();
 

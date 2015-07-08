@@ -31,7 +31,6 @@ import javax.ws.rs.core.Cookie;
 
 import com.google.auto.service.AutoService;
 import com.google.common.base.Optional;
-import com.gwtplatform.dispatch.rest.processors.utils.UnconstrainedTypes;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 import static com.google.auto.common.MoreTypes.asTypeElement;
@@ -54,13 +53,6 @@ public class CookieParamValueResolver extends HttpParamValueResolver {
                     return resolver.isValidCookieType(type);
                 }
             };
-
-    private UnconstrainedTypes unconstrainedTypes;
-
-    @Override
-    protected void init() {
-        unconstrainedTypes = new UnconstrainedTypes(types, elements);
-    }
 
     @Override
     public Class<CookieParam> getAssociatedClass() {
@@ -96,7 +88,7 @@ public class CookieParamValueResolver extends HttpParamValueResolver {
 
     private boolean isBoxed(DeclaredType type) {
         try {
-            PrimitiveType primitiveType = types.unboxedType(type);
+            PrimitiveType primitiveType = utils.types.unboxedType(type);
             return primitiveType != null;
         } catch (IllegalArgumentException e) {
             return false;
@@ -104,10 +96,10 @@ public class CookieParamValueResolver extends HttpParamValueResolver {
     }
 
     private boolean isCookieCollection(DeclaredType type) {
-        TypeMirror collectionType = unconstrainedTypes.create(Collection.class);
+        TypeMirror collectionType = utils.createWithWildcard(Collection.class);
         Optional<TypeMirror> typeArg = extractCollectionTypeArg(type);
 
-        return types.isAssignable(type, collectionType)
+        return utils.types.isAssignable(type, collectionType)
                 && typeArg.isPresent()
                 && isType(typeArg.get())
                 && asTypeElement(typeArg.get()).getQualifiedName().contentEquals(Cookie.class.getCanonicalName());

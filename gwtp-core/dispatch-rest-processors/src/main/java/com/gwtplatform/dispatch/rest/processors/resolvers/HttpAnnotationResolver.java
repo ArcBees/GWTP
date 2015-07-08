@@ -17,12 +17,11 @@
 package com.gwtplatform.dispatch.rest.processors.resolvers;
 
 import javax.lang.model.element.VariableElement;
-import javax.lang.model.util.Elements;
-import javax.lang.model.util.Types;
 
 import com.gwtplatform.dispatch.rest.processors.definitions.HttpAnnotationDefinition;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.resolvers.parameters.HttpParamValueResolver;
+import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.parentName;
 
@@ -35,10 +34,9 @@ public class HttpAnnotationResolver {
 
     public HttpAnnotationResolver(
             Logger logger,
-            Types types,
-            Elements elements) {
+            Utils utils) {
         this.logger = logger;
-        this.resolvers = HttpParamValueResolver.getResolvers(logger, types, elements);
+        this.resolvers = HttpParamValueResolver.getResolvers(logger, utils);
     }
 
     public boolean canResolve(VariableElement element) {
