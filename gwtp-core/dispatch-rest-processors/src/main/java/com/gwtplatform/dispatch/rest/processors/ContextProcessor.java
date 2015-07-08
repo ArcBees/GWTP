@@ -40,4 +40,6 @@ public interface ContextProcessor<I, O> {
     boolean canProcess(I context);
 
     O process(I context);
+
+    void processLast();
 }

@@ -84,7 +84,7 @@ public class ContextProcessors {
     }
 
     public <P extends ContextProcessor<I, ?>, I> Iterable<P> getProcessors(Class<P> clazz, final I input) {
-        return FluentIterable.from(loaders.get(clazz))
+        return FluentIterable.from(getProcessors(clazz))
                 .filter(new Predicate<P>() {
                     @Override
                     public boolean apply(P processor) {
@@ -94,11 +94,19 @@ public class ContextProcessors {
                 .toSortedList(ContextProcessor.COMPARATOR);
     }
 
-    private synchronized <P extends ContextProcessor<I, ?>, I> boolean canProcess(P processor, I input) {
+    public <P extends ContextProcessor<?, ?>> Iterable<P> getProcessors(Class<P> clazz) {
+        return loaders.get(clazz);
+    }
+
+    private <P extends ContextProcessor<I, ?>, I> boolean canProcess(P processor, I input) {
+        ensureInitialized(processor);
+
+        return processor.canProcess(input);
+    }
+
+    private synchronized  <P extends ContextProcessor<?, ?>> void ensureInitialized(P processor) {
         if (!processor.isInitialized()) {
             processor.init(processingEnv);
         }
-
-        return processor.canProcess(input);
     }
 }

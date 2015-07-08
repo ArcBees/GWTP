@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
+import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
 
 import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
@@ -31,47 +32,30 @@ import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 
-public class ContextProcessingStep<P extends ContextProcessor<Element, O>, O> implements ProcessingStep {
-    private static final String UNABLE_TO_PROCESS_EXCEPTION = "Unable to process Rest-Dispatch classes. See previous "
-            + "log entries for details or compile with -A%s for additional details.";
-    private static final String UNRESOLVABLE_EXCEPTION =
-            "Unresolvable exception. Compile with -A%s for additional details.";
+public abstract class ContextProcessingStep<P extends ContextProcessor<Element, O>, O> implements ProcessingStep {
+    private Logger logger;
+    private ContextProcessors contextProcessors;
+    private Collection<O> outputs;
 
-    private final Logger logger;
-    private final ContextProcessors contextProcessors;
-    private final Class<? extends Annotation> annotationClass;
-    private final Class<P> processorClass;
-    private final Collection<O> outputs;
-
-    public ContextProcessingStep(
-            Logger logger,
-            ContextProcessors contextProcessors,
-            Class<? extends Annotation> annotationClass,
-            Class<P> processorClass) {
+    public synchronized void init(Logger logger, ProcessingEnvironment processingEnvironment) {
         this.logger = logger;
-        this.contextProcessors = contextProcessors;
-        this.annotationClass = annotationClass;
-        this.processorClass = processorClass;
+        this.contextProcessors = new ContextProcessors(processingEnvironment, logger);
         this.outputs = Collections.synchronizedCollection(new ArrayList<O>());
     }
+
+    protected abstract Class<P> processorClass();
+
+    protected abstract Class<? extends Annotation> annotation();
 
     @SuppressWarnings("unchecked")
     @Override
     public Set<? extends Class<? extends Annotation>> annotations() {
-        return Sets.newHashSet(annotationClass);
+        return Sets.newHashSet(annotation());
     }
 
     @Override
     public void process(SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
-        Set<Element> elements = elementsByAnnotation.get(annotationClass);
-
-        try {
-            process(elements);
-        } catch (UnableToProcessException e) {
-            logger.error(UNABLE_TO_PROCESS_EXCEPTION, Logger.DEBUG_OPTION);
-        } catch (Exception e) {
-            logger.error().throwable(e).log(UNRESOLVABLE_EXCEPTION, Logger.DEBUG_OPTION);
-        }
+        process(elementsByAnnotation.get(annotation()));
     }
 
     private void process(Set<Element> elements) {
@@ -82,7 +66,7 @@ public class ContextProcessingStep<P extends ContextProcessor<Element, O>, O> im
     }
 
     private void process(Element element) {
-        Optional<P> processor = contextProcessors.getOptionalProcessor(processorClass, element);
+        Optional<P> processor = contextProcessors.getOptionalProcessor(processorClass(), element);
 
         if (processor.isPresent()) {
             O output = process(element, processor.get());
@@ -95,7 +79,17 @@ public class ContextProcessingStep<P extends ContextProcessor<Element, O>, O> im
         return processor.process(element);
     }
 
+    public void processLast() {
+        for (P processor : contextProcessors.getProcessors(processorClass())) {
+            processor.processLast();
+        }
+    }
+
     public Collection<O> getOutputs() {
         return ImmutableList.copyOf(outputs);
+    }
+
+    protected Logger getLogger() {
+        return logger;
     }
 }

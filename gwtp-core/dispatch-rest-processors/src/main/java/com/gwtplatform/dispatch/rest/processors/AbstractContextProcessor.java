@@ -30,19 +30,21 @@ public abstract class AbstractContextProcessor<I, O> implements ContextProcessor
     private boolean initialized;
 
     @Override
-    public final void init(ProcessingEnvironment processingEnv) {
-        if (!initialized) {
-            this.processingEnv = processingEnv;
-            this.outputter = new Outputter(logger, new TypeDefinition(getClass()), processingEnv.getFiler());
-            this.logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
+    public void init(ProcessingEnvironment processingEnv) {
+        this.processingEnv = processingEnv;
+        this.outputter = new Outputter(logger, new TypeDefinition(getClass()), processingEnv.getFiler());
+        this.logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
 
-            init();
+        init();
 
-            this.initialized = true;
-        }
+        this.initialized = true;
     }
 
     protected void init() {
+    }
+
+    @Override
+    public void processLast() {
     }
 
     @Override

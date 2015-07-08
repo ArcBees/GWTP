@@ -16,16 +16,22 @@
 
 package com.gwtplatform.dispatch.rest.processors.resource;
 
+import java.lang.annotation.Annotation;
+
 import javax.ws.rs.Path;
 
+import com.google.auto.service.AutoService;
 import com.gwtplatform.dispatch.rest.processors.ContextProcessingStep;
-import com.gwtplatform.dispatch.rest.processors.ContextProcessors;
-import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 
+@AutoService(ContextProcessingStep.class)
 public class ResourceProcessingStep extends ContextProcessingStep<ResourceProcessor, ResourceDefinition> {
-    public ResourceProcessingStep(
-            Logger logger,
-            ContextProcessors contextProcessors) {
-        super(logger, contextProcessors, Path.class, ResourceProcessor.class);
+    @Override
+    protected Class<ResourceProcessor> processorClass() {
+        return ResourceProcessor.class;
+    }
+
+    @Override
+    protected Class<? extends Annotation> annotation() {
+        return Path.class;
     }
 }
