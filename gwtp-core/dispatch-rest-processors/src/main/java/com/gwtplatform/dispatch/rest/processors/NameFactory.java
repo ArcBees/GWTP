@@ -16,10 +16,13 @@
 
 package com.gwtplatform.dispatch.rest.processors;
 
+import java.util.List;
+
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import javax.lang.model.util.Elements;
 import javax.lang.model.util.SimpleElementVisitor6;
 
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
@@ -40,19 +43,21 @@ public class NameFactory {
      * name clashes. This function will prefix the requested name with the parent name and the method index to ensure
      * uniqueness.
      */
-    public static TypeDefinition endPointName(TypeDefinition parent, ExecutableElement element) {
+    public static TypeDefinition endPointName(Elements elements, TypeDefinition parent, ExecutableElement method) {
         String packageName = parent.getPackageName();
         String parentName = parent.getSimpleName();
 
-        Name methodName = element.getSimpleName();
-        int methodIndex = indexInParent(element);
+        Name methodName = method.getSimpleName();
+        int methodIndex = indexInParent(elements, method);
         String className = String.format("%s_%d_%s", parentName, methodIndex, methodName);
 
         return new TypeDefinition(packageName, className);
     }
 
-    private static int indexInParent(ExecutableElement element) {
-        return methodsIn(element.getEnclosingElement().getEnclosedElements()).indexOf(element);
+    private static int indexInParent(Elements elements, ExecutableElement method) {
+        TypeElement type = asType(method.getEnclosingElement());
+        List<ExecutableElement> methods = methodsIn(elements.getAllMembers(type));
+        return methods.indexOf(method);
     }
 
     public static String parentName(VariableElement element) {

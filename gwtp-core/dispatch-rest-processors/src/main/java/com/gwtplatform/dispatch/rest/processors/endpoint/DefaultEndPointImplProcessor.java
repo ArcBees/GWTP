@@ -18,18 +18,28 @@ package com.gwtplatform.dispatch.rest.processors.endpoint;
 
 import java.util.List;
 
+import javax.lang.model.util.Elements;
+
 import com.google.auto.service.AutoService;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
-import com.gwtplatform.dispatch.rest.processors.NameFactory;
 import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
 import com.gwtplatform.dispatch.rest.processors.definitions.VariableDefinition;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodContext;
 
+import static com.gwtplatform.dispatch.rest.processors.NameFactory.endPointName;
+
 @AutoService(EndPointImplProcessor.class)
 public class DefaultEndPointImplProcessor extends AbstractContextProcessor<EndPointImplContext, EndPointImplDefinition>
         implements EndPointImplProcessor {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm";
+
+    private Elements elements;
+
+    @Override
+    protected void init() {
+        elements = processingEnv.getElementUtils();
+    }
 
     @Override
     public boolean canProcess(EndPointImplContext context) {
@@ -52,7 +62,7 @@ public class DefaultEndPointImplProcessor extends AbstractContextProcessor<EndPo
 
     private EndPointImplDefinition processImplDefinition(EndPointImplContext context) {
         ResourceMethodContext methodContext = context.getResourceMethodContext();
-        TypeDefinition impl = NameFactory.endPointName(methodContext.getParent(), methodContext.getElement());
+        TypeDefinition impl = endPointName(elements, methodContext.getParent(), methodContext.getElement());
         EndPointDefinition endPoint = context.getEndPointDefinition();
         List<VariableDefinition> fields = context.getMethodDefinition().getParameters();
 
