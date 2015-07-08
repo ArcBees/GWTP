@@ -1,5 +1,3 @@
-#* @vtlvariable name="methods" type="java.util.List<com.gwtplatform.dispatch.rest.processors.endpoint.EndPointMethodDefinition>" *#
-#* @vtlvariable name="resource" type="com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition" *#
 package $impl.packageName;
 
 import com.gwtplatform.dispatch.rest.client.core.StaticParametersFactory;
@@ -20,6 +18,7 @@ public class $impl.parameterizedName implements $resource.parameterizedName {
         this.defaultDateFormat = StaticParametersFactory.getDefaultDateFormat();
         this.httpParameterFactory = StaticParametersFactory.getHttpParameterFactory();
     }
+#foreach ($method in $methods)
 
-#foreach ($method in $methods)$method.codeSnippet.code#end
+$method.codeSnippet.code#end
 }

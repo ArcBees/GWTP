@@ -16,7 +16,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 public class $impl.parameterizedName extends AbstractRestAction<$endPoint.result.parameterizedName> {
     public ${impl.simpleName}(
             HttpParameterFactory httpParameterFactory,
-            String defaultDateFormat#appendParameterDefinitions($fields)) {
+            String defaultDateFormat#appendParameterDefinitions(3 $fields)) {
         super(httpParameterFactory, defaultDateFormat, HttpMethod.$endPoint.verb.name(), "$endPoint.path");
 
 #foreach($param in $endPoint.httpParameters)

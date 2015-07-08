@@ -3,6 +3,8 @@
 #if($foreach.hasNext), #end
 #end
 
+#macro(indent $tabCount)#set($spaceCount = $tabCount * 4)#foreach($i in [1..$spaceCount]) #end#end
+
 ## TODO: Use `new ContentType(...)`. For now it's easier to reparse because of the parameters map
 #macro(recreateContentType $contentType)
 ContentType.valueOf("$contentType")#end
@@ -11,12 +13,12 @@ ContentType.valueOf("$contentType")#end
 import $import;
 #end#end
 
-#macro(printParameterDefinitions $parameters)#foreach ($parameter in $parameters)
+#macro(printParameterDefinitions $tabs $parameters)#foreach ($parameter in $parameters)
 
-            $parameter.type.parameterizedName $parameter.name#commaIfNeeded()#end#end
+#indent($tabs)$parameter.type.parameterizedName $parameter.name#commaIfNeeded()#end#end
 
-#macro(appendParameterDefinitions $parameters)#foreach ($parameter in $parameters),
-            $parameter.type.parameterizedName $parameter.name#end#end
+#macro(appendParameterDefinitions $tabs $parameters)#foreach ($parameter in $parameters),
+#indent($tabs)$parameter.type.parameterizedName $parameter.name#end#end
 
-#macro(appendParameterNames $parameters)#foreach ($parameter in $parameters),
-            $parameter.name#end#end
+#macro(appendParameterNames $tabs $parameters)#foreach ($parameter in $parameters),
+#indent($tabs)$parameter.name#end#end
