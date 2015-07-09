@@ -1,0 +1,36 @@
+package $impl.packageName;
+
+import javax.annotation.Generated;
+
+import com.google.gwt.inject.client.AbstractGinModule;
+
+#printImports($imports)
+
+@Generated("$processor.qualifiedName")
+public class $impl.simpleName extends AbstractGinModule {
+    @Override
+    protected void configure() {
+#foreach ($binding in $bindings)
+#set($implementerMethod = 'bind')
+#if($binding.implemented.isPresent())
+#set($implemented = $binding.implemented.get())
+#set($implementerMethod = '        .to')
+#if($implemented.isParameterized())
+        bind(new TypeLiteral<$implemented.parameterizedName>() {})
+#else
+        bind(${implemented.simpleName}.class)
+#end
+#end
+#set($implementer = $binding.implementer)
+#if($implementer.isParameterized())
+        ${implementerMethod}(new TypeLiteral<$implementer.parameterizedName>() {})
+#else
+        ${implementerMethod}(${implementer.simpleName}.class)
+#end
+#if($binding.isEagerSingleton())
+                .asEagerSingleton()
+#elseif($binding.scope.isPresent())
+                .in(${binding.scope.get().simpleName}.class)#end;
+#end
+    }
+}

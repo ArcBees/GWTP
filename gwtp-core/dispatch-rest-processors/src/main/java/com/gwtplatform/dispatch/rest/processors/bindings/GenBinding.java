@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.annotations;
+package com.gwtplatform.dispatch.rest.processors.bindings;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -23,16 +23,16 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)
-public @interface RestImplementation {
-    final class OnlySuper {
+public @interface GenBinding {
+    final class Auto {
     }
 
     final class None {
     }
 
-    boolean singleton() default false;
+    String parentClass() default "com.gwtplatform.dispatch.rest.processors.bindings.GenBinding.Auto";
+
+    Class<?> scope() default None.class;
 
     boolean eagerSingleton() default false;
-
-    Class<?> parentClass() default OnlySuper.class;
 }

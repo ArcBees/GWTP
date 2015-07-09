@@ -28,6 +28,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
 
 import static com.google.auto.common.MoreElements.getPackage;
 import static com.google.auto.common.MoreTypes.asDeclared;
@@ -42,7 +43,7 @@ public class TypeDefinition implements HasImports {
         if (type.getKind().isPrimitive()) {
             packageName = "";
             simpleName = asPrimitiveType(type).toString();
-            typeArguments = new ArrayList<>();
+            typeArguments = ImmutableList.of();
         } else {
             DeclaredType declaredType = asDeclared(type);
             Element element = declaredType.asElement();
@@ -57,6 +58,33 @@ public class TypeDefinition implements HasImports {
                         }
                     })
                     .toList();
+        }
+    }
+
+    public TypeDefinition(String parameterizedQualifiedName) {
+        String qualifiedName = parameterizedQualifiedName;
+        Builder<TypeDefinition> argumentsBuilder = ImmutableList.builder();
+        int argumentsStart = parameterizedQualifiedName.indexOf("<");
+
+        if (argumentsStart != -1) {
+            int argumentsEnd = parameterizedQualifiedName.lastIndexOf(">");
+            qualifiedName = parameterizedQualifiedName.substring(0, argumentsStart);
+
+            String[] arguments = parameterizedQualifiedName.substring(argumentsStart + 1, argumentsEnd).split(",");
+            for (String argument : arguments) {
+                argumentsBuilder.add(new TypeDefinition(argument.trim()));
+            }
+        }
+        typeArguments = argumentsBuilder.build();
+
+        // primitives don't have packages
+        int lastDot = qualifiedName.lastIndexOf('.');
+        if (lastDot != -1) {
+            packageName = qualifiedName.substring(0, lastDot).trim();
+            simpleName = qualifiedName.substring(lastDot + 1).trim();
+        } else {
+            packageName = "";
+            simpleName = qualifiedName.trim();
         }
     }
 
@@ -102,6 +130,10 @@ public class TypeDefinition implements HasImports {
 
     public String getSimpleName() {
         return simpleName;
+    }
+
+    public boolean isParameterized() {
+        return !typeArguments.isEmpty();
     }
 
     public List<TypeDefinition> getTypeArguments() {

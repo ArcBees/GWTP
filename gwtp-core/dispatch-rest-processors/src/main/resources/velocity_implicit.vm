@@ -5,17 +5,19 @@
 
 #* @vtlvariable name="impl" type="com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition" *#
 #* @vtlvariable name="processor" type="com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition" *#
-#* @vtlvariable name="imports" type="java.util.List<java.lang.String>" *#
+#* @vtlvariable name="imports" type="java.util.Collection<java.lang.String>" *#
 
 #* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.definitions.MethodDefinition" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm" *#
 #* @vtlvariable name="endPointImpl" type="com.gwtplatform.dispatch.rest.processors.endpoint.EndPointImplDefinition" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm" *#
 
-#* @vtlvariable name="methods" type="java.util.List<com.gwtplatform.dispatch.rest.processors.endpoint.EndPointMethodDefinition>" file="com/gwtplatform/dispatch/rest/processors/resource/RootResource.vm" *#
+#* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.endpoint.EndPointMethodDefinition>" file="com/gwtplatform/dispatch/rest/processors/resource/RootResource.vm" *#
 #* @vtlvariable name="resource" type="com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition" file="com/gwtplatform/dispatch/rest/processors/resource/RootResource.vm" *#
 
 #* @vtlvariable name="endPoint" type="com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm" *#
-#* @vtlvariable name="fields" type="java.util.List<com.gwtplatform.dispatch.rest.processors.definitions.VariableDefinition>" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm" *#
+#* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.definitions.VariableDefinition>" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm" *#
 
-#* @vtlvariable name="mappers" type="java.util.List<com.gwtplatform.dispatch.rest.processors.serialization.jackson.MapperDefinition>" file="com/gwtplatform/dispatch/rest/processors/serialization/jackson/JacksonMapperProvider.vm" *#
+#* @vtlvariable name="mappers" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.serialization.jackson.MapperDefinition>" file="com/gwtplatform/dispatch/rest/processors/serialization/jackson/JacksonMapperProvider.vm" *#
 
 #* @vtlvariable name="mapped" type="com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition" file="com/gwtplatform/dispatch/rest/processors/serialization/jackson/JacksonMapper.vm" *#
+
+#* @vtlvariable name="bindings" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.bindings.gin.GinBinding>" file="com/gwtplatform/dispatch/rest/processors/bindings/gin/GinModule.vm" *#
