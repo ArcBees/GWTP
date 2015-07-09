@@ -56,7 +56,7 @@ public class GinModuleProcessor extends AbstractContextProcessor<Element, Void> 
     private final List<GinBinding> bindings;
 
     private TypeDefinition impl;
-    private JavaFileObject javaFile;
+    private JavaFileObject sourceFile;
     private boolean containsTypeLiteral;
 
     public GinModuleProcessor() {
@@ -68,7 +68,7 @@ public class GinModuleProcessor extends AbstractContextProcessor<Element, Void> 
         super.init(processingEnv);
 
         impl = new TypeDefinition(QUALIFIED_NAME);
-        javaFile = outputter.prepareSource(impl);
+        sourceFile = outputter.prepareSourceFile(impl);
     }
 
     @Override
@@ -109,7 +109,6 @@ public class GinModuleProcessor extends AbstractContextProcessor<Element, Void> 
     private TypeDefinition findImplemented(TypeElement type) {
         TypeMirror superclass = type.getSuperclass();
         if (superclass.getKind() != TypeKind.NONE && !isTypeOf(Object.class, superclass)) {
-            logger.debug(superclass.getKind().name());
             return new TypeDefinition(superclass);
         }
 
@@ -149,6 +148,6 @@ public class GinModuleProcessor extends AbstractContextProcessor<Element, Void> 
             outputBuilder = outputBuilder.withImport(TypeLiteral.class.getCanonicalName());
         }
 
-        outputBuilder.writeTo(impl, javaFile);
+        outputBuilder.writeTo(impl, sourceFile);
     }
 }

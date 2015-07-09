@@ -72,32 +72,30 @@ public class Outputter {
             merge(builder, writer);
             return writer.toString();
         } catch (IOException e) {
-            logger.error().throwable(e).log("Can not parse `%s`.", builder.getErrorLogParameter());
+            logger.error().throwable(e).log("Can not parse `%s`.", builder.getErrorLogParameter().get());
             throw new UnableToProcessException();
         }
     }
 
     void writeSource(OutputBuilder builder) {
-        JavaFileObject classFile = prepareSource(builder);
-
-        try (Writer writer = classFile.openWriter()) {
+        try (Writer writer = prepareSourceFile(builder).openWriter()) {
             merge(builder, writer);
         } catch (IOException e) {
-            logger.error().throwable(e).log("Can not write `%s`.", builder.getErrorLogParameter());
+            logger.error().throwable(e).log("Can not write `%s`.", builder.getErrorLogParameter().get());
             throw new UnableToProcessException();
         }
     }
 
-    private JavaFileObject prepareSource(OutputBuilder builder) {
-        Optional<JavaFileObject> javaFile = builder.getJavaFile();
-        if (javaFile.isPresent()) {
-            return javaFile.get();
+    private JavaFileObject prepareSourceFile(OutputBuilder builder) throws IOException {
+        Optional<JavaFileObject> sourceFile = builder.getSourceFile();
+        if (sourceFile.isPresent()) {
+            return sourceFile.get();
         } else {
-            return prepareSource(builder.getType().get());
+            return prepareSourceFile(builder.getType().get());
         }
     }
 
-    public JavaFileObject prepareSource(TypeDefinition type) {
+    public JavaFileObject prepareSourceFile(TypeDefinition type) {
         try {
             return filer.createSourceFile(type.getQualifiedName());
         } catch (IOException e) {
@@ -118,8 +116,7 @@ public class Outputter {
         context.put("processor", builder.getProcessorDefinition());
         context.put("imports", imports);
 
-        getEngine().getTemplate(builder.getTemplateFile(), ENCODING)
-                .merge(context, writer);
+        getEngine().mergeTemplate(builder.getTemplateFile(), ENCODING, context, writer);
     }
 
     private Collection<String> cleanupImports(Collection<String> imports, Optional<TypeDefinition> type) {

@@ -39,7 +39,7 @@ public class OutputBuilder {
     private final VelocityContext context;
     private final Collection<String> imports;
 
-    private Optional<JavaFileObject> javaFile;
+    private Optional<JavaFileObject> sourceFile;
     private Optional<TypeDefinition> type;
     private Optional<String> errorLogParameter;
 
@@ -52,7 +52,7 @@ public class OutputBuilder {
         this.templateFile = templateFile;
         this.context = new VelocityContext();
         this.imports = new HashSet<>();
-        this.javaFile = Optional.absent();
+        this.sourceFile = Optional.absent();
         this.type = Optional.absent();
         this.errorLogParameter = Optional.absent();
     }
@@ -98,18 +98,12 @@ public class OutputBuilder {
     }
 
     public void writeTo(TypeDefinition type) {
-        this.type = Optional.of(type);
-
-        if (!errorLogParameter.isPresent()) {
-            errorLogParameter = Optional.of(type.getQualifiedName());
-        }
-
-        outputter.writeSource(this);
+        writeTo(type, null);
     }
 
-    public void writeTo(TypeDefinition type, JavaFileObject javaFile) {
+    public void writeTo(TypeDefinition type, JavaFileObject sourceFile) {
         this.type = Optional.of(type);
-        this.javaFile = Optional.of(javaFile);
+        this.sourceFile = Optional.fromNullable(sourceFile);
 
         if (!errorLogParameter.isPresent()) {
             errorLogParameter = Optional.of(type.getQualifiedName());
@@ -138,8 +132,8 @@ public class OutputBuilder {
         return imports;
     }
 
-    Optional<JavaFileObject> getJavaFile() {
-        return javaFile;
+    Optional<JavaFileObject> getSourceFile() {
+        return sourceFile;
     }
 
     Optional<TypeDefinition> getType() {

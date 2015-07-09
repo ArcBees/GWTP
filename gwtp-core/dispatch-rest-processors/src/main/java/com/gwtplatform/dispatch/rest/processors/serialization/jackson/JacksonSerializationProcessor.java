@@ -47,7 +47,7 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
     private final Map<TypeDefinition, MapperDefinition> mappers;
     private final TypeDefinition impl;
 
-    private JavaFileObject javaFile;
+    private JavaFileObject sourceFile;
 
     public JacksonSerializationProcessor() {
         Class<JacksonMapperProvider> superClass = JacksonMapperProvider.class;
@@ -62,7 +62,10 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
         super.init(processingEnv);
 
         mapperProcessor.init(processingEnv);
-        javaFile = outputter.prepareSource(impl);
+        sourceFile = outputter.prepareSourceFile(impl);
+
+        // TODO: Find a way to use @GinBinding in the initial round
+        outputter.withTemplateFile(TEMPLATE).writeTo(impl, sourceFile);
     }
 
     @Override
@@ -100,6 +103,6 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
 
         outputter.withTemplateFile(TEMPLATE)
                 .withParam("mappers", mappers.values())
-                .writeTo(impl, javaFile);
+                .writeTo(impl, sourceFile);
     }
 }
