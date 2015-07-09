@@ -16,8 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.processors.serialization.jackson;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.inject.Singleton;
@@ -58,7 +58,7 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
 
     public JacksonSerializationProcessor() {
         this.mapperProcessor = new JacksonMapperProcessor();
-        this.mappers = new HashMap<>();
+        this.mappers = new TreeMap<>();
         this.parent = new TypeDefinition(JacksonMapperProvider.class);
         this.impl = new TypeDefinition(parent.getPackageName(), parent.getSimpleName() + "Impl");
     }
@@ -108,14 +108,19 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
     }
 
     private void duplicateIfBoxedOrPrimitive(MapperDefinition mapper) {
-        String name = mapper.getMapped().getQualifiedParameterizedName();
+        String name = mapper.getKey().getQualifiedParameterizedName();
         Optional<Primitives> primitive = findByPrimitive(name);
         Optional<Primitives> boxed = findByBoxed(name);
+        TypeDefinition newKey = null;
 
         if (primitive.isPresent()) {
-            mappers.put(new TypeDefinition(primitive.get().getBoxedClass()), mapper);
+            newKey = new TypeDefinition(primitive.get().getBoxedClass());
         } else if (boxed.isPresent()) {
-            mappers.put(new TypeDefinition("", boxed.get().getPrimitive()), mapper);
+            newKey = new TypeDefinition(boxed.get().getPrimitive());
+        }
+
+        if (newKey != null) {
+            mappers.put(newKey, new MapperDefinition(newKey, mapper.getMapped(), mapper.getImpl()));
         }
     }
 

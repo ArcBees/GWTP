@@ -24,14 +24,21 @@ import com.gwtplatform.dispatch.rest.processors.definitions.HasImports;
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
 
 public class MapperDefinition implements HasImports {
+    private final TypeDefinition key;
     private final TypeDefinition mapped;
     private final TypeDefinition impl;
 
     public MapperDefinition(
+            TypeDefinition key,
             TypeDefinition mapped,
             TypeDefinition impl) {
+        this.key = key;
         this.mapped = mapped;
         this.impl = impl;
+    }
+
+    public TypeDefinition getKey() {
+        return key;
     }
 
     public TypeDefinition getMapped() {

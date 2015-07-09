@@ -53,12 +53,13 @@ public class JacksonMapperProcessor extends AbstractContextProcessor<Serializati
     }
 
     private MapperDefinition processMapper(SerializationContext context) {
-        TypeDefinition mapped = ensureNotPrimitive(context.getType());
+        TypeDefinition type = context.getType();
+        TypeDefinition mapped = ensureNotPrimitive(type);
 
         String name = SANITIZE_NAME_PATTERN.matcher(mapped.getQualifiedParameterizedName()).replaceAll("_");
         name += NAME_SUFFIX;
 
-        return new MapperDefinition(mapped, new TypeDefinition(PACKAGE, name));
+        return new MapperDefinition(type, mapped, new TypeDefinition(PACKAGE, name));
     }
 
     private TypeDefinition ensureNotPrimitive(TypeDefinition type) {
