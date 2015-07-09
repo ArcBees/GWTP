@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.processors.resource;
 import java.util.List;
 
 import javax.annotation.processing.ProcessingEnvironment;
+import javax.inject.Singleton;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
@@ -30,6 +31,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.ContextProcessors;
+import com.gwtplatform.dispatch.rest.processors.bindings.BindingContext;
+import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessor;
 import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
 import com.gwtplatform.dispatch.rest.processors.endpoint.EndPointMethodDefinition;
@@ -40,6 +43,7 @@ import static javax.lang.model.util.ElementFilter.methodsIn;
 import static com.google.auto.common.MoreElements.asType;
 import static com.google.auto.common.MoreTypes.asDeclared;
 import static com.google.auto.common.MoreTypes.asTypeElement;
+import static com.google.common.collect.Iterables.isEmpty;
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.resourceName;
 
 @AutoService(ResourceProcessor.class)
@@ -80,6 +84,8 @@ public class RootResourceProcessor extends AbstractContextProcessor<Element, Res
                 .withParam("methods", resource.getMethods())
                 .writeTo(resource.getImpl());
 
+        processBinding(resource);
+
         return resource;
     }
 
@@ -114,5 +120,22 @@ public class RootResourceProcessor extends AbstractContextProcessor<Element, Res
         ResourceMethodProcessor processor = contextProcessors.getProcessor(ResourceMethodProcessor.class, context);
 
         return processor.process(context);
+    }
+
+    private void processBinding(ResourceDefinition resource) {
+        TypeDefinition impl = resource.getImpl();
+
+        BindingContext context = new BindingContext(impl);
+        context.setImplemented(resource.getResource());
+        context.setScope(Singleton.class);
+
+        Iterable<BindingsProcessor> processors = contextProcessors.getProcessors(BindingsProcessor.class, context);
+        for (BindingsProcessor processor : processors) {
+            processor.process(context);
+        }
+
+        if (isEmpty(processors)) {
+            logger.mandatoryWarning("No binding policy found for resource `%s`.", impl.getQualifiedName());
+        }
     }
 }

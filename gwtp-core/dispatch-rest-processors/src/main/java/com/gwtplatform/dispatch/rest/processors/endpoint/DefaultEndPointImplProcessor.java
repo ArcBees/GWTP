@@ -64,12 +64,12 @@ public class DefaultEndPointImplProcessor extends AbstractContextProcessor<EndPo
 
         EndPointImplDefinition definition = processImplDefinition(context);
 
-        generateSerializers(definition);
-
         outputter.withTemplateFile(TEMPLATE)
                 .withParam("endPoint", definition.getEndPoint())
                 .withParam("fields", definition.getFields())
                 .writeTo(definition.getImpl());
+
+        generateSerializers(definition);
 
         return definition;
     }

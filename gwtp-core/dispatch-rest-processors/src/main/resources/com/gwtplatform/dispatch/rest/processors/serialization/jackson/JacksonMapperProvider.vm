@@ -7,12 +7,9 @@ import javax.inject.Singleton;
 
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
 import com.google.gwt.core.client.GWT;
-import com.gwtplatform.dispatch.rest.processors.bindings.GenBinding;
 
 #printImports($imports)
 
-@GenBinding(parentClass = "com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider",
-        scope = Singleton.class)
 @Generated("$processor.qualifiedName")
 public class $impl.simpleName extends AbstractJacksonMapperProvider {
     ${impl.simpleName}() {

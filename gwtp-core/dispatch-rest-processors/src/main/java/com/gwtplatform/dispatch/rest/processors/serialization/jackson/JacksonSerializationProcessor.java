@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.processing.ProcessingEnvironment;
+import javax.inject.Singleton;
 import javax.tools.JavaFileObject;
 import javax.ws.rs.core.MediaType;
 
@@ -27,12 +28,16 @@ import com.google.auto.service.AutoService;
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
+import com.gwtplatform.dispatch.rest.processors.ContextProcessors;
+import com.gwtplatform.dispatch.rest.processors.bindings.BindingContext;
+import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessor;
 import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessor;
 import com.gwtplatform.dispatch.rest.processors.utils.Primitives;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 
+import static com.google.common.collect.Iterables.isEmpty;
 import static com.gwtplatform.dispatch.rest.processors.utils.Primitives.findByBoxed;
 import static com.gwtplatform.dispatch.rest.processors.utils.Primitives.findByPrimitive;
 
@@ -46,15 +51,16 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
     private final JacksonMapperProcessor mapperProcessor;
     private final Map<TypeDefinition, MapperDefinition> mappers;
     private final TypeDefinition impl;
+    private final TypeDefinition parent;
 
     private JavaFileObject sourceFile;
+    private ContextProcessors contextProcessors;
 
     public JacksonSerializationProcessor() {
-        Class<JacksonMapperProvider> superClass = JacksonMapperProvider.class;
-
         this.mapperProcessor = new JacksonMapperProcessor();
         this.mappers = new HashMap<>();
-        this.impl = new TypeDefinition(superClass.getPackage().getName(), superClass.getSimpleName() + "Impl");
+        this.parent = new TypeDefinition(JacksonMapperProvider.class);
+        this.impl = new TypeDefinition(parent.getPackageName(), parent.getSimpleName() + "Impl");
     }
 
     @Override
@@ -62,10 +68,26 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
         super.init(processingEnv);
 
         mapperProcessor.init(processingEnv);
+
+        contextProcessors = new ContextProcessors(processingEnv, logger);
         sourceFile = outputter.prepareSourceFile(impl);
 
-        // TODO: Find a way to use @GinBinding in the initial round
-        outputter.withTemplateFile(TEMPLATE).writeTo(impl, sourceFile);
+        processBinding();
+    }
+
+    private void processBinding() {
+        BindingContext context = new BindingContext(impl);
+        context.setImplemented(parent);
+        context.setScope(Singleton.class);
+
+        Iterable<BindingsProcessor> processors = contextProcessors.getProcessors(BindingsProcessor.class, context);
+        for (BindingsProcessor processor : processors) {
+            processor.process(context);
+        }
+
+        if (isEmpty(processors)) {
+            logger.mandatoryWarning("No binding policy found for serialization policy `%s`.", impl.getQualifiedName());
+        }
     }
 
     @Override

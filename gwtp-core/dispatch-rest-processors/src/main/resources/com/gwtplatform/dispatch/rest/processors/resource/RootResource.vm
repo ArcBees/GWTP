@@ -2,14 +2,13 @@ package $impl.packageName;
 
 import com.gwtplatform.dispatch.rest.client.core.StaticParametersFactory;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
-import com.gwtplatform.dispatch.rest.processors.bindings.GenBinding;
 
 import javax.annotation.Generated;
 import javax.inject.Singleton;
 
 #printImports($imports)
 
-@GenBinding(scope = Singleton.class)
+@Singleton
 @Generated("$processor.qualifiedName")
 public class $impl.parameterizedName implements $resource.parameterizedName {
     private final HttpParameterFactory httpParameterFactory;

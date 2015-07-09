@@ -84,7 +84,7 @@ public class ContextProcessors {
         this.loaders = Loaders.get();
     }
 
-    public Iterable<ContextProcessor<?, ?>> getAllProcessors() {
+    Iterable<ContextProcessor<?, ?>> getAllProcessors() {
         return loaders.getAll();
     }
 

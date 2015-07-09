@@ -16,9 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.processors.bindings;
 
-import javax.lang.model.element.Element;
-
 import com.gwtplatform.dispatch.rest.processors.ContextProcessor;
 
-public interface BindingsProcessor extends ContextProcessor<Element, Void> {
+public interface BindingsProcessor extends ContextProcessor<BindingContext, Void> {
 }

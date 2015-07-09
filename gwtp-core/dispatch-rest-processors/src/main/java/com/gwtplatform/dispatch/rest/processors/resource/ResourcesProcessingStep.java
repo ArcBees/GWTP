@@ -24,7 +24,9 @@ import com.google.auto.service.AutoService;
 import com.gwtplatform.dispatch.rest.processors.ContextProcessingStep;
 
 @AutoService(ContextProcessingStep.class)
-public class ResourceProcessingStep extends ContextProcessingStep<ResourceProcessor, ResourceDefinition> {
+public class ResourcesProcessingStep extends ContextProcessingStep<ResourceProcessor, ResourceDefinition> {
+    // TODO: Too much. Push back in DispatchRestProcessor and use extension points.
+
     @Override
     protected Class<ResourceProcessor> processorClass() {
         return ResourceProcessor.class;
