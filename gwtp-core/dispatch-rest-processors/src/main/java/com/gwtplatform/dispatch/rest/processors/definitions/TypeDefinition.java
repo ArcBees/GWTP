@@ -34,7 +34,7 @@ import static com.google.auto.common.MoreElements.getPackage;
 import static com.google.auto.common.MoreTypes.asDeclared;
 import static com.google.auto.common.MoreTypes.asPrimitiveType;
 
-public class TypeDefinition implements HasImports {
+public class TypeDefinition implements HasImports, Comparable<TypeDefinition> {
     private final String packageName;
     private final String simpleName;
     private final List<TypeDefinition> typeArguments;
@@ -176,6 +176,11 @@ public class TypeDefinition implements HasImports {
                 .transformAndConcat(EXTRACT_IMPORTS_FUNCTION)
                 .append(getQualifiedName())
                 .toSet();
+    }
+
+    @Override
+    public int compareTo(TypeDefinition o) {
+        return getQualifiedParameterizedName().compareTo(o == null ? "" : o.getQualifiedParameterizedName());
     }
 
     @Override

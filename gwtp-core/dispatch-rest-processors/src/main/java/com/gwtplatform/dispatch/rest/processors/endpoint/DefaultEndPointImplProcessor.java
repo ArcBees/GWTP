@@ -37,7 +37,7 @@ import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProce
 import static com.google.common.collect.Iterables.isEmpty;
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.endPointName;
 
-@AutoService(EndPointImplProcessor.class)
+@AutoService(EndPointImplProcessor.class /* TODO: Should not be a SPI */)
 public class DefaultEndPointImplProcessor extends AbstractContextProcessor<EndPointImplContext, EndPointImplDefinition>
         implements EndPointImplProcessor {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm";

@@ -16,7 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.processors;
 
-import java.util.ServiceLoader;
+import java.lang.annotation.Annotation;
+import java.util.Collections;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -26,17 +27,22 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedOptions;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+import javax.ws.rs.Path;
 
 import com.google.auto.common.BasicAnnotationProcessor;
 import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
 import com.google.auto.service.AutoService;
+import com.google.common.base.Optional;
+import com.google.common.collect.SetMultimap;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
+import com.gwtplatform.dispatch.rest.processors.resource.ResourceProcessor;
 
 @AutoService(Processor.class)
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 @SupportedOptions(Logger.DEBUG_OPTION)
-public class DispatchRestProcessor extends AbstractProcessor {
+public class DispatchRestProcessor extends AbstractProcessor implements ProcessingStep {
     private static final String UNABLE_TO_PROCESS_EXCEPTION = "Unable to process Rest-Dispatch classes. See previous "
             + "log entries for details or compile with -A%s for additional details.";
     private static final String UNRESOLVABLE_EXCEPTION =
@@ -50,18 +56,12 @@ public class DispatchRestProcessor extends AbstractProcessor {
     private final BasicAnnotationProcessor delegate = new BasicAnnotationProcessor() {
         @Override
         protected Iterable<? extends ProcessingStep> initSteps() {
-            return DispatchRestProcessor.this.initSteps();
+            return Collections.singletonList(DispatchRestProcessor.this);
         }
     };
 
     private Logger logger;
-    private ServiceLoader<? extends ContextProcessingStep<?, ?>> processingStepsLoader;
     private ContextProcessors contextProcessors;
-
-    @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        return delegate.getSupportedAnnotationTypes();
-    }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
@@ -69,25 +69,25 @@ public class DispatchRestProcessor extends AbstractProcessor {
         super.init(processingEnv);
 
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
-        processingStepsLoader = ServiceLoader.<ContextProcessingStep<?, ?>>load(
-                (Class) ContextProcessingStep.class, getClass().getClassLoader());
         contextProcessors = new ContextProcessors(processingEnv, logger);
 
         delegate.init(processingEnv);
     }
 
-    private Iterable<? extends ProcessingStep> initSteps() {
-        for (ContextProcessingStep<?, ?> processingStep : processingStepsLoader) {
-            processingStep.init(logger, processingEnv);
-        }
+    @Override
+    public Set<? extends Class<? extends Annotation>> annotations() {
+        return Collections.singleton(Path.class);
+    }
 
-        return processingStepsLoader;
+    @Override
+    public Set<String> getSupportedAnnotationTypes() {
+        return delegate.getSupportedAnnotationTypes();
     }
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         try {
-            doProcess(annotations, roundEnv);
+            delegateProcess(annotations, roundEnv);
         } catch (UnableToProcessException e) {
             logger.error(UNABLE_TO_PROCESS_EXCEPTION, Logger.DEBUG_OPTION);
         } catch (Exception e) {
@@ -97,12 +97,28 @@ public class DispatchRestProcessor extends AbstractProcessor {
         return false;
     }
 
-    public void doProcess(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        // TODO: Keep output
+    public void delegateProcess(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         delegate.process(annotations, roundEnv);
 
         if (roundEnv.processingOver()) {
             processLastRound();
+        }
+    }
+
+    @Override
+    public void process(SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
+        // TODO: Filter elements outside GWT's paths
+        for (Element element : elementsByAnnotation.get(Path.class)) {
+            process(element);
+        }
+    }
+
+    private void process(Element element) {
+        Optional<ResourceProcessor> processor =
+                contextProcessors.getOptionalProcessor(ResourceProcessor.class, element);
+
+        if (processor.isPresent()) {
+            processor.get().process(element);
         }
     }
 
