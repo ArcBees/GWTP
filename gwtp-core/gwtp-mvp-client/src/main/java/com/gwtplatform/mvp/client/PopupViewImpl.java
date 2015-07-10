@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.client;
 
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
@@ -152,12 +153,16 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
 
     @Override
     public void showAndReposition() {
-        onReposition();
-        asPopupPanel().setPopupPositionAndShow(new PositionCallback() {
-            @Override
-            public void setPosition(int offsetWidth, int offsetHeight) {
-                PopupPosition popupPosition = positioner.getPopupPosition(offsetWidth, offsetHeight);
-                asPopupPanel().setPopupPosition(popupPosition.getLeft(), popupPosition.getTop());
+        Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+            public void execute() {
+                onReposition();
+                asPopupPanel().setPopupPositionAndShow(new PositionCallback() {
+                    @Override
+                    public void setPosition(int offsetWidth, int offsetHeight) {
+                        PopupPosition popupPosition = positioner.getPopupPosition(offsetWidth, offsetHeight);
+                        asPopupPanel().setPopupPosition(popupPosition.getLeft(), popupPosition.getTop());
+                    }
+                });
             }
         });
     }
