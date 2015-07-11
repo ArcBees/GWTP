@@ -49,22 +49,22 @@ public class Outputter {
     private static final String ENCODING = "UTF-8";
 
     private final Logger logger;
-    private final Type processorDefinition;
+    private final Type processor;
     private final Filer filer;
 
     private VelocityEngine velocityEngine;
 
     public Outputter(
             Logger logger,
-            Type processorDefinition,
+            Type processor,
             Filer filer) {
         this.logger = logger;
-        this.processorDefinition = processorDefinition;
+        this.processor = processor;
         this.filer = filer;
     }
 
     public OutputBuilder withTemplateFile(String templateFile) {
-        return new OutputBuilder(this, processorDefinition, templateFile);
+        return new OutputBuilder(this, processor, templateFile);
     }
 
     String parse(OutputBuilder builder) {
@@ -113,7 +113,7 @@ public class Outputter {
             context.put("impl", type.get());
         }
 
-        context.put("processor", builder.getProcessorDefinition());
+        context.put("processor", builder.getProcessor());
         context.put("imports", imports);
 
         getEngine().mergeTemplate(builder.getTemplateFile(), ENCODING, context, writer);

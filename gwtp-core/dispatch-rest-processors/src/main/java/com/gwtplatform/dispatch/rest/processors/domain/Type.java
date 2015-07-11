@@ -143,8 +143,8 @@ public class Type implements HasImports, Comparable<Type> {
     public String getQualifiedTypeParameters() {
         return formatTypeParameters(new Function<Type, String>() {
             @Override
-            public String apply(Type definition) {
-                return definition.getQualifiedParameterizedName();
+            public String apply(Type type) {
+                return type.getQualifiedParameterizedName();
             }
         });
     }
@@ -152,8 +152,8 @@ public class Type implements HasImports, Comparable<Type> {
     public String getSimpleTypeParameters() {
         return formatTypeParameters(new Function<Type, String>() {
             @Override
-            public String apply(Type definition) {
-                return definition.getParameterizedName();
+            public String apply(Type type) {
+                return type.getParameterizedName();
             }
         });
     }

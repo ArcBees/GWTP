@@ -34,7 +34,7 @@ import static com.gwtplatform.dispatch.rest.processors.domain.HasImports.EXTRACT
 
 public class OutputBuilder {
     private final Outputter outputter;
-    private final Type processorDefinition;
+    private final Type processor;
     private final String templateFile;
     private final VelocityContext context;
     private final Collection<String> imports;
@@ -45,10 +45,10 @@ public class OutputBuilder {
 
     OutputBuilder(
             Outputter outputter,
-            Type processorDefinition,
+            Type processor,
             String templateFile) {
         this.outputter = outputter;
-        this.processorDefinition = processorDefinition;
+        this.processor = processor;
         this.templateFile = templateFile;
         this.context = new VelocityContext();
         this.imports = new HashSet<>();
@@ -116,8 +116,8 @@ public class OutputBuilder {
         return outputter.parse(this);
     }
 
-    Type getProcessorDefinition() {
-        return processorDefinition;
+    Type getProcessor() {
+        return processor;
     }
 
     String getTemplateFile() {

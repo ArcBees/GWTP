@@ -17,10 +17,9 @@
 package com.gwtplatform.dispatch.rest.processors.resource;
 
 import com.gwtplatform.dispatch.rest.processors.ContextProcessor;
-import com.gwtplatform.dispatch.rest.processors.endpoint.EndPointResourceMethod;
 import com.gwtplatform.dispatch.rest.rebind.HasPriority;
 
 // TODO: need an interface ResourceMethodDefinition when a second method processor is created
 public interface ResourceMethodProcessor
-        extends ContextProcessor<ResourceMethodContext, EndPointResourceMethod>, HasPriority {
+        extends ContextProcessor<ResourceMethodContext, ResourceMethod>, HasPriority {
 }

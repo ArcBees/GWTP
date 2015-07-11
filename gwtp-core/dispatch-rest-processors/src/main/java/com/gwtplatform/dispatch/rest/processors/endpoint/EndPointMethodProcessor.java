@@ -30,13 +30,14 @@ import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.Method;
 import com.gwtplatform.dispatch.rest.processors.resolvers.EndPointResolver;
 import com.gwtplatform.dispatch.rest.processors.resolvers.MethodResolver;
+import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessor;
 
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
 
 @AutoService(ResourceMethodProcessor.class)
-public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMethodContext, EndPointResourceMethod>
+public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMethodContext, ResourceMethod>
         implements ResourceMethodProcessor {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm";
 
@@ -64,7 +65,7 @@ public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMe
     }
 
     @Override
-    public EndPointResourceMethod process(ResourceMethodContext context) {
+    public ResourceMethod process(ResourceMethodContext context) {
         String methodName = methodName(context.getParent(), context.getElement());
         logger.debug("Generating end-point method `%s`.", methodName);
 

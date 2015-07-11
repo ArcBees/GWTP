@@ -31,11 +31,12 @@ import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.domain.Variable;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
-import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext.IO;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessor;
 
 import static com.google.common.collect.Iterables.isEmpty;
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.endPointName;
+import static com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext.IO.READ;
+import static com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext.IO.WRITE;
 
 @AutoService(EndPointProcessor.class /* TODO: Should not be a SPI */)
 public class DefaultEndPointProcessor extends AbstractContextProcessor<EndPointContext, EndPoint>
@@ -62,19 +63,19 @@ public class DefaultEndPointProcessor extends AbstractContextProcessor<EndPointC
     public EndPoint process(EndPointContext context) {
         logger.debug("Generating end-point implementation for `%s`.", context);
 
-        EndPoint definition = processImplDefinition(context);
+        EndPoint endPoint = processEndPoint(context);
 
         outputter.withTemplateFile(TEMPLATE)
-                .withParam("endPoint", definition.getEndPoint())
-                .withParam("fields", definition.getFields())
-                .writeTo(definition.getImpl());
+                .withParam("endPoint", endPoint.getEndPointDetails())
+                .withParam("fields", endPoint.getFields())
+                .writeTo(endPoint.getImpl());
 
-        generateSerializers(definition);
+        generateSerializers(endPoint);
 
-        return definition;
+        return endPoint;
     }
 
-    private EndPoint processImplDefinition(EndPointContext context) {
+    private EndPoint processEndPoint(EndPointContext context) {
         ResourceMethodContext methodContext = context.getResourceMethodContext();
         Type impl = endPointName(elements, methodContext.getParent(), methodContext.getElement());
         EndPointDetails endPoint = context.getEndPointDetails();
@@ -83,15 +84,16 @@ public class DefaultEndPointProcessor extends AbstractContextProcessor<EndPointC
         return new EndPoint(impl, fields, endPoint);
     }
 
-    private void generateSerializers(EndPoint definition) {
-        EndPointDetails endPoint = definition.getEndPoint();
-        Optional<HttpVariable> body = endPoint.getBody();
+    private void generateSerializers(EndPoint endPoint) {
+        EndPointDetails endPointDetails = endPoint.getEndPointDetails();
+        Optional<HttpVariable> body = endPointDetails.getBody();
 
         if (body.isPresent()) {
-            processSerialization(new SerializationContext(body.get().getType(), endPoint.getConsumes(), IO.READ));
+            processSerialization(new SerializationContext(body.get().getType(), endPointDetails.getConsumes(), READ));
         }
 
-        processSerialization(new SerializationContext(endPoint.getResult(), endPoint.getProduces(), IO.WRITE));
+        processSerialization(
+                new SerializationContext(endPointDetails.getResult(), endPointDetails.getProduces(), WRITE));
     }
 
     private void processSerialization(SerializationContext context) {

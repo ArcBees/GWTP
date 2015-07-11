@@ -29,15 +29,15 @@ import com.gwtplatform.dispatch.rest.processors.domain.Variable;
 public class EndPoint implements HasImports {
     private final Type impl;
     private final List<Variable> fields;
-    private final EndPointDetails endPoint;
+    private final EndPointDetails endPointDetails;
 
     public EndPoint(
             Type impl,
             List<Variable> fields,
-            EndPointDetails endPoint) {
+            EndPointDetails endPointDetails) {
         this.impl = impl;
         this.fields = fields;
-        this.endPoint = endPoint;
+        this.endPointDetails = endPointDetails;
     }
 
     public Type getImpl() {
@@ -48,8 +48,8 @@ public class EndPoint implements HasImports {
         return fields;
     }
 
-    public EndPointDetails getEndPoint() {
-        return endPoint;
+    public EndPointDetails getEndPointDetails() {
+        return endPointDetails;
     }
 
     @Override
