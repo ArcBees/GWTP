@@ -8,15 +8,15 @@
 #* @vtlvariable name="imports" type="java.util.Collection<java.lang.String>" *#
 
 #* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.domain.Method" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm" *#
-#* @vtlvariable name="endPointImpl" type="com.gwtplatform.dispatch.rest.processors.endpoint.EndPointImplDefinition" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm" *#
+#* @vtlvariable name="endPointImpl" type="com.gwtplatform.dispatch.rest.processors.endpoint.EndPoint" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm" *#
 
-#* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.endpoint.EndPointMethodDefinition>" file="com/gwtplatform/dispatch/rest/processors/resource/RootResource.vm" *#
+#* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.endpoint.EndPointResourceMethod>" file="com/gwtplatform/dispatch/rest/processors/resource/RootResource.vm" *#
 #* @vtlvariable name="resource" type="com.gwtplatform.dispatch.rest.processors.domain.Type" file="com/gwtplatform/dispatch/rest/processors/resource/RootResource.vm" *#
 
 #* @vtlvariable name="endPoint" type="com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm" *#
 #* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.domain.Variable>" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm" *#
 
-#* @vtlvariable name="mappers" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.serialization.jackson.MapperDefinition>" file="com/gwtplatform/dispatch/rest/processors/serialization/jackson/JacksonMapperProvider.vm" *#
+#* @vtlvariable name="mappers" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.serialization.jackson.JacksonMapper>" file="com/gwtplatform/dispatch/rest/processors/serialization/jackson/JacksonMapperProvider.vm" *#
 
 #* @vtlvariable name="mapped" type="com.gwtplatform.dispatch.rest.processors.domain.Type" file="com/gwtplatform/dispatch/rest/processors/serialization/jackson/JacksonMapper.vm" *#
 

@@ -14,11 +14,9 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.resource;
-
-import javax.lang.model.element.Element;
+package com.gwtplatform.dispatch.rest.processors.endpoint;
 
 import com.gwtplatform.dispatch.rest.processors.ContextProcessor;
 
-public interface ResourceProcessor extends ContextProcessor<Element, Resource> {
+public interface EndPointProcessor extends ContextProcessor<EndPointContext, EndPoint> {
 }

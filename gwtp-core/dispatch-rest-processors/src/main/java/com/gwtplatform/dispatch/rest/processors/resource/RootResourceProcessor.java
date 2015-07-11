@@ -35,7 +35,6 @@ import com.gwtplatform.dispatch.rest.processors.bindings.BindingContext;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessor;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
-import com.gwtplatform.dispatch.rest.processors.endpoint.EndPointMethodDefinition;
 import com.gwtplatform.dispatch.rest.processors.resolvers.EndPointResolver;
 
 import static javax.lang.model.util.ElementFilter.methodsIn;
@@ -47,8 +46,7 @@ import static com.google.common.collect.Iterables.isEmpty;
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.resourceName;
 
 @AutoService(ResourceProcessor.class)
-public class RootResourceProcessor extends AbstractContextProcessor<Element, ResourceDefinition>
-        implements ResourceProcessor {
+public class RootResourceProcessor extends AbstractContextProcessor<Element, Resource> implements ResourceProcessor {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/resource/RootResource.vm";
 
     private ContextProcessors contextProcessors;
@@ -74,10 +72,10 @@ public class RootResourceProcessor extends AbstractContextProcessor<Element, Res
     }
 
     @Override
-    public ResourceDefinition process(Element element) {
+    public Resource process(Element element) {
         logger.debug("Generating resource implementation for `%s`.", asType(element).getQualifiedName());
 
-        ResourceDefinition resource = processResource(element);
+        Resource resource = processResource(element);
 
         outputter.withTemplateFile(TEMPLATE)
                 .withParam("resource", resource.getResource())
@@ -89,40 +87,39 @@ public class RootResourceProcessor extends AbstractContextProcessor<Element, Res
         return resource;
     }
 
-    public ResourceDefinition processResource(Element element) {
+    public Resource processResource(Element element) {
         DeclaredType type = asDeclared(element.asType());
         Type resourceInterface = new Type(type);
         Type impl = resourceName(resourceInterface);
         EndPointDetails endPoint = endPointResolver.resolve(type);
-        List<EndPointMethodDefinition> methods = processMethods(impl, endPoint, type);
+        List<ResourceMethod> methods = processMethods(impl, endPoint, type);
 
-        return new ResourceDefinition(impl, resourceInterface, endPoint, methods);
+        return new Resource(impl, resourceInterface, endPoint, methods);
     }
 
-    private List<EndPointMethodDefinition> processMethods(final Type impl, final EndPointDetails endPoint,
+    private List<ResourceMethod> processMethods(final Type impl, final EndPointDetails endPointDetails,
             DeclaredType type) {
         List<ExecutableElement> methodElements = methodsIn(utils.getAllMembers(asTypeElement(type), Object.class));
 
         return FluentIterable.from(methodElements)
-                .transform(new Function<ExecutableElement, EndPointMethodDefinition>() {
+                .transform(new Function<ExecutableElement, ResourceMethod>() {
                     @Override
-                    public EndPointMethodDefinition apply(ExecutableElement element) {
-                        return processMethod(impl, endPoint, element);
+                    public ResourceMethod apply(ExecutableElement element) {
+                        return processMethod(impl, endPointDetails, element);
                     }
                 })
                 .filter(Predicates.notNull())
                 .toList();
     }
 
-    private EndPointMethodDefinition processMethod(Type impl, EndPointDetails endPoint,
-            ExecutableElement element) {
-        ResourceMethodContext context = new ResourceMethodContext(impl, endPoint, element);
+    private ResourceMethod processMethod(Type impl, EndPointDetails endPointDetails, ExecutableElement element) {
+        ResourceMethodContext context = new ResourceMethodContext(impl, endPointDetails, element);
         ResourceMethodProcessor processor = contextProcessors.getProcessor(ResourceMethodProcessor.class, context);
 
         return processor.process(context);
     }
 
-    private void processBinding(ResourceDefinition resource) {
+    private void processBinding(Resource resource) {
         Type impl = resource.getImpl();
 
         BindingContext context = new BindingContext(impl);

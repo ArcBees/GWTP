@@ -27,7 +27,7 @@ import com.gwtplatform.dispatch.rest.processors.utils.Primitives;
 
 import static com.gwtplatform.dispatch.rest.processors.utils.Primitives.findByPrimitive;
 
-public class JacksonMapperProcessor extends AbstractContextProcessor<SerializationContext, MapperDefinition> {
+public class JacksonMapperProcessor extends AbstractContextProcessor<SerializationContext, JacksonMapper> {
     private static final Pattern SANITIZE_NAME_PATTERN = Pattern.compile("[^a-zA-Z0-9_]");
     private static final String PACKAGE = JacksonMapperProvider.class.getPackage().getName() + ".mappers";
     private static final String NAME_SUFFIX = "Mapper";
@@ -40,10 +40,10 @@ public class JacksonMapperProcessor extends AbstractContextProcessor<Serializati
     }
 
     @Override
-    public MapperDefinition process(SerializationContext context) {
+    public JacksonMapper process(SerializationContext context) {
         logger.debug("Generating Jackson mapper for `%s`.", context.getType().getQualifiedParameterizedName());
 
-        MapperDefinition mapper = processMapper(context);
+        JacksonMapper mapper = processMapper(context);
 
         outputter.withTemplateFile(TEMPLATE)
                 .withParam("mapped", mapper.getMapped())
@@ -52,14 +52,14 @@ public class JacksonMapperProcessor extends AbstractContextProcessor<Serializati
         return mapper;
     }
 
-    private MapperDefinition processMapper(SerializationContext context) {
+    private JacksonMapper processMapper(SerializationContext context) {
         Type type = context.getType();
         Type mapped = ensureNotPrimitive(type);
 
         String name = SANITIZE_NAME_PATTERN.matcher(mapped.getQualifiedParameterizedName()).replaceAll("_");
         name += NAME_SUFFIX;
 
-        return new MapperDefinition(type, mapped, new Type(PACKAGE, name));
+        return new JacksonMapper(type, mapped, new Type(PACKAGE, name));
     }
 
     private Type ensureNotPrimitive(Type type) {

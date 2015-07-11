@@ -14,9 +14,14 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.endpoint;
+package com.gwtplatform.dispatch.rest.processors.resource;
 
-import com.gwtplatform.dispatch.rest.processors.ContextProcessor;
+import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
+import com.gwtplatform.dispatch.rest.processors.domain.Method;
 
-public interface EndPointImplProcessor extends ContextProcessor<EndPointImplContext, EndPointImplDefinition> {
+public interface ResourceMethod extends HasImports {
+    Method getMethod();
+
+    EndPointDetails getEndPointDetails();
 }

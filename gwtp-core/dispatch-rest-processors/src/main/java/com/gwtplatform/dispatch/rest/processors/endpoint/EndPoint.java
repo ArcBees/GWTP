@@ -16,54 +16,52 @@
 
 package com.gwtplatform.dispatch.rest.processors.endpoint;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet;
+import com.google.common.base.Function;
+import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
-import com.gwtplatform.dispatch.rest.processors.domain.Method;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
+import com.gwtplatform.dispatch.rest.processors.domain.Variable;
 
-public class EndPointMethodDefinition implements HasImports {
-    private final Method method;
+public class EndPoint implements HasImports {
+    private final Type impl;
+    private final List<Variable> fields;
     private final EndPointDetails endPoint;
-    private final EndPointImplDefinition impl;
-    private final CodeSnippet codeSnippet;
 
-    EndPointMethodDefinition(
-            Method method,
-            EndPointDetails endPoint,
-            EndPointImplDefinition impl,
-            CodeSnippet codeSnippet) {
-        this.method = method;
-        this.endPoint = endPoint;
+    public EndPoint(
+            Type impl,
+            List<Variable> fields,
+            EndPointDetails endPoint) {
         this.impl = impl;
-        this.codeSnippet = codeSnippet;
+        this.fields = fields;
+        this.endPoint = endPoint;
     }
 
-    public Method getMethod() {
-        return method;
-    }
-
-    public EndPointImplDefinition getImpl() {
+    public Type getImpl() {
         return impl;
+    }
+
+    public List<Variable> getFields() {
+        return fields;
     }
 
     public EndPointDetails getEndPoint() {
         return endPoint;
     }
 
-    public CodeSnippet getCodeSnippet() {
-        return codeSnippet;
-    }
-
     @Override
     public Collection<String> getImports() {
-        List<String> imports = new ArrayList<>(method.getImports());
-        imports.addAll(impl.getImports());
-        imports.addAll(codeSnippet.getImports());
-
-        return imports;
+        return FluentIterable.from(fields)
+                .transformAndConcat(new Function<Variable, Iterable<String>>() {
+                    @Override
+                    public Iterable<String> apply(Variable variable) {
+                        return variable.getImports();
+                    }
+                })
+                .append(impl.getImports())
+                .toList();
     }
 }

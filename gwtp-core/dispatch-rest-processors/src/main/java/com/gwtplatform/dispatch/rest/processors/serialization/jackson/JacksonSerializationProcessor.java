@@ -49,7 +49,7 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
     private static final ContentType APPLICATION_JSON = ContentType.valueOf(MediaType.APPLICATION_JSON);
 
     private final JacksonMapperProcessor mapperProcessor;
-    private final Map<Type, MapperDefinition> mappers;
+    private final Map<Type, JacksonMapper> mappers;
     private final Type impl;
     private final Type parent;
 
@@ -98,7 +98,7 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
     @Override
     public Void process(SerializationContext context) {
         if (!mappers.containsKey(context.getType())) {
-            MapperDefinition mapper = mapperProcessor.process(context);
+            JacksonMapper mapper = mapperProcessor.process(context);
 
             mappers.put(mapper.getMapped(), mapper);
             duplicateIfBoxedOrPrimitive(mapper);
@@ -107,7 +107,7 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
         return null;
     }
 
-    private void duplicateIfBoxedOrPrimitive(MapperDefinition mapper) {
+    private void duplicateIfBoxedOrPrimitive(JacksonMapper mapper) {
         String name = mapper.getKey().getQualifiedParameterizedName();
         Optional<Primitives> primitive = findByPrimitive(name);
         Optional<Primitives> boxed = findByBoxed(name);
@@ -120,7 +120,7 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
         }
 
         if (newKey != null) {
-            mappers.put(newKey, new MapperDefinition(newKey, mapper.getMapped(), mapper.getImpl()));
+            mappers.put(newKey, new JacksonMapper(newKey, mapper.getMapped(), mapper.getImpl()));
         }
     }
 

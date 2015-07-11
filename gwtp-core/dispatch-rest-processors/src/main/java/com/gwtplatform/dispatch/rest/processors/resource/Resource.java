@@ -23,19 +23,18 @@ import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
-import com.gwtplatform.dispatch.rest.processors.endpoint.EndPointMethodDefinition;
 
-public class ResourceDefinition implements HasImports {
+public class Resource implements HasImports {
     private final Type impl;
     private final Type resource;
     private final EndPointDetails endPoint;
-    private final List<EndPointMethodDefinition> methods;
+    private final List<ResourceMethod> methods;
 
-    public ResourceDefinition(
+    public Resource(
             Type impl,
             Type resource,
             EndPointDetails endPoint,
-            List<EndPointMethodDefinition> methods) {
+            List<ResourceMethod> methods) {
         this.impl = impl;
         this.resource = resource;
         this.endPoint = endPoint;
@@ -54,7 +53,7 @@ public class ResourceDefinition implements HasImports {
         return endPoint;
     }
 
-    public List<EndPointMethodDefinition> getMethods() {
+    public List<ResourceMethod> getMethods() {
         return methods;
     }
 

@@ -36,7 +36,7 @@ import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessor
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
 
 @AutoService(ResourceMethodProcessor.class)
-public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMethodContext, EndPointMethodDefinition>
+public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMethodContext, EndPointResourceMethod>
         implements ResourceMethodProcessor {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm";
 
@@ -64,7 +64,7 @@ public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMe
     }
 
     @Override
-    public EndPointMethodDefinition process(ResourceMethodContext context) {
+    public EndPointResourceMethod process(ResourceMethodContext context) {
         String methodName = methodName(context.getParent(), context.getElement());
         logger.debug("Generating end-point method `%s`.", methodName);
 
@@ -72,23 +72,23 @@ public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMe
         // sub-resources are implemented
         Method method = methodResolver.resolve(context.getElement());
         EndPointDetails endPoint = endPointResolver.resolve(context.getElement(), context.getEndPoint());
-        EndPointImplDefinition impl = processEndPointImpl(context, method, endPoint);
+        EndPoint impl = processEndPointImpl(context, method, endPoint);
 
         CodeSnippet codeSnippet = parse(methodName, method, impl);
 
-        return new EndPointMethodDefinition(method, endPoint, impl, codeSnippet);
+        return new EndPointResourceMethod(method, endPoint, impl, codeSnippet);
     }
 
-    private EndPointImplDefinition processEndPointImpl(ResourceMethodContext context, Method method,
+    private EndPoint processEndPointImpl(ResourceMethodContext context, Method method,
             EndPointDetails endPoint) {
-        EndPointImplContext endPointImplContext = new EndPointImplContext(context, method, endPoint);
-        EndPointImplProcessor processor =
-                contextProcessors.getProcessor(EndPointImplProcessor.class, endPointImplContext);
+        EndPointContext endPointContext = new EndPointContext(context, method, endPoint);
+        EndPointProcessor processor =
+                contextProcessors.getProcessor(EndPointProcessor.class, endPointContext);
 
-        return processor.process(endPointImplContext);
+        return processor.process(endPointContext);
     }
 
-    public CodeSnippet parse(String methodName, Method method, EndPointImplDefinition impl) {
+    public CodeSnippet parse(String methodName, Method method, EndPoint impl) {
         String code = outputter.withTemplateFile(TEMPLATE)
                 .withParam("method", method)
                 .withParam("endPointImpl", impl)

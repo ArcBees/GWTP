@@ -20,12 +20,12 @@ import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.Method;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodContext;
 
-public class EndPointImplContext {
+public class EndPointContext {
     private final ResourceMethodContext resourceMethodContext;
     private final Method method;
     private final EndPointDetails endPointDetails;
 
-    public EndPointImplContext(
+    public EndPointContext(
             ResourceMethodContext resourceMethodContext,
             Method method,
             EndPointDetails endPointDetails) {

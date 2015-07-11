@@ -37,9 +37,9 @@ import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProce
 import static com.google.common.collect.Iterables.isEmpty;
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.endPointName;
 
-@AutoService(EndPointImplProcessor.class /* TODO: Should not be a SPI */)
-public class DefaultEndPointImplProcessor extends AbstractContextProcessor<EndPointImplContext, EndPointImplDefinition>
-        implements EndPointImplProcessor {
+@AutoService(EndPointProcessor.class /* TODO: Should not be a SPI */)
+public class DefaultEndPointProcessor extends AbstractContextProcessor<EndPointContext, EndPoint>
+        implements EndPointProcessor {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm";
 
     private ContextProcessors contextProcessors;
@@ -54,15 +54,15 @@ public class DefaultEndPointImplProcessor extends AbstractContextProcessor<EndPo
     }
 
     @Override
-    public boolean canProcess(EndPointImplContext context) {
+    public boolean canProcess(EndPointContext context) {
         return true;
     }
 
     @Override
-    public EndPointImplDefinition process(EndPointImplContext context) {
+    public EndPoint process(EndPointContext context) {
         logger.debug("Generating end-point implementation for `%s`.", context);
 
-        EndPointImplDefinition definition = processImplDefinition(context);
+        EndPoint definition = processImplDefinition(context);
 
         outputter.withTemplateFile(TEMPLATE)
                 .withParam("endPoint", definition.getEndPoint())
@@ -74,16 +74,16 @@ public class DefaultEndPointImplProcessor extends AbstractContextProcessor<EndPo
         return definition;
     }
 
-    private EndPointImplDefinition processImplDefinition(EndPointImplContext context) {
+    private EndPoint processImplDefinition(EndPointContext context) {
         ResourceMethodContext methodContext = context.getResourceMethodContext();
         Type impl = endPointName(elements, methodContext.getParent(), methodContext.getElement());
         EndPointDetails endPoint = context.getEndPointDetails();
         List<Variable> fields = context.getMethod().getParameters();
 
-        return new EndPointImplDefinition(impl, fields, endPoint);
+        return new EndPoint(impl, fields, endPoint);
     }
 
-    private void generateSerializers(EndPointImplDefinition definition) {
+    private void generateSerializers(EndPoint definition) {
         EndPointDetails endPoint = definition.getEndPoint();
         Optional<HttpVariable> body = endPoint.getBody();
 

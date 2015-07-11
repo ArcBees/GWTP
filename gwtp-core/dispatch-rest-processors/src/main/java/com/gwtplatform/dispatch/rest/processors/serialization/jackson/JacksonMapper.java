@@ -23,12 +23,12 @@ import java.util.List;
 import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
 
-public class MapperDefinition implements HasImports {
+public class JacksonMapper implements HasImports {
     private final Type key;
     private final Type mapped;
     private final Type impl;
 
-    public MapperDefinition(
+    public JacksonMapper(
             Type key,
             Type mapped,
             Type impl) {
