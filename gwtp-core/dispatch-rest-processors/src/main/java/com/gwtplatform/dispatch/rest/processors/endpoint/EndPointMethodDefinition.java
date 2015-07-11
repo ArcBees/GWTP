@@ -20,20 +20,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.gwtplatform.dispatch.rest.processors.definitions.CodeSnippet;
-import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.HasImports;
-import com.gwtplatform.dispatch.rest.processors.definitions.MethodDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet;
+import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
+import com.gwtplatform.dispatch.rest.processors.domain.Method;
 
 public class EndPointMethodDefinition implements HasImports {
-    private final MethodDefinition method;
-    private final EndPointDefinition endPoint;
+    private final Method method;
+    private final EndPointDetails endPoint;
     private final EndPointImplDefinition impl;
     private final CodeSnippet codeSnippet;
 
     EndPointMethodDefinition(
-            MethodDefinition method,
-            EndPointDefinition endPoint,
+            Method method,
+            EndPointDetails endPoint,
             EndPointImplDefinition impl,
             CodeSnippet codeSnippet) {
         this.method = method;
@@ -42,7 +42,7 @@ public class EndPointMethodDefinition implements HasImports {
         this.codeSnippet = codeSnippet;
     }
 
-    public MethodDefinition getMethod() {
+    public Method getMethod() {
         return method;
     }
 
@@ -50,7 +50,7 @@ public class EndPointMethodDefinition implements HasImports {
         return impl;
     }
 
-    public EndPointDefinition getEndPoint() {
+    public EndPointDetails getEndPoint() {
         return endPoint;
     }
 

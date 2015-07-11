@@ -36,10 +36,10 @@ public class InterceptorContext {
      * {@link InterceptorContext} Builder.
      */
     public static class Builder {
-        // Template definitions
+        // Template domain
         private RestAction<?> template;
 
-        // Manual definitions
+        // Manual domain
         private String path;
         private HttpMethod httpMethod;
         private int queryCount;

@@ -20,32 +20,32 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.gwtplatform.dispatch.rest.processors.definitions.HasImports;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 
 public class MapperDefinition implements HasImports {
-    private final TypeDefinition key;
-    private final TypeDefinition mapped;
-    private final TypeDefinition impl;
+    private final Type key;
+    private final Type mapped;
+    private final Type impl;
 
     public MapperDefinition(
-            TypeDefinition key,
-            TypeDefinition mapped,
-            TypeDefinition impl) {
+            Type key,
+            Type mapped,
+            Type impl) {
         this.key = key;
         this.mapped = mapped;
         this.impl = impl;
     }
 
-    public TypeDefinition getKey() {
+    public Type getKey() {
         return key;
     }
 
-    public TypeDefinition getMapped() {
+    public Type getMapped() {
         return mapped;
     }
 
-    public TypeDefinition getImpl() {
+    public Type getImpl() {
         return impl;
     }
 

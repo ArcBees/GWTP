@@ -25,10 +25,10 @@ import com.google.auto.service.AutoService;
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.ContextProcessors;
-import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.HttpVariableDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.VariableDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.HttpVariable;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
+import com.gwtplatform.dispatch.rest.processors.domain.Variable;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext.IO;
@@ -76,16 +76,16 @@ public class DefaultEndPointImplProcessor extends AbstractContextProcessor<EndPo
 
     private EndPointImplDefinition processImplDefinition(EndPointImplContext context) {
         ResourceMethodContext methodContext = context.getResourceMethodContext();
-        TypeDefinition impl = endPointName(elements, methodContext.getParent(), methodContext.getElement());
-        EndPointDefinition endPoint = context.getEndPointDefinition();
-        List<VariableDefinition> fields = context.getMethodDefinition().getParameters();
+        Type impl = endPointName(elements, methodContext.getParent(), methodContext.getElement());
+        EndPointDetails endPoint = context.getEndPointDetails();
+        List<Variable> fields = context.getMethod().getParameters();
 
         return new EndPointImplDefinition(impl, fields, endPoint);
     }
 
     private void generateSerializers(EndPointImplDefinition definition) {
-        EndPointDefinition endPoint = definition.getEndPoint();
-        Optional<HttpVariableDefinition> body = endPoint.getBody();
+        EndPointDetails endPoint = definition.getEndPoint();
+        Optional<HttpVariable> body = endPoint.getBody();
 
         if (body.isPresent()) {
             processSerialization(new SerializationContext(body.get().getType(), endPoint.getConsumes(), IO.READ));

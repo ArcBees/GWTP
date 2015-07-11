@@ -31,7 +31,7 @@ import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.ContextProcessors;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingContext;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessor;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessor;
 import com.gwtplatform.dispatch.rest.processors.utils.Primitives;
@@ -49,9 +49,9 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
     private static final ContentType APPLICATION_JSON = ContentType.valueOf(MediaType.APPLICATION_JSON);
 
     private final JacksonMapperProcessor mapperProcessor;
-    private final Map<TypeDefinition, MapperDefinition> mappers;
-    private final TypeDefinition impl;
-    private final TypeDefinition parent;
+    private final Map<Type, MapperDefinition> mappers;
+    private final Type impl;
+    private final Type parent;
 
     private JavaFileObject sourceFile;
     private ContextProcessors contextProcessors;
@@ -59,8 +59,8 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
     public JacksonSerializationProcessor() {
         this.mapperProcessor = new JacksonMapperProcessor();
         this.mappers = new TreeMap<>();
-        this.parent = new TypeDefinition(JacksonMapperProvider.class);
-        this.impl = new TypeDefinition(parent.getPackageName(), parent.getSimpleName() + "Impl");
+        this.parent = new Type(JacksonMapperProvider.class);
+        this.impl = new Type(parent.getPackageName(), parent.getSimpleName() + "Impl");
     }
 
     @Override
@@ -111,12 +111,12 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
         String name = mapper.getKey().getQualifiedParameterizedName();
         Optional<Primitives> primitive = findByPrimitive(name);
         Optional<Primitives> boxed = findByBoxed(name);
-        TypeDefinition newKey = null;
+        Type newKey = null;
 
         if (primitive.isPresent()) {
-            newKey = new TypeDefinition(primitive.get().getBoxedClass());
+            newKey = new Type(primitive.get().getBoxedClass());
         } else if (boxed.isPresent()) {
-            newKey = new TypeDefinition(boxed.get().getPrimitive());
+            newKey = new Type(boxed.get().getPrimitive());
         }
 
         if (newKey != null) {

@@ -24,41 +24,41 @@ import javax.lang.model.type.DeclaredType;
 
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
-import com.gwtplatform.dispatch.rest.processors.definitions.MethodDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.VariableDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.Method;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
+import com.gwtplatform.dispatch.rest.processors.domain.Variable;
 
 import static com.google.auto.common.MoreTypes.asDeclared;
 
 public class MethodResolver {
-    public MethodDefinition resolve(ExecutableElement element) {
-        TypeDefinition returnType = processReturnType(element);
+    public Method resolve(ExecutableElement element) {
+        Type returnType = processReturnType(element);
         String name = element.getSimpleName().toString();
-        List<VariableDefinition> parameters = processParameters(element);
+        List<Variable> parameters = processParameters(element);
 
-        return new MethodDefinition(returnType, name, parameters);
+        return new Method(returnType, name, parameters);
     }
 
-    private TypeDefinition processReturnType(ExecutableElement element) {
+    private Type processReturnType(ExecutableElement element) {
         DeclaredType returnType = asDeclared(element.getReturnType());
-        return new TypeDefinition(returnType);
+        return new Type(returnType);
     }
 
-    private List<VariableDefinition> processParameters(ExecutableElement element) {
+    private List<Variable> processParameters(ExecutableElement element) {
         return FluentIterable.from(element.getParameters())
-                .transform(new Function<VariableElement, VariableDefinition>() {
+                .transform(new Function<VariableElement, Variable>() {
                     @Override
-                    public VariableDefinition apply(VariableElement variableElement) {
+                    public Variable apply(VariableElement variableElement) {
                         return processParameter(variableElement);
                     }
                 })
                 .toList();
     }
 
-    private VariableDefinition processParameter(VariableElement element) {
-        TypeDefinition typeDefinition = new TypeDefinition(element.asType());
+    private Variable processParameter(VariableElement element) {
+        Type type = new Type(element.asType());
         String name = element.getSimpleName().toString();
 
-        return new VariableDefinition(typeDefinition, name);
+        return new Variable(type, name);
     }
 }

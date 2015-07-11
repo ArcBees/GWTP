@@ -23,7 +23,7 @@ import com.gwtplatform.dispatch.shared.Result;
 
 /**
  * Convenience class to store {@link ActionHandler} and {@link ActionValidator}
- * instance definitions.
+ * instance domain.
  *
  * @deprecated Please use
  * {@link com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorInstance}.

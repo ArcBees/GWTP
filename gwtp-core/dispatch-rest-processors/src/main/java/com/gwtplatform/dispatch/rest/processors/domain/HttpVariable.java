@@ -14,23 +14,23 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.definitions;
+package com.gwtplatform.dispatch.rest.processors.domain;
 
 import java.util.Collection;
 
 import com.google.common.base.MoreObjects;
 
-public class HttpVariableDefinition implements HasImports {
-    private final TypeDefinition type;
+public class HttpVariable implements HasImports {
+    private final Type type;
     private final String name;
-    private final HttpAnnotationDefinition httpAnnotation;
+    private final HttpAnnotation httpAnnotation;
     private final String dateFormat;
     private final boolean body;
 
-    public HttpVariableDefinition(
-            TypeDefinition type,
+    public HttpVariable(
+            Type type,
             String name,
-            HttpAnnotationDefinition httpAnnotation,
+            HttpAnnotation httpAnnotation,
             String dateFormat,
             boolean body) {
         this.type = type;
@@ -40,7 +40,7 @@ public class HttpVariableDefinition implements HasImports {
         this.body = body;
     }
 
-    public TypeDefinition getType() {
+    public Type getType() {
         return type;
     }
 
@@ -48,7 +48,7 @@ public class HttpVariableDefinition implements HasImports {
         return name;
     }
 
-    public HttpAnnotationDefinition getHttpAnnotation() {
+    public HttpAnnotation getHttpAnnotation() {
         return httpAnnotation;
     }
 

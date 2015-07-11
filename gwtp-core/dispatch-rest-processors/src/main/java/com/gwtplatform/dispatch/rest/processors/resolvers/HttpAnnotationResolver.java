@@ -18,7 +18,7 @@ package com.gwtplatform.dispatch.rest.processors.resolvers;
 
 import javax.lang.model.element.VariableElement;
 
-import com.gwtplatform.dispatch.rest.processors.definitions.HttpAnnotationDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.HttpAnnotation;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.resolvers.parameters.HttpParamValueResolver;
 import com.gwtplatform.dispatch.rest.processors.utils.Utils;
@@ -56,11 +56,11 @@ public class HttpAnnotationResolver {
         return annotationsCount <= 1;
     }
 
-    public HttpAnnotationDefinition resolve(VariableElement element) {
+    public HttpAnnotation resolve(VariableElement element) {
         for (HttpParamValueResolver resolver : resolvers) {
             if (resolver.isPresent(element)) {
                 String name = resolver.resolve(element);
-                return new HttpAnnotationDefinition(resolver.getAssociatedType(), name);
+                return new HttpAnnotation(resolver.getAssociatedType(), name);
             }
         }
 

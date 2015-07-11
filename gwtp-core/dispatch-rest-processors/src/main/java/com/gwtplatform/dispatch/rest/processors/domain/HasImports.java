@@ -14,27 +14,19 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.definitions;
+package com.gwtplatform.dispatch.rest.processors.domain;
 
 import java.util.Collection;
 
-public class CodeSnippet implements HasImports {
-    private final String code;
-    private final Collection<String> imports;
+import com.google.common.base.Function;
 
-    public CodeSnippet(
-            String code,
-            Collection<String> imports) {
-        this.code = code;
-        this.imports = imports;
-    }
+public interface HasImports {
+    Function<HasImports, Iterable<String>> EXTRACT_IMPORTS_FUNCTION = new Function<HasImports, Iterable<String>>() {
+        @Override
+        public Iterable<String> apply(HasImports hasImports) {
+            return hasImports.getImports();
+        }
+    };
 
-    public String getCode() {
-        return code;
-    }
-
-    @Override
-    public Collection<String> getImports() {
-        return imports;
-    }
+    Collection<String> getImports();
 }

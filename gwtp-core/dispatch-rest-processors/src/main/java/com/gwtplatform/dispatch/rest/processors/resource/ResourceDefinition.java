@@ -20,21 +20,21 @@ import java.util.Collection;
 import java.util.List;
 
 import com.google.common.collect.FluentIterable;
-import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.HasImports;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.endpoint.EndPointMethodDefinition;
 
 public class ResourceDefinition implements HasImports {
-    private final TypeDefinition impl;
-    private final TypeDefinition resource;
-    private final EndPointDefinition endPoint;
+    private final Type impl;
+    private final Type resource;
+    private final EndPointDetails endPoint;
     private final List<EndPointMethodDefinition> methods;
 
     public ResourceDefinition(
-            TypeDefinition impl,
-            TypeDefinition resource,
-            EndPointDefinition endPoint,
+            Type impl,
+            Type resource,
+            EndPointDetails endPoint,
             List<EndPointMethodDefinition> methods) {
         this.impl = impl;
         this.resource = resource;
@@ -42,15 +42,15 @@ public class ResourceDefinition implements HasImports {
         this.methods = methods;
     }
 
-    public TypeDefinition getImpl() {
+    public Type getImpl() {
         return impl;
     }
 
-    public TypeDefinition getResource() {
+    public Type getResource() {
         return resource;
     }
 
-    public EndPointDefinition getEndPoint() {
+    public EndPointDetails getEndPoint() {
         return endPoint;
     }
 

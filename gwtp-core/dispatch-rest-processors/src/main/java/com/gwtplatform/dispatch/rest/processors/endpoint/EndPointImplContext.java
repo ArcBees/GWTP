@@ -16,30 +16,30 @@
 
 package com.gwtplatform.dispatch.rest.processors.endpoint;
 
-import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.MethodDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.Method;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodContext;
 
 public class EndPointImplContext {
     private final ResourceMethodContext resourceMethodContext;
-    private final MethodDefinition methodDefinition;
-    private final EndPointDefinition endPointDefinition;
+    private final Method method;
+    private final EndPointDetails endPointDetails;
 
     public EndPointImplContext(
             ResourceMethodContext resourceMethodContext,
-            MethodDefinition methodDefinition,
-            EndPointDefinition endPointDefinition) {
+            Method method,
+            EndPointDetails endPointDetails) {
         this.resourceMethodContext = resourceMethodContext;
-        this.methodDefinition = methodDefinition;
-        this.endPointDefinition = endPointDefinition;
+        this.method = method;
+        this.endPointDetails = endPointDetails;
     }
 
-    public EndPointDefinition getEndPointDefinition() {
-        return endPointDefinition;
+    public EndPointDetails getEndPointDetails() {
+        return endPointDetails;
     }
 
-    public MethodDefinition getMethodDefinition() {
-        return methodDefinition;
+    public Method getMethod() {
+        return method;
     }
 
     public ResourceMethodContext getResourceMethodContext() {

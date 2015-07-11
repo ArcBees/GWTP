@@ -21,43 +21,43 @@ import java.util.List;
 
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
-import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.HasImports;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.VariableDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
+import com.gwtplatform.dispatch.rest.processors.domain.Variable;
 
 public class EndPointImplDefinition implements HasImports {
-    private final TypeDefinition impl;
-    private final List<VariableDefinition> fields;
-    private final EndPointDefinition endPoint;
+    private final Type impl;
+    private final List<Variable> fields;
+    private final EndPointDetails endPoint;
 
     public EndPointImplDefinition(
-            TypeDefinition impl,
-            List<VariableDefinition> fields,
-            EndPointDefinition endPoint) {
+            Type impl,
+            List<Variable> fields,
+            EndPointDetails endPoint) {
         this.impl = impl;
         this.fields = fields;
         this.endPoint = endPoint;
     }
 
-    public TypeDefinition getImpl() {
+    public Type getImpl() {
         return impl;
     }
 
-    public List<VariableDefinition> getFields() {
+    public List<Variable> getFields() {
         return fields;
     }
 
-    public EndPointDefinition getEndPoint() {
+    public EndPointDetails getEndPoint() {
         return endPoint;
     }
 
     @Override
     public Collection<String> getImports() {
         return FluentIterable.from(fields)
-                .transformAndConcat(new Function<VariableDefinition, Iterable<String>>() {
+                .transformAndConcat(new Function<Variable, Iterable<String>>() {
                     @Override
-                    public Iterable<String> apply(VariableDefinition variable) {
+                    public Iterable<String> apply(Variable variable) {
                         return variable.getImports();
                     }
                 })

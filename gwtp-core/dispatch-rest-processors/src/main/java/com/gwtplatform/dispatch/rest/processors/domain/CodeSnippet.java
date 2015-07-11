@@ -14,27 +14,27 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.definitions;
+package com.gwtplatform.dispatch.rest.processors.domain;
 
-import com.gwtplatform.dispatch.rest.shared.HttpParameter;
-import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
+import java.util.Collection;
 
-public class HttpAnnotationDefinition {
-    private final HttpParameter.Type parameterType;
-    private final String name;
+public class CodeSnippet implements HasImports {
+    private final String code;
+    private final Collection<String> imports;
 
-    public HttpAnnotationDefinition(
-            HttpParameter.Type type,
-            String name) {
-        this.parameterType = type;
-        this.name = name;
+    public CodeSnippet(
+            String code,
+            Collection<String> imports) {
+        this.code = code;
+        this.imports = imports;
     }
 
-    public Type getParameterType() {
-        return parameterType;
+    public String getCode() {
+        return code;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public Collection<String> getImports() {
+        return imports;
     }
 }

@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.definitions;
+package com.gwtplatform.dispatch.rest.processors.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,12 +34,12 @@ import static com.google.auto.common.MoreElements.getPackage;
 import static com.google.auto.common.MoreTypes.asDeclared;
 import static com.google.auto.common.MoreTypes.asPrimitiveType;
 
-public class TypeDefinition implements HasImports, Comparable<TypeDefinition> {
+public class Type implements HasImports, Comparable<Type> {
     private final String packageName;
     private final String simpleName;
-    private final List<TypeDefinition> typeArguments;
+    private final List<Type> typeArguments;
 
-    public TypeDefinition(TypeMirror type) {
+    public Type(TypeMirror type) {
         if (type.getKind().isPrimitive()) {
             packageName = "";
             simpleName = asPrimitiveType(type).toString();
@@ -51,19 +51,19 @@ public class TypeDefinition implements HasImports, Comparable<TypeDefinition> {
             packageName = getPackage(element).getQualifiedName().toString();
             simpleName = element.getSimpleName().toString();
             typeArguments = FluentIterable.from(declaredType.getTypeArguments())
-                    .transform(new Function<TypeMirror, TypeDefinition>() {
+                    .transform(new Function<TypeMirror, Type>() {
                         @Override
-                        public TypeDefinition apply(TypeMirror typeArgument) {
-                            return new TypeDefinition(typeArgument);
+                        public Type apply(TypeMirror typeArgument) {
+                            return new Type(typeArgument);
                         }
                     })
                     .toList();
         }
     }
 
-    public TypeDefinition(String parameterizedQualifiedName) {
+    public Type(String parameterizedQualifiedName) {
         String qualifiedName = parameterizedQualifiedName;
-        Builder<TypeDefinition> argumentsBuilder = ImmutableList.builder();
+        Builder<Type> argumentsBuilder = ImmutableList.builder();
         int argumentsStart = parameterizedQualifiedName.indexOf("<");
 
         if (argumentsStart != -1) {
@@ -72,7 +72,7 @@ public class TypeDefinition implements HasImports, Comparable<TypeDefinition> {
 
             String[] arguments = parameterizedQualifiedName.substring(argumentsStart + 1, argumentsEnd).split(",");
             for (String argument : arguments) {
-                argumentsBuilder.add(new TypeDefinition(argument.trim()));
+                argumentsBuilder.add(new Type(argument.trim()));
             }
         }
         typeArguments = argumentsBuilder.build();
@@ -88,20 +88,20 @@ public class TypeDefinition implements HasImports, Comparable<TypeDefinition> {
         }
     }
 
-    public TypeDefinition(Class<?> clazz) {
+    public Type(Class<?> clazz) {
         this(clazz.getPackage().getName(), clazz.getSimpleName());
     }
 
-    public TypeDefinition(
+    public Type(
             String packageName,
             String simpleName) {
-        this(packageName, simpleName, new ArrayList<TypeDefinition>());
+        this(packageName, simpleName, new ArrayList<Type>());
     }
 
-    public TypeDefinition(
+    public Type(
             String packageName,
             String simpleName,
-            List<TypeDefinition> typeArguments) {
+            List<Type> typeArguments) {
         this.packageName = packageName;
         this.simpleName = simpleName;
         this.typeArguments = ImmutableList.copyOf(typeArguments);
@@ -136,29 +136,29 @@ public class TypeDefinition implements HasImports, Comparable<TypeDefinition> {
         return !typeArguments.isEmpty();
     }
 
-    public List<TypeDefinition> getTypeArguments() {
+    public List<Type> getTypeArguments() {
         return typeArguments;
     }
 
     public String getQualifiedTypeParameters() {
-        return formatTypeParameters(new Function<TypeDefinition, String>() {
+        return formatTypeParameters(new Function<Type, String>() {
             @Override
-            public String apply(TypeDefinition definition) {
+            public String apply(Type definition) {
                 return definition.getQualifiedParameterizedName();
             }
         });
     }
 
     public String getSimpleTypeParameters() {
-        return formatTypeParameters(new Function<TypeDefinition, String>() {
+        return formatTypeParameters(new Function<Type, String>() {
             @Override
-            public String apply(TypeDefinition definition) {
+            public String apply(Type definition) {
                 return definition.getParameterizedName();
             }
         });
     }
 
-    private String formatTypeParameters(Function<TypeDefinition, String> function) {
+    private String formatTypeParameters(Function<Type, String> function) {
         if (typeArguments.isEmpty()) {
             return "";
         }
@@ -179,7 +179,7 @@ public class TypeDefinition implements HasImports, Comparable<TypeDefinition> {
     }
 
     @Override
-    public int compareTo(TypeDefinition o) {
+    public int compareTo(Type o) {
         return getQualifiedParameterizedName().compareTo(o == null ? "" : o.getQualifiedParameterizedName());
     }
 
@@ -198,11 +198,11 @@ public class TypeDefinition implements HasImports, Comparable<TypeDefinition> {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof TypeDefinition)) {
+        if (obj == null || !(obj instanceof Type)) {
             return false;
         }
 
-        TypeDefinition other = (TypeDefinition) obj;
+        Type other = (Type) obj;
         return getQualifiedParameterizedName().equals(other.getQualifiedParameterizedName());
     }
 }

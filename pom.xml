@@ -397,7 +397,7 @@
             </plugins>
         </pluginManagement>
 
-        <!-- Plugins to be inherited by sub-projects. Note that definitions and configurations of the following plugins in
+        <!-- Plugins to be inherited by sub-projects. Note that domain and configurations of the following plugins in
             a sub module, will override the top level parent pom's definition -->
         <plugins>
             <plugin>

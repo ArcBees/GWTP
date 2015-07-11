@@ -88,7 +88,7 @@ public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
 
     @Override
     protected void populateTemplateVariables(Map<String, Object> variables) {
-        variables.put("definitions", serializerDefinitions);
+        variables.put("domain", serializerDefinitions);
     }
 
     @Override

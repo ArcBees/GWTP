@@ -14,19 +14,27 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.definitions;
+package com.gwtplatform.dispatch.rest.processors.domain;
 
-import java.util.Collection;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
-import com.google.common.base.Function;
+public class HttpAnnotation {
+    private final HttpParameter.Type parameterType;
+    private final String name;
 
-public interface HasImports {
-    Function<HasImports, Iterable<String>> EXTRACT_IMPORTS_FUNCTION = new Function<HasImports, Iterable<String>>() {
-        @Override
-        public Iterable<String> apply(HasImports hasImports) {
-            return hasImports.getImports();
-        }
-    };
+    public HttpAnnotation(
+            HttpParameter.Type type,
+            String name) {
+        this.parameterType = type;
+        this.name = name;
+    }
 
-    Collection<String> getImports();
+    public Type getParameterType() {
+        return parameterType;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

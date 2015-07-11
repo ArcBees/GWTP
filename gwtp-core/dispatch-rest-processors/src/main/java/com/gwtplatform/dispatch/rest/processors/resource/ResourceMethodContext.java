@@ -18,30 +18,30 @@ package com.gwtplatform.dispatch.rest.processors.resource;
 
 import javax.lang.model.element.ExecutableElement;
 
-import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
 
 public class ResourceMethodContext {
-    private final TypeDefinition parent;
-    private final EndPointDefinition endPoint;
+    private final Type parent;
+    private final EndPointDetails endPoint;
     private final ExecutableElement element;
 
     public ResourceMethodContext(
-            TypeDefinition parent,
-            EndPointDefinition endPoint,
+            Type parent,
+            EndPointDetails endPoint,
             ExecutableElement element) {
         this.parent = parent;
         this.endPoint = endPoint;
         this.element = element;
     }
 
-    public TypeDefinition getParent() {
+    public Type getParent() {
         return parent;
     }
 
-    public EndPointDefinition getEndPoint() {
+    public EndPointDetails getEndPoint() {
         return endPoint;
     }
 

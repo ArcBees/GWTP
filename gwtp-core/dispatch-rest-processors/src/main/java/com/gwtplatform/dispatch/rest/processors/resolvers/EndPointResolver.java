@@ -27,14 +27,13 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
 
 import com.google.common.base.Optional;
-import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.HttpVariableDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.HttpVariable;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
-import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 import static com.google.auto.common.MoreElements.asType;
@@ -63,7 +62,7 @@ public class EndPointResolver {
         this.httpVariableResolver = new HttpVariableResolver(logger, utils);
     }
 
-    public boolean canResolve(ExecutableElement element, EndPointDefinition parent) {
+    public boolean canResolve(ExecutableElement element, EndPointDetails parent) {
         return hasValidVerb(element)
                 && hasValidReturnType(element)
                 && hasValidParameters(element, parent);
@@ -90,19 +89,20 @@ public class EndPointResolver {
         return false;
     }
 
-    private boolean hasValidParameters(ExecutableElement element, EndPointDefinition parent) {
+    private boolean hasValidParameters(ExecutableElement element, EndPointDetails parent) {
         boolean valid = true;
         int bodyCount = containsBody(parent) ? 1 : 0;
         boolean hasForms = containsForm(parent);
 
         for (VariableElement variableElement : element.getParameters()) {
             if (httpVariableResolver.canResolve(variableElement)) {
-                HttpVariableDefinition variable = httpVariableResolver.resolve(variableElement);
+                HttpVariable variable = httpVariableResolver.resolve(variableElement);
 
                 if (variable.isBody()) {
                     ++bodyCount;
                 } else {
-                    hasForms |= variable.getHttpAnnotation().getParameterType() == Type.FORM;
+                    hasForms |= variable.getHttpAnnotation().getParameterType() == com.gwtplatform.dispatch.rest
+                            .shared.HttpParameter.Type.FORM;
                 }
             } else {
                 valid = false;
@@ -135,8 +135,8 @@ public class EndPointResolver {
         return valid;
     }
 
-    private boolean containsBody(EndPointDefinition endPoint) {
-        for (HttpVariableDefinition variable : endPoint.getHttpParameters()) {
+    private boolean containsBody(EndPointDetails endPoint) {
+        for (HttpVariable variable : endPoint.getHttpParameters()) {
             if (variable.isBody()) {
                 return true;
             }
@@ -145,9 +145,9 @@ public class EndPointResolver {
         return false;
     }
 
-    private boolean containsForm(EndPointDefinition endPoint) {
-        for (HttpVariableDefinition variable : endPoint.getHttpParameters()) {
-            if (variable.getHttpAnnotation().getParameterType() == Type.FORM) {
+    private boolean containsForm(EndPointDetails endPoint) {
+        for (HttpVariable variable : endPoint.getHttpParameters()) {
+            if (variable.getHttpAnnotation().getParameterType() == com.gwtplatform.dispatch.rest.shared.HttpParameter.Type.FORM) {
                 return true;
             }
         }
@@ -155,7 +155,7 @@ public class EndPointResolver {
         return false;
     }
 
-    public EndPointDefinition resolve(DeclaredType type) {
+    public EndPointDetails resolve(DeclaredType type) {
         Element element = type.asElement();
 
         String path = PathResolver.resolve(element);
@@ -163,24 +163,24 @@ public class EndPointResolver {
         Set<ContentType> consumes = resolveConsumes(element);
         Set<ContentType> produces = resolveProduces(element);
 
-        return new EndPointDefinition(path, secured, consumes, produces);
+        return new EndPointDetails(path, secured, consumes, produces);
     }
 
-    public EndPointDefinition resolve(ExecutableElement element, EndPointDefinition parent) {
+    public EndPointDetails resolve(ExecutableElement element, EndPointDetails parent) {
         String path = PathResolver.resolve(element, parent.getPath());
         boolean secured = parent.isSecured() && SecuredResolver.resolve(element);
         Set<ContentType> consumes = resolveConsumes(element, parent.getConsumes());
         Set<ContentType> produces = resolveProduces(element, parent.getProduces());
         HttpVerb verb = httpVerbResolver.resolve(element);
-        List<HttpVariableDefinition> variables = resolveVariables(element, parent);
-        TypeDefinition result = resolveResult(element);
+        List<HttpVariable> variables = resolveVariables(element, parent);
+        Type result = resolveResult(element);
 
-        return new EndPointDefinition(path, secured, consumes, produces, verb, variables, result);
+        return new EndPointDetails(path, secured, consumes, produces, verb, variables, result);
     }
 
-    public List<HttpVariableDefinition> resolveVariables(ExecutableElement element, EndPointDefinition parent) {
-        List<HttpVariableDefinition> variables = new ArrayList<>(parent.getHttpParameters());
-        Optional<HttpVariableDefinition> body = parent.getBody();
+    public List<HttpVariable> resolveVariables(ExecutableElement element, EndPointDetails parent) {
+        List<HttpVariable> variables = new ArrayList<>(parent.getHttpParameters());
+        Optional<HttpVariable> body = parent.getBody();
 
         if (body.isPresent()) {
             variables.add(body.get());
@@ -193,10 +193,10 @@ public class EndPointResolver {
         return variables;
     }
 
-    public TypeDefinition resolveResult(ExecutableElement element) {
+    public Type resolveResult(ExecutableElement element) {
         DeclaredType returnType = asDeclared(element.getReturnType());
         List<? extends TypeMirror> typeArguments = returnType.getTypeArguments();
 
-        return new TypeDefinition(typeArguments.get(0));
+        return new Type(typeArguments.get(0));
     }
 }

@@ -17,42 +17,42 @@
 package com.gwtplatform.dispatch.rest.processors.bindings;
 
 import com.google.common.base.Optional;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 
 public class BindingContext {
-    private final TypeDefinition implementer;
+    private final Type implementer;
 
-    private Optional<TypeDefinition> implemented;
-    private Optional<TypeDefinition> scope;
+    private Optional<Type> implemented;
+    private Optional<Type> scope;
     private boolean eagerSingleton;
 
-    public BindingContext(TypeDefinition implementer) {
+    public BindingContext(Type implementer) {
         this.implementer = implementer;
         this.implemented = Optional.absent();
         this.scope = Optional.absent();
     }
 
-    public void setImplemented(TypeDefinition implemented) {
+    public void setImplemented(Type implemented) {
         this.implemented = Optional.fromNullable(implemented);
     }
 
     public void setScope(Class<?> scope) {
-        this.scope = Optional.of(new TypeDefinition(scope));
+        this.scope = Optional.of(new Type(scope));
     }
 
     public void setEagerSingleton(boolean eagerSingleton) {
         this.eagerSingleton = eagerSingleton;
     }
 
-    public TypeDefinition getImplementer() {
+    public Type getImplementer() {
         return implementer;
     }
 
-    public Optional<TypeDefinition> getImplemented() {
+    public Optional<Type> getImplemented() {
         return implemented;
     }
 
-    public Optional<TypeDefinition> getScope() {
+    public Optional<Type> getScope() {
         return scope;
     }
 

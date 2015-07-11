@@ -14,22 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.definitions;
+package com.gwtplatform.dispatch.rest.processors.domain;
 
 import java.util.Collection;
 
-public class VariableDefinition implements HasImports {
-    private final TypeDefinition type;
+public class Variable implements HasImports {
+    private final Type type;
     private final String name;
 
-    public VariableDefinition(
-            TypeDefinition type,
+    public Variable(
+            Type type,
             String name) {
         this.type = type;
         this.name = name;
     }
 
-    public TypeDefinition getType() {
+    public Type getType() {
         return type;
     }
 

@@ -27,25 +27,25 @@ import org.apache.velocity.VelocityContext;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
-import com.gwtplatform.dispatch.rest.processors.definitions.HasImports;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 
-import static com.gwtplatform.dispatch.rest.processors.definitions.HasImports.EXTRACT_IMPORTS_FUNCTION;
+import static com.gwtplatform.dispatch.rest.processors.domain.HasImports.EXTRACT_IMPORTS_FUNCTION;
 
 public class OutputBuilder {
     private final Outputter outputter;
-    private final TypeDefinition processorDefinition;
+    private final Type processorDefinition;
     private final String templateFile;
     private final VelocityContext context;
     private final Collection<String> imports;
 
     private Optional<JavaFileObject> sourceFile;
-    private Optional<TypeDefinition> type;
+    private Optional<Type> type;
     private Optional<String> errorLogParameter;
 
     OutputBuilder(
             Outputter outputter,
-            TypeDefinition processorDefinition,
+            Type processorDefinition,
             String templateFile) {
         this.outputter = outputter;
         this.processorDefinition = processorDefinition;
@@ -97,11 +97,11 @@ public class OutputBuilder {
         return this;
     }
 
-    public void writeTo(TypeDefinition type) {
+    public void writeTo(Type type) {
         writeTo(type, null);
     }
 
-    public void writeTo(TypeDefinition type, JavaFileObject sourceFile) {
+    public void writeTo(Type type, JavaFileObject sourceFile) {
         this.type = Optional.of(type);
         this.sourceFile = Optional.fromNullable(sourceFile);
 
@@ -116,7 +116,7 @@ public class OutputBuilder {
         return outputter.parse(this);
     }
 
-    TypeDefinition getProcessorDefinition() {
+    Type getProcessorDefinition() {
         return processorDefinition;
     }
 
@@ -136,7 +136,7 @@ public class OutputBuilder {
         return sourceFile;
     }
 
-    Optional<TypeDefinition> getType() {
+    Optional<Type> getType() {
         return type;
     }
 

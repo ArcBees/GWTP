@@ -33,8 +33,8 @@ import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.ContextProcessors;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingContext;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessor;
-import com.gwtplatform.dispatch.rest.processors.definitions.EndPointDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.endpoint.EndPointMethodDefinition;
 import com.gwtplatform.dispatch.rest.processors.resolvers.EndPointResolver;
 
@@ -91,15 +91,15 @@ public class RootResourceProcessor extends AbstractContextProcessor<Element, Res
 
     public ResourceDefinition processResource(Element element) {
         DeclaredType type = asDeclared(element.asType());
-        TypeDefinition resourceInterface = new TypeDefinition(type);
-        TypeDefinition impl = resourceName(resourceInterface);
-        EndPointDefinition endPoint = endPointResolver.resolve(type);
+        Type resourceInterface = new Type(type);
+        Type impl = resourceName(resourceInterface);
+        EndPointDetails endPoint = endPointResolver.resolve(type);
         List<EndPointMethodDefinition> methods = processMethods(impl, endPoint, type);
 
         return new ResourceDefinition(impl, resourceInterface, endPoint, methods);
     }
 
-    private List<EndPointMethodDefinition> processMethods(final TypeDefinition impl, final EndPointDefinition endPoint,
+    private List<EndPointMethodDefinition> processMethods(final Type impl, final EndPointDetails endPoint,
             DeclaredType type) {
         List<ExecutableElement> methodElements = methodsIn(utils.getAllMembers(asTypeElement(type), Object.class));
 
@@ -114,7 +114,7 @@ public class RootResourceProcessor extends AbstractContextProcessor<Element, Res
                 .toList();
     }
 
-    private EndPointMethodDefinition processMethod(TypeDefinition impl, EndPointDefinition endPoint,
+    private EndPointMethodDefinition processMethod(Type impl, EndPointDetails endPoint,
             ExecutableElement element) {
         ResourceMethodContext context = new ResourceMethodContext(impl, endPoint, element);
         ResourceMethodProcessor processor = contextProcessors.getProcessor(ResourceMethodProcessor.class, context);
@@ -123,7 +123,7 @@ public class RootResourceProcessor extends AbstractContextProcessor<Element, Res
     }
 
     private void processBinding(ResourceDefinition resource) {
-        TypeDefinition impl = resource.getImpl();
+        Type impl = resource.getImpl();
 
         BindingContext context = new BindingContext(impl);
         context.setImplemented(resource.getResource());

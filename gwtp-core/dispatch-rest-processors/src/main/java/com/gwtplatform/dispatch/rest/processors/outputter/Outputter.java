@@ -36,7 +36,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Ordering;
 import com.gwtplatform.dispatch.rest.processors.UnableToProcessException;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.utils.Primitives;
 
@@ -49,14 +49,14 @@ public class Outputter {
     private static final String ENCODING = "UTF-8";
 
     private final Logger logger;
-    private final TypeDefinition processorDefinition;
+    private final Type processorDefinition;
     private final Filer filer;
 
     private VelocityEngine velocityEngine;
 
     public Outputter(
             Logger logger,
-            TypeDefinition processorDefinition,
+            Type processorDefinition,
             Filer filer) {
         this.logger = logger;
         this.processorDefinition = processorDefinition;
@@ -95,7 +95,7 @@ public class Outputter {
         }
     }
 
-    public JavaFileObject prepareSourceFile(TypeDefinition type) {
+    public JavaFileObject prepareSourceFile(Type type) {
         try {
             return filer.createSourceFile(type.getQualifiedName());
         } catch (IOException e) {
@@ -106,7 +106,7 @@ public class Outputter {
 
     private void merge(OutputBuilder builder, Writer writer) throws IOException {
         VelocityContext context = builder.getContext();
-        Optional<TypeDefinition> type = builder.getType();
+        Optional<Type> type = builder.getType();
         Collection<String> imports = cleanupImports(builder.getImports(), type);
 
         if (type.isPresent()) {
@@ -119,7 +119,7 @@ public class Outputter {
         getEngine().mergeTemplate(builder.getTemplateFile(), ENCODING, context, writer);
     }
 
-    private Collection<String> cleanupImports(Collection<String> imports, Optional<TypeDefinition> type) {
+    private Collection<String> cleanupImports(Collection<String> imports, Optional<Type> type) {
         List<Predicate<CharSequence>> predicates = new ArrayList<>();
         predicates.add(Predicates.<CharSequence>isNull());
         predicates.add(Primitives.IS_PRIMITIVE_PREDICATE);

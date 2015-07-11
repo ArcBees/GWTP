@@ -18,9 +18,9 @@ package com.gwtplatform.dispatch.rest.processors.resolvers;
 
 import javax.lang.model.element.VariableElement;
 
-import com.gwtplatform.dispatch.rest.processors.definitions.HttpAnnotationDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.HttpVariableDefinition;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.HttpAnnotation;
+import com.gwtplatform.dispatch.rest.processors.domain.HttpVariable;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 
@@ -40,13 +40,13 @@ public class HttpVariableResolver {
                 && dateFormatResolver.canResolve(element);
     }
 
-    public HttpVariableDefinition resolve(VariableElement element) {
-        TypeDefinition type = new TypeDefinition(element.asType());
+    public HttpVariable resolve(VariableElement element) {
+        Type type = new Type(element.asType());
         String name = element.getSimpleName().toString();
-        HttpAnnotationDefinition httpAnnotation = httpAnnotationResolver.resolve(element);
+        HttpAnnotation httpAnnotation = httpAnnotationResolver.resolve(element);
         String dateFormat = dateFormatResolver.resolve(element);
         boolean body = httpAnnotation == null;
 
-        return new HttpVariableDefinition(type, name, httpAnnotation, dateFormat, body);
+        return new HttpVariable(type, name, httpAnnotation, dateFormat, body);
     }
 }

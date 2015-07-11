@@ -25,7 +25,7 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.SimpleElementVisitor6;
 
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 
 import static javax.lang.model.util.ElementFilter.methodsIn;
 
@@ -34,8 +34,8 @@ import static com.google.auto.common.MoreElements.asType;
 public class NameFactory {
     private static final String RESOURCE_SUFFIX = "Impl";
 
-    public static TypeDefinition resourceName(TypeDefinition resource) {
-        return new TypeDefinition(resource.getPackageName(), resource.getSimpleName() + RESOURCE_SUFFIX);
+    public static Type resourceName(Type resource) {
+        return new Type(resource.getPackageName(), resource.getSimpleName() + RESOURCE_SUFFIX);
     }
 
     /**
@@ -43,7 +43,7 @@ public class NameFactory {
      * name clashes. This function will prefix the requested name with the parent name and the method index to ensure
      * uniqueness.
      */
-    public static TypeDefinition endPointName(Elements elements, TypeDefinition parent, ExecutableElement method) {
+    public static Type endPointName(Elements elements, Type parent, ExecutableElement method) {
         String packageName = parent.getPackageName();
         String parentName = parent.getSimpleName();
 
@@ -51,7 +51,7 @@ public class NameFactory {
         int methodIndex = indexInParent(elements, method);
         String className = String.format("%s_%d_%s", parentName, methodIndex, methodName);
 
-        return new TypeDefinition(packageName, className);
+        return new Type(packageName, className);
     }
 
     private static int indexInParent(Elements elements, ExecutableElement method) {
@@ -81,7 +81,7 @@ public class NameFactory {
         return className + "#" + methodName;
     }
 
-    public static String methodName(TypeDefinition parent, ExecutableElement element) {
+    public static String methodName(Type parent, ExecutableElement element) {
         return parent.getQualifiedName() + "#" + element.getSimpleName();
     }
 }

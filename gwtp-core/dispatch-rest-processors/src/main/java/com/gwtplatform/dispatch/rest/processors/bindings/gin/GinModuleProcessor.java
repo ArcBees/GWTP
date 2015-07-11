@@ -28,7 +28,7 @@ import com.google.inject.TypeLiteral;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingContext;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessor;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.outputter.OutputBuilder;
 
 @AutoService(BindingsProcessor.class)
@@ -38,7 +38,7 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
 
     private final List<GinBinding> bindings;
 
-    private TypeDefinition impl;
+    private Type impl;
     private JavaFileObject sourceFile;
     private boolean containsTypeLiteral;
 
@@ -50,7 +50,7 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
-        impl = new TypeDefinition(QUALIFIED_NAME);
+        impl = new Type(QUALIFIED_NAME);
         sourceFile = outputter.prepareSourceFile(impl);
     }
 
@@ -61,9 +61,9 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
 
     @Override
     public Void process(BindingContext context) {
-        TypeDefinition implementer = context.getImplementer();
-        Optional<TypeDefinition> implemented = context.getImplemented();
-        Optional<TypeDefinition> scope = context.getScope();
+        Type implementer = context.getImplementer();
+        Optional<Type> implemented = context.getImplemented();
+        Optional<Type> scope = context.getScope();
 
         bindings.add(new GinBinding(implementer, implemented.orNull(), scope.orNull(), context.isEagerSingleton()));
         containsTypeLiteral |= implementer.isParameterized()

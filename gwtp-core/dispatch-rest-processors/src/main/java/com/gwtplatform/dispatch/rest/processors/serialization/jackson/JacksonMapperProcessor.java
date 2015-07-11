@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.dispatch.rest.processors.utils.Primitives;
 
@@ -53,19 +53,19 @@ public class JacksonMapperProcessor extends AbstractContextProcessor<Serializati
     }
 
     private MapperDefinition processMapper(SerializationContext context) {
-        TypeDefinition type = context.getType();
-        TypeDefinition mapped = ensureNotPrimitive(type);
+        Type type = context.getType();
+        Type mapped = ensureNotPrimitive(type);
 
         String name = SANITIZE_NAME_PATTERN.matcher(mapped.getQualifiedParameterizedName()).replaceAll("_");
         name += NAME_SUFFIX;
 
-        return new MapperDefinition(type, mapped, new TypeDefinition(PACKAGE, name));
+        return new MapperDefinition(type, mapped, new Type(PACKAGE, name));
     }
 
-    private TypeDefinition ensureNotPrimitive(TypeDefinition type) {
+    private Type ensureNotPrimitive(Type type) {
         Optional<Primitives> primitive = findByPrimitive(type.getQualifiedParameterizedName());
         if (primitive.isPresent()) {
-            return new TypeDefinition(primitive.get().getBoxedClass());
+            return new Type(primitive.get().getBoxedClass());
         }
 
         return type;

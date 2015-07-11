@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.definitions;
+package com.gwtplatform.dispatch.rest.processors.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,10 +34,10 @@ import static com.google.common.base.Predicates.equalTo;
 import static com.google.common.base.Predicates.not;
 import static com.google.common.base.Predicates.notNull;
 
-public class EndPointDefinition implements HasImports {
-    private static final Predicate<HttpVariableDefinition> BODY_PREDICATE = new Predicate<HttpVariableDefinition>() {
+public class EndPointDetails implements HasImports {
+    private static final Predicate<HttpVariable> BODY_PREDICATE = new Predicate<HttpVariable>() {
         @Override
-        public boolean apply(HttpVariableDefinition variable) {
+        public boolean apply(HttpVariable variable) {
             return variable.isBody();
         }
     };
@@ -47,26 +47,26 @@ public class EndPointDefinition implements HasImports {
     private final Set<ContentType> consumes;
     private final Set<ContentType> produces;
     private final HttpVerb verb;
-    private final Collection<HttpVariableDefinition> httpParameters;
-    private final Optional<HttpVariableDefinition> body;
-    private final TypeDefinition result;
+    private final Collection<HttpVariable> httpParameters;
+    private final Optional<HttpVariable> body;
+    private final Type result;
 
-    public EndPointDefinition(
+    public EndPointDetails(
             String path,
             boolean secured,
             Set<ContentType> consumes,
             Set<ContentType> produces) {
-        this(path, secured, consumes, produces, null, new ArrayList<HttpVariableDefinition>(), null);
+        this(path, secured, consumes, produces, null, new ArrayList<HttpVariable>(), null);
     }
 
-    public EndPointDefinition(
+    public EndPointDetails(
             String path,
             boolean secured,
             Set<ContentType> consumes,
             Set<ContentType> produces,
             HttpVerb verb,
-            Collection<HttpVariableDefinition> parameters,
-            TypeDefinition result) {
+            Collection<HttpVariable> parameters,
+            Type result) {
         this.verb = verb;
         this.path = path;
         this.secured = secured;
@@ -77,13 +77,13 @@ public class EndPointDefinition implements HasImports {
         this.result = result;
     }
 
-    private Collection<HttpVariableDefinition> removeBody(Collection<HttpVariableDefinition> parameters) {
+    private Collection<HttpVariable> removeBody(Collection<HttpVariable> parameters) {
         return FluentIterable.from(parameters)
                 .filter(not(BODY_PREDICATE))
                 .toList();
     }
 
-    private Optional<HttpVariableDefinition> extractBody(Collection<HttpVariableDefinition> parameters) {
+    private Optional<HttpVariable> extractBody(Collection<HttpVariable> parameters) {
         return FluentIterable.from(parameters)
                 .filter(BODY_PREDICATE)
                 .first();
@@ -109,24 +109,24 @@ public class EndPointDefinition implements HasImports {
         return produces;
     }
 
-    public Collection<HttpVariableDefinition> getHttpParameters() {
+    public Collection<HttpVariable> getHttpParameters() {
         return httpParameters;
     }
 
-    public Optional<HttpVariableDefinition> getBody() {
+    public Optional<HttpVariable> getBody() {
         return body;
     }
 
-    public TypeDefinition getResult() {
+    public Type getResult() {
         return result;
     }
 
     @Override
     public Collection<String> getImports() {
         FluentIterable<String> imports = FluentIterable.from(httpParameters)
-                .transformAndConcat(new Function<HttpVariableDefinition, Iterable<String>>() {
+                .transformAndConcat(new Function<HttpVariable, Iterable<String>>() {
                     @Override
-                    public Iterable<String> apply(HttpVariableDefinition variable) {
+                    public Iterable<String> apply(HttpVariable variable) {
                         return variable.getImports();
                     }
                 })

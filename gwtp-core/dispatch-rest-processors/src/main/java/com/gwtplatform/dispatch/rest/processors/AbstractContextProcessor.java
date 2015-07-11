@@ -18,7 +18,7 @@ package com.gwtplatform.dispatch.rest.processors;
 
 import javax.annotation.processing.ProcessingEnvironment;
 
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.outputter.Outputter;
 import com.gwtplatform.dispatch.rest.processors.utils.Utils;
@@ -36,7 +36,7 @@ public abstract class AbstractContextProcessor<I, O> implements ContextProcessor
         this.processingEnv = processingEnv;
         this.logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
         this.utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
-        this.outputter = new Outputter(logger, new TypeDefinition(getClass()), processingEnv.getFiler());
+        this.outputter = new Outputter(logger, new Type(getClass()), processingEnv.getFiler());
 
         this.initialized = true;
     }

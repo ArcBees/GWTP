@@ -22,19 +22,19 @@ import java.util.List;
 import java.util.Objects;
 
 import com.google.common.base.Optional;
-import com.gwtplatform.dispatch.rest.processors.definitions.HasImports;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 
 public class GinBinding implements HasImports {
-    private final TypeDefinition implementer;
-    private final Optional<TypeDefinition> implemented;
-    private final Optional<TypeDefinition> scope;
+    private final Type implementer;
+    private final Optional<Type> implemented;
+    private final Optional<Type> scope;
     private final boolean eagerSingleton;
 
     public GinBinding(
-            TypeDefinition implementer,
-            TypeDefinition implemented,
-            TypeDefinition scope,
+            Type implementer,
+            Type implemented,
+            Type scope,
             boolean eagerSingleton) {
         this.implementer = implementer;
         this.implemented = Optional.fromNullable(eagerSingleton ? null : implemented);
@@ -42,15 +42,15 @@ public class GinBinding implements HasImports {
         this.eagerSingleton = eagerSingleton;
     }
 
-    public TypeDefinition getImplementer() {
+    public Type getImplementer() {
         return implementer;
     }
 
-    public Optional<TypeDefinition> getImplemented() {
+    public Optional<Type> getImplemented() {
         return implemented;
     }
 
-    public Optional<TypeDefinition> getScope() {
+    public Optional<Type> getScope() {
         return scope;
     }
 

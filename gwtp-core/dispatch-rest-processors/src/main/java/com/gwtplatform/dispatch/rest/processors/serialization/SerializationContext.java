@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.rest.processors.serialization;
 import java.util.Set;
 
 import com.google.common.base.MoreObjects;
-import com.gwtplatform.dispatch.rest.processors.definitions.TypeDefinition;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 
 public class SerializationContext {
@@ -29,12 +29,12 @@ public class SerializationContext {
         BOTH
     }
 
-    private final TypeDefinition type;
+    private final Type type;
     private final Set<ContentType> contentTypes;
     private final IO io;
 
     public SerializationContext(
-            TypeDefinition type,
+            Type type,
             Set<ContentType> contentTypes,
             IO io) {
         this.type = type;
@@ -42,7 +42,7 @@ public class SerializationContext {
         this.io = io;
     }
 
-    public TypeDefinition getType() {
+    public Type getType() {
         return type;
     }
 

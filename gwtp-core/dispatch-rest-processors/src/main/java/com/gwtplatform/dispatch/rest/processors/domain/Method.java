@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.definitions;
+package com.gwtplatform.dispatch.rest.processors.domain;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -23,21 +23,21 @@ import java.util.Set;
 
 import com.google.common.collect.FluentIterable;
 
-public class MethodDefinition implements HasImports {
-    private final TypeDefinition returnType;
+public class Method implements HasImports {
+    private final Type returnType;
     private final String name;
-    private final List<VariableDefinition> parameters;
+    private final List<Variable> parameters;
 
-    public MethodDefinition(
-            TypeDefinition returnType,
+    public Method(
+            Type returnType,
             String name,
-            List<VariableDefinition> parameters) {
+            List<Variable> parameters) {
         this.returnType = returnType;
         this.name = name;
         this.parameters = parameters;
     }
 
-    public TypeDefinition getReturnType() {
+    public Type getReturnType() {
         return returnType;
     }
 
@@ -45,7 +45,7 @@ public class MethodDefinition implements HasImports {
         return name;
     }
 
-    public List<VariableDefinition> getParameters() {
+    public List<Variable> getParameters() {
         return parameters;
     }
 
@@ -53,7 +53,7 @@ public class MethodDefinition implements HasImports {
     public Collection<String> getImports() {
         Set<String> imports = new HashSet<>(returnType.getImports());
 
-        for (VariableDefinition variable : parameters) {
+        for (Variable variable : parameters) {
             imports.addAll(variable.getType().getImports());
         }
 
