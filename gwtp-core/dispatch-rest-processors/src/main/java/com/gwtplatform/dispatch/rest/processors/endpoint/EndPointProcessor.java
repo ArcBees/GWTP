@@ -16,7 +16,55 @@
 
 package com.gwtplatform.dispatch.rest.processors.endpoint;
 
-import com.gwtplatform.dispatch.rest.processors.ContextProcessor;
+import javax.annotation.processing.ProcessingEnvironment;
 
-public interface EndPointProcessor extends ContextProcessor<EndPointContext, EndPoint> {
+import com.google.common.base.Optional;
+import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
+import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.HttpVariable;
+import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
+import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessors;
+
+import static com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext.IO.READ;
+import static com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext.IO.WRITE;
+
+public class EndPointProcessor extends AbstractContextProcessor<EndPoint, Void> {
+    private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm";
+
+    private SerializationProcessors serializationProcessors;
+
+    @Override
+    public synchronized void init(ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+
+        serializationProcessors = new SerializationProcessors(processingEnv);
+    }
+
+    @Override
+    public Void process(EndPoint endPoint) {
+        logger.debug("Generating end-point implementation `%s`.", endPoint.getImpl());
+
+        outputter.withTemplateFile(TEMPLATE)
+                .withParam("endPoint", endPoint.getEndPointDetails())
+                .withParam("fields", endPoint.getFields())
+                .writeTo(endPoint.getImpl());
+
+        generateSerializers(endPoint);
+
+        return null;
+    }
+
+    private void generateSerializers(EndPoint endPoint) {
+        EndPointDetails endPointDetails = endPoint.getEndPointDetails();
+        Optional<HttpVariable> body = endPointDetails.getBody();
+        SerializationContext context;
+
+        if (body.isPresent()) {
+            context = new SerializationContext(body.get().getType(), endPointDetails.getConsumes(), READ);
+            serializationProcessors.process(context);
+        }
+
+        context = new SerializationContext(endPointDetails.getResult(), endPointDetails.getProduces(), WRITE);
+        serializationProcessors.process(context);
+    }
 }

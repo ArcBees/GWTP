@@ -83,10 +83,6 @@ public abstract class HttpParamValueResolver {
         return isAnnotationPresent(element, getAssociatedClass());
     }
 
-    public boolean canResolve(VariableElement element) {
-        return true;
-    }
-
     public String resolve(VariableElement element) {
         AnnotationMirror annotationMirror = getAnnotationMirror(element, getAssociatedClass()).get();
         Collection<? extends AnnotationValue> values =

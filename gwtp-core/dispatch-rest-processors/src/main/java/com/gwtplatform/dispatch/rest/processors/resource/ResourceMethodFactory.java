@@ -14,18 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors;
+package com.gwtplatform.dispatch.rest.processors.resource;
 
-import javax.annotation.processing.ProcessingEnvironment;
+import javax.lang.model.element.ExecutableElement;
 
-public interface ContextProcessor<I, O> {
-    void init(ProcessingEnvironment processingEnv);
+import com.gwtplatform.dispatch.rest.processors.logger.Logger;
+import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 
-    boolean isInitialized();
+public interface ResourceMethodFactory {
+    boolean canHandle(ExecutableElement element);
 
-    boolean canProcess(I context);
-
-    O process(I context);
-
-    void processLast();
+    ResourceMethod resolve(Logger logger, Utils utils, Resource resource, ExecutableElement element);
 }

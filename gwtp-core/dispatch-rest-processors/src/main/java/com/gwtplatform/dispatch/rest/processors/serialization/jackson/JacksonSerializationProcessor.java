@@ -28,16 +28,14 @@ import com.google.auto.service.AutoService;
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
-import com.gwtplatform.dispatch.rest.processors.ContextProcessors;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingContext;
-import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessor;
+import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessors;
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessor;
 import com.gwtplatform.dispatch.rest.processors.utils.Primitives;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 
-import static com.google.common.collect.Iterables.isEmpty;
 import static com.gwtplatform.dispatch.rest.processors.utils.Primitives.findByBoxed;
 import static com.gwtplatform.dispatch.rest.processors.utils.Primitives.findByPrimitive;
 
@@ -54,7 +52,7 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
     private final Type parent;
 
     private JavaFileObject sourceFile;
-    private ContextProcessors contextProcessors;
+    private BindingsProcessors bindingsProcessors;
 
     public JacksonSerializationProcessor() {
         this.mapperProcessor = new JacksonMapperProcessor();
@@ -67,10 +65,10 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
-        mapperProcessor.init(processingEnv);
-
-        contextProcessors = new ContextProcessors(processingEnv, logger);
+        bindingsProcessors = new BindingsProcessors(processingEnv);
         sourceFile = outputter.prepareSourceFile(impl);
+
+        mapperProcessor.init(processingEnv);
 
         processBinding();
     }
@@ -80,14 +78,7 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
         context.setImplemented(parent);
         context.setScope(Singleton.class);
 
-        Iterable<BindingsProcessor> processors = contextProcessors.getProcessors(BindingsProcessor.class, context);
-        for (BindingsProcessor processor : processors) {
-            processor.process(context);
-        }
-
-        if (isEmpty(processors)) {
-            logger.mandatoryWarning("No binding policy found for serialization policy `%s`.", impl.getQualifiedName());
-        }
+        bindingsProcessors.process(context);
     }
 
     @Override

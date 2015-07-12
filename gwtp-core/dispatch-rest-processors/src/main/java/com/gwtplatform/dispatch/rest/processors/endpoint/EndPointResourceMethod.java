@@ -20,26 +20,38 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet;
+import javax.lang.model.element.ExecutableElement;
+
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.Method;
+import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
+import com.gwtplatform.dispatch.rest.processors.resource.Resource;
+import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 
 public class EndPointResourceMethod implements ResourceMethod {
-    private final Method method;
-    private final EndPointDetails endPoint;
-    private final EndPoint impl;
-    private final CodeSnippet codeSnippet;
+    private final Resource resource;
 
-    EndPointResourceMethod(
-            Method method,
-            EndPointDetails endPoint,
-            EndPoint impl,
-            CodeSnippet codeSnippet) {
-        this.method = method;
-        this.endPoint = endPoint;
-        this.impl = impl;
-        this.codeSnippet = codeSnippet;
+    private final Method method;
+    private final EndPointDetails endPointDetails;
+    private final EndPoint endPoint;
+
+    public EndPointResourceMethod(
+            Logger logger,
+            Utils utils,
+            Resource resource,
+            ExecutableElement element) {
+        this.resource = resource;
+
+        // TODO: Add an order to HttpVariables and converge both HttpVariables and Variables.
+        // This is not an issue until sub-resources are implemented
+        method = new Method(element);
+        endPointDetails = new EndPointDetails(logger, utils, element, resource.getEndPointDetails());
+        endPoint = new EndPoint(logger, utils, this, element);
+    }
+
+    public Resource getResource() {
+        return resource;
     }
 
     @Override
@@ -49,23 +61,17 @@ public class EndPointResourceMethod implements ResourceMethod {
 
     @Override
     public EndPointDetails getEndPointDetails() {
+        return endPointDetails;
+    }
+
+    public EndPoint getEndPoint() {
         return endPoint;
-    }
-
-    public EndPoint getImpl() {
-        return impl;
-    }
-
-    @Deprecated(/* TODO: processors will handle that  */)
-    public CodeSnippet getCodeSnippet() {
-        return codeSnippet;
     }
 
     @Override
     public Collection<String> getImports() {
         List<String> imports = new ArrayList<>(method.getImports());
-        imports.addAll(impl.getImports());
-        imports.addAll(codeSnippet.getImports());
+        imports.addAll(endPoint.getImports());
 
         return imports;
     }

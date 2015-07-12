@@ -35,11 +35,6 @@ public class JacksonMapperProcessor extends AbstractContextProcessor<Serializati
             "/com/gwtplatform/dispatch/rest/processors/serialization/jackson/JacksonMapper.vm";
 
     @Override
-    public boolean canProcess(SerializationContext context) {
-        return true;
-    }
-
-    @Override
     public JacksonMapper process(SerializationContext context) {
         logger.debug("Generating Jackson mapper for `%s`.", context.getType().getQualifiedParameterizedName());
 

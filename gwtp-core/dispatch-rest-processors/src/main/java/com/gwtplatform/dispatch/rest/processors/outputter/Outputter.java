@@ -36,6 +36,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Ordering;
 import com.gwtplatform.dispatch.rest.processors.UnableToProcessException;
+import com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet;
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.utils.Primitives;
@@ -67,10 +68,14 @@ public class Outputter {
         return new OutputBuilder(this, processor, templateFile);
     }
 
-    String parse(OutputBuilder builder) {
+    CodeSnippet parse(OutputBuilder builder) {
         try (Writer writer = new StringWriter()) {
             merge(builder, writer);
-            return writer.toString();
+
+            String code = writer.toString();
+            Collection<String> imports = builder.getImports();
+
+            return new CodeSnippet(code, imports);
         } catch (IOException e) {
             logger.error().throwable(e).log("Can not parse `%s`.", builder.getErrorLogParameter().get());
             throw new UnableToProcessException();
@@ -123,11 +128,11 @@ public class Outputter {
         List<Predicate<CharSequence>> predicates = new ArrayList<>();
         predicates.add(Predicates.<CharSequence>isNull());
         predicates.add(Primitives.IS_PRIMITIVE_PREDICATE);
-        predicates.add(containsPattern("^java\\.lang\\.[^.]+$"));
+        predicates.add(containsPattern("^java\\.lang\\.[^.]+$" ));
 
         if (type.isPresent()) {
             String packageName = type.get().getPackageName();
-            predicates.add(containsPattern("^" + packageName.replace(".", "\\.") + "\\.[^.]+$"));
+            predicates.add(containsPattern("^" + packageName.replace(".", "\\." ) + "\\.[^.]+$" ));
         }
 
         return FluentIterable.from(imports)

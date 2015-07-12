@@ -18,26 +18,28 @@ package com.gwtplatform.dispatch.rest.processors.domain;
 
 import java.util.Collection;
 
-import com.google.common.base.MoreObjects;
+import javax.lang.model.element.VariableElement;
+
+import com.google.common.base.Optional;
+import com.gwtplatform.dispatch.rest.processors.logger.Logger;
+import com.gwtplatform.dispatch.rest.processors.resolvers.DateFormatResolver;
+import com.gwtplatform.dispatch.rest.processors.resolvers.HttpAnnotationResolver;
+import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 
 public class HttpVariable implements HasImports {
     private final Type type;
     private final String name;
-    private final HttpAnnotation httpAnnotation;
-    private final String dateFormat;
-    private final boolean body;
+    private final Optional<HttpAnnotation> httpAnnotation;
+    private final Optional<String> dateFormat;
 
     public HttpVariable(
-            Type type,
-            String name,
-            HttpAnnotation httpAnnotation,
-            String dateFormat,
-            boolean body) {
-        this.type = type;
-        this.name = name;
-        this.httpAnnotation = httpAnnotation;
-        this.dateFormat = dateFormat;
-        this.body = body;
+            Logger logger,
+            Utils utils,
+            VariableElement element) {
+        type = new Type(element.asType());
+        name = element.getSimpleName().toString();
+        httpAnnotation = new HttpAnnotationResolver(logger, utils).resolve(element);
+        dateFormat = new DateFormatResolver(logger).resolve(element);
     }
 
     public Type getType() {
@@ -48,32 +50,20 @@ public class HttpVariable implements HasImports {
         return name;
     }
 
-    public HttpAnnotation getHttpAnnotation() {
+    public Optional<HttpAnnotation> getHttpAnnotation() {
         return httpAnnotation;
     }
 
-    public String getDateFormat() {
+    public Optional<String> getDateFormat() {
         return dateFormat;
     }
 
     public boolean isBody() {
-        return body;
+        return !httpAnnotation.isPresent();
     }
 
     @Override
     public Collection<String> getImports() {
         return type.getImports();
-    }
-
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("type", type)
-                .add("name", name)
-                .add("httpAnnotation", httpAnnotation)
-                .add("dateFormat", dateFormat)
-                .add("body", body)
-                .add("imports", getImports())
-                .toString();
     }
 }

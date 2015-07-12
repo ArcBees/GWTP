@@ -16,17 +16,24 @@
 
 package com.gwtplatform.dispatch.rest.processors.domain;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
+import com.google.common.collect.ImmutableList;
 
 public class CodeSnippet implements HasImports {
     private final String code;
     private final Collection<String> imports;
 
+    public CodeSnippet(String code) {
+        this(code, new ArrayList<String>());
+    }
+
     public CodeSnippet(
             String code,
             Collection<String> imports) {
         this.code = code;
-        this.imports = imports;
+        this.imports = ImmutableList.copyOf(imports);
     }
 
     public String getCode() {

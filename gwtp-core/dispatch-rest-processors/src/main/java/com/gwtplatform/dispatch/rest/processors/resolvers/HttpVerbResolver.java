@@ -18,15 +18,16 @@ package com.gwtplatform.dispatch.rest.processors.resolvers;
 
 import javax.lang.model.element.ExecutableElement;
 
+import com.gwtplatform.dispatch.rest.processors.UnableToProcessException;
+import com.gwtplatform.dispatch.rest.processors.logger.LogBuilder;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
 
-import static com.google.auto.common.MoreElements.asType;
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
 
 public class HttpVerbResolver {
     private static final String INVALID_VERB_COUNT = "End-Point method detected with *%s* HTTP verb annotations. "
-            + "Verify that `%s#%s` is annotated with a single HTTP verb.";
+            + "Verify that one and only one HTTP verb is present.";
 
     private final Logger logger;
 
@@ -34,31 +35,46 @@ public class HttpVerbResolver {
         this.logger = logger;
     }
 
-    public boolean canResolve(ExecutableElement element) {
+    public static boolean isPresent(ExecutableElement element) {
+        for (HttpVerb annotation : HttpVerb.values()) {
+            if (isAnnotationPresent(element, annotation.getAnnotationClass())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public HttpVerb resolve(ExecutableElement element) {
         int annotationsCount = 0;
+        HttpVerb verb = null;
 
         for (HttpVerb annotation : HttpVerb.values()) {
             if (isAnnotationPresent(element, annotation.getAnnotationClass())) {
                 annotationsCount += 1;
+                verb = annotation;
             }
         }
 
-        boolean hasOneAnnotation = annotationsCount == 1;
-        if (!hasOneAnnotation) {
-            logger.warning().context(element).log(INVALID_VERB_COUNT, annotationsCount,
-                    asType(element.getEnclosingElement()).getQualifiedName(), element.getSimpleName());
-        }
+        logPotentialErrors(element, annotationsCount);
 
-        return hasOneAnnotation;
+        return verb;
     }
 
-    public HttpVerb resolve(ExecutableElement element) {
-        for (HttpVerb verb : HttpVerb.values()) {
-            if (isAnnotationPresent(element, verb.getAnnotationClass())) {
-                return verb;
+    public void logPotentialErrors(ExecutableElement element, int annotationsCount) {
+        if (annotationsCount > 1) {
+            LogBuilder logBuilder;
+            if (annotationsCount > 1) {
+                logBuilder = logger.warning();
+            } else {
+                logBuilder = logger.error();
+            }
+
+            logBuilder.context(element).log(INVALID_VERB_COUNT, annotationsCount);
+
+            if (annotationsCount == 0) {
+                throw new UnableToProcessException();
             }
         }
-
-        return null;
     }
 }

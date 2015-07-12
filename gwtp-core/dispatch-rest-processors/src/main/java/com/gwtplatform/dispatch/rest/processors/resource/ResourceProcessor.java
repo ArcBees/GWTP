@@ -16,9 +16,69 @@
 
 package com.gwtplatform.dispatch.rest.processors.resource;
 
-import javax.lang.model.element.Element;
+import java.util.List;
 
-import com.gwtplatform.dispatch.rest.processors.ContextProcessor;
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.inject.Singleton;
 
-public interface ResourceProcessor extends ContextProcessor<Element, Resource> {
+import com.google.common.base.Function;
+import com.google.common.collect.FluentIterable;
+import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
+import com.gwtplatform.dispatch.rest.processors.bindings.BindingContext;
+import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessors;
+import com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet;
+
+public class ResourceProcessor extends AbstractContextProcessor<Resource, Void> {
+    private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/resource/Resource.vm";
+
+    private BindingsProcessors bindingsProcessors;
+    private ResourceMethodProcessors methodProcessors;
+
+    @Override
+    public synchronized void init(ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+
+        bindingsProcessors = new BindingsProcessors(processingEnv);
+        methodProcessors = new ResourceMethodProcessors(processingEnv);
+    }
+
+    @Override
+    public Void process(Resource resource) {
+        logger.debug("Generating resource implementation `%s`.", resource.getImpl());
+
+        List<CodeSnippet> processedMethods = processMethods(resource);
+
+        outputter.withTemplateFile(TEMPLATE)
+                .withParam("resource", resource.getResource())
+                .withParam("methods", processedMethods)
+                .writeTo(resource.getImpl());
+
+        processBinding(resource);
+
+        return null;
+    }
+
+    private List<CodeSnippet> processMethods(Resource resource) {
+        return FluentIterable.from(resource.getMethods())
+                .transform(new Function<ResourceMethod, CodeSnippet>() {
+                    @Override
+                    public CodeSnippet apply(ResourceMethod resourceMethod) {
+                        return methodProcessors.process(resourceMethod);
+                    }
+                })
+                .toList();
+    }
+
+    private void processBinding(Resource resource) {
+        BindingContext context = new BindingContext(resource.getImpl());
+        context.setImplemented(resource.getResource());
+        context.setScope(Singleton.class);
+
+        bindingsProcessors.process(context);
+    }
+
+    @Override
+    public void processLast() {
+        methodProcessors.processLast();
+    }
 }

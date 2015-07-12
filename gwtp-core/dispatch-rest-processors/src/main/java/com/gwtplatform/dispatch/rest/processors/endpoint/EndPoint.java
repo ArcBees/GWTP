@@ -19,25 +19,40 @@ package com.gwtplatform.dispatch.rest.processors.endpoint;
 import java.util.Collection;
 import java.util.List;
 
-import com.google.common.base.Function;
+import javax.lang.model.element.ExecutableElement;
+
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableList;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.domain.Variable;
+import com.gwtplatform.dispatch.rest.processors.logger.Logger;
+import com.gwtplatform.dispatch.rest.processors.utils.Utils;
+
+import static com.gwtplatform.dispatch.rest.processors.NameFactory.endPointName;
 
 public class EndPoint implements HasImports {
+    private final EndPointResourceMethod resourceMethod;
+
     private final Type impl;
     private final List<Variable> fields;
     private final EndPointDetails endPointDetails;
 
     public EndPoint(
-            Type impl,
-            List<Variable> fields,
-            EndPointDetails endPointDetails) {
-        this.impl = impl;
-        this.fields = fields;
-        this.endPointDetails = endPointDetails;
+            Logger logger,
+            Utils utils,
+            EndPointResourceMethod resourceMethod,
+            ExecutableElement element) {
+        this.resourceMethod = resourceMethod;
+
+        impl = endPointName(utils.elements, resourceMethod.getResource().getImpl(), element);
+        fields = ImmutableList.copyOf(resourceMethod.getMethod().getParameters());
+        endPointDetails = resourceMethod.getEndPointDetails();
+    }
+
+    public EndPointResourceMethod getResourceMethod() {
+        return resourceMethod;
     }
 
     public Type getImpl() {
@@ -55,12 +70,7 @@ public class EndPoint implements HasImports {
     @Override
     public Collection<String> getImports() {
         return FluentIterable.from(fields)
-                .transformAndConcat(new Function<Variable, Iterable<String>>() {
-                    @Override
-                    public Iterable<String> apply(Variable variable) {
-                        return variable.getImports();
-                    }
-                })
+                .transformAndConcat(EXTRACT_IMPORTS_FUNCTION)
                 .append(impl.getImports())
                 .toList();
     }

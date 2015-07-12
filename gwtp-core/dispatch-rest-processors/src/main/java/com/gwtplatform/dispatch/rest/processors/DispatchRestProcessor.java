@@ -34,19 +34,26 @@ import javax.ws.rs.Path;
 import com.google.auto.common.BasicAnnotationProcessor;
 import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
 import com.google.auto.service.AutoService;
-import com.google.common.base.Optional;
 import com.google.common.collect.SetMultimap;
+import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessors;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceProcessor;
+import com.gwtplatform.dispatch.rest.processors.resource.Resource;
+import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessors;
+import com.gwtplatform.dispatch.rest.processors.utils.Utils;
+
+import static com.google.auto.common.MoreElements.isType;
+import static com.gwtplatform.dispatch.rest.processors.logger.Logger.DEBUG_OPTION;
 
 @AutoService(Processor.class)
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
-@SupportedOptions(Logger.DEBUG_OPTION)
+@SupportedOptions(DEBUG_OPTION)
 public class DispatchRestProcessor extends AbstractProcessor implements ProcessingStep {
-    private static final String UNABLE_TO_PROCESS_EXCEPTION = "Unable to process Rest-Dispatch classes. See previous "
-            + "log entries for details or compile with -A%s for additional details.";
-    private static final String UNRESOLVABLE_EXCEPTION =
-            "Unresolvable exception. Compile with -A%s for additional details.";
+    private static final String SEE_LOG =
+            "See previous log entries for details or compile with `-A" + DEBUG_OPTION + "` for additional details.";
+    private static final String UNABLE_TO_PROCESS_GENERAL = "Unable to process Rest-Dispatch classes. " + SEE_LOG;
+    private static final String UNABLE_TO_PROCESS_RESOURCE = "Unable to process resource. " + SEE_LOG;
+    private static final String UNRESOLVABLE_EXCEPTION = "Unresolvable exception. " + SEE_LOG;
 
     /**
      * {@link BasicAnnotationProcessor} doesn't give access to the last round ({@link
@@ -60,8 +67,16 @@ public class DispatchRestProcessor extends AbstractProcessor implements Processi
         }
     };
 
+    private final ResourceProcessor resourceProcessor;
+
     private Logger logger;
-    private ContextProcessors contextProcessors;
+    private Utils utils;
+    private BindingsProcessors bindingsProcessors;
+    private SerializationProcessors serializationProcessors;
+
+    public DispatchRestProcessor() {
+        this.resourceProcessor = new ResourceProcessor();
+    }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
@@ -69,7 +84,10 @@ public class DispatchRestProcessor extends AbstractProcessor implements Processi
         super.init(processingEnv);
 
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
-        contextProcessors = new ContextProcessors(processingEnv, logger);
+        utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
+        bindingsProcessors = new BindingsProcessors(processingEnv);
+        serializationProcessors = new SerializationProcessors(processingEnv);
+        resourceProcessor.init(processingEnv);
 
         delegate.init(processingEnv);
     }
@@ -89,9 +107,9 @@ public class DispatchRestProcessor extends AbstractProcessor implements Processi
         try {
             delegateProcess(annotations, roundEnv);
         } catch (UnableToProcessException e) {
-            logger.error(UNABLE_TO_PROCESS_EXCEPTION, Logger.DEBUG_OPTION);
+            logger.error(UNABLE_TO_PROCESS_GENERAL);
         } catch (Exception e) {
-            logger.error().throwable(e).log(UNRESOLVABLE_EXCEPTION, Logger.DEBUG_OPTION);
+            logger.error().throwable(e).log(UNRESOLVABLE_EXCEPTION);
         }
 
         return false;
@@ -109,22 +127,25 @@ public class DispatchRestProcessor extends AbstractProcessor implements Processi
     public void process(SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
         // TODO: Filter elements outside GWT's paths
         for (Element element : elementsByAnnotation.get(Path.class)) {
-            process(element);
+            if (isType(element)) {
+                process(element);
+            }
         }
     }
 
     private void process(Element element) {
-        Optional<ResourceProcessor> processor =
-                contextProcessors.getOptionalProcessor(ResourceProcessor.class, element);
+        try {
+            Resource resource = new Resource(logger, utils, element);
 
-        if (processor.isPresent()) {
-            processor.get().process(element);
+            resourceProcessor.process(resource);
+        } catch (UnableToProcessException e) {
+            logger.mandatoryWarning().context(element).log(UNABLE_TO_PROCESS_RESOURCE, DEBUG_OPTION);
         }
     }
 
     private void processLastRound() {
-        for (ContextProcessor<?, ?> processor : contextProcessors.getAllProcessors()) {
-            processor.processLast();
-        }
+        resourceProcessor.processLast();
+        serializationProcessors.processLast();
+        bindingsProcessors.processLast();
     }
 }

@@ -23,7 +23,7 @@ import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
 
 public class SecuredResolver {
-    public static boolean resolve(Element element) {
+    public static boolean resolveSecured(Element element) {
         return !isAnnotationPresent(element, NoXsrfHeader.class);
     }
 }

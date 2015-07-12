@@ -8,10 +8,10 @@
 #* @vtlvariable name="imports" type="java.util.Collection<java.lang.String>" *#
 
 #* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.domain.Method" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm" *#
-#* @vtlvariable name="endPointImpl" type="com.gwtplatform.dispatch.rest.processors.endpoint.EndPoint" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm" *#
+#* @vtlvariable name="endPointImpl" type="com.gwtplatform.dispatch.rest.processors.domain.Type" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm" *#
 
-#* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.endpoint.EndPointResourceMethod>" file="com/gwtplatform/dispatch/rest/processors/resource/RootResource.vm" *#
-#* @vtlvariable name="resource" type="com.gwtplatform.dispatch.rest.processors.domain.Type" file="com/gwtplatform/dispatch/rest/processors/resource/RootResource.vm" *#
+#* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet>" file="com/gwtplatform/dispatch/rest/processors/resource/Resource.vm" *#
+#* @vtlvariable name="resource" type="com.gwtplatform.dispatch.rest.processors.domain.Type" file="com/gwtplatform/dispatch/rest/processors/resource/Resource.vm" *#
 
 #* @vtlvariable name="endPoint" type="com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm" *#
 #* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.domain.Variable>" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm" *#

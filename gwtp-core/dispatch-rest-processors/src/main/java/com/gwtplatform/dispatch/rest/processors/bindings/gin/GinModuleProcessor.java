@@ -55,11 +55,6 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
     }
 
     @Override
-    public boolean canProcess(BindingContext context) {
-        return true;
-    }
-
-    @Override
     public Void process(BindingContext context) {
         Type implementer = context.getImplementer();
         Optional<Type> implemented = context.getImplemented();

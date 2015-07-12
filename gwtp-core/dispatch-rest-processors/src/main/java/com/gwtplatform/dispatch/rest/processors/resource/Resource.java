@@ -19,26 +19,73 @@ package com.gwtplatform.dispatch.rest.processors.resource;
 import java.util.Collection;
 import java.util.List;
 
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.TypeElement;
+
+import com.google.common.base.Function;
+import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
+import com.gwtplatform.dispatch.rest.processors.UnableToProcessException;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
+import com.gwtplatform.dispatch.rest.processors.logger.Logger;
+import com.gwtplatform.dispatch.rest.processors.utils.Utils;
+
+import static javax.lang.model.util.ElementFilter.methodsIn;
+
+import static com.google.auto.common.MoreElements.asType;
 
 public class Resource implements HasImports {
+    private static final String NAME_SUFFIX = "Impl";
+
+    private final Logger logger;
+    private final Utils utils;
+    private final TypeElement element;
+
     private final Type impl;
     private final Type resource;
-    private final EndPointDetails endPoint;
+    private final EndPointDetails endPointDetails;
     private final List<ResourceMethod> methods;
 
     public Resource(
-            Type impl,
-            Type resource,
-            EndPointDetails endPoint,
-            List<ResourceMethod> methods) {
-        this.impl = impl;
-        this.resource = resource;
-        this.endPoint = endPoint;
-        this.methods = methods;
+            Logger logger,
+            Utils utils,
+            Element element) {
+        this.logger = logger;
+        this.utils = utils;
+        this.element = ensureTypeElement(element);
+
+        this.resource = new Type(this.element);
+        this.impl = new Type(resource.getPackageName(), resource.getSimpleName() + NAME_SUFFIX);
+        this.endPointDetails = new EndPointDetails(logger, utils, this.element);
+        this.methods = processMethods();
+    }
+
+    public TypeElement ensureTypeElement(Element element) {
+        if (element.getKind() == ElementKind.INTERFACE) {
+            return asType(element);
+        }
+
+        logger.mandatoryWarning().context(element).log("Element annotated with @Path must be an interface." );
+        throw new UnableToProcessException();
+    }
+
+    private List<ResourceMethod> processMethods() {
+        final ResourceMethodFactories resourceMethodFactories = new ResourceMethodFactories(logger, utils);
+        List<ExecutableElement> methodElements = methodsIn(utils.getAllMembers(element, Object.class));
+
+        return FluentIterable.from(methodElements)
+                .transform(new Function<ExecutableElement, ResourceMethod>() {
+                    @Override
+                    public ResourceMethod apply(ExecutableElement element) {
+                        return resourceMethodFactories.resolve(Resource.this, element);
+                    }
+                })
+                .filter(Predicates.notNull())
+                .toList();
     }
 
     public Type getImpl() {
@@ -49,8 +96,8 @@ public class Resource implements HasImports {
         return resource;
     }
 
-    public EndPointDetails getEndPoint() {
-        return endPoint;
+    public EndPointDetails getEndPointDetails() {
+        return endPointDetails;
     }
 
     public List<ResourceMethod> getMethods() {

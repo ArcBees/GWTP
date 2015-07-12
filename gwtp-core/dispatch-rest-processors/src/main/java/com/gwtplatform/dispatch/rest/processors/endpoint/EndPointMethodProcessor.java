@@ -16,87 +16,59 @@
 
 package com.gwtplatform.dispatch.rest.processors.endpoint;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-import javax.annotation.Generated;
 import javax.annotation.processing.ProcessingEnvironment;
 
 import com.google.auto.service.AutoService;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
-import com.gwtplatform.dispatch.rest.processors.ContextProcessors;
 import com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet;
-import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
-import com.gwtplatform.dispatch.rest.processors.domain.Method;
-import com.gwtplatform.dispatch.rest.processors.resolvers.EndPointResolver;
-import com.gwtplatform.dispatch.rest.processors.resolvers.MethodResolver;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
-import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodContext;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessor;
 
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
 
 @AutoService(ResourceMethodProcessor.class)
-public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMethodContext, ResourceMethod>
+public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMethod, CodeSnippet>
         implements ResourceMethodProcessor {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm";
 
-    private ContextProcessors contextProcessors;
-    private EndPointResolver endPointResolver;
-    private MethodResolver methodResolver;
+    private final EndPointProcessor endPointProcessor;
+
+    public EndPointMethodProcessor() {
+        endPointProcessor = new EndPointProcessor();
+    }
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
-        contextProcessors = new ContextProcessors(processingEnv, logger);
-        endPointResolver = new EndPointResolver(logger, utils);
-        methodResolver = new MethodResolver();
+        endPointProcessor.init(processingEnv);
     }
 
     @Override
-    public byte getPriority() {
-        return DEFAULT_PRIORITY;
+    public boolean canProcess(ResourceMethod method) {
+        return method instanceof EndPointResourceMethod;
     }
 
     @Override
-    public boolean canProcess(ResourceMethodContext context) {
-        return endPointResolver.canResolve(context.getElement(), context.getEndPoint());
-    }
+    public CodeSnippet process(ResourceMethod resourceMethod) {
+        EndPointResourceMethod endPointMethod = (EndPointResourceMethod) resourceMethod;
+        String methodName = methodName(endPointMethod);
 
-    @Override
-    public ResourceMethod process(ResourceMethodContext context) {
-        String methodName = methodName(context.getParent(), context.getElement());
         logger.debug("Generating end-point method `%s`.", methodName);
 
-        // TODO: Add an order to HttpVariables and converge both HttpVariables and Variables. This is not an issue until
-        // sub-resources are implemented
-        Method method = methodResolver.resolve(context.getElement());
-        EndPointDetails endPoint = endPointResolver.resolve(context.getElement(), context.getEndPoint());
-        EndPoint impl = processEndPointImpl(context, method, endPoint);
-
-        CodeSnippet codeSnippet = parse(methodName, method, impl);
-
-        return new EndPointResourceMethod(method, endPoint, impl, codeSnippet);
-    }
-
-    private EndPoint processEndPointImpl(ResourceMethodContext context, Method method,
-            EndPointDetails endPoint) {
-        EndPointContext endPointContext = new EndPointContext(context, method, endPoint);
-        EndPointProcessor processor =
-                contextProcessors.getProcessor(EndPointProcessor.class, endPointContext);
-
-        return processor.process(endPointContext);
-    }
-
-    public CodeSnippet parse(String methodName, Method method, EndPoint impl) {
-        String code = outputter.withTemplateFile(TEMPLATE)
-                .withParam("method", method)
-                .withParam("endPointImpl", impl)
+        CodeSnippet code = outputter.withTemplateFile(TEMPLATE)
+                .withParam("method", endPointMethod.getMethod())
+                .withParam("endPointImpl", endPointMethod.getEndPoint().getImpl())
                 .withErrorLogParameter(methodName)
                 .parse();
-        Collection<String> imports = Arrays.asList(Generated.class.getCanonicalName());
 
-        return new CodeSnippet(code, imports);
+        endPointProcessor.process(endPointMethod.getEndPoint());
+
+        return code;
+    }
+
+    @Override
+    public void processLast() {
+        endPointProcessor.processLast();
     }
 }

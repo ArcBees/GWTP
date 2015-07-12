@@ -20,5 +20,5 @@ public class $impl.parameterizedName implements $resource.parameterizedName {
     }
 #foreach ($method in $methods)
 
-$method.codeSnippet.code#end
+$method.code#end
 }

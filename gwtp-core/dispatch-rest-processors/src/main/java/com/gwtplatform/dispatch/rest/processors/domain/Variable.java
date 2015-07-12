@@ -18,15 +18,15 @@ package com.gwtplatform.dispatch.rest.processors.domain;
 
 import java.util.Collection;
 
+import javax.lang.model.element.VariableElement;
+
 public class Variable implements HasImports {
     private final Type type;
     private final String name;
 
-    public Variable(
-            Type type,
-            String name) {
-        this.type = type;
-        this.name = name;
+    public Variable(VariableElement element) {
+        type = new Type(element.asType());
+        name = element.getSimpleName().toString();
     }
 
     public Type getType() {

@@ -21,20 +21,35 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.VariableElement;
+
+import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
 
 public class Method implements HasImports {
+    private static final Function<VariableElement, Variable> ELEMENT_TO_VARIABLE =
+            new Function<VariableElement, Variable>() {
+                @Override
+                public Variable apply(VariableElement variableElement) {
+                    return new Variable(variableElement);
+                }
+            };
+
     private final Type returnType;
     private final String name;
     private final List<Variable> parameters;
 
-    public Method(
-            Type returnType,
-            String name,
-            List<Variable> parameters) {
-        this.returnType = returnType;
-        this.name = name;
-        this.parameters = parameters;
+    public Method(ExecutableElement element) {
+        returnType = new Type(element.getReturnType());
+        name = element.getSimpleName().toString();
+        parameters = processParameters(element);
+    }
+
+    private List<Variable> processParameters(ExecutableElement element) {
+        return FluentIterable.from(element.getParameters())
+                .transform(ELEMENT_TO_VARIABLE)
+                .toList();
     }
 
     public Type getReturnType() {

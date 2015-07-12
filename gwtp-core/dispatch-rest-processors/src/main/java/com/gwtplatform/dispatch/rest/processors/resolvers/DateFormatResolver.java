@@ -22,6 +22,7 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.util.SimpleTypeVisitor6;
 
+import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 
@@ -31,7 +32,7 @@ import static com.gwtplatform.dispatch.rest.processors.NameFactory.parentName;
 
 public class DateFormatResolver {
     private static final String DATE_FORMAT_NOT_DATE =
-            "Method `%s#%s` parameter's `%s` is annotated with @DateFormat but its type is not Date.";
+            "Method `%s` parameter's `%s` is annotated with @DateFormat but its type is not Date.";
     private static final SimpleTypeVisitor6<Boolean, Void> DATE_TYPE_VALIDATION_VISITOR =
             new SimpleTypeVisitor6<Boolean, Void>(false) {
                 @Override
@@ -46,23 +47,18 @@ public class DateFormatResolver {
         this.logger = logger;
     }
 
-    public boolean canResolve(VariableElement element) {
-        boolean valid = !isPresent(element)
-                || element.asType().accept(DATE_TYPE_VALIDATION_VISITOR, null);
+    public Optional<String> resolve(VariableElement element) {
+        Optional<String> dateFormat = Optional.absent();
 
-        if (!valid) {
-            logger.error().context(element).log(DATE_FORMAT_NOT_DATE, parentName(element), element.getSimpleName());
+        if (isAnnotationPresent(element, DateFormat.class)) {
+            if (element.asType().accept(DATE_TYPE_VALIDATION_VISITOR, null)) {
+                dateFormat = Optional.of(element.getAnnotation(DateFormat.class).value());
+            } else {
+                logger.warning().context(element)
+                        .log(DATE_FORMAT_NOT_DATE, parentName(element), element.getSimpleName());
+            }
         }
-        return valid;
-    }
 
-    public String resolve(VariableElement element) {
-        return isPresent(element)
-                ? element.getAnnotation(DateFormat.class).value()
-                : null;
-    }
-
-    private boolean isPresent(VariableElement element) {
-        return isAnnotationPresent(element, DateFormat.class);
+        return dateFormat;
     }
 }

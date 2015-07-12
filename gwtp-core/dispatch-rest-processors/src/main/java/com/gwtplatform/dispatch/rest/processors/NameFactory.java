@@ -26,6 +26,7 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.SimpleElementVisitor6;
 
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
+import com.gwtplatform.dispatch.rest.processors.endpoint.EndPointResourceMethod;
 
 import static javax.lang.model.util.ElementFilter.methodsIn;
 
@@ -61,7 +62,7 @@ public class NameFactory {
     }
 
     public static String parentName(VariableElement element) {
-        return element.getEnclosingElement().accept(new SimpleElementVisitor6<String, Void>("") {
+        return element.getEnclosingElement().accept(new SimpleElementVisitor6<String, Void>("" ) {
             @Override
             public String visitExecutable(ExecutableElement parent, Void v) {
                 return methodName(parent);
@@ -83,5 +84,9 @@ public class NameFactory {
 
     public static String methodName(Type parent, ExecutableElement element) {
         return parent.getQualifiedName() + "#" + element.getSimpleName();
+    }
+
+    public static String methodName(EndPointResourceMethod method) {
+        return method.getResource().getImpl() + "#" + method.getMethod().getName();
     }
 }

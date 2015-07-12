@@ -19,8 +19,8 @@ public class $impl.parameterizedName extends AbstractRestAction<$endPoint.result
             String defaultDateFormat#appendParameterDefinitions(3 $fields)) {
         super(httpParameterFactory, defaultDateFormat, HttpMethod.$endPoint.verb.name(), "$endPoint.path");
 
-#foreach($param in $endPoint.httpParameters)
-        addParam(Type.$param.httpAnnotation.parameterType.name(), "$param.httpAnnotation.name", $param.name#if($param.dateFormat), "$param.dateFormat"#end);
+#foreach($param in $endPoint.httpVariables)#set($annotation = $param.httpAnnotation.get())
+        addParam(Type.$annotation.parameterType.name(), "$annotation.name", $param.name#if($param.dateFormat.isPresent()), "$param.dateFormat.get()"#end);
 #end
 #if($endPoint.body.isPresent())
         setBodyParam($endPoint.body.get().name);

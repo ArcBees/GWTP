@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.processors.domain;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
+// TODO: Make strong
 public class HttpAnnotation {
     private final HttpParameter.Type parameterType;
     private final String name;

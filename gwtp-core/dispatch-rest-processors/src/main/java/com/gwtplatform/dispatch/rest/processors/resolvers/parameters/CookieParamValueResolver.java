@@ -31,6 +31,7 @@ import javax.ws.rs.core.Cookie;
 
 import com.google.auto.service.AutoService;
 import com.google.common.base.Optional;
+import com.gwtplatform.dispatch.rest.processors.UnableToProcessException;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 import static com.google.auto.common.MoreTypes.asTypeElement;
@@ -65,15 +66,13 @@ public class CookieParamValueResolver extends HttpParamValueResolver {
     }
 
     @Override
-    public boolean canResolve(VariableElement element) {
-        boolean valid = !isPresent(element) ||
-                element.asType().accept(VALID_COOKIE_TYPE_VISITOR, this);
-
-        if (!valid) {
+    public String resolve(VariableElement element) {
+        if (isPresent(element) && !element.asType().accept(VALID_COOKIE_TYPE_VISITOR, this)) {
             logger.error().context(element).log(COOKIE_BAD_RETURN_TYPE, parentName(element), element.getSimpleName());
+            throw new UnableToProcessException();
         }
 
-        return valid;
+        return super.resolve(element);
     }
 
     private boolean isValidCookieType(DeclaredType type) {

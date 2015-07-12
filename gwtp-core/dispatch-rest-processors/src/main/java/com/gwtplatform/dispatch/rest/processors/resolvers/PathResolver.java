@@ -22,14 +22,14 @@ import javax.ws.rs.Path;
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
 
 public class PathResolver {
-    public static String resolve(Element type, String basePath) {
-        String path = resolve(type);
+    public static String resolvePath(Element type, String basePath) {
+        String path = resolvePath(type);
         path = concatenate(basePath, path);
 
         return path;
     }
 
-    public static String resolve(Element element) {
+    public static String resolvePath(Element element) {
         String path = "";
 
         if (isAnnotationPresent(element, Path.class)) {

@@ -42,6 +42,11 @@ public abstract class AbstractContextProcessor<I, O> implements ContextProcessor
     }
 
     @Override
+    public boolean canProcess(I context) {
+        return true;
+    }
+
+    @Override
     public void processLast() {
     }
 

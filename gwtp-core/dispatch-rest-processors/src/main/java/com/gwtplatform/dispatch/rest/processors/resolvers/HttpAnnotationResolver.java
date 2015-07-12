@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.processors.resolvers;
 
 import javax.lang.model.element.VariableElement;
 
+import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.processors.domain.HttpAnnotation;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.resolvers.parameters.HttpParamValueResolver;
@@ -39,31 +40,21 @@ public class HttpAnnotationResolver {
         this.resolvers = HttpParamValueResolver.getResolvers(logger, utils);
     }
 
-    public boolean canResolve(VariableElement element) {
+    public Optional<HttpAnnotation> resolve(VariableElement element) {
         int annotationsCount = 0;
+        Optional<HttpAnnotation> annotation = Optional.absent();
 
         for (HttpParamValueResolver resolver : resolvers) {
             if (resolver.isPresent(element)) {
-                resolver.canResolve(element);
                 ++annotationsCount;
+                annotation = Optional.of(new HttpAnnotation(resolver.getAssociatedType(), resolver.resolve(element)));
             }
         }
 
         if (annotationsCount > 1) {
-            logger.error().context(element).log(MANY_REST_ANNOTATIONS, parentName(element), element.getSimpleName());
+            logger.warning().context(element).log(MANY_REST_ANNOTATIONS, parentName(element), element.getSimpleName());
         }
 
-        return annotationsCount <= 1;
-    }
-
-    public HttpAnnotation resolve(VariableElement element) {
-        for (HttpParamValueResolver resolver : resolvers) {
-            if (resolver.isPresent(element)) {
-                String name = resolver.resolve(element);
-                return new HttpAnnotation(resolver.getAssociatedType(), name);
-            }
-        }
-
-        return null;
+        return annotation;
     }
 }
