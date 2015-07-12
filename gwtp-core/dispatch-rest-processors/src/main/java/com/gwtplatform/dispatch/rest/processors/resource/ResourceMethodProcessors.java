@@ -21,8 +21,8 @@ import java.util.ServiceLoader;
 import javax.annotation.processing.ProcessingEnvironment;
 
 import com.gwtplatform.dispatch.rest.processors.UnableToProcessException;
-import com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
+import com.gwtplatform.dispatch.rest.processors.outputter.CodeSnippet;
 
 public class ResourceMethodProcessors {
     private static final String NO_PROCESSORS_FOUND = "Can not find a resource method processor for `%s`.";

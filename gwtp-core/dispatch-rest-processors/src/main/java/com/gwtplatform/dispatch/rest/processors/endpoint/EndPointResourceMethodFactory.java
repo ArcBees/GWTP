@@ -21,9 +21,9 @@ import javax.lang.model.element.ExecutableElement;
 import com.google.auto.service.AutoService;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpVerbResolver;
+import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodFactory;
-import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 
 @AutoService(ResourceMethodFactory.class)

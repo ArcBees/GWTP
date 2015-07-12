@@ -17,7 +17,7 @@
 package com.gwtplatform.dispatch.rest.processors.resource;
 
 import com.gwtplatform.dispatch.rest.processors.ContextProcessor;
-import com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet;
+import com.gwtplatform.dispatch.rest.processors.outputter.CodeSnippet;
 
 public interface ResourceMethodProcessor extends ContextProcessor<ResourceMethod, CodeSnippet> {
 }

@@ -25,7 +25,7 @@ import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
 
-public class GinBinding implements HasImports {
+class GinBinding implements HasImports {
     private final Type implementer;
     private final Optional<Type> implemented;
     private final Optional<Type> scope;

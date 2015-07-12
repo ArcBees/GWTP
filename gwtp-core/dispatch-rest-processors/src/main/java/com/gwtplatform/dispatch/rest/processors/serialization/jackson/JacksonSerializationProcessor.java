@@ -52,33 +52,23 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
     private final Type parent;
 
     private JavaFileObject sourceFile;
-    private BindingsProcessors bindingsProcessors;
 
     public JacksonSerializationProcessor() {
         this.mapperProcessor = new JacksonMapperProcessor();
         this.mappers = new TreeMap<>();
         this.parent = new Type(JacksonMapperProvider.class);
-        this.impl = new Type(parent.getPackageName(), parent.getSimpleName() + "Impl");
+        this.impl = new Type(parent.getPackageName(), parent.getSimpleName() + "Impl" );
     }
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
-        bindingsProcessors = new BindingsProcessors(processingEnv);
         sourceFile = outputter.prepareSourceFile(impl);
 
         mapperProcessor.init(processingEnv);
 
-        processBinding();
-    }
-
-    private void processBinding() {
-        BindingContext context = new BindingContext(impl);
-        context.setImplemented(parent);
-        context.setScope(Singleton.class);
-
-        bindingsProcessors.process(context);
+        new BindingsProcessors(processingEnv).process(new BindingContext(impl, parent, Singleton.class));
     }
 
     @Override

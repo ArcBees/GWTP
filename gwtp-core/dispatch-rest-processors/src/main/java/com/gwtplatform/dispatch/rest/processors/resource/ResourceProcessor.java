@@ -26,7 +26,7 @@ import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingContext;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessors;
-import com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet;
+import com.gwtplatform.dispatch.rest.processors.outputter.CodeSnippet;
 
 public class ResourceProcessor extends AbstractContextProcessor<Resource, Void> {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/resource/Resource.vm";

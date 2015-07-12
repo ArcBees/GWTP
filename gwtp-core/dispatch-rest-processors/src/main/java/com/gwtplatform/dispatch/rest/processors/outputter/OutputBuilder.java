@@ -27,7 +27,6 @@ import org.apache.velocity.VelocityContext;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
-import com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet;
 import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
 

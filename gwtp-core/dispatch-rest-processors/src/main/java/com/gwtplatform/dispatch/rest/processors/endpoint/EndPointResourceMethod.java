@@ -25,8 +25,8 @@ import javax.lang.model.element.ExecutableElement;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.Method;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
-import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
+import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 
 public class EndPointResourceMethod implements ResourceMethod {

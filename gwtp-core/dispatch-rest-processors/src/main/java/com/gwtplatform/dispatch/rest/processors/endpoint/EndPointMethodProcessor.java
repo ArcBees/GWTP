@@ -20,7 +20,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 
 import com.google.auto.service.AutoService;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
-import com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet;
+import com.gwtplatform.dispatch.rest.processors.outputter.CodeSnippet;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessor;
 

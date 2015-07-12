@@ -32,6 +32,15 @@ public class BindingContext {
         this.scope = Optional.absent();
     }
 
+    public BindingContext(
+            Type implementer,
+            Type implemented,
+            Class<?> scope) {
+        this.implementer = implementer;
+        this.implemented = Optional.of(implemented);
+        this.scope = Optional.of(new Type(scope));
+    }
+
     public void setImplemented(Type implemented) {
         this.implemented = Optional.fromNullable(implemented);
     }

@@ -37,8 +37,8 @@ import com.google.auto.service.AutoService;
 import com.google.common.collect.SetMultimap;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessors;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
-import com.gwtplatform.dispatch.rest.processors.resource.ResourceProcessor;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
+import com.gwtplatform.dispatch.rest.processors.resource.ResourceProcessor;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessors;
 import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 

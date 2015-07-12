@@ -36,7 +36,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Ordering;
 import com.gwtplatform.dispatch.rest.processors.UnableToProcessException;
-import com.gwtplatform.dispatch.rest.processors.domain.CodeSnippet;
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.utils.Primitives;

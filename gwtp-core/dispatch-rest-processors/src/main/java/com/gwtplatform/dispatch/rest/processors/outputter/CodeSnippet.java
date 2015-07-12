@@ -14,20 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.domain;
+package com.gwtplatform.dispatch.rest.processors.outputter;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import com.google.common.collect.ImmutableList;
+import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
 
 public class CodeSnippet implements HasImports {
     private final String code;
     private final Collection<String> imports;
-
-    public CodeSnippet(String code) {
-        this(code, new ArrayList<String>());
-    }
 
     public CodeSnippet(
             String code,
