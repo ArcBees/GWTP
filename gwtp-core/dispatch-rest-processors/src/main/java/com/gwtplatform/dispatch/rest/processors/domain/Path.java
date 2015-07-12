@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.processors.domain;
 
+import java.util.Objects;
+
 import javax.lang.model.element.Element;
 
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
@@ -72,5 +74,22 @@ public class Path {
     @Override
     public String toString() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Path path = (Path) o;
+        return Objects.equals(value, path.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
