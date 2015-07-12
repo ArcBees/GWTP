@@ -14,32 +14,35 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.resolvers;
+package com.gwtplatform.dispatch.rest.processors.domain;
 
 import javax.lang.model.element.Element;
-import javax.ws.rs.Path;
 
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
 
-public class PathResolver {
-    public static String resolvePath(Element type, String basePath) {
-        String path = resolvePath(type);
-        path = concatenate(basePath, path);
+public class Path {
+    private final String value;
 
-        return path;
+    public Path(Element element) {
+        value = resolvePath(element);
     }
 
-    public static String resolvePath(Element element) {
+    public Path(Element element, Path basePath) {
+        String path = resolvePath(element);
+        value = concatenate(basePath.getValue(), path);
+    }
+
+    private String resolvePath(Element element) {
         String path = "";
 
-        if (isAnnotationPresent(element, Path.class)) {
-            path = element.getAnnotation(Path.class).value();
+        if (isAnnotationPresent(element, javax.ws.rs.Path.class)) {
+            path = element.getAnnotation(javax.ws.rs.Path.class).value();
         }
 
         return normalize(path);
     }
 
-    private static String concatenate(String path1, String path2) {
+    private String concatenate(String path1, String path2) {
         String newPath1 = normalize(path1);
         String newPath2 = normalize(path2);
 
@@ -60,5 +63,14 @@ public class PathResolver {
         }
 
         return newPath;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }

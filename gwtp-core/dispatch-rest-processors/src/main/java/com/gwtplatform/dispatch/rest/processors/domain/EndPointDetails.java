@@ -52,8 +52,6 @@ import static com.google.common.base.Predicates.notNull;
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
 import static com.gwtplatform.dispatch.rest.processors.resolvers.ContentTypeResolver.resolveConsumes;
 import static com.gwtplatform.dispatch.rest.processors.resolvers.ContentTypeResolver.resolveProduces;
-import static com.gwtplatform.dispatch.rest.processors.resolvers.PathResolver.resolvePath;
-import static com.gwtplatform.dispatch.rest.processors.resolvers.SecuredResolver.resolveSecured;
 
 public class EndPointDetails implements HasImports {
     private static final String MANY_POTENTIAL_BODY = "Method `%s` has more than one body parameter.";
@@ -66,8 +64,8 @@ public class EndPointDetails implements HasImports {
     private final Logger logger;
     private final Utils utils;
 
-    private String path;
-    private boolean secured;
+    private Path path;
+    private Secured secured;
     private Set<ContentType> consumes;
     private Set<ContentType> produces;
     private HttpVerb verb;
@@ -82,8 +80,8 @@ public class EndPointDetails implements HasImports {
         this.logger = logger;
         this.utils = utils;
 
-        this.path = resolvePath(element);
-        this.secured = resolveSecured(element);
+        this.path = new Path(element);
+        this.secured = new Secured(element);
         this.consumes = ImmutableSet.copyOf(resolveConsumes(element));
         this.produces = ImmutableSet.copyOf(resolveProduces(element));
     }
@@ -96,8 +94,8 @@ public class EndPointDetails implements HasImports {
         this.logger = logger;
         this.utils = utils;
 
-        this.path = resolvePath(element, parentDetails.getPath());
-        this.secured = parentDetails.isSecured() && resolveSecured(element);
+        this.path = new Path(element, parentDetails.getPath());
+        this.secured = new Secured(element, parentDetails.getSecured());
         this.consumes = ImmutableSet.copyOf(resolveConsumes(element, parentDetails.getConsumes()));
         this.produces = ImmutableSet.copyOf(resolveProduces(element, parentDetails.getProduces()));
 
@@ -189,11 +187,11 @@ public class EndPointDetails implements HasImports {
         return verb;
     }
 
-    public String getPath() {
+    public Path getPath() {
         return path;
     }
 
-    public boolean isSecured() {
+    public Secured getSecured() {
         return secured;
     }
 
