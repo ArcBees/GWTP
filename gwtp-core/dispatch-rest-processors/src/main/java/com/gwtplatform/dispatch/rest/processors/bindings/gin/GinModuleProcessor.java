@@ -73,7 +73,7 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
 
         OutputBuilder outputBuilder = outputter
                 .withTemplateFile(TEMPLATE)
-                .withParam("bindings", this.bindings);
+                .withParam("bindings", bindings);
 
         if (containsTypeLiteral) {
             outputBuilder = outputBuilder.withImport(TypeLiteral.class.getCanonicalName());

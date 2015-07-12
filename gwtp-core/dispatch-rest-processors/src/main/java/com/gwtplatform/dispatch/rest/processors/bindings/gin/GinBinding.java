@@ -25,7 +25,7 @@ import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
 
-class GinBinding implements HasImports {
+public class GinBinding implements HasImports {
     private final Type implementer;
     private final Optional<Type> implemented;
     private final Optional<Type> scope;
@@ -59,6 +59,20 @@ class GinBinding implements HasImports {
     }
 
     @Override
+    public Collection<String> getImports() {
+        List<String> imports = new ArrayList<>(implementer.getImports());
+
+        if (implemented.isPresent()) {
+            imports.addAll(implemented.get().getImports());
+        }
+        if (scope.isPresent()) {
+            imports.addAll(scope.get().getImports());
+        }
+
+        return imports;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -77,19 +91,5 @@ class GinBinding implements HasImports {
     @Override
     public int hashCode() {
         return Objects.hash(implementer, implemented, scope, eagerSingleton);
-    }
-
-    @Override
-    public Collection<String> getImports() {
-        List<String> imports = new ArrayList<>(implementer.getImports());
-
-        if (implemented.isPresent()) {
-            imports.addAll(implemented.get().getImports());
-        }
-        if (scope.isPresent()) {
-            imports.addAll(scope.get().getImports());
-        }
-
-        return imports;
     }
 }

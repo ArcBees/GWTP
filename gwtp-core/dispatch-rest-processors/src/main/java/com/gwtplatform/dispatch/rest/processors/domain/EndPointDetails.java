@@ -230,6 +230,6 @@ public class EndPointDetails implements HasImports {
             imports = imports.append(HttpParameter.Type.class.getCanonicalName());
         }
 
-        return imports.filter(and(notNull(), not(equalTo("" )))).toList();
+        return imports.filter(and(notNull(), not(equalTo("")))).toList();
     }
 }

@@ -62,7 +62,7 @@ public class NameFactory {
     }
 
     public static String parentName(VariableElement element) {
-        return element.getEnclosingElement().accept(new SimpleElementVisitor6<String, Void>("" ) {
+        return element.getEnclosingElement().accept(new SimpleElementVisitor6<String, Void>("") {
             @Override
             public String visitExecutable(ExecutableElement parent, Void v) {
                 return methodName(parent);

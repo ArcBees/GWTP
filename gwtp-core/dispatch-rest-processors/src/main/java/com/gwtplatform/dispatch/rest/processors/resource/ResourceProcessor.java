@@ -53,7 +53,7 @@ public class ResourceProcessor extends AbstractContextProcessor<Resource, Void> 
                 .withParam("methods", processedMethods)
                 .writeTo(resource.getImpl());
 
-        processBinding(resource);
+        bindingsProcessors.process(new BindingContext(resource.getImpl(), resource.getResource(), Singleton.class));
 
         return null;
     }
@@ -67,14 +67,6 @@ public class ResourceProcessor extends AbstractContextProcessor<Resource, Void> 
                     }
                 })
                 .toList();
-    }
-
-    private void processBinding(Resource resource) {
-        BindingContext context = new BindingContext(resource.getImpl());
-        context.setImplemented(resource.getResource());
-        context.setScope(Singleton.class);
-
-        bindingsProcessors.process(context);
     }
 
     @Override

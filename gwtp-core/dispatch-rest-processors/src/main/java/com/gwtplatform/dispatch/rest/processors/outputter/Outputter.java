@@ -127,11 +127,11 @@ public class Outputter {
         List<Predicate<CharSequence>> predicates = new ArrayList<>();
         predicates.add(Predicates.<CharSequence>isNull());
         predicates.add(Primitives.IS_PRIMITIVE_PREDICATE);
-        predicates.add(containsPattern("^java\\.lang\\.[^.]+$" ));
+        predicates.add(containsPattern("^java\\.lang\\.[^.]+$"));
 
         if (type.isPresent()) {
             String packageName = type.get().getPackageName();
-            predicates.add(containsPattern("^" + packageName.replace(".", "\\." ) + "\\.[^.]+$" ));
+            predicates.add(containsPattern("^" + packageName.replace(".", "\\.") + "\\.[^.]+$"));
         }
 
         return FluentIterable.from(imports)

@@ -69,7 +69,7 @@ public class Resource implements HasImports {
             return asType(element);
         }
 
-        logger.mandatoryWarning().context(element).log("Element annotated with @Path must be an interface." );
+        logger.mandatoryWarning().context(element).log("Element annotated with @Path must be an interface.");
         throw new UnableToProcessException();
     }
 

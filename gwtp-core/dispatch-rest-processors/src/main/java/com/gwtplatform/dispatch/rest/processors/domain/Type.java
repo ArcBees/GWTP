@@ -37,6 +37,13 @@ import static com.google.auto.common.MoreTypes.asPrimitiveType;
 import static com.google.auto.common.MoreTypes.isType;
 
 public class Type implements HasImports, Comparable<Type> {
+    private static final Function<TypeMirror, Type> TYPE_MIRROR_TO_TYPE = new Function<TypeMirror, Type>() {
+        @Override
+        public Type apply(TypeMirror typeArgument) {
+            return new Type(typeArgument);
+        }
+    };
+
     private final String packageName;
     private final String simpleName;
     private final List<Type> typeArguments;
@@ -57,28 +64,23 @@ public class Type implements HasImports, Comparable<Type> {
             packageName = getPackage(element).getQualifiedName().toString();
             simpleName = element.getSimpleName().toString();
             typeArguments = FluentIterable.from(declaredType.getTypeArguments())
-                    .transform(new Function<TypeMirror, Type>() {
-                        @Override
-                        public Type apply(TypeMirror typeArgument) {
-                            return new Type(typeArgument);
-                        }
-                    })
+                    .transform(TYPE_MIRROR_TO_TYPE)
                     .toList();
         } else {
-            throw new IllegalArgumentException("TypeMirror must be a primitive or declared type." );
+            throw new IllegalArgumentException("TypeMirror must be a primitive or declared type.");
         }
     }
 
     public Type(String parameterizedQualifiedName) {
         String qualifiedName = parameterizedQualifiedName;
         Builder<Type> argumentsBuilder = ImmutableList.builder();
-        int argumentsStart = parameterizedQualifiedName.indexOf("<" );
+        int argumentsStart = parameterizedQualifiedName.indexOf("<");
 
         if (argumentsStart != -1) {
-            int argumentsEnd = parameterizedQualifiedName.lastIndexOf(">" );
+            int argumentsEnd = parameterizedQualifiedName.lastIndexOf(">");
             qualifiedName = parameterizedQualifiedName.substring(0, argumentsStart);
 
-            String[] arguments = parameterizedQualifiedName.substring(argumentsStart + 1, argumentsEnd).split("," );
+            String[] arguments = parameterizedQualifiedName.substring(argumentsStart + 1, argumentsEnd).split(",");
             for (String argument : arguments) {
                 argumentsBuilder.add(new Type(argument.trim()));
             }
@@ -173,7 +175,7 @@ public class Type implements HasImports, Comparable<Type> {
 
         String qualifiedTypeParameters = FluentIterable.from(typeArguments)
                 .transform(function)
-                .join(Joiner.on(", " ));
+                .join(Joiner.on(", "));
 
         return "<" + qualifiedTypeParameters + ">";
     }

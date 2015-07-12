@@ -57,7 +57,7 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
         this.mapperProcessor = new JacksonMapperProcessor();
         this.mappers = new TreeMap<>();
         this.parent = new Type(JacksonMapperProvider.class);
-        this.impl = new Type(parent.getPackageName(), parent.getSimpleName() + "Impl" );
+        this.impl = new Type(parent.getPackageName(), parent.getSimpleName() + "Impl");
     }
 
     @Override
