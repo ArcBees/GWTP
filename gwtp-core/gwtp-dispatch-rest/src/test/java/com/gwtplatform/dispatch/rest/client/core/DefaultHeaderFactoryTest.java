@@ -27,6 +27,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InOrder;
 
 import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.user.client.rpc.RpcRequestBuilder;
 import com.google.inject.Provides;
 import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
 import com.gwtplatform.dispatch.rest.client.annotations.GlobalHeaderParams;
@@ -187,6 +188,33 @@ public class DefaultHeaderFactoryTest {
 
         // then
         verify(requestBuilder).setHeader(eq(HttpHeaders.ACCEPT), eq("a/*,b/*"));
+    }
+
+    @Test
+    public void build_emptyRestApplicationPath_headerIsNotSet(@GlobalHeaderParams RestParameterBindings bindings) {
+        // given
+        DefaultHeaderFactory factory = new DefaultHeaderFactory(parameterFactory, bindings, XSRF_HEADER_NAME, "");
+        UnsecuredRestAction action = new UnsecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+
+        // when
+        factory.buildHeaders(requestBuilder, action, "");
+
+        // then
+        verify(requestBuilder, never()).setHeader(eq(RpcRequestBuilder.MODULE_BASE_HEADER), anyString());
+    }
+
+    @Test
+    public void build_notEmptyRestApplicationPath_headerIsNotSet(@GlobalHeaderParams RestParameterBindings bindings) {
+        // given
+        DefaultHeaderFactory factory =
+                new DefaultHeaderFactory(parameterFactory, bindings, XSRF_HEADER_NAME, APPLICATION_PATH);
+        UnsecuredRestAction action = new UnsecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+
+        // when
+        factory.buildHeaders(requestBuilder, action, "");
+
+        // then
+        verify(requestBuilder).setHeader(eq(RpcRequestBuilder.MODULE_BASE_HEADER), eq(APPLICATION_PATH));
     }
 
     private RestAction<Void> createActionWithHeaderParams() {
