@@ -151,10 +151,9 @@ public interface HasSlots {
      * <p/>
      * For more details on slots, see {@link HasSlots}.
      *
-     * @param slot    An opaque object identifying which slot this content is being
-     *                added into.
-     * @param content The content, a {@link PresenterWidget}. Passing {@code null}
-     *                will not add anything.
+     * @param slot  The slot this content is being added into.
+     * @param child The content, a {@link PresenterWidget}. Passing {@code null}
+     *              will not add anything.
      */
     <T extends PresenterWidget<?>> void addToSlot(MultiSlot<T> slot, T child);
 
@@ -168,7 +167,7 @@ public interface HasSlots {
      * <p/>
      * For more details on slots, see {@link HasSlots}.
      *
-     * @param slot An opaque object identifying which slot to clear.
+     * @param slot The slot to clear.
      */
     void clearSlot(RemovableSlot<?> slot);
 
@@ -181,10 +180,9 @@ public interface HasSlots {
      * <p/>
      * For more details on slots, see {@link HasSlots}.
      *
-     * @param slot    An opaque object identifying which slot this content is being
-     *                removed from.
-     * @param content The content, a {@link PresenterWidget}. Passing {@code null}
-     *                will not remove anything.
+     * @param slot  The slot this content is being removed from.
+     * @param child The content, a {@link PresenterWidget}. Passing {@code null}
+     *              will not remove anything.
      */
     <T extends PresenterWidget<?>> void removeFromSlot(RemovableSlot<T> slot, T child);
 
@@ -196,10 +194,10 @@ public interface HasSlots {
      * <p/>
      * For more details on slots, see {@link HasSlots}.
      *
-     * @param slot    An opaque object identifying which slot this content is being
-     *                set into. The attached view should know what to do with this slot.
-     * @param content The content, a {@link PresenterWidget}. Passing {@code null}
-     *                will clear the slot.
+     * @param slot  The slot this content is being set into.
+     *              The attached view should know what to do with this slot.
+     * @param child The content, a {@link PresenterWidget}. Passing {@code null}
+     *              will clear the slot.
      */
     <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child);
 
@@ -212,9 +210,8 @@ public interface HasSlots {
      * <p/>
      * For more details on slots, see {@link HasSlots}.
      *
-     * @param slot         An opaque object identifying which slot this content is being
-     *                     set into.
-     * @param content      The content, a {@link PresenterWidget}. Passing {@code null}
+     * @param slot         The slot this content is being set into.
+     * @param child        The content, a {@link PresenterWidget}. Passing {@code null}
      *                     will clear the slot.
      * @param performReset Pass {@code true} if you want a
      *                     {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} to be fired
