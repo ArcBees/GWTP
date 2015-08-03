@@ -151,7 +151,7 @@ public interface HasSlots {
      * <p/>
      * For more details on slots, see {@link HasSlots}.
      *
-     * @param slot  The slot this content is being added into.
+     * @param slot  The slot into which the content is being added.
      * @param child The content, a {@link PresenterWidget}. Passing {@code null}
      *              will not add anything.
      */
@@ -180,7 +180,7 @@ public interface HasSlots {
      * <p/>
      * For more details on slots, see {@link HasSlots}.
      *
-     * @param slot  The slot this content is being removed from.
+     * @param slot  The slot for which the content is being removed.
      * @param child The content, a {@link PresenterWidget}. Passing {@code null}
      *              will not remove anything.
      */
@@ -194,7 +194,7 @@ public interface HasSlots {
      * <p/>
      * For more details on slots, see {@link HasSlots}.
      *
-     * @param slot  The slot this content is being set into.
+     * @param slot  The slot for which the content is being set.
      *              The attached view should know what to do with this slot.
      * @param child The content, a {@link PresenterWidget}. Passing {@code null}
      *              will clear the slot.
@@ -210,7 +210,7 @@ public interface HasSlots {
      * <p/>
      * For more details on slots, see {@link HasSlots}.
      *
-     * @param slot         The slot this content is being set into.
+     * @param slot         The slot for which the content is being set.
      * @param child        The content, a {@link PresenterWidget}. Passing {@code null}
      *                     will clear the slot.
      * @param performReset Pass {@code true} if you want a
