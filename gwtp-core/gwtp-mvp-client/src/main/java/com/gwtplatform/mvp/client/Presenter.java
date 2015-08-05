@@ -29,7 +29,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
 /**
  * A singleton presenter, the basic building block of the
- * <a href="http://code.google.com/intl/nl/events/io/2009/sessions/GoogleWebToolkitBestPractices.html">
+ * <a href="http://gwtcreate.com/videos/#gwt-dev-practices">
  * model-view-presenter</a> architecture. Each logical page of your application will usually
  * correspond to a singleton {@link Presenter}. If you need to separate logic from view
  * in a simple graphical component, you might consider using a {@link PresenterWidget}.
@@ -69,16 +69,16 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * To reveal a presenter associated to a {@link com.gwtplatform.mvp.client.proxy.ProxyPlace ProxyPlace}
  * you can simply navigate to an hyperlink corresponding to this place's name token. The
  * {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager} offers a number of method for building
- * such hyperlinks. If you want to reveal it programatically, you should build a
+ * such hyperlinks. If you want to reveal it programmatically, you should build a
  * {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest PlaceRequest} and call one of the
  * following method:
  * <ul>
  * <li>{@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealPlace(com.gwtplatform.mvp.shared.proxy.PlaceRequest)
  * PlaceManager.revealPlace(PlaceRequest)}</li>
- * <li>{@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealRelativePlace(com.gwtplatform.mvp.client.proxy
- * .PlaceRequest) PlaceManager.revealRelativePlace(PlaceRequest)}</li>
- * <li>{@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealRelativePlace(com.gwtplatform.mvp.client.proxy
- * .PlaceRequest, int) PlaceManager.revealRelativePlace(PlaceRequest, int)}</li>
+ * <li>{@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealRelativePlace(
+ * com.gwtplatform.mvp.shared.proxy.PlaceRequest) PlaceManager.revealRelativePlace(PlaceRequest)}</li>
+ * <li>{@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealRelativePlace(
+ * com.gwtplatform.mvp.shared.proxy.PlaceRequest, int) PlaceManager.revealRelativePlace(PlaceRequest, int)}</li>
  * </ul>
  * If the presenter is associated to a regular {@link Proxy} and does not have
  * a name token then you should call the {@link #forceReveal()} method. For such

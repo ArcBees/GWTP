@@ -207,6 +207,21 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         addToSlot(LegacySlotConvertor.convert(slot), content);
     }
 
+    /**
+     * This method adds some content in a specific slot of the {@link Presenter}.
+     * The attached {@link View} should manage this slot when its
+     * {@link View#addToSlot(Object, com.google.gwt.user.client.ui.Widget)} is called.
+     * <p/>
+     * Contrary to the {@link #setInSlot(IsSlot, PresenterWidget)} method, no
+     * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired,
+     * so {@link PresenterWidget#onReset()} is not invoked.
+     * <p/>
+     * For more details on slots, see {@link HasSlots}.
+     *
+     * @param slot The slot into which the content is being added.
+     * @param child The content, a {@link PresenterWidget}. Passing {@code null}
+     * will not add anything.
+     */
     @Override
     public <T extends PresenterWidget<?>> void addToSlot(MultiSlot<T> slot, T child) {
         assert child != null : "cannot add null to a slot";
@@ -249,6 +264,18 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         clearSlot(LegacySlotConvertor.convert(slot));
     }
 
+    /**
+     * This method clears the content in a specific slot. No
+     * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired.
+     * The attached {@link View} should manage this slot when its
+     * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear
+     * the slot when the {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} method is
+     * called with {@code null} as a parameter.
+     * <p/>
+     * For more details on slots, see {@link HasSlots}.
+     *
+     * @param slot Specific slot to clear.
+     */
     @Override
     public void clearSlot(RemovableSlot<?> slot) {
         internalClearSlot(slot, null);
@@ -368,6 +395,19 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         removeFromSlot(LegacySlotConvertor.convert(slot), content);
     }
 
+    /**
+     * This method removes some content in a specific slot of the
+     * {@link Presenter}. No
+     * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired.
+     * The attached {@link View} should manage this slot when its
+     * {@link View#removeFromSlot(Object, com.google.gwt.user.client.ui.Widget)} is called.
+     * <p/>
+     * For more details on slots, see {@link HasSlots}.
+     *
+     * @param slot  The slot for which the content is being removed.
+     * @param child The content, a {@link PresenterWidget}. Passing {@code null}
+     * will not remove anything.
+     */
     @Override
     public <T extends PresenterWidget<?>> void removeFromSlot(RemovableSlot<T> slot, T child) {
         rawRemoveFromSlot(slot, child);
@@ -430,11 +470,41 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         setInSlot(LegacySlotConvertor.convert(slot), content, performReset);
     }
 
+    /**
+     * This method sets some content in a specific slot of the {@link Presenter}.
+     * The attached {@link View} should manage this slot when its
+     * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear the
+     * slot when the {@code setInSlot} method is called with {@code null} as a
+     * parameter.
+     * <p/>
+     * For more details on slots, see {@link HasSlots}.
+     *
+     * @param slot  The slot for which the content is being set.
+     * @param child The content, a {@link PresenterWidget}. Passing {@code null}
+     * will clear the slot.
+     */
     @Override
     public <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child) {
         setInSlot(slot, child, true);
     }
 
+    /**
+     * This method sets some content in a specific slot of the {@link Presenter}.
+     * The attached {@link View} should manage this slot when its
+     * {@link View#setInSlot(Object, com.google.gwt.user.client.ui.Widget)} is called. It should also clear the
+     * slot when the {@code setInSlot} method is called with {@code null} as a
+     * parameter.
+     * <p/>
+     * For more details on slots, see {@link HasSlots}.
+     *
+     * @param slot  The slot for which the content is being set.
+     * @param child The content, a {@link PresenterWidget}. Passing {@code null}
+     * will clear the slot.
+     * @param performReset Pass {@code true} if you want a
+     * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} to be fired
+     * after the content has been added and this presenter is visible, pass
+     * {@code false} otherwise.
+     */
     @Override
     public <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child, boolean performReset) {
         if (child == null) {
