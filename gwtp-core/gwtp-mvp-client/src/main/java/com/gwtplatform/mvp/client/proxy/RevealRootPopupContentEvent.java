@@ -76,6 +76,8 @@ public final class RevealRootPopupContentEvent extends
      *            wants to set itself as root content.
      * @param center
      *            Does nothing.
+     *
+     * @deprecated Since 1.4.
      */
     @Deprecated
     public static void fire(final HasHandlers source,
@@ -97,6 +99,9 @@ public final class RevealRootPopupContentEvent extends
         return content;
     }
 
+    /**
+     * @deprecated Since 1.4.
+     */
     @Deprecated
     public boolean isCentered() {
         return true;

@@ -55,6 +55,9 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
     private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
 
+    /**
+     * @deprecated Since 1.4.
+     */
     @Deprecated
     public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter) {
         this(eventBus, tokenFormatter, (Historian) GWT.create(Historian.class));
