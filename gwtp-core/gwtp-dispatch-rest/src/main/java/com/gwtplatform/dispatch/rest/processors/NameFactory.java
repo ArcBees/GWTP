@@ -81,6 +81,8 @@ public class NameFactory {
     }
 
     public static String methodName(ResourceMethod method) {
-        return method.getResource().getImpl() + "#" + method.getMethod().getName();
+        // TODO: Fix this
+        return "";
+        // return method.getResource().getImpl() + "#" + method.getMethod().getName();
     }
 }

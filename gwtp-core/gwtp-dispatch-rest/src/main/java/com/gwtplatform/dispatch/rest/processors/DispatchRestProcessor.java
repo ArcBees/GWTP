@@ -36,11 +36,11 @@ import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
 import com.google.auto.service.AutoService;
 import com.google.common.collect.SetMultimap;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessors;
-import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
-import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceProcessor;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessors;
+import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
+import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.MoreElements.isType;
@@ -125,13 +125,15 @@ public class DispatchRestProcessor extends AbstractProcessor implements Processi
     }
 
     @Override
-    public void process(SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
+    public Set<Element> process(SetMultimap<Class<? extends Annotation>, Element> elementsByAnnotation) {
         // TODO: Filter elements outside GWT's paths
         for (Element element : elementsByAnnotation.get(Path.class)) {
             if (isType(element)) {
                 process(element);
             }
         }
+
+        return Collections.emptySet();
     }
 
     private void process(Element element) {
