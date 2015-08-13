@@ -14,8 +14,9 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.endpoint;
+package com.gwtplatform.dispatch.rest.processors.subresource;
 
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 
 import com.google.auto.service.AutoService;
@@ -26,15 +27,18 @@ import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodFactory;
 import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 
+import static com.google.auto.common.MoreTypes.asTypeElement;
+
 @AutoService(ResourceMethodFactory.class)
-public class EndPointResourceMethodFactory implements ResourceMethodFactory {
+public class SubResourceMethodFactory implements ResourceMethodFactory {
     @Override
     public boolean canHandle(ExecutableElement element) {
-        return HttpVerbResolver.isPresent(element);
+        return !HttpVerbResolver.isPresent(element)
+                && asTypeElement(element.getReturnType()).getKind() == ElementKind.INTERFACE;
     }
 
     @Override
     public ResourceMethod resolve(Logger logger, Utils utils, Resource resource, ExecutableElement element) {
-        return new EndPointResourceMethod(logger, utils, resource, element);
+        return new SubResourceMethod(logger, utils, resource, element);
     }
 }

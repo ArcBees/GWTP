@@ -26,19 +26,13 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.SimpleElementVisitor6;
 
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
-import com.gwtplatform.dispatch.rest.processors.endpoint.EndPointResourceMethod;
+import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 
 import static javax.lang.model.util.ElementFilter.methodsIn;
 
 import static com.google.auto.common.MoreElements.asType;
 
 public class NameFactory {
-    private static final String RESOURCE_SUFFIX = "Impl";
-
-    public static Type resourceName(Type resource) {
-        return new Type(resource.getPackageName(), resource.getSimpleName() + RESOURCE_SUFFIX);
-    }
-
     /**
      * Generate a unique class name based on a method. Since methods may define overloads, it's possible we end up with
      * name clashes. This function will prefix the requested name with the parent name and the method index to ensure
@@ -86,7 +80,7 @@ public class NameFactory {
         return parent.getQualifiedName() + "#" + element.getSimpleName();
     }
 
-    public static String methodName(EndPointResourceMethod method) {
+    public static String methodName(ResourceMethod method) {
         return method.getResource().getImpl() + "#" + method.getMethod().getName();
     }
 }

@@ -14,53 +14,42 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.endpoint;
+package com.gwtplatform.dispatch.rest.processors.subresource;
 
 import java.util.Collection;
 import java.util.List;
 
-import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.TypeElement;
 
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.HasImports;
 import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.domain.Variable;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
+import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 
-import static com.gwtplatform.dispatch.rest.processors.NameFactory.endPointName;
-
-public class EndPoint implements HasImports {
-    private final EndPointMethod endPointMethod;
-
+public class SubResource implements HasImports {
     private final Type impl;
+    private final Type subResource;
     private final List<Variable> fields;
+    private final List<ResourceMethod> methods;
     private final EndPointDetails endPointDetails;
 
-    public EndPoint(
+    public SubResource(
             Logger logger,
             Utils utils,
-            EndPointMethod endPointMethod,
-            ExecutableElement element) {
-        this.endPointMethod = endPointMethod;
-
-        this.impl = endPointName(utils.elements, endPointMethod.getParentImpl(), element);
-        this.fields = ImmutableList.copyOf(endPointMethod.getMethod().getParameters());
-        this.endPointDetails = endPointMethod.getEndPointDetails();
-    }
-
-    public EndPointMethod getEndPointMethod() {
-        return endPointMethod;
+            SubResourceMethod method,
+            TypeElement element) {
+        this.impl = null;
+        this.fields = null;
+        this.endPointDetails = new EndPointDetails(logger, utils, element, method.getEndPointDetails());
+        this.subResource = null;
+        this.methods = null;
     }
 
     public Type getImpl() {
         return impl;
-    }
-
-    public List<Variable> getFields() {
-        return fields;
     }
 
     public EndPointDetails getEndPointDetails() {
@@ -69,9 +58,6 @@ public class EndPoint implements HasImports {
 
     @Override
     public Collection<String> getImports() {
-        return FluentIterable.from(fields)
-                .transformAndConcat(EXTRACT_IMPORTS_FUNCTION)
-                .append(impl.getImports())
-                .toList();
+        return null;
     }
 }

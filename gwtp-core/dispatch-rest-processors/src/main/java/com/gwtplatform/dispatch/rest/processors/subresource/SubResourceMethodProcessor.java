@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.endpoint;
+package com.gwtplatform.dispatch.rest.processors.subresource;
 
 import javax.annotation.processing.ProcessingEnvironment;
 
@@ -27,48 +27,39 @@ import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessor
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
 
 @AutoService(ResourceMethodProcessor.class)
-public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMethod, CodeSnippet>
+public class SubResourceMethodProcessor extends AbstractContextProcessor<ResourceMethod, CodeSnippet>
         implements ResourceMethodProcessor {
-    private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm";
+    private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/subresource/SubResourceMethod.vm";
 
-    private final EndPointProcessor endPointProcessor;
+    private final SubResourceProcessor subResourceProcessor;
 
-    public EndPointMethodProcessor() {
-        endPointProcessor = new EndPointProcessor();
+    public SubResourceMethodProcessor() {
+        subResourceProcessor = new SubResourceProcessor();
     }
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
-        endPointProcessor.init(processingEnv);
+        subResourceProcessor.init(processingEnv);
     }
 
     @Override
     public boolean canProcess(ResourceMethod method) {
-        return method instanceof EndPointMethod;
+        return method instanceof SubResourceMethod;
     }
 
     @Override
     public CodeSnippet process(ResourceMethod resourceMethod) {
-        EndPointMethod endPointMethod = (EndPointMethod) resourceMethod;
         String methodName = methodName(resourceMethod);
 
-        logger.debug("Generating end-point method `%s`.", methodName);
+        logger.debug("Generating sub-resource method `%s`.", methodName);
 
-        CodeSnippet code = outputter.withTemplateFile(TEMPLATE)
-                .withParam("method", endPointMethod.getMethod())
-                .withParam("endPointImpl", endPointMethod.getEndPoint().getImpl())
-                .withErrorLogParameter(methodName)
-                .parse();
-
-        endPointProcessor.process(endPointMethod.getEndPoint());
-
-        return code;
+        return null;
     }
 
     @Override
     public void processLast() {
-        endPointProcessor.processLast();
+        subResourceProcessor.processLast();
     }
 }

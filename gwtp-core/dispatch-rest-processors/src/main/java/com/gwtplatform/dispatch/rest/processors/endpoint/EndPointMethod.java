@@ -24,19 +24,20 @@ import javax.lang.model.element.ExecutableElement;
 
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.Method;
+import com.gwtplatform.dispatch.rest.processors.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.utils.Utils;
 
-public class EndPointResourceMethod implements ResourceMethod {
+public class EndPointMethod implements ResourceMethod {
     private final Resource resource;
 
     private final Method method;
     private final EndPointDetails endPointDetails;
     private final EndPoint endPoint;
 
-    public EndPointResourceMethod(
+    public EndPointMethod(
             Logger logger,
             Utils utils,
             Resource resource,
@@ -44,14 +45,14 @@ public class EndPointResourceMethod implements ResourceMethod {
         this.resource = resource;
 
         // TODO: Add an order to HttpVariables and converge both HttpVariables and Variables.
-        // This is not an issue until sub-resources are implemented
         method = new Method(element);
         endPointDetails = new EndPointDetails(logger, utils, element, resource.getEndPointDetails());
         endPoint = new EndPoint(logger, utils, this, element);
     }
 
-    public Resource getResource() {
-        return resource;
+    @Override
+    public Type getParentImpl() {
+        return resource.getImpl();
     }
 
     @Override

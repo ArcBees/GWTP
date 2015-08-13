@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
@@ -89,19 +90,33 @@ public class EndPointDetails implements HasImports {
     public EndPointDetails(
             Logger logger,
             Utils utils,
+            TypeElement element,
+            EndPointDetails parentDetails) {
+        this.logger = logger;
+        this.utils = utils;
+
+        resolvePartially(element, parentDetails);
+    }
+
+    public EndPointDetails(
+            Logger logger,
+            Utils utils,
             ExecutableElement element,
             EndPointDetails parentDetails) {
         this.logger = logger;
         this.utils = utils;
 
+        resolvePartially(element, parentDetails);
+        resolveVerb(element);
+        resolveResult(element);
+        resolveVariables(element, parentDetails);
+    }
+
+    public void resolvePartially(Element element, EndPointDetails parentDetails) {
         this.path = new Path(element, parentDetails.getPath());
         this.secured = new Secured(element, parentDetails.getSecured());
         this.consumes = ImmutableSet.copyOf(resolveConsumes(element, parentDetails.getConsumes()));
         this.produces = ImmutableSet.copyOf(resolveProduces(element, parentDetails.getProduces()));
-
-        resolveVerb(element);
-        resolveResult(element);
-        resolveVariables(element, parentDetails);
     }
 
     public void resolveVerb(ExecutableElement element) {
