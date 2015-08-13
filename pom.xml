@@ -217,6 +217,7 @@
     <modules>
         <module>gwtp-core</module>
         <module>gwtp-crawler-service</module>
+        <module>processor-tools</module>
     </modules>
 
     <properties>
@@ -262,6 +263,8 @@
         <servlet-api.version>2.5</servlet-api.version>
         <spring.version>4.0.5.RELEASE</spring.version>
         <velocity.version>1.7</velocity.version>
+        <auto-common.version>1.0-SNAPSHOT</auto-common.version>
+        <auto-service.version>1.0-SNAPSHOT</auto-service.version>
         <htmlunit.version>2.15</htmlunit.version>
 
         <!-- Testing -->
@@ -553,6 +556,29 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Rebind dependencies -->
+            <!-- TODO: Shade rebind deps -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.auto</groupId>
+                <artifactId>auto-common</artifactId>
+                <version>${auto-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.auto.service</groupId>
+                <artifactId>auto-service</artifactId>
+                <version>${auto-service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
             <!-- Testing -->
             <dependency>
                 <groupId>junit</groupId>
