@@ -31,8 +31,8 @@ import javax.ws.rs.core.Cookie;
 
 import com.google.auto.service.AutoService;
 import com.google.common.base.Optional;
-import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
+import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 
 import static com.google.auto.common.MoreTypes.asTypeElement;
 import static com.google.auto.common.MoreTypes.isType;

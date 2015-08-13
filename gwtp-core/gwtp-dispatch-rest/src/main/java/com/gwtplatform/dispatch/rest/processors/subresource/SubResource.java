@@ -22,11 +22,11 @@ import java.util.List;
 import javax.lang.model.element.TypeElement;
 
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.Variable;
+import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
-import com.gwtplatform.dispatch.rest.processors.domain.Variable;
 import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 public class SubResource implements HasImports {

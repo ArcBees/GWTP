@@ -24,9 +24,9 @@ import javax.lang.model.element.ExecutableElement;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.Variable;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
-import com.gwtplatform.dispatch.rest.processors.domain.Variable;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 

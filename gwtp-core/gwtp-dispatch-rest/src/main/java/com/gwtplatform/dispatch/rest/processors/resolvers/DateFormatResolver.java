@@ -23,8 +23,8 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.util.SimpleTypeVisitor6;
 
 import com.google.common.base.Optional;
-import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
+import com.gwtplatform.processors.tools.logger.Logger;
 
 import static com.google.auto.common.MoreElements.asType;
 import static com.google.auto.common.MoreElements.isAnnotationPresent;

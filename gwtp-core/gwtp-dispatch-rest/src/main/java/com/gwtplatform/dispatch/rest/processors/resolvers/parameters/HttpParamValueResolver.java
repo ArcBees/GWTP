@@ -29,9 +29,9 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
-import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 import static com.google.auto.common.MoreElements.getAnnotationMirror;
 import static com.google.auto.common.MoreElements.isAnnotationPresent;

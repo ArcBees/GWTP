@@ -25,8 +25,8 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.SimpleElementVisitor6;
 
-import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
+import com.gwtplatform.processors.tools.domain.Type;
 
 import static javax.lang.model.util.ElementFilter.methodsIn;
 

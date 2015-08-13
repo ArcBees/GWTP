@@ -19,8 +19,8 @@ package com.gwtplatform.dispatch.rest.processors.serialization;
 import java.util.Set;
 
 import com.google.common.base.MoreObjects;
-import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
+import com.gwtplatform.processors.tools.domain.Type;
 
 public class SerializationContext {
     public enum IO {

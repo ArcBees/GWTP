@@ -17,8 +17,8 @@
 package com.gwtplatform.dispatch.rest.processors.resource;
 
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
-import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.dispatch.rest.processors.domain.Method;
+import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
 
 public interface ResourceMethod extends HasImports {

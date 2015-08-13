@@ -21,12 +21,12 @@ import java.util.Collection;
 import javax.lang.model.element.VariableElement;
 
 import com.google.common.base.Optional;
-import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.resolvers.DateFormatResolver;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpAnnotationResolver;
-import com.gwtplatform.processors.tools.utils.Utils;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
+import com.gwtplatform.processors.tools.logger.Logger;
+import com.gwtplatform.processors.tools.utils.Utils;
 
 public class HttpVariable implements HasImports {
     private final Type type;

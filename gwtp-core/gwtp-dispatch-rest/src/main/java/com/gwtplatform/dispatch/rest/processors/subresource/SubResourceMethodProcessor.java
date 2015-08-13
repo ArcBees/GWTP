@@ -20,9 +20,9 @@ import javax.annotation.processing.ProcessingEnvironment;
 
 import com.google.auto.service.AutoService;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
-import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessor;
+import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
 

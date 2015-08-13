@@ -20,11 +20,11 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 
 import com.google.auto.service.AutoService;
-import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpVerbResolver;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodFactory;
+import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.MoreTypes.asTypeElement;

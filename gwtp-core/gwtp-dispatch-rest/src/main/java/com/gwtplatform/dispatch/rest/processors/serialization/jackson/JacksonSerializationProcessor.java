@@ -30,11 +30,11 @@ import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
 import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingContext;
 import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessors;
-import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessor;
-import com.gwtplatform.processors.tools.utils.Primitives;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
+import com.gwtplatform.processors.tools.domain.Type;
+import com.gwtplatform.processors.tools.utils.Primitives;
 
 import static com.gwtplatform.processors.tools.utils.Primitives.findByBoxed;
 import static com.gwtplatform.processors.tools.utils.Primitives.findByPrimitive;
