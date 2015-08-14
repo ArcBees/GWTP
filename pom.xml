@@ -484,7 +484,8 @@
                     <maxmemory>2048</maxmemory>
                     <failOnError>true</failOnError>
 
-                    <excludePackageNames>com.gwtplatform.carstore</excludePackageNames>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+
                     <reportOutputDirectory>${project.build.directory}/staging</reportOutputDirectory>
 
                     <links>
