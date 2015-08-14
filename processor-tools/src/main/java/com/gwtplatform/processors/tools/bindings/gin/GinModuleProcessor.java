@@ -33,12 +33,14 @@ import com.gwtplatform.processors.tools.domain.Type;
 @AutoService(BindingsProcessor.class)
 public class GinModuleProcessor extends AbstractContextProcessor<BindingContext, Void> implements BindingsProcessor {
     private static final String TEMPLATE = "com/gwtplatform/processors/tools/bindings/gin/GinModule.vm";
-    private final Multimap<Type, GinBinding> bindings;
 
-    private Map<Type, JavaFileObject> sourceFiles;
+    private final Multimap<Type, GinBinding> bindings;
+    private final Multimap<Type, Type> subModules;
+    private final Map<Type, JavaFileObject> sourceFiles;
 
     public GinModuleProcessor() {
-        this.bindings = HashMultimap.create();
+        bindings = HashMultimap.create();
+        subModules = HashMultimap.create();
         sourceFiles = new HashMap<>();
     }
 
@@ -51,12 +53,17 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
         }
 
         Type implementer = context.getImplementer();
-        Optional<Type> implemented = context.getImplemented();
-        Optional<Type> scope = context.getScope();
 
-        GinBinding value = new GinBinding(implementer, implemented.orNull(), scope.orNull(), context.isEagerSingleton());
-        logger.debug().log(value.toString());
-        bindings.put(moduleType, value);
+        if (context.isSubModule()) {
+            subModules.put(moduleType, implementer);
+        } else {
+            Optional<Type> implemented = context.getImplemented();
+            Optional<Type> scope = context.getScope();
+            GinBinding binding =
+                    new GinBinding(implementer, implemented.orNull(), scope.orNull(), context.isEagerSingleton());
+
+            bindings.put(moduleType, binding);
+        }
 
         return null;
     }
@@ -66,9 +73,11 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
         for (Map.Entry<Type, JavaFileObject> entry : sourceFiles.entrySet()) {
             Type moduleType = entry.getKey();
             logger.debug("Generating GIN module `%s`.", moduleType.getQualifiedName());
+
             outputter
                     .withTemplateFile(TEMPLATE)
                     .withParam("bindings", bindings.get(moduleType))
+                    .withParam("subModules", subModules.get(moduleType))
                     .writeTo(moduleType, entry.getValue());
         }
     }

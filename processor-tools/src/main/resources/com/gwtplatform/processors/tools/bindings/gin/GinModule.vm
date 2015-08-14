@@ -10,6 +10,10 @@ import com.google.gwt.inject.client.AbstractGinModule;
 public class $impl.simpleName extends AbstractGinModule {
     @Override
     protected void configure() {
+#foreach($subModule in $subModules)
+        install(new ${subModule.simpleName}());
+#end
+
 #foreach ($binding in $bindings)
 #set($implementerMethod = 'bind')
 #if($binding.implemented.isPresent())

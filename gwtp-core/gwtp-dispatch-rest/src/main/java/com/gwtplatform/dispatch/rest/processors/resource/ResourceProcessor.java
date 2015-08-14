@@ -54,7 +54,7 @@ public class ResourceProcessor extends AbstractContextProcessor<Resource, Void> 
                 .withParam("methods", processedMethods)
                 .writeTo(resource.getImpl());
 
-        bindingsProcessors.process(new BindingContext(resource.getImpl(), resource.getResource(), Singleton.class, NameFactory.REST_GIN_MODULE));
+        bindingsProcessors.process(new BindingContext(NameFactory.REST_GIN_MODULE, resource.getImpl(), resource.getResource(), Singleton.class));
 
         return null;
     }

@@ -69,7 +69,7 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
 
         mapperProcessor.init(processingEnv);
 
-        new BindingsProcessors(processingEnv).process(new BindingContext(impl, parent, Singleton.class, NameFactory.REST_GIN_MODULE));
+        new BindingsProcessors(processingEnv).process(new BindingContext(NameFactory.REST_GIN_MODULE, impl, parent, Singleton.class));
     }
 
     @Override

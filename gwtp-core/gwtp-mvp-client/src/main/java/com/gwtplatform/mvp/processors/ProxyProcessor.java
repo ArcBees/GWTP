@@ -45,6 +45,7 @@ public class ProxyProcessor extends AbstractProcessor {
     private Outputter outputter;
     private Utils utils;
     private BindingsProcessors bindingProcessors;
+    private int moduleIndex;
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
@@ -64,7 +65,8 @@ public class ProxyProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         try {
             // Find the requested class
-            Set<? extends Element> elementsAnnotatedWithProxyStandard = roundEnv.getElementsAnnotatedWith(ProxyStandard.class);
+            Set<? extends Element> elementsAnnotatedWithProxyStandard =
+                    roundEnv.getElementsAnnotatedWith(ProxyStandard.class);
             for (Element element : elementsAnnotatedWithProxyStandard) {
                 // If it's not an interface it's a custom user-made proxy class. Don't use generator.
                 if (!element.getKind().isInterface()) {
@@ -83,7 +85,8 @@ public class ProxyProcessor extends AbstractProcessor {
                         public boolean apply(TypeMirror input) {
                             logger.debug().log("input QN: " + asTypeElement(input).getQualifiedName());
                             logger.debug().log("Proxy QN: " + Proxy.class.getCanonicalName());
-                            return asTypeElement(input).getQualifiedName().contentEquals(Proxy.class.getCanonicalName());
+                            return asTypeElement(input).getQualifiedName()
+                                    .contentEquals(Proxy.class.getCanonicalName());
                         }
                     }).orNull();
 
@@ -94,7 +97,8 @@ public class ProxyProcessor extends AbstractProcessor {
 
                     List<? extends TypeMirror> proxyGenericTypes = MoreTypes.asDeclared(typeMirror).getTypeArguments();
                     if (proxyGenericTypes.size() == 0) {
-                        logger.error().context(element).log("There's more than one generic type specified in the Proxy.");
+                        logger.error().context(element)
+                                .log("There's more than one generic type specified in the Proxy.");
                         return false;
                     }
 
@@ -106,7 +110,8 @@ public class ProxyProcessor extends AbstractProcessor {
                     Set<String> slotNames = getSlotNames(presenterTypeMirror);
 
                     logger.debug("Trying to create the file");
-                    Type implementationType = new Type(packageName, String.format("%s%sImpl", presenterName, proxyName));
+                    Type implementationType =
+                            new Type(packageName, String.format("%s%sImpl", presenterName, proxyName));
                     Type interfaceType = new Type(element.asType());
                     outputter
                             .withTemplateFile("com/gwtplatform/mvp/processors/SimpleProxyImpl.vm")
@@ -116,11 +121,13 @@ public class ProxyProcessor extends AbstractProcessor {
                             .withParam("slots", slotNames)
                             .writeTo(implementationType);
 
-                    BindingContext bindingContext = new BindingContext(implementationType, MVP_MODULE);
+                    Type localModuleType = new Type(implementationType.getPackageName(), "MvpModule" + moduleIndex++);
+                    BindingContext bindingContext = new BindingContext(localModuleType, implementationType);
                     bindingContext.setEagerSingleton(true);
                     bindingContext.setImplemented(interfaceType);
 
                     bindingProcessors.process(bindingContext);
+                    bindingProcessors.process(new BindingContext(MVP_MODULE, localModuleType, true));
                 }
             }
             if (roundEnv.processingOver()) {
@@ -134,7 +141,8 @@ public class ProxyProcessor extends AbstractProcessor {
     }
 
     private Set<String> getSlotNames(TypeMirror presenterType) {
-        List<VariableElement> fieldsInPresenter = ElementFilter.fieldsIn(utils.getAllMembers(asTypeElement(presenterType)));
+        List<VariableElement> fieldsInPresenter =
+                ElementFilter.fieldsIn(utils.getAllMembers(asTypeElement(presenterType)));
 
         Set<String> slotNames = Sets.newHashSet();
 

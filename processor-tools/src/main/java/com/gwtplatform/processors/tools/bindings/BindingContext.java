@@ -20,31 +20,41 @@ import com.google.common.base.Optional;
 import com.gwtplatform.processors.tools.domain.Type;
 
 public class BindingContext {
-    private final Type implementer;
     private final Type moduleType;
+    private final Type implementer;
+    private final boolean subModule;
 
     private Optional<Type> implemented;
     private Optional<Type> scope;
     private boolean eagerSingleton;
 
     public BindingContext(
+            Type moduleType,
+            Type implementer) {
+        this(moduleType, implementer, false);
+    }
+
+    public BindingContext(
+            Type moduleType,
             Type implementer,
-            Type moduleType) {
-        this.implementer = implementer;
+            boolean subModule) {
         this.moduleType = moduleType;
+        this.implementer = implementer;
+        this.subModule = subModule;
         this.implemented = Optional.absent();
         this.scope = Optional.absent();
     }
 
     public BindingContext(
+            Type moduleType,
             Type implementer,
             Type implemented,
-            Class<?> scope,
-            Type moduleType) {
-        this.implementer = implementer;
+            Class<?> scope) {
         this.moduleType = moduleType;
+        this.implementer = implementer;
         this.implemented = Optional.of(implemented);
         this.scope = Optional.of(new Type(scope));
+        this.subModule = false;
     }
 
     public Type getModuleType() {
@@ -77,5 +87,9 @@ public class BindingContext {
 
     public void setEagerSingleton(boolean eagerSingleton) {
         this.eagerSingleton = eagerSingleton;
+    }
+
+    public boolean isSubModule() {
+        return subModule;
     }
 }
