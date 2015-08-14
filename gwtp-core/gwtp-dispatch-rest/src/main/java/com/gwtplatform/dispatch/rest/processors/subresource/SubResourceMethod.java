@@ -25,9 +25,11 @@ import javax.lang.model.element.ExecutableElement;
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.Method;
+import com.gwtplatform.dispatch.rest.processors.domain.ResourceType;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.processors.tools.domain.Type;
+import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
@@ -44,30 +46,37 @@ public class SubResourceMethod implements ResourceMethod {
     public SubResourceMethod(
             Logger logger,
             Utils utils,
-            Resource parentResource,
+            ResourceType resourceType,
             ExecutableElement element) {
-        this.parentResource = Optional.of(parentResource);
-        this.parentSubResource = Optional.absent();
+        this.parentResource = asResource(resourceType);
+        this.parentSubResource = asSubResource(resourceType);
 
-        // TODO: Add an order to HttpVariables and converge both HttpVariables and Variables.
+        ensureOnlyOneParentType(logger, element);
+
         this.method = new Method(element);
-        this.endPointDetails = new EndPointDetails(logger, utils, element, parentResource.getEndPointDetails());
+        this.endPointDetails = new EndPointDetails(logger, utils, element, resourceType.getEndPointDetails());
         this.subResource = new SubResource(logger, utils, this, asTypeElement(element.getReturnType()));
     }
 
-    public SubResourceMethod(
-            Logger logger,
-            Utils utils,
-            SubResource parentSubResource,
-            ExecutableElement element) {
-        this.parentResource = Optional.absent();
-        this.parentSubResource = Optional.of(parentSubResource);
+    private Optional<Resource> asResource(ResourceType resourceType) {
+        return resourceType instanceof Resource
+                ? Optional.of((Resource) resourceType)
+                : Optional.<Resource>absent();
+    }
 
-        // TODO: Add an order to HttpVariables and converge both HttpVariables and Variables.
-        // TODO: Inherit
-        this.method = new Method(element);
-        this.endPointDetails = new EndPointDetails(logger, utils, element, parentSubResource.getEndPointDetails());
-        this.subResource = new SubResource(logger, utils, this, asTypeElement(element.getReturnType()));
+    private Optional<SubResource> asSubResource(ResourceType resourceType) {
+        return resourceType instanceof SubResource
+                ? Optional.of((SubResource) resourceType)
+                : Optional.<SubResource>absent();
+    }
+
+    private void ensureOnlyOneParentType(Logger logger, ExecutableElement element) {
+        if (!parentResource.isPresent() && !parentSubResource.isPresent()) {
+            logger.error()
+                    .context(element)
+                    .log("Ambiguous hierarchy for sub resource method. Only Resource or SubResource is allowed.");
+            throw new UnableToProcessException();
+        }
     }
 
     @Override
