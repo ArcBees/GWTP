@@ -14,20 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.bindings;
+package com.gwtplatform.processors.tools.bindings;
 
 import com.google.common.base.Optional;
 import com.gwtplatform.processors.tools.domain.Type;
 
 public class BindingContext {
     private final Type implementer;
+    private final Type moduleType;
 
     private Optional<Type> implemented;
     private Optional<Type> scope;
     private boolean eagerSingleton;
 
-    public BindingContext(Type implementer) {
+    public BindingContext(
+            Type implementer,
+            Type moduleType) {
         this.implementer = implementer;
+        this.moduleType = moduleType;
         this.implemented = Optional.absent();
         this.scope = Optional.absent();
     }
@@ -35,22 +39,16 @@ public class BindingContext {
     public BindingContext(
             Type implementer,
             Type implemented,
-            Class<?> scope) {
+            Class<?> scope,
+            Type moduleType) {
         this.implementer = implementer;
+        this.moduleType = moduleType;
         this.implemented = Optional.of(implemented);
         this.scope = Optional.of(new Type(scope));
     }
 
-    public void setImplemented(Type implemented) {
-        this.implemented = Optional.fromNullable(implemented);
-    }
-
-    public void setScope(Class<?> scope) {
-        this.scope = Optional.of(new Type(scope));
-    }
-
-    public void setEagerSingleton(boolean eagerSingleton) {
-        this.eagerSingleton = eagerSingleton;
+    public Type getModuleType() {
+        return moduleType;
     }
 
     public Type getImplementer() {
@@ -61,11 +59,23 @@ public class BindingContext {
         return implemented;
     }
 
+    public void setImplemented(Type implemented) {
+        this.implemented = Optional.fromNullable(implemented);
+    }
+
     public Optional<Type> getScope() {
         return scope;
     }
 
+    public void setScope(Class<?> scope) {
+        this.scope = Optional.of(new Type(scope));
+    }
+
     public boolean isEagerSingleton() {
         return eagerSingleton;
+    }
+
+    public void setEagerSingleton(boolean eagerSingleton) {
+        this.eagerSingleton = eagerSingleton;
     }
 }

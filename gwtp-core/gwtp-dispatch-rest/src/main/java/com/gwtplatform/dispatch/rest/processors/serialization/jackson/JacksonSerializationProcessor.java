@@ -27,9 +27,10 @@ import javax.ws.rs.core.MediaType;
 import com.google.auto.service.AutoService;
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
-import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
-import com.gwtplatform.dispatch.rest.processors.bindings.BindingContext;
-import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessors;
+import com.gwtplatform.dispatch.rest.processors.NameFactory;
+import com.gwtplatform.processors.tools.AbstractContextProcessor;
+import com.gwtplatform.processors.tools.bindings.BindingContext;
+import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessor;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
@@ -68,7 +69,7 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
 
         mapperProcessor.init(processingEnv);
 
-        new BindingsProcessors(processingEnv).process(new BindingContext(impl, parent, Singleton.class));
+        new BindingsProcessors(processingEnv).process(new BindingContext(impl, parent, Singleton.class, NameFactory.REST_GIN_MODULE));
     }
 
     @Override

@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.bindings.gin;
+package com.gwtplatform.processors.tools.bindings.gin;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,7 +37,7 @@ public class GinBinding implements HasImports {
             Type scope,
             boolean eagerSingleton) {
         this.implementer = implementer;
-        this.implemented = Optional.fromNullable(eagerSingleton ? null : implemented);
+        this.implemented = Optional.fromNullable(implemented);
         this.scope = Optional.fromNullable(eagerSingleton ? null : scope);
         this.eagerSingleton = eagerSingleton;
     }
@@ -86,6 +86,16 @@ public class GinBinding implements HasImports {
                 Objects.equals(implementer, that.implementer) &&
                 Objects.equals(implemented, that.implemented) &&
                 Objects.equals(scope, that.scope);
+    }
+
+    @Override
+    public String toString() {
+        return "GinBinding{" +
+                "implementer=" + implementer +
+                ", implemented=" + implemented +
+                ", scope=" + scope +
+                ", eagerSingleton=" + eagerSingleton +
+                '}';
     }
 
     @Override

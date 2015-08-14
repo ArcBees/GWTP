@@ -18,7 +18,7 @@ package com.gwtplatform.dispatch.rest.processors.subresource;
 
 import javax.annotation.processing.ProcessingEnvironment;
 
-import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
+import com.gwtplatform.processors.tools.AbstractContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessors;
 
 public class SubResourceProcessor extends AbstractContextProcessor<SubResource, Void> {

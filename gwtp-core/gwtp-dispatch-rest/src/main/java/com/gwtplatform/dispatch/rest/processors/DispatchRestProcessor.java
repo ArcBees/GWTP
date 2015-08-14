@@ -35,7 +35,7 @@ import com.google.auto.common.BasicAnnotationProcessor;
 import com.google.auto.common.BasicAnnotationProcessor.ProcessingStep;
 import com.google.auto.service.AutoService;
 import com.google.common.collect.SetMultimap;
-import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessors;
+import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceProcessor;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessors;

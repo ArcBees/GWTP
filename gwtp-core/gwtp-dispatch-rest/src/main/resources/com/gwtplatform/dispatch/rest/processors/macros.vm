@@ -1,17 +1,7 @@
 #* @vtlvariable name="parameters" type="java.util.List<com.gwtplatform.dispatch.rest.processors.domain.Variable>" *#
-#macro(commaIfNeeded)
-#if($foreach.hasNext), #end
-#end
-
-#macro(indent $tabCount)#set($spaceCount = $tabCount * 4)#foreach($i in [1..$spaceCount]) #end#end
-
 ## TODO: Use `new ContentType(...)`. For now it's easier to reparse because of the parameters map
 #macro(recreateContentType $contentType)
 ContentType.valueOf("$contentType")#end
-
-#macro(printImports $imports)#foreach ($import in $imports)
-import $import;
-#end#end
 
 #macro(printParameterDefinitions $tabs $parameters)#foreach ($parameter in $parameters)
 

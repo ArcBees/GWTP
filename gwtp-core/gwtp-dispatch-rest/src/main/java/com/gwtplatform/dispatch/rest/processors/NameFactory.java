@@ -28,11 +28,13 @@ import javax.lang.model.util.SimpleElementVisitor6;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.processors.tools.domain.Type;
 
-import static javax.lang.model.util.ElementFilter.methodsIn;
-
 import static com.google.auto.common.MoreElements.asType;
 
+import static javax.lang.model.util.ElementFilter.methodsIn;
+
 public class NameFactory {
+    public static final Type REST_GIN_MODULE = new Type("com.gwtplatform.dispatch.rest.client.RestGinModule");
+
     /**
      * Generate a unique class name based on a method. Since methods may define overloads, it's possible we end up with
      * name clashes. This function will prefix the requested name with the parent name and the method index to ensure

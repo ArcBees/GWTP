@@ -20,4 +20,4 @@
 
 #* @vtlvariable name="mapped" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/dispatch/rest/processors/serialization/jackson/JacksonMapper.vm" *#
 
-#* @vtlvariable name="bindings" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.bindings.gin.GinBinding>" file="com/gwtplatform/dispatch/rest/processors/bindings/gin/GinModule.vm" *#
+#* @vtlvariable name="bindings" type="java.util.Collection<com.gwtplatform.processors.tools.bindings.gin.GinBinding>" file="com/gwtplatform/dispatch/rest/processors/bindings/gin/GinModule.vm" *#

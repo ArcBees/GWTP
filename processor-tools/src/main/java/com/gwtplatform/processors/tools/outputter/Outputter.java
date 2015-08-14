@@ -45,7 +45,7 @@ import static com.google.common.base.Predicates.not;
 import static com.google.common.base.Predicates.or;
 
 public class Outputter {
-    private static final String PROPERTIES = "/com/gwtplatform/dispatch/rest/processors/velocity.properties";
+    private static final String PROPERTIES = "/com/gwtplatform/processors/tools/velocity.properties";
     private static final String ENCODING = "UTF-8";
 
     private final Logger logger;
