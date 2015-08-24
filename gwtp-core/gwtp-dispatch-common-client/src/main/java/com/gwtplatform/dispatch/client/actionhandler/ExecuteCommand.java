@@ -22,7 +22,7 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 /**
  * The interface that {@link ClientActionHandler}s use to send the action to execute to the server.
  *
- * @deprecated use {@link com.gwtplatform.dispatch.client.interceptor.ExecuteCommand}
+ * @deprecated Since 1.4. Use {@link com.gwtplatform.dispatch.client.interceptor.ExecuteCommand}
  *
  * @param <A> The action type.
  * @param <R> The result type.
