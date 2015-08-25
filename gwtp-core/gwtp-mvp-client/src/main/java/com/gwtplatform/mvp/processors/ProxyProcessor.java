@@ -1,5 +1,6 @@
 package com.gwtplatform.mvp.processors;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -26,9 +27,11 @@ import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
+import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 import com.gwtplatform.processors.tools.bindings.BindingContext;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
+import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.outputter.Outputter;
 import com.gwtplatform.processors.tools.utils.Utils;
@@ -74,70 +77,117 @@ public class ProxyProcessor extends AbstractProcessor {
                 }
 
                 // check if interface is also annotated with NameToken
-                if (element.getAnnotation(NameToken.class) != null) {
-                    logger.error().context(element).log("Too complicated! Annotated with Nametoken!");
+                NameToken nameTokenAnnotation = element.getAnnotation(NameToken.class);
+                if (nameTokenAnnotation != null) {
+                    List<? extends TypeMirror> interfaces = asType(element).getInterfaces();
+                    TypeMirror typeMirror = extractFirstProxyInterface(element, interfaces, ProxyPlace.class);
+                    TypeMirror presenterTypeMirror = extractPresenterTypeMirror(element, typeMirror);
+                    List<String> nametokens = Arrays.asList(nameTokenAnnotation.value());
+                    processProxyPlace(element, nametokens);
                     return false;
                 } else {
-                    List<? extends TypeMirror> interfaces = asType(element).getInterfaces();
-
-                    TypeMirror typeMirror = FluentIterable.from(interfaces).firstMatch(new Predicate<TypeMirror>() {
-                        @Override
-                        public boolean apply(TypeMirror input) {
-                            logger.debug().log("input QN: " + asTypeElement(input).getQualifiedName());
-                            logger.debug().log("Proxy QN: " + Proxy.class.getCanonicalName());
-                            return asTypeElement(input).getQualifiedName()
-                                    .contentEquals(Proxy.class.getCanonicalName());
-                        }
-                    }).orNull();
-
-                    if (typeMirror == null) {
-                        logger.error().context(element).log("Must extend Proxy");
-                        return false;
-                    }
-
-                    List<? extends TypeMirror> proxyGenericTypes = MoreTypes.asDeclared(typeMirror).getTypeArguments();
-                    if (proxyGenericTypes.size() == 0) {
-                        logger.error().context(element)
-                                .log("There's more than one generic type specified in the Proxy.");
-                        return false;
-                    }
-
-                    String packageName = new Type(asType(element)).getPackageName();
-                    TypeMirror presenterTypeMirror = proxyGenericTypes.get(0);
-                    String presenterName = new Type(presenterTypeMirror).getSimpleName();
-                    String proxyName = element.getSimpleName().toString();
-
-                    Set<String> slotNames = getSlotNames(presenterTypeMirror);
-
-                    logger.debug("Trying to create the file");
-                    Type implementationType =
-                            new Type(packageName, String.format("%s%sImpl", presenterName, proxyName));
-                    Type interfaceType = new Type(element.asType());
-                    outputter
-                            .withTemplateFile("com/gwtplatform/mvp/processors/SimpleProxyImpl.vm")
-                            .withParam("proxy", interfaceType)
-                            .withParam("proxyName", proxyName)
-                            .withParam("presenterName", presenterName)
-                            .withParam("slots", slotNames)
-                            .writeTo(implementationType);
-
-                    Type localModuleType = new Type(implementationType.getPackageName(), "MvpModule" + moduleIndex++);
-                    BindingContext bindingContext = new BindingContext(localModuleType, implementationType);
-                    bindingContext.setEagerSingleton(true);
-                    bindingContext.setImplemented(interfaceType);
-
-                    bindingProcessors.process(bindingContext);
-                    bindingProcessors.process(new BindingContext(MVP_MODULE, localModuleType, true));
+                    processSimpleProxy(element);
                 }
             }
             if (roundEnv.processingOver()) {
                 bindingProcessors.processLast();
             }
         } catch (Exception e) {
-            logger.error().throwable(e).log("Osti");
+            logger.error().throwable(e).log("Osti de " + e.getMessage());
         }
 
         return false;
+    }
+
+    private void processProxyPlace(Element element, List<String> nametokens) {
+        List<? extends TypeMirror> interfaces = asType(element).getInterfaces();
+
+        TypeMirror firstProxyInterface = extractFirstProxyInterface(element, interfaces, ProxyPlace.class);
+        TypeMirror presenterTypeMirror = extractPresenterTypeMirror(element, firstProxyInterface);
+
+        String packageName = new Type(asType(element)).getPackageName();
+        String presenterName = new Type(presenterTypeMirror).getSimpleName();
+        String proxyName = element.getSimpleName().toString();
+        Set<String> slotNames = getSlotNames(presenterTypeMirror);
+
+        Type implementationType =
+                new Type(packageName, String.format("%s%sImpl", presenterName, proxyName));
+        Type interfaceType = new Type(element.asType());
+
+        outputter
+                .withTemplateFile("com/gwtplatform/mvp/processors/ProxyPlaceImpl.vm")
+                .withParam("proxy", interfaceType)
+                .withParam("proxyName", proxyName)
+                .withParam("presenterName", presenterName)
+                .withParam("nametokens", nametokens)
+                .withParam("slots", slotNames)
+                .writeTo(implementationType);
+
+        createGinBindings(implementationType, interfaceType);
+    }
+
+    private void processSimpleProxy(Element element) {
+        List<? extends TypeMirror> interfaces = asType(element).getInterfaces();
+
+        TypeMirror firstProxyInterface = extractFirstProxyInterface(element, interfaces, Proxy.class);
+        TypeMirror presenterTypeMirror = extractPresenterTypeMirror(element, firstProxyInterface);
+
+        String packageName = new Type(asType(element)).getPackageName();
+        String presenterName = new Type(presenterTypeMirror).getSimpleName();
+        String proxyName = element.getSimpleName().toString();
+
+        Set<String> slotNames = getSlotNames(presenterTypeMirror);
+
+        Type implementationType =
+                new Type(packageName, String.format("%s%sImpl", presenterName, proxyName));
+        Type interfaceType = new Type(element.asType());
+
+        outputter
+                .withTemplateFile("com/gwtplatform/mvp/processors/SimpleProxyImpl.vm")
+                .withParam("proxy", interfaceType)
+                .withParam("proxyName", proxyName)
+                .withParam("presenterName", presenterName)
+                .withParam("slots", slotNames)
+                .writeTo(implementationType);
+
+        createGinBindings(implementationType, interfaceType);
+    }
+
+    private void createGinBindings(Type implementationType, Type interfaceType) {
+        Type localModuleType = new Type(implementationType.getPackageName(), "MvpModule" + moduleIndex++);
+        BindingContext bindingContext = new BindingContext(localModuleType, implementationType);
+        bindingContext.setEagerSingleton(true);
+        bindingContext.setImplemented(interfaceType);
+
+        bindingProcessors.process(bindingContext);
+        bindingProcessors.process(new BindingContext(MVP_MODULE, localModuleType, true));
+    }
+
+    private TypeMirror extractFirstProxyInterface(Element element, List<? extends TypeMirror> interfaces, final Class<?> proxyClass) {
+        TypeMirror firstProxyInterface = FluentIterable.from(interfaces).firstMatch(new Predicate<TypeMirror>() {
+            @Override
+            public boolean apply(TypeMirror input) {
+                return asTypeElement(input).getQualifiedName()
+                        .contentEquals(proxyClass.getCanonicalName());
+            }
+        }).orNull();
+
+        if (firstProxyInterface == null) {
+            logger.error().context(element).log("This Proxy interface must extend %s.", proxyClass.getSimpleName());
+            throw new UnableToProcessException();
+        }
+        return firstProxyInterface;
+    }
+
+    private TypeMirror extractPresenterTypeMirror(Element element, TypeMirror firstProxyInterface) {
+        List<? extends TypeMirror> proxyGenericTypes = MoreTypes.asDeclared(firstProxyInterface).getTypeArguments();
+        if (proxyGenericTypes.size() == 0) {
+            logger.error().context(element)
+                    .log("This Proxy must specify the associated Presenter.");
+            throw new UnableToProcessException();
+        }
+
+        return proxyGenericTypes.get(0);
     }
 
     private Set<String> getSlotNames(TypeMirror presenterType) {
@@ -151,6 +201,7 @@ public class ProxyProcessor extends AbstractProcessor {
                 slotNames.add(field.getSimpleName().toString());
             }
         }
+
         return slotNames;
     }
 }
