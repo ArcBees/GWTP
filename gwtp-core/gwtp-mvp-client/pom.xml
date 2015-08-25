@@ -33,6 +33,13 @@
                     </preloadSources>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <runOrder>alphabetical</runOrder>
+                </configuration>
+            </plugin>
         </plugins>
         <resources>
             <!-- Bundle sources with the jar, so they are visible to GWT's compiler -->
