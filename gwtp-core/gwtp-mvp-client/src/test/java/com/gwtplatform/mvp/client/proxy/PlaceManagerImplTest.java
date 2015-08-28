@@ -29,6 +29,7 @@ import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.google.gwt.junit.GWTMockUtilities;
 import com.google.gwt.user.client.Command;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
@@ -57,6 +58,7 @@ public class PlaceManagerImplTest {
     public static class Module extends JukitoModule {
         @Override
         protected void configureTest() {
+            GWTMockUtilities.disarm();
             bind(DeferredCommandManager.class).in(TestSingleton.class);
             bind(EventBus.class).to(SimpleEventBus.class).in(TestSingleton.class);
             bind(PlaceManager.class).to(PlaceManagerTestUtil.class).in(TestSingleton.class);
