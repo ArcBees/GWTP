@@ -15,7 +15,7 @@
 #* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.processors.tools.outputter.CodeSnippet>" file="resource/Resource.vm" *#
 #* @vtlvariable name="resource" type="com.gwtplatform.processors.tools.domain.Type" file="resource/Resource.vm" *#
 
-###* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.domain.Method" file="subresource/SubResourceMethod.vm" *#
+#* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.domain.Method" file="subresource/SubResourceMethod.vm" *#
 #* @vtlvariable name="subresource" type="com.gwtplatform.dispatch.rest.processors.subresource.SubResource" file="subresource/SubResourceMethod.vm" *#
 
 #* @vtlvariable name="parameters" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.domain.Variable>" file="subresource/SubResource.vm" *#

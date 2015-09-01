@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors;
+package com.gwtplatform.processors.tools;
 
 import javax.annotation.processing.ProcessingEnvironment;
 

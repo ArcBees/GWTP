@@ -94,8 +94,9 @@
 
         <!-- Rebind dependencies -->
         <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>processor-tools</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- Test dependencies -->
@@ -111,10 +112,6 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
