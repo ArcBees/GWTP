@@ -28,6 +28,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.ResourceType;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
@@ -38,7 +39,7 @@ import static javax.lang.model.util.ElementFilter.methodsIn;
 
 import static com.google.auto.common.MoreElements.asType;
 
-public class Resource implements HasImports {
+public class Resource implements ResourceType, HasImports {
     private static final String NAME_SUFFIX = "Impl";
 
     private final Logger logger;
@@ -88,6 +89,7 @@ public class Resource implements HasImports {
                 .toList();
     }
 
+    @Override
     public Type getImpl() {
         return impl;
     }
@@ -96,6 +98,7 @@ public class Resource implements HasImports {
         return resource;
     }
 
+    @Override
     public EndPointDetails getEndPointDetails() {
         return endPointDetails;
     }

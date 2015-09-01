@@ -14,17 +14,12 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.resource;
+package com.gwtplatform.dispatch.rest.processors.domain;
 
-import javax.lang.model.element.ExecutableElement;
+import com.gwtplatform.processors.tools.domain.Type;
 
-import com.gwtplatform.dispatch.rest.processors.domain.ResourceType;
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.utils.Utils;
+public interface ResourceType {
+    Type getImpl();
 
-public interface ResourceMethodFactory {
-    boolean canHandle(ExecutableElement element);
-
-    ResourceMethod resolve(Logger logger, Utils utils, ResourceType resourceType,
-            ExecutableElement element);
+    EndPointDetails getEndPointDetails();
 }

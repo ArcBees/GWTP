@@ -20,8 +20,8 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 
 import com.google.auto.service.AutoService;
+import com.gwtplatform.dispatch.rest.processors.domain.ResourceType;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpVerbResolver;
-import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodFactory;
 import com.gwtplatform.processors.tools.logger.Logger;
@@ -38,7 +38,7 @@ public class SubResourceMethodFactory implements ResourceMethodFactory {
     }
 
     @Override
-    public ResourceMethod resolve(Logger logger, Utils utils, Resource resource, ExecutableElement element) {
-        return new SubResourceMethod(logger, utils, resource, element);
+    public ResourceMethod resolve(Logger logger, Utils utils, ResourceType resourceType, ExecutableElement element) {
+        return new SubResourceMethod(logger, utils, resourceType, element);
     }
 }
