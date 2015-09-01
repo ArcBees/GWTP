@@ -30,6 +30,7 @@ import javax.tools.JavaFileObject;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -46,21 +47,25 @@ import static com.google.common.base.Predicates.or;
 
 public class Outputter {
     private static final String PROPERTIES = "/com/gwtplatform/processors/tools/velocity.properties";
+    private static final String DEFAULT_MACRO_FILE = "/com/gwtplatform/processors/tools/macros.vm";
     private static final String ENCODING = "UTF-8";
 
     private final Logger logger;
     private final Type processor;
     private final Filer filer;
+    private final List<String> macroFiles;
 
     private VelocityEngine velocityEngine;
 
     public Outputter(
             Logger logger,
             Type processor,
-            Filer filer) {
+            Filer filer,
+            String... macroFiles) {
         this.logger = logger;
         this.processor = processor;
         this.filer = filer;
+        this.macroFiles = FluentIterable.of(macroFiles).append(DEFAULT_MACRO_FILE).toList();
     }
 
     public OutputBuilder withTemplateFile(String templateFile) {
@@ -143,6 +148,7 @@ public class Outputter {
         if (velocityEngine == null) {
             Properties properties = new Properties();
             properties.load(getClass().getResourceAsStream(PROPERTIES));
+            properties.put("velocimacro.library", Joiner.on(",").join(macroFiles));
 
             velocityEngine = new VelocityEngine(properties);
         }

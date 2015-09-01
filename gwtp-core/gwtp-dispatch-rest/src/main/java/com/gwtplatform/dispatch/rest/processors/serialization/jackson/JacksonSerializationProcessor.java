@@ -27,21 +27,21 @@ import javax.ws.rs.core.MediaType;
 import com.google.auto.service.AutoService;
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
-import com.gwtplatform.dispatch.rest.processors.NameFactory;
-import com.gwtplatform.processors.tools.AbstractContextProcessor;
-import com.gwtplatform.processors.tools.bindings.BindingContext;
-import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
+import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessor;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
+import com.gwtplatform.processors.tools.bindings.BindingContext;
+import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.utils.Primitives;
 
+import static com.gwtplatform.dispatch.rest.processors.NameFactory.REST_GIN_MODULE;
 import static com.gwtplatform.processors.tools.utils.Primitives.findByBoxed;
 import static com.gwtplatform.processors.tools.utils.Primitives.findByPrimitive;
 
 @AutoService(SerializationProcessor.class)
-public class JacksonSerializationProcessor extends AbstractContextProcessor<SerializationContext, Void>
+public class JacksonSerializationProcessor extends DispatchRestContextProcessor<SerializationContext, Void>
         implements SerializationProcessor {
     private static final String TEMPLATE =
             "com/gwtplatform/dispatch/rest/processors/serialization/jackson/JacksonMapperProvider.vm";
@@ -65,11 +65,12 @@ public class JacksonSerializationProcessor extends AbstractContextProcessor<Seri
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
-        sourceFile = outputter.prepareSourceFile(impl);
-
         mapperProcessor.init(processingEnv);
 
-        new BindingsProcessors(processingEnv).process(new BindingContext(NameFactory.REST_GIN_MODULE, impl, parent, Singleton.class));
+        sourceFile = outputter.prepareSourceFile(impl);
+
+        BindingContext context = new BindingContext(REST_GIN_MODULE, impl, parent, Singleton.class);
+        new BindingsProcessors(processingEnv).process(context);
     }
 
     @Override

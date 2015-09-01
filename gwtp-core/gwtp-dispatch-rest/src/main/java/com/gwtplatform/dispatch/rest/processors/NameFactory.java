@@ -28,9 +28,9 @@ import javax.lang.model.util.SimpleElementVisitor6;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.processors.tools.domain.Type;
 
-import static com.google.auto.common.MoreElements.asType;
-
 import static javax.lang.model.util.ElementFilter.methodsIn;
+
+import static com.google.auto.common.MoreElements.asType;
 
 public class NameFactory {
     public static final Type REST_GIN_MODULE = new Type("com.gwtplatform.dispatch.rest.client.RestGinModule");

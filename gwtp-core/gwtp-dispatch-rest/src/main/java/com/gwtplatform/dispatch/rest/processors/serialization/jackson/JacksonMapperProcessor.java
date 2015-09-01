@@ -20,14 +20,14 @@ import java.util.regex.Pattern;
 
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
-import com.gwtplatform.processors.tools.AbstractContextProcessor;
+import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.utils.Primitives;
 
 import static com.gwtplatform.processors.tools.utils.Primitives.findByPrimitive;
 
-public class JacksonMapperProcessor extends AbstractContextProcessor<SerializationContext, JacksonMapper> {
+public class JacksonMapperProcessor extends DispatchRestContextProcessor<SerializationContext, JacksonMapper> {
     private static final Pattern SANITIZE_NAME_PATTERN = Pattern.compile("[^a-zA-Z0-9_]");
     private static final String PACKAGE = JacksonMapperProvider.class.getPackage().getName() + ".mappers";
     private static final String NAME_SUFFIX = "Mapper";

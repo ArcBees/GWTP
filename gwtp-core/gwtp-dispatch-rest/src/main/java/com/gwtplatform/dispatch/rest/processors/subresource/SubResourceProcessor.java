@@ -18,10 +18,10 @@ package com.gwtplatform.dispatch.rest.processors.subresource;
 
 import javax.annotation.processing.ProcessingEnvironment;
 
-import com.gwtplatform.processors.tools.AbstractContextProcessor;
+import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessors;
 
-public class SubResourceProcessor extends AbstractContextProcessor<SubResource, Void> {
+public class SubResourceProcessor extends DispatchRestContextProcessor<SubResource, Void> {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/subresource/SubResource.vm";
 
     private ResourceMethodProcessors methodProcessors;

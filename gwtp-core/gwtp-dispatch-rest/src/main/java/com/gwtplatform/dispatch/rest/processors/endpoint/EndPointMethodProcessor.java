@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.rest.processors.endpoint;
 import javax.annotation.processing.ProcessingEnvironment;
 
 import com.google.auto.service.AutoService;
-import com.gwtplatform.processors.tools.AbstractContextProcessor;
+import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessor;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
@@ -27,7 +27,7 @@ import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
 
 @AutoService(ResourceMethodProcessor.class)
-public class EndPointMethodProcessor extends AbstractContextProcessor<ResourceMethod, CodeSnippet>
+public class EndPointMethodProcessor extends DispatchRestContextProcessor<ResourceMethod, CodeSnippet>
         implements ResourceMethodProcessor {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm";
 

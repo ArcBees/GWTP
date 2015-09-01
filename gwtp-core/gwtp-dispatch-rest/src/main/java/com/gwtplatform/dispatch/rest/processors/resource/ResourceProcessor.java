@@ -23,13 +23,15 @@ import javax.inject.Singleton;
 
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
-import com.gwtplatform.dispatch.rest.processors.NameFactory;
-import com.gwtplatform.processors.tools.AbstractContextProcessor;
+import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
 import com.gwtplatform.processors.tools.bindings.BindingContext;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
+import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 
-public class ResourceProcessor extends AbstractContextProcessor<Resource, Void> {
+import static com.gwtplatform.dispatch.rest.processors.NameFactory.REST_GIN_MODULE;
+
+public class ResourceProcessor extends DispatchRestContextProcessor<Resource, Void> {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/resource/Resource.vm";
 
     private BindingsProcessors bindingsProcessors;
@@ -45,16 +47,19 @@ public class ResourceProcessor extends AbstractContextProcessor<Resource, Void> 
 
     @Override
     public Void process(Resource resource) {
-        logger.debug("Generating resource implementation `%s`.", resource.getImpl());
+        Type impl = resource.getImpl();
+        Type resourceType = resource.getResource();
+
+        logger.debug("Generating resource implementation `%s`.", impl);
 
         List<CodeSnippet> processedMethods = processMethods(resource);
 
         outputter.withTemplateFile(TEMPLATE)
-                .withParam("resource", resource.getResource())
+                .withParam("resource", resourceType)
                 .withParam("methods", processedMethods)
-                .writeTo(resource.getImpl());
+                .writeTo(impl);
 
-        bindingsProcessors.process(new BindingContext(NameFactory.REST_GIN_MODULE, resource.getImpl(), resource.getResource(), Singleton.class));
+        bindingsProcessors.process(new BindingContext(REST_GIN_MODULE, impl, resourceType, Singleton.class));
 
         return null;
     }

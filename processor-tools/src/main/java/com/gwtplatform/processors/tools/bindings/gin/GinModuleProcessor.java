@@ -46,26 +46,42 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
 
     @Override
     public Void process(BindingContext context) {
+        Type moduleType = findOrCreateSourceFile(context);
+
+        if (context.isSubModule()) {
+            createSubModule(context, moduleType);
+        } else {
+            createBinding(context, moduleType);
+        }
+
+        return null;
+    }
+
+    public Type findOrCreateSourceFile(BindingContext context) {
         Type moduleType = context.getModuleType();
         if (!sourceFiles.containsKey(moduleType)) {
             JavaFileObject file = outputter.prepareSourceFile(moduleType);
             sourceFiles.put(moduleType, file);
         }
 
+        return moduleType;
+    }
+
+    public void createSubModule(BindingContext context, Type moduleType) {
         Type implementer = context.getImplementer();
 
-        if (context.isSubModule()) {
-            subModules.put(moduleType, implementer);
-        } else {
-            Optional<Type> implemented = context.getImplemented();
-            Optional<Type> scope = context.getScope();
-            GinBinding binding =
-                    new GinBinding(implementer, implemented.orNull(), scope.orNull(), context.isEagerSingleton());
+        subModules.put(moduleType, implementer);
+    }
 
-            bindings.put(moduleType, binding);
-        }
+    public void createBinding(BindingContext context, Type moduleType) {
+        Type implementer = context.getImplementer();
 
-        return null;
+        Optional<Type> implemented = context.getImplemented();
+        Optional<Type> scope = context.getScope();
+        GinBinding binding =
+                new GinBinding(implementer, implemented.orNull(), scope.orNull(), context.isEagerSingleton());
+
+        bindings.put(moduleType, binding);
     }
 
     @Override

@@ -47,8 +47,8 @@ public class Type implements HasImports, Comparable<Type> {
 
     private final String packageName;
     private final String simpleName;
+    private final String enclosingNames;
     private final List<Type> typeArguments;
-    private final String enclosingTypes;
 
     public Type(TypeElement element) {
         this(element.asType());
@@ -57,9 +57,9 @@ public class Type implements HasImports, Comparable<Type> {
     public Type(TypeMirror type) {
         if (type.getKind().isPrimitive()) {
             packageName = "";
+            enclosingNames = "";
             simpleName = asPrimitiveType(type).toString();
             typeArguments = ImmutableList.of();
-            enclosingTypes = "";
         } else if (isType(type)) {
             DeclaredType declaredType = asDeclared(type);
             Element element = declaredType.asElement();
@@ -70,30 +70,30 @@ public class Type implements HasImports, Comparable<Type> {
                     .transform(TYPE_MIRROR_TO_TYPE)
                     .toList();
 
-            StringBuilder bob = new StringBuilder();
+            StringBuilder enclosingElementNames = new StringBuilder();
 
             Element enclosingElement = element.getEnclosingElement();
-
             while (enclosingElement != null && enclosingElement.getKind() != ElementKind.PACKAGE) {
-                bob.insert(0, enclosingElement.getSimpleName() + ".");
+                enclosingElementNames.insert(0, enclosingElement.getSimpleName() + ".");
                 enclosingElement = enclosingElement.getEnclosingElement();
             }
 
-            if (bob.length() != 0) {
-                bob.deleteCharAt(bob.length() - 1);
+            if (enclosingElementNames.length() != 0) {
+                enclosingElementNames.deleteCharAt(enclosingElementNames.length() - 1);
             }
 
-            enclosingTypes = bob.toString();
+            enclosingNames = enclosingElementNames.toString();
         } else {
             throw new IllegalArgumentException("TypeMirror must be a primitive or declared type.");
         }
     }
 
     public Type(String parameterizedQualifiedName) {
+        enclosingNames = "";
+
         String qualifiedName = parameterizedQualifiedName;
         Builder<Type> argumentsBuilder = ImmutableList.builder();
         int argumentsStart = parameterizedQualifiedName.indexOf("<");
-        enclosingTypes = "";
 
         if (argumentsStart != -1) {
             int argumentsEnd = parameterizedQualifiedName.lastIndexOf(">");
@@ -134,7 +134,7 @@ public class Type implements HasImports, Comparable<Type> {
         this.packageName = packageName;
         this.simpleName = simpleName;
         this.typeArguments = ImmutableList.copyOf(typeArguments);
-        enclosingTypes = "";
+        this.enclosingNames = "";
     }
 
     public String getQualifiedName() {
@@ -143,8 +143,8 @@ public class Type implements HasImports, Comparable<Type> {
             qualifiedName += ".";
         }
 
-        if (!enclosingTypes.isEmpty()) {
-            qualifiedName += enclosingTypes + ".";
+        if (!enclosingNames.isEmpty()) {
+            qualifiedName += enclosingNames + ".";
         }
 
         return qualifiedName + simpleName;
