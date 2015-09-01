@@ -1,23 +1,32 @@
 #* @implicitly included *#
 
-#* @vtlmacrolibrary path="com/gwtplatform/dispatch/rest/processors/macros.vm" *#
+#* @vtlmacrolibrary path="macros.vm" *#
 #* @velocityproperties path=com/gwtplatform/dispatch/rest/processors/velocity.properties *#
+
+#* @vtlvariable name="parameters" type="java.util.List<com.gwtplatform.dispatch.rest.processors.domain.Variable>" file="macros.vm" *#
 
 #* @vtlvariable name="impl" type="com.gwtplatform.processors.tools.domain.Type" *#
 #* @vtlvariable name="processor" type="com.gwtplatform.processors.tools.domain.Type" *#
 #* @vtlvariable name="imports" type="java.util.Collection<java.lang.String>" *#
 
-#* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.domain.Method" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm" *#
-#* @vtlvariable name="endPointImpl" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPointMethod.vm" *#
+#* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.domain.Method" file="endpoint/EndPointMethod.vm" *#
+#* @vtlvariable name="endPointImpl" type="com.gwtplatform.processors.tools.domain.Type" file="endpoint/EndPointMethod.vm" *#
 
-#* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.processors.tools.outputter.CodeSnippet>" file="com/gwtplatform/dispatch/rest/processors/resource/Resource.vm" *#
-#* @vtlvariable name="resource" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/dispatch/rest/processors/resource/Resource.vm" *#
+#* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.processors.tools.outputter.CodeSnippet>" file="resource/Resource.vm" *#
+#* @vtlvariable name="resource" type="com.gwtplatform.processors.tools.domain.Type" file="resource/Resource.vm" *#
 
-#* @vtlvariable name="endPoint" type="com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm" *#
-#* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.domain.Variable>" file="com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm" *#
+###* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.domain.Method" file="subresource/SubResourceMethod.vm" *#
+#* @vtlvariable name="subresource" type="com.gwtplatform.dispatch.rest.processors.subresource.SubResource" file="subresource/SubResourceMethod.vm" *#
 
-#* @vtlvariable name="mappers" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.serialization.jackson.JacksonMapper>" file="com/gwtplatform/dispatch/rest/processors/serialization/jackson/JacksonMapperProvider.vm" *#
+#* @vtlvariable name="parameters" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.domain.Variable>" file="subresource/SubResource.vm" *#
+#* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.processors.tools.outputter.CodeSnippet>" file="subresource/SubResource.vm" *#
+#* @vtlvariable name="resource" type="com.gwtplatform.processors.tools.domain.Type" file="subresource/SubResource.vm" *#
 
-#* @vtlvariable name="mapped" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/dispatch/rest/processors/serialization/jackson/JacksonMapper.vm" *#
+#* @vtlvariable name="endPoint" type="com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails" file="endpoint/EndPoint.vm" *#
+#* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.domain.Variable>" file="endpoint/EndPoint.vm" *#
 
-#* @vtlvariable name="bindings" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.bindings.gin.GinBinding>" file="com/gwtplatform/dispatch/rest/processors/bindings/gin/GinModule.vm" *#
+#* @vtlvariable name="mappers" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.serialization.jackson.JacksonMapper>" file="serialization/jackson/JacksonMapperProvider.vm" *#
+
+#* @vtlvariable name="mapped" type="com.gwtplatform.processors.tools.domain.Type" file="serialization/jackson/JacksonMapper.vm" *#
+
+#* @vtlvariable name="bindings" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.bindings.gin.GinBinding>" file="bindings/gin/GinModule.vm" *#

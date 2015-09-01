@@ -1,4 +1,3 @@
-#* @vtlvariable name="parameters" type="java.util.List<com.gwtplatform.dispatch.rest.processors.domain.Variable>" *#
 #macro(commaIfNeeded)
 #if($foreach.hasNext), #end
 #end
@@ -19,6 +18,10 @@ import $import;
 
 #macro(appendParameterDefinitions $tabs $parameters)#foreach ($parameter in $parameters),
 #indent($tabs)$parameter.type.parameterizedName $parameter.name#end#end
+
+#macro(printParameterNames $tabs $parameters)#foreach ($parameter in $parameters)
+
+#indent($tabs)$parameter.name#commaIfNeeded()#end#end
 
 #macro(appendParameterNames $tabs $parameters)#foreach ($parameter in $parameters),
 #indent($tabs)$parameter.name#end#end

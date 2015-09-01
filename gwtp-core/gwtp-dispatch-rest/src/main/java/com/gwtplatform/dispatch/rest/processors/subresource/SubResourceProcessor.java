@@ -22,7 +22,7 @@ import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessors;
 
 public class SubResourceProcessor extends AbstractContextProcessor<SubResource, Void> {
-    private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm";
+    private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/subresource/SubResource.vm";
 
     private ResourceMethodProcessors methodProcessors;
 

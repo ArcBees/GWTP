@@ -2,19 +2,38 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.6.1//EN"
         "http://gwtproject.org/doctype/2.7.0/gwt-module.dtd">
 <module>
-    <inherits name="com.gwtplatform.dispatch.rest.DispatchRestBase"/>
+    <inherits name="com.gwtplatform.dispatch.DispatchCommonClient"/>
+    <inherits name="com.gwtplatform.dispatch.rest.DispatchRestShared"/>
 
-    <entry-point class="com.gwtplatform.dispatch.rest.client.DispatchRestEntryPoint"/>
+    <inherits name="com.google.gwt.http.HTTP"/>
+    <inherits name="com.google.gwt.json.JSON"/>
+    <inherits name="com.github.nmorel.gwtjackson.GwtJackson"/>
 
-    <generate-with class="com.gwtplatform.dispatch.rest.rebind.DispatchRestIncrementalGenerator">
-        <when-type-is class="com.gwtplatform.dispatch.rest.client.DispatchRestEntryPoint"/>
-    </generate-with>
+    <!-- Specify the paths for translatable code -->
+    <source path="client"/>
+    <super-source path="emul"/>
+
+    <extend-configuration-property name="gin.classloading.exceptedPackages" value="javax.ws.rs"/>
+
+    <define-configuration-property name="gwtp.dispatch.rest.generatorModules" is-multi-valued="true"/>
+    <define-configuration-property name="gwtp.dispatch.rest.ginModule" is-multi-valued="false"/>
+    <set-configuration-property name="gwtp.dispatch.rest.ginModule"
+            value="com.gwtplatform.dispatch.rest.client.RestGinModule"/>
+    <extend-configuration-property name="gin.ginjector.modules"
+            value="com.gwtplatform.dispatch.rest.client.RestGinModule"/>
+
+    <!-- TODO: Remove GWT Generators rules once the migration to APT is done -->
+    <!--<entry-point class="com.gwtplatform.dispatch.rest.client.DispatchRestEntryPoint"/>-->
+
+    <!--<generate-with class="com.gwtplatform.dispatch.rest.rebind.DispatchRestIncrementalGenerator">-->
+        <!--<when-type-is class="com.gwtplatform.dispatch.rest.client.DispatchRestEntryPoint"/>-->
+    <!--</generate-with>-->
 
     <!-- Fallbacks -->
-    <generate-with class="com.gwtplatform.dispatch.rest.rebind.FallThroughGenerator">
-        <when-type-assignable class="com.gwtplatform.dispatch.rest.client.annotations.Resource"/>
-    </generate-with>
-    <generate-with class="com.gwtplatform.dispatch.rest.rebind.FallThroughGenerator">
-        <when-type-is class="com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider"/>
-    </generate-with>
+    <!--<generate-with class="com.gwtplatform.dispatch.rest.rebind.FallThroughGenerator">-->
+        <!--<when-type-assignable class="com.gwtplatform.dispatch.rest.client.annotations.Resource"/>-->
+    <!--</generate-with>-->
+    <!--<generate-with class="com.gwtplatform.dispatch.rest.rebind.FallThroughGenerator">-->
+        <!--<when-type-is class="com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider"/>-->
+    <!--</generate-with>-->
 </module>

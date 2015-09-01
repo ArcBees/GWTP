@@ -118,6 +118,10 @@ public class SubResource implements ResourceType, HasImports {
         return endPointDetails;
     }
 
+    public List<Variable> getFields() {
+        return fields;
+    }
+
     @Override
     public Collection<String> getImports() {
         return FluentIterable.from(methods)

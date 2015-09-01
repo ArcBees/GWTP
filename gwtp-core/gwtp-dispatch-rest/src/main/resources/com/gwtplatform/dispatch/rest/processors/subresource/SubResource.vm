@@ -1,0 +1,29 @@
+package $impl.packageName;
+
+import javax.annotation.Generated;
+
+import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+#printImports($imports)
+
+@Generated(value = "$processor.qualifiedName")
+public class $impl.simpleName implements $resourceType {
+    private final HttpParameterFactory httpParameterFactory;
+    private final String defaultDateFormat;
+#foreach ($parameter in $parameters)
+    private final $param.type.qualifiedParameterizedName $param.name;
+#end
+
+    ${impl}(
+            HttpParameterFactory httpParameterFactory,
+            String defaultDateFormat#appendParameterNames(3 $parameters)) {
+        this.httpParameterFactory = httpParameterFactory;
+        this.defaultDateFormat = defaultDateFormat;
+#foreach ($parameter in $parameters)
+        this.$parameter.name = $parameter.name;
+#end
+    }
+
+#foreach ($method in $methods)
+$method.code
+#end
+}
