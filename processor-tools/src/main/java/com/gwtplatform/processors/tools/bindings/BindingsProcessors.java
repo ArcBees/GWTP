@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.bindings;
+package com.gwtplatform.processors.tools.bindings;
 
 import java.util.ServiceLoader;
 
@@ -26,7 +26,7 @@ public class BindingsProcessors {
     private static final String NO_BINDING_POLICIES_FOUND = "Can not find a binding policy for `%s`.";
 
     private static ServiceLoader<BindingsProcessor> processors;
-
+    private static boolean PROCESSED = false;
     private final ProcessingEnvironment environment;
     private final Logger logger;
 
@@ -57,10 +57,13 @@ public class BindingsProcessors {
     }
 
     public void processLast() {
-        for (BindingsProcessor processor : processors) {
-            ensureInitialized(processor);
+        if (!PROCESSED) {
+            for (BindingsProcessor processor : processors) {
+                ensureInitialized(processor);
 
-            processor.processLast();
+                processor.processLast();
+            }
+            PROCESSED = true;
         }
     }
 

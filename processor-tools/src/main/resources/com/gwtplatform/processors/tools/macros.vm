@@ -1,0 +1,9 @@
+#macro(commaIfNeeded)
+    #if($foreach.hasNext), #end
+#end
+
+#macro(indent $tabCount)#set($spaceCount = $tabCount * 4)#foreach($i in [1..$spaceCount]) #end#end
+
+#macro(printImports $imports)#foreach ($import in $imports)
+import $import;
+#end#end

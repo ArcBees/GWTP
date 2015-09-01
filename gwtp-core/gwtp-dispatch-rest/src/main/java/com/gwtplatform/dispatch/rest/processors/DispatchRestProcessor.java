@@ -31,10 +31,10 @@ import javax.lang.model.element.TypeElement;
 import javax.ws.rs.Path;
 
 import com.google.auto.service.AutoService;
-import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessors;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceProcessor;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessors;
+import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;

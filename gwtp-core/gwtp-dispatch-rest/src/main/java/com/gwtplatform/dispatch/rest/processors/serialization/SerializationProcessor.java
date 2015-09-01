@@ -16,7 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.processors.serialization;
 
-import com.gwtplatform.dispatch.rest.processors.ContextProcessor;
+import com.gwtplatform.processors.tools.ContextProcessor;
 
 public interface SerializationProcessor extends ContextProcessor<SerializationContext, Void> {
 }

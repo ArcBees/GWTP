@@ -23,9 +23,10 @@ import javax.inject.Singleton;
 
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
-import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
-import com.gwtplatform.dispatch.rest.processors.bindings.BindingContext;
-import com.gwtplatform.dispatch.rest.processors.bindings.BindingsProcessors;
+import com.gwtplatform.dispatch.rest.processors.NameFactory;
+import com.gwtplatform.processors.tools.AbstractContextProcessor;
+import com.gwtplatform.processors.tools.bindings.BindingContext;
+import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 
 public class ResourceProcessor extends AbstractContextProcessor<Resource, Void> {
@@ -53,7 +54,7 @@ public class ResourceProcessor extends AbstractContextProcessor<Resource, Void> 
                 .withParam("methods", processedMethods)
                 .writeTo(resource.getImpl());
 
-        bindingsProcessors.process(new BindingContext(resource.getImpl(), resource.getResource(), Singleton.class));
+        bindingsProcessors.process(new BindingContext(NameFactory.REST_GIN_MODULE, resource.getImpl(), resource.getResource(), Singleton.class));
 
         return null;
     }

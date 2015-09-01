@@ -14,9 +14,18 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.bindings;
+package com.gwtplatform.processors.tools;
 
-import com.gwtplatform.dispatch.rest.processors.ContextProcessor;
+import javax.annotation.processing.ProcessingEnvironment;
 
-public interface BindingsProcessor extends ContextProcessor<BindingContext, Void> {
+public interface ContextProcessor<I, O> {
+    void init(ProcessingEnvironment processingEnv);
+
+    boolean isInitialized();
+
+    boolean canProcess(I context);
+
+    O process(I context);
+
+    void processLast();
 }

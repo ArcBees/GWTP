@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.rest.processors.endpoint;
 import javax.annotation.processing.ProcessingEnvironment;
 
 import com.google.common.base.Optional;
-import com.gwtplatform.dispatch.rest.processors.AbstractContextProcessor;
+import com.gwtplatform.processors.tools.AbstractContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.HttpVariable;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
