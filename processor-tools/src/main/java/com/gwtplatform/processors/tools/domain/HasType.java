@@ -14,16 +14,8 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.resource;
+package com.gwtplatform.processors.tools.domain;
 
-import javax.lang.model.element.ExecutableElement;
-
-import com.gwtplatform.dispatch.rest.processors.domain.Resource;
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.utils.Utils;
-
-public interface ResourceMethodFactory {
-    boolean canHandle(ExecutableElement element);
-
-    ResourceMethod resolve(Logger logger, Utils utils, Resource resource, ExecutableElement element);
+public interface HasType {
+    Type getType();
 }

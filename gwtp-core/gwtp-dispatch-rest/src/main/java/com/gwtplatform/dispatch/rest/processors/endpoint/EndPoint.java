@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.processors.endpoint;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,61 +23,37 @@ import javax.lang.model.element.ExecutableElement;
 
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
-import com.gwtplatform.dispatch.rest.processors.domain.ResourceType;
 import com.gwtplatform.dispatch.rest.processors.domain.Variable;
-import com.gwtplatform.dispatch.rest.processors.subresource.SubResource;
-import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
-import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.endPointName;
 
-public class EndPoint implements HasImports {
-    private final EndPointMethod endPointMethod;
-
+public class EndPoint implements IsEndPoint {
     private final Type impl;
     private final List<Variable> fields;
     private final EndPointDetails endPointDetails;
 
     public EndPoint(
-            Logger logger,
             Utils utils,
             EndPointMethod endPointMethod,
             ExecutableElement element) {
-        this.endPointMethod = endPointMethod;
-
-        this.impl = endPointName(utils.elements, endPointMethod.getParent().getImpl(), element);
-        this.fields = processFields(endPointMethod);
+        this.impl = endPointName(utils.elements, endPointMethod.getParentResource().getType(), element);
+        this.fields = new EndPointUtils().processFields(endPointMethod);
         this.endPointDetails = endPointMethod.getEndPointDetails();
     }
 
-    private List<Variable> processFields(EndPointMethod method) {
-        // TODO: Copied from SubResource
-        List<Variable> combinedFields = new ArrayList<>();
-        ResourceType parent = method.getParent();
-
-        if (parent instanceof SubResource) {
-            combinedFields.addAll(((SubResource) parent).getFields());
-        }
-
-        combinedFields.addAll(method.getMethod().getParameters());
-
-        return combinedFields;
-    }
-
-    public EndPointMethod getEndPointMethod() {
-        return endPointMethod;
-    }
-
-    public Type getImpl() {
+    @Override
+    public Type getType() {
         return impl;
     }
 
+    @Override
     public List<Variable> getFields() {
         return fields;
     }
 
+    @Override
     public EndPointDetails getEndPointDetails() {
         return endPointDetails;
     }

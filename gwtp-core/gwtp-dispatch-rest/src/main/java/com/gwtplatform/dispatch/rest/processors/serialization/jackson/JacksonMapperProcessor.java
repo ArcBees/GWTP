@@ -42,7 +42,7 @@ public class JacksonMapperProcessor extends DispatchRestContextProcessor<Seriali
 
         outputter.withTemplateFile(TEMPLATE)
                 .withParam("mapped", mapper.getMapped())
-                .writeTo(mapper.getImpl());
+                .writeTo(mapper.getType());
 
         return mapper;
     }

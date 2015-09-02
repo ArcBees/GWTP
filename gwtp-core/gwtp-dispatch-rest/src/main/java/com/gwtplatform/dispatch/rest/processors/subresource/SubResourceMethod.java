@@ -24,7 +24,7 @@ import javax.lang.model.element.ExecutableElement;
 
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.Method;
-import com.gwtplatform.dispatch.rest.processors.domain.ResourceType;
+import com.gwtplatform.dispatch.rest.processors.domain.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
@@ -32,7 +32,7 @@ import com.gwtplatform.processors.tools.utils.Utils;
 import static com.google.auto.common.MoreTypes.asTypeElement;
 
 public class SubResourceMethod implements ResourceMethod {
-    private final ResourceType parent;
+    private final Resource parentResource;
     private final Method method;
     private final EndPointDetails endPointDetails;
     private final SubResource subResource;
@@ -40,17 +40,17 @@ public class SubResourceMethod implements ResourceMethod {
     public SubResourceMethod(
             Logger logger,
             Utils utils,
-            ResourceType parent,
+            Resource parentResource,
             ExecutableElement element) {
-        this.parent = parent;
+        this.parentResource = parentResource;
         this.method = new Method(element);
-        this.endPointDetails = new EndPointDetails(logger, utils, element, parent.getEndPointDetails());
+        this.endPointDetails = new EndPointDetails(logger, utils, element, parentResource.getEndPointDetails());
         this.subResource = new SubResource(logger, utils, this, asTypeElement(element.getReturnType()));
     }
 
     @Override
-    public ResourceType getParent() {
-        return parent;
+    public Resource getParentResource() {
+        return parentResource;
     }
 
     @Override

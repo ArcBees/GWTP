@@ -14,54 +14,41 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.subresource;
+package com.gwtplatform.dispatch.rest.processors.resource;
 
 import java.util.Collection;
 import java.util.List;
 
+import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.Resource;
-import com.gwtplatform.dispatch.rest.processors.domain.Variable;
-import com.gwtplatform.dispatch.rest.processors.endpoint.EndPointUtils;
-import com.gwtplatform.dispatch.rest.processors.endpoint.IsEndPoint;
-import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
-import com.gwtplatform.dispatch.rest.processors.resource.ResourceUtils;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
-public class SubResource implements Resource, IsEndPoint {
-    private final Type type;
-    private final Type subResourceType;
-    private final List<Variable> fields;
-    private final List<ResourceMethod> methods;
-    private final EndPointDetails endPointDetails;
+public class RootResource implements Resource {
+    private static final String NAME_SUFFIX = "Impl";
 
-    public SubResource(
+    private final Type type;
+    private final Type resourceType;
+    private final EndPointDetails endPointDetails;
+    private final List<ResourceMethod> methods;
+
+    public RootResource(
             Logger logger,
             Utils utils,
-            SubResourceMethod method,
-            TypeElement element) {
+            Element element) {
         ResourceUtils resourceUtils = new ResourceUtils(logger, utils);
-        TypeElement resourceType = resourceUtils.asResourceTypeElement(element);
+        TypeElement resourceElement = resourceUtils.asResourceTypeElement(element);
 
-        this.subResourceType = new Type(resourceType);
-        this.type = processImplType(method);
-        this.endPointDetails = new EndPointDetails(logger, utils, element, method.getEndPointDetails());
-        this.fields = new EndPointUtils().processFields(method);
-        this.methods = resourceUtils.processMethods(resourceType, this);
-    }
-
-    private Type processImplType(SubResourceMethod method) {
-        Type parentImpl = method.getParentResource().getType();
-
-        // TODO: NameFactory?
-        String simpleName = parentImpl.getSimpleName() + "_" + subResourceType.getSimpleName();
-        return new Type(subResourceType.getPackageName(), simpleName);
+        this.resourceType = new Type(resourceElement);
+        this.type = new Type(this.resourceType.getPackageName(), this.resourceType.getSimpleName() + NAME_SUFFIX);
+        this.endPointDetails = new EndPointDetails(logger, utils, resourceElement);
+        this.methods = resourceUtils.processMethods(resourceElement, this);
     }
 
     @Override
@@ -71,17 +58,12 @@ public class SubResource implements Resource, IsEndPoint {
 
     @Override
     public Type getResourceType() {
-        return subResourceType;
+        return resourceType;
     }
 
     @Override
     public EndPointDetails getEndPointDetails() {
         return endPointDetails;
-    }
-
-    @Override
-    public List<Variable> getFields() {
-        return fields;
     }
 
     @Override
@@ -93,7 +75,7 @@ public class SubResource implements Resource, IsEndPoint {
     public Collection<String> getImports() {
         return FluentIterable.from(methods)
                 .transformAndConcat(HasImports.EXTRACT_IMPORTS_FUNCTION)
-                .append(subResourceType.getImports())
+                .append(resourceType.getImports())
                 .toList();
     }
 }

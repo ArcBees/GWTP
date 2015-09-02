@@ -20,10 +20,7 @@ import java.util.List;
 
 import javax.annotation.processing.ProcessingEnvironment;
 
-import com.google.common.base.Function;
-import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
-import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
@@ -42,12 +39,12 @@ public class SubResourceProcessor extends DispatchRestContextProcessor<SubResour
 
     @Override
     public Void process(SubResource subResource) {
-        Type impl = subResource.getImpl();
-        Type subResourceType = subResource.getSubResource();
+        Type impl = subResource.getType();
+        Type subResourceType = subResource.getResourceType();
 
         logger.debug("Generating sub-resource implementation `%s`.", impl);
 
-        List<CodeSnippet> methods = processMethods(subResource);
+        List<CodeSnippet> methods = methodProcessors.processAll(subResource.getMethods());
 
         outputter.withTemplateFile(TEMPLATE)
                 .withParam("subResourceType", subResourceType)
@@ -56,17 +53,5 @@ public class SubResourceProcessor extends DispatchRestContextProcessor<SubResour
                 .writeTo(impl);
 
         return null;
-    }
-
-    private List<CodeSnippet> processMethods(SubResource subResource) {
-        // TODO: Copied from ResourceProcessor
-        return FluentIterable.from(subResource.getMethods())
-                .transform(new Function<ResourceMethod, CodeSnippet>() {
-                    @Override
-                    public CodeSnippet apply(ResourceMethod resourceMethod) {
-                        return methodProcessors.process(resourceMethod);
-                    }
-                })
-                .toList();
     }
 }

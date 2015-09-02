@@ -16,10 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.processors.domain;
 
-import com.gwtplatform.processors.tools.domain.Type;
-
-public interface ResourceType {
-    Type getImpl();
-
+public interface HasEndPointDetails {
     EndPointDetails getEndPointDetails();
 }

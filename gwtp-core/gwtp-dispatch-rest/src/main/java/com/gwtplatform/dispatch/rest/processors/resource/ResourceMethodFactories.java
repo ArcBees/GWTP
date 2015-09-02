@@ -20,7 +20,7 @@ import java.util.ServiceLoader;
 
 import javax.lang.model.element.ExecutableElement;
 
-import com.gwtplatform.dispatch.rest.processors.domain.ResourceType;
+import com.gwtplatform.dispatch.rest.processors.domain.Resource;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
@@ -44,7 +44,7 @@ public class ResourceMethodFactories {
         }
     }
 
-    public ResourceMethod resolve(ResourceType resourceType, ExecutableElement element) {
+    public ResourceMethod resolve(Resource resourceType, ExecutableElement element) {
         for (ResourceMethodFactory factory : factories) {
             if (factory.canHandle(element)) {
                 return factory.resolve(logger, utils, resourceType, element);

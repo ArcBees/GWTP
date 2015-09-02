@@ -21,20 +21,21 @@ import java.util.Collection;
 import java.util.List;
 
 import com.gwtplatform.processors.tools.domain.HasImports;
+import com.gwtplatform.processors.tools.domain.HasType;
 import com.gwtplatform.processors.tools.domain.Type;
 
-public class JacksonMapper implements HasImports {
+public class JacksonMapper implements HasType, HasImports {
     private final Type key;
     private final Type mapped;
-    private final Type impl;
+    private final Type type;
 
     public JacksonMapper(
             Type key,
             Type mapped,
-            Type impl) {
+            Type type) {
         this.key = key;
         this.mapped = mapped;
-        this.impl = impl;
+        this.type = type;
     }
 
     public Type getKey() {
@@ -45,14 +46,15 @@ public class JacksonMapper implements HasImports {
         return mapped;
     }
 
-    public Type getImpl() {
-        return impl;
+    @Override
+    public Type getType() {
+        return type;
     }
 
     @Override
     public Collection<String> getImports() {
         List<String> imports = new ArrayList<>(mapped.getImports());
-        imports.addAll(impl.getImports());
+        imports.addAll(type.getImports());
 
         return imports;
     }

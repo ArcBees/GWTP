@@ -21,7 +21,7 @@ public class $impl.simpleName extends AbstractJacksonMapperProvider {
                     @SuppressWarnings("unchecked")
                     public ObjectMapper<?> get() {
                         if (mapper == null){
-                            mapper = (ObjectMapper<$mapper.mapped.parameterizedName>) GWT.create(${mapper.impl.simpleName}.class);
+                            mapper = (ObjectMapper<$mapper.mapped.parameterizedName>) GWT.create(${mapper.type.simpleName}.class);
                         }
 
                         return mapper;

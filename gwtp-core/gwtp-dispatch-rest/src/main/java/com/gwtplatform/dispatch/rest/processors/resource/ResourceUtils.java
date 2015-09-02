@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.processors.resource;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.lang.model.element.Element;
@@ -27,10 +26,7 @@ import javax.lang.model.element.TypeElement;
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
-import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
-import com.gwtplatform.dispatch.rest.processors.domain.ResourceType;
-import com.gwtplatform.processors.tools.domain.HasImports;
-import com.gwtplatform.processors.tools.domain.Type;
+import com.gwtplatform.dispatch.rest.processors.domain.Resource;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
@@ -39,33 +35,20 @@ import static javax.lang.model.util.ElementFilter.methodsIn;
 
 import static com.google.auto.common.MoreElements.asType;
 
-public class Resource implements ResourceType, HasImports {
-    private static final String NAME_SUFFIX = "Impl";
-
+public class ResourceUtils {
     private final Logger logger;
     private final Utils utils;
-    private final TypeElement element;
+    private final ResourceMethodFactories resourceMethodFactories;
 
-    private final Type impl;
-    private final Type resource;
-    private final EndPointDetails endPointDetails;
-    private final List<ResourceMethod> methods;
-
-    public Resource(
+    public ResourceUtils(
             Logger logger,
-            Utils utils,
-            Element element) {
+            Utils utils) {
         this.logger = logger;
         this.utils = utils;
-        this.element = ensureTypeElement(element);
-
-        this.resource = new Type(this.element);
-        this.impl = new Type(resource.getPackageName(), resource.getSimpleName() + NAME_SUFFIX);
-        this.endPointDetails = new EndPointDetails(logger, utils, this.element);
-        this.methods = processMethods();
+        this.resourceMethodFactories = new ResourceMethodFactories(logger, utils);
     }
 
-    public TypeElement ensureTypeElement(Element element) {
+    public TypeElement asResourceTypeElement(Element element) {
         if (element.getKind() == ElementKind.INTERFACE) {
             return asType(element);
         }
@@ -74,44 +57,18 @@ public class Resource implements ResourceType, HasImports {
         throw new UnableToProcessException();
     }
 
-    private List<ResourceMethod> processMethods() {
-        final ResourceMethodFactories resourceMethodFactories = new ResourceMethodFactories(logger, utils);
-        List<ExecutableElement> methodElements = methodsIn(utils.getAllMembers(element, Object.class));
+    public List<ResourceMethod> processMethods(TypeElement element, final Resource resourceType) {
+        List<Element> members = utils.getAllMembers(element, Object.class);
+        List<ExecutableElement> methods = methodsIn(members);
 
-        return FluentIterable.from(methodElements)
+        return FluentIterable.from(methods)
                 .transform(new Function<ExecutableElement, ResourceMethod>() {
                     @Override
                     public ResourceMethod apply(ExecutableElement element) {
-                        return resourceMethodFactories.resolve(Resource.this, element);
+                        return resourceMethodFactories.resolve(resourceType, element);
                     }
                 })
                 .filter(Predicates.notNull())
-                .toList();
-    }
-
-    @Override
-    public Type getImpl() {
-        return impl;
-    }
-
-    public Type getResource() {
-        return resource;
-    }
-
-    @Override
-    public EndPointDetails getEndPointDetails() {
-        return endPointDetails;
-    }
-
-    public List<ResourceMethod> getMethods() {
-        return methods;
-    }
-
-    @Override
-    public Collection<String> getImports() {
-        return FluentIterable.from(methods)
-                .transformAndConcat(HasImports.EXTRACT_IMPORTS_FUNCTION)
-                .append(resource.getImports())
                 .toList();
     }
 }

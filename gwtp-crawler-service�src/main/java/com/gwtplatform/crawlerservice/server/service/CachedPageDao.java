@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,16 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.resource;
+package com.gwtplatform.crawlerservice.server.service;
 
-import javax.lang.model.element.ExecutableElement;
+import com.gwtplatform.crawlerservice.server.domain.CachedPage;
 
-import com.gwtplatform.dispatch.rest.processors.domain.Resource;
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.utils.Utils;
-
-public interface ResourceMethodFactory {
-    boolean canHandle(ExecutableElement element);
-
-    ResourceMethod resolve(Logger logger, Utils utils, Resource resource, ExecutableElement element);
+/**
+ * The DAO for a {@link CachedPage}.
+ */
+public class CachedPageDao extends ObjectifyDao<CachedPage> {
+    public CachedPageDao() {
+        super(CachedPage.class);
+    }
 }

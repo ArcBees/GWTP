@@ -21,8 +21,6 @@ import java.util.List;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.inject.Singleton;
 
-import com.google.common.base.Function;
-import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
 import com.gwtplatform.processors.tools.bindings.BindingContext;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
@@ -31,13 +29,13 @@ import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 
 import static com.gwtplatform.dispatch.rest.processors.NameFactory.REST_GIN_MODULE;
 
-public class ResourceProcessor extends DispatchRestContextProcessor<Resource, Void> {
+public class RootResourceProcessor extends DispatchRestContextProcessor<RootResource, Void> {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/resource/Resource.vm";
 
     private BindingsProcessors bindingsProcessors;
     private ResourceMethodProcessors methodProcessors;
 
-    public ResourceProcessor(ProcessingEnvironment processingEnv) {
+    public RootResourceProcessor(ProcessingEnvironment processingEnv) {
         init(processingEnv);
     }
 
@@ -50,13 +48,13 @@ public class ResourceProcessor extends DispatchRestContextProcessor<Resource, Vo
     }
 
     @Override
-    public Void process(Resource resource) {
-        Type impl = resource.getImpl();
-        Type resourceType = resource.getResource();
+    public Void process(RootResource resource) {
+        Type impl = resource.getType();
+        Type resourceType = resource.getResourceType();
 
         logger.debug("Generating resource implementation `%s`.", impl);
 
-        List<CodeSnippet> processedMethods = processMethods(resource);
+        List<CodeSnippet> processedMethods = methodProcessors.processAll(resource.getMethods());
 
         outputter.withTemplateFile(TEMPLATE)
                 .withParam("resource", resourceType)
@@ -66,17 +64,6 @@ public class ResourceProcessor extends DispatchRestContextProcessor<Resource, Vo
         bindingsProcessors.process(new BindingContext(REST_GIN_MODULE, impl, resourceType, Singleton.class));
 
         return null;
-    }
-
-    private List<CodeSnippet> processMethods(Resource resource) {
-        return FluentIterable.from(resource.getMethods())
-                .transform(new Function<ResourceMethod, CodeSnippet>() {
-                    @Override
-                    public CodeSnippet apply(ResourceMethod resourceMethod) {
-                        return methodProcessors.process(resourceMethod);
-                    }
-                })
-                .toList();
     }
 
     @Override

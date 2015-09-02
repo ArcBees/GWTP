@@ -16,15 +16,13 @@
 
 package com.gwtplatform.dispatch.rest.processors.resource;
 
-import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.HasEndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.Method;
-import com.gwtplatform.dispatch.rest.processors.domain.ResourceType;
+import com.gwtplatform.dispatch.rest.processors.domain.Resource;
 import com.gwtplatform.processors.tools.domain.HasImports;
 
-public interface ResourceMethod extends HasImports {
-    ResourceType getParent();
+public interface ResourceMethod extends HasEndPointDetails, HasImports {
+    Resource getParentResource();
 
     Method getMethod();
-
-    EndPointDetails getEndPointDetails();
 }

@@ -1,4 +1,4 @@
-## TODO: Use `new ContentType(...)`. For now it's easier to reparse because of the parameters map
+## TODO: Find a way to use `new ContentType(...)` for better performances.
 #macro(recreateContentType $contentType)
 ContentType.valueOf("$contentType")#end
 

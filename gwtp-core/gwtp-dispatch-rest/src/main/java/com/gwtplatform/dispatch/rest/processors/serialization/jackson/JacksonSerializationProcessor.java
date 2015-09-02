@@ -103,7 +103,7 @@ public class JacksonSerializationProcessor extends DispatchRestContextProcessor<
         }
 
         if (newKey != null) {
-            mappers.put(newKey, new JacksonMapper(newKey, mapper.getMapped(), mapper.getImpl()));
+            mappers.put(newKey, new JacksonMapper(newKey, mapper.getMapped(), mapper.getType()));
         }
     }
 

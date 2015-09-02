@@ -31,8 +31,8 @@ import javax.lang.model.element.TypeElement;
 import javax.ws.rs.Path;
 
 import com.google.auto.service.AutoService;
-import com.gwtplatform.dispatch.rest.processors.resource.Resource;
-import com.gwtplatform.dispatch.rest.processors.resource.ResourceProcessor;
+import com.gwtplatform.dispatch.rest.processors.resource.RootResource;
+import com.gwtplatform.dispatch.rest.processors.resource.RootResourceProcessor;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessors;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
@@ -54,7 +54,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
 
     private Logger logger;
     private Utils utils;
-    private ResourceProcessor resourceProcessor;
+    private RootResourceProcessor resourceProcessor;
     private SerializationProcessors serializationProcessors;
     private BindingsProcessors bindingsProcessors;
 
@@ -67,7 +67,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
 
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
         utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
-        resourceProcessor = new ResourceProcessor(processingEnv);
+        resourceProcessor = new RootResourceProcessor(processingEnv);
         serializationProcessors = new SerializationProcessors(processingEnv);
         bindingsProcessors = new BindingsProcessors(processingEnv);
     }
@@ -105,7 +105,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
 
     private void process(Element element) {
         try {
-            Resource resource = new Resource(logger, utils, element);
+            RootResource resource = new RootResource(logger, utils, element);
 
             resourceProcessor.process(resource);
         } catch (UnableToProcessException e) {

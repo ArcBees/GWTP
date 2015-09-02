@@ -24,6 +24,7 @@ import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.HttpVariable;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessors;
+import com.gwtplatform.processors.tools.domain.Type;
 
 import static com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext.IO.READ;
 import static com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext.IO.WRITE;
@@ -42,12 +43,14 @@ public class EndPointProcessor extends DispatchRestContextProcessor<EndPoint, Vo
 
     @Override
     public Void process(EndPoint endPoint) {
-        logger.debug("Generating end-point implementation `%s`.", endPoint.getImpl());
+        Type type = endPoint.getType();
+
+        logger.debug("Generating end-point implementation `%s`.", type);
 
         outputter.withTemplateFile(TEMPLATE)
                 .withParam("endPoint", endPoint.getEndPointDetails())
                 .withParam("fields", endPoint.getFields())
-                .writeTo(endPoint.getImpl());
+                .writeTo(type);
 
         generateSerializers(endPoint);
 
