@@ -69,9 +69,4 @@ public class SubResourceProcessor extends DispatchRestContextProcessor<SubResour
                 })
                 .toList();
     }
-
-    @Override
-    public void processLast() {
-        methodProcessors.processLast();
-    }
 }

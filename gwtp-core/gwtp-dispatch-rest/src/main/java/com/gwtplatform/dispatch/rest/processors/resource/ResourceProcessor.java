@@ -37,6 +37,10 @@ public class ResourceProcessor extends DispatchRestContextProcessor<Resource, Vo
     private BindingsProcessors bindingsProcessors;
     private ResourceMethodProcessors methodProcessors;
 
+    public ResourceProcessor(ProcessingEnvironment processingEnv) {
+        init(processingEnv);
+    }
+
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);

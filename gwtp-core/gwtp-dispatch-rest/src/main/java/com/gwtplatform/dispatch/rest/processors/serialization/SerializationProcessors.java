@@ -26,7 +26,6 @@ public class SerializationProcessors {
     private static final String NO_SERIALIZATION_POLICIES_FOUND = "Can not find a serialization policy for `%s`.";
 
     private static ServiceLoader<SerializationProcessor> processors;
-    private static boolean processedLast;
 
     private final ProcessingEnvironment environment;
     private final Logger logger;
@@ -58,14 +57,10 @@ public class SerializationProcessors {
     }
 
     public void processLast() {
-        // TODO: Better handling of processLast
-        if (!processedLast) {
-            processedLast = true;
-            for (SerializationProcessor processor : processors) {
-                ensureInitialized(processor);
+        for (SerializationProcessor processor : processors) {
+            ensureInitialized(processor);
 
-                processor.processLast();
-            }
+            processor.processLast();
         }
     }
 

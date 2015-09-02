@@ -58,8 +58,6 @@ public class BindingsProcessors {
     }
 
     public void processLast() {
-        // TODO: Use AutoService and a standalone processor to register collections that require a call to processLast
-        // Manual usage is error prone
         if (!processedLast) {
             processedLast = true;
 

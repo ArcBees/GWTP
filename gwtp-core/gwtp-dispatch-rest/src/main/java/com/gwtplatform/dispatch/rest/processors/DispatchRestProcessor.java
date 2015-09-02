@@ -52,27 +52,24 @@ public class DispatchRestProcessor extends AbstractProcessor {
     private static final String UNABLE_TO_PROCESS_RESOURCE = "Unable to process resource. " + SEE_LOG;
     private static final String UNRESOLVABLE_EXCEPTION = "Unresolvable exception. " + SEE_LOG;
 
-    private final ResourceProcessor resourceProcessor;
-
     private Logger logger;
     private Utils utils;
-    private BindingsProcessors bindingsProcessors;
+    private ResourceProcessor resourceProcessor;
     private SerializationProcessors serializationProcessors;
+    private BindingsProcessors bindingsProcessors;
 
     public DispatchRestProcessor() {
-        this.resourceProcessor = new ResourceProcessor();
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
         utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
-        bindingsProcessors = new BindingsProcessors(processingEnv);
+        resourceProcessor = new ResourceProcessor(processingEnv);
         serializationProcessors = new SerializationProcessors(processingEnv);
-        resourceProcessor.init(processingEnv);
+        bindingsProcessors = new BindingsProcessors(processingEnv);
     }
 
     @Override
@@ -82,6 +79,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        logger.warning("HEY");
         try {
             processPathElements(roundEnv.getElementsAnnotatedWith(Path.class), roundEnv);
         } catch (UnableToProcessException e) {

@@ -28,7 +28,6 @@ public class ResourceMethodProcessors {
     private static final String NO_PROCESSORS_FOUND = "Can not find a resource method processor for `%s`.";
 
     private static ServiceLoader<ResourceMethodProcessor> processors;
-    private static boolean processedLast;
 
     private final ProcessingEnvironment environment;
     private final Logger logger;
@@ -56,14 +55,10 @@ public class ResourceMethodProcessors {
     }
 
     public void processLast() {
-        // TODO: Better handling of processLast
-        if (!processedLast) {
-            processedLast = true;
-            for (ResourceMethodProcessor processor : processors) {
-                ensureInitialized(processor);
+        for (ResourceMethodProcessor processor : processors) {
+            ensureInitialized(processor);
 
-                processor.processLast();
-            }
+            processor.processLast();
         }
     }
 
