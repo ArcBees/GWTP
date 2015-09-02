@@ -24,7 +24,7 @@ import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessor;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 
-import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
+import static com.gwtplatform.dispatch.rest.processors.NameUtils.qualifiedMethodName;
 
 @AutoService(ResourceMethodProcessor.class)
 public class SubResourceMethodProcessor extends DispatchRestContextProcessor<ResourceMethod, CodeSnippet>
@@ -52,7 +52,7 @@ public class SubResourceMethodProcessor extends DispatchRestContextProcessor<Res
     @Override
     public CodeSnippet process(ResourceMethod resourceMethod) {
         SubResourceMethod subResourceMethod = (SubResourceMethod) resourceMethod;
-        String methodName = methodName(resourceMethod);
+        String methodName = qualifiedMethodName(resourceMethod);
 
         logger.debug("Generating sub-resource method `%s`.", methodName);
 

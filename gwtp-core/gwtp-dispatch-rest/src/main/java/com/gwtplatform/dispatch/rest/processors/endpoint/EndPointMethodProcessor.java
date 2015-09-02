@@ -24,7 +24,7 @@ import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessor;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 
-import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
+import static com.gwtplatform.dispatch.rest.processors.NameUtils.qualifiedMethodName;
 
 @AutoService(ResourceMethodProcessor.class)
 public class EndPointMethodProcessor extends DispatchRestContextProcessor<ResourceMethod, CodeSnippet>
@@ -52,7 +52,7 @@ public class EndPointMethodProcessor extends DispatchRestContextProcessor<Resour
     @Override
     public CodeSnippet process(ResourceMethod resourceMethod) {
         EndPointMethod endPointMethod = (EndPointMethod) resourceMethod;
-        String methodName = methodName(resourceMethod);
+        String methodName = qualifiedMethodName(resourceMethod);
 
         logger.debug("Generating end-point method `%s`.", methodName);
 

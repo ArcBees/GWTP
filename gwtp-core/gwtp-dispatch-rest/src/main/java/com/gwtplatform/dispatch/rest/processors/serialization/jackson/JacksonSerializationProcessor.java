@@ -36,7 +36,7 @@ import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.utils.Primitives;
 
-import static com.gwtplatform.dispatch.rest.processors.NameFactory.REST_GIN_MODULE;
+import static com.gwtplatform.dispatch.rest.processors.NameUtils.REST_GIN_MODULE;
 import static com.gwtplatform.processors.tools.utils.Primitives.findByBoxed;
 import static com.gwtplatform.processors.tools.utils.Primitives.findByPrimitive;
 

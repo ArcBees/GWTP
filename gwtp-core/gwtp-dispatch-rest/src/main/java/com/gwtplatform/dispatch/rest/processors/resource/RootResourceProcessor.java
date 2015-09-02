@@ -27,7 +27,7 @@ import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 
-import static com.gwtplatform.dispatch.rest.processors.NameFactory.REST_GIN_MODULE;
+import static com.gwtplatform.dispatch.rest.processors.NameUtils.REST_GIN_MODULE;
 
 public class RootResourceProcessor extends DispatchRestContextProcessor<RootResource, Void> {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/resource/Resource.vm";

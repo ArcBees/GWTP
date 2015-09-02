@@ -16,52 +16,25 @@
 
 package com.gwtplatform.dispatch.rest.processors;
 
-import java.util.List;
-
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
-import javax.lang.model.util.Elements;
 import javax.lang.model.util.SimpleElementVisitor6;
 
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.processors.tools.domain.Type;
 
-import static javax.lang.model.util.ElementFilter.methodsIn;
-
 import static com.google.auto.common.MoreElements.asType;
 
-public class NameFactory {
+public class NameUtils {
     public static final Type REST_GIN_MODULE = new Type("com.gwtplatform.dispatch.rest.client", "RestGinModule");
-
-    /**
-     * Generate a unique class name based on a method. Since methods may define overloads, it's possible we end up with
-     * name clashes. This function will prefix the requested name with the parent name and the method index to ensure
-     * uniqueness.
-     */
-    public static Type endPointName(Elements elements, Type parent, ExecutableElement method) {
-        String packageName = parent.getPackageName();
-        String parentName = parent.getSimpleName();
-
-        Name methodName = method.getSimpleName();
-        int methodIndex = indexInParent(elements, method);
-        String className = String.format("%s_%d_%s", parentName, methodIndex, methodName);
-
-        return new Type(packageName, className);
-    }
-
-    private static int indexInParent(Elements elements, ExecutableElement method) {
-        TypeElement type = asType(method.getEnclosingElement());
-        List<ExecutableElement> methods = methodsIn(elements.getAllMembers(type));
-        return methods.indexOf(method);
-    }
 
     public static String parentName(VariableElement element) {
         return element.getEnclosingElement().accept(new SimpleElementVisitor6<String, Void>("") {
             @Override
             public String visitExecutable(ExecutableElement parent, Void v) {
-                return methodName(parent);
+                return qualifiedMethodName(parent);
             }
 
             @Override
@@ -71,18 +44,18 @@ public class NameFactory {
         }, null);
     }
 
-    public static String methodName(ExecutableElement element) {
+    public static String qualifiedMethodName(ExecutableElement element) {
         Name className = asType(element.getEnclosingElement()).getQualifiedName();
         Name methodName = element.getSimpleName();
 
         return className + "#" + methodName;
     }
 
-    public static String methodName(Type parent, ExecutableElement element) {
+    public static String qualifiedMethodName(Type parent, ExecutableElement element) {
         return parent.getQualifiedName() + "#" + element.getSimpleName();
     }
 
-    public static String methodName(ResourceMethod method) {
+    public static String qualifiedMethodName(ResourceMethod method) {
         return method.getParentResource().getType() + "#" + method.getMethod().getName();
     }
 }

@@ -20,6 +20,8 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Name;
+import javax.lang.model.element.TypeElement;
 
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
@@ -27,20 +29,41 @@ import com.gwtplatform.dispatch.rest.processors.domain.Variable;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.utils.Utils;
 
-import static com.gwtplatform.dispatch.rest.processors.NameFactory.endPointName;
+import static javax.lang.model.util.ElementFilter.methodsIn;
+
+import static com.google.auto.common.MoreElements.asType;
 
 public class EndPoint implements IsEndPoint {
     private final Type impl;
     private final List<Variable> fields;
     private final EndPointDetails endPointDetails;
+    private final Utils utils;
 
     public EndPoint(
             Utils utils,
             EndPointMethod endPointMethod,
             ExecutableElement element) {
-        this.impl = endPointName(utils.elements, endPointMethod.getParentResource().getType(), element);
+        this.utils = utils;
+        this.impl = processName(endPointMethod.getParentResource().getType(), element);
         this.fields = new EndPointUtils().processFields(endPointMethod);
         this.endPointDetails = endPointMethod.getEndPointDetails();
+    }
+
+    private Type processName(Type parentType, ExecutableElement method) {
+        String parentName = parentType.getSimpleName();
+        int methodIndex = indexInParent(method);
+        Name methodName = method.getSimpleName();
+
+        String packageName = parentType.getPackageName();
+        String className = String.format("%s_%d_%s", parentName, methodIndex, methodName);
+
+        return new Type(packageName, className);
+    }
+
+    private int indexInParent(ExecutableElement method) {
+        TypeElement type = asType(method.getEnclosingElement());
+        List<ExecutableElement> methods = methodsIn(utils.elements.getAllMembers(type));
+        return methods.indexOf(method);
     }
 
     @Override

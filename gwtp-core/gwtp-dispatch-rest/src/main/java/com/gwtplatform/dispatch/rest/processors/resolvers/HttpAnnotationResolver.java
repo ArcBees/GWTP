@@ -24,7 +24,7 @@ import com.gwtplatform.dispatch.rest.processors.resolvers.parameters.HttpParamVa
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
-import static com.gwtplatform.dispatch.rest.processors.NameFactory.parentName;
+import static com.gwtplatform.dispatch.rest.processors.NameUtils.parentName;
 
 public class HttpAnnotationResolver {
     private static final String MANY_REST_ANNOTATIONS =

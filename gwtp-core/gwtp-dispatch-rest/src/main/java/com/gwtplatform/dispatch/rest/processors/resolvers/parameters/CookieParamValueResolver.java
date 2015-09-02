@@ -36,7 +36,7 @@ import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 
 import static com.google.auto.common.MoreTypes.asTypeElement;
 import static com.google.auto.common.MoreTypes.isType;
-import static com.gwtplatform.dispatch.rest.processors.NameFactory.parentName;
+import static com.gwtplatform.dispatch.rest.processors.NameUtils.parentName;
 
 @AutoService(HttpParamValueResolver.class)
 public class CookieParamValueResolver extends HttpParamValueResolver {

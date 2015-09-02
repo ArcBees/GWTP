@@ -35,6 +35,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.gwtplatform.dispatch.rest.processors.NameUtils;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpVerbResolver;
 import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
@@ -52,7 +53,6 @@ import static com.google.common.base.Predicates.and;
 import static com.google.common.base.Predicates.equalTo;
 import static com.google.common.base.Predicates.not;
 import static com.google.common.base.Predicates.notNull;
-import static com.gwtplatform.dispatch.rest.processors.NameFactory.methodName;
 import static com.gwtplatform.dispatch.rest.processors.resolvers.ContentTypeResolver.resolveConsumes;
 import static com.gwtplatform.dispatch.rest.processors.resolvers.ContentTypeResolver.resolveProduces;
 
@@ -146,7 +146,7 @@ public class EndPointDetails implements HasImports {
         if (typeArguments.size() == 1) {
             result = new Type(typeArguments.get(0));
         } else {
-            logger.error().context(element).log(BAD_REST_ACTION, methodName(element));
+            logger.error().context(element).log(BAD_REST_ACTION, NameUtils.qualifiedMethodName(element));
             throw new UnableToProcessException();
         }
     }
@@ -167,7 +167,7 @@ public class EndPointDetails implements HasImports {
         HttpVariable httpVariable = new HttpVariable(logger, utils, variableElement);
 
         if (body.isPresent() && httpVariable.isBody()) {
-            logger.error().context(element).log(MANY_POTENTIAL_BODY, methodName(element));
+            logger.error().context(element).log(MANY_POTENTIAL_BODY, NameUtils.qualifiedMethodName(element));
             throw new UnableToProcessException();
         }
 
@@ -179,7 +179,7 @@ public class EndPointDetails implements HasImports {
     }
 
     private void logPotentialErrors(ExecutableElement element) {
-        String methodName = methodName(element);
+        String methodName = NameUtils.qualifiedMethodName(element);
         boolean containsFormVariables = containsFormVariables();
         boolean containsBody = body.isPresent();
 

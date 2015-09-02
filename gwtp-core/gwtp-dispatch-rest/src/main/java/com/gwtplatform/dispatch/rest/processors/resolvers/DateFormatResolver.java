@@ -28,7 +28,7 @@ import com.gwtplatform.processors.tools.logger.Logger;
 
 import static com.google.auto.common.MoreElements.asType;
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
-import static com.gwtplatform.dispatch.rest.processors.NameFactory.parentName;
+import static com.gwtplatform.dispatch.rest.processors.NameUtils.parentName;
 
 public class DateFormatResolver {
     private static final String DATE_FORMAT_NOT_DATE =
