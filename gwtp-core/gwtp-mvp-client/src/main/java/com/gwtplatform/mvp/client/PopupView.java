@@ -85,16 +85,15 @@ public interface PopupView extends View {
      *
      * @param left The left position of the top-left corner (in pixels).
      * @param top  The top position of the top-left corner (in pixels).
-     * @deprecated use a {@link com.gwtplatform.mvp.client.view.PopupPositioner} instead.
+     * @deprecated since 1.4. Use a {@link com.gwtplatform.mvp.client.view.PopupPositioner} instead.
      */
     @Deprecated
     void setPosition(int left, int top);
 
     /**
      * This method does nothing.
-     * @deprecated use a {@link com.gwtplatform.mvp.client.view.PopupPositioner} instead.
+     * @deprecated since 1.4. Use a {@link com.gwtplatform.mvp.client.view.PopupPositioner} instead.
      */
     @Deprecated
     void center();
-
 }

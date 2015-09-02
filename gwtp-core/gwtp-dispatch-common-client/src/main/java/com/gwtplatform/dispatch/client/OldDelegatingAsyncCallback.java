@@ -27,6 +27,8 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * {@code AsyncCallback} implementation wrapping another {@link AsyncCallback} object used by a
  * {@link ClientActionHandler} to delegate the execution result.
  *
+ * @deprecated Since 1.4.
+ *
  * @param <A> the {@link TypedAction} type.
  * @param <R> the result type for this action.
  */

@@ -102,7 +102,7 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * </code>
  * </pre>
  *
- * @deprecated use {@link com.gwtplatform.dispatch.client.interceptor.Interceptor}
+ * @deprecated Since 1.4. Use {@link com.gwtplatform.dispatch.client.interceptor.Interceptor}
  *
  * @param <A> The type of the action.
  * @param <R> The type of the result.

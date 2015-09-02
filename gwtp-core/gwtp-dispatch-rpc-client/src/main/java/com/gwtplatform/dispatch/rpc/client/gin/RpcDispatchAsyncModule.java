@@ -58,6 +58,9 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
         private Class<? extends RpcDispatchHooks> dispatchHooks = DefaultRpcDispatchHooks.class;
         private Class<? extends RpcInterceptorRegistry> interceptorRegistry = DefaultRpcInterceptorRegistry.class;
 
+        /**
+         * @deprecated Since 1.4.
+         */
         @Deprecated
         private Class<? extends ClientActionHandlerRegistry> clientActionHandlerRegistryType =
                 DefaultClientActionHandlerRegistry.class;
