@@ -46,7 +46,7 @@ public class EndPoint implements HasImports {
             ExecutableElement element) {
         this.endPointMethod = endPointMethod;
 
-        this.impl = endPointName(utils.elements, endPointMethod.getParentImpl(), element);
+        this.impl = endPointName(utils.elements, endPointMethod.getParent().getImpl(), element);
         this.fields = ImmutableList.copyOf(endPointMethod.getMethod().getParameters());
         this.endPointDetails = endPointMethod.getEndPointDetails();
     }

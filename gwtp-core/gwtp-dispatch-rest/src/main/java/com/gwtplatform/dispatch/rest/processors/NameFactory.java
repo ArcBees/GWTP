@@ -33,7 +33,7 @@ import static javax.lang.model.util.ElementFilter.methodsIn;
 import static com.google.auto.common.MoreElements.asType;
 
 public class NameFactory {
-    public static final Type REST_GIN_MODULE = new Type("com.gwtplatform.dispatch.rest.client.RestGinModule");
+    public static final Type REST_GIN_MODULE = new Type("com.gwtplatform.dispatch.rest.client", "RestGinModule");
 
     /**
      * Generate a unique class name based on a method. Since methods may define overloads, it's possible we end up with
@@ -83,6 +83,6 @@ public class NameFactory {
     }
 
     public static String methodName(ResourceMethod method) {
-        return method.getParentImpl() + "#" + method.getMethod().getName();
+        return method.getParent().getImpl() + "#" + method.getMethod().getName();
     }
 }

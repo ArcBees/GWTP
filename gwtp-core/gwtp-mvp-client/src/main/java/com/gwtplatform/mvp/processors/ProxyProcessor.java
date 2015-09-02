@@ -23,7 +23,6 @@ import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedOptions;
 import javax.annotation.processing.SupportedSourceVersion;
@@ -35,7 +34,6 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 
 import com.google.auto.common.MoreTypes;
-import com.google.auto.service.AutoService;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Sets;
@@ -57,7 +55,7 @@ import static com.google.auto.common.MoreTypes.asTypeElement;
 
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
 @SupportedOptions(Logger.DEBUG_OPTION)
-@AutoService(Processor.class)
+// TODO: Add back @AutoService to enable the ProxyProcessor
 public class ProxyProcessor extends AbstractProcessor {
     public static final Type MVP_MODULE = new Type("com.gwtplatform.mvp.client.gin", "MvpModule");
     private Logger logger;

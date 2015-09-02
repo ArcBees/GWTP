@@ -22,23 +22,17 @@ import java.util.List;
 
 import javax.lang.model.element.ExecutableElement;
 
-import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.Method;
 import com.gwtplatform.dispatch.rest.processors.domain.ResourceType;
-import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
-import com.gwtplatform.processors.tools.domain.Type;
-import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.MoreTypes.asTypeElement;
 
 public class SubResourceMethod implements ResourceMethod {
-    private final Optional<Resource> parentResource;
-    private final Optional<SubResource> parentSubResource;
-
+    private final ResourceType parent;
     private final Method method;
     private final EndPointDetails endPointDetails;
     private final SubResource subResource;
@@ -46,42 +40,18 @@ public class SubResourceMethod implements ResourceMethod {
     public SubResourceMethod(
             Logger logger,
             Utils utils,
-            ResourceType resourceType,
+            ResourceType parent,
             ExecutableElement element) {
-        this.parentResource = asResource(resourceType);
-        this.parentSubResource = asSubResource(resourceType);
-
-        ensureOnlyOneParentType(logger, element);
+        this.parent = parent;
 
         this.method = new Method(element);
-        this.endPointDetails = new EndPointDetails(logger, utils, element, resourceType.getEndPointDetails());
+        this.endPointDetails = new EndPointDetails(logger, utils, element, parent.getEndPointDetails());
         this.subResource = new SubResource(logger, utils, this, asTypeElement(element.getReturnType()));
     }
 
-    private Optional<Resource> asResource(ResourceType resourceType) {
-        return resourceType instanceof Resource
-                ? Optional.of((Resource) resourceType)
-                : Optional.<Resource>absent();
-    }
-
-    private Optional<SubResource> asSubResource(ResourceType resourceType) {
-        return resourceType instanceof SubResource
-                ? Optional.of((SubResource) resourceType)
-                : Optional.<SubResource>absent();
-    }
-
-    private void ensureOnlyOneParentType(Logger logger, ExecutableElement element) {
-        if (!parentResource.isPresent() && !parentSubResource.isPresent()) {
-            logger.error()
-                    .context(element)
-                    .log("Ambiguous hierarchy for sub resource method. Only Resource or SubResource is allowed.");
-            throw new UnableToProcessException();
-        }
-    }
-
     @Override
-    public Type getParentImpl() {
-        return parentResource.isPresent() ? parentResource.get().getImpl() : parentSubResource.get().getImpl();
+    public ResourceType getParent() {
+        return parent;
     }
 
     @Override

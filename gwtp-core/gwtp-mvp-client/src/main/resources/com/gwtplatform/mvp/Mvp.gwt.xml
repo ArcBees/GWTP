@@ -29,7 +29,8 @@
     <define-configuration-property name="gin.ginjector.extensions" is-multi-valued="true"/>
     <set-configuration-property name="gin.ginjector.extensions" value=""/>
 
-    <extend-configuration-property name="gin.ginjector.modules" value="com.gwtplatform.mvp.client.gin.MvpModule"/>
+    <!-- TODO: Add back to enable the ProxyProcessor -->
+    <!--<extend-configuration-property name="gin.ginjector.modules" value="com.gwtplatform.mvp.client.gin.MvpModule"/>-->
 
     <!--
       optional comma separated list of annotation classes which can be added to widget presenter for

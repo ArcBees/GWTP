@@ -51,11 +51,20 @@ public class SubResourceMethodProcessor extends DispatchRestContextProcessor<Res
 
     @Override
     public CodeSnippet process(ResourceMethod resourceMethod) {
+        SubResourceMethod subResourceMethod = (SubResourceMethod) resourceMethod;
         String methodName = methodName(resourceMethod);
 
         logger.debug("Generating sub-resource method `%s`.", methodName);
 
-        return null;
+        CodeSnippet code = outputter.withTemplateFile(TEMPLATE)
+                .withParam("method", subResourceMethod.getMethod())
+                .withParam("subResource", subResourceMethod.getSubResource())
+                .withErrorLogParameter(methodName)
+                .parse();
+
+        subResourceProcessor.process(subResourceMethod.getSubResource());
+
+        return code;
     }
 
     @Override

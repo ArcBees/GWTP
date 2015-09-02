@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.processors.subresource;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -82,14 +83,22 @@ public class SubResource implements ResourceType, HasImports {
     }
 
     private Type processImplType(SubResourceMethod method) {
-        Type parentImpl = method.getParentImpl();
+        Type parentImpl = method.getParent().getImpl();
 
         return new Type(subResource.getPackageName(), parentImpl.getSimpleName() + "_" + subResource.getSimpleName());
     }
 
     private List<Variable> processFields() {
-        // TODO
-        return null;
+        List<Variable> combinedFields = new ArrayList<>();
+        ResourceType parent = method.getParent();
+
+        if (parent instanceof SubResource) {
+            combinedFields.addAll(((SubResource) parent).getFields());
+        }
+
+        combinedFields.addAll(method.getMethod().getParameters());
+
+        return combinedFields;
     }
 
     private List<ResourceMethod> processMethods() {
@@ -113,6 +122,10 @@ public class SubResource implements ResourceType, HasImports {
         return impl;
     }
 
+    public Type getSubResource() {
+        return subResource;
+    }
+
     @Override
     public EndPointDetails getEndPointDetails() {
         return endPointDetails;
@@ -120,6 +133,10 @@ public class SubResource implements ResourceType, HasImports {
 
     public List<Variable> getFields() {
         return fields;
+    }
+
+    public List<ResourceMethod> getMethods() {
+        return methods;
     }
 
     @Override

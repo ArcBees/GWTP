@@ -6,20 +6,20 @@ import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory
 #printImports($imports)
 
 @Generated(value = "$processor.qualifiedName")
-public class $impl.simpleName implements $resourceType {
+public class $impl.simpleName implements $subResourceType.parameterizedName {
     private final HttpParameterFactory httpParameterFactory;
     private final String defaultDateFormat;
-#foreach ($parameter in $parameters)
-    private final $param.type.qualifiedParameterizedName $param.name;
+#foreach ($field in $fields)
+    private final $field.type.qualifiedParameterizedName $field.name;
 #end
 
     ${impl}(
             HttpParameterFactory httpParameterFactory,
-            String defaultDateFormat#appendParameterNames(3 $parameters)) {
+            String defaultDateFormat#appendParameterNames(3 $fields)) {
         this.httpParameterFactory = httpParameterFactory;
         this.defaultDateFormat = defaultDateFormat;
-#foreach ($parameter in $parameters)
-        this.$parameter.name = $parameter.name;
+#foreach ($field in $fields)
+        this.$field.name = $field.name;
 #end
     }
 

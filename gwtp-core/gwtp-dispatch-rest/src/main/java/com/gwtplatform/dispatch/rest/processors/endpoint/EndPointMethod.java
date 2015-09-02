@@ -26,12 +26,11 @@ import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.domain.Method;
 import com.gwtplatform.dispatch.rest.processors.domain.ResourceType;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
-import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 public class EndPointMethod implements ResourceMethod {
-    private final ResourceType resourceType;
+    private final ResourceType parent;
 
     private final Method method;
     private final EndPointDetails endPointDetails;
@@ -40,19 +39,18 @@ public class EndPointMethod implements ResourceMethod {
     public EndPointMethod(
             Logger logger,
             Utils utils,
-            ResourceType resourceType,
+            ResourceType parent,
             ExecutableElement element) {
-        this.resourceType = resourceType;
+        this.parent = parent;
 
-        // TODO: Add an order to HttpVariables and converge both HttpVariables and Variables.
         method = new Method(element);
-        endPointDetails = new EndPointDetails(logger, utils, element, resourceType.getEndPointDetails());
+        endPointDetails = new EndPointDetails(logger, utils, element, parent.getEndPointDetails());
         endPoint = new EndPoint(logger, utils, this, element);
     }
 
     @Override
-    public Type getParentImpl() {
-        return resourceType.getImpl();
+    public ResourceType getParent() {
+        return parent;
     }
 
     @Override

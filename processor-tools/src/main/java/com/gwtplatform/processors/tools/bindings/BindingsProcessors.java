@@ -26,7 +26,8 @@ public class BindingsProcessors {
     private static final String NO_BINDING_POLICIES_FOUND = "Can not find a binding policy for `%s`.";
 
     private static ServiceLoader<BindingsProcessor> processors;
-    private static boolean PROCESSED = false;
+    private static boolean processedLast;
+
     private final ProcessingEnvironment environment;
     private final Logger logger;
 
@@ -57,13 +58,16 @@ public class BindingsProcessors {
     }
 
     public void processLast() {
-        if (!PROCESSED) {
+        // TODO: Use AutoService and a standalone processor to register collections that require a call to processLast
+        // Manual usage is error prone
+        if (!processedLast) {
+            processedLast = true;
+
             for (BindingsProcessor processor : processors) {
                 ensureInitialized(processor);
 
                 processor.processLast();
             }
-            PROCESSED = true;
         }
     }
 
