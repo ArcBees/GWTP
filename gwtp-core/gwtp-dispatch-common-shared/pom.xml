@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.gwtplatform</groupId>
         <artifactId>gwtp-core</artifactId>
-        <version>1.5-SNAPSHOT</version>
+        <version>1.6-SNAPSHOT</version>
     </parent>
 
     <artifactId>gwtp-dispatch-common-shared</artifactId>

@@ -1,4 +1,2 @@
 ##Contributing Guidelines
-* https://github.com/ArcBees/GWTP/wiki/Contributing
-* https://github.com/ArcBees/GWTP/wiki/Contributing-Guidelines
-* https://github.com/ArcBees/GWTP/wiki/Compiling-and-Debugging
+See http://dev.arcbees.com/gwtp/contributing/Contributing-Guidelines.html

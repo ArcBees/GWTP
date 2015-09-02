@@ -67,7 +67,7 @@ import com.gwtplatform.common.client.ProviderBundle;
  * </code>
  * </pre>
  *
- * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.DefaultRpcInterceptorRegistry}
+ * @deprecated Since 1.4. Use {@link com.gwtplatform.dispatch.rpc.client.interceptor.DefaultRpcInterceptorRegistry}
  */
 @Deprecated
 public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRegistry {
