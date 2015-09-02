@@ -47,11 +47,11 @@ public class SubResourceProcessor extends DispatchRestContextProcessor<SubResour
 
         logger.debug("Generating sub-resource implementation `%s`.", impl);
 
-        List<CodeSnippet> processedMethods = processMethods(subResource);
+        List<CodeSnippet> methods = processMethods(subResource);
 
         outputter.withTemplateFile(TEMPLATE)
-                .withParam("resource", subResourceType)
-                .withParam("methods", processedMethods)
+                .withParam("subResourceType", subResourceType)
+                .withParam("methods", methods)
                 .withParam("fields", subResource.getFields())
                 .writeTo(impl);
 

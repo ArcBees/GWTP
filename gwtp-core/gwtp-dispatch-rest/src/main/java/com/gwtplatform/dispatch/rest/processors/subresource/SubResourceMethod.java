@@ -43,7 +43,6 @@ public class SubResourceMethod implements ResourceMethod {
             ResourceType parent,
             ExecutableElement element) {
         this.parent = parent;
-
         this.method = new Method(element);
         this.endPointDetails = new EndPointDetails(logger, utils, element, parent.getEndPointDetails());
         this.subResource = new SubResource(logger, utils, this, asTypeElement(element.getReturnType()));

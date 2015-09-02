@@ -42,10 +42,9 @@ public class EndPointMethod implements ResourceMethod {
             ResourceType parent,
             ExecutableElement element) {
         this.parent = parent;
-
-        method = new Method(element);
-        endPointDetails = new EndPointDetails(logger, utils, element, parent.getEndPointDetails());
-        endPoint = new EndPoint(logger, utils, this, element);
+        this.method = new Method(element);
+        this.endPointDetails = new EndPointDetails(logger, utils, element, parent.getEndPointDetails());
+        this.endPoint = new EndPoint(logger, utils, this, element);
     }
 
     @Override

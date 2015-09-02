@@ -16,15 +16,17 @@
 
 package com.gwtplatform.dispatch.rest.processors.endpoint;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import javax.lang.model.element.ExecutableElement;
 
 import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
 import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.domain.ResourceType;
 import com.gwtplatform.dispatch.rest.processors.domain.Variable;
+import com.gwtplatform.dispatch.rest.processors.subresource.SubResource;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.logger.Logger;
@@ -47,8 +49,22 @@ public class EndPoint implements HasImports {
         this.endPointMethod = endPointMethod;
 
         this.impl = endPointName(utils.elements, endPointMethod.getParent().getImpl(), element);
-        this.fields = ImmutableList.copyOf(endPointMethod.getMethod().getParameters());
+        this.fields = processFields(endPointMethod);
         this.endPointDetails = endPointMethod.getEndPointDetails();
+    }
+
+    private List<Variable> processFields(EndPointMethod method) {
+        // TODO: Copied from SubResource
+        List<Variable> combinedFields = new ArrayList<>();
+        ResourceType parent = method.getParent();
+
+        if (parent instanceof SubResource) {
+            combinedFields.addAll(((SubResource) parent).getFields());
+        }
+
+        combinedFields.addAll(method.getMethod().getParameters());
+
+        return combinedFields;
     }
 
     public EndPointMethod getEndPointMethod() {

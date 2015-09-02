@@ -58,7 +58,7 @@ public class EndPointMethodProcessor extends DispatchRestContextProcessor<Resour
 
         CodeSnippet code = outputter.withTemplateFile(TEMPLATE)
                 .withParam("method", endPointMethod.getMethod())
-                .withParam("endPointImpl", endPointMethod.getEndPoint().getImpl())
+                .withParam("endPoint", endPointMethod.getEndPoint())
                 .withErrorLogParameter(methodName)
                 .parse();
 

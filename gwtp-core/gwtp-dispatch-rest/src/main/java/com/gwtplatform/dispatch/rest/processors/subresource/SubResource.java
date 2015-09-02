@@ -47,7 +47,6 @@ public class SubResource implements ResourceType, HasImports {
     private final TypeElement element;
     private final Logger logger;
     private final Utils utils;
-    private final SubResourceMethod method;
 
     private final Type impl;
     private final Type subResource;
@@ -62,13 +61,12 @@ public class SubResource implements ResourceType, HasImports {
             TypeElement element) {
         this.logger = logger;
         this.utils = utils;
-        this.method = method;
         this.element = ensureTypeElement(element);
 
         this.subResource = new Type(this.element);
         this.impl = processImplType(method);
         this.endPointDetails = new EndPointDetails(logger, utils, element, method.getEndPointDetails());
-        this.fields = processFields();
+        this.fields = processFields(method);
         this.methods = processMethods();
     }
 
@@ -88,7 +86,7 @@ public class SubResource implements ResourceType, HasImports {
         return new Type(subResource.getPackageName(), parentImpl.getSimpleName() + "_" + subResource.getSimpleName());
     }
 
-    private List<Variable> processFields() {
+    private List<Variable> processFields(SubResourceMethod method) {
         List<Variable> combinedFields = new ArrayList<>();
         ResourceType parent = method.getParent();
 

@@ -13,9 +13,9 @@ public class $impl.simpleName implements $subResourceType.parameterizedName {
     private final $field.type.qualifiedParameterizedName $field.name;
 #end
 
-    ${impl}(
+    ${impl.simpleName}(
             HttpParameterFactory httpParameterFactory,
-            String defaultDateFormat#appendParameterNames(3 $fields)) {
+            String defaultDateFormat#appendParameterDefinitions(3 $fields)) {
         this.httpParameterFactory = httpParameterFactory;
         this.defaultDateFormat = defaultDateFormat;
 #foreach ($field in $fields)

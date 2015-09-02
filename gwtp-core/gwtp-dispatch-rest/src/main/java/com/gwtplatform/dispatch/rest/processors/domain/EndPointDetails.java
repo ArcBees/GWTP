@@ -97,7 +97,7 @@ public class EndPointDetails implements HasImports {
         this.logger = logger;
         this.utils = utils;
 
-        resolvePartially(element, parentDetails);
+        resolveAndInheritParent(element, parentDetails);
     }
 
     public EndPointDetails(
@@ -108,26 +108,51 @@ public class EndPointDetails implements HasImports {
         this.logger = logger;
         this.utils = utils;
 
-        resolvePartially(element, parentDetails);
+        resolveAndInheritParent(element, parentDetails);
         resolveVerb(element);
         resolveResult(element);
-        resolveVariables(element, parentDetails);
+        resolveVariables(element);
     }
 
-    public void resolvePartially(Element element, EndPointDetails parentDetails) {
+    public void resolveAndInheritParent(Element element, EndPointDetails parentDetails) {
         this.path = new Path(element, parentDetails.getPath());
         this.secured = new Secured(element, parentDetails.getSecured());
         this.consumes = ImmutableSet.copyOf(resolveConsumes(element, parentDetails.getConsumes()));
         this.produces = ImmutableSet.copyOf(resolveProduces(element, parentDetails.getProduces()));
+        this.httpVariables = parentDetails.getHttpVariables();
+        this.body = parentDetails.getBody();
+        this.result = parentDetails.getResult();
     }
 
     public void resolveVerb(ExecutableElement element) {
         verb = new HttpVerbResolver(logger).resolve(element);
     }
 
-    private void resolveVariables(ExecutableElement element, EndPointDetails inherited) {
-        httpVariables = new ArrayList<>(inherited.getHttpVariables());
-        body = inherited.getBody();
+    private void resolveResult(ExecutableElement element) {
+        DeclaredType resultType = asDeclared(element.getReturnType());
+        String restActionName = RestAction.class.getCanonicalName();
+        String returnTypeName = asType(resultType.asElement()).getQualifiedName().toString();
+
+        if (restActionName.equals(returnTypeName)) {
+            resolveRestActionResult(element, resultType);
+        } else {
+            result = new Type(resultType);
+        }
+    }
+
+    private void resolveRestActionResult(ExecutableElement element, DeclaredType resultType) {
+        List<? extends TypeMirror> typeArguments = resultType.getTypeArguments();
+
+        if (typeArguments.size() == 1) {
+            result = new Type(typeArguments.get(0));
+        } else {
+            logger.error().context(element).log(BAD_REST_ACTION, methodName(element));
+            throw new UnableToProcessException();
+        }
+    }
+
+    private void resolveVariables(ExecutableElement element) {
+        httpVariables = new ArrayList<>(httpVariables);
 
         for (VariableElement variableElement : element.getParameters()) {
             resolveVariable(element, variableElement);
@@ -175,29 +200,6 @@ public class EndPointDetails implements HasImports {
                 return httpVariable.getHttpAnnotation().get().getParameterType() == HttpParameter.Type.FORM;
             }
         });
-    }
-
-    private void resolveResult(ExecutableElement element) {
-        DeclaredType resultType = asDeclared(element.getReturnType());
-        String restActionName = RestAction.class.getCanonicalName();
-        String returnTypeName = asType(resultType.asElement()).getQualifiedName().toString();
-
-        if (restActionName.equals(returnTypeName)) {
-            resolveRestActionResult(element, resultType);
-        } else {
-            result = new Type(resultType);
-        }
-    }
-
-    private void resolveRestActionResult(ExecutableElement element, DeclaredType resultType) {
-        List<? extends TypeMirror> typeArguments = resultType.getTypeArguments();
-
-        if (typeArguments.size() == 1) {
-            result = new Type(typeArguments.get(0));
-        } else {
-            logger.error().context(element).log(BAD_REST_ACTION, methodName(element));
-            throw new UnableToProcessException();
-        }
     }
 
     public HttpVerb getVerb() {
