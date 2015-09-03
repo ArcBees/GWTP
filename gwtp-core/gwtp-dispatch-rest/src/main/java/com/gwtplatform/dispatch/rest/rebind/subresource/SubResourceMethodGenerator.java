@@ -31,7 +31,7 @@ import org.apache.velocity.app.VelocityEngine;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
-import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
+import com.gwtplatform.dispatch.rest.processors.details.HttpVerb;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 import com.gwtplatform.dispatch.rest.rebind.resource.AbstractMethodGenerator;
 import com.gwtplatform.dispatch.rest.rebind.resource.MethodContext;

@@ -29,7 +29,7 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JParameterizedType;
 import com.google.gwt.core.ext.typeinfo.JType;
-import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
+import com.gwtplatform.dispatch.rest.processors.details.HttpVerb;
 import com.gwtplatform.dispatch.rest.rebind.Parameter;
 import com.gwtplatform.dispatch.rest.rebind.resource.AbstractMethodGenerator;
 import com.gwtplatform.dispatch.rest.rebind.resource.MethodContext;

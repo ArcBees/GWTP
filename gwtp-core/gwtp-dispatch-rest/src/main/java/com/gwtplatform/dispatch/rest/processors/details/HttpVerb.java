@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind;
+package com.gwtplatform.dispatch.rest.processors.details;
 
 import java.lang.annotation.Annotation;
 

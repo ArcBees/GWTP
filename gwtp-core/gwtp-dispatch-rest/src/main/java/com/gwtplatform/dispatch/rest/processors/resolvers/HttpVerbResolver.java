@@ -18,7 +18,7 @@ package com.gwtplatform.dispatch.rest.processors.resolvers;
 
 import javax.lang.model.element.ExecutableElement;
 
-import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
+import com.gwtplatform.dispatch.rest.processors.details.HttpVerb;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.LogBuilder;
 import com.gwtplatform.processors.tools.logger.Logger;

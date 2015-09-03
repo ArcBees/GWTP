@@ -34,7 +34,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.gwtplatform.dispatch.rest.processors.NameUtils;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpVerbResolver;
-import com.gwtplatform.dispatch.rest.rebind.HttpVerb;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
