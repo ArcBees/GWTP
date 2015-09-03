@@ -4,7 +4,7 @@
 #* @vtlmacrolibrary path="../../../../../../../../../../processor-tools/src/main/resources/com/gwtplatform/processors/tools/macros.vm" *#
 #* @velocityproperties path=com/gwtplatform/dispatch/rest/processors/velocity.properties *#
 
-#* @vtlvariable name="parameters" type="java.util.List<com.gwtplatform.dispatch.rest.processors.domain.Variable>" file="macros.vm" *#
+#* @vtlvariable name="parameters" type="java.util.List<com.gwtplatform.dispatch.rest.processors.details.Variable>" file="macros.vm" *#
 
 #* @vtlvariable name="impl" type="com.gwtplatform.processors.tools.domain.Type" *#
 #* @vtlvariable name="processor" type="com.gwtplatform.processors.tools.domain.Type" *#
@@ -13,18 +13,18 @@
 #* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.processors.tools.outputter.CodeSnippet>" file="resource/Resource.vm" *#
 #* @vtlvariable name="resource" type="com.gwtplatform.processors.tools.domain.Type" file="resource/Resource.vm" *#
 
-#* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.domain.Method" file="subresource/SubResourceMethod.vm" *#
+#* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.details.Method" file="subresource/SubResourceMethod.vm" *#
 #* @vtlvariable name="subResource" type="com.gwtplatform.dispatch.rest.processors.subresource.SubResource" file="subresource/SubResourceMethod.vm" *#
 
-#* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.domain.Variable>" file="subresource/SubResource.vm" *#
+#* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.details.Variable>" file="subresource/SubResource.vm" *#
 #* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.processors.tools.outputter.CodeSnippet>" file="subresource/SubResource.vm" *#
 #* @vtlvariable name="subResourceType" type="com.gwtplatform.processors.tools.domain.Type" file="subresource/SubResource.vm" *#
 
-#* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.domain.Method" file="endpoint/EndPointMethod.vm" *#
+#* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.details.Method" file="endpoint/EndPointMethod.vm" *#
 #* @vtlvariable name="endPoint" type="com.gwtplatform.dispatch.rest.processors.endpoint.EndPoint" file="endpoint/EndPointMethod.vm" *#
 
-#* @vtlvariable name="endPoint" type="com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails" file="endpoint/EndPoint.vm" *#
-#* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.domain.Variable>" file="endpoint/EndPoint.vm" *#
+#* @vtlvariable name="endPoint" type="com.gwtplatform.dispatch.rest.processors.details.EndPointDetails" file="endpoint/EndPoint.vm" *#
+#* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.details.Variable>" file="endpoint/EndPoint.vm" *#
 
 #* @vtlvariable name="mappers" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.serialization.jackson.JacksonMapper>" file="serialization/jackson/JacksonMapperProvider.vm" *#
 

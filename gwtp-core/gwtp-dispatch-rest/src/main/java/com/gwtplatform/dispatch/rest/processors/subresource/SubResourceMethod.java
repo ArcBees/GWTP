@@ -22,9 +22,9 @@ import java.util.List;
 
 import javax.lang.model.element.ExecutableElement;
 
-import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
-import com.gwtplatform.dispatch.rest.processors.domain.Method;
-import com.gwtplatform.dispatch.rest.processors.domain.Resource;
+import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.details.Method;
+import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;

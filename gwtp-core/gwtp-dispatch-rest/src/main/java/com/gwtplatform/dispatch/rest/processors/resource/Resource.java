@@ -14,34 +14,19 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.domain;
+package com.gwtplatform.dispatch.rest.processors.resource;
 
-import java.util.Collection;
+import java.util.List;
 
-import javax.lang.model.element.VariableElement;
-
+import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
 import com.gwtplatform.processors.tools.domain.HasImports;
+import com.gwtplatform.processors.tools.domain.HasType;
 import com.gwtplatform.processors.tools.domain.Type;
 
-public class Variable implements HasImports {
-    private final Type type;
-    private final String name;
+public interface Resource extends HasType, HasImports {
+    Type getResourceType();
 
-    public Variable(VariableElement element) {
-        type = new Type(element.asType());
-        name = element.getSimpleName().toString();
-    }
+    EndPointDetails getEndPointDetails();
 
-    public Type getType() {
-        return type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public Collection<String> getImports() {
-        return type.getImports();
-    }
+    List<ResourceMethod> getMethods();
 }

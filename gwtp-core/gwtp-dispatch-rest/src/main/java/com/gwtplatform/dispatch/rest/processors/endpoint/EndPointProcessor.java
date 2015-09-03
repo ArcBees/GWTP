@@ -20,8 +20,8 @@ import javax.annotation.processing.ProcessingEnvironment;
 
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
-import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
-import com.gwtplatform.dispatch.rest.processors.domain.HttpVariable;
+import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.details.HttpVariable;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessors;
 import com.gwtplatform.processors.tools.domain.Type;

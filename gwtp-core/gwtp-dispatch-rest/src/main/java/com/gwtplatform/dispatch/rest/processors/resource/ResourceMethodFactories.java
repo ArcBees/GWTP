@@ -20,7 +20,6 @@ import java.util.ServiceLoader;
 
 import javax.lang.model.element.ExecutableElement;
 
-import com.gwtplatform.dispatch.rest.processors.domain.Resource;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;

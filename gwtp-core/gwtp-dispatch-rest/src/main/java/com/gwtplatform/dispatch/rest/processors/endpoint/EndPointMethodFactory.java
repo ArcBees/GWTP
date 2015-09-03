@@ -19,8 +19,8 @@ package com.gwtplatform.dispatch.rest.processors.endpoint;
 import javax.lang.model.element.ExecutableElement;
 
 import com.google.auto.service.AutoService;
-import com.gwtplatform.dispatch.rest.processors.domain.Resource;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpVerbResolver;
+import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodFactory;
 import com.gwtplatform.processors.tools.logger.Logger;

@@ -14,34 +14,22 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.domain;
+package com.gwtplatform.dispatch.rest.processors.details;
 
 import java.util.Collection;
 
 import javax.lang.model.element.VariableElement;
 
-import com.google.common.base.Optional;
-import com.gwtplatform.dispatch.rest.processors.resolvers.DateFormatResolver;
-import com.gwtplatform.dispatch.rest.processors.resolvers.HttpAnnotationResolver;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.utils.Utils;
 
-public class HttpVariable implements HasImports {
+public class Variable implements HasImports {
     private final Type type;
     private final String name;
-    private final Optional<HttpAnnotation> httpAnnotation;
-    private final Optional<String> dateFormat;
 
-    public HttpVariable(
-            Logger logger,
-            Utils utils,
-            VariableElement element) {
+    public Variable(VariableElement element) {
         type = new Type(element.asType());
         name = element.getSimpleName().toString();
-        httpAnnotation = new HttpAnnotationResolver(logger, utils).resolve(element);
-        dateFormat = new DateFormatResolver(logger).resolve(element);
     }
 
     public Type getType() {
@@ -50,18 +38,6 @@ public class HttpVariable implements HasImports {
 
     public String getName() {
         return name;
-    }
-
-    public Optional<HttpAnnotation> getHttpAnnotation() {
-        return httpAnnotation;
-    }
-
-    public Optional<String> getDateFormat() {
-        return dateFormat;
-    }
-
-    public boolean isBody() {
-        return !httpAnnotation.isPresent();
     }
 
     @Override

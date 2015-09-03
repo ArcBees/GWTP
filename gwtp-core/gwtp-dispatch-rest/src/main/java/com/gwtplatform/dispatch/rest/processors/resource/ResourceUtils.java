@@ -26,7 +26,6 @@ import javax.lang.model.element.TypeElement;
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
-import com.gwtplatform.dispatch.rest.processors.domain.Resource;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;

@@ -18,8 +18,8 @@ package com.gwtplatform.dispatch.rest.processors.endpoint;
 
 import java.util.List;
 
-import com.gwtplatform.dispatch.rest.processors.domain.HasEndPointDetails;
-import com.gwtplatform.dispatch.rest.processors.domain.Variable;
+import com.gwtplatform.dispatch.rest.processors.details.HasEndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.details.Variable;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.HasType;
 

@@ -24,8 +24,8 @@ import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 
 import com.google.common.collect.FluentIterable;
-import com.gwtplatform.dispatch.rest.processors.domain.EndPointDetails;
-import com.gwtplatform.dispatch.rest.processors.domain.Variable;
+import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.details.Variable;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.utils.Utils;
 

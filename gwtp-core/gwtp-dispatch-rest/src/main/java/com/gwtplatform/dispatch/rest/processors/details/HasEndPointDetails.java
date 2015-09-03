@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.domain;
+package com.gwtplatform.dispatch.rest.processors.details;
 
 public interface HasEndPointDetails {
     EndPointDetails getEndPointDetails();

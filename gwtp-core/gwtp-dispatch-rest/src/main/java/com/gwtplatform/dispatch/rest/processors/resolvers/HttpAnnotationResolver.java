@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.rest.processors.resolvers;
 import javax.lang.model.element.VariableElement;
 
 import com.google.common.base.Optional;
-import com.gwtplatform.dispatch.rest.processors.domain.HttpAnnotation;
+import com.gwtplatform.dispatch.rest.processors.details.HttpAnnotation;
 import com.gwtplatform.dispatch.rest.processors.resolvers.parameters.HttpParamValueResolver;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
