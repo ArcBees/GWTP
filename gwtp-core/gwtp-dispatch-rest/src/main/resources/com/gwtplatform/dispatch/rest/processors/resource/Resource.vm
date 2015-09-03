@@ -3,7 +3,7 @@ package $impl.packageName;
 import javax.annotation.Generated;
 import javax.inject.Inject;
 
-import com.gwtplatform.dispatch.rest.client.core.StaticParametersFactory;
+import com.gwtplatform.dispatch.rest.client.annotations.DefaultDateFormat;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 
 #printImports($imports)
@@ -14,9 +14,11 @@ public class $impl.parameterizedName implements $resource.parameterizedName {
     private final String defaultDateFormat;
 
     @Inject
-    ${impl.simpleName}() {
-        this.defaultDateFormat = StaticParametersFactory.getDefaultDateFormat();
-        this.httpParameterFactory = StaticParametersFactory.getHttpParameterFactory();
+    ${impl.simpleName}(
+            @DefaultDateFormat String defaultDateFormat,
+            HttpParameterFactory httpParameterFactory) {
+        this.defaultDateFormat = defaultDateFormat;
+        this.httpParameterFactory = httpParameterFactory;
     }
 #foreach ($method in $methods)
 
