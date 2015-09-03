@@ -25,9 +25,6 @@ import java.util.Set;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.VariableElement;
-import javax.lang.model.type.DeclaredType;
-import javax.lang.model.type.TypeMirror;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
@@ -47,8 +44,6 @@ import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
-import static com.google.auto.common.MoreElements.asType;
-import static com.google.auto.common.MoreTypes.asDeclared;
 import static com.google.common.base.Predicates.and;
 import static com.google.common.base.Predicates.equalTo;
 import static com.google.common.base.Predicates.not;
@@ -74,7 +69,7 @@ public class EndPointDetails implements HasImports {
     private HttpVerb verb;
     private Collection<HttpVariable> httpVariables = Collections.emptyList();
     private Optional<HttpVariable> body = Optional.absent();
-    private Type result;
+    private Type resultType;
 
     public EndPointDetails(
             Logger logger,
@@ -82,7 +77,6 @@ public class EndPointDetails implements HasImports {
             TypeElement element) {
         this.logger = logger;
         this.utils = utils;
-
         this.path = new Path(element);
         this.secured = new Secured(element);
         this.consumes = ImmutableSet.copyOf(resolveConsumes(element));
@@ -103,71 +97,76 @@ public class EndPointDetails implements HasImports {
     public EndPointDetails(
             Logger logger,
             Utils utils,
-            ExecutableElement element,
+            Method method,
             EndPointDetails parentDetails) {
         this.logger = logger;
         this.utils = utils;
 
-        resolveAndInheritParent(element, parentDetails);
-        resolveVerb(element);
-        resolveResult(element);
-        resolveVariables(element);
+        resolveAndInheritParent(method.getElement(), parentDetails);
+        resolveVerb(method);
+        resolveResult(method);
+        resolveVariables(method);
     }
 
     public void resolveAndInheritParent(Element element, EndPointDetails parentDetails) {
-        this.path = new Path(element, parentDetails.getPath());
-        this.secured = new Secured(element, parentDetails.getSecured());
-        this.consumes = ImmutableSet.copyOf(resolveConsumes(element, parentDetails.getConsumes()));
-        this.produces = ImmutableSet.copyOf(resolveProduces(element, parentDetails.getProduces()));
-        this.httpVariables = parentDetails.getHttpVariables();
-        this.body = parentDetails.getBody();
-        this.result = parentDetails.getResult();
+        path = new Path(element, parentDetails.getPath());
+        secured = new Secured(element, parentDetails.getSecured());
+        consumes = ImmutableSet.copyOf(resolveConsumes(element, parentDetails.getConsumes()));
+        produces = ImmutableSet.copyOf(resolveProduces(element, parentDetails.getProduces()));
+        httpVariables = parentDetails.getHttpVariables();
+        body = parentDetails.getBody();
+        resultType = parentDetails.getResultType();
     }
 
-    public void resolveVerb(ExecutableElement element) {
-        verb = new HttpVerbResolver(logger).resolve(element);
+    public void resolveVerb(Method method) {
+        verb = new HttpVerbResolver(logger).resolve(method.getElement());
     }
 
-    private void resolveResult(ExecutableElement element) {
-        DeclaredType resultType = asDeclared(element.getReturnType());
+    private void resolveResult(Method method) {
         String restActionName = RestAction.class.getCanonicalName();
-        String returnTypeName = asType(resultType.asElement()).getQualifiedName().toString();
+        Type returnType = method.getReturnType();
 
-        if (restActionName.equals(returnTypeName)) {
-            resolveRestActionResult(element, resultType);
+        if (restActionName.equals(returnType.getQualifiedName())) {
+            resolveRestActionResult(method);
         } else {
-            result = new Type(resultType);
+            resultType = returnType;
         }
     }
 
-    private void resolveRestActionResult(ExecutableElement element, DeclaredType resultType) {
-        List<? extends TypeMirror> typeArguments = resultType.getTypeArguments();
+    private void resolveRestActionResult(Method method) {
+        List<Type> typeArguments = method.getReturnType().getTypeArguments();
 
         if (typeArguments.size() == 1) {
-            result = new Type(typeArguments.get(0));
+            resultType = typeArguments.get(0);
         } else {
+            ExecutableElement element = method.getElement();
+
             logger.error().context(element).log(BAD_REST_ACTION, NameUtils.qualifiedMethodName(element));
             throw new UnableToProcessException();
         }
     }
 
-    private void resolveVariables(ExecutableElement element) {
+    private void resolveVariables(Method method) {
         httpVariables = new ArrayList<>(httpVariables);
 
-        for (VariableElement variableElement : element.getParameters()) {
-            resolveVariable(element, variableElement);
+        for (Variable variable : method.getParameters()) {
+            resolveVariable(method, variable);
         }
 
         httpVariables = ImmutableList.copyOf(httpVariables);
 
-        logPotentialErrors(element);
+        logPotentialErrors(method);
     }
 
-    private void resolveVariable(ExecutableElement element, VariableElement variableElement) {
-        HttpVariable httpVariable = new HttpVariable(logger, utils, variableElement);
+    private void resolveVariable(Method method, Variable variable) {
+        HttpVariable httpVariable = new HttpVariable(logger, utils, variable);
 
         if (body.isPresent() && httpVariable.isBody()) {
-            logger.error().context(element).log(MANY_POTENTIAL_BODY, NameUtils.qualifiedMethodName(element));
+            ExecutableElement methodElement = method.getElement();
+
+            logger.error()
+                    .context(methodElement)
+                    .log(MANY_POTENTIAL_BODY, NameUtils.qualifiedMethodName(methodElement));
             throw new UnableToProcessException();
         }
 
@@ -178,17 +177,18 @@ public class EndPointDetails implements HasImports {
         }
     }
 
-    private void logPotentialErrors(ExecutableElement element) {
-        String methodName = NameUtils.qualifiedMethodName(element);
+    private void logPotentialErrors(Method method) {
+        ExecutableElement methodElement = method.getElement();
+        String methodName = NameUtils.qualifiedMethodName(methodElement);
         boolean containsFormVariables = containsFormVariables();
         boolean containsBody = body.isPresent();
 
         if (containsBody && containsFormVariables) {
-            logger.error().context(element).log(FORM_AND_BODY_PARAM, methodName);
+            logger.error().context(methodElement).log(FORM_AND_BODY_PARAM, methodName);
             throw new UnableToProcessException();
         }
         if ((verb == HttpVerb.GET || verb == HttpVerb.HEAD) && (containsBody || containsFormVariables)) {
-            logger.error().context(element).log(GET_WITH_BODY, methodName);
+            logger.error().context(methodElement).log(GET_WITH_BODY, methodName);
             throw new UnableToProcessException();
         }
     }
@@ -230,15 +230,15 @@ public class EndPointDetails implements HasImports {
         return body;
     }
 
-    public Type getResult() {
-        return result;
+    public Type getResultType() {
+        return resultType;
     }
 
     @Override
     public Collection<String> getImports() {
         FluentIterable<String> imports = FluentIterable.from(httpVariables)
                 .transformAndConcat(EXTRACT_IMPORTS_FUNCTION)
-                .append(result.getImports());
+                .append(resultType.getImports());
 
         if (body.isPresent()) {
             imports = imports.append(body.get().getImports());

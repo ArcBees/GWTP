@@ -67,7 +67,7 @@ public class EndPointProcessor extends DispatchRestContextProcessor<EndPoint, Vo
             serializationProcessors.process(context);
         }
 
-        context = new SerializationContext(endPointDetails.getResult(), endPointDetails.getProduces(), WRITE);
+        context = new SerializationContext(endPointDetails.getResultType(), endPointDetails.getProduces(), WRITE);
         serializationProcessors.process(context);
     }
 }

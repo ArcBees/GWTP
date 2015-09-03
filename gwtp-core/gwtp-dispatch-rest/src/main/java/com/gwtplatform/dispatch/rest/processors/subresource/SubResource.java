@@ -59,7 +59,6 @@ public class SubResource implements Resource, IsEndPoint {
     private Type processImplType(SubResourceMethod method) {
         Type parentImpl = method.getParentResource().getType();
 
-        // TODO: NameFactory?
         String simpleName = parentImpl.getSimpleName() + "_" + subResourceType.getSimpleName();
         return new Type(subResourceType.getPackageName(), simpleName);
     }

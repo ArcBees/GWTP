@@ -37,11 +37,13 @@ public class HttpVariable implements HasImports {
     public HttpVariable(
             Logger logger,
             Utils utils,
-            VariableElement element) {
-        type = new Type(element.asType());
-        name = element.getSimpleName().toString();
-        httpAnnotation = new HttpAnnotationResolver(logger, utils).resolve(element);
-        dateFormat = new DateFormatResolver(logger).resolve(element);
+            Variable variable) {
+        VariableElement variableElement = variable.getElement();
+
+        type = variable.getType();
+        name = variable.getName();
+        httpAnnotation = new HttpAnnotationResolver(logger, utils).resolve(variableElement);
+        dateFormat = new DateFormatResolver(logger).resolve(variableElement);
     }
 
     public Type getType() {

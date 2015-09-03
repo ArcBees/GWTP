@@ -41,17 +41,23 @@ public class Method implements HasImports {
     private final Type returnType;
     private final String name;
     private final List<Variable> parameters;
+    private final ExecutableElement element;
 
     public Method(ExecutableElement element) {
-        returnType = new Type(element.getReturnType());
-        name = element.getSimpleName().toString();
-        parameters = processParameters(element);
+        this.element = element;
+        this.returnType = new Type(element.getReturnType());
+        this.name = element.getSimpleName().toString();
+        this.parameters = processParameters(element);
     }
 
     private List<Variable> processParameters(ExecutableElement element) {
         return FluentIterable.from(element.getParameters())
                 .transform(ELEMENT_TO_VARIABLE)
                 .toList();
+    }
+
+    public ExecutableElement getElement() {
+        return element;
     }
 
     public Type getReturnType() {

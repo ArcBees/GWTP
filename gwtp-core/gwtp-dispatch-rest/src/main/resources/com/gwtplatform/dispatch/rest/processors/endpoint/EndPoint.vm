@@ -13,7 +13,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 #printImports($imports)
 
 @Generated("$processor.qualifiedName")
-public class $impl.parameterizedName extends AbstractRestAction<$endPoint.result.parameterizedName> {
+public class $impl.parameterizedName extends AbstractRestAction<$endPoint.resultType.parameterizedName> {
     public ${impl.simpleName}(
             HttpParameterFactory httpParameterFactory,
             String defaultDateFormat#appendParameterDefinitions(3 $fields)) {
@@ -39,7 +39,7 @@ public class $impl.parameterizedName extends AbstractRestAction<$endPoint.result
 
     @Override
     public String getResultClass() {
-        return "$endPoint.result.qualifiedParameterizedName";
+        return "$endPoint.resultType.qualifiedParameterizedName";
     }
 
     @Override

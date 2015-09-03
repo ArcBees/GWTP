@@ -24,12 +24,18 @@ import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
 
 public class Variable implements HasImports {
+    private final VariableElement element;
     private final Type type;
     private final String name;
 
     public Variable(VariableElement element) {
-        type = new Type(element.asType());
-        name = element.getSimpleName().toString();
+        this.element = element;
+        this.type = new Type(element.asType());
+        this.name = element.getSimpleName().toString();
+    }
+
+    public VariableElement getElement() {
+        return element;
     }
 
     public Type getType() {
