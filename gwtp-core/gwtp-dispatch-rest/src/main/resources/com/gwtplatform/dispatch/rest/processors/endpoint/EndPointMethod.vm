@@ -1,7 +1,7 @@
     @Generated("$processor.qualifiedName")
     @Override
     public $method.returnType.parameterizedName ${method.name}(#printParameterDefinitions(3 $method.parameters)) {
-        return new ${endPoint.type.parameterizedName}(
+        return new ${endPointType.parameterizedName}(
                 httpParameterFactory,
-                defaultDateFormat#appendParameterNames(4 $endPoint.fields));
+                defaultDateFormat#appendParameterNames(4 $endPointArguments));
     }

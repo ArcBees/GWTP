@@ -93,6 +93,7 @@ public class SubResource implements Resource, IsEndPoint {
         return FluentIterable.from(methods)
                 .transformAndConcat(HasImports.EXTRACT_IMPORTS_FUNCTION)
                 .append(subResourceType.getImports())
+                .append(type.getImports())
                 .toList();
     }
 }

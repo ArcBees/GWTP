@@ -13,7 +13,7 @@ public class $impl.simpleName implements $subResourceType.parameterizedName {
     private final $field.type.qualifiedParameterizedName $field.name;
 #end
 
-    ${impl.simpleName}(
+    public ${impl.simpleName}(
             HttpParameterFactory httpParameterFactory,
             String defaultDateFormat#appendParameterDefinitions(3 $fields)) {
         this.httpParameterFactory = httpParameterFactory;

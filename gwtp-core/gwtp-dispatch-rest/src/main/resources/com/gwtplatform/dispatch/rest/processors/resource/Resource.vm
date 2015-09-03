@@ -1,19 +1,19 @@
 package $impl.packageName;
 
+import javax.annotation.Generated;
+import javax.inject.Inject;
+
 import com.gwtplatform.dispatch.rest.client.core.StaticParametersFactory;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 
-import javax.annotation.Generated;
-import javax.inject.Singleton;
-
 #printImports($imports)
 
-@Singleton
 @Generated("$processor.qualifiedName")
 public class $impl.parameterizedName implements $resource.parameterizedName {
     private final HttpParameterFactory httpParameterFactory;
     private final String defaultDateFormat;
 
+    @Inject
     ${impl.simpleName}() {
         this.defaultDateFormat = StaticParametersFactory.getDefaultDateFormat();
         this.httpParameterFactory = StaticParametersFactory.getHttpParameterFactory();

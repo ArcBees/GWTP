@@ -68,7 +68,7 @@ public class EndPointMethod implements ResourceMethod {
     @Override
     public Collection<String> getImports() {
         return FluentIterable.from(method.getImports())
-                .append(endPoint.getImports())
+                .append(endPoint.getType().getImports())
                 .toList();
     }
 }

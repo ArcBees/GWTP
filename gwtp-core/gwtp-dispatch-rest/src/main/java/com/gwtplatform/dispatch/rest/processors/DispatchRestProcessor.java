@@ -79,7 +79,6 @@ public class DispatchRestProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        logger.warning("HEY");
         try {
             processPathElements(roundEnv.getElementsAnnotatedWith(Path.class), roundEnv);
         } catch (UnableToProcessException e) {

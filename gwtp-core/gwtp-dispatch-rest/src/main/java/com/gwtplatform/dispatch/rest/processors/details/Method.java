@@ -17,9 +17,7 @@
 package com.gwtplatform.dispatch.rest.processors.details;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
@@ -81,12 +79,6 @@ public class Method implements HasImports {
 
     @Override
     public Collection<String> getImports() {
-        Set<String> imports = new HashSet<>(returnType.getImports());
-
-        for (Variable variable : parameters) {
-            imports.addAll(variable.getType().getImports());
-        }
-
         return FluentIterable.from(parameters)
                 .transformAndConcat(EXTRACT_IMPORTS_FUNCTION)
                 .append(returnType.getImports())

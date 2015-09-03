@@ -75,6 +75,7 @@ public class RootResource implements Resource {
         return FluentIterable.from(methods)
                 .transformAndConcat(HasImports.EXTRACT_IMPORTS_FUNCTION)
                 .append(resourceType.getImports())
+                .append(type.getImports())
                 .toList();
     }
 }

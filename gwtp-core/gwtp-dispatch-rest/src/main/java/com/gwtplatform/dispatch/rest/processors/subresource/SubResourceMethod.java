@@ -16,12 +16,11 @@
 
 package com.gwtplatform.dispatch.rest.processors.subresource;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.lang.model.element.ExecutableElement;
 
+import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.details.Method;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
@@ -70,9 +69,8 @@ public class SubResourceMethod implements ResourceMethod {
 
     @Override
     public Collection<String> getImports() {
-        List<String> imports = new ArrayList<>(method.getImports());
-        imports.addAll(subResource.getImports());
-
-        return imports;
+        return FluentIterable.from(method.getImports())
+                .append(subResource.getType().getImports())
+                .toList();
     }
 }
