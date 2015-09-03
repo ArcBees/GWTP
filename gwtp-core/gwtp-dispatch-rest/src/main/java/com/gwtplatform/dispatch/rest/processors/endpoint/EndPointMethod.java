@@ -16,16 +16,16 @@
 
 package com.gwtplatform.dispatch.rest.processors.endpoint;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.lang.model.element.ExecutableElement;
 
+import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.details.Method;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
+import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodUtils;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
@@ -41,7 +41,7 @@ public class EndPointMethod implements ResourceMethod {
             Resource parentResource,
             ExecutableElement element) {
         this.parentResource = parentResource;
-        this.method = new Method(element);
+        this.method = new ResourceMethodUtils().processMethod(element, parentResource);
         this.endPointDetails = new EndPointDetails(logger, utils, method, parentResource.getEndPointDetails());
         this.endPoint = new EndPoint(utils, this, element);
     }
@@ -67,9 +67,8 @@ public class EndPointMethod implements ResourceMethod {
 
     @Override
     public Collection<String> getImports() {
-        List<String> imports = new ArrayList<>(method.getImports());
-        imports.addAll(endPoint.getImports());
-
-        return imports;
+        return FluentIterable.from(method.getImports())
+                .append(endPoint.getImports())
+                .toList();
     }
 }

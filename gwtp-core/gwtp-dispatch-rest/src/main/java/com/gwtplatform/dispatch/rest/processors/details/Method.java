@@ -30,29 +30,36 @@ import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
 
 public class Method implements HasImports {
-    private static final Function<VariableElement, Variable> ELEMENT_TO_VARIABLE =
-            new Function<VariableElement, Variable>() {
-                @Override
-                public Variable apply(VariableElement variableElement) {
-                    return new Variable(variableElement);
-                }
-            };
+    private static class ElementToVariableFunction implements Function<VariableElement, Variable> {
+        private final Collection<String> existingVariableNames;
+
+        ElementToVariableFunction(Collection<String> existingVariableNames) {
+            this.existingVariableNames = existingVariableNames;
+        }
+
+        @Override
+        public Variable apply(VariableElement variableElement) {
+            return new Variable(variableElement, existingVariableNames);
+        }
+    }
 
     private final Type returnType;
     private final String name;
     private final List<Variable> parameters;
     private final ExecutableElement element;
 
-    public Method(ExecutableElement element) {
+    public Method(
+            ExecutableElement element,
+            Collection<String> existingVariableNames) {
         this.element = element;
         this.returnType = new Type(element.getReturnType());
         this.name = element.getSimpleName().toString();
-        this.parameters = processParameters(element);
+        this.parameters = processParameters(element, existingVariableNames);
     }
 
-    private List<Variable> processParameters(ExecutableElement element) {
+    private List<Variable> processParameters(ExecutableElement element, Collection<String> existingVariableNames) {
         return FluentIterable.from(element.getParameters())
-                .transform(ELEMENT_TO_VARIABLE)
+                .transform(new ElementToVariableFunction(existingVariableNames))
                 .toList();
     }
 

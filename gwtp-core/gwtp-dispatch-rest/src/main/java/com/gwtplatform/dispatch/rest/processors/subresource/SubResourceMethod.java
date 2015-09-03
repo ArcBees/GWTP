@@ -26,6 +26,7 @@ import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.details.Method;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
+import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodUtils;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
@@ -43,7 +44,7 @@ public class SubResourceMethod implements ResourceMethod {
             Resource parentResource,
             ExecutableElement element) {
         this.parentResource = parentResource;
-        this.method = new Method(element);
+        this.method = new ResourceMethodUtils().processMethod(element, parentResource);
         this.endPointDetails = new EndPointDetails(logger, utils, method, parentResource.getEndPointDetails());
         this.subResource = new SubResource(logger, utils, this, asTypeElement(element.getReturnType()));
     }

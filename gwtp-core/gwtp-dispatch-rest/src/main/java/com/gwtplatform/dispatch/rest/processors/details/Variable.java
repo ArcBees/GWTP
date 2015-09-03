@@ -28,10 +28,24 @@ public class Variable implements HasImports {
     private final Type type;
     private final String name;
 
-    public Variable(VariableElement element) {
+    public Variable(
+            VariableElement element,
+            Collection<String> existingVariableNames) {
         this.element = element;
         this.type = new Type(element.asType());
-        this.name = element.getSimpleName().toString();
+        this.name = processName(element, existingVariableNames);
+    }
+
+    public String processName(VariableElement element, Collection<String> existingVariableNames) {
+        String simpleName = element.getSimpleName().toString();
+        String uniqueName = simpleName;
+
+        int i = 2;
+        while (existingVariableNames.contains(uniqueName)) {
+            uniqueName = simpleName + i++;
+        }
+
+        return uniqueName;
     }
 
     public VariableElement getElement() {
