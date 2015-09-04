@@ -14,16 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.rebind.parameter;
+package com.gwtplatform.dispatch.rest.processors.resolvers.parameters;
 
+import javax.lang.model.element.VariableElement;
 import javax.ws.rs.MatrixParam;
 
 import org.junit.Test;
 
-import com.google.gwt.core.ext.typeinfo.HasAnnotations;
+import com.gwtplatform.dispatch.rest.processors.AnnotatedElementBuilder;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 public class MatrixParamValueResolverTest {
@@ -34,38 +34,15 @@ public class MatrixParamValueResolverTest {
     @Test
     public void resolve_matrixParam() {
         // given
-        MatrixParam param = mock(MatrixParam.class);
-        given(param.value()).willReturn(VALUE);
+        VariableElement variableElement = mock(VariableElement.class);
+
+        AnnotatedElementBuilder matrixParamBuilder = new AnnotatedElementBuilder(variableElement, MatrixParam.class);
+        matrixParamBuilder.setAnnotationValue("value", VALUE);
 
         // when
-        String value = resolver.resolve(param);
+        String value = resolver.resolve(variableElement);
 
         // then
         assertThat(value).isEqualTo(VALUE);
-    }
-
-    @Test
-    public void resolve_hasAnnotations_hasMatrixParam() {
-        // given
-        MatrixParam param = mock(MatrixParam.class);
-        given(param.value()).willReturn(VALUE);
-
-        HasAnnotations hasAnnotations = mock(HasAnnotations.class);
-        given(hasAnnotations.getAnnotation(MatrixParam.class)).willReturn(param);
-
-        // when
-        String value = resolver.resolve(hasAnnotations);
-
-        // then
-        assertThat(value).isEqualTo(VALUE);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void resolve_hasAnnotations_hasNoMatrixParams() {
-        // given
-        HasAnnotations hasAnnotations = mock(HasAnnotations.class);
-
-        // when
-        resolver.resolve(hasAnnotations);
     }
 }

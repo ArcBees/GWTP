@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.client.core.parameters;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
@@ -28,7 +29,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gwtplatform.common.shared.UrlUtils;
-import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 import static org.assertj.core.api.Assertions.assertThat;
