@@ -79,7 +79,7 @@ public final class CrawlFilter implements Filter {
      * characters that were escaped by the crawler. If the query string does not
      * contain _escaped_fragment_, it is not modified.
      *
-     * @param queryString
+     * @param queryString query string
      * @return A modified query string followed by a hash fragment if applicable.
      * The non-modified query string otherwise.
      * @throws UnsupportedEncodingException
