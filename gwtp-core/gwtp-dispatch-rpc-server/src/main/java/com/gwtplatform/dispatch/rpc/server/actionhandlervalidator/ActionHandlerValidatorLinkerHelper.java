@@ -33,7 +33,7 @@ public class ActionHandlerValidatorLinkerHelper {
         /**
          * @param <B>
          */
-        public interface BindingDescriptor<B> {
+        interface BindingDescriptor<B> {
 
             String getBeanName();
 
