@@ -293,7 +293,6 @@ public class GenerationHelper implements Closeable {
                 typeName.equals("double") ||
                 typeName.equals("char") ||
                 typeName.equals("boolean");
-
     }
 
     /**

@@ -30,7 +30,7 @@ import com.google.inject.Provider;
  * @param <T> The type of mock object provided
  */
 public class MockProvider<T> implements Provider<T> {
-    private T mock;
+    private final T mock;
 
     /**
      * Construct a {@link Provider} that will provide the mock object.

@@ -64,14 +64,14 @@ public class CrawlServiceServlet extends HttpServlet {
 
     @Inject(optional = true)
     @HtmlUnitTimeoutMillis
-    private long timeoutMillis = 5000;
-    private long jsTimeoutMillis = 2000;
-    private long pageWaitMillis = 100;
-    private long maxLoopChecks = 2;
+    private final long timeoutMillis = 5000;
+    private final long jsTimeoutMillis = 2000;
+    private final long pageWaitMillis = 100;
+    private final long maxLoopChecks = 2;
 
     @Inject(optional = true)
     @CachedPageTimeoutSec
-    private long cachedPageTimeoutSec = 15 * 60;
+    private final long cachedPageTimeoutSec = 15 * 60;
 
     private final Logger log;
     private final Provider<WebClient> webClientProvider;

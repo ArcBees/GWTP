@@ -20,8 +20,8 @@ package com.gwtplatform.mvp.client.view;
  * Positions the popup at the left and top coordinates.
  */
 public class TopLeftPopupPositioner extends PopupPositioner {
-    private int left;
-    private int top;
+    private final int left;
+    private final int top;
 
     public TopLeftPopupPositioner(int left, int top) {
         super();

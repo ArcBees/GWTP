@@ -26,7 +26,7 @@ import com.gwtplatform.dispatch.rpc.server.RequestProvider;
 @Singleton
 public class DefaultRequestProvider implements RequestProvider {
 
-    private Provider<HttpServletRequest> requestProvider;
+    private final Provider<HttpServletRequest> requestProvider;
 
     @Inject
     public DefaultRequestProvider(Provider<HttpServletRequest> requestProvider) {
