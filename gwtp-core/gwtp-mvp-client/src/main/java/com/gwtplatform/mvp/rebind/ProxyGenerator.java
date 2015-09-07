@@ -30,21 +30,16 @@ import com.google.gwt.user.rebind.SourceWriter;
 
 public class ProxyGenerator extends Generator {
 
-    private ClassCollection classCollection;
-    private GinjectorInspector ginjectorInspector;
-    private PresenterInspector presenterInspector;
-    private ProxyOutputterFactory proxyOutputterFactory;
-
     @Override
     public String generate(TreeLogger logger, GeneratorContext ctx,
             String requestedClass) throws UnableToCompleteException {
         // Initialize dependencies
         TypeOracle oracle = ctx.getTypeOracle();
-        classCollection = new ClassCollection(oracle);
-        ginjectorInspector = new GinjectorInspector(classCollection, ctx, logger);
-        presenterInspector = new PresenterInspector(oracle, logger, classCollection,
+        ClassCollection classCollection = new ClassCollection(oracle);
+        GinjectorInspector ginjectorInspector = new GinjectorInspector(classCollection, ctx, logger);
+        PresenterInspector presenterInspector = new PresenterInspector(oracle, logger, classCollection,
                 ginjectorInspector);
-        proxyOutputterFactory = new ProxyOutputterFactory(oracle, logger, classCollection,
+        ProxyOutputterFactory proxyOutputterFactory = new ProxyOutputterFactory(oracle, logger, classCollection,
                 ginjectorInspector, presenterInspector);
 
         // Find the requested class
