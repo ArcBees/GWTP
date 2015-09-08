@@ -87,7 +87,7 @@ public class CookieParamValueResolver extends HttpParamValueResolver {
 
     private boolean isBoxed(DeclaredType type) {
         try {
-            PrimitiveType primitiveType = utils.types.unboxedType(type);
+            PrimitiveType primitiveType = utils.getTypes().unboxedType(type);
             return primitiveType != null;
         } catch (IllegalArgumentException e) {
             return false;
@@ -98,7 +98,7 @@ public class CookieParamValueResolver extends HttpParamValueResolver {
         TypeMirror collectionType = utils.createWithWildcard(Collection.class);
         Optional<TypeMirror> typeArg = extractCollectionTypeArg(type);
 
-        return utils.types.isAssignable(type, collectionType)
+        return utils.getTypes().isAssignable(type, collectionType)
                 && typeArg.isPresent()
                 && isType(typeArg.get())
                 && asTypeElement(typeArg.get()).getQualifiedName().contentEquals(Cookie.class.getCanonicalName());

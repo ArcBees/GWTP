@@ -78,7 +78,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
         sourceFilter = new GwtSourceFilter(logger, utils);
 
         String module = processingEnv.getOptions().get(GWT_MODULE_OPTION);
-        if(module != null) {
+        if (module != null) {
             sourceFilter.addModules(module.split(","));
         }
     }

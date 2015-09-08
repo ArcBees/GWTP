@@ -62,7 +62,7 @@ public class EndPoint implements IsEndPoint {
 
     private int indexInParent(ExecutableElement method) {
         TypeElement type = asType(method.getEnclosingElement());
-        List<ExecutableElement> methods = methodsIn(utils.elements.getAllMembers(type));
+        List<ExecutableElement> methods = methodsIn(utils.getElements().getAllMembers(type));
         return methods.indexOf(method);
     }
 

@@ -35,6 +35,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
@@ -49,7 +50,9 @@ public class GwtSourceFilter {
     private final Logger logger;
     private final Utils utils;
     private final Set<String> parsedModules;
-    private final Set<String> sourcePackages;
+
+    @VisibleForTesting
+    final Set<String> sourcePackages;
 
     public GwtSourceFilter(
             Logger logger,
@@ -78,7 +81,7 @@ public class GwtSourceFilter {
     }
 
     public boolean elementIsPartOfGwtSource(Element element) {
-        PackageElement packageElement = utils.elements.getPackageOf(element);
+        PackageElement packageElement = utils.getElements().getPackageOf(element);
         String packageName = packageElement.getQualifiedName() + ".";
 
         for (String sourcePackage : sourcePackages) {

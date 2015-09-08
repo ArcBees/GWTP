@@ -30,14 +30,22 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 
 public class Utils {
-    public final Types types;
-    public final Elements elements;
+    private final Types types;
+    private final Elements elements;
 
     public Utils(
             Types types,
             Elements elements) {
         this.types = types;
         this.elements = elements;
+    }
+
+    public Types getTypes() {
+        return types;
+    }
+
+    public Elements getElements() {
+        return elements;
     }
 
     public TypeMirror createWithWildcard(Class<?> clazz) {
