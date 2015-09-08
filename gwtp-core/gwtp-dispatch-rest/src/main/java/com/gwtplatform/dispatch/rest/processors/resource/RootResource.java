@@ -22,60 +22,88 @@ import java.util.List;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.utils.Utils;
+
+import static com.google.common.base.Optional.absent;
+import static com.google.common.base.Optional.of;
 
 public class RootResource implements Resource {
-    private static final String NAME_SUFFIX = "Impl";
-
-    private final Type type;
-    private final Type resourceType;
-    private final EndPointDetails endPointDetails;
-    private final List<ResourceMethod> methods;
-
-    public RootResource(
-            Logger logger,
-            Utils utils,
-            Element element) {
-        ResourceUtils resourceUtils = new ResourceUtils(logger, utils);
-        TypeElement resourceElement = resourceUtils.asResourceTypeElement(element);
-
-        this.resourceType = new Type(resourceElement);
-        this.type = new Type(this.resourceType.getPackageName(), this.resourceType.getSimpleName() + NAME_SUFFIX);
-        this.endPointDetails = new EndPointDetails(logger, utils, resourceElement);
-        this.methods = resourceUtils.processMethods(resourceElement, this);
+    public interface Factory {
+        RootResource create(Element element);
     }
 
-    @Override
-    public Type getType() {
-        return type;
+    private static final String NAME_SUFFIX = "Impl";
+
+    private final ResourceUtils resourceUtils;
+    private final EndPointDetails.Factory endPointDetailsFactory;
+    private final TypeElement element;
+
+    private Optional<Type> resourceType = absent();
+    private Optional<Type> type = absent();
+    private Optional<EndPointDetails> endPointDetails = absent();
+    private Optional<List<ResourceMethod>> methods = absent();
+
+    RootResource(
+            ResourceUtils resourceUtils,
+            EndPointDetails.Factory endPointDetailsFactory,
+            Element element) {
+        this.resourceUtils = resourceUtils;
+        this.endPointDetailsFactory = endPointDetailsFactory;
+        this.element = resourceUtils.asResourceTypeElement(element);
     }
 
     @Override
     public Type getResourceType() {
-        return resourceType;
+        if (!resourceType.isPresent()) {
+            resourceType = of(new Type(element));
+        }
+
+        return resourceType.get();
+    }
+
+    @Override
+    public Type getType() {
+        if (!type.isPresent()) {
+            createType();
+        }
+
+        return type.get();
+    }
+
+    private void createType() {
+        Type resource = getResourceType();
+
+        type = of(new Type(resource.getPackageName(), resource.getSimpleName() + NAME_SUFFIX));
     }
 
     @Override
     public EndPointDetails getEndPointDetails() {
-        return endPointDetails;
+        if (!endPointDetails.isPresent()) {
+            endPointDetails = of(endPointDetailsFactory.create(element));
+        }
+
+        return endPointDetails.get();
     }
 
     @Override
     public List<ResourceMethod> getMethods() {
-        return methods;
+        if (!methods.isPresent()) {
+            methods = of(resourceUtils.processMethods(element, this));
+        }
+
+        return methods.get();
     }
 
     @Override
     public Collection<String> getImports() {
-        return FluentIterable.from(methods)
+        return FluentIterable.from(getMethods())
                 .transformAndConcat(HasImports.EXTRACT_IMPORTS_FUNCTION)
-                .append(resourceType.getImports())
-                .append(type.getImports())
+                .append(getResourceType().getImports())
+                .append(getType().getImports())
                 .toList();
     }
 }

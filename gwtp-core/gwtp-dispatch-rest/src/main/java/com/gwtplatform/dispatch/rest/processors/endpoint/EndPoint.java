@@ -23,6 +23,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.details.Variable;
@@ -32,60 +33,84 @@ import com.gwtplatform.processors.tools.utils.Utils;
 import static javax.lang.model.util.ElementFilter.methodsIn;
 
 import static com.google.auto.common.MoreElements.asType;
+import static com.google.common.base.Optional.absent;
+import static com.google.common.base.Optional.of;
 
 public class EndPoint implements IsEndPoint {
-    private final Type impl;
-    private final List<Variable> fields;
-    private final EndPointDetails endPointDetails;
-    private final Utils utils;
+    public interface Factory {
+        EndPoint create(EndPointMethod endPointMethod, ExecutableElement element);
+    }
 
-    public EndPoint(
+    private final Utils utils;
+    private final EndPointUtils endPointUtils;
+    private final EndPointMethod endPointMethod;
+    private final ExecutableElement element;
+
+    private Optional<Type> type = absent();
+    private Optional<List<Variable>> fields = absent();
+    private Optional<EndPointDetails> endPointDetails = absent();
+
+    EndPoint(
             Utils utils,
+            EndPointUtils endPointUtils,
             EndPointMethod endPointMethod,
             ExecutableElement element) {
         this.utils = utils;
-        this.impl = processName(endPointMethod.getParentResource().getType(), element);
-        this.fields = new EndPointUtils().processFields(endPointMethod);
-        this.endPointDetails = endPointMethod.getEndPointDetails();
-    }
-
-    private Type processName(Type parentType, ExecutableElement method) {
-        String parentName = parentType.getSimpleName();
-        int methodIndex = indexInParent(method);
-        Name methodName = method.getSimpleName();
-
-        String packageName = parentType.getPackageName();
-        String className = String.format("%s_%d_%s", parentName, methodIndex, methodName);
-
-        return new Type(packageName, className);
-    }
-
-    private int indexInParent(ExecutableElement method) {
-        TypeElement type = asType(method.getEnclosingElement());
-        List<ExecutableElement> methods = methodsIn(utils.getElements().getAllMembers(type));
-        return methods.indexOf(method);
+        this.endPointUtils = endPointUtils;
+        this.endPointMethod = endPointMethod;
+        this.element = element;
     }
 
     @Override
     public Type getType() {
-        return impl;
+        if (!type.isPresent()) {
+            createType();
+        }
+
+        return type.get();
+    }
+
+    private void createType() {
+        Type parentType = endPointMethod.getParentResource().getType();
+        String parentName = parentType.getSimpleName();
+        int methodIndex = indexInParent();
+        Name methodName = element.getSimpleName();
+
+        String packageName = parentType.getPackageName();
+        String className = String.format("%s_%d_%s", parentName, methodIndex, methodName);
+
+        type = of(new Type(packageName, className));
+    }
+
+    private int indexInParent() {
+        TypeElement parentTypeElement = asType(element.getEnclosingElement());
+        List<ExecutableElement> methods = methodsIn(utils.getElements().getAllMembers(parentTypeElement));
+        return methods.indexOf(element);
     }
 
     @Override
     public List<Variable> getFields() {
-        return fields;
+        if (!fields.isPresent()) {
+            fields = of(endPointUtils.processFields(endPointMethod));
+        }
+
+        return fields.get();
     }
 
     @Override
     public EndPointDetails getEndPointDetails() {
-        return endPointDetails;
+        if (!endPointDetails.isPresent()) {
+            endPointDetails = of(endPointMethod.getEndPointDetails());
+        }
+
+        return endPointDetails.get();
     }
 
     @Override
     public Collection<String> getImports() {
-        return FluentIterable.from(fields)
+        return FluentIterable.from(getFields())
                 .transformAndConcat(EXTRACT_IMPORTS_FUNCTION)
-                .append(impl.getImports())
+                .append(getType().getImports())
                 .toList();
     }
 }

@@ -19,22 +19,35 @@ package com.gwtplatform.dispatch.rest.processors.endpoint;
 import javax.lang.model.element.ExecutableElement;
 
 import com.google.auto.service.AutoService;
+import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.details.EndPointDetailsFactory;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpVerbResolver;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodFactory;
+import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodUtils;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 @AutoService(ResourceMethodFactory.class)
 public class EndPointMethodFactory implements ResourceMethodFactory {
+    private final ResourceMethodUtils resourceMethodUtils;
+
+    public EndPointMethodFactory() {
+        this.resourceMethodUtils = new ResourceMethodUtils();
+    }
+
     @Override
     public boolean canHandle(ExecutableElement element) {
         return HttpVerbResolver.isPresent(element);
     }
 
     @Override
-    public ResourceMethod resolve(Logger logger, Utils utils, Resource resourceType, ExecutableElement element) {
-        return new EndPointMethod(logger, utils, resourceType, element);
+    public ResourceMethod resolve(Logger logger, Utils utils, Resource parentResource, ExecutableElement element) {
+        EndPointDetails.Factory endPointDetailsFactory = new EndPointDetailsFactory(logger, utils);
+        EndPoint.Factory endPointFactory = new EndPointFactory(utils);
+
+        return new EndPointMethod(resourceMethodUtils, endPointDetailsFactory, endPointFactory, parentResource,
+                element);
     }
 }

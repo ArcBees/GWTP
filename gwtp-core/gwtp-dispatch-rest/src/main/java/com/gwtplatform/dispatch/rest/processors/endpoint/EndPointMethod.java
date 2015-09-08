@@ -20,30 +20,39 @@ import java.util.Collection;
 
 import javax.lang.model.element.ExecutableElement;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.details.Method;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodUtils;
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.utils.Utils;
+
+import static com.google.common.base.Optional.absent;
+import static com.google.common.base.Optional.of;
 
 public class EndPointMethod implements ResourceMethod {
+    private final ResourceMethodUtils resourceMethodUtils;
+    private final EndPointDetails.Factory endPointDetailsFactory;
+    private final EndPoint.Factory endPointFactory;
     private final Resource parentResource;
-    private final Method method;
-    private final EndPointDetails endPointDetails;
-    private final EndPoint endPoint;
+    private final ExecutableElement element;
 
-    public EndPointMethod(
-            Logger logger,
-            Utils utils,
+    private Optional<Method> method = absent();
+    private Optional<EndPointDetails> endPointDetails = absent();
+    private Optional<EndPoint> endPoint = absent();
+
+    EndPointMethod(
+            ResourceMethodUtils resourceMethodUtils,
+            EndPointDetails.Factory endPointDetailsFactory,
+            EndPoint.Factory endPointFactory,
             Resource parentResource,
             ExecutableElement element) {
+        this.resourceMethodUtils = resourceMethodUtils;
+        this.endPointDetailsFactory = endPointDetailsFactory;
+        this.endPointFactory = endPointFactory;
         this.parentResource = parentResource;
-        this.method = new ResourceMethodUtils().processMethod(element, parentResource);
-        this.endPointDetails = new EndPointDetails(logger, utils, method, parentResource.getEndPointDetails());
-        this.endPoint = new EndPoint(utils, this, element);
+        this.element = element;
     }
 
     @Override
@@ -53,22 +62,34 @@ public class EndPointMethod implements ResourceMethod {
 
     @Override
     public Method getMethod() {
-        return method;
+        if (!method.isPresent()) {
+            method = of(resourceMethodUtils.processMethod(parentResource, element));
+        }
+
+        return method.get();
     }
 
     @Override
     public EndPointDetails getEndPointDetails() {
-        return endPointDetails;
+        if (!endPointDetails.isPresent()) {
+            endPointDetails = of(endPointDetailsFactory.create(parentResource.getEndPointDetails(), getMethod()));
+        }
+
+        return endPointDetails.get();
     }
 
     public EndPoint getEndPoint() {
-        return endPoint;
+        if (!endPoint.isPresent()) {
+            endPoint = of(endPointFactory.create(this, element));
+        }
+
+        return endPoint.get();
     }
 
     @Override
     public Collection<String> getImports() {
-        return FluentIterable.from(method.getImports())
-                .append(endPoint.getType().getImports())
+        return FluentIterable.from(getMethod().getImports())
+                .append(getEndPoint().getType().getImports())
                 .toList();
     }
 }

@@ -14,15 +14,23 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.resource;
+package com.gwtplatform.dispatch.rest.processors.endpoint;
 
 import javax.lang.model.element.ExecutableElement;
 
-import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
-public interface ResourceMethodFactory {
-    boolean canHandle(ExecutableElement element);
+public class EndPointFactory implements EndPoint.Factory {
+    private final Utils utils;
+    private final EndPointUtils endPointUtils;
 
-    ResourceMethod resolve(Logger logger, Utils utils, Resource parentResource, ExecutableElement element);
+    public EndPointFactory(Utils utils) {
+        this.utils = utils;
+        this.endPointUtils = new EndPointUtils();
+    }
+
+    @Override
+    public EndPoint create(EndPointMethod endPointMethod, ExecutableElement element) {
+        return new EndPoint(utils, endPointUtils, endPointMethod, element);
+    }
 }

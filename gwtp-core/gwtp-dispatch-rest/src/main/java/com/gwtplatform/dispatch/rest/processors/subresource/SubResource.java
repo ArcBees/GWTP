@@ -21,6 +21,7 @@ import java.util.List;
 
 import javax.lang.model.element.TypeElement;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.details.Variable;
@@ -31,69 +32,99 @@ import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceUtils;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.utils.Utils;
+
+import static com.google.common.base.Optional.absent;
+import static com.google.common.base.Optional.of;
 
 public class SubResource implements Resource, IsEndPoint {
-    private final Type type;
-    private final Type subResourceType;
-    private final List<Variable> fields;
-    private final List<ResourceMethod> methods;
-    private final EndPointDetails endPointDetails;
+    public interface Factory {
+        SubResource create(SubResourceMethod method, TypeElement element);
+    }
 
-    public SubResource(
-            Logger logger,
-            Utils utils,
+    private final ResourceUtils resourceUtils;
+    private final EndPointUtils endPointUtils;
+    private final EndPointDetails.Factory endPointDetailsFactory;
+    private final SubResourceMethod method;
+    private final TypeElement element;
+
+    private Optional<Type> subResourceType = absent();
+    private Optional<Type> type = absent();
+    private Optional<List<Variable>> fields = absent();
+    private Optional<List<ResourceMethod>> methods = absent();
+    private Optional<EndPointDetails> endPointDetails = absent();
+
+    SubResource(
+            ResourceUtils resourceUtils,
+            EndPointUtils endPointUtils,
+            EndPointDetails.Factory endPointDetailsFactory,
             SubResourceMethod method,
             TypeElement element) {
-        ResourceUtils resourceUtils = new ResourceUtils(logger, utils);
-        TypeElement resourceType = resourceUtils.asResourceTypeElement(element);
-
-        this.subResourceType = new Type(resourceType);
-        this.type = processImplType(method);
-        this.endPointDetails = new EndPointDetails(logger, utils, element, method.getEndPointDetails());
-        this.fields = new EndPointUtils().processFields(method);
-        this.methods = resourceUtils.processMethods(resourceType, this);
-    }
-
-    private Type processImplType(SubResourceMethod method) {
-        Type parentImpl = method.getParentResource().getType();
-
-        String simpleName = parentImpl.getSimpleName() + "_" + subResourceType.getSimpleName();
-        return new Type(subResourceType.getPackageName(), simpleName);
-    }
-
-    @Override
-    public Type getType() {
-        return type;
+        this.resourceUtils = resourceUtils;
+        this.endPointUtils = endPointUtils;
+        this.endPointDetailsFactory = endPointDetailsFactory;
+        this.method = method;
+        this.element = resourceUtils.asResourceTypeElement(element);
     }
 
     @Override
     public Type getResourceType() {
-        return subResourceType;
+        if (!subResourceType.isPresent()) {
+            subResourceType = of(new Type(element));
+        }
+
+        return subResourceType.get();
     }
 
     @Override
-    public EndPointDetails getEndPointDetails() {
-        return endPointDetails;
+    public Type getType() {
+        if (!type.isPresent()) {
+            createImplType();
+        }
+
+        return type.get();
+    }
+
+    private void createImplType() {
+        Type resourceType = getResourceType();
+        Type parentImpl = method.getParentResource().getType();
+        String simpleName = parentImpl.getSimpleName() + "_" + resourceType.getSimpleName();
+
+        type = of(new Type(resourceType.getPackageName(), simpleName));
     }
 
     @Override
     public List<Variable> getFields() {
-        return fields;
+        if (!fields.isPresent()) {
+            fields = of(endPointUtils.processFields(method));
+        }
+
+        return fields.get();
     }
 
     @Override
     public List<ResourceMethod> getMethods() {
-        return methods;
+        if (!methods.isPresent()) {
+            methods = of(resourceUtils.processMethods(element, this));
+        }
+
+        return methods.get();
+    }
+
+    @Override
+    public EndPointDetails getEndPointDetails() {
+        if (!endPointDetails.isPresent()) {
+            endPointDetails = of(endPointDetailsFactory.create(method.getEndPointDetails(), element));
+        }
+
+        return endPointDetails.get();
     }
 
     @Override
     public Collection<String> getImports() {
-        return FluentIterable.from(methods)
+        return FluentIterable.from(getMethods())
                 .transformAndConcat(HasImports.EXTRACT_IMPORTS_FUNCTION)
-                .append(subResourceType.getImports())
-                .append(type.getImports())
+                .append(getResourceType().getImports())
+                .append(getType().getImports())
                 .toList();
     }
 }

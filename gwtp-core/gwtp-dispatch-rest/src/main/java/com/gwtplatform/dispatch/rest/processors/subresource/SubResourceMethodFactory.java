@@ -20,10 +20,13 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 
 import com.google.auto.service.AutoService;
+import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.details.EndPointDetailsFactory;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpVerbResolver;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodFactory;
+import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodUtils;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
@@ -31,6 +34,12 @@ import static com.google.auto.common.MoreTypes.asTypeElement;
 
 @AutoService(ResourceMethodFactory.class)
 public class SubResourceMethodFactory implements ResourceMethodFactory {
+    private final ResourceMethodUtils resourceMethodUtils;
+
+    public SubResourceMethodFactory() {
+        resourceMethodUtils = new ResourceMethodUtils();
+    }
+
     @Override
     public boolean canHandle(ExecutableElement element) {
         return !HttpVerbResolver.isPresent(element)
@@ -38,7 +47,11 @@ public class SubResourceMethodFactory implements ResourceMethodFactory {
     }
 
     @Override
-    public ResourceMethod resolve(Logger logger, Utils utils, Resource resourceType, ExecutableElement element) {
-        return new SubResourceMethod(logger, utils, resourceType, element);
+    public ResourceMethod resolve(Logger logger, Utils utils, Resource parentResource, ExecutableElement element) {
+        EndPointDetails.Factory endPointDetailsFactory = new EndPointDetailsFactory(logger, utils);
+        SubResource.Factory subResourceFactory = new SubResourceFactory(logger, utils);
+
+        return new SubResourceMethod(resourceMethodUtils, endPointDetailsFactory, subResourceFactory, parentResource,
+                element);
     }
 }

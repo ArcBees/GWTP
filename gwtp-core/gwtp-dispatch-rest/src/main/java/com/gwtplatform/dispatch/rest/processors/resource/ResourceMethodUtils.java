@@ -26,7 +26,7 @@ import com.gwtplatform.dispatch.rest.processors.details.HttpVariable;
 import com.gwtplatform.dispatch.rest.processors.details.Method;
 
 public class ResourceMethodUtils {
-    public Method processMethod(ExecutableElement element, Resource parentResource) {
+    public Method processMethod(Resource parentResource, ExecutableElement element) {
         Collection<HttpVariable> variables = parentResource.getEndPointDetails().getHttpVariables();
         Collection<String> existingVariableNames = FluentIterable.from(variables)
                 .transform(new Function<HttpVariable, String>() {

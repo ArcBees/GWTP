@@ -29,7 +29,8 @@ public class Path {
         value = resolvePath(element);
     }
 
-    public Path(Element element, Path basePath) {
+    public Path(
+            Element element, Path basePath) {
         String path = resolvePath(element);
         value = concatenate(basePath.getValue(), path);
     }

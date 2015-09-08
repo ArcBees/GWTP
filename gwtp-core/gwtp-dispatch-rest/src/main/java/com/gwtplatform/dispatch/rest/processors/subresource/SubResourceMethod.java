@@ -19,33 +19,42 @@ package com.gwtplatform.dispatch.rest.processors.subresource;
 import java.util.Collection;
 
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.TypeElement;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails.Factory;
 import com.gwtplatform.dispatch.rest.processors.details.Method;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodUtils;
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.MoreTypes.asTypeElement;
+import static com.google.common.base.Optional.absent;
+import static com.google.common.base.Optional.of;
 
 public class SubResourceMethod implements ResourceMethod {
+    private final ResourceMethodUtils resourceMethodUtils;
+    private final SubResource.Factory subResourceFactory;
+    private final EndPointDetails.Factory endPointDetailsFactory;
     private final Resource parentResource;
-    private final Method method;
-    private final EndPointDetails endPointDetails;
-    private final SubResource subResource;
+    private final ExecutableElement element;
 
-    public SubResourceMethod(
-            Logger logger,
-            Utils utils,
+    private Optional<Method> method = absent();
+    private Optional<EndPointDetails> endPointDetails = absent();
+    private Optional<SubResource> subResource = absent();
+
+    SubResourceMethod(
+            ResourceMethodUtils resourceMethodUtils,
+            Factory endPointDetailsFactory, SubResource.Factory subResourceFactory,
             Resource parentResource,
             ExecutableElement element) {
+        this.resourceMethodUtils = resourceMethodUtils;
+        this.subResourceFactory = subResourceFactory;
+        this.endPointDetailsFactory = endPointDetailsFactory;
         this.parentResource = parentResource;
-        this.method = new ResourceMethodUtils().processMethod(element, parentResource);
-        this.endPointDetails = new EndPointDetails(logger, utils, method, parentResource.getEndPointDetails());
-        this.subResource = new SubResource(logger, utils, this, asTypeElement(element.getReturnType()));
+        this.element = element;
     }
 
     @Override
@@ -55,22 +64,40 @@ public class SubResourceMethod implements ResourceMethod {
 
     @Override
     public Method getMethod() {
-        return method;
+        if (!method.isPresent()) {
+            method = of(resourceMethodUtils.processMethod(parentResource, element));
+        }
+
+        return method.get();
     }
 
     @Override
     public EndPointDetails getEndPointDetails() {
-        return endPointDetails;
+        if (!endPointDetails.isPresent()) {
+            endPointDetails = of(endPointDetailsFactory.create(parentResource.getEndPointDetails(), getMethod()));
+        }
+
+        return endPointDetails.get();
     }
 
     public SubResource getSubResource() {
-        return subResource;
+        if (!subResource.isPresent()) {
+            createSubResource();
+        }
+
+        return subResource.get();
+    }
+
+    public void createSubResource() {
+        TypeElement returnTypeElement = asTypeElement(element.getReturnType());
+
+        subResource = of(subResourceFactory.create(this, returnTypeElement));
     }
 
     @Override
     public Collection<String> getImports() {
-        return FluentIterable.from(method.getImports())
-                .append(subResource.getType().getImports())
+        return FluentIterable.from(getMethod().getImports())
+                .append(getSubResource().getType().getImports())
                 .toList();
     }
 }

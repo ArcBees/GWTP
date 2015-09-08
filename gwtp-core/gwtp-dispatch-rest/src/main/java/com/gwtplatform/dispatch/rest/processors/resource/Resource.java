@@ -18,15 +18,13 @@ package com.gwtplatform.dispatch.rest.processors.resource;
 
 import java.util.List;
 
-import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.details.HasEndPointDetails;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.HasType;
 import com.gwtplatform.processors.tools.domain.Type;
 
-public interface Resource extends HasType, HasImports {
+public interface Resource extends HasEndPointDetails, HasType, HasImports {
     Type getResourceType();
-
-    EndPointDetails getEndPointDetails();
 
     List<ResourceMethod> getMethods();
 }

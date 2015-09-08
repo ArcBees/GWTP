@@ -32,6 +32,7 @@ import javax.ws.rs.Path;
 
 import com.google.auto.service.AutoService;
 import com.gwtplatform.dispatch.rest.processors.resource.RootResource;
+import com.gwtplatform.dispatch.rest.processors.resource.RootResourceFactory;
 import com.gwtplatform.dispatch.rest.processors.resource.RootResourceProcessor;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessors;
 import com.gwtplatform.processors.tools.GwtSourceFilter;
@@ -58,6 +59,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
 
     private Logger logger;
     private Utils utils;
+    private RootResource.Factory rootResourceFactory;
     private RootResourceProcessor resourceProcessor;
     private SerializationProcessors serializationProcessors;
     private BindingsProcessors bindingsProcessors;
@@ -72,12 +74,18 @@ public class DispatchRestProcessor extends AbstractProcessor {
 
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
         utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
+        rootResourceFactory = new RootResourceFactory(logger, utils);
         resourceProcessor = new RootResourceProcessor(processingEnv);
         serializationProcessors = new SerializationProcessors(processingEnv);
         bindingsProcessors = new BindingsProcessors(processingEnv);
         sourceFilter = new GwtSourceFilter(logger, utils);
 
+        initSourceFilter(processingEnv);
+    }
+
+    private void initSourceFilter(ProcessingEnvironment processingEnv) {
         String module = processingEnv.getOptions().get(GWT_MODULE_OPTION);
+
         if (module != null) {
             sourceFilter.addModules(module.split(","));
         }
@@ -118,7 +126,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
 
     private void process(Element element) {
         try {
-            RootResource resource = new RootResource(logger, utils, element);
+            RootResource resource = rootResourceFactory.create(element);
 
             resourceProcessor.process(resource);
         } catch (UnableToProcessException e) {

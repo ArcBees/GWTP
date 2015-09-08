@@ -16,13 +16,26 @@
 
 package com.gwtplatform.dispatch.rest.processors.resource;
 
-import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Element;
 
+import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
+import com.gwtplatform.dispatch.rest.processors.details.EndPointDetailsFactory;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
-public interface ResourceMethodFactory {
-    boolean canHandle(ExecutableElement element);
+public class RootResourceFactory implements RootResource.Factory {
+    private final ResourceUtils resourceUtils;
+    private final EndPointDetails.Factory endPointDetailsFactory;
 
-    ResourceMethod resolve(Logger logger, Utils utils, Resource parentResource, ExecutableElement element);
+    public RootResourceFactory(
+            Logger logger,
+            Utils utils) {
+        this.resourceUtils = new ResourceUtils(logger, utils);
+        this.endPointDetailsFactory = new EndPointDetailsFactory(logger, utils);
+    }
+
+    @Override
+    public RootResource create(Element element) {
+        return new RootResource(resourceUtils, endPointDetailsFactory, element);
+    }
 }

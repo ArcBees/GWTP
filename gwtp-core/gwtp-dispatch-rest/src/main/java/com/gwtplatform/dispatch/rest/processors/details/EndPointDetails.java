@@ -30,7 +30,6 @@ import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.gwtplatform.dispatch.rest.processors.NameUtils;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpVerbResolver;
@@ -47,10 +46,19 @@ import static com.google.common.base.Predicates.and;
 import static com.google.common.base.Predicates.equalTo;
 import static com.google.common.base.Predicates.not;
 import static com.google.common.base.Predicates.notNull;
+import static com.google.common.collect.ImmutableSet.copyOf;
 import static com.gwtplatform.dispatch.rest.processors.resolvers.ContentTypeResolver.resolveConsumes;
 import static com.gwtplatform.dispatch.rest.processors.resolvers.ContentTypeResolver.resolveProduces;
 
 public class EndPointDetails implements HasImports {
+    public interface Factory {
+        EndPointDetails create(TypeElement element);
+
+        EndPointDetails create(EndPointDetails parentDetails, TypeElement element);
+
+        EndPointDetails create(EndPointDetails parentDetails, Method method);
+    }
+
     private static final String MANY_POTENTIAL_BODY = "Method `%s` has more than one body parameter.";
     private static final String FORM_AND_BODY_PARAM = "Method `%s` has both a @FormParam and a body parameter. "
             + "Specify one or the other.";
@@ -70,58 +78,52 @@ public class EndPointDetails implements HasImports {
     private Optional<HttpVariable> body = Optional.absent();
     private Type resultType;
 
-    public EndPointDetails(
+    EndPointDetails(
             Logger logger,
-            Utils utils,
-            TypeElement element) {
+            Utils utils) {
         this.logger = logger;
         this.utils = utils;
-        this.path = new Path(element);
-        this.secured = new Secured(element);
-        this.consumes = ImmutableSet.copyOf(resolveConsumes(element));
-        this.produces = ImmutableSet.copyOf(resolveProduces(element));
     }
 
-    public EndPointDetails(
+    EndPointDetails(
             Logger logger,
             Utils utils,
-            TypeElement element,
             EndPointDetails parentDetails) {
         this.logger = logger;
         this.utils = utils;
 
-        resolveAndInheritParent(element, parentDetails);
+        copyFields(parentDetails);
     }
 
-    public EndPointDetails(
-            Logger logger,
-            Utils utils,
-            Method method,
-            EndPointDetails parentDetails) {
-        this.logger = logger;
-        this.utils = utils;
-
-        resolveAndInheritParent(method.getElement(), parentDetails);
-        resolveVerb(method);
-        resolveResult(method);
-        resolveVariables(method);
-    }
-
-    public void resolveAndInheritParent(Element element, EndPointDetails parentDetails) {
-        path = new Path(element, parentDetails.getPath());
-        secured = new Secured(element, parentDetails.getSecured());
-        consumes = ImmutableSet.copyOf(resolveConsumes(element, parentDetails.getConsumes()));
-        produces = ImmutableSet.copyOf(resolveProduces(element, parentDetails.getProduces()));
+    private void copyFields(EndPointDetails parentDetails) {
+        path = parentDetails.getPath();
+        secured = parentDetails.getSecured();
+        consumes = copyOf(parentDetails.getConsumes());
+        produces = copyOf(parentDetails.getProduces());
         httpVariables = parentDetails.getHttpVariables();
         body = parentDetails.getBody();
         resultType = parentDetails.getResultType();
     }
 
-    public void resolveVerb(Method method) {
+    void processMethod(Method method) {
+        processElement(method.getElement());
+        processVerb(method);
+        processResult(method);
+        createVariables(method);
+    }
+
+    void processElement(Element element) {
+        path = path == null ? new Path(element) : new Path(element, path);
+        secured = secured == null ? new Secured(element) : new Secured(element, secured);
+        consumes = copyOf(consumes == null ? resolveConsumes(element) : resolveConsumes(element, consumes));
+        produces = copyOf(produces == null ? resolveProduces(element) : resolveProduces(element, produces));
+    }
+
+    public void processVerb(Method method) {
         verb = new HttpVerbResolver(logger).resolve(method.getElement());
     }
 
-    private void resolveResult(Method method) {
+    private void processResult(Method method) {
         String restActionName = RestAction.class.getCanonicalName();
         Type returnType = method.getReturnType();
 
@@ -145,7 +147,7 @@ public class EndPointDetails implements HasImports {
         }
     }
 
-    private void resolveVariables(Method method) {
+    private void createVariables(Method method) {
         httpVariables = new ArrayList<>(httpVariables);
 
         for (Variable variable : method.getParameters()) {
