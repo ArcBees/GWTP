@@ -40,8 +40,8 @@ public class ActionModule extends HandlerModule {
     }
 
     @Bean
-    public AnnotatedActionBeandHandlerRegistrator getAnnotatedActionBeandHandlerRegistrator() {
-        return new AnnotatedActionBeandHandlerRegistrator();
+    public AnnotatedActionBeanHandlerRegistrator getAnnotatedActionBeandHandlerRegistrator() {
+        return new AnnotatedActionBeanHandlerRegistrator();
     }
 
     @Bean
