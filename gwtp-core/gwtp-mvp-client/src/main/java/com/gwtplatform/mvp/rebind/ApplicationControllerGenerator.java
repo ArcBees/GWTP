@@ -135,7 +135,13 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
             getTreeLogger().log(TreeLogger.ERROR, PROPERTY_BOOTSTRAPPER_EMPTY);
         }
 
-        return findAndVerifyType(typeName, Bootstrapper.class, BootstrapperFallback.class);
+        JClassType type;
+        try {
+            type = findAndVerifyType(typeName, Bootstrapper.class);
+        } catch (UnableToCompleteException ex) {
+            type = findAndVerifyType(typeName, BootstrapperFallback.class);
+        }
+        return type;
     }
 
     /**
@@ -147,8 +153,13 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
             return null;
         }
 
-        return findAndVerifyType(typeName, PreBootstrapper.class,
-                PreBootstrapperFallback.class);
+        JClassType type;
+        try {
+            type = findAndVerifyType(typeName, PreBootstrapper.class);
+        } catch (UnableToCompleteException ex) {
+            type = findAndVerifyType(typeName, PreBootstrapperFallback.class);
+        }
+        return type;
     }
 
     /**
@@ -176,23 +187,12 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     /**
      * Find the Java type by the given class name and verify that it extends the given interface.
      */
-    private JClassType findAndVerifyType(String typeName, Class<?> interfaceClass) throws UnableToCompleteException {
-        return findAndVerifyType(typeName, interfaceClass, null);
-    }
-
-    /**
-     * Find the Java type by the given class name and verify that it extends the given interface.
-     */
-    private JClassType findAndVerifyType(String typeName, Class<?> interfaceClass, Class<?> fallbackClass)
+    private JClassType findAndVerifyType(String typeName, Class<?> interfaceClass)
             throws UnableToCompleteException {
         JClassType type = getTypeOracle().findType(typeName);
         if (type == null) {
-            if (fallbackClass == null) {
-                getTreeLogger().log(TreeLogger.ERROR, String.format(TYPE_NOT_FOUND, typeName));
-                throw new UnableToCompleteException();
-            } else {
-                type = getTypeOracle().findType(fallbackClass.getName());
-            }
+            getTreeLogger().log(TreeLogger.ERROR, String.format(TYPE_NOT_FOUND, typeName));
+            throw new UnableToCompleteException();
         }
 
         JClassType interfaceType = getType(interfaceClass.getName());
