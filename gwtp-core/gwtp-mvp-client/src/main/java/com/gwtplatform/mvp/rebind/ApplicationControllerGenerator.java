@@ -31,6 +31,9 @@ import com.google.gwt.user.rebind.SourceWriter;
 import com.gwtplatform.mvp.client.Bootstrapper;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 import com.gwtplatform.mvp.client.PreBootstrapper;
+import com.gwtplatform.mvp.client.fallback.ApplicationControllerFallback;
+import com.gwtplatform.mvp.client.fallback.BootstrapperFallback;
+import com.gwtplatform.mvp.client.fallback.PreBootstrapperFallback;
 
 /**
  * Will generate a {@link com.gwtplatform.mvp.client.ApplicationController}. If the user wants his Generator to be
@@ -38,10 +41,13 @@ import com.gwtplatform.mvp.client.PreBootstrapper;
  * revealCurrentPlace() from the place manager.
  */
 public class ApplicationControllerGenerator extends AbstractGenerator {
+    private static final String PROBLEM_GENERATING = "There was a problem generating the ApplicationController," +
+            " this can be caused by bad GWT module configuration or compile errors in your source code.";
     private static final String PROPERTY_BOOTSTRAPPER_EMPTY =
             "Required configuration property 'gwtp.bootstrapper' can not be empty!.";
     private static final String PROPERTY_NOT_FOUND = "Undefined configuration property '%s'.";
-    private static final String TYPE_NOT_FOUND = "The type '%s' was not found.";
+    private static final String TYPE_NOT_FOUND = "The type '%s' was not found, either the class name is " +
+            "wrong or there are compile errors in your code.";
     private static final String HINT_URL = "https://github.com/ArcBees/GWTP/wiki/Bootstrapping";
     private static final String DOES_NOT_EXTEND_INTERFACE = "'%s' doesn't implement the '%s' interface. See "
             + HINT_URL;
@@ -73,7 +79,6 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
             return typeName + SUFFIX;
         }
         try {
-
             JClassType preBootstrapper = getPreBootstrapper();
 
             ClassSourceFileComposerFactory composer = initComposer(preBootstrapper);
@@ -89,6 +94,15 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
             closeDefinition(sw);
 
             return getPackageName() + "." + getClassName();
+        } catch (UnableToCompleteException e) {
+            // Java compile errors can cause problems during compilation
+            // for tasks like TypeOracle#findType will return null if there
+            // are compile errors, we should at least hint this possibility.
+            getTreeLogger().log(TreeLogger.ERROR, PROBLEM_GENERATING);
+
+            // Return ApplicationControllerFallback class to avoid
+            // swallowing the actual compiler issues if there are any.
+            return ApplicationControllerFallback.class.getName();
         } finally {
             printWriter.close();
         }
@@ -117,12 +131,11 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
     private JClassType getBootstrapper() throws UnableToCompleteException {
         String typeName = lookupTypeNameByProperty(PROPERTY_NAME_BOOTSTRAPPER);
         if (typeName == null) {
-            getTreeLogger()
-                    .log(TreeLogger.ERROR, PROPERTY_BOOTSTRAPPER_EMPTY);
-            throw new UnableToCompleteException();
+
+            getTreeLogger().log(TreeLogger.ERROR, PROPERTY_BOOTSTRAPPER_EMPTY);
         }
 
-        return findAndVerifyType(typeName, Bootstrapper.class);
+        return findAndVerifyType(typeName, Bootstrapper.class, BootstrapperFallback.class);
     }
 
     /**
@@ -134,7 +147,8 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
             return null;
         }
 
-        return findAndVerifyType(typeName, PreBootstrapper.class);
+        return findAndVerifyType(typeName, PreBootstrapper.class,
+                PreBootstrapperFallback.class);
     }
 
     /**
@@ -163,10 +177,22 @@ public class ApplicationControllerGenerator extends AbstractGenerator {
      * Find the Java type by the given class name and verify that it extends the given interface.
      */
     private JClassType findAndVerifyType(String typeName, Class<?> interfaceClass) throws UnableToCompleteException {
+        return findAndVerifyType(typeName, interfaceClass, null);
+    }
+
+    /**
+     * Find the Java type by the given class name and verify that it extends the given interface.
+     */
+    private JClassType findAndVerifyType(String typeName, Class<?> interfaceClass, Class<?> fallbackClass)
+            throws UnableToCompleteException {
         JClassType type = getTypeOracle().findType(typeName);
         if (type == null) {
-            getTreeLogger().log(TreeLogger.ERROR, String.format(TYPE_NOT_FOUND, typeName));
-            throw new UnableToCompleteException();
+            if (fallbackClass == null) {
+                getTreeLogger().log(TreeLogger.ERROR, String.format(TYPE_NOT_FOUND, typeName));
+                throw new UnableToCompleteException();
+            } else {
+                type = getTypeOracle().findType(fallbackClass.getName());
+            }
         }
 
         JClassType interfaceType = getType(interfaceClass.getName());
