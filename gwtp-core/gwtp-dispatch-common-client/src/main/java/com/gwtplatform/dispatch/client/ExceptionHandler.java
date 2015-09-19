@@ -17,14 +17,13 @@
 package com.gwtplatform.dispatch.client;
 
 /**
- * Implementations of this interface can be added to a {@link com.gwtplatform.dispatch.shared.DispatchAsync}
- * implementation to intercept exceptions which return from further up the chain.
+ * Interface to intercept exceptions which return from further up the chain.
  */
 public interface ExceptionHandler {
     /**
      * {@link ExceptionHandler}'s status enumeration.
      */
-    public enum Status {
+    enum Status {
         CONTINUE, STOP
     }
 

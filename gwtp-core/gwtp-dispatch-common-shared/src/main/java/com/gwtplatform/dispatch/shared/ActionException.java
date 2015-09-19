@@ -24,19 +24,27 @@ public class ActionException extends Exception {
 
     private static final long serialVersionUID = -1423773155541528952L;
 
+    TypedAction<?> action;
+
     public ActionException() {
     }
 
-    public ActionException(String message) {
+    public ActionException(TypedAction<?> action) {
+    }
+
+    public ActionException(TypedAction<?> action, String message) {
         super(message);
     }
 
-    public ActionException(String message, Throwable cause) {
+    public ActionException(TypedAction<?> action, String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ActionException(Throwable cause) {
+    public ActionException(TypedAction<?> action, Throwable cause) {
         super(cause.getMessage());
     }
 
+    public TypedAction<?> getAction() {
+        return action;
+    }
 }

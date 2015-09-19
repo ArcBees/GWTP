@@ -51,7 +51,7 @@ public class BatchActionHandler extends AbstractActionHandler<BatchAction, Batch
                     if (e instanceof RuntimeException) {
                         throw (RuntimeException) e;
                     } else {
-                        throw new ActionException(e);
+                        throw new ActionException(action, e);
                     }
                 }
             }

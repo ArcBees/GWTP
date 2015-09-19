@@ -28,6 +28,7 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.serialization.SerializationException;
 import com.gwtplatform.dispatch.rest.client.serialization.SerializedValue;
+import com.gwtplatform.dispatch.rest.shared.ActionSerializationException;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -85,12 +86,8 @@ public class DefaultBodyFactory implements BodyFactory {
      * @return The serialized string.
      */
     protected SerializedValue serialize(Serialization serialization, Object object, String bodyClass,
-            List<ContentType> contentTypes) throws ActionException {
-        try {
-            return serialization.serialize(bodyClass, contentTypes, object);
-        } catch (SerializationException e) {
-            throw new ActionException(e);
-        }
+            List<ContentType> contentTypes) throws SerializationException {
+        return serialization.serialize(bodyClass, contentTypes, object);
     }
 
     private void assignBodyFromForm(RequestBuilder requestBuilder, RestAction<?> action) {
@@ -127,11 +124,16 @@ public class DefaultBodyFactory implements BodyFactory {
             Serialization serialization = findSerialization(bodyClass, contentTypes);
 
             if (serialization != null) {
-                return serialize(serialization, object, bodyClass, contentTypes);
+                try {
+                    return serialize(serialization, object, bodyClass, contentTypes);
+                } catch (SerializationException e) {
+                    throw new ActionSerializationException(action, e);
+                }
             }
         }
 
-        throw new ActionException("Unable to serialize request body. No serializer found.");
+        throw new ActionSerializationException(action,
+            "Unable to serialize request body. No serializer found.");
     }
 
     private Set<Serialization> getSerializations() {

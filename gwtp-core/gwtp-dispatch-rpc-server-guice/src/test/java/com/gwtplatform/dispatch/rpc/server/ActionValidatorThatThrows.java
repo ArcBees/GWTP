@@ -24,6 +24,6 @@ import com.gwtplatform.dispatch.shared.ActionException;
 public class ActionValidatorThatThrows implements ActionValidator {
     @Override
     public boolean isValid(Action<? extends Result> action) throws ActionException {
-        throw new ActionExceptionThrownByValidator(new Exception());
+        throw new ActionExceptionThrownByValidator(action, new Exception());
     }
 }
