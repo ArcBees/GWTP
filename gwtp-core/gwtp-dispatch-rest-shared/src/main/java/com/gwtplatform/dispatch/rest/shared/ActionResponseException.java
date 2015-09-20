@@ -23,6 +23,7 @@ public class ActionResponseException extends RestActionException {
     private int statusCode;
     private String statusText;
     private String headers;
+    private String content;
 
     public ActionResponseException() {
     }
@@ -53,6 +54,7 @@ public class ActionResponseException extends RestActionException {
         this.statusCode = response.getStatusCode();
         this.statusText = response.getStatusText();
         this.headers = response.getHeadersAsString();
+        this.content = response.getText();
     }
 
     public int getStatusCode() {
@@ -65,5 +67,9 @@ public class ActionResponseException extends RestActionException {
 
     public String getHeaders() {
         return headers;
+    }
+
+    public String getContent() {
+        return content;
     }
 }
