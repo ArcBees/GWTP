@@ -32,10 +32,10 @@ Get high quality support through ArcBees.
 * See the manual dependency download section in [Maven Configuration Instructions](https://github.com/ArcBees/GWTP/wiki/Maven-Configuration) 
 
 ###Current Release
-1.4 - Released on 12 January 2015
+1.5 - Released on 19 August 2015
 
 ###Current Snapshot
-1.5-SNAPSHOT
+1.6-SNAPSHOT
 
 ##Demos
 * [GWTP Samples Project Home](https://github.com/ArcBees/GWTP-Samples)
