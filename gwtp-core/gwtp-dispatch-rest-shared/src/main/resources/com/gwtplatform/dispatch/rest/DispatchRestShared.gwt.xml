@@ -6,5 +6,4 @@
     <inherits name="com.gwtplatform.dispatch.DispatchCommonShared"/>
 
     <source path='shared'/>
-    <source path="client"/>
 </module>

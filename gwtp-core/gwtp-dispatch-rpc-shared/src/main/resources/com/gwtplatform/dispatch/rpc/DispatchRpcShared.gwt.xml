@@ -9,5 +9,4 @@
 
     <!-- Specify the paths for translatable code                    -->
     <source path='shared'/>
-    <source path="client"/>
 </module>
