@@ -20,6 +20,7 @@ import java.io.BufferedWriter;
 import java.io.Closeable;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
@@ -112,18 +113,19 @@ public class GenerationHelper implements Closeable {
     public void generateConstantFieldDeclaration(VariableElement fieldElement) {
         if (isConstant(fieldElement)) {
             String constantValue = determineFinalConstantValue(fieldElement);
+            Set<Modifier> modifiers = fieldElement.getModifiers();
+            String modifierList = generateModifierList(modifiers.toArray(new Modifier[modifiers.size()]));
+
             if (constantValue != null) {
-                Set<Modifier> modifiers = fieldElement.getModifiers();
                 println("  {0}{1} {2} = {3};",
-                        generateModifierList(modifiers.toArray(new Modifier[modifiers.size()])),
+                        modifierList,
                         fieldElement.asType().toString(),
                         fieldElement.getSimpleName(),
                         constantValue
                 );
             } else {
-                Set<Modifier> modifiers = fieldElement.getModifiers();
                 println("  {0}{1} {2};",
-                        generateModifierList(modifiers.toArray(new Modifier[modifiers.size()])),
+                        modifierList,
                         fieldElement.asType().toString(),
                         fieldElement.getSimpleName()
                 );
