@@ -4,5 +4,4 @@
 
 <module>
     <source path="shared"/>
-    <source path="client"/>
 </module>
