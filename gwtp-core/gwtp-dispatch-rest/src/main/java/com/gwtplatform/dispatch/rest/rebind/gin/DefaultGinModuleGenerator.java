@@ -39,9 +39,10 @@ public class DefaultGinModuleGenerator extends AbstractVelocityGenerator impleme
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/gin/GinModule.vm";
     private static final String GIN_MODULE_PROPERTY = "gwtp.dispatch.rest.ginModule";
 
+    private final List<RegisterGinBindingEvent> bindings;
+
     private String packageName;
     private String implName;
-    private List<RegisterGinBindingEvent> bindings;
 
     @Inject
     DefaultGinModuleGenerator(

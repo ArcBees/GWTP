@@ -24,7 +24,7 @@ public interface ExceptionHandler {
     /**
      * {@link ExceptionHandler}'s status enumeration.
      */
-    public enum Status {
+    enum Status {
         CONTINUE, STOP
     }
 

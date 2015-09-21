@@ -33,7 +33,7 @@ public class ActionHandlerValidatorLinkerHelper {
         /**
          * @param <B>
          */
-        public interface BindingDescriptor<B> {
+        interface BindingDescriptor<B> {
 
             String getBeanName();
 
@@ -47,8 +47,8 @@ public class ActionHandlerValidatorLinkerHelper {
      */
     public static class CommonBindingDescriptor<B> implements BindingDescriptor<B> {
 
-        private String name;
-        private B bean;
+        private final String name;
+        private final B bean;
 
         public CommonBindingDescriptor(B bean, String name) {
             this.name = name;

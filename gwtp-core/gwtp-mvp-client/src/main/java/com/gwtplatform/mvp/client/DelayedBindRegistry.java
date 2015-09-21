@@ -30,8 +30,9 @@ import com.google.gwt.inject.client.Ginjector;
  */
 public final class DelayedBindRegistry {
 
+    private static final List<DelayedBind> delayedBindObjects = new ArrayList<DelayedBind>();
+
     private static Ginjector ginjector;
-    private static List<DelayedBind> delayedBindObjects = new ArrayList<DelayedBind>();
 
     /**
      * Bind all the registered classes, by calling their

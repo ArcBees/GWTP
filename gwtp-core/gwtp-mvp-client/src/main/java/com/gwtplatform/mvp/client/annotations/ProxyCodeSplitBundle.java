@@ -70,7 +70,7 @@ import com.gwtplatform.common.client.ProviderBundle;
 @Target(ElementType.TYPE)
 public @interface ProxyCodeSplitBundle {
 
-    public final class NoOpProviderBundle extends ProviderBundle {
+    final class NoOpProviderBundle extends ProviderBundle {
         private NoOpProviderBundle(int bundleSize) {
             super(bundleSize);
         }

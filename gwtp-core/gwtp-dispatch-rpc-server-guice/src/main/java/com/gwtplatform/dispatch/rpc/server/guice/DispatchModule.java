@@ -37,9 +37,9 @@ import com.gwtplatform.dispatch.rpc.server.guice.request.DefaultRequestProvider;
  * {@link HandlerModule} instances.
  */
 public class DispatchModule extends AbstractModule {
-    private Class<? extends Dispatch> dispatchClass;
-    private Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass;
-    private Class<? extends RequestProvider> requestProviderClass;
+    private final Class<? extends Dispatch> dispatchClass;
+    private final Class<? extends ActionHandlerValidatorRegistry> actionHandlerValidatorRegistryClass;
+    private final Class<? extends RequestProvider> requestProviderClass;
 
     /**
      * A DispatchModule builder.

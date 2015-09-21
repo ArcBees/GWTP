@@ -39,7 +39,7 @@ public class SpringBeanProvider implements BeanProvider {
         }
     }
 
-    private ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
 
     public SpringBeanProvider(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;

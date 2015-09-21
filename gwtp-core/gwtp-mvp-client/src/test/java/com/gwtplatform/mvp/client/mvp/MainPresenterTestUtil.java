@@ -47,7 +47,7 @@ public class MainPresenterTestUtil extends Presenter<MainPresenterTestUtil.MyVie
     public interface MyProxy extends Proxy<MainPresenterTestUtil> {
     }
 
-    private PresenterWidget<?> subPresenter;
+    private final PresenterWidget<?> subPresenter;
 
     @Inject
     public MainPresenterTestUtil(final EventBus eventBus, final MyView view,

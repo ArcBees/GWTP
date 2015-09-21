@@ -23,7 +23,7 @@ import java.util.Map.Entry;
  * This class is used by {@link RestAction} to associate a parameter name to a value.
  */
 public interface HttpParameter {
-    public enum Type {
+    enum Type {
         /** Represent {@link javax.ws.rs.CookieParam @CookieParam} parameters. */
         COOKIE,
         /** Represent {@link javax.ws.rs.FormParam @FormParam} parameters. */

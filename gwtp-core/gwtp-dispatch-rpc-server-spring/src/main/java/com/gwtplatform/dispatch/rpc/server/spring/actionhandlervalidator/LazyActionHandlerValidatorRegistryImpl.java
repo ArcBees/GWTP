@@ -115,7 +115,7 @@ public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandler
 
     private ActionHandlerValidatorInstance createInstance(
             ActionHandlerValidatorClass<? extends Action<?>, ? extends Result> actionHandlerValidatorClass) {
-        ActionHandlerValidatorInstance actionHandlerValidatorInstance = null;
+        ActionHandlerValidatorInstance actionHandlerValidatorInstance;
         ActionValidator actionValidator = findActionValidator(actionHandlerValidatorClass.getActionValidatorClass());
 
         ActionHandler<?, ?> actionHandler = SpringUtils.getInstance(applicationContext,

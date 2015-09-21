@@ -57,7 +57,7 @@ public abstract class AbstractCachingRpcInterceptor<A, R> extends AbstractRpcInt
     private final Cache cache;
 
     // Holds callbacks, so that for multiple requests before the first returns (is served), we save round trips as well
-    private Map<A, List<CallbackDispatchRequest<R>>> pendingRequestCallbackMap =
+    private final Map<A, List<CallbackDispatchRequest<R>>> pendingRequestCallbackMap =
             new HashMap<A, List<CallbackDispatchRequest<R>>>();
 
     public AbstractCachingRpcInterceptor(Class<A> actionType, Cache cache) {

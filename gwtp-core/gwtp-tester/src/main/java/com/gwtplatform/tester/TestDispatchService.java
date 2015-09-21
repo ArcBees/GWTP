@@ -30,7 +30,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
  */
 
 public class TestDispatchService implements DispatchService {
-    private Dispatch dispatch;
+    private final Dispatch dispatch;
 
     @Inject
     public TestDispatchService(Dispatch dispatch) {

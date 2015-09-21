@@ -29,7 +29,7 @@ import static org.mockito.Mockito.mock;
 public class CookieParamValueResolverTest {
     private static final String SOME_VALUE = "llamas";
 
-    private CookieParamValueResolver resolver = new CookieParamValueResolver();
+    private final CookieParamValueResolver resolver = new CookieParamValueResolver();
 
     @Test
     public void resolve_cookieParam() {

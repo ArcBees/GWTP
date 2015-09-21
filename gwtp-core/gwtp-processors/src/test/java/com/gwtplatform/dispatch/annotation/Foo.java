@@ -20,7 +20,7 @@ package com.gwtplatform.dispatch.annotation;
  * For testing purposes only.
  */
 public class Foo {
-    private String name;
+    private final String name;
 
     public Foo(String name) {
         this.name = name;

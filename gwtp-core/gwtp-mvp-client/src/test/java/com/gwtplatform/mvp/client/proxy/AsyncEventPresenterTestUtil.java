@@ -35,7 +35,7 @@ public class AsyncEventPresenterTestUtil extends
         AsyncCallFailHandler,
         AsyncCallStartHandler, AsyncCallSucceedHandler {
 
-    private DispatchAsync dispatcher;
+    private final DispatchAsync dispatcher;
 
     /**
      * Presenter's view.

@@ -21,6 +21,7 @@ import java.io.Closeable;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.VariableElement;
@@ -53,7 +54,7 @@ public class GenerationHelper implements Closeable {
         if (segments.length == 0) {
             implodedString = "";
         } else {
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             sb.append(segments[0]);
             for (int i = 1; i < segments.length; i++) {
                 if (segments[i] != null && !segments[i].toString().isEmpty()) {
@@ -111,16 +112,19 @@ public class GenerationHelper implements Closeable {
     public void generateConstantFieldDeclaration(VariableElement fieldElement) {
         if (isConstant(fieldElement)) {
             String constantValue = determineFinalConstantValue(fieldElement);
+            Set<Modifier> modifiers = fieldElement.getModifiers();
+            String modifierList = generateModifierList(modifiers.toArray(new Modifier[modifiers.size()]));
+
             if (constantValue != null) {
                 println("  {0}{1} {2} = {3};",
-                        generateModifierList(fieldElement.getModifiers().toArray(new Modifier[]{})),
+                        modifierList,
                         fieldElement.asType().toString(),
                         fieldElement.getSimpleName(),
                         constantValue
                 );
             } else {
                 println("  {0}{1} {2};",
-                        generateModifierList(fieldElement.getModifiers().toArray(new Modifier[]{})),
+                        modifierList,
                         fieldElement.asType().toString(),
                         fieldElement.getSimpleName()
                 );
@@ -129,8 +133,9 @@ public class GenerationHelper implements Closeable {
     }
 
     public void generateFieldDeclaration(VariableElement fieldElement) {
+        Set<Modifier> modifiers = fieldElement.getModifiers();
         println("  {0}{1} {2};",
-                generateModifierList(fieldElement.getModifiers().toArray(new Modifier[]{})),
+                generateModifierList(modifiers.toArray(new Modifier[modifiers.size()])),
                 fieldElement.asType().toString(),
                 fieldElement.getSimpleName()
         );
@@ -276,42 +281,19 @@ public class GenerationHelper implements Closeable {
     }
 
     /**
-     * Checks if a field contains a final modifier.
-     */
-    public boolean isFinal(VariableElement fieldElement) {
-        return fieldElement.getModifiers().contains(Modifier.FINAL);
-    }
-
-    /**
      * Checks if a type is a primitive type.
      */
     public boolean isPrimitive(TypeMirror type) {
         String typeName = type.toString();
-        if (typeName.equals("byte")) {
-            return true;
-        }
-        if (typeName.equals("short")) {
-            return true;
-        }
-        if (typeName.equals("int")) {
-            return true;
-        }
-        if (typeName.equals("long")) {
-            return true;
-        }
-        if (typeName.equals("float")) {
-            return true;
-        }
-        if (typeName.equals("double")) {
-            return true;
-        }
-        if (typeName.equals("char")) {
-            return true;
-        }
-        if (typeName.equals("boolean")) {
-            return true;
-        }
-        return false;
+
+        return typeName.equals("byte") ||
+                typeName.equals("short") ||
+                typeName.equals("int") ||
+                typeName.equals("long") ||
+                typeName.equals("float") ||
+                typeName.equals("double") ||
+                typeName.equals("char") ||
+                typeName.equals("boolean");
     }
 
     /**
@@ -430,10 +412,6 @@ public class GenerationHelper implements Closeable {
         String name = "set";
         name += firstCharToUpperCase(fieldName);
         return name;
-    }
-
-    protected String manufactureSetterName(VariableElement fieldElement) {
-        return manufactureSetterName(fieldElement.getSimpleName().toString());
     }
 
     protected String manufactureIndentation() {

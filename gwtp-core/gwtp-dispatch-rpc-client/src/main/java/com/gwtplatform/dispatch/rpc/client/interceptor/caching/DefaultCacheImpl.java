@@ -42,7 +42,7 @@ public class DefaultCacheImpl implements Cache {
         }
     }
 
-    private Map<Object, CacheValue> map;
+    private final Map<Object, CacheValue> map;
     private long autoExpireTimeInMs;
 
     /**
