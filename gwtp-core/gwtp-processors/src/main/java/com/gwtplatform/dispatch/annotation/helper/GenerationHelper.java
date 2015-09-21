@@ -20,7 +20,6 @@ import java.io.BufferedWriter;
 import java.io.Closeable;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
