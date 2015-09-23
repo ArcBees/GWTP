@@ -26,7 +26,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
  * @see: https://github.com/ArcBees/GWTP/wiki/Presenter-%22Slots%22
  */
 public class NestedSlot extends GwtEvent.Type<RevealContentHandler<?>>
-        implements IsSingleSlot<Presenter<?,?>> {
+        implements IsSingleSlot<Presenter<?,?>>, RemovableSlot<Presenter<?,?>> {
     @Override
     public boolean isPopup() {
         return false;
