@@ -27,6 +27,7 @@ import com.gwtplatform.processors.tools.utils.Utils;
 public class ResourceMethodFactories {
     private static final String NO_FACTORIES_FOUND = "Can not find a factory to handle the resource method.";
 
+    @SuppressWarnings("rawtypes")
     private static ServiceLoader<ResourceMethodFactory> factories;
 
     private final Logger logger;
@@ -39,14 +40,23 @@ public class ResourceMethodFactories {
         this.utils = utils;
 
         if (factories == null) {
-            factories = ServiceLoader.load(ResourceMethodFactory.class, getClass().getClassLoader());
+            initFactories();
+        }
+    }
+
+    private void initFactories() {
+        assert factories == null;
+        factories = ServiceLoader.load(ResourceMethodFactory.class, getClass().getClassLoader());
+
+        for (ResourceMethodFactory<?> factory : factories) {
+            factory.init(logger, utils);
         }
     }
 
     public ResourceMethod resolve(Resource resourceType, ExecutableElement element) {
-        for (ResourceMethodFactory factory : factories) {
-            if (factory.canHandle(element)) {
-                return factory.resolve(logger, utils, resourceType, element);
+        for (ResourceMethodFactory<?> factory : factories) {
+            if (factory.canCreate(element)) {
+                return factory.create(resourceType, element);
             }
         }
 

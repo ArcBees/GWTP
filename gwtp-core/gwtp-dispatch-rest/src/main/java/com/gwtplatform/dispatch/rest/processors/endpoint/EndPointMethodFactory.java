@@ -23,30 +23,43 @@ import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetailsFactory;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpVerbResolver;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
-import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodFactory;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodUtils;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 @AutoService(ResourceMethodFactory.class)
-public class EndPointMethodFactory implements ResourceMethodFactory {
-    private final ResourceMethodUtils resourceMethodUtils;
+public class EndPointMethodFactory implements ResourceMethodFactory<EndPointMethod> {
+    private ResourceMethodUtils resourceMethodUtils;
+    private EndPointDetails.Factory endPointDetailsFactory;
+    private EndPoint.Factory endPointFactory;
 
+    /**
+     * Explicit constructor required by the Service Loader.
+     */
     public EndPointMethodFactory() {
-        this.resourceMethodUtils = new ResourceMethodUtils();
+    }
+
+    public EndPointMethodFactory(
+            Logger logger,
+            Utils utils) {
+        init(logger, utils);
     }
 
     @Override
-    public boolean canHandle(ExecutableElement element) {
-        return HttpVerbResolver.isPresent(element);
+    public void init(Logger logger, Utils utils) {
+        resourceMethodUtils = new ResourceMethodUtils();
+        endPointDetailsFactory = new EndPointDetailsFactory(logger, utils);
+        endPointFactory = new EndPointFactory(utils);
     }
 
     @Override
-    public ResourceMethod resolve(Logger logger, Utils utils, Resource parentResource, ExecutableElement element) {
-        EndPointDetails.Factory endPointDetailsFactory = new EndPointDetailsFactory(logger, utils);
-        EndPoint.Factory endPointFactory = new EndPointFactory(utils);
+    public boolean canCreate(ExecutableElement element) {
+        return HttpVerbResolver.isPresent(element) && resourceMethodUtils.returnsRestAction(element);
+    }
 
+    @Override
+    public EndPointMethod create(Resource parentResource, ExecutableElement element) {
         return new EndPointMethod(resourceMethodUtils, endPointDetailsFactory, endPointFactory, parentResource,
                 element);
     }

@@ -40,6 +40,7 @@ import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
+import com.gwtplatform.processors.tools.utils.Primitives;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.common.base.Predicates.and;
@@ -49,6 +50,7 @@ import static com.google.common.base.Predicates.notNull;
 import static com.google.common.collect.ImmutableSet.copyOf;
 import static com.gwtplatform.dispatch.rest.processors.resolvers.ContentTypeResolver.resolveConsumes;
 import static com.gwtplatform.dispatch.rest.processors.resolvers.ContentTypeResolver.resolveProduces;
+import static com.gwtplatform.processors.tools.utils.Primitives.findByPrimitive;
 
 public class EndPointDetails implements HasImports {
     public interface Factory {
@@ -130,7 +132,13 @@ public class EndPointDetails implements HasImports {
         if (restActionName.equals(returnType.getQualifiedName())) {
             resolveRestActionResult(method);
         } else {
-            resultType = returnType;
+            Optional<Primitives> primitive = findByPrimitive(returnType.getQualifiedParameterizedName());
+
+            if (primitive.isPresent()) {
+                resultType = new Type(primitive.get().getBoxedClass().getCanonicalName());
+            } else {
+                resultType = returnType;
+            }
         }
     }
 

@@ -21,8 +21,10 @@ import javax.lang.model.element.ExecutableElement;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
-public interface ResourceMethodFactory {
-    boolean canHandle(ExecutableElement element);
+public interface ResourceMethodFactory<R extends ResourceMethod> {
+    void init(Logger logger, Utils utils);
 
-    ResourceMethod resolve(Logger logger, Utils utils, Resource parentResource, ExecutableElement element);
+    boolean canCreate(ExecutableElement element);
+
+    R create(Resource parentResource, ExecutableElement element);
 }

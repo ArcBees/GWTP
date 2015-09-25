@@ -24,6 +24,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 
 import com.google.common.base.Function;
@@ -54,8 +55,15 @@ public class Type implements HasImports, Comparable<Type> {
         this(element.asType());
     }
 
+    // TODO: I guess it's type to go with factory methods...
     public Type(TypeMirror type) {
-        if (type.getKind().isPrimitive()) {
+        // void is not a primitive
+        if(type.getKind() == TypeKind.VOID) {
+            packageName = "";
+            enclosingNames = "";
+            simpleName = "void";
+            typeArguments = ImmutableList.of();
+        } else if (type.getKind().isPrimitive()) {
             packageName = "";
             enclosingNames = "";
             simpleName = asPrimitiveType(type).toString();

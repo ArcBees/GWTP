@@ -58,7 +58,6 @@ public class DispatchRestProcessor extends AbstractProcessor {
     private static final String UNRESOLVABLE_EXCEPTION = "Unresolvable exception. " + SEE_LOG;
 
     private Logger logger;
-    private Utils utils;
     private RootResource.Factory rootResourceFactory;
     private RootResourceProcessor resourceProcessor;
     private SerializationProcessors serializationProcessors;
@@ -72,8 +71,9 @@ public class DispatchRestProcessor extends AbstractProcessor {
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
+        Utils utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
+
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
-        utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
         rootResourceFactory = new RootResourceFactory(logger, utils);
         resourceProcessor = new RootResourceProcessor(processingEnv);
         serializationProcessors = new SerializationProcessors(processingEnv);

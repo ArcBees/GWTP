@@ -21,15 +21,15 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 
 public enum Primitives {
-    BOOLEAN("boolean", Boolean.class, false),
-    BYTE("byte", Byte.class, 0),
-    CHAR("char", Character.class, 0),
-    DOUBLE("double", Double.class, 0D),
-    FLOAT("float", Float.class, 0F),
-    INT("int", Integer.class, 0),
-    LONG("long", Long.class, 0L),
-    SHORT("short", Short.class, 0),
-    VOID("void", Void.class, null);
+    BOOLEAN("boolean", Boolean.class, "false"),
+    BYTE("byte", Byte.class, "0"),
+    CHAR("char", Character.class, "0"),
+    DOUBLE("double", Double.class, "0D"),
+    FLOAT("float", Float.class, "0F"),
+    INT("int", Integer.class, "0"),
+    LONG("long", Long.class, "0L"),
+    SHORT("short", Short.class, "0"),
+    VOID("void", Void.class, "null");
 
     public static final Predicate<CharSequence> IS_PRIMITIVE_PREDICATE = new Predicate<CharSequence>() {
         @Override
@@ -40,15 +40,15 @@ public enum Primitives {
 
     private final String primitive;
     private final Class<?> boxedClass;
-    private final Object defaultValue;
+    private final String defaultValueLiteral;
 
     Primitives(
             String primitive,
             Class<?> boxedClass,
-            Object defaultValue) {
+            String defaultValueLiteral) {
         this.primitive = primitive;
         this.boxedClass = boxedClass;
-        this.defaultValue = defaultValue;
+        this.defaultValueLiteral = defaultValueLiteral;
     }
 
     public static Optional<Primitives> findByPrimitive(final CharSequence primitiveName) {
@@ -79,7 +79,7 @@ public enum Primitives {
         return boxedClass;
     }
 
-    public Object getDefaultValue() {
-        return defaultValue;
+    public String getDefaultValueLiteral() {
+        return defaultValueLiteral;
     }
 }

@@ -19,13 +19,31 @@ package com.gwtplatform.dispatch.rest.processors.resource;
 import java.util.Collection;
 
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Name;
+import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.TypeVisitor;
+import javax.lang.model.util.SimpleTypeVisitor6;
 
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.HttpVariable;
 import com.gwtplatform.dispatch.rest.processors.details.Method;
+import com.gwtplatform.dispatch.rest.shared.RestAction;
+
+import static com.google.auto.common.MoreTypes.asTypeElement;
 
 public class ResourceMethodUtils {
+    private static final TypeVisitor<Boolean, Void> IS_REST_ACTION_VISITOR =
+            new SimpleTypeVisitor6<Boolean, Void>(false) {
+                @Override
+                public Boolean visitDeclared(DeclaredType type, Void nothing) {
+                    Name returnTypeName = asTypeElement(type).getQualifiedName();
+
+                    return returnTypeName.contentEquals(REST_ACTION_FQN);
+                }
+            };
+    private static final String REST_ACTION_FQN = RestAction.class.getCanonicalName();
+
     public Method processMethod(Resource parentResource, ExecutableElement element) {
         Collection<HttpVariable> variables = parentResource.getEndPointDetails().getHttpVariables();
         Collection<String> existingVariableNames = FluentIterable.from(variables)
@@ -38,5 +56,9 @@ public class ResourceMethodUtils {
                 .toList();
 
         return new Method(element, existingVariableNames);
+    }
+
+    public boolean returnsRestAction(ExecutableElement element) {
+        return element.getReturnType().accept(IS_REST_ACTION_VISITOR, null);
     }
 }
