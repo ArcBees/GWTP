@@ -16,11 +16,10 @@
 
 package com.gwtplatform.dispatch.rest.processors.resource;
 
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.utils.Utils;
+import javax.annotation.processing.ProcessingEnvironment;
 
 public interface ResourcePostProcessor {
-    void init(Logger logger, Utils utils);
+    void init(ProcessingEnvironment environment);
 
     void postProcess(RootResource resource);
 }

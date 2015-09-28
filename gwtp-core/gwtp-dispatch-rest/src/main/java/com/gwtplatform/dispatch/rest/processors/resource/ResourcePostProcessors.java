@@ -18,21 +18,16 @@ package com.gwtplatform.dispatch.rest.processors.resource;
 
 import java.util.ServiceLoader;
 
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.utils.Utils;
+import javax.annotation.processing.ProcessingEnvironment;
 
 public class ResourcePostProcessors {
     private static ServiceLoader<ResourcePostProcessor> processors;
     private static boolean initialized;
 
-    private final Logger logger;
-    private final Utils utils;
+    private final ProcessingEnvironment environment;
 
-    public ResourcePostProcessors(
-            Logger logger,
-            Utils utils) {
-        this.logger = logger;
-        this.utils = utils;
+    public ResourcePostProcessors(ProcessingEnvironment environment) {
+        this.environment = environment;
 
         if (processors == null) {
             processors = ServiceLoader.load(ResourcePostProcessor.class, getClass().getClassLoader());
@@ -50,7 +45,7 @@ public class ResourcePostProcessors {
     private void ensureInitialized() {
         if (!initialized) {
             for (ResourcePostProcessor processor : processors) {
-                processor.init(logger, utils);
+                processor.init(environment);
             }
 
             initialized = true;

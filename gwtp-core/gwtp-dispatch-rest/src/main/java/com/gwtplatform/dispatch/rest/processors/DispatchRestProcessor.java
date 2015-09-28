@@ -79,7 +79,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
         sourceFilter = new GwtSourceFilter(logger, utils);
         rootResourceFactory = new RootResourceFactory(logger, utils);
         resourceProcessor = new RootResourceProcessor(processingEnv);
-        resourcePostProcessors = new ResourcePostProcessors(logger, utils);
+        resourcePostProcessors = new ResourcePostProcessors(processingEnv);
         serializationProcessors = new SerializationProcessors(processingEnv);
         bindingsProcessors = new BindingsProcessors(processingEnv);
 
