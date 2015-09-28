@@ -40,7 +40,5 @@ public class CoreModule extends AbstractGinModule {
         bind(ResponseDeserializer.class).to(builder.getResponseDeserializer()).in(Singleton.class);
         bind(HttpParameterFactory.class).to(builder.getHttpParameterFactory()).in(Singleton.class);
         bind(RestDispatch.class).to(builder.getRestDispatch()).in(Singleton.class);
-
-        requestStaticInjection(StaticParametersFactory.class);
     }
 }
