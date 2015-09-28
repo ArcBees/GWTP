@@ -27,6 +27,7 @@ public class BindingsProcessors {
 
     private static ServiceLoader<BindingsProcessor> processors;
     private static boolean processedLast;
+    private static boolean initialized;
 
     private final ProcessingEnvironment environment;
     private final Logger logger;
@@ -41,11 +42,11 @@ public class BindingsProcessors {
     }
 
     public void process(BindingContext context) {
+        ensureInitialized();
         boolean processed = false;
 
         for (BindingsProcessor processor : processors) {
             if (processor.canProcess(context)) {
-                ensureInitialized(processor);
 
                 processor.process(context);
                 processed = true;
@@ -58,20 +59,24 @@ public class BindingsProcessors {
     }
 
     public void processLast() {
+        ensureInitialized();
+
         if (!processedLast) {
             processedLast = true;
 
             for (BindingsProcessor processor : processors) {
-                ensureInitialized(processor);
-
                 processor.processLast();
             }
         }
     }
 
-    private void ensureInitialized(BindingsProcessor processor) {
-        if (!processor.isInitialized()) {
-            processor.init(environment);
+    private void ensureInitialized() {
+        if (!initialized) {
+            for (BindingsProcessor processor : processors) {
+                processor.init(environment);
+            }
+
+            initialized = true;
         }
     }
 }

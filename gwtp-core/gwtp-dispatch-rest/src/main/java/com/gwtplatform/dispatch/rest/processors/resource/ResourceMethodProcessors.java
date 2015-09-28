@@ -31,6 +31,7 @@ public class ResourceMethodProcessors {
     private static final String NO_PROCESSORS_FOUND = "Can not find a resource method processor for `%s`.";
 
     private static ServiceLoader<ResourceMethodProcessor> processors;
+    private static boolean initialized;
 
     private final ProcessingEnvironment environment;
     private final Logger logger;
@@ -56,10 +57,10 @@ public class ResourceMethodProcessors {
     }
 
     public CodeSnippet process(ResourceMethod context) {
+        ensureInitialized();
+
         for (ResourceMethodProcessor processor : processors) {
             if (processor.canProcess(context)) {
-                ensureInitialized(processor);
-
                 return processor.process(context);
             }
         }
@@ -69,16 +70,20 @@ public class ResourceMethodProcessors {
     }
 
     public void processLast() {
-        for (ResourceMethodProcessor processor : processors) {
-            ensureInitialized(processor);
+        ensureInitialized();
 
+        for (ResourceMethodProcessor processor : processors) {
             processor.processLast();
         }
     }
 
-    private void ensureInitialized(ResourceMethodProcessor processor) {
-        if (!processor.isInitialized()) {
-            processor.init(environment);
+    private void ensureInitialized() {
+        if (!initialized) {
+            for (ResourceMethodProcessor processor : processors) {
+                processor.init(environment);
+            }
+
+            initialized = true;
         }
     }
 }

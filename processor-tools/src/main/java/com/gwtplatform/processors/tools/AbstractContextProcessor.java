@@ -29,16 +29,12 @@ public abstract class AbstractContextProcessor<I, O> implements ContextProcessor
     protected Utils utils;
     protected Outputter outputter;
 
-    private boolean initialized;
-
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         this.processingEnv = processingEnv;
         this.logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
         this.utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
         this.outputter = new Outputter(logger, new Type(getClass()), processingEnv.getFiler(), getMacroFiles());
-
-        this.initialized = true;
     }
 
     protected String[] getMacroFiles() {
@@ -52,10 +48,5 @@ public abstract class AbstractContextProcessor<I, O> implements ContextProcessor
 
     @Override
     public void processLast() {
-    }
-
-    @Override
-    public final boolean isInitialized() {
-        return initialized;
     }
 }

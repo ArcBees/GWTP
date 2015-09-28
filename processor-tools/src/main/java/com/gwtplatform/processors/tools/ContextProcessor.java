@@ -21,8 +21,6 @@ import javax.annotation.processing.ProcessingEnvironment;
 public interface ContextProcessor<I, O> {
     void init(ProcessingEnvironment processingEnv);
 
-    boolean isInitialized();
-
     boolean canProcess(I context);
 
     O process(I context);
