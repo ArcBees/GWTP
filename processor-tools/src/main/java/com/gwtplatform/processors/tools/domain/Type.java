@@ -58,7 +58,7 @@ public class Type implements HasImports, Comparable<Type> {
     // TODO: I guess it's type to go with factory methods...
     public Type(TypeMirror type) {
         // void is not a primitive
-        if(type.getKind() == TypeKind.VOID) {
+        if (type.getKind() == TypeKind.VOID) {
             packageName = "";
             enclosingNames = "";
             simpleName = "void";
@@ -132,17 +132,32 @@ public class Type implements HasImports, Comparable<Type> {
     public Type(
             String packageName,
             String simpleName) {
-        this(packageName, simpleName, new ArrayList<Type>());
+        this(packageName, "", simpleName);
+    }
+
+    public Type(
+            String packageName,
+            String enclosingNames,
+            String simpleName) {
+        this(packageName, enclosingNames, simpleName, new ArrayList<Type>());
     }
 
     public Type(
             String packageName,
             String simpleName,
             List<Type> typeArguments) {
+        this(packageName, "", simpleName, typeArguments);
+    }
+
+    public Type(
+            String packageName,
+            String enclosingNames,
+            String simpleName,
+            List<Type> typeArguments) {
         this.packageName = packageName;
+        this.enclosingNames = enclosingNames;
         this.simpleName = simpleName;
         this.typeArguments = ImmutableList.copyOf(typeArguments);
-        this.enclosingNames = "";
     }
 
     public String getQualifiedName() {
@@ -168,6 +183,10 @@ public class Type implements HasImports, Comparable<Type> {
 
     public String getPackageName() {
         return packageName;
+    }
+
+    public String getEnclosingNames() {
+        return enclosingNames;
     }
 
     public String getSimpleName() {

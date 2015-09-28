@@ -31,6 +31,7 @@ import javax.lang.model.element.TypeElement;
 import javax.ws.rs.Path;
 
 import com.google.auto.service.AutoService;
+import com.gwtplatform.dispatch.rest.processors.resource.ResourcePostProcessors;
 import com.gwtplatform.dispatch.rest.processors.resource.RootResource;
 import com.gwtplatform.dispatch.rest.processors.resource.RootResourceFactory;
 import com.gwtplatform.dispatch.rest.processors.resource.RootResourceProcessor;
@@ -58,11 +59,12 @@ public class DispatchRestProcessor extends AbstractProcessor {
     private static final String UNRESOLVABLE_EXCEPTION = "Unresolvable exception. " + SEE_LOG;
 
     private Logger logger;
+    private GwtSourceFilter sourceFilter;
     private RootResource.Factory rootResourceFactory;
     private RootResourceProcessor resourceProcessor;
+    private ResourcePostProcessors resourcePostProcessors;
     private SerializationProcessors serializationProcessors;
     private BindingsProcessors bindingsProcessors;
-    private GwtSourceFilter sourceFilter;
 
     public DispatchRestProcessor() {
     }
@@ -74,11 +76,12 @@ public class DispatchRestProcessor extends AbstractProcessor {
         Utils utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
 
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
+        sourceFilter = new GwtSourceFilter(logger, utils);
         rootResourceFactory = new RootResourceFactory(logger, utils);
         resourceProcessor = new RootResourceProcessor(processingEnv);
+        resourcePostProcessors = new ResourcePostProcessors(logger, utils);
         serializationProcessors = new SerializationProcessors(processingEnv);
         bindingsProcessors = new BindingsProcessors(processingEnv);
-        sourceFilter = new GwtSourceFilter(logger, utils);
 
         initSourceFilter(processingEnv);
     }
@@ -129,6 +132,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
             RootResource resource = rootResourceFactory.create(element);
 
             resourceProcessor.process(resource);
+            resourcePostProcessors.process(resource);
         } catch (UnableToProcessException e) {
             logger.mandatoryWarning().context(element).log(UNABLE_TO_PROCESS_RESOURCE, DEBUG_OPTION);
         }
