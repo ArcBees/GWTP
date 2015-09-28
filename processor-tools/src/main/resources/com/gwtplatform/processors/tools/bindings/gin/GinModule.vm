@@ -3,6 +3,7 @@ package $impl.packageName;
 import javax.annotation.Generated;
 
 import com.google.gwt.inject.client.AbstractGinModule;
+import com.google.inject.TypeLiteral;
 
 #printImports($imports)
 

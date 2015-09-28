@@ -129,6 +129,10 @@ public class Type implements HasImports, Comparable<Type> {
         this(clazz.getPackage().getName(), clazz.getSimpleName());
     }
 
+    public Type(Class<?> clazz, List<Type> typeArguments) {
+        this(clazz.getPackage().getName(), clazz.getSimpleName(), typeArguments);
+    }
+
     public Type(
             String packageName,
             String simpleName) {

@@ -88,7 +88,7 @@ public class SubResourceMethod implements ResourceMethod {
         return subResource.get();
     }
 
-    public void createSubResource() {
+    private void createSubResource() {
         TypeElement returnTypeElement = asTypeElement(element.getReturnType());
 
         subResource = of(subResourceFactory.create(this, returnTypeElement));

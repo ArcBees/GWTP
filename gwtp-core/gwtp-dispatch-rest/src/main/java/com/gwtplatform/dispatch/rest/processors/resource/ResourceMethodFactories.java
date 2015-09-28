@@ -53,7 +53,7 @@ public class ResourceMethodFactories {
         }
     }
 
-    public ResourceMethod resolve(Resource resourceType, ExecutableElement element) {
+    public ResourceMethod create(Resource resourceType, ExecutableElement element) {
         for (ResourceMethodFactory<?> factory : factories) {
             if (factory.canCreate(element)) {
                 return factory.create(resourceType, element);

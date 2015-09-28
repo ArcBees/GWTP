@@ -64,7 +64,7 @@ public class ResourceUtils {
                 .transform(new Function<ExecutableElement, ResourceMethod>() {
                     @Override
                     public ResourceMethod apply(ExecutableElement element) {
-                        return resourceMethodFactories.resolve(resourceType, element);
+                        return resourceMethodFactories.create(resourceType, element);
                     }
                 })
                 .filter(Predicates.notNull())
