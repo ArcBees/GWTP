@@ -16,13 +16,14 @@
 
 package com.gwtplatform.dispatch.rest.processors.subresource;
 
-import javax.annotation.processing.ProcessingEnvironment;
-
 import com.google.auto.service.AutoService;
 import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessor;
+import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
+import com.gwtplatform.processors.tools.outputter.Outputter;
+import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.gwtplatform.dispatch.rest.processors.NameUtils.qualifiedMethodName;
 
@@ -38,10 +39,10 @@ public class SubResourceMethodProcessor extends DispatchRestContextProcessor<Res
     }
 
     @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
+    public synchronized void init(Logger logger, Utils utils, Outputter outputter) {
+        super.init(logger, utils, outputter);
 
-        subResourceProcessor.init(processingEnv);
+        subResourceProcessor.init(logger, utils, outputter);
     }
 
     @Override

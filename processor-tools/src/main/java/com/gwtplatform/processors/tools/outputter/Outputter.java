@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.annotation.processing.Filer;
+import javax.annotation.processing.Processor;
 import javax.tools.JavaFileObject;
 
 import org.apache.velocity.VelocityContext;
@@ -59,11 +60,11 @@ public class Outputter {
 
     public Outputter(
             Logger logger,
-            Type processor,
+            Processor processor,
             Filer filer,
             String... macroFiles) {
         this.logger = logger;
-        this.processor = processor;
+        this.processor = new Type(processor.getClass());
         this.filer = filer;
         this.macroFiles = FluentIterable.of(macroFiles).append(DEFAULT_MACRO_FILE).toList();
     }

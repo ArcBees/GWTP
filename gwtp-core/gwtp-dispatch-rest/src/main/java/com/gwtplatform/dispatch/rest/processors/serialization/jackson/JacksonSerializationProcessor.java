@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.rest.processors.serialization.jackson;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.annotation.processing.ProcessingEnvironment;
 import javax.inject.Singleton;
 import javax.tools.JavaFileObject;
 import javax.ws.rs.core.MediaType;
@@ -34,7 +33,10 @@ import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.processors.tools.bindings.BindingContext;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
+import com.gwtplatform.processors.tools.logger.Logger;
+import com.gwtplatform.processors.tools.outputter.Outputter;
 import com.gwtplatform.processors.tools.utils.Primitives;
+import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.gwtplatform.dispatch.rest.processors.NameUtils.REST_GIN_MODULE;
 import static com.gwtplatform.processors.tools.utils.Primitives.findByBoxed;
@@ -62,15 +64,15 @@ public class JacksonSerializationProcessor extends DispatchRestContextProcessor<
     }
 
     @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
+    public synchronized void init(Logger logger, Utils utils, Outputter outputter) {
+        super.init(logger, utils, outputter);
 
-        mapperProcessor.init(processingEnv);
+        mapperProcessor.init(logger, utils, outputter);
 
         sourceFile = outputter.prepareSourceFile(impl);
 
         BindingContext context = new BindingContext(REST_GIN_MODULE, impl, parent, Singleton.class);
-        new BindingsProcessors(processingEnv).process(context);
+        new BindingsProcessors(logger, utils, outputter).process(context);
     }
 
     @Override

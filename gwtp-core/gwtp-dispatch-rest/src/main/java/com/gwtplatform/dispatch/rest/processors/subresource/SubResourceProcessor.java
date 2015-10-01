@@ -18,12 +18,13 @@ package com.gwtplatform.dispatch.rest.processors.subresource;
 
 import java.util.List;
 
-import javax.annotation.processing.ProcessingEnvironment;
-
 import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
+import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
+import com.gwtplatform.processors.tools.outputter.Outputter;
+import com.gwtplatform.processors.tools.utils.Utils;
 
 public class SubResourceProcessor extends DispatchRestContextProcessor<SubResource, Void> {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/subresource/SubResource.vm";
@@ -31,10 +32,10 @@ public class SubResourceProcessor extends DispatchRestContextProcessor<SubResour
     private ResourceMethodProcessors methodProcessors;
 
     @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
+    public void init(Logger logger, Utils utils, Outputter outputter) {
+        super.init(logger, utils, outputter);
 
-        methodProcessors = new ResourceMethodProcessors(processingEnv);
+        methodProcessors = new ResourceMethodProcessors(logger, utils, outputter);
     }
 
     @Override

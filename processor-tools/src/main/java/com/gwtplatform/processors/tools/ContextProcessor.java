@@ -16,10 +16,12 @@
 
 package com.gwtplatform.processors.tools;
 
-import javax.annotation.processing.ProcessingEnvironment;
+import com.gwtplatform.processors.tools.logger.Logger;
+import com.gwtplatform.processors.tools.outputter.Outputter;
+import com.gwtplatform.processors.tools.utils.Utils;
 
 public interface ContextProcessor<I, O> {
-    void init(ProcessingEnvironment processingEnv);
+    void init(Logger logger, Utils utils, Outputter outputter);
 
     boolean canProcess(I context);
 

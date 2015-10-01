@@ -18,9 +18,9 @@ package com.gwtplatform.processors.tools.bindings;
 
 import java.util.ServiceLoader;
 
-import javax.annotation.processing.ProcessingEnvironment;
-
 import com.gwtplatform.processors.tools.logger.Logger;
+import com.gwtplatform.processors.tools.outputter.Outputter;
+import com.gwtplatform.processors.tools.utils.Utils;
 
 public class BindingsProcessors {
     private static final String NO_BINDING_POLICIES_FOUND = "Can not find a binding policy for `%s`.";
@@ -29,12 +29,17 @@ public class BindingsProcessors {
     private static boolean processedLast;
     private static boolean initialized;
 
-    private final ProcessingEnvironment environment;
     private final Logger logger;
+    private final Utils utils;
+    private final Outputter outputter;
 
-    public BindingsProcessors(ProcessingEnvironment environment) {
-        this.environment = environment;
-        this.logger = new Logger(environment.getMessager(), environment.getOptions());
+    public BindingsProcessors(
+            Logger logger,
+            Utils utils,
+            Outputter outputter) {
+        this.logger = logger;
+        this.utils = utils;
+        this.outputter = outputter;
 
         if (processors == null) {
             processors = ServiceLoader.load(BindingsProcessor.class, getClass().getClassLoader());
@@ -73,7 +78,7 @@ public class BindingsProcessors {
     private void ensureInitialized() {
         if (!initialized) {
             for (BindingsProcessor processor : processors) {
-                processor.init(environment);
+                processor.init(logger, utils, outputter);
             }
 
             initialized = true;

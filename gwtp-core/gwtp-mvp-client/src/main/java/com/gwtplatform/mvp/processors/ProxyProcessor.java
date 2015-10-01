@@ -72,10 +72,11 @@ public class ProxyProcessor extends AbstractProcessor {
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
-        outputter = new Outputter(logger, new Type(ProxyProcessor.class), processingEnv.getFiler());
+
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
         utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
-        bindingProcessors = new BindingsProcessors(processingEnv);
+        outputter = new Outputter(logger, this, processingEnv.getFiler());
+        bindingProcessors = new BindingsProcessors(logger, utils, outputter);
     }
 
     @Override

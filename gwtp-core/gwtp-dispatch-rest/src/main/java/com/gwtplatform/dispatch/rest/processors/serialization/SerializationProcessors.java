@@ -18,9 +18,9 @@ package com.gwtplatform.dispatch.rest.processors.serialization;
 
 import java.util.ServiceLoader;
 
-import javax.annotation.processing.ProcessingEnvironment;
-
 import com.gwtplatform.processors.tools.logger.Logger;
+import com.gwtplatform.processors.tools.outputter.Outputter;
+import com.gwtplatform.processors.tools.utils.Utils;
 
 public class SerializationProcessors {
     private static final String NO_SERIALIZATION_POLICIES_FOUND = "Can not find a serialization policy for `%s`.";
@@ -28,12 +28,17 @@ public class SerializationProcessors {
     private static ServiceLoader<SerializationProcessor> processors;
     private static boolean initialized;
 
-    private final ProcessingEnvironment environment;
     private final Logger logger;
+    private final Utils utils;
+    private final Outputter outputter;
 
-    public SerializationProcessors(ProcessingEnvironment environment) {
-        this.environment = environment;
-        this.logger = new Logger(environment.getMessager(), environment.getOptions());
+    public SerializationProcessors(
+            Logger logger,
+            Utils utils,
+            Outputter outputter) {
+        this.logger = logger;
+        this.utils = utils;
+        this.outputter = outputter;
 
         if (processors == null) {
             processors = ServiceLoader.load(SerializationProcessor.class, getClass().getClassLoader());
@@ -67,7 +72,7 @@ public class SerializationProcessors {
     private void ensureInitialized() {
         if (!initialized) {
             for (SerializationProcessor processor : processors) {
-                processor.init(environment);
+                processor.init(logger, utils, outputter);
             }
 
             initialized = true;

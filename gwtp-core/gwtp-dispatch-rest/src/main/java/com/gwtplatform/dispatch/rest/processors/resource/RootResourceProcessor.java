@@ -18,14 +18,16 @@ package com.gwtplatform.dispatch.rest.processors.resource;
 
 import java.util.List;
 
-import javax.annotation.processing.ProcessingEnvironment;
 import javax.inject.Singleton;
 
 import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
 import com.gwtplatform.processors.tools.bindings.BindingContext;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
+import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
+import com.gwtplatform.processors.tools.outputter.Outputter;
+import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.gwtplatform.dispatch.rest.processors.NameUtils.REST_GIN_MODULE;
 
@@ -35,16 +37,16 @@ public class RootResourceProcessor extends DispatchRestContextProcessor<RootReso
     private BindingsProcessors bindingsProcessors;
     private ResourceMethodProcessors methodProcessors;
 
-    public RootResourceProcessor(ProcessingEnvironment processingEnv) {
-        init(processingEnv);
+    public RootResourceProcessor(Logger logger, Utils utils, Outputter outputter) {
+        init(logger, utils, outputter);
     }
 
     @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
+    public void init(Logger logger, Utils utils, Outputter outputter) {
+        super.init(logger, utils, outputter);
 
-        bindingsProcessors = new BindingsProcessors(processingEnv);
-        methodProcessors = new ResourceMethodProcessors(processingEnv);
+        bindingsProcessors = new BindingsProcessors(logger, utils, outputter);
+        methodProcessors = new ResourceMethodProcessors(logger, utils, outputter);
     }
 
     @Override

@@ -27,7 +27,10 @@ import javax.tools.Diagnostic.Kind;
 import static java.lang.String.format;
 
 public class Logger {
-    public static final String DEBUG_OPTION = "debug";
+    public static final String DEBUG_OPTION = "gwtp.debug";
+
+    private static final String SEE_LOG =
+            "See previous log entries for details or compile with `-A" + DEBUG_OPTION + "` for additional details.";
 
     private final Messager messager;
     private final boolean debug;
@@ -100,6 +103,10 @@ public class Logger {
 
     void log(Kind kind, String message, Throwable throwable, Object[] arguments, Element element,
             AnnotationMirror annotationMirror, AnnotationValue annotationValue) {
+        if (!debug && (kind == Kind.ERROR || kind == Kind.MANDATORY_WARNING)) {
+            message += System.lineSeparator() + SEE_LOG;
+        }
+
         messager.printMessage(kind, format(message, arguments), element, annotationMirror, annotationValue);
 
         if (debug && throwable != null) {

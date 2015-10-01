@@ -40,6 +40,7 @@ import com.gwtplatform.processors.tools.GwtSourceFilter;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
+import com.gwtplatform.processors.tools.outputter.Outputter;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.MoreElements.isType;
@@ -50,21 +51,21 @@ import static com.gwtplatform.processors.tools.logger.Logger.DEBUG_OPTION;
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 @SupportedOptions({DEBUG_OPTION, GWT_MODULE_OPTION})
 public class DispatchRestProcessor extends AbstractProcessor {
-    static final String GWT_MODULE_OPTION = "gwt.module";
+    static final String GWT_MODULE_OPTION = "gwtp.module";
 
-    private static final String SEE_LOG =
-            "See previous log entries for details or compile with `-A" + DEBUG_OPTION + "` for additional details.";
-    private static final String UNABLE_TO_PROCESS_GENERAL = "Unable to process Rest-Dispatch classes. " + SEE_LOG;
-    private static final String UNABLE_TO_PROCESS_RESOURCE = "Unable to process resource. " + SEE_LOG;
-    private static final String UNRESOLVABLE_EXCEPTION = "Unresolvable exception. " + SEE_LOG;
+    private static final String UNABLE_TO_PROCESS_GENERAL = "Unable to process Rest-Dispatch classes.";
+    private static final String UNABLE_TO_PROCESS_RESOURCE = "Unable to process resource.";
+    private static final String UNRESOLVABLE_EXCEPTION = "Unresolvable exception.";
 
     private Logger logger;
+    private Utils utils;
     private GwtSourceFilter sourceFilter;
     private RootResource.Factory rootResourceFactory;
     private RootResourceProcessor resourceProcessor;
     private ResourcePostProcessors resourcePostProcessors;
     private SerializationProcessors serializationProcessors;
     private BindingsProcessors bindingsProcessors;
+    private Outputter outputter;
 
     public DispatchRestProcessor() {
     }
@@ -73,25 +74,38 @@ public class DispatchRestProcessor extends AbstractProcessor {
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
-        Utils utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
-
-        logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
-        sourceFilter = new GwtSourceFilter(logger, utils);
-        rootResourceFactory = new RootResourceFactory(logger, utils);
-        resourceProcessor = new RootResourceProcessor(processingEnv);
-        resourcePostProcessors = new ResourcePostProcessors(processingEnv);
-        serializationProcessors = new SerializationProcessors(processingEnv);
-        bindingsProcessors = new BindingsProcessors(processingEnv);
-
-        initSourceFilter(processingEnv);
+        initializeTools(processingEnv);
+        initializeDomainFactory();
+        initializeProcessors();
     }
 
-    private void initSourceFilter(ProcessingEnvironment processingEnv) {
+    private void initializeTools(ProcessingEnvironment processingEnv) {
+        logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
+        utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
+        outputter = new Outputter(logger, this, processingEnv.getFiler());
+        sourceFilter = createSourceFilter();
+    }
+
+    private GwtSourceFilter createSourceFilter() {
+        GwtSourceFilter filter = new GwtSourceFilter(logger, utils);
         String module = processingEnv.getOptions().get(GWT_MODULE_OPTION);
 
         if (module != null) {
-            sourceFilter.addModules(module.split(","));
+            filter.addModules(module.split(","));
         }
+
+        return filter;
+    }
+
+    private void initializeDomainFactory() {
+        rootResourceFactory = new RootResourceFactory(logger, utils);
+    }
+
+    private void initializeProcessors() {
+        resourceProcessor = new RootResourceProcessor(logger, utils, outputter);
+        resourcePostProcessors = new ResourcePostProcessors(logger, utils, outputter);
+        serializationProcessors = new SerializationProcessors(logger, utils, outputter);
+        bindingsProcessors = new BindingsProcessors(logger, utils, outputter);
     }
 
     @Override
@@ -105,7 +119,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
             Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(Path.class);
             elements = sourceFilter.filterElements(elements);
 
-            processPathElements(elements, roundEnv);
+            processVisibleElements(elements, roundEnv);
         } catch (UnableToProcessException e) {
             logger.error(UNABLE_TO_PROCESS_GENERAL);
         } catch (Exception e) {
@@ -115,7 +129,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
         return false;
     }
 
-    private void processPathElements(Set<? extends Element> elements, RoundEnvironment roundEnv) {
+    private void processVisibleElements(Set<? extends Element> elements, RoundEnvironment roundEnv) {
         for (Element element : elements) {
             if (isType(element)) {
                 process(element);
@@ -134,7 +148,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
             resourceProcessor.process(resource);
             resourcePostProcessors.process(resource);
         } catch (UnableToProcessException e) {
-            logger.mandatoryWarning().context(element).log(UNABLE_TO_PROCESS_RESOURCE, DEBUG_OPTION);
+            logger.mandatoryWarning().context(element).log(UNABLE_TO_PROCESS_RESOURCE);
         }
     }
 
