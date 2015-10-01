@@ -6,6 +6,7 @@
 
 #* @vtlvariable name="impl" type="com.gwtplatform.processors.tools.domain.Type" *#
 #* @vtlvariable name="processor" type="com.gwtplatform.processors.tools.domain.Type" *#
+#* @vtlvariable name="processingDate" type="java.lang.String" *#
 #* @vtlvariable name="imports" type="java.util.Collection<java.lang.String>" *#
 
 #* @vtlvariable name="parameters" type="java.util.List<com.gwtplatform.dispatch.rest.processors.details.Variable>" file="macros.vm" *#

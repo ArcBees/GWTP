@@ -8,7 +8,7 @@ import com.google.gwt.core.client.GWT;
 
 #printImports($imports)
 
-@Generated("$processor.qualifiedName")
+@Generated(value = "$processor.qualifiedName", date = "$processingDate")
 public class $impl.simpleName extends AbstractJacksonMapperProvider {
     ${impl.simpleName}() {
 #foreach ($mapper in $mappers)

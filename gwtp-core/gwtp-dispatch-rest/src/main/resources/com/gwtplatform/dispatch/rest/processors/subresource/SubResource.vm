@@ -5,7 +5,7 @@ import javax.annotation.Generated;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 #printImports($imports)
 
-@Generated(value = "$processor.qualifiedName")
+@Generated(value = "$processor.qualifiedName", date = "$processingDate")
 public class $impl.simpleName implements $subResourceType.parameterizedName {
     private final HttpParameterFactory httpParameterFactory;
     private final String defaultDateFormat;

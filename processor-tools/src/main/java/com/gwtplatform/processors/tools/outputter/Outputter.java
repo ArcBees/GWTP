@@ -19,8 +19,10 @@ package com.gwtplatform.processors.tools.outputter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -50,6 +52,7 @@ public class Outputter {
     private static final String PROPERTIES = "/com/gwtplatform/processors/tools/velocity.properties";
     private static final String DEFAULT_MACRO_FILE = "/com/gwtplatform/processors/tools/macros.vm";
     private static final String ENCODING = "UTF-8";
+    private static final SimpleDateFormat PROCESSING_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
     private final Logger logger;
     private final Type processor;
@@ -124,6 +127,7 @@ public class Outputter {
         }
 
         context.put("processor", builder.getProcessor());
+        context.put("processingDate", PROCESSING_DATE_FORMAT.format(new Date()));
         context.put("imports", imports);
 
         getEngine().mergeTemplate(builder.getTemplateFile(), ENCODING, context, writer);

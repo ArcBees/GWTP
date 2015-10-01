@@ -8,7 +8,7 @@ import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory
 
 #printImports($imports)
 
-@Generated("$processor.qualifiedName")
+@Generated(value = "$processor.qualifiedName", date = "$processingDate")
 public class $impl.parameterizedName implements $resource.parameterizedName {
     private final HttpParameterFactory httpParameterFactory;
     private final String defaultDateFormat;

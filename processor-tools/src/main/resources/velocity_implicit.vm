@@ -5,6 +5,7 @@
 
 #* @vtlvariable name="impl" type="com.gwtplatform.processors.tools.domain.Type" *#
 #* @vtlvariable name="processor" type="com.gwtplatform.processors.tools.domain.Type" *#
+#* @vtlvariable name="processingDate" type="java.lang.String" *#
 #* @vtlvariable name="imports" type="java.util.Collection<java.lang.String>" *#
 
 #* @vtlvariable name="bindings" type="java.util.Collection<com.gwtplatform.processors.tools.bindings.gin.GinBinding>" file="com/gwtplatform/processors/tools/bindings/gin/GinModule.vm" *#

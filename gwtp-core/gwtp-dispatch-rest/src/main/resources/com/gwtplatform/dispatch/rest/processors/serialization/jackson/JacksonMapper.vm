@@ -6,6 +6,6 @@ import com.github.nmorel.gwtjackson.client.ObjectMapper;
 
 #printImports($imports)
 
-@Generated("$processor.qualifiedName")
+@Generated(value = "$processor.qualifiedName", date = "$processingDate")
 public interface $impl.simpleName extends ObjectMapper<$mapped.parameterizedName> {
 }

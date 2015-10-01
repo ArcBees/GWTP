@@ -12,7 +12,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 #printImports($imports)
 
-@Generated("$processor.qualifiedName")
+@Generated(value = "$processor.qualifiedName", date = "$processingDate")
 public class $impl.parameterizedName extends AbstractRestAction<$endPoint.resultType.parameterizedName> {
     public ${impl.simpleName}(
             HttpParameterFactory httpParameterFactory,
