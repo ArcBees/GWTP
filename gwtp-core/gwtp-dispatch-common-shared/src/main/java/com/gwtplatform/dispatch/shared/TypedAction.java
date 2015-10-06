@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.shared;
 
-import java.io.Serializable;
-
 /**
  * An action with a result.
  * <p/>
@@ -25,5 +23,5 @@ import java.io.Serializable;
  *
  * @param <R> the result type for this action.
  */
-public interface TypedAction<R> extends Serializable {
+public interface TypedAction<R> {
 }

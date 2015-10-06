@@ -28,24 +28,24 @@ public class ActionResponseException extends RestActionException {
     public ActionResponseException() {
     }
 
-    public ActionResponseException(RestAction<?> action, Response response) {
-        this(action, response, response.getStatusText());
+    public ActionResponseException(Response response) {
+        this(response, response.getStatusText());
     }
 
-    public ActionResponseException(RestAction<?> action, Response response, String message) {
-        super(action, message);
+    public ActionResponseException(Response response, String message) {
+        super(message);
 
         unwrapResponse(response);
     }
 
-    public ActionResponseException(RestAction<?> action, Response response, String message, Throwable cause) {
-        super(action, message, cause);
+    public ActionResponseException(Response response, String message, Throwable cause) {
+        super(message, cause);
 
         unwrapResponse(response);
     }
 
-    public ActionResponseException(RestAction<?> action, Response response, Throwable cause) {
-        super(action, cause);
+    public ActionResponseException(Response response, Throwable cause) {
+        super(cause);
 
         unwrapResponse(response);
     }

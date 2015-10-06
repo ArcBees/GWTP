@@ -23,19 +23,19 @@ public class ActionDeserializationException extends ActionResponseException {
     public ActionDeserializationException() {
     }
 
-    public ActionDeserializationException(RestAction<?> action, Response response) {
-        super(action, response);
+    public ActionDeserializationException(Response response) {
+        super(response);
     }
 
-    public ActionDeserializationException(RestAction<?> action, Response response, String message) {
-        super(action, response, message);
+    public ActionDeserializationException(Response response, String message) {
+        super(response, message);
     }
 
-    public ActionDeserializationException(RestAction<?> action, Response response, String message, Throwable cause) {
-        super(action, response, message, cause);
+    public ActionDeserializationException(Response response, String message, Throwable cause) {
+        super(response, message, cause);
     }
 
-    public ActionDeserializationException(RestAction<?> action, Response response, Throwable cause) {
-        super(action, response, cause);
+    public ActionDeserializationException(Response response, Throwable cause) {
+        super(response, cause);
     }
 }

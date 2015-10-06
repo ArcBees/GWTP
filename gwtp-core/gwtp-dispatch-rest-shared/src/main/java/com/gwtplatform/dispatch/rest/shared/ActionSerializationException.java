@@ -21,15 +21,15 @@ public class ActionSerializationException extends RestActionException {
     public ActionSerializationException() {
     }
 
-    public ActionSerializationException(RestAction<?> action, String message) {
-        super(action, message);
+    public ActionSerializationException(String message) {
+        super(message);
     }
 
-    public ActionSerializationException(RestAction<?> action, String message, Throwable cause) {
-        super(action, message, cause);
+    public ActionSerializationException(String message, Throwable cause) {
+        super(message, cause);
     }
 
-    public ActionSerializationException(RestAction<?> action, Throwable cause) {
-        super(action, cause);
+    public ActionSerializationException(Throwable cause) {
+        super(cause);
     }
 }

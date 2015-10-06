@@ -23,24 +23,15 @@ public class RestActionException extends ActionException {
     public RestActionException() {
     }
 
-    public RestActionException(RestAction<?> action) {
-        super(action);
+    public RestActionException(String message) {
+        super(message);
     }
 
-    public RestActionException(RestAction<?> action, String message) {
-        super(action, message);
+    public RestActionException(String message, Throwable cause) {
+        super(message, cause);
     }
 
-    public RestActionException(RestAction<?> action, String message, Throwable cause) {
-        super(action, message, cause);
-    }
-
-    public RestActionException(RestAction<?> action, Throwable cause) {
-        super(action, cause);
-    }
-
-    @Override
-    public RestAction<?> getAction() {
-        return (RestAction<?>) super.getAction();
+    public RestActionException(Throwable cause) {
+        super(cause);
     }
 }

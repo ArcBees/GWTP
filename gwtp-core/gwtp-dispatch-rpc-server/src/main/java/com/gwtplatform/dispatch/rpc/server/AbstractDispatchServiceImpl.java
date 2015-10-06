@@ -128,7 +128,7 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
         } catch (ActionException e) {
             logger.warning("Action exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
 
-            throw new ActionException(action, e.getMessage());
+            throw new ActionException(e.getMessage());
         } catch (ServiceException e) {
             logger.warning("Service exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
 

@@ -30,7 +30,7 @@ public class HandlerThatThrowsActionException extends AbstractActionHandler<Some
 
     @Override
     public NoResult execute(SomeAction action, ExecutionContext context) throws ActionException {
-        throw new ActionExceptionThrownByHandler(action, new Exception());
+        throw new ActionExceptionThrownByHandler(new Exception());
     }
 
     @Override

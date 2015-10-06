@@ -22,7 +22,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
 public class ActionExceptionThrownByHandler extends ActionException {
     private static final long serialVersionUID = 1L;
 
-    public ActionExceptionThrownByHandler(TypedAction<?> action, Throwable cause) {
-        super(action, "", cause);
+    public ActionExceptionThrownByHandler(Throwable cause) {
+        super("", cause);
     }
 }

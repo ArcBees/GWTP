@@ -127,12 +127,12 @@ public class DefaultBodyFactory implements BodyFactory {
                 try {
                     return serialize(serialization, object, bodyClass, contentTypes);
                 } catch (SerializationException e) {
-                    throw new ActionSerializationException(action, e);
+                    throw new ActionSerializationException(e);
                 }
             }
         }
 
-        throw new ActionSerializationException(action,
+        throw new ActionSerializationException(
             "Unable to serialize request body. No serializer found.");
     }
 

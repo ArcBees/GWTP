@@ -50,7 +50,7 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
         if (isSuccessStatusCode(response)) {
             return getDeserializedResponse(action, response);
         } else {
-            throw new ActionResponseException(action, response);
+            throw new ActionResponseException(response);
         }
     }
 
@@ -104,12 +104,12 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
                 try {
                     return deserializeValue(serialization, resultClass, contentType, response.getText());
                 } catch (SerializationException e) {
-                    throw new ActionDeserializationException(action, response, e);
+                    throw new ActionDeserializationException(response, e);
                 }
             }
         }
 
-        throw new ActionDeserializationException(action, response,
+        throw new ActionDeserializationException(response,
             "Unable to deserialize response. No serializer found.");
     }
 
