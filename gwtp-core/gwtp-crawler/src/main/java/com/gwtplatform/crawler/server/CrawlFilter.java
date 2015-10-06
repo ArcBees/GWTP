@@ -152,7 +152,7 @@ public final class CrawlFilter implements Filter {
                 log.info("Crawl filter encountered escaped fragment, will open: " + pageName);
 
                 String serviceRequest = serviceUrl + "?key=" + URLEncoder.encode(key, CHAR_ENCODING)
-                    + "&url=" + URLEncoder.encode(pageName, CHAR_ENCODING);
+                                        + "&url=" + URLEncoder.encode(pageName, CHAR_ENCODING);
 
                 log.info("Full service request: " + serviceRequest);
 
