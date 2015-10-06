@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.crawlerservice.server.guice;
+package com.gwtplatform.crawlerservice.server;
 
 import java.util.logging.Logger;
 
@@ -24,16 +24,11 @@ import javax.inject.Singleton;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.inject.Inject;
 import com.googlecode.objectify.Key;
-import com.gwtplatform.crawlerservice.server.AbstractCrawlServiceServlet;
-import com.gwtplatform.crawlerservice.server.CachedPageTimeoutSec;
-import com.gwtplatform.crawlerservice.server.HtmlUnitTimeoutMillis;
-import com.gwtplatform.crawlerservice.server.ServiceKey;
 import com.gwtplatform.crawlerservice.server.domain.CachedPage;
 import com.gwtplatform.crawlerservice.server.service.CachedPageDao;
 
 /**
- * Servlet that makes it possible to fetch an external page,
- * renders it using HTMLUnit and returns the HTML page.
+ * Guice crawl servlet implementation.
  */
 @Singleton
 public class CrawlServiceServlet extends AbstractCrawlServiceServlet<CachedPage> {
