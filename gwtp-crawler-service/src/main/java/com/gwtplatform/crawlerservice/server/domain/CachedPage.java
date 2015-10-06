@@ -20,7 +20,7 @@ import java.util.Date;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
-import com.gwtplatform.crawlerservice.server.CrawledPage;
+import com.gwtplatform.crawler.server.CrawledPage;
 
 /**
  * Stores a cached version of a page.

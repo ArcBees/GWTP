@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.crawlerservice.server;
+package com.gwtplatform.crawler.server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.google.common.base.Strings;
 
 /**
  * Servlet that makes it possible to fetch an external page,
@@ -64,15 +63,17 @@ public abstract class AbstractCrawlServiceServlet<T extends CrawledPage> extends
         this.key = key;
     }
 
+    protected abstract WebClient getWebClient();
+
     protected abstract T createCrawledPage();
+
+    // Page cache operations
 
     protected abstract T getCachedPage(String url);
 
     protected abstract void saveCachedPage(T crawledPage);
 
     protected abstract void deleteCachedPage(T crawledPage);
-
-    protected abstract WebClient getWebClient();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -86,7 +87,7 @@ public abstract class AbstractCrawlServiceServlet<T extends CrawledPage> extends
             validateKey(request);
 
             String url = request.getParameter("url");
-            if (!Strings.isNullOrEmpty(url)) {
+            if (url != null && !url.isEmpty()) {
                 url = URLDecoder.decode(url, CHAR_ENCODING);
 
                 T crawledPage = getCachedPage(url);
@@ -117,7 +118,7 @@ public abstract class AbstractCrawlServiceServlet<T extends CrawledPage> extends
             throws InvalidKeyException, UnsupportedEncodingException {
         String receivedKey = request.getParameter("key");
 
-        if (Strings.isNullOrEmpty(receivedKey)) {
+        if (receivedKey == null || receivedKey.isEmpty()) {
             throw new InvalidKeyException("No service key attached to the request.");
         } else {
             String decodedKey = URLDecoder.decode(receivedKey, CHAR_ENCODING);

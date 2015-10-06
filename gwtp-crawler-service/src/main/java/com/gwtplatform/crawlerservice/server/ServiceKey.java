@@ -32,7 +32,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <pre>bindConstant().annotatedWith(ServiceKey.class).to("123456");
  * </pre>
  */
-
 @BindingAnnotation
 @Target({FIELD, PARAMETER, METHOD})
 @Retention(RUNTIME)

@@ -24,6 +24,7 @@ import javax.inject.Singleton;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.inject.Inject;
 import com.googlecode.objectify.Key;
+import com.gwtplatform.crawler.server.AbstractCrawlServiceServlet;
 import com.gwtplatform.crawlerservice.server.domain.CachedPage;
 import com.gwtplatform.crawlerservice.server.service.CachedPageDao;
 

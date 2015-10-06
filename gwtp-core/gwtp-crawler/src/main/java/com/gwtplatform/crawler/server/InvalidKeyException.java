@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2014 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,29 +14,12 @@
  * the License.
  */
 
-package com.gwtplatform.crawlerservice.server;
+package com.gwtplatform.crawler.server;
 
-import java.util.Date;
+public class InvalidKeyException extends Exception {
+    private static final long serialVersionUID = 1L;
 
-/**
- * Crawled page interface.
- */
-public interface CrawledPage {
-    void setUrl(String url);
-
-    String getUrl();
-
-    void setFetchDate(Date fetchDate);
-
-    Date getFetchDate();
-
-    void setFetchInProgress(boolean fetchInProgress);
-
-    boolean isFetchInProgress();
-
-    void setContent(String content);
-
-    String getContent();
-
-    boolean isExpired(long cachedPageTimeoutSec);
+    public InvalidKeyException(String message) {
+        super(message);
+    }
 }
