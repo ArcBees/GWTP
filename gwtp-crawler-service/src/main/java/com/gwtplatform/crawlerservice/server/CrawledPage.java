@@ -14,25 +14,29 @@
  * the License.
  */
 
-package com.gwtplatform.crawlerservice.server.guice;
+package com.gwtplatform.crawlerservice.server;
 
-import javax.inject.Singleton;
+import java.util.Date;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.google.inject.Provides;
-import com.google.inject.servlet.ServletModule;
+/**
+ * Crawled page interface.
+ */
+public interface CrawledPage {
+    void setUrl(String url);
 
-public class CrawlServiceModule extends ServletModule {
+    String getUrl();
 
-    @Override
-    public void configureServlets() {
-        serve("*").with(CrawlServiceServlet.class);
-    }
+    void setFetchDate(Date fetchDate);
 
-    @Singleton
-    @Provides
-    WebClient getWebClient() {
-        return new WebClient(BrowserVersion.FIREFOX_24);
-    }
+    Date getFetchDate();
+
+    void setFetchInProgress(boolean fetchInProgress);
+
+    boolean isFetchInProgress();
+
+    void setContent(String content);
+
+    String getContent();
+
+    boolean isExpired(long cachedPageTimeoutSec);
 }

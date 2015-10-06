@@ -20,6 +20,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import com.google.inject.BindingAnnotation;
+import com.gwtplatform.crawlerservice.server.guice.CrawlServiceServlet;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;

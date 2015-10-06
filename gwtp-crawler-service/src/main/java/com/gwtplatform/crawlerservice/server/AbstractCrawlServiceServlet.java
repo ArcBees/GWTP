@@ -26,8 +26,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-import javax.inject.Provider;
-import javax.inject.Singleton;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,16 +36,12 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.google.common.base.Strings;
-import com.google.inject.Inject;
-import com.googlecode.objectify.Key;
-import com.gwtplatform.crawlerservice.server.domain.CachedPage;
-import com.gwtplatform.crawlerservice.server.service.CachedPageDao;
 
 /**
- * Servlet that makes it possible to fetch an external page, renders it using HTMLUnit and returns the HTML page.
+ * Servlet that makes it possible to fetch an external page,
+ * renders it using HTMLUnit and returns the HTML page.
  */
-@Singleton
-public class CrawlServiceServlet extends HttpServlet {
+public abstract class AbstractCrawlServiceServlet<T extends CrawledPage> extends HttpServlet {
 
     private static class SyncAllAjaxController extends NicelyResynchronizingAjaxController {
         private static final long serialVersionUID = 1L;
@@ -58,39 +52,27 @@ public class CrawlServiceServlet extends HttpServlet {
         }
     }
 
-    private static final String CHAR_ENCODING = "UTF-8";
+    protected static final String CHAR_ENCODING = "UTF-8";
 
     private static final long serialVersionUID = -6129110224710383122L;
 
-    @Inject(optional = true)
-    @HtmlUnitTimeoutMillis
-    private final long timeoutMillis = 5000;
-    private final long jsTimeoutMillis = 2000;
-    private final long pageWaitMillis = 100;
-    private final long maxLoopChecks = 2;
+    protected final Logger log;
+    protected final String key;
 
-    @Inject(optional = true)
-    @CachedPageTimeoutSec
-    private final long cachedPageTimeoutSec = 15 * 60;
-
-    private final Logger log;
-    private final Provider<WebClient> webClientProvider;
-
-    private final String key;
-
-    private final CachedPageDao cachedPageDao;
-
-    @Inject
-    protected CrawlServiceServlet(
-            Provider<WebClient> webClientProvider,
-            Logger log,
-            CachedPageDao cachedPageDao,
-            @ServiceKey String key) {
-        this.webClientProvider = webClientProvider;
+    protected AbstractCrawlServiceServlet(Logger log, String key) {
         this.log = log;
         this.key = key;
-        this.cachedPageDao = cachedPageDao;
     }
+
+    protected abstract T createCrawledPage();
+
+    protected abstract T getCachedPage(String url);
+
+    protected abstract void saveCachedPage(T crawledPage);
+
+    protected abstract void deleteCachedPage(T crawledPage);
+
+    protected abstract WebClient getWebClient();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -107,14 +89,14 @@ public class CrawlServiceServlet extends HttpServlet {
             if (!Strings.isNullOrEmpty(url)) {
                 url = URLDecoder.decode(url, CHAR_ENCODING);
 
-                CachedPage cachedPage = cachedPageDao.get(Key.create(CachedPage.class, url));
+                T crawledPage = getCachedPage(url);
 
                 Date currDate = new Date();
 
-                if (needToFetchPage(cachedPage, currDate, out)) {
-                    cachedPage = createPlaceholderPage(url, currDate);
+                if (needToFetchPage(crawledPage, currDate, out)) {
+                    crawledPage = createPlaceholderPage(url, currDate);
                     String renderedHtml = renderPage(url);
-                    storeFetchedPage(cachedPage, renderedHtml);
+                    storeFetchedPage(crawledPage, renderedHtml);
                     out.println(renderedHtml);
                 }
             }
@@ -146,10 +128,10 @@ public class CrawlServiceServlet extends HttpServlet {
         }
     }
 
-    private void storeFetchedPage(CachedPage cachedPage, String stringBuilder) {
-        cachedPage.setContent(stringBuilder);
-        cachedPage.setFetchInProgress(false);
-        cachedPageDao.put(cachedPage);
+    private void storeFetchedPage(T crawledPage, String stringBuilder) {
+        crawledPage.setContent(stringBuilder);
+        crawledPage.setFetchInProgress(false);
+        saveCachedPage(crawledPage);
     }
 
     /**
@@ -161,15 +143,15 @@ public class CrawlServiceServlet extends HttpServlet {
      * @param out          The {@link PrintWriter} to write to, if needed.
      * @return {@code true} if the page needs to be fetched, {@code false} otherwise.
      */
-    private boolean needToFetchPage(CachedPage matchingPage, Date currDate, PrintWriter out) {
-        if (matchingPage == null || matchingPage.isExpired(cachedPageTimeoutSec)) {
+    private boolean needToFetchPage(T matchingPage, Date currDate, PrintWriter out) {
+        if (matchingPage == null || matchingPage.isExpired(getCachedPageTimeoutSec())) {
             return true;
         }
 
         if (matchingPage.isFetchInProgress()) {
             // If fetch is in progress since more than 60 seconds, we consider something went wrong and fetch again.
             if (currDate.getTime() > matchingPage.getFetchDate().getTime() + 60000) {
-                cachedPageDao.delete(matchingPage);
+                deleteCachedPage(matchingPage);
                 return true;
             } else {
                 out.println("FETCH_IN_PROGRESS");
@@ -188,12 +170,12 @@ public class CrawlServiceServlet extends HttpServlet {
      * @param currDate The current date, to mark the page.
      * @return The newly created placeholder page.
      */
-    private CachedPage createPlaceholderPage(String url, Date currDate) {
-        CachedPage result = new CachedPage();
+    private T createPlaceholderPage(String url, Date currDate) {
+        T result = createCrawledPage();
         result.setUrl(url);
         result.setFetchDate(currDate);
         result.setFetchInProgress(true);
-        cachedPageDao.put(result);
+        saveCachedPage(result);
         return result;
     }
 
@@ -205,7 +187,7 @@ public class CrawlServiceServlet extends HttpServlet {
      * @return The rendered page, in a {@link StringBuilder}.
      */
     private String renderPage(String url) throws IOException {
-        WebClient webClient = webClientProvider.get();
+        WebClient webClient = getWebClient();
 
         webClient.getCache().clear();
         webClient.getOptions().setCssEnabled(false);
@@ -218,12 +200,13 @@ public class CrawlServiceServlet extends HttpServlet {
 
         WebRequest webRequest = new WebRequest(new URL(url), "text/html");
         HtmlPage page = webClient.getPage(webRequest);
-        webClient.getJavaScriptEngine().pumpEventLoop(timeoutMillis);
+        webClient.getJavaScriptEngine().pumpEventLoop(getTimeoutMillis());
 
+        long jsTimeoutMillis = getJsTimeoutMillis();
         int waitForBackgroundJavaScript = webClient.waitForBackgroundJavaScript(jsTimeoutMillis);
         int loopCount = 0;
 
-        while (waitForBackgroundJavaScript > 0 && loopCount < maxLoopChecks) {
+        while (waitForBackgroundJavaScript > 0 && loopCount < getMaxLoopChecks()) {
             ++loopCount;
             waitForBackgroundJavaScript = webClient.waitForBackgroundJavaScript(jsTimeoutMillis);
 
@@ -235,7 +218,7 @@ public class CrawlServiceServlet extends HttpServlet {
             synchronized (page) {
                 log.fine("HtmlUnit waits for background javascript at loop counter " + loopCount);
                 try {
-                    page.wait(pageWaitMillis);
+                    page.wait(getPageWaitMillis());
                 } catch (InterruptedException e) {
                     log.log(Level.SEVERE, "HtmlUnit ERROR on page.wait at loop counter " + loopCount, e);
                 }
@@ -247,5 +230,41 @@ public class CrawlServiceServlet extends HttpServlet {
         return Pattern.compile("<style>.*?</style>", Pattern.DOTALL)
                 .matcher(page.asXml().replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", ""))
                 .replaceAll("");
+    }
+
+    /**
+     * The HTML Unit Timeout in milliseconds.
+     */
+    public long getTimeoutMillis() {
+        return 5000;
+    }
+
+    /**
+     * The JavaScript load timeout in milliseconds.
+     */
+    public long getJsTimeoutMillis() {
+        return 2000;
+    }
+
+    /**
+     * Max page wait time in milliseconds.
+     */
+    public long getPageWaitMillis() {
+        return 100;
+    }
+
+    /**
+     * Max loop check value.
+     */
+    public long getMaxLoopChecks() {
+        return 2;
+    }
+
+    /**
+     * Cache timeout period before {@link CrawledPage}'s are invalidated.
+     * @return timeout period in seconds.
+     */
+    public long getCachedPageTimeoutSec() {
+        return 15 * 60;
     }
 }
