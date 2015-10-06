@@ -17,7 +17,6 @@
 package com.gwtplatform.dispatch.rpc.server;
 
 import com.gwtplatform.dispatch.shared.ActionException;
-import com.gwtplatform.dispatch.shared.TypedAction;
 
 public class ActionExceptionThrownByHandler extends ActionException {
     private static final long serialVersionUID = 1L;
