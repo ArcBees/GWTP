@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.crawler.server;
+package com.gwtplatform.crawler.server.guice;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

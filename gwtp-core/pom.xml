@@ -29,6 +29,8 @@
         <module>gwtp-tester</module>
         <module>gwtp-processors</module>
         <module>gwtp-crawler</module>
+        <module>gwtp-crawler-guice</module>
+        <module>gwtp-crawler-spring</module>
         <module>gwtp-all</module>
     </modules>
 

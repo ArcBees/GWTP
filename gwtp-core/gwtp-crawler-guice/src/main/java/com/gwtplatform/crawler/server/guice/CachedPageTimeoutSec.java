@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.crawlerservice.server;
+package com.gwtplatform.crawler.server.guice;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -35,5 +35,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @BindingAnnotation
 @Target({FIELD, PARAMETER, METHOD})
 @Retention(RUNTIME)
-public @interface HtmlUnitTimeoutMillis {
+public @interface CachedPageTimeoutSec {
 }

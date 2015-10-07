@@ -82,7 +82,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>gwtp-crawler</artifactId>
+            <artifactId>gwtp-crawler-guice</artifactId>
             <version>${project.version}</version>
         </dependency>
 

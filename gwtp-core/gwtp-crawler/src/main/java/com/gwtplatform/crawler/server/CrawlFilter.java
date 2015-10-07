@@ -28,8 +28,6 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.logging.Logger;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -40,10 +38,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet that makes this application crawlable.
+ * Servlet filter that makes this application crawlable.
  */
-@Singleton
-public final class CrawlFilter implements Filter {
+public class CrawlFilter implements Filter {
     private static final String CHAR_ENCODING = "UTF-8";
 
     /**
@@ -64,10 +61,7 @@ public final class CrawlFilter implements Filter {
     private final String key;
     private final Logger log;
 
-    @Inject
-    CrawlFilter(@ServiceUrl String serviceUrl,
-                @ServiceKey String key,
-                Logger log) {
+    protected CrawlFilter(String serviceUrl, String key, Logger log) {
         this.serviceUrl = serviceUrl;
         this.key = key;
         this.log = log;
@@ -201,5 +195,13 @@ public final class CrawlFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    public String getServiceUrl() {
+        return serviceUrl;
+    }
+
+    public String getKey() {
+        return key;
     }
 }

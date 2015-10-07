@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.crawlerservice.server;
+package com.gwtplatform.crawler.server.guice;
 
 import java.util.logging.Logger;
 
@@ -23,16 +23,14 @@ import javax.inject.Singleton;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.inject.Inject;
-import com.googlecode.objectify.Key;
 import com.gwtplatform.crawler.server.AbstractCrawlServiceServlet;
-import com.gwtplatform.crawlerservice.server.domain.CachedPage;
-import com.gwtplatform.crawlerservice.server.service.CachedPageDao;
+import com.gwtplatform.crawler.server.CrawlCacheService;
 
 /**
- * Guice crawl servlet implementation.
+ * Guice Crawl Service Servlet.
  */
 @Singleton
-public class CrawlServiceServlet extends AbstractCrawlServiceServlet<CachedPage> {
+public class CrawlServiceServlet extends AbstractCrawlServiceServlet {
 
     @Inject(optional = true)
     @HtmlUnitTimeoutMillis
@@ -44,38 +42,15 @@ public class CrawlServiceServlet extends AbstractCrawlServiceServlet<CachedPage>
 
     private final Provider<WebClient> webClientProvider;
 
-    private final CachedPageDao cachedPageDao;
-
     @Inject
     protected CrawlServiceServlet(
             Provider<WebClient> webClientProvider,
             Logger log,
-            CachedPageDao cachedPageDao,
+            CrawlCacheService crawlCacheService,
             @ServiceKey String key) {
-        super(log, key);
+        super(log, key, crawlCacheService);
 
         this.webClientProvider = webClientProvider;
-        this.cachedPageDao = cachedPageDao;
-    }
-
-    @Override
-    protected CachedPage createCrawledPage() {
-        return new CachedPage();
-    }
-
-    @Override
-    protected CachedPage getCachedPage(String url) {
-        return cachedPageDao.get(Key.create(CachedPage.class, url));
-    }
-
-    @Override
-    protected void saveCachedPage(CachedPage cachedPage) {
-        cachedPageDao.put(cachedPage);
-    }
-
-    @Override
-    protected void deleteCachedPage(CachedPage cachedPage) {
-        cachedPageDao.delete(cachedPage);
     }
 
     @Override

@@ -22,12 +22,16 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.inject.Provides;
 import com.google.inject.servlet.ServletModule;
-import com.gwtplatform.crawlerservice.server.CrawlServiceServlet;
+import com.gwtplatform.crawler.server.CrawlCacheService;
+import com.gwtplatform.crawler.server.guice.CrawlServiceServlet;
+import com.gwtplatform.crawlerservice.server.OfyCrawlCacheService;
 
 public class CrawlServiceModule extends ServletModule {
 
     @Override
     public void configureServlets() {
+        bind(CrawlCacheService.class).to(OfyCrawlCacheService.class);
+
         serve("*").with(CrawlServiceServlet.class);
     }
 

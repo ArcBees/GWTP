@@ -40,7 +40,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  * Servlet that makes it possible to fetch an external page,
  * renders it using HTMLUnit and returns the HTML page.
  */
-public abstract class AbstractCrawlServiceServlet<T extends CrawledPage> extends HttpServlet {
+@SuppressWarnings("unchecked")
+public abstract class AbstractCrawlServiceServlet extends HttpServlet {
 
     private static class SyncAllAjaxController extends NicelyResynchronizingAjaxController {
         private static final long serialVersionUID = 1L;
@@ -51,6 +52,24 @@ public abstract class AbstractCrawlServiceServlet<T extends CrawledPage> extends
         }
     }
 
+    static class DummyCrawlCacheService implements CrawlCacheService {
+        @Override
+        public CrawledPage createCrawledPage() {
+            return new DefaultCrawledPage();
+        }
+
+        @Override
+        public CrawledPage getCachedPage(String url) {
+            return null;
+        }
+
+        @Override
+        public void saveCachedPage(CrawledPage crawledPage) { }
+
+        @Override
+        public void deleteCachedPage(CrawledPage crawledPage) { }
+    }
+
     protected static final String CHAR_ENCODING = "UTF-8";
 
     private static final long serialVersionUID = -6129110224710383122L;
@@ -58,22 +77,24 @@ public abstract class AbstractCrawlServiceServlet<T extends CrawledPage> extends
     protected final Logger log;
     protected final String key;
 
-    protected AbstractCrawlServiceServlet(Logger log, String key) {
+    private final CrawlCacheService cacheService;
+
+    public AbstractCrawlServiceServlet(
+            Logger log,
+            String key) {
+        this(log, key, new DummyCrawlCacheService());
+    }
+
+    public AbstractCrawlServiceServlet(
+            Logger log,
+            String key,
+            CrawlCacheService cacheService) {
         this.log = log;
         this.key = key;
+        this.cacheService = cacheService;
     }
 
     protected abstract WebClient getWebClient();
-
-    protected abstract T createCrawledPage();
-
-    // Page cache operations
-
-    protected abstract T getCachedPage(String url);
-
-    protected abstract void saveCachedPage(T crawledPage);
-
-    protected abstract void deleteCachedPage(T crawledPage);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -90,7 +111,7 @@ public abstract class AbstractCrawlServiceServlet<T extends CrawledPage> extends
             if (url != null && !url.isEmpty()) {
                 url = URLDecoder.decode(url, CHAR_ENCODING);
 
-                T crawledPage = getCachedPage(url);
+                CrawledPage crawledPage = cacheService.getCachedPage(url);
 
                 Date currDate = new Date();
 
@@ -129,10 +150,10 @@ public abstract class AbstractCrawlServiceServlet<T extends CrawledPage> extends
         }
     }
 
-    private void storeFetchedPage(T crawledPage, String stringBuilder) {
+    private void storeFetchedPage(CrawledPage crawledPage, String stringBuilder) {
         crawledPage.setContent(stringBuilder);
         crawledPage.setFetchInProgress(false);
-        saveCachedPage(crawledPage);
+        cacheService.saveCachedPage(crawledPage);
     }
 
     /**
@@ -144,7 +165,7 @@ public abstract class AbstractCrawlServiceServlet<T extends CrawledPage> extends
      * @param out          The {@link PrintWriter} to write to, if needed.
      * @return {@code true} if the page needs to be fetched, {@code false} otherwise.
      */
-    private boolean needToFetchPage(T matchingPage, Date currDate, PrintWriter out) {
+    private boolean needToFetchPage(CrawledPage matchingPage, Date currDate, PrintWriter out) {
         if (matchingPage == null || matchingPage.isExpired(getCachedPageTimeoutSec())) {
             return true;
         }
@@ -152,7 +173,7 @@ public abstract class AbstractCrawlServiceServlet<T extends CrawledPage> extends
         if (matchingPage.isFetchInProgress()) {
             // If fetch is in progress since more than 60 seconds, we consider something went wrong and fetch again.
             if (currDate.getTime() > matchingPage.getFetchDate().getTime() + 60000) {
-                deleteCachedPage(matchingPage);
+                cacheService.deleteCachedPage(matchingPage);
                 return true;
             } else {
                 out.println("FETCH_IN_PROGRESS");
@@ -171,12 +192,12 @@ public abstract class AbstractCrawlServiceServlet<T extends CrawledPage> extends
      * @param currDate The current date, to mark the page.
      * @return The newly created placeholder page.
      */
-    private T createPlaceholderPage(String url, Date currDate) {
-        T result = createCrawledPage();
+    private CrawledPage createPlaceholderPage(String url, Date currDate) {
+        CrawledPage result = cacheService.createCrawledPage();
         result.setUrl(url);
         result.setFetchDate(currDate);
         result.setFetchInProgress(true);
-        saveCachedPage(result);
+        cacheService.saveCachedPage(result);
         return result;
     }
 
