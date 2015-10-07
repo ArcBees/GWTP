@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,6 +18,7 @@ package com.gwtplatform.crawler.server;
 
 /**
  * Crawl cache service interface.
+ * @author Ben Dol
  */
 public interface CrawlCacheService<T extends CrawledPage> {
 

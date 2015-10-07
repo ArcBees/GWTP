@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,7 +23,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.gwtplatform.crawler.server.spring.filter.AbstractCrawlFilterModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -76,6 +75,7 @@ import com.gwtplatform.crawler.server.CrawledPage;
  *   servletContext.addServlet("crawlServiceServlet", new HttpRequestHandlerServlet()).addMapping("/*");
  * </pre>
  *
+ * @author Ben Dol
  */
 @Component
 public class CrawlServiceServlet extends AbstractCrawlServiceServlet implements HttpRequestHandler {

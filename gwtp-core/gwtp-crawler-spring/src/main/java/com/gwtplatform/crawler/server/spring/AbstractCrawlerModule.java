@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Bean;
 
 /**
  * Abstract crawler module for {@link @Configuration} setup.
+ * @author Ben Dol
  */
 public abstract class AbstractCrawlerModule {
     @Bean

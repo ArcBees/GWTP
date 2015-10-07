@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,6 +16,10 @@
 
 package com.gwtplatform.crawler.server;
 
+/**
+ * Default crawl cache service implementation.
+ * @author Ben Dol
+ */
 public class DefaultCrawlCacheService implements CrawlCacheService<DefaultCrawledPage> {
     @Override
     public DefaultCrawledPage createCrawledPage() {

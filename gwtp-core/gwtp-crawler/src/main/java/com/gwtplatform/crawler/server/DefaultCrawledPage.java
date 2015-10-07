@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,6 +20,7 @@ import java.util.Date;
 
 /**
  * Default crawled page implementation.
+ * @author Ben Dol
  */
 public class DefaultCrawledPage implements CrawledPage {
     private String url;
