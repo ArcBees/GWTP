@@ -52,24 +52,6 @@ public abstract class AbstractCrawlServiceServlet extends HttpServlet {
         }
     }
 
-    static class DummyCrawlCacheService implements CrawlCacheService {
-        @Override
-        public CrawledPage createCrawledPage() {
-            return new DefaultCrawledPage();
-        }
-
-        @Override
-        public CrawledPage getCachedPage(String url) {
-            return null;
-        }
-
-        @Override
-        public void saveCachedPage(CrawledPage crawledPage) { }
-
-        @Override
-        public void deleteCachedPage(CrawledPage crawledPage) { }
-    }
-
     protected static final String CHAR_ENCODING = "UTF-8";
 
     private static final long serialVersionUID = -6129110224710383122L;
@@ -82,7 +64,7 @@ public abstract class AbstractCrawlServiceServlet extends HttpServlet {
     public AbstractCrawlServiceServlet(
             Logger log,
             String key) {
-        this(log, key, new DummyCrawlCacheService());
+        this(log, key, null);
     }
 
     public AbstractCrawlServiceServlet(
@@ -91,7 +73,12 @@ public abstract class AbstractCrawlServiceServlet extends HttpServlet {
             CrawlCacheService cacheService) {
         this.log = log;
         this.key = key;
-        this.cacheService = cacheService;
+
+        if(cacheService != null) {
+            this.cacheService = cacheService;
+        } else {
+            this.cacheService = new DefaultCrawlCacheService();
+        }
     }
 
     protected abstract WebClient getWebClient();
