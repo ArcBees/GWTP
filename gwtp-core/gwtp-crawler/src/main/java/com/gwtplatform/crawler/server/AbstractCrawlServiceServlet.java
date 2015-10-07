@@ -74,7 +74,7 @@ public abstract class AbstractCrawlServiceServlet extends HttpServlet {
         this.log = log;
         this.key = key;
 
-        if(cacheService != null) {
+        if (cacheService != null) {
             this.cacheService = cacheService;
         } else {
             this.cacheService = new DefaultCrawlCacheService();
