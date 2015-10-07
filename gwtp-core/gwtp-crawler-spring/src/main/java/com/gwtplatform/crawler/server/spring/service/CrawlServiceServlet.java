@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.crawler.server.spring;
+package com.gwtplatform.crawler.server.spring.service;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -23,6 +23,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gwtplatform.crawler.server.spring.filter.AbstractCrawlFilterModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -35,18 +36,20 @@ import com.gwtplatform.crawler.server.CrawlCacheService;
 import com.gwtplatform.crawler.server.CrawledPage;
 
 /**
- * Spring Crawl Service Servlet.<br>
+ * Spring Crawl Service Servlet.<br/>
  * Required bean dependencies are:
  * <ul>
  *     <li>webClient ({@link WebClient}): HTML Unit virtual web client.</li>
  *     <li>crawlCacheService ({@link CrawlCacheService}): Crawled page cache service.</li>
  *     <li>crawlKey (String): Unique key for the crawler service.</li>
- *     <li>logger (Logger): Logger for the crawl filter.</li>
+ *     <li>crawlLogger (Logger): Logger for the crawl filter.</li>
  *     <li>timeoutMillis (long:5000): The HTML Unit Timeout in milliseconds.</li>
  *     <li>cachedPageTimeoutSec (long:900): Cache timeout period before {@link CrawledPage}'s are invalidated.</li>
  * </ul>
- *
- * Register in web.xml like so:
+ * Extend the {@link AbstractCrawlServiceModule} with
+ * {@link org.springframework.beans.factory.annotation.Configurable} class.
+ * <br/>
+ * Then register in web.xml like so:
  * <pre>
  * {@code
  *  <-- First ensure you have the ContextLoaderListener -->
@@ -90,8 +93,8 @@ public class CrawlServiceServlet extends AbstractCrawlServiceServlet implements 
             WebClient webClient,
             CrawlCacheService crawlCacheService,
             String crawlKey,
-            Logger logger) {
-        super(logger, crawlKey, crawlCacheService);
+            Logger crawlLogger) {
+        super(crawlLogger, crawlKey, crawlCacheService);
 
         this.webClient = webClient;
     }

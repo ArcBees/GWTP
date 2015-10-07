@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.crawler.server.guice;
+package com.gwtplatform.crawler.server.guice.service;
 
 import java.util.logging.Logger;
 
@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.inject.Inject;
 import com.gwtplatform.crawler.server.AbstractCrawlServiceServlet;
 import com.gwtplatform.crawler.server.CrawlCacheService;
+import com.gwtplatform.crawler.server.guice.ServiceKey;
 
 /**
  * Guice Crawl Service Servlet.

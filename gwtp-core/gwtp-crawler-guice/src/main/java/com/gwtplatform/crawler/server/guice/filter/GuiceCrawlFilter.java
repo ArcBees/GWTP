@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.crawler.server.guice;
+package com.gwtplatform.crawler.server.guice.filter;
 
 import java.util.logging.Logger;
 
@@ -22,6 +22,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.gwtplatform.crawler.server.CrawlFilter;
+import com.gwtplatform.crawler.server.guice.ServiceKey;
 
 /**
  * Guice implementation for the {@link CrawlFilter}.

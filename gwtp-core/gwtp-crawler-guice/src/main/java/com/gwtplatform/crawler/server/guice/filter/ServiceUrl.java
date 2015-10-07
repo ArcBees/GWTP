@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.crawler.server.guice;
+package com.gwtplatform.crawler.server.guice.filter;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -27,13 +27,14 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Use this annotation to indicate how long HtmlUnit should pump the javascript
- * event loop before timing out. Use in your
- * {@link com.google.inject.AbstractModule} with a call to
- * {@code bindConstant().annotatedWith(HtmlUnitTimeout.class).to(10000)}.
+ * Use this annotation to bind the URL that should be used for the crawl service.
+ * For example:
+ * <pre>bindConstant().annotatedWith(ServiceUrl).to("http://mycrawlservice.com");
+ * </pre>
  */
+
 @BindingAnnotation
 @Target({FIELD, PARAMETER, METHOD})
 @Retention(RUNTIME)
-public @interface CachedPageTimeoutSec {
+public @interface ServiceUrl {
 }

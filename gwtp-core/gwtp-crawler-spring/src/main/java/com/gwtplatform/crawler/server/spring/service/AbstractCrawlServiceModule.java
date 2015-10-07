@@ -14,30 +14,30 @@
  * the License.
  */
 
-package com.gwtplatform.crawlerservice.server.guice;
+package com.gwtplatform.crawler.server.spring.service;
 
-import javax.inject.Singleton;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.google.inject.Provides;
-import com.google.inject.servlet.ServletModule;
 import com.gwtplatform.crawler.server.CrawlCacheService;
-import com.gwtplatform.crawler.server.guice.service.CrawlServiceServlet;
-import com.gwtplatform.crawlerservice.server.OfyCrawlCacheService;
+import com.gwtplatform.crawler.server.DefaultCrawlCacheService;
 
-public class CrawlServiceModule extends ServletModule {
-
-    @Override
-    public void configureServlets() {
-        bind(CrawlCacheService.class).to(OfyCrawlCacheService.class);
-
-        serve("*").with(CrawlServiceServlet.class);
+/**
+ * Abstract crawl service module for {@link @Configuration} setup.
+ */
+@ComponentScan(basePackages = {
+        "com.gwtplatform.crawler.server.spring.service"
+        })
+public abstract class AbstractCrawlServiceModule {
+    @Bean
+    protected WebClient webClient() {
+        return new WebClient(BrowserVersion.CHROME);
     }
 
-    @Singleton
-    @Provides
-    WebClient getWebClient() {
-        return new WebClient(BrowserVersion.FIREFOX_24);
+    @Bean
+    protected CrawlCacheService crawlCacheService() {
+        return new DefaultCrawlCacheService();
     }
 }
