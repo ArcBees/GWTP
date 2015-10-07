@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gwtplatform.crawler.server.CrawlCacheService;
 import com.gwtplatform.crawler.server.DefaultCrawlCacheService;
+import com.gwtplatform.crawler.server.spring.AbstractCrawlerModule;
 
 /**
  * Abstract crawl service module for {@link @Configuration} setup.
@@ -31,7 +32,7 @@ import com.gwtplatform.crawler.server.DefaultCrawlCacheService;
 @ComponentScan(basePackages = {
         "com.gwtplatform.crawler.server.spring.service"
         })
-public abstract class AbstractCrawlServiceModule {
+public abstract class AbstractCrawlServiceModule extends AbstractCrawlerModule {
     @Bean
     protected WebClient webClient() {
         return new WebClient(BrowserVersion.CHROME);
