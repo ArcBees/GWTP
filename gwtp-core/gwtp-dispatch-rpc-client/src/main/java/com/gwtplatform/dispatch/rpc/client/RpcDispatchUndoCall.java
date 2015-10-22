@@ -114,9 +114,6 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
         ));
     }
 
-    /**
-     * @deprecated Since 1.4.
-     */
     @Deprecated
     private DispatchRequest findClientActionHandlerRequest() {
         DispatchRequest request = null;

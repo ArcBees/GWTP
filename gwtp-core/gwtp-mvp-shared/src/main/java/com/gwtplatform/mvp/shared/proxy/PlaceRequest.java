@@ -65,6 +65,31 @@ public class PlaceRequest {
     }
 
     /**
+     * Builds a request with the specified name token and without parameters. You
+     * can later add parameters by doing:
+     * <p/>
+     * <pre>
+     *   PlaceRequest request = newRequest.with(key1, param1)
+     *                                    .with(key2, param2);
+     * </pre>
+     *
+     * @param nameToken The name token for the request.
+     * @deprecated Please use {@link PlaceRequest.Builder#nameToken(String)}
+     *             instead
+     */
+    @Deprecated
+    public PlaceRequest(String nameToken) {
+        this.nameToken = nameToken;
+        // Note: No parameter map attached.
+        // Calling PlaceRequest#with(String, String) will
+        // invoke the other constructor and instantiate a map.
+        // This choice makes it efficient to instantiate
+        // parameter-less PlaceRequest and slightly more
+        // costly to instantiate PlaceRequest with parameters.
+        this.params = null;
+    }
+
+    /**
      * Builds a place request with the specified name token and with an existing parameter map.
      *
      * @param nameToken The name token for the request.
@@ -170,6 +195,30 @@ public class PlaceRequest {
             return false;
         }
         return this.nameToken.equals(nameToken);
+    }
+
+    /**
+     * Returns a new instance of the request with the specified parameter name and
+     * value. If a parameter with the same name was previously specified, the new
+     * request contains the new value.
+     *
+     * @param name  The new parameter name.
+     * @param value The new parameter value.
+     * @return The new place request instance.
+     * @deprecated Please use {@link PlaceRequest.Builder#with(String, String)}
+     *             instead
+     */
+    @Deprecated
+    public PlaceRequest with(String name, String value) {
+        // Note: Copying everything to a new PlaceRequest is slightly
+        // less efficient than modifying the current request, but
+        // it reduces unexpected side-effects. Moreover, it lets
+        // us instantiate the parameter map only when needed.
+        // (See the PlaceRequest constructors.)
+        Builder b = new Builder().nameToken(nameToken);
+        b.with(params);
+        b.with(name, value);
+        return b.build();
     }
 
     /**

@@ -21,7 +21,7 @@ package com.gwtplatform.dispatch.client.actionhandler;
  * A provider was registered to provide a client-side action handler for an action, but this action was not the same
  * action as specified by {@link ClientActionHandler#getActionType()}.
  *
- * @deprecated Since 1.4. Use {@link com.gwtplatform.dispatch.client.interceptor.InterceptorMismatchException}
+ * @deprecated use {@link com.gwtplatform.dispatch.client.interceptor.InterceptorMismatchException}
  */
 @Deprecated
 public class ClientActionHandlerMismatchException extends RuntimeException {

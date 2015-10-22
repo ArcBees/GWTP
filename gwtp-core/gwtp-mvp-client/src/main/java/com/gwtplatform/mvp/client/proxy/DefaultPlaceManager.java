@@ -54,9 +54,6 @@ public class DefaultPlaceManager extends PlaceManagerImpl {
     private final PlaceRequest errorPlaceRequest;
     private final PlaceRequest unauthorizedPlaceRequest;
 
-    /**
-     * @deprecated Since 1.4.
-     */
     @Deprecated
     public DefaultPlaceManager(EventBus eventBus,
             TokenFormatter tokenFormatter,

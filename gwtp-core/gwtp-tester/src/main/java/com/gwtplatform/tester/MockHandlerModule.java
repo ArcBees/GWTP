@@ -133,6 +133,15 @@ public abstract class MockHandlerModule extends AbstractModule {
     protected abstract void configureMockHandlers();
 
     /**
+     * Use bindMockActionHandler instead.
+     */
+    @Deprecated
+    protected <A extends Action<R>, R extends Result, H extends ActionHandler<A, R>> void bindMockHandler(
+            Class<H> handler, H mockHandler) {
+        bindMockActionHandler(handler, mockHandler);
+    }
+
+    /**
      * Registers a mock server-side action handlers.
      * <p/>
      * This mock server-side action handler will be executed when the class under

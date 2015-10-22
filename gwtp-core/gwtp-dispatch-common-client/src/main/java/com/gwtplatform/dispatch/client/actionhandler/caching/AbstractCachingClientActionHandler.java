@@ -48,8 +48,7 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * Flexibility of cache implementation to support custom caching
  * </li>
  * </ol>
- * @deprecated Since 1.4.
- * Use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.AbstractCachingRpcInterceptor}
+ * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.AbstractCachingRpcInterceptor}
  *
  * @param <A> The type of the action.
  * @param <R> The type of the result.

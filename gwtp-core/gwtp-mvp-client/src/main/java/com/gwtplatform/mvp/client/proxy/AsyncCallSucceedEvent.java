@@ -17,6 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HasHandlers;
 import com.google.web.bindery.event.shared.EventBus;
 
 /**
@@ -40,6 +41,18 @@ public class AsyncCallSucceedEvent extends GwtEvent<AsyncCallSucceedHandler> {
      * @param source The source that fires this event ({@link EventBus}).
      */
     public static void fire(EventBus source) {
+        source.fireEvent(new AsyncCallSucceedEvent());
+    }
+
+    /**
+     * Fires a {@link AsyncCallSucceedEvent}
+     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+     *
+     * @param source The source that fires this event ({@link HasHandlers}).
+     * @deprecated Use {@link #fire(EventBus)} instead.
+     */
+    @Deprecated
+    public static void fire(final HasHandlers source) {
         source.fireEvent(new AsyncCallSucceedEvent());
     }
 

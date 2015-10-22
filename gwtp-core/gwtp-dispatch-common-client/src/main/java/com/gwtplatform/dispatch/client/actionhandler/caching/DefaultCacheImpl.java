@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * Default Implementation for {@link Cache}, backed by an {@link java.util.HashMap}.
  *
- * @deprecated Since 1.4. Use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.DefaultCacheImpl}
+ * @deprecated use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.DefaultCacheImpl}
  */
 @Deprecated
 public class DefaultCacheImpl implements Cache {

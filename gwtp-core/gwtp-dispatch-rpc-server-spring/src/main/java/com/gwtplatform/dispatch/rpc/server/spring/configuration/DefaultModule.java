@@ -18,7 +18,9 @@ package com.gwtplatform.dispatch.rpc.server.spring.configuration;
 
 import org.springframework.context.annotation.Bean;
 
+import com.gwtplatform.dispatch.rpc.server.AbstractHttpSessionSecurityCookieFilter;
 import com.gwtplatform.dispatch.rpc.server.RequestProvider;
+import com.gwtplatform.dispatch.rpc.server.spring.HttpSessionSecurityCookieFilter;
 import com.gwtplatform.dispatch.rpc.server.spring.request.DefaultRequestProvider;
 
 /**
@@ -30,6 +32,11 @@ public class DefaultModule {
     @Bean
     String getSecurityCookieName() {
         return securityCookieName;
+    }
+
+    @Bean
+    AbstractHttpSessionSecurityCookieFilter getCookieFilter() {
+        return new HttpSessionSecurityCookieFilter(getSecurityCookieName());
     }
 
     @Bean

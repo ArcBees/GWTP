@@ -37,7 +37,7 @@ package com.gwtplatform.mvp.client.googleanalytics;
  * <p/>
  * Also, for more information about Event Tracking, please read:
  * <a href="http://code.google.com/apis/analytics/docs/tracking/eventTrackerGuide.html">Event Tracking Guide</a>
- * @deprecated Since 1.4. Use https://github.com/ArcBees/universal-analytics instead.
+ * @deprecated use https://github.com/ArcBees/universal-analytics instead.
  */
 @Deprecated
 public interface GoogleAnalytics {

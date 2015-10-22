@@ -110,7 +110,7 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
     /**
      * Specify the XSRF token header name.
      *
-     * @deprecated Since 1.4. Use {@link #xsrfTokenHeaderName(String)}
+     * @deprecated See {@link #xsrfTokenHeaderName(String)}
      */
     @Deprecated
     public B xcsrfTokenHeaderName(String xsrfTokenHeaderName) {

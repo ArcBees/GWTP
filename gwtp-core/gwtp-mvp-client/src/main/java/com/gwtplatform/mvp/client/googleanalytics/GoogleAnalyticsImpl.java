@@ -24,8 +24,7 @@ import com.google.gwt.user.client.Window;
 /**
  * Default {@link GoogleAnalytics} implementation that uses JSNI to
  * expose Google Analytics javascript methods.
- *
- * @deprecated Since 1.4. Use https://github.com/ArcBees/universal-analytics instead.
+* @deprecated use https://github.com/ArcBees/universal-analytics instead.
  */
 @Deprecated
 public class GoogleAnalyticsImpl implements GoogleAnalytics {

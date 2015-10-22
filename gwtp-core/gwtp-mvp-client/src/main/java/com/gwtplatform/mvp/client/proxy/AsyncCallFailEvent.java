@@ -17,6 +17,7 @@
 package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HasHandlers;
 import com.google.web.bindery.event.shared.EventBus;
 
 /**
@@ -53,6 +54,19 @@ public class AsyncCallFailEvent extends GwtEvent<AsyncCallFailHandler> {
         source.fireEvent(new AsyncCallFailEvent(caught));
     }
 
+    /**
+     * Fires a {@link AsyncCallFailEvent}
+     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+     *
+     * @param source The source that fires this event ({@link HasHandlers}).
+     * @param caught failure encountered while executing a remote procedure call.
+     * @deprecated Use {@link #fire(EventBus, Throwable)} instead.
+     */
+    @Deprecated
+    public static void fire(final HasHandlers source, Throwable caught) {
+        source.fireEvent(new AsyncCallFailEvent(caught));
+    }
+
     public static Type<AsyncCallFailHandler> getType() {
         return TYPE;
     }
@@ -66,7 +80,7 @@ public class AsyncCallFailEvent extends GwtEvent<AsyncCallFailHandler> {
      * Access the {@link Throwable} that was obtained when this asynchronous call failed.
      *
      * @return The {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest} or {@code null} if no place request is
-     * known.
+     *         known.
      */
     public Throwable getCaught() {
         return caught;

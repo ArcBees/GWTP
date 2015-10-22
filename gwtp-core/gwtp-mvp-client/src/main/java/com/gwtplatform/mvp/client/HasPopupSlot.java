@@ -56,7 +56,7 @@ public interface HasPopupSlot {
      * @param child  The popup child, a {@link PresenterWidget}.
      * @param center - has no affect.
      * @see #addToPopupSlot(PresenterWidget)
-     * @deprecated - Since 1.4. Use {@link #addToPopupSlot(PresenterWidget)} instead. Center no longer as any affect.
+     * @deprecated - Use {@link #addToPopupSlot(PresenterWidget)} instead. Center no longer as any affect.
      */
     @Deprecated
     void addToPopupSlot(final PresenterWidget<? extends PopupView> child, boolean center);

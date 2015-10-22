@@ -330,6 +330,17 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         return view;
     }
 
+    /**
+     * Makes it possible to access the {@link Widget} object associated with that
+     * presenter.
+     *
+     * @return The Widget associated with that presenter.
+     */
+    @Deprecated
+    public Widget getWidget() {
+        return asWidget();
+    }
+
     @Override
     public final int hashCode() {
         return super.hashCode();
@@ -540,8 +551,6 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * Use this only in the rare situations where you want to manually
      * control when the handler is unregistered, otherwise call
      * {@link #addRegisteredHandler(com.google.gwt.event.shared.GwtEvent.Type, EventHandler)}.
-     *
-     * @deprecated since 1.5.
      *
      * @param <H>     The handler type.
      * @param type    See {@link com.google.gwt.event.shared.GwtEvent.Type}.
