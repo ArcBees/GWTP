@@ -38,8 +38,4 @@ public class ActionException extends Exception {
     public ActionException(Throwable cause) {
         super(cause);
     }
-
-    public ActionException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
 }

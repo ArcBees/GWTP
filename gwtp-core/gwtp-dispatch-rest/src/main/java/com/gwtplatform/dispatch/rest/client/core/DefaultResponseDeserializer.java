@@ -80,11 +80,16 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
      * @param serialization the serialization object to be used.
      * @param resultClass the parameterized type of the object once deserialized.
      * @param contentType the contentType of <code>data</code>.
-     * @param data the data to deserialize.    @return The deserialized object.
+     * @param response the response to deserialize.
+     * @return The deserialized object.
      */
     protected <R> R deserializeValue(Serialization serialization, String resultClass, ContentType contentType,
-            String data) throws SerializationException {
-        return serialization.deserialize(resultClass, contentType, data);
+            Response response) throws ActionDeserializationException {
+        try {
+            return serialization.deserialize(resultClass, contentType, response.getText());
+        } catch (SerializationException e) {
+            throw new ActionDeserializationException(response, e);
+        }
     }
 
     private boolean isSuccessStatusCode(Response response) {
@@ -101,11 +106,7 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
             Serialization serialization = findSerialization(resultClass, contentType);
 
             if (serialization != null) {
-                try {
-                    return deserializeValue(serialization, resultClass, contentType, response.getText());
-                } catch (SerializationException e) {
-                    throw new ActionDeserializationException(response, e);
-                }
+                return deserializeValue(serialization, resultClass, contentType, response);
             }
         }
 

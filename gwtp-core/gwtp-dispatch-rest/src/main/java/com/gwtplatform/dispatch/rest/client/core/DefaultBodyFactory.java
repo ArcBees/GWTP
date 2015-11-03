@@ -86,8 +86,12 @@ public class DefaultBodyFactory implements BodyFactory {
      * @return The serialized string.
      */
     protected SerializedValue serialize(Serialization serialization, Object object, String bodyClass,
-            List<ContentType> contentTypes) throws SerializationException {
-        return serialization.serialize(bodyClass, contentTypes, object);
+            List<ContentType> contentTypes) throws ActionSerializationException {
+        try {
+            return serialization.serialize(bodyClass, contentTypes, object);
+        } catch (SerializationException e) {
+            throw new ActionSerializationException(e);
+        }
     }
 
     private void assignBodyFromForm(RequestBuilder requestBuilder, RestAction<?> action) {
@@ -124,11 +128,7 @@ public class DefaultBodyFactory implements BodyFactory {
             Serialization serialization = findSerialization(bodyClass, contentTypes);
 
             if (serialization != null) {
-                try {
-                    return serialize(serialization, object, bodyClass, contentTypes);
-                } catch (SerializationException e) {
-                    throw new ActionSerializationException(e);
-                }
+                return serialize(serialization, object, bodyClass, contentTypes);
             }
         }
 
