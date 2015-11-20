@@ -16,6 +16,9 @@
 
 package com.gwtplatform.dispatch.rest.rebind.action;
 
+import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.FORM;
+import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.isHttpParameter;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,13 +54,11 @@ import com.gwtplatform.dispatch.rest.rebind.utils.ClassNameGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.ContentTypeResolver;
 import com.gwtplatform.dispatch.rest.rebind.utils.Generators;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
+import com.gwtplatform.dispatch.rest.rebind.utils.PathInformation;
 import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
-
-import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.FORM;
-import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.isHttpParameter;
 
 public class RestActionGenerator extends AbstractVelocityGenerator implements ActionGenerator {
     private static class FilteredParameters {
@@ -140,15 +141,17 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
 
         if (printWriter != null) {
             HttpMethod verb = resolveHttpVerb();
-            String path = resolvePath();
+            PathInformation pathInformation = PathResolver.resolvePathInformation(resourceDefinition.getPath(), method);
             boolean secured = resolveSecured();
             JClassType resultType = resolveResultType();
             FilteredParameters parameters = filterParameters();
             Set<ContentType> consumes = resolveConsumes(parameters.getBodyParameter());
             Set<ContentType> produces = resolveProduces(resultType);
 
-            actionDefinition = new ActionDefinition(getPackageName(), getImplName(), verb, path, secured, consumes,
-                    produces, resultType, parameters.getHttpParameters(), parameters.getBodyParameter());
+            actionDefinition = new ActionDefinition(getPackageName(), getImplName(), verb, pathInformation
+                    .getRawServicePath(), pathInformation.getPath(), pathInformation.getPathParamRegexMapping(),
+                    secured, consumes, produces, resultType, parameters.getHttpParameters(), parameters
+                            .getBodyParameter());
 
             mergeTemplate(printWriter);
             commit(printWriter);
@@ -176,6 +179,8 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         variables.put("secured", actionDefinition.isSecured());
         variables.put("httpVerb", actionDefinition.getVerb());
         variables.put("path", actionDefinition.getPath());
+        variables.put("rawServicePath", actionDefinition.getRawServicePath());
+        variables.put("pathParamRegexMapping", actionDefinition.getPathParamRegexMapping());
         variables.put("body", bodyTypeName);
         variables.put("bodyParameterName", bodyParameterName);
         variables.put("parameters", parameters);
@@ -235,10 +240,6 @@ public class RestActionGenerator extends AbstractVelocityGenerator implements Ac
         }
 
         return verb;
-    }
-
-    private String resolvePath() {
-        return PathResolver.resolve(resourceDefinition.getPath(), method);
     }
 
     private boolean resolveSecured() {

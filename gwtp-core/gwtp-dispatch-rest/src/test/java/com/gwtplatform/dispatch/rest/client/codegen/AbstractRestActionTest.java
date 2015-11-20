@@ -16,6 +16,10 @@
 
 package com.gwtplatform.dispatch.rest.client.codegen;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,10 +27,6 @@ import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
-import static org.junit.Assert.assertTrue;
 
 public class AbstractRestActionTest {
     private static final String PARAM_NAME_1 = "someName";
@@ -57,12 +57,8 @@ public class AbstractRestActionTest {
         action.addParam(Type.QUERY, PARAM_NAME_2, PARAM_VALUE_2);
 
         // Then
-        assertThat(action.getParameters(Type.QUERY))
-                .hasSize(2)
-                .extracting("name", "object")
-                .containsExactly(
-                        tuple(PARAM_NAME_1, PARAM_VALUE_1),
-                        tuple(PARAM_NAME_2, PARAM_VALUE_2));
+        assertThat(action.getParameters(Type.QUERY)).hasSize(2).extracting("name", "object").containsExactly(tuple(
+                PARAM_NAME_1, PARAM_VALUE_1), tuple(PARAM_NAME_2, PARAM_VALUE_2));
     }
 
     @Test
@@ -72,9 +68,79 @@ public class AbstractRestActionTest {
         action.addParam(Type.FORM, PARAM_NAME_2, PARAM_VALUE_2);
 
         // Then
-        assertThat(action.getParameters(Type.FORM))
-                .hasSize(1)
-                .extracting("name", "object")
-                .containsExactly(tuple(PARAM_NAME_2, PARAM_VALUE_2));
+        assertThat(action.getParameters(Type.FORM)).hasSize(1).extracting("name", "object").containsExactly(tuple(
+                PARAM_NAME_2, PARAM_VALUE_2));
     }
+
+    @Test
+    public void regexInformationShouldNotBePartOfPath() {
+        // When
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST,
+                "{id: [0-9]*}/subpath/{sid:[0-9]{1,9}}");
+
+        // Then
+        assertThat(action.getPath()).isEqualTo("{id}/subpath/{sid}");
+    }
+
+    @Test
+    public void pathParameterWithoutRegexShouldNotBeChanged() {
+        // When
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST, "{id: [0-9]*}/subpath/{sid}");
+
+        // Then
+        assertThat(action.getPath()).isEqualTo("{id}/subpath/{sid}");
+    }
+
+    @Test
+    public void regexInformationCanBeRetrievedForParameter() {
+        // When
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST, "{id: [0-9]*}/subpath");
+
+        // Then
+        assertThat(action.getPathParameterRegex("id")).isEqualTo("[0-9]*");
+    }
+
+    @Test
+    public void multipleRegexInformationCanBeRetrievedForParameter() {
+        // When
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST,
+                "{id: [0-9]*}/subpath/{sid:[0-9]{1,9}}");
+
+        // Then
+        assertThat(action.getPathParameterRegex("id")).isEqualTo("[0-9]*");
+        assertThat(action.getPathParameterRegex("sid")).isEqualTo("[0-9]{1,9}");
+    }
+
+    @Test
+    public void multipleRegexInformationCanBeRetrievedForParameter2() {
+        // When
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST,
+                "{id: [0-9]*}/subpath/{sid:[0-9]{1,9}}/mobile/{imei : [0-9\\:\\/]{15}}");
+
+        // Then
+        assertThat(action.getPathParameterRegex("id")).isEqualTo("[0-9]*");
+        assertThat(action.getPathParameterRegex("sid")).isEqualTo("[0-9]{1,9}");
+        assertThat(action.getPathParameterRegex("imei")).isEqualTo("[0-9\\:\\/]{15}");
+    }
+
+    @Test
+    public void multipleRegexInformationCanBeRetrievedForParameter3() {
+        // When
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST,
+                "/{id: [a-zA-Z0-9\\{](-[a-zA-Z0-9])-[a-zA-Z0-9]{12}}");
+
+        // Then
+        assertThat(action.getPathParameterRegex("id")).isEqualTo("[a-zA-Z0-9\\{](-[a-zA-Z0-9])-[a-zA-Z0-9]{12}");
+    }
+
+    @Test
+    public void nullShouldBeReturnedIfNoRegexIsDefined() {
+        // When
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST, "{id}/subpath/{sid}");
+
+        // Then
+        assertThat(action.getPathParameterRegex("id")).isNull();
+        assertThat(action.getPathParameterRegex("sid")).isNull();
+    }
+
 }
