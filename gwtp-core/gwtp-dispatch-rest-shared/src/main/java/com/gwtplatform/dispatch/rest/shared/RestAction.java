@@ -30,24 +30,24 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * @param <R> the result type.
  */
 public interface RestAction<R> extends TypedAction<R>, HasSecured {
+
     /**
-	 * Returns the raw value of the @Path annotation. This
-	 * path may also contain regular expression values for the specific variables.
-	 * 
-	 * @see JSR-311 section 3.4
-	 * @return the raw service path for this action
-	 */
+     * Returns the raw value of the @Path annotation. This path may also contain regular expression values for the
+     * specific variables.
+     * 
+     * @see JSR-311 section 3.4
+     * @return the raw service path for this action
+     */
     String getRawServicePath();
 
-	/**
-	 * Returns the relative path for this action. It should not be prepended by
-	 * the path annotated with
-	 * {@link com.gwtplatform.dispatch.rest.client.RestApplicationPath @RestApplicationPath}.
-	 * This path does not contain regular expressions for the URI templates anymore.
-	 *
-	 * @see #getRawServicePath()
-	 * @return the relative path for this action.
-	 */
+    /**
+     * Returns the relative path for this action. It should not be prepended by the path annotated with
+     * {@link com.gwtplatform.dispatch.rest.client.RestApplicationPath @RestApplicationPath}. This path does not contain
+     * regular expressions for the URI templates anymore.
+     *
+     * @see #getRawServicePath()
+     * @return the relative path for this action.
+     */
     String getPath();
 
     /**

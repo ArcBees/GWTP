@@ -44,17 +44,17 @@ public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
             HttpMethod httpMethod,
             String rawServicePath) {
         super(factory, DateFormat.DEFAULT, httpMethod, rawServicePath, PathResolver.resolvePath(rawServicePath));
-        
+
         // also resolve the regular expressions add them to the newly created instance
         Map<String, String> regex = PathResolver.extractPathParameterRegex(rawServicePath);
-        if (regex != null) {        	
-        	for (Entry<String, String> entry : regex.entrySet()) {
-        		addParameterExpression(entry.getKey(), entry.getValue());
-        	}
+        if (regex != null) {
+            for (Entry<String, String> entry : regex.entrySet()) {
+                addParameterExpression(entry.getKey(), entry.getValue());
+            }
         }
     }
 
-	@Override
+    @Override
     public void setBodyParam(Object value) {
         super.setBodyParam(value);
     }

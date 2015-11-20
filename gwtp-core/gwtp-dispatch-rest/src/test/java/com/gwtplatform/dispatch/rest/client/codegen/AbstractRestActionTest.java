@@ -16,10 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.client.codegen;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,6 +23,10 @@ import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
+import static org.junit.Assert.assertTrue;
 
 public class AbstractRestActionTest {
     private static final String PARAM_NAME_1 = "someName";

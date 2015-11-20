@@ -30,11 +30,11 @@ public class PathResolver {
     /* a path with regular expression looks like: @Path("{id:[0-9]*}/subpath") */
     private static final String REGEX_MATCH_PATH_PATTERN =
             "\\{ *(\\w[\\w\\.-]*) *(\\: *(((\\\\\\{)|(\\\\\\})|(\\[[^\\]]*\\])|([^\\{\\}])|(\\{[0-9\\,]+\\}))*))?"
-            + "[^\\\\]?\\}";
+                    + "[^\\\\]?\\}";
     private static final int REGEX_PATH_PATTERN_GROUP_PARAMETER = 1;
     private static final int REGEX_PATH_PATTERN_GROUP_REGEX = 3;
     private static final int REGEX_PATH_PATTERN_GROUPS = 9;
-    
+
     public static String resolve(String basePath, HasAnnotations type) {
         String path = resolve(type);
         path = concatenate(basePath, path);
@@ -74,14 +74,14 @@ public class PathResolver {
 
         return newPath;
     }
-    
+
     public static PathInformation resolvePathInformation(String path, HasAnnotations method) {
         String rawPath = PathResolver.resolve(path, method);
         String parsedPath = null;
         Map<String, String> pathParamRegexMapping = null;
 
         if (!isNullOrEmpty(rawPath)) {
-        	parsedPath = resolvePath(rawPath);
+            parsedPath = resolvePath(rawPath);
 
             if (rawPath.equals(path)) {
                 pathParamRegexMapping = extractPathParameterRegex(rawPath);

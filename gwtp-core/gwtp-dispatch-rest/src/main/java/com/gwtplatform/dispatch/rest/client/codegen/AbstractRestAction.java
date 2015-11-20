@@ -45,9 +45,8 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
 
     private Object bodyParam;
 
-	/**
-     * Creates a new instance of the action without parsing the regular expressions from the 
-     * rawServicePath.
+    /**
+     * Creates a new instance of the action without parsing the regular expressions from the rawServicePath.
      * 
      * @param httpParameterFactory factory to create the HTTP parameters
      * @param defaultDateFormat for the date marshalling
@@ -56,10 +55,10 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
      * @param path the path after parsing the regex definitions
      */
     protected AbstractRestAction(
-    		HttpParameterFactory httpParameterFactory, 
-    		String defaultDateFormat,
-            HttpMethod httpMethod, 
-            String rawServicePath, 
+            HttpParameterFactory httpParameterFactory,
+            String defaultDateFormat,
+            HttpMethod httpMethod,
+            String rawServicePath,
             String path) {
         this.httpParameterFactory = httpParameterFactory;
         this.defaultDateFormat = defaultDateFormat;
@@ -134,7 +133,7 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
 
     /**
      * Method is used to add information about regular expressions specified for path parameters (for details on how to
-     * specify those regular expession see JSR-311 specification).
+     * specify those regular expression see JSR-311 specification).
      * 
      * @param parameter The parameter the regex should be associated with
      * @param regex The regular expression used for the parameter

@@ -16,9 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.rebind.action;
 
-import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.FORM;
-import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.isHttpParameter;
-
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -59,6 +56,9 @@ import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
+
+import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.FORM;
+import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.isHttpParameter;
 
 public class RestActionGenerator extends AbstractVelocityGenerator implements ActionGenerator {
     private static class FilteredParameters {
