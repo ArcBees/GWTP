@@ -83,11 +83,16 @@ public class PathResolver {
         if (!isNullOrEmpty(rawPath)) {
             parsedPath = resolvePath(rawPath);
 
-            if (rawPath.equals(path)) {
+            if (!rawPath.equals(parsedPath)) {
+                /*
+                 * the parsed path (path without regular expression information) is different to the rawPath - so it
+                 * seems a regular expression information is been removed. in this case try to extract the regex
+                 * information
+                 */
                 pathParamRegexMapping = extractPathParameterRegex(rawPath);
             }
-
         }
+
         return new PathInformation(rawPath, parsedPath, pathParamRegexMapping);
     }
 
