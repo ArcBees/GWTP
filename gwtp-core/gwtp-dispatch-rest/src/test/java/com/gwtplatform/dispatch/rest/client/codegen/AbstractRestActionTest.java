@@ -103,34 +103,65 @@ public class AbstractRestActionTest {
     @Test
     public void multipleRegexInformationCanBeRetrievedForParameter() {
         // When
-        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST,
-                "{id: [0-9]*}/subpath/{sid:[0-9]{1,9}}");
+        String idRegex = "[0-9]*";
+        String sidRegex = "[0-9]{1,9}";
+        String imeiRegex = "[0-9\\:\\/]{15}";
+        StringBuilder paramBuilder = new StringBuilder();
+        paramBuilder.append("{id: ").append(idRegex).append("}");
+        paramBuilder.append("/subpath");
+        paramBuilder.append("/{sid: ").append(sidRegex).append("}");
+        paramBuilder.append("/mobile");
+        paramBuilder.append("/{imei: ").append(imeiRegex).append("}");
+
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST, paramBuilder.toString());
 
         // Then
-        assertThat(action.getPathParameterRegex("id")).isEqualTo("[0-9]*");
-        assertThat(action.getPathParameterRegex("sid")).isEqualTo("[0-9]{1,9}");
+        assertThat(action.getPathParameterRegex("id")).isEqualTo(idRegex);
+        assertThat(action.getPathParameterRegex("sid")).isEqualTo(sidRegex);
+        assertThat(action.getPathParameterRegex("imei")).isEqualTo(imeiRegex);
+        assertThat(action.getPathParameterRegex("subpath")).isNull();
+        assertThat(action.getPathParameterRegex("mobile")).isNull();
     }
 
     @Test
-    public void multipleRegexInformationCanBeRetrievedForParameter2() {
+    public void regexWithEscapedAngleBracketsCanBeResolved() {
         // When
+        String regex = "[a-zA-Z0-9\\{](-[a-zA-Z0-9])-[a-zA-Z0-9]{12}";
         action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST,
-                "{id: [0-9]*}/subpath/{sid:[0-9]{1,9}}/mobile/{imei : [0-9\\:\\/]{15}}");
+                "/{id:" + regex + "}");
 
         // Then
-        assertThat(action.getPathParameterRegex("id")).isEqualTo("[0-9]*");
-        assertThat(action.getPathParameterRegex("sid")).isEqualTo("[0-9]{1,9}");
-        assertThat(action.getPathParameterRegex("imei")).isEqualTo("[0-9\\:\\/]{15}");
+        assertThat(action.getPathParameterRegex("id")).isEqualTo(regex);
     }
 
     @Test
-    public void multipleRegexInformationCanBeRetrievedForParameter3() {
+    public void multipleAndMoreComplexRegexInformationCanBeRetrievedForParameter() {
         // When
-        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST,
-                "/{id: [a-zA-Z0-9\\{](-[a-zA-Z0-9])-[a-zA-Z0-9]{12}}");
+        String nameRegex = "[0-9]*";
+        String idRegex = "[a-zA-Z0-9\\{](-[a-zA-Z0-9])-[a-zA-Z0-9]{12}";
+        String id2Regex = "[a-zA-Z0-9\\{](-[a-zA-Z0-9\\}])-[a-zA-Z0-9]{15}";
+        String emailRegex =
+                "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\""
+                        + "(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\["
+                        + "\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+"
+                        + "[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}"
+                        + "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]"
+                        + ":(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]"
+                        + "|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
+        StringBuilder paramBuilder = new StringBuilder();
+        paramBuilder.append("/{name: ").append(nameRegex).append("}");
+        paramBuilder.append("/x");
+        paramBuilder.append("/{id: ").append(idRegex).append("}");
+        paramBuilder.append("/{id2: ").append(id2Regex).append("}");
+        paramBuilder.append("/{email:").append(emailRegex).append("}");
+
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST, paramBuilder.toString());
         // Then
-        assertThat(action.getPathParameterRegex("id")).isEqualTo("[a-zA-Z0-9\\{](-[a-zA-Z0-9])-[a-zA-Z0-9]{12}");
+        assertThat(action.getPathParameterRegex("name")).isEqualTo(nameRegex);
+        assertThat(action.getPathParameterRegex("id")).isEqualTo(idRegex);
+        assertThat(action.getPathParameterRegex("id2")).isEqualTo(id2Regex);
+        assertThat(action.getPathParameterRegex("email")).isEqualTo(emailRegex);
     }
 
     @Test
@@ -141,6 +172,15 @@ public class AbstractRestActionTest {
         // Then
         assertThat(action.getPathParameterRegex("id")).isNull();
         assertThat(action.getPathParameterRegex("sid")).isNull();
+    }
+
+    @Test
+    public void nullShouldBeReturnedIfParameterIsNotDefined() {
+        // When
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST, "{id}/subpath/{sid}");
+
+        // Then
+        assertThat(action.getPathParameterRegex("subpath")).isNull();
     }
 
 }
