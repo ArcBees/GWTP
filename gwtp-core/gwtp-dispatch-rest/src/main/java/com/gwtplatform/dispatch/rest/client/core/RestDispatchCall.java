@@ -77,7 +77,6 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
     @Override
     public DispatchRequest execute() {
         A action = getAction();
-        dispatchHooks.onExecute(action);
 
         if (!isIntercepted()) {
             IndirectProvider<RestInterceptor> interceptorProvider = interceptorRegistry.find(action);
@@ -93,6 +92,8 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
                 return dispatchRequest;
             }
         }
+
+        dispatchHooks.onExecute(action);
 
         // Execute the request as given
         return processCall();
