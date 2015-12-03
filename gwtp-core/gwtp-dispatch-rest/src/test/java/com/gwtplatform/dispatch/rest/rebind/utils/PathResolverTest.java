@@ -1,18 +1,34 @@
-package com.gwtplatform.dispatch.rest.rebind.utils;
+/*
+ * Copyright 2015 ArcBees Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
 
-import static org.assertj.core.api.Assertions.assertThat;
+package com.gwtplatform.dispatch.rest.rebind.utils;
 
 import java.util.Map;
 
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class PathResolverTest {
 
     @Test
     public void regexInformationShouldNotBePartOfPath() {
-    	// When
+        // When
         String resolvedPath = PathResolver.resolvePath("{id: [0-9]*}/subpath/{sid:[0-9]{1,9}}");
-        
+
         // Then
         assertThat(resolvedPath).isEqualTo("{id}/subpath/{sid}");
     }
@@ -20,16 +36,16 @@ public class PathResolverTest {
     @Test
     public void pathParameterWithoutRegexShouldNotBeChanged() {
         // When
-    	String resolvedPath = PathResolver.resolvePath("{id: [0-9]*}/subpath/{sid}");
+        String resolvedPath = PathResolver.resolvePath("{id: [0-9]*}/subpath/{sid}");
 
         // Then
-    	assertThat(resolvedPath).isEqualTo("{id}/subpath/{sid}");
+        assertThat(resolvedPath).isEqualTo("{id}/subpath/{sid}");
     }
 
     @Test
     public void regexInformationCanBeRetrievedForParameter() {
-    	// When
-    	Map<String, String> regex = PathResolver.extractPathParameterRegex("{id: [0-9]*}/subpath");
+        // When
+        Map<String, String> regex = PathResolver.extractPathParameterRegex("{id: [0-9]*}/subpath");
 
         // Then
         assertThat(regex.get("id")).isEqualTo("[0-9]*");
@@ -59,7 +75,7 @@ public class PathResolverTest {
 
     @Test
     public void regexWithEscapedAngleBracketsCanBeResolved() {
-    	// When
+        // When
         String regex = "[a-zA-Z0-9\\{](-[a-zA-Z0-9])-[a-zA-Z0-9]{12}";
         Map<String, String> regexMap = PathResolver.extractPathParameterRegex(
                 "/{id:[a-zA-Z0-9\\{](-[a-zA-Z0-9])-[a-zA-Z0-9]{12}}");
@@ -91,7 +107,7 @@ public class PathResolverTest {
         paramBuilder.append("/{email:").append(emailRegex).append("}");
 
         Map<String, String> regex = PathResolver.extractPathParameterRegex(paramBuilder.toString());
-        
+
         // Then
         assertThat(regex.get("name")).isEqualTo(nameRegex);
         assertThat(regex.get("id")).isEqualTo(idRegex);
@@ -102,7 +118,7 @@ public class PathResolverTest {
     @Test
     public void nullShouldBeReturnedIfNoRegexIsDefined() {
         // When
-    	Map<String, String> regex = PathResolver.extractPathParameterRegex("{id}/subpath/{sid}");
+        Map<String, String> regex = PathResolver.extractPathParameterRegex("{id}/subpath/{sid}");
 
         // Then
         assertThat(regex.get("id")).isNull();
@@ -112,7 +128,7 @@ public class PathResolverTest {
     @Test
     public void nullShouldBeReturnedIfParameterIsNotDefined() {
         // When
-    	Map<String, String> regex = PathResolver.extractPathParameterRegex("{id}/subpath/{sid}");
+        Map<String, String> regex = PathResolver.extractPathParameterRegex("{id}/subpath/{sid}");
 
         // Then
         assertThat(regex.get("subpath")).isNull();
