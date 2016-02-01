@@ -49,6 +49,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
     protected <P extends Presenter<?, ?>, Proxy_ extends Proxy<P>> void bindPresenter(
             Class<P> presenter, Class<? extends P> presenterImpl, Class<Proxy_> proxy) {
         bind(presenterImpl).in(Singleton.class);
+        bind(proxy).asEagerSingleton();
         bind(presenter).to(presenterImpl);
     }
 
@@ -71,6 +72,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
             Class<? extends V> viewImpl, Class<Proxy_> proxy) {
         bind(presenterImpl).in(Singleton.class);
         bind(viewImpl).in(Singleton.class);
+        bind(proxy).asEagerSingleton();
         bind(presenter).to(presenterImpl);
         bind(view).to(viewImpl);
     }
@@ -95,6 +97,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
     protected <P extends Presenter<?, ?>, Proxy_ extends Proxy<P>> void bindPresenter(
             Class<P> presenterImpl, Class<Proxy_> proxy) {
         bind(presenterImpl).in(Singleton.class);
+        bind(proxy).asEagerSingleton();
     }
 
     /**
@@ -115,6 +118,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
             Class<Proxy_> proxy) {
         bind(presenterImpl).in(Singleton.class);
         bind(viewImpl).in(Singleton.class);
+        bind(proxy).asEagerSingleton();
         bind(view).to(viewImpl);
     }
 

@@ -25,14 +25,14 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.gwt.mvp.MainPresenterTestUtilGwt.MyProxy;
+import com.gwtplatform.mvp.client.gwt.mvp.MainPresenterTestUtilGwt.MyView;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 /**
  * A test presenter meant to be run in a GWTTestCase.
  */
-public class MainPresenterTestUtilGwt
-        extends Presenter<MainPresenterTestUtilGwt.MyView, MainPresenterTestUtilGwt.MyProxy> {
-
+public class MainPresenterTestUtilGwt extends Presenter<MyView, MyProxy> {
     interface MyView extends View {
     }
 
@@ -44,10 +44,11 @@ public class MainPresenterTestUtilGwt
     private final Provider<PopupPresenterTestUtilGwt> popupPresenterProvider;
 
     @Inject
-    MainPresenterTestUtilGwt(EventBus eventBus,
-                             MyView view,
-                             MyProxy proxy,
-                             Provider<PopupPresenterTestUtilGwt> popupPresenterProvider) {
+    MainPresenterTestUtilGwt(
+            EventBus eventBus,
+            MyView view,
+            MyProxy proxy,
+            Provider<PopupPresenterTestUtilGwt> popupPresenterProvider) {
         super(eventBus, view, proxy, RevealType.Root);
 
         this.popupPresenterProvider = popupPresenterProvider;

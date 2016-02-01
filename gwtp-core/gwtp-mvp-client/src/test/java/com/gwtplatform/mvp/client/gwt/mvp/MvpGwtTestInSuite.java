@@ -117,9 +117,10 @@ public class MvpGwtTestInSuite extends GWTTestCase {
      * Verify multiple name tokens.
      */
     public void testMultipleTokens() {
+        delayTestFinish(1000);
         ginjector.getPlaceManager().revealDefaultPlace();
 
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+        runTest(new ScheduledCommand() {
             @Override
             public void execute() {
                 assertTrue(ginjector.getMainPresenter().get().isVisible());
@@ -128,29 +129,28 @@ public class MvpGwtTestInSuite extends GWTTestCase {
                 revealAdmin();
             }
         });
-
-        delayTestFinish(1000);
     }
 
     private void revealAdmin() {
         PlaceRequest placeRequest = new Builder().nameToken("admin").build();
         ginjector.getPlaceManager().revealPlace(placeRequest);
 
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+        runTest(new ScheduledCommand() {
             @Override
             public void execute() {
                 assertFalse(ginjector.getMainPresenter().get().isVisible());
                 assertTrue(ginjector.getAdminPresenter().get().isVisible());
 
-                revealDefaultPlace();
+                revealHomePlace();
             }
         });
     }
 
-    private void revealDefaultPlace() {
-        ginjector.getPlaceManager().revealDefaultPlace();
+    private void revealHomePlace() {
+        PlaceRequest placeRequest = new Builder().nameToken("home").build();
+        ginjector.getPlaceManager().revealPlace(placeRequest);
 
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+        runTest(new ScheduledCommand() {
             @Override
             public void execute() {
                 assertTrue(ginjector.getMainPresenter().get().isVisible());
@@ -165,7 +165,7 @@ public class MvpGwtTestInSuite extends GWTTestCase {
         PlaceRequest placeRequest = new Builder().nameToken("selfService").build();
         ginjector.getPlaceManager().revealPlace(placeRequest);
 
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+        runTest(new ScheduledCommand() {
             @Override
             public void execute() {
                 assertFalse(ginjector.getMainPresenter().get().isVisible());
