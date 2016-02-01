@@ -56,6 +56,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
     private static final String UNABLE_TO_PROCESS_GENERAL = "Unable to process Rest-Dispatch classes.";
     private static final String UNABLE_TO_PROCESS_RESOURCE = "Unable to process resource.";
     private static final String UNRESOLVABLE_EXCEPTION = "Unresolvable exception.";
+    private static final String DISPATCH_MACROS = "com/gwtplatform/dispatch/rest/processors/macros.vm";
 
     private Logger logger;
     private Utils utils;
@@ -82,7 +83,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
     private void initializeTools(ProcessingEnvironment processingEnv) {
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
         utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
-        outputter = new Outputter(logger, this, processingEnv.getFiler());
+        outputter = new Outputter(logger, this, processingEnv.getFiler(), DISPATCH_MACROS);
         sourceFilter = createSourceFilter();
     }
 
