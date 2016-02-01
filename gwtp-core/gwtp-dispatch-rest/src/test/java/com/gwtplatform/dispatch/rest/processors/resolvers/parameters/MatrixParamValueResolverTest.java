@@ -29,7 +29,7 @@ import static org.mockito.Mockito.mock;
 public class MatrixParamValueResolverTest {
     private static final String VALUE = "tiger";
 
-    private MatrixParamValueResolver resolver = new MatrixParamValueResolver();
+    private final MatrixParamValueResolver resolver = new MatrixParamValueResolver();
 
     @Test
     public void resolve_matrixParam() {

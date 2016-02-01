@@ -53,7 +53,7 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
             "the security cookie?)";
     protected final Dispatch dispatch;
     protected final Logger logger;
-    protected RequestProvider requestProvider;
+    protected final RequestProvider requestProvider;
 
     protected AbstractDispatchServiceImpl(Logger logger,
                                           Dispatch dispatch,

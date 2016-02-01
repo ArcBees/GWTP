@@ -41,8 +41,8 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * MockHandlerModule}.
  */
 public class TestDispatchAsync implements DispatchAsync {
-    private DispatchService service;
-    private Map<Class<?>, ClientActionHandler<?, ?>> clientActionHandlers;
+    private final DispatchService service;
+    private final Map<Class<?>, ClientActionHandler<?, ?>> clientActionHandlers;
 
     class TestingDispatchRequest implements DispatchRequest {
 

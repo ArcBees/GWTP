@@ -33,7 +33,7 @@ import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 /**
  * Annotation bean post processing to register {@link ActionHandler}s annotated with {@link RegisterActionHandler}.
  */
-public class AnnotatedActionBeandHandlerRegistrator implements BeanPostProcessor, Ordered {
+public class AnnotatedActionBeanHandlerRegistrator implements BeanPostProcessor, Ordered {
     @Autowired
     protected ApplicationContext applicationContext;
 

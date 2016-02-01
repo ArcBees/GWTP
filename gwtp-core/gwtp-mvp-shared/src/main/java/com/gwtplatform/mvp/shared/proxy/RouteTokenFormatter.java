@@ -72,12 +72,12 @@ public class RouteTokenFormatter implements TokenFormatter {
         /**
          * Route/place-token associated to the match.
          */
-        String route;
+        final String route;
 
         /**
          * Number of static matches in this route.
          */
-        int staticMatches;
+        final int staticMatches;
 
         /**
          * Parsed parameters of this route.

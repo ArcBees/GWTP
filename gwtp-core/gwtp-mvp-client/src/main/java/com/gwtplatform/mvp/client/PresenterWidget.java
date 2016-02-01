@@ -311,7 +311,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     * Fires the given event to the handlers listening to the event's type.
     * <p>
     * Any exceptions thrown by handlers will be bundled into a
-    * {@link UmbrellaException} and then re-thrown after all handlers have
+    * {@link com.google.gwt.event.shared.UmbrellaException UmbrellaException} and then re-thrown after all handlers have
     * completed. An exception thrown by a handler will not prevent other handlers
     * from executing.
     *

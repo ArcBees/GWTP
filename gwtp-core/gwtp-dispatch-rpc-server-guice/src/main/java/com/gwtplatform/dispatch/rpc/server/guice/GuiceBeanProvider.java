@@ -39,7 +39,7 @@ public class GuiceBeanProvider implements BeanProvider {
         }
     }
 
-    private Injector injector;
+    private final Injector injector;
 
     public GuiceBeanProvider(Injector injector) {
         this.injector = injector;

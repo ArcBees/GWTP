@@ -43,8 +43,8 @@ import com.gwtplatform.dispatch.annotation.Out;
 @SuppressWarnings("unchecked")
 public class ReflectionHelper {
 
-    private TypeElement classRepresenter;
-    private ProcessingEnvironment environment;
+    private final TypeElement classRepresenter;
+    private final ProcessingEnvironment environment;
 
     public ReflectionHelper(ProcessingEnvironment environment, TypeElement classRepresenter) {
         this.classRepresenter = classRepresenter;

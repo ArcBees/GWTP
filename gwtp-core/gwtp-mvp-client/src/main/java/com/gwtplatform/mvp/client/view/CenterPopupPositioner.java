@@ -24,7 +24,7 @@ public class CenterPopupPositioner extends PopupPositioner {
     /**
      * By default this method centers the popup horizontally.
      * You can override this method to change the horizontal position of the popup.
-     * @param popupWidth
+     * @param popupWidth the width of the popup
      * @return the left position of the popup
      */
     protected int getLeft(int popupWidth) {
@@ -34,7 +34,7 @@ public class CenterPopupPositioner extends PopupPositioner {
     /**
      * By default this method centers the popup vertically.
      * You can override this method to change the vertical position of the popup.
-     * @param popupHeight
+     * @param popupHeight the height of the popup
      * @return the top position of the popup.
      */
     protected int getTop(int popupHeight) {

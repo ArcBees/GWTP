@@ -109,8 +109,8 @@ public class DefaultHeaderFactory implements HeaderFactory {
         }
     }
 
-    private boolean addGlobalHeaders(RestAction<?> action, List<HttpParameter> headerParams) {
-        return headerParams.addAll(globalParams.get(action.getHttpMethod()));
+    private void addGlobalHeaders(RestAction<?> action, List<HttpParameter> headerParams) {
+        headerParams.addAll(globalParams.get(action.getHttpMethod()));
     }
 
     private void addActionHeaders(RestAction<?> action, List<HttpParameter> headerParams) {
