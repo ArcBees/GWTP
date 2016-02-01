@@ -16,7 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.client.interceptor;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.google.gwt.inject.client.AsyncProvider;
@@ -69,28 +69,24 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  */
 public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     private final Map<InterceptorContext, IndirectProvider<RestInterceptor>> interceptors =
-            new HashMap<InterceptorContext, IndirectProvider<RestInterceptor>>();
+            new LinkedHashMap<InterceptorContext, IndirectProvider<RestInterceptor>>();
 
     @Override
     public <A> IndirectProvider<RestInterceptor> find(A action) {
-        if (interceptors != null && action instanceof RestAction) {
-            IndirectProvider<RestInterceptor> provider = null;
-
+        if (action instanceof RestAction) {
             InterceptorContext subjectContext = new InterceptorContext
                     .Builder((RestAction) action).build();
 
-            for (Map.Entry<InterceptorContext, IndirectProvider<RestInterceptor>> entry
-                    : interceptors.entrySet()) {
+            for (Map.Entry<InterceptorContext, IndirectProvider<RestInterceptor>> entry : interceptors.entrySet()) {
                 InterceptorContext context = entry.getKey();
 
                 if (context.equals(subjectContext)) {
-                    provider = entry.getValue();
+                    return entry.getValue();
                 }
             }
-            return provider;
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
