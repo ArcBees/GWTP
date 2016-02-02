@@ -19,7 +19,7 @@ package com.gwtplatform.processors.tools.bindings.gin;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.tools.JavaFileObject;
+import javax.tools.FileObject;
 
 import com.google.auto.service.AutoService;
 import com.google.common.base.Optional;
@@ -36,7 +36,7 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
 
     private final Multimap<Type, GinBinding> bindings;
     private final Multimap<Type, Type> subModules;
-    private final Map<Type, JavaFileObject> sourceFiles;
+    private final Map<Type, FileObject> sourceFiles;
 
     public GinModuleProcessor() {
         bindings = HashMultimap.create();
@@ -57,23 +57,23 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
         return null;
     }
 
-    public Type findOrCreateSourceFile(BindingContext context) {
+    private Type findOrCreateSourceFile(BindingContext context) {
         Type moduleType = context.getModuleType();
         if (!sourceFiles.containsKey(moduleType)) {
-            JavaFileObject file = outputter.prepareSourceFile(moduleType);
+            FileObject file = outputter.prepareSourceFile(moduleType);
             sourceFiles.put(moduleType, file);
         }
 
         return moduleType;
     }
 
-    public void createSubModule(BindingContext context, Type moduleType) {
+    private void createSubModule(BindingContext context, Type moduleType) {
         Type implementer = context.getImplementer();
 
         subModules.put(moduleType, implementer);
     }
 
-    public void createBinding(BindingContext context, Type moduleType) {
+    private void createBinding(BindingContext context, Type moduleType) {
         Type implementer = context.getImplementer();
 
         Optional<Type> implemented = context.getImplemented();
@@ -86,7 +86,7 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
 
     @Override
     public void processLast() {
-        for (Map.Entry<Type, JavaFileObject> entry : sourceFiles.entrySet()) {
+        for (Map.Entry<Type, FileObject> entry : sourceFiles.entrySet()) {
             Type moduleType = entry.getKey();
             logger.debug("Generating GIN module `%s`.", moduleType.getQualifiedName());
 

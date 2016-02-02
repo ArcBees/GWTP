@@ -21,7 +21,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.tools.JavaFileObject;
+import javax.tools.FileObject;
 
 import org.apache.velocity.VelocityContext;
 
@@ -39,7 +39,7 @@ public class OutputBuilder {
     private final VelocityContext context;
     private final Collection<String> imports;
 
-    private Optional<JavaFileObject> sourceFile;
+    private Optional<FileObject> sourceFile;
     private Optional<Type> type;
     private Optional<String> errorLogParameter;
 
@@ -101,7 +101,7 @@ public class OutputBuilder {
         writeTo(type, null);
     }
 
-    public void writeTo(Type type, JavaFileObject sourceFile) {
+    public void writeTo(Type type, FileObject sourceFile) {
         this.type = Optional.of(type);
         this.sourceFile = Optional.fromNullable(sourceFile);
 
@@ -132,7 +132,7 @@ public class OutputBuilder {
         return imports;
     }
 
-    Optional<JavaFileObject> getSourceFile() {
+    Optional<FileObject> getSourceFile() {
         return sourceFile;
     }
 

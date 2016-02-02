@@ -42,7 +42,7 @@ public class Logger {
         this.debug = options.containsKey(DEBUG_OPTION);
     }
 
-    public boolean debugEnabled() {
+    public boolean isDebugEnabled() {
         return debug;
     }
 

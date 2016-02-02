@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.inject.Singleton;
-import javax.tools.JavaFileObject;
+import javax.tools.FileObject;
 import javax.ws.rs.core.MediaType;
 
 import com.google.auto.service.AutoService;
@@ -54,7 +54,7 @@ public class JacksonSerializationProcessor extends DispatchRestContextProcessor<
     private final Type impl;
     private final Type parent;
 
-    private JavaFileObject sourceFile;
+    private FileObject sourceFile;
 
     public JacksonSerializationProcessor() {
         this.mapperProcessor = new JacksonMapperProcessor();

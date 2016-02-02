@@ -28,7 +28,7 @@ import java.util.Properties;
 
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.Processor;
-import javax.tools.JavaFileObject;
+import javax.tools.FileObject;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -99,8 +99,8 @@ public class Outputter {
         }
     }
 
-    private JavaFileObject prepareSourceFile(OutputBuilder builder) throws IOException {
-        Optional<JavaFileObject> sourceFile = builder.getSourceFile();
+    private FileObject prepareSourceFile(OutputBuilder builder) throws IOException {
+        Optional<FileObject> sourceFile = builder.getSourceFile();
         if (sourceFile.isPresent()) {
             return sourceFile.get();
         } else {
@@ -108,9 +108,9 @@ public class Outputter {
         }
     }
 
-    public JavaFileObject prepareSourceFile(Type type) {
+    public FileObject prepareSourceFile(Type type) {
         try {
-            return filer.createSourceFile(type.getQualifiedName());
+            return new SourcedFileObject(logger, filer, type);
         } catch (IOException e) {
             logger.error().throwable(e).log("Can not create source file `%s`.", type.getQualifiedName());
             throw new UnableToProcessException();
