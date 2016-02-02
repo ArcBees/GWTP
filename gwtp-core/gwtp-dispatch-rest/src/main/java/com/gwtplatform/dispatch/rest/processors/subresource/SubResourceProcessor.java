@@ -47,7 +47,7 @@ public class SubResourceProcessor extends DispatchRestContextProcessor<SubResour
 
         List<CodeSnippet> methods = methodProcessors.processAll(subResource.getMethods());
 
-        outputter.withTemplateFile(TEMPLATE)
+        outputter.configure(TEMPLATE)
                 .withParam("subResourceType", subResourceType)
                 .withParam("methods", methods)
                 .withParam("fields", subResource.getFields())

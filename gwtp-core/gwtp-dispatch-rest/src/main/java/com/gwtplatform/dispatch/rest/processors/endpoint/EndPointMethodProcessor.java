@@ -58,7 +58,7 @@ public class EndPointMethodProcessor extends DispatchRestContextProcessor<Resour
 
         logger.debug("Generating end-point method `%s`.", methodName);
 
-        CodeSnippet code = outputter.withTemplateFile(TEMPLATE)
+        CodeSnippet code = outputter.configure(TEMPLATE)
                 .withParam("method", endPointMethod.getMethod())
                 .withParam("endPointType", endPoint.getType())
                 .withParam("endPointArguments", endPoint.getFields())

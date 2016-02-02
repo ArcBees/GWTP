@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.processors;
 
+import java.util.Set;
+
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
@@ -24,11 +26,12 @@ import javax.lang.model.util.SimpleElementVisitor6;
 
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.processors.tools.domain.Type;
+import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.MoreElements.asType;
 
 public class NameUtils {
-    public static final Type REST_GIN_MODULE = new Type("com.gwtplatform.dispatch.rest.client", "RestGinModule");
+    private static final String REST_MODULE_NAME = "RestModule$Generated";
 
     public static String parentName(VariableElement element) {
         return element.getEnclosingElement().accept(new SimpleElementVisitor6<String, Void>("") {
@@ -57,5 +60,12 @@ public class NameUtils {
 
     public static String qualifiedMethodName(ResourceMethod method) {
         return method.getParentResource().getType() + "#" + method.getMethod().getName();
+    }
+
+    public static Type findRestModuleType(Utils utils) {
+        Set<String> sourcePackages = utils.getSourceFilter().getSourcePackages();
+
+        // Source packages is guaranteed not to be null.
+        return new Type(sourcePackages.iterator().next(), REST_MODULE_NAME);
     }
 }

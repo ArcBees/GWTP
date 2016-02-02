@@ -32,10 +32,6 @@ public abstract class AbstractContextProcessor<I, O> implements ContextProcessor
         this.outputter = outputter;
     }
 
-    protected String[] getMacroFiles() {
-        return new String[0];
-    }
-
     @Override
     public boolean canProcess(I context) {
         return true;

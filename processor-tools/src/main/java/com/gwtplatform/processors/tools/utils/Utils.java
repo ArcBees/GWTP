@@ -17,6 +17,7 @@
 package com.gwtplatform.processors.tools.utils;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.lang.model.element.Element;
@@ -28,16 +29,24 @@ import javax.lang.model.util.Types;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
+import com.gwtplatform.processors.tools.GwtSourceFilter;
+import com.gwtplatform.processors.tools.logger.Logger;
 
 public class Utils {
     private final Types types;
     private final Elements elements;
+    private final Map<String, String> options;
+    private final GwtSourceFilter sourceFilter;
 
     public Utils(
+            Logger logger,
             Types types,
-            Elements elements) {
+            Elements elements,
+            Map<String, String> options) {
         this.types = types;
         this.elements = elements;
+        this.options = options;
+        this.sourceFilter = new GwtSourceFilter(logger, this);
     }
 
     public Types getTypes() {
@@ -46,6 +55,18 @@ public class Utils {
 
     public Elements getElements() {
         return elements;
+    }
+
+    public GwtSourceFilter getSourceFilter() {
+        return sourceFilter;
+    }
+
+    public boolean containsOption(String key) {
+        return options.containsKey(key);
+    }
+
+    public String getOption(String key) {
+        return options.get(key);
     }
 
     public TypeMirror createWithWildcard(Class<?> clazz) {

@@ -19,8 +19,4 @@ package com.gwtplatform.dispatch.rest.processors;
 import com.gwtplatform.processors.tools.AbstractContextProcessor;
 
 public abstract class DispatchRestContextProcessor<I, O> extends AbstractContextProcessor<I, O> {
-    @Override
-    protected String[] getMacroFiles() {
-        return new String[]{"com/gwtplatform/dispatch/rest/processors/macros.vm"};
-    }
 }

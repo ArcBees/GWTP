@@ -38,7 +38,7 @@ import com.gwtplatform.processors.tools.outputter.Outputter;
 import com.gwtplatform.processors.tools.utils.Primitives;
 import com.gwtplatform.processors.tools.utils.Utils;
 
-import static com.gwtplatform.dispatch.rest.processors.NameUtils.REST_GIN_MODULE;
+import static com.gwtplatform.dispatch.rest.processors.NameUtils.findRestModuleType;
 import static com.gwtplatform.processors.tools.utils.Primitives.findByBoxed;
 import static com.gwtplatform.processors.tools.utils.Primitives.findByPrimitive;
 
@@ -71,7 +71,7 @@ public class JacksonSerializationProcessor extends DispatchRestContextProcessor<
 
         sourceFile = outputter.prepareSourceFile(impl);
 
-        BindingContext context = new BindingContext(REST_GIN_MODULE, impl, parent, Singleton.class);
+        BindingContext context = new BindingContext(findRestModuleType(utils), impl, parent, Singleton.class);
         new BindingsProcessors(logger, utils, outputter).process(context);
     }
 
@@ -113,7 +113,7 @@ public class JacksonSerializationProcessor extends DispatchRestContextProcessor<
     public void processLast() {
         logger.debug("Generating Jackson serialization policy `%s`.", impl.getQualifiedName());
 
-        outputter.withTemplateFile(TEMPLATE)
+        outputter.configure(TEMPLATE)
                 .withParam("mappers", mappers.values())
                 .writeTo(impl, sourceFile);
     }

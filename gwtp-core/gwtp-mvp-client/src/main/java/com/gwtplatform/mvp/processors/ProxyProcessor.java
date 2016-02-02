@@ -74,7 +74,7 @@ public class ProxyProcessor extends AbstractProcessor {
         super.init(processingEnv);
 
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
-        utils = new Utils(processingEnv.getTypeUtils(), processingEnv.getElementUtils());
+        utils = new Utils(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils(), processingEnv.getOptions());
         outputter = new Outputter(logger, this, processingEnv.getFiler());
         bindingProcessors = new BindingsProcessors(logger, utils, outputter);
     }
@@ -130,7 +130,7 @@ public class ProxyProcessor extends AbstractProcessor {
         Type interfaceType = new Type(element.asType());
 
         outputter
-                .withTemplateFile("com/gwtplatform/mvp/processors/ProxyPlaceImpl.vm")
+                .configure("com/gwtplatform/mvp/processors/ProxyPlaceImpl.vm")
                 .withParam("proxy", interfaceType)
                 .withParam("proxyName", proxyName)
                 .withParam("presenterName", presenterName)
@@ -158,7 +158,7 @@ public class ProxyProcessor extends AbstractProcessor {
         Type interfaceType = new Type(element.asType());
 
         outputter
-                .withTemplateFile("com/gwtplatform/mvp/processors/SimpleProxyImpl.vm")
+                .configure("com/gwtplatform/mvp/processors/SimpleProxyImpl.vm")
                 .withParam("proxy", interfaceType)
                 .withParam("proxyName", proxyName)
                 .withParam("presenterName", presenterName)

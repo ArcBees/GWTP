@@ -48,7 +48,7 @@ public class EndPointProcessor extends DispatchRestContextProcessor<EndPoint, Vo
 
         logger.debug("Generating end-point implementation `%s`.", type);
 
-        outputter.withTemplateFile(TEMPLATE)
+        outputter.configure(TEMPLATE)
                 .withParam("endPoint", endPoint.getEndPointDetails())
                 .withParam("fields", endPoint.getFields())
                 .writeTo(type);

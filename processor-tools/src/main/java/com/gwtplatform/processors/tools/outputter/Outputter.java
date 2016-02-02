@@ -50,6 +50,7 @@ import static com.google.common.base.Predicates.or;
 
 public class Outputter {
     private static final String PROPERTIES = "/com/gwtplatform/processors/tools/velocity.properties";
+    // TODO: Given in AbstractRestProcessor
     private static final String DEFAULT_MACRO_FILE = "/com/gwtplatform/processors/tools/macros.vm";
     private static final String ENCODING = "UTF-8";
     private static final SimpleDateFormat PROCESSING_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
@@ -72,7 +73,7 @@ public class Outputter {
         this.macroFiles = FluentIterable.of(macroFiles).append(DEFAULT_MACRO_FILE).toList();
     }
 
-    public OutputBuilder withTemplateFile(String templateFile) {
+    public OutputBuilder configure(String templateFile) {
         return new OutputBuilder(this, processor, templateFile);
     }
 
@@ -104,13 +105,17 @@ public class Outputter {
         if (sourceFile.isPresent()) {
             return sourceFile.get();
         } else {
-            return prepareSourceFile(builder.getType().get());
+            return prepareSourceFile(builder.getType().get(), builder.getOutputType().get());
         }
     }
 
     public FileObject prepareSourceFile(Type type) {
+        return prepareSourceFile(type, OutputType.GWT);
+    }
+
+    public FileObject prepareSourceFile(Type type, OutputType outputType) {
         try {
-            return new SourcedFileObject(logger, filer, type);
+            return outputType.createFileObject(logger, filer, type);
         } catch (IOException e) {
             logger.error().throwable(e).log("Can not create source file `%s`.", type.getQualifiedName());
             throw new UnableToProcessException();

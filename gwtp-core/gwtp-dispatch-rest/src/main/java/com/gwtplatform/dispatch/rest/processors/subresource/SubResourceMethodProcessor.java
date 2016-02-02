@@ -58,7 +58,7 @@ public class SubResourceMethodProcessor extends DispatchRestContextProcessor<Res
 
         logger.debug("Generating sub-resource method `%s`.", methodName);
 
-        CodeSnippet code = outputter.withTemplateFile(TEMPLATE)
+        CodeSnippet code = outputter.configure(TEMPLATE)
                 .withParam("method", subResourceMethod.getMethod())
                 .withParam("subResourceType", subResource.getType())
                 .withParam("subResourceArguments", subResource.getFields())

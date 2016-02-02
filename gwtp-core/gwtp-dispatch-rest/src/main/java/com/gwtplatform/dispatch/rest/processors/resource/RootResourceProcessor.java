@@ -29,7 +29,7 @@ import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 import com.gwtplatform.processors.tools.outputter.Outputter;
 import com.gwtplatform.processors.tools.utils.Utils;
 
-import static com.gwtplatform.dispatch.rest.processors.NameUtils.REST_GIN_MODULE;
+import static com.gwtplatform.dispatch.rest.processors.NameUtils.findRestModuleType;
 
 public class RootResourceProcessor extends DispatchRestContextProcessor<RootResource, Void> {
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/resource/Resource.vm";
@@ -58,12 +58,12 @@ public class RootResourceProcessor extends DispatchRestContextProcessor<RootReso
 
         List<CodeSnippet> processedMethods = methodProcessors.processAll(resource.getMethods());
 
-        outputter.withTemplateFile(TEMPLATE)
+        outputter.configure(TEMPLATE)
                 .withParam("resource", resourceType)
                 .withParam("methods", processedMethods)
                 .writeTo(impl);
 
-        bindingsProcessors.process(new BindingContext(REST_GIN_MODULE, impl, resourceType, Singleton.class));
+        bindingsProcessors.process(new BindingContext(findRestModuleType(utils), impl, resourceType, Singleton.class));
 
         return null;
     }

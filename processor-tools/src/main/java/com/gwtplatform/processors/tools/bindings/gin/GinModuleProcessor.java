@@ -16,6 +16,8 @@
 
 package com.gwtplatform.processors.tools.bindings.gin;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,14 +31,19 @@ import com.gwtplatform.processors.tools.AbstractContextProcessor;
 import com.gwtplatform.processors.tools.bindings.BindingContext;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessor;
 import com.gwtplatform.processors.tools.domain.Type;
+import com.gwtplatform.processors.tools.outputter.OutputType;
 
 @AutoService(BindingsProcessor.class)
 public class GinModuleProcessor extends AbstractContextProcessor<BindingContext, Void> implements BindingsProcessor {
+    public static final Type META_INF_TYPE = new Type("", "gwtp/ginModules");
+
     private static final String TEMPLATE = "com/gwtplatform/processors/tools/bindings/gin/GinModule.vm";
 
     private final Multimap<Type, GinBinding> bindings;
     private final Multimap<Type, Type> subModules;
     private final Map<Type, FileObject> sourceFiles;
+
+    private BufferedWriter metaInfWriter;
 
     public GinModuleProcessor() {
         bindings = HashMultimap.create();
@@ -60,11 +67,41 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
     private Type findOrCreateSourceFile(BindingContext context) {
         Type moduleType = context.getModuleType();
         if (!sourceFiles.containsKey(moduleType)) {
-            FileObject file = outputter.prepareSourceFile(moduleType);
-            sourceFiles.put(moduleType, file);
+            createSourceFile(moduleType);
         }
 
         return moduleType;
+    }
+
+    private void createSourceFile(Type moduleType) {
+        FileObject file = outputter.prepareSourceFile(moduleType);
+        sourceFiles.put(moduleType, file);
+
+        appendToMetaInf(moduleType);
+    }
+
+    private void appendToMetaInf(Type moduleType) {
+        if (metaInfWriter == null) {
+            createMetaInfFile();
+        }
+
+        try {
+            metaInfWriter.append(moduleType.getQualifiedName());
+            metaInfWriter.newLine();
+        } catch (IOException e) {
+            logger.mandatoryWarning()
+                    .throwable(e)
+                    .log("Unable to append '%s' to the GIN modules metadata file", moduleType);
+        }
+    }
+
+    private void createMetaInfFile() {
+        try {
+            FileObject fileObject = outputter.prepareSourceFile(META_INF_TYPE, OutputType.META_INF);
+            metaInfWriter = new BufferedWriter(fileObject.openWriter());
+        } catch (IOException e) {
+            logger.error().throwable(e).log("Could not to create GIN modules metadata file.");
+        }
     }
 
     private void createSubModule(BindingContext context, Type moduleType) {
@@ -91,10 +128,22 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
             logger.debug("Generating GIN module `%s`.", moduleType.getQualifiedName());
 
             outputter
-                    .withTemplateFile(TEMPLATE)
+                    .configure(TEMPLATE)
                     .withParam("bindings", bindings.get(moduleType))
                     .withParam("subModules", subModules.get(moduleType))
                     .writeTo(moduleType, entry.getValue());
+        }
+
+        closeMetadataFile();
+    }
+
+    private void closeMetadataFile() {
+        if (metaInfWriter != null) {
+            try {
+                metaInfWriter.close();
+            } catch (IOException e) {
+                logger.error().throwable(e).log("Could not write GIN modules metadata file.");
+            }
         }
     }
 }

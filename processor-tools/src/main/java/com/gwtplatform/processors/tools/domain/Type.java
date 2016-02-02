@@ -55,7 +55,7 @@ public class Type implements HasImports, Comparable<Type> {
         this(element.asType());
     }
 
-    // TODO: I guess it's type to go with factory methods...
+    // TODO: I guess it's time to go with factory methods...
     public Type(TypeMirror type) {
         // void is not a primitive
         if (type.getKind() == TypeKind.VOID) {

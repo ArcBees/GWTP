@@ -30,6 +30,8 @@ import com.google.common.collect.FluentIterable;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
 
+import static com.google.common.base.Optional.fromNullable;
+import static com.google.common.base.Optional.of;
 import static com.gwtplatform.processors.tools.domain.HasImports.EXTRACT_IMPORTS_FUNCTION;
 
 public class OutputBuilder {
@@ -42,6 +44,7 @@ public class OutputBuilder {
     private Optional<FileObject> sourceFile;
     private Optional<Type> type;
     private Optional<String> errorLogParameter;
+    private Optional<OutputType> outputType;
 
     OutputBuilder(
             Outputter outputter,
@@ -93,20 +96,29 @@ public class OutputBuilder {
     }
 
     public OutputBuilder withErrorLogParameter(String errorLogParameter) {
-        this.errorLogParameter = Optional.of(errorLogParameter);
+        this.errorLogParameter = of(errorLogParameter);
         return this;
     }
 
     public void writeTo(Type type) {
-        writeTo(type, null);
+        writeTo(type, OutputType.GWT);
+    }
+
+    public void writeTo(Type type, OutputType outputType) {
+        writeTo(type, outputType, null);
     }
 
     public void writeTo(Type type, FileObject sourceFile) {
-        this.type = Optional.of(type);
-        this.sourceFile = Optional.fromNullable(sourceFile);
+        writeTo(type, null, sourceFile);
+    }
+
+    private void writeTo(Type type, OutputType outputType, FileObject sourceFile) {
+        this.type = of(type);
+        this.sourceFile = fromNullable(sourceFile);
+        this.outputType = fromNullable(outputType);
 
         if (!errorLogParameter.isPresent()) {
-            errorLogParameter = Optional.of(type.getQualifiedName());
+            errorLogParameter = of(type.getQualifiedName());
         }
 
         outputter.writeSource(this);
@@ -134,6 +146,10 @@ public class OutputBuilder {
 
     Optional<FileObject> getSourceFile() {
         return sourceFile;
+    }
+
+    Optional<OutputType> getOutputType() {
+        return outputType;
     }
 
     Optional<Type> getType() {

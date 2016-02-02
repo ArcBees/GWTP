@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.lang.model.element.Element;
@@ -47,6 +48,8 @@ public class GwtSourceFilter {
     private static final String INHERITS_TAG = "inherits";
     private static final String NAME_ATTRIBUTE = "name";
 
+    public static final String GWTP_MODULE_OPTION = "gwtp.module";
+
     private final Logger logger;
     private final Utils utils;
     private final Set<String> parsedModules;
@@ -61,10 +64,30 @@ public class GwtSourceFilter {
         this.logger = logger;
         this.utils = utils;
         this.parsedModules = new HashSet<>();
-        this.sourcePackages = new HashSet<>();
+        this.sourcePackages = new LinkedHashSet<>();
 
         if (moduleNames != null) {
             addModules(moduleNames);
+        }
+        loadFromOptions();
+
+        if (sourcePackages.isEmpty()) {
+            logger.warning("No source packages found. Make sure your GWT module contains <source> tags.");
+        }
+    }
+
+    public Set<String> getSourcePackages() {
+        return new LinkedHashSet<>(sourcePackages);
+    }
+
+    private void loadFromOptions() {
+        String modules = utils.getOption(GWTP_MODULE_OPTION);
+
+        if (modules == null) {
+            logger.warning("Add `-A%s=com.domain.YourModule.gwt.xml` to your compiler options to enable GWTP "
+                    + "annotation processors.", GWTP_MODULE_OPTION);
+        } else {
+            addModules(modules.split(","));
         }
     }
 
@@ -85,7 +108,7 @@ public class GwtSourceFilter {
         String packageName = packageElement.getQualifiedName() + ".";
 
         for (String sourcePackage : sourcePackages) {
-            if (packageName.startsWith(sourcePackage)) {
+            if (packageName.startsWith(sourcePackage + ".")) {
                 return true;
             }
         }
@@ -165,7 +188,7 @@ public class GwtSourceFilter {
             sourcePackage += "." + path.replace('/', '.');
         }
 
-        sourcePackages.add(sourcePackage + ".");
+        sourcePackages.add(sourcePackage);
     }
 
     private void loadInheritedModules(Document document)

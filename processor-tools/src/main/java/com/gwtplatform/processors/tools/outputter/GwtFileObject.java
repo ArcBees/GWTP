@@ -31,11 +31,11 @@ import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.logger.Logger;
 
 /**
- * A FileObject that wraps both the .java file that will be compiled to a .class file and the .java file that will be
- * sourced by GWT. The first one is only necessary for development purpose and can only be enabled through compiler
- * properties.
+ * A FileObject that wraps both the .java file that will be compiled to a .class and the .java file that will be
+ * transpiled by GWT. The first one is only necessary for development purpose to detect errors earlier and can only be
+ * enabled with the <code>-Adebug</code> property.
  */
-class SourcedFileObject implements FileObject {
+class GwtFileObject implements FileObject {
     private static class MultiFileWriter extends Writer {
         private final Writer prodWriter;
         private final Writer devWriter;
@@ -88,7 +88,7 @@ class SourcedFileObject implements FileObject {
     private final FileObject prodFileObject;
     private final FileObject devFileObject;
 
-    SourcedFileObject(
+    GwtFileObject(
             Logger logger,
             Filer filer,
             Type type) throws IOException {

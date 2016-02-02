@@ -16,6 +16,8 @@
 
 package com.gwtplatform.processors.tools.logger;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Map;
 
 import javax.annotation.processing.Messager;
@@ -110,7 +112,9 @@ public class Logger {
         messager.printMessage(kind, format(message, arguments), element, annotationMirror, annotationValue);
 
         if (debug && throwable != null) {
-            throwable.printStackTrace();
+            StringWriter writer = new StringWriter();
+            throwable.printStackTrace(new PrintWriter(writer));
+            messager.printMessage(Kind.ERROR, writer.toString());
         }
     }
 }
