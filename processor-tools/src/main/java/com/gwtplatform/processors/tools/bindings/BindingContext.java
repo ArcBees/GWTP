@@ -28,6 +28,10 @@ public class BindingContext {
     private Optional<Type> scope;
     private boolean eagerSingleton;
 
+    public BindingContext(Type moduleType) {
+        this(moduleType, null);
+    }
+
     public BindingContext(
             Type moduleType,
             Type implementer) {

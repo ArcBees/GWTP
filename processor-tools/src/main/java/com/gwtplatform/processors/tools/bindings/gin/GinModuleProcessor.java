@@ -57,7 +57,7 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
 
         if (context.isSubModule()) {
             createSubModule(context, moduleType);
-        } else {
+        } else if (context.getImplementer() != null) {
             createBinding(context, moduleType);
         }
 
@@ -95,6 +95,11 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
         }
     }
 
+    /**
+     * TODO: If this file already exists in the current resources (not JARs!), append content This is not critical as it
+     * should not be manually created. In the case someone wants to register modules, we can add a @GwtpModule
+     * annotation
+     */
     private void createMetaInfFile() {
         try {
             FileObject fileObject = outputter.prepareSourceFile(META_INF_TYPE, OutputType.META_INF);

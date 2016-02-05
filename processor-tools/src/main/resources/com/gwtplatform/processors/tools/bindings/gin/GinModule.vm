@@ -5,14 +5,12 @@ import javax.annotation.Generated;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.TypeLiteral;
 
-#printImports($imports)
-
 @Generated("$processor.qualifiedName")
 public class $impl.simpleName extends AbstractGinModule {
     @Override
     protected void configure() {
 #foreach($subModule in $subModules)
-        install(new ${subModule.simpleName}());
+        install(new ${subModule.qualifiedName}());
 #end
 
 #foreach ($binding in $bindings)
@@ -21,21 +19,21 @@ public class $impl.simpleName extends AbstractGinModule {
 #set($implemented = $binding.implemented.get())
 #set($implementerMethod = '        .to')
 #if($implemented.isParameterized())
-        bind(new TypeLiteral<$implemented.parameterizedName>() {})
+        bind(new TypeLiteral<$implemented.qualifiedParameterizedName>() {})
 #else
-        bind(${implemented.simpleName}.class)
+        bind(${implemented.qualifiedName}.class)
 #end
 #end
 #set($implementer = $binding.implementer)
 #if($implementer.isParameterized())
-        ${implementerMethod}(new TypeLiteral<$implementer.parameterizedName>() {})
+        ${implementerMethod}(new TypeLiteral<$implementer.qualifiedParameterizedName>() {})
 #else
-        ${implementerMethod}(${implementer.simpleName}.class)
+        ${implementerMethod}(${implementer.qualifiedName}.class)
 #end
 #if($binding.isEagerSingleton())
                 .asEagerSingleton()
 #elseif($binding.scope.isPresent())
-                .in(${binding.scope.get().simpleName}.class)#end;
+                .in(${binding.scope.get().qualifiedName}.class)#end;
 #end
     }
 }

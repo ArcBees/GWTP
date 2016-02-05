@@ -14,5 +14,4 @@
     <super-source path="emul"/>
 
     <extend-configuration-property name="gin.classloading.exceptedPackages" value="javax.ws.rs"/>
-    <extend-configuration-property name="gin.ginjector.modules" value="com.gwtplatform.common.client.GwtpGinModule"/>
 </module>

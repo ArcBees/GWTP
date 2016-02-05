@@ -31,7 +31,7 @@ import com.gwtplatform.processors.tools.utils.Utils;
 import static com.google.auto.common.MoreElements.asType;
 
 public class NameUtils {
-    private static final String REST_MODULE_NAME = "RestModule$Generated";
+    private static final String REST_MODULE_NAME = "GeneratedRestModule";
 
     public static String parentName(VariableElement element) {
         return element.getEnclosingElement().accept(new SimpleElementVisitor6<String, Void>("") {
