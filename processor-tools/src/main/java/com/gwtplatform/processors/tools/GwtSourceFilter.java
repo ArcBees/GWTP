@@ -36,7 +36,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
@@ -52,10 +51,11 @@ public class GwtSourceFilter {
 
     private final Logger logger;
     private final Utils utils;
+    private final String[] moduleNames;
     private final Set<String> parsedModules;
+    private final Set<String> sourcePackages;
 
-    @VisibleForTesting
-    final Set<String> sourcePackages;
+    private boolean initialized;
 
     public GwtSourceFilter(
             Logger logger,
@@ -63,9 +63,21 @@ public class GwtSourceFilter {
             String... moduleNames) {
         this.logger = logger;
         this.utils = utils;
+        this.moduleNames = moduleNames;
         this.parsedModules = new HashSet<>();
         this.sourcePackages = new LinkedHashSet<>();
+    }
 
+    public Set<String> getSourcePackages() {
+        if (!initialized) {
+            resolveSourcePackages();
+            initialized = true;
+        }
+
+        return new LinkedHashSet<>(sourcePackages);
+    }
+
+    private void resolveSourcePackages() {
         if (moduleNames != null) {
             addModules(moduleNames);
         }
@@ -74,10 +86,6 @@ public class GwtSourceFilter {
         if (sourcePackages.isEmpty()) {
             logger.warning("No source packages found. Make sure your GWT module contains <source> tags.");
         }
-    }
-
-    public Set<String> getSourcePackages() {
-        return new LinkedHashSet<>(sourcePackages);
     }
 
     private void loadFromOptions() {
@@ -107,7 +115,7 @@ public class GwtSourceFilter {
         PackageElement packageElement = utils.getElements().getPackageOf(element);
         String packageName = packageElement.getQualifiedName() + ".";
 
-        for (String sourcePackage : sourcePackages) {
+        for (String sourcePackage : getSourcePackages()) {
             if (packageName.startsWith(sourcePackage + ".")) {
                 return true;
             }

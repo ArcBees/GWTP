@@ -52,6 +52,8 @@ import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.MoreElements.asType;
 import static com.google.auto.common.MoreTypes.asTypeElement;
+import static com.gwtplatform.processors.tools.bindings.BindingContext.newBinding;
+import static com.gwtplatform.processors.tools.bindings.BindingContext.newSubModule;
 
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
 @SupportedOptions(Logger.DEBUG_OPTION)
@@ -170,12 +172,11 @@ public class ProxyProcessor extends AbstractProcessor {
 
     private void createGinBindings(Type implementationType, Type interfaceType) {
         Type localModuleType = new Type(implementationType.getPackageName(), "MvpModule" + moduleIndex++);
-        BindingContext bindingContext = new BindingContext(localModuleType, implementationType);
+        BindingContext bindingContext = newBinding(localModuleType, interfaceType, implementationType);
         bindingContext.setEagerSingleton(true);
-        bindingContext.setImplemented(interfaceType);
 
         bindingProcessors.process(bindingContext);
-        bindingProcessors.process(new BindingContext(MVP_MODULE, localModuleType, true));
+        bindingProcessors.process(newSubModule(MVP_MODULE, localModuleType));
     }
 
     private TypeMirror extractFirstProxyInterface(Element element, List<? extends TypeMirror> interfaces,

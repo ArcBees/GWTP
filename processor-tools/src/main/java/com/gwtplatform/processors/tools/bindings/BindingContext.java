@@ -19,70 +19,91 @@ package com.gwtplatform.processors.tools.bindings;
 import com.google.common.base.Optional;
 import com.gwtplatform.processors.tools.domain.Type;
 
+import static com.google.common.base.Optional.of;
+
 public class BindingContext {
     private final Type moduleType;
-    private final Type implementer;
+    private final Optional<Type> implementation;
+    private final Optional<Type> parent;
+    private final Optional<Type> scope;
     private final boolean subModule;
+    private final boolean setBinder;
 
-    private Optional<Type> implemented;
-    private Optional<Type> scope;
     private boolean eagerSingleton;
 
-    public BindingContext(Type moduleType) {
-        this(moduleType, null);
-    }
-
-    public BindingContext(
+    private BindingContext(
             Type moduleType,
-            Type implementer) {
-        this(moduleType, implementer, false);
-    }
-
-    public BindingContext(
-            Type moduleType,
-            Type implementer,
-            boolean subModule) {
+            Optional<Type> implementation,
+            Optional<Type> parent,
+            Optional<Type> scope,
+            boolean subModule,
+            boolean setBinder) {
         this.moduleType = moduleType;
-        this.implementer = implementer;
+        this.implementation = implementation;
+        this.parent = parent;
+        this.scope = scope;
         this.subModule = subModule;
-        this.implemented = Optional.absent();
-        this.scope = Optional.absent();
+        this.setBinder = setBinder;
     }
 
-    public BindingContext(
-            Type moduleType,
-            Type implementer,
-            Type implemented,
+    public static BindingContext newModule(Type module) {
+        return new BindingContext(module, absentType(), absentType(), absentType(), true, false);
+    }
+
+    public static BindingContext newSubModule(
+            Type module,
+            Type subModule) {
+        return new BindingContext(module, of(subModule), absentType(), absentType(), true, false);
+    }
+
+    public static BindingContext newSetBinder(
+            Type module,
+            Type parent,
+            Type implementation) {
+        return new BindingContext(module, of(implementation), of(parent), absentType(), false, true);
+    }
+
+    public static BindingContext newSetBinder(
+            Type module,
+            Type parent,
+            Type implementation,
             Class<?> scope) {
-        this.moduleType = moduleType;
-        this.implementer = implementer;
-        this.implemented = Optional.of(implemented);
-        this.scope = Optional.of(new Type(scope));
-        this.subModule = false;
+        return new BindingContext(module, of(implementation), of(parent), of(new Type(scope)), false, true);
+    }
+
+    public static BindingContext newBinding(
+            Type module,
+            Type parent,
+            Type implementation) {
+        return new BindingContext(module, of(implementation), of(parent), absentType(), false, false);
+    }
+
+    public static BindingContext newBinding(
+            Type module,
+            Type parent,
+            Type implementation,
+            Class<?> scope) {
+        return new BindingContext(module, of(implementation), of(parent), of(new Type(scope)), false, false);
+    }
+
+    private static Optional<Type> absentType() {
+        return Optional.absent();
     }
 
     public Type getModuleType() {
         return moduleType;
     }
 
-    public Type getImplementer() {
-        return implementer;
+    public Optional<Type> getImplementation() {
+        return implementation;
     }
 
-    public Optional<Type> getImplemented() {
-        return implemented;
-    }
-
-    public void setImplemented(Type implemented) {
-        this.implemented = Optional.fromNullable(implemented);
+    public Optional<Type> getParent() {
+        return parent;
     }
 
     public Optional<Type> getScope() {
         return scope;
-    }
-
-    public void setScope(Class<?> scope) {
-        this.scope = Optional.of(new Type(scope));
     }
 
     public boolean isEagerSingleton() {
@@ -95,5 +116,9 @@ public class BindingContext {
 
     public boolean isSubModule() {
         return subModule;
+    }
+
+    public boolean isSetBinder() {
+        return setBinder;
     }
 }

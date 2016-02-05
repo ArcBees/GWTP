@@ -5,6 +5,7 @@ import javax.inject.Provider;
 
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
 import com.google.gwt.core.client.GWT;
+import com.gwtplatform.dispatch.rest.client.serialization.AbstractJacksonMapperProvider;
 
 #printImports($imports)
 

@@ -55,7 +55,7 @@ public class GwtSourceFilterTest {
         GwtSourceFilter filter = new GwtSourceFilter(logger, utils, MODULE1);
 
         // then
-        assertThat(filter.sourcePackages).containsOnly(
+        assertThat(filter.getSourcePackages()).containsOnly(
                 "com.gwtplatform.processors.tools.module1.client",
                 "com.gwtplatform.processors.tools.module2.client",
                 "com.gwtplatform.processors.tools.module2.shared",
@@ -70,7 +70,7 @@ public class GwtSourceFilterTest {
         GwtSourceFilter filter = new GwtSourceFilter(logger, utils, MODULE4);
 
         // then
-        assertThat(filter.sourcePackages).containsOnly(MODULE4_SOURCE_PATH);
+        assertThat(filter.getSourcePackages()).containsOnly(MODULE4_SOURCE_PATH);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class GwtSourceFilterTest {
         filter.addModule(MODULE4);
 
         // then
-        assertThat(filter.sourcePackages).containsOnly(MODULE4_SOURCE_PATH);
+        assertThat(filter.getSourcePackages()).containsOnly(MODULE4_SOURCE_PATH);
     }
 
     @Test

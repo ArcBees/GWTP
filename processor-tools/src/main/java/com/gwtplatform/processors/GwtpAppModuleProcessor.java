@@ -17,18 +17,6 @@
 package com.gwtplatform.processors;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -40,20 +28,24 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedOptions;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
+import com.google.auto.common.MoreElements;
 import com.google.auto.service.AutoService;
 import com.google.common.collect.Sets;
 import com.gwtplatform.common.client.GwtpApp;
-import com.gwtplatform.processors.tools.bindings.BindingContext;
+import com.gwtplatform.common.client.GwtpModule;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
+import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.outputter.Outputter;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.gwtplatform.processors.tools.GwtSourceFilter.GWTP_MODULE_OPTION;
-import static com.gwtplatform.processors.tools.bindings.gin.GinModuleProcessor.META_INF_TYPE;
+import static com.gwtplatform.processors.tools.bindings.BindingContext.newModule;
+import static com.gwtplatform.processors.tools.bindings.BindingContext.newSubModule;
 import static com.gwtplatform.processors.tools.logger.Logger.DEBUG_OPTION;
 
 @AutoService(Processor.class)
@@ -63,7 +55,11 @@ public class GwtpAppModuleProcessor extends AbstractProcessor {
     private static final Type MAIN_MODULE_TYPE = new Type(GwtpApp.class.getPackage().getName(), "GeneratedGwtpModule");
 
     private Logger logger;
+
     private BindingsProcessors bindingsProcessors;
+    private MetaInfModuleHandler metaInfModuleHandler;
+
+    private boolean isGwtpApp;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
@@ -75,74 +71,77 @@ public class GwtpAppModuleProcessor extends AbstractProcessor {
         Utils utils = new Utils(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils(), options);
         Outputter outputter = new Outputter(logger, this, processingEnv.getFiler());
         bindingsProcessors = new BindingsProcessors(logger, utils, outputter);
+        metaInfModuleHandler = new MetaInfModuleHandler(logger, outputter);
     }
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return Sets.newHashSet(GwtpApp.class.getCanonicalName());
+        return Sets.newHashSet(GwtpApp.class.getCanonicalName(), GwtpModule.class.getCanonicalName());
     }
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         try {
-            if (roundEnv.processingOver()) {
-                bindingsProcessors.processLast();
+            if (!roundEnv.processingOver()) {
+                doProcess(roundEnv);
             } else {
-                ensureModuleIsCreated();
-
-                List<String> modules = findModulesToInstall();
-                installModules(modules);
+                processLast();
             }
+        } catch (UnableToProcessException e) {
+            // More details should be logged before thrown
         } catch (Exception e) {
-            logger.error().throwable(e).log("Could not read GIN modules metadata.");
+            logger.error().throwable(e).log("Unexpected error. See stack trace.");
         }
+
         return false;
     }
 
-    private void ensureModuleIsCreated() {
-        bindingsProcessors.process(new BindingContext(MAIN_MODULE_TYPE));
-    }
+    private void doProcess(RoundEnvironment environment) throws Exception {
+        if (isGwtpApp(environment)) {
+            logger.debug("Processing GWTP application.");
 
-    private List<String> findModulesToInstall() throws IOException, URISyntaxException {
-        String metadataFileName = "META-INF/" + META_INF_TYPE.getSimpleName();
-        List<URL> moduleFiles = Collections.list(getClass().getClassLoader().getResources(metadataFileName));
-
-        return extractModulesToInstall(moduleFiles);
-    }
-
-    private List<String> extractModulesToInstall(List<URL> moduleFiles) throws URISyntaxException, IOException {
-        List<String> modules = new ArrayList<>();
-        for (URL moduleFile : moduleFiles) {
-            modules.addAll(extractModulesToInstall(moduleFile.toURI()));
-        }
-
-        return modules;
-    }
-
-    private List<String> extractModulesToInstall(URI moduleFile) throws URISyntaxException, IOException {
-        if (moduleFile.toString().contains("!")) {
-            return extractModulesToInstallFromZip(moduleFile);
+            ensureModuleIsCreated();
+            installModules(metaInfModuleHandler.readAll());
         } else {
-            return extractModulesToInstall(Paths.get(moduleFile));
+            logger.debug("Processing GWTP meta data.");
+
+            addModulesToMetaInf(environment);
         }
     }
 
-    private List<String> extractModulesToInstallFromZip(URI uri) throws IOException {
-        Map<String, Object> env = new HashMap<>();
-        String[] paths = uri.toString().split("!");
-
-        try (FileSystem fileSystem = FileSystems.newFileSystem(URI.create(paths[0]), env)) {
-            return extractModulesToInstall(fileSystem.getPath(paths[1]));
+    private boolean isGwtpApp(RoundEnvironment environment) {
+        if (!environment.getElementsAnnotatedWith(GwtpApp.class).isEmpty()) {
+            isGwtpApp = true;
         }
+
+        return isGwtpApp;
     }
 
-    private List<String> extractModulesToInstall(Path path) throws IOException {
-        return Files.readAllLines(path, Charset.defaultCharset());
+    private void ensureModuleIsCreated() {
+        bindingsProcessors.process(newModule(MAIN_MODULE_TYPE));
     }
 
     private void installModules(List<String> modules) {
         for (String module : modules) {
-            bindingsProcessors.process(new BindingContext(MAIN_MODULE_TYPE, new Type(module), true));
+            bindingsProcessors.process(newSubModule(MAIN_MODULE_TYPE, new Type(module)));
+        }
+    }
+
+    private void addModulesToMetaInf(RoundEnvironment environment) throws IOException {
+        Set<? extends Element> moduleElements = environment.getElementsAnnotatedWith(GwtpModule.class);
+
+        for (Element moduleElement : moduleElements) {
+            String moduleType = MoreElements.asType(moduleElement).getQualifiedName().toString();
+
+            metaInfModuleHandler.writeLine(moduleType);
+        }
+    }
+
+    private void processLast() throws IOException {
+        metaInfModuleHandler.closeWriter();
+
+        if (isGwtpApp) {
+            bindingsProcessors.processLast();
         }
     }
 }

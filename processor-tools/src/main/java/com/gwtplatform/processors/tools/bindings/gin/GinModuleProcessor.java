@@ -16,10 +16,12 @@
 
 package com.gwtplatform.processors.tools.bindings.gin;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.tools.FileObject;
 
@@ -31,99 +33,86 @@ import com.gwtplatform.processors.tools.AbstractContextProcessor;
 import com.gwtplatform.processors.tools.bindings.BindingContext;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessor;
 import com.gwtplatform.processors.tools.domain.Type;
-import com.gwtplatform.processors.tools.outputter.OutputType;
 
 @AutoService(BindingsProcessor.class)
 public class GinModuleProcessor extends AbstractContextProcessor<BindingContext, Void> implements BindingsProcessor {
-    public static final Type META_INF_TYPE = new Type("", "gwtp/ginModules");
-
     private static final String TEMPLATE = "com/gwtplatform/processors/tools/bindings/gin/GinModule.vm";
 
     private final Multimap<Type, GinBinding> bindings;
+    private final Map<Type, Multimap<Type, GinBinding>> setBinders;
     private final Multimap<Type, Type> subModules;
     private final Map<Type, FileObject> sourceFiles;
 
-    private BufferedWriter metaInfWriter;
-
     public GinModuleProcessor() {
         bindings = HashMultimap.create();
+        setBinders = new HashMap<>();
         subModules = HashMultimap.create();
         sourceFiles = new HashMap<>();
     }
 
+    // TODO: We need a way to flush modules tagged for it after each round (ie: GeneratedRestModule$1, ...$2, etc)
+    // This is because of the GwtpModule applied to the class. It can't be picked up when it is created at the last
+    // round
+    // TODO: OR. Output bindings as we go so the annotated module can be picked up
+
     @Override
     public Void process(BindingContext context) {
-        Type moduleType = findOrCreateSourceFile(context);
+        ensureSourceFileIsCreated(context);
 
-        if (context.isSubModule()) {
-            createSubModule(context, moduleType);
-        } else if (context.getImplementer() != null) {
-            createBinding(context, moduleType);
+        if (context.getImplementation().isPresent()) {
+            if (context.isSubModule()) {
+                createSubModule(context);
+            } else {
+                createBinding(context);
+            }
         }
 
         return null;
     }
 
-    private Type findOrCreateSourceFile(BindingContext context) {
+    private void ensureSourceFileIsCreated(BindingContext context) {
         Type moduleType = context.getModuleType();
+
         if (!sourceFiles.containsKey(moduleType)) {
-            createSourceFile(moduleType);
-        }
-
-        return moduleType;
-    }
-
-    private void createSourceFile(Type moduleType) {
-        FileObject file = outputter.prepareSourceFile(moduleType);
-        sourceFiles.put(moduleType, file);
-
-        appendToMetaInf(moduleType);
-    }
-
-    private void appendToMetaInf(Type moduleType) {
-        if (metaInfWriter == null) {
-            createMetaInfFile();
-        }
-
-        try {
-            metaInfWriter.append(moduleType.getQualifiedName());
-            metaInfWriter.newLine();
-        } catch (IOException e) {
-            logger.mandatoryWarning()
-                    .throwable(e)
-                    .log("Unable to append '%s' to the GIN modules metadata file", moduleType);
+            FileObject file = outputter.prepareSourceFile(moduleType);
+            sourceFiles.put(moduleType, file);
         }
     }
 
-    /**
-     * TODO: If this file already exists in the current resources (not JARs!), append content This is not critical as it
-     * should not be manually created. In the case someone wants to register modules, we can add a @GwtpModule
-     * annotation
-     */
-    private void createMetaInfFile() {
-        try {
-            FileObject fileObject = outputter.prepareSourceFile(META_INF_TYPE, OutputType.META_INF);
-            metaInfWriter = new BufferedWriter(fileObject.openWriter());
-        } catch (IOException e) {
-            logger.error().throwable(e).log("Could not to create GIN modules metadata file.");
+    private void createSubModule(BindingContext context) {
+        Type implementer = context.getImplementation().get();
+
+        subModules.put(context.getModuleType(), implementer);
+    }
+
+    private void createBinding(BindingContext context) {
+        GinBinding binding = new GinBinding(
+                context.getImplementation().get(),
+                context.getParent().orNull(),
+                context.getScope().orNull(),
+                context.isEagerSingleton());
+
+        if (context.isSetBinder()) {
+            createSetBinding(context, binding);
+        } else {
+            bindings.put(context.getModuleType(), binding);
         }
     }
 
-    private void createSubModule(BindingContext context, Type moduleType) {
-        Type implementer = context.getImplementer();
+    private void createSetBinding(BindingContext context, GinBinding binding) {
+        Type moduleType = context.getModuleType();
+        Optional<Type> implemented = binding.getImplemented();
+        Type implementedType = implemented.get();
+        Multimap<Type, GinBinding> setBindings;
 
-        subModules.put(moduleType, implementer);
-    }
+        if (setBinders.containsKey(implementedType)) {
+            setBindings = setBinders.get(moduleType);
+        } else {
+            setBindings = HashMultimap.create();
+            setBinders.put(moduleType, setBindings);
+        }
 
-    private void createBinding(BindingContext context, Type moduleType) {
-        Type implementer = context.getImplementer();
-
-        Optional<Type> implemented = context.getImplemented();
-        Optional<Type> scope = context.getScope();
-        GinBinding binding =
-                new GinBinding(implementer, implemented.orNull(), scope.orNull(), context.isEagerSingleton());
-
-        bindings.put(moduleType, binding);
+        setBindings.put(implementedType, binding);
     }
 
     @Override
@@ -132,23 +121,17 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
             Type moduleType = entry.getKey();
             logger.debug("Generating GIN module `%s`.", moduleType.getQualifiedName());
 
+            Multimap<Type, GinBinding> setBindings = setBinders.get(moduleType);
+            Set<Entry<Type, Collection<GinBinding>>> setBindingsEntries = setBindings == null
+                    ? new HashSet<Entry<Type, Collection<GinBinding>>>()
+                    : setBindings.asMap().entrySet();
+
             outputter
                     .configure(TEMPLATE)
                     .withParam("bindings", bindings.get(moduleType))
+                    .withParam("setBindings", setBindingsEntries)
                     .withParam("subModules", subModules.get(moduleType))
                     .writeTo(moduleType, entry.getValue());
-        }
-
-        closeMetadataFile();
-    }
-
-    private void closeMetadataFile() {
-        if (metaInfWriter != null) {
-            try {
-                metaInfWriter.close();
-            } catch (IOException e) {
-                logger.error().throwable(e).log("Could not write GIN modules metadata file.");
-            }
         }
     }
 }

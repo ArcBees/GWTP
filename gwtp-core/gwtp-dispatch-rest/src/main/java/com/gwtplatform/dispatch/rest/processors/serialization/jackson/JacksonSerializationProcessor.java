@@ -27,6 +27,7 @@ import com.google.auto.service.AutoService;
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.client.serialization.JacksonMapperProvider;
 import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
+import com.gwtplatform.dispatch.rest.processors.NameUtils;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessor;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
@@ -39,6 +40,7 @@ import com.gwtplatform.processors.tools.utils.Primitives;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.gwtplatform.dispatch.rest.processors.NameUtils.findRestModuleType;
+import static com.gwtplatform.processors.tools.bindings.BindingContext.newSetBinder;
 import static com.gwtplatform.processors.tools.utils.Primitives.findByBoxed;
 import static com.gwtplatform.processors.tools.utils.Primitives.findByPrimitive;
 
@@ -51,16 +53,15 @@ public class JacksonSerializationProcessor extends DispatchRestContextProcessor<
 
     private final JacksonMapperProcessor mapperProcessor;
     private final Map<Type, JacksonMapper> mappers;
-    private final Type impl;
     private final Type parent;
 
+    private Type impl;
     private FileObject sourceFile;
 
     public JacksonSerializationProcessor() {
         this.mapperProcessor = new JacksonMapperProcessor();
         this.mappers = new TreeMap<>();
         this.parent = new Type(JacksonMapperProvider.class);
-        this.impl = new Type(parent.getPackageName(), parent.getSimpleName() + "Impl");
     }
 
     @Override
@@ -68,10 +69,10 @@ public class JacksonSerializationProcessor extends DispatchRestContextProcessor<
         super.init(logger, utils, outputter);
 
         mapperProcessor.init(logger, utils, outputter);
-
+        impl = NameUtils.findJacksonMapperProviderType(utils);
         sourceFile = outputter.prepareSourceFile(impl);
 
-        BindingContext context = new BindingContext(findRestModuleType(utils), impl, parent, Singleton.class);
+        BindingContext context = newSetBinder(findRestModuleType(utils), parent, impl, Singleton.class);
         new BindingsProcessors(logger, utils, outputter).process(context);
     }
 

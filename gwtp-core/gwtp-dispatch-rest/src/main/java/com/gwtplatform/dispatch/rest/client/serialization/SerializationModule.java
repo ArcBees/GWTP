@@ -21,15 +21,20 @@ import javax.inject.Singleton;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.inject.client.binder.GinBinder;
 import com.google.gwt.inject.client.binder.GinLinkedBindingBuilder;
-import com.google.gwt.inject.client.multibindings.GinMultibinder;
+
+import static com.google.gwt.inject.client.multibindings.GinMultibinder.newSetBinder;
 
 public class SerializationModule extends AbstractGinModule {
     public static GinLinkedBindingBuilder<Serialization> registerSerializationBinding(GinBinder binder) {
-        return GinMultibinder.newSetBinder(binder, Serialization.class).addBinding();
+        return newSetBinder(binder, Serialization.class).addBinding();
     }
 
     @Override
     protected void configure() {
+        // TODO: Move jackson implementation to an extension
         registerSerializationBinding(binder()).to(JsonSerialization.class).in(Singleton.class);
+
+        newSetBinder(binder(), JacksonMapperProvider.class);
+        bind(JacksonMapperProvider.class).to(DispatchingJacksonMapperProvider.class).in(Singleton.class);
     }
 }

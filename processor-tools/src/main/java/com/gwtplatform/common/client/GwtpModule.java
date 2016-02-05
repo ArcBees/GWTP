@@ -23,5 +23,5 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)
-public @interface GwtpApp {
+public @interface GwtpModule {
 }

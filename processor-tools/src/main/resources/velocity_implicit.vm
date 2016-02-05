@@ -7,6 +7,10 @@
 #* @vtlvariable name="processor" type="com.gwtplatform.processors.tools.domain.Type" *#
 #* @vtlvariable name="processingDate" type="java.lang.String" *#
 #* @vtlvariable name="imports" type="java.util.Collection<java.lang.String>" *#
+#* @vtlvariable name="type" type="com.gwtplatform.processors.tools.domain.Type" *#
+
+#* @vtlvariable name="binding" type="com.gwtplatform.processors.tools.bindings.gin.GinBinding" file="com/gwtplatform/processors/tools/macros.vm" *#
 
 #* @vtlvariable name="bindings" type="java.util.Collection<com.gwtplatform.processors.tools.bindings.gin.GinBinding>" file="com/gwtplatform/processors/tools/bindings/gin/GinModule.vm" *#
 #* @vtlvariable name="subModules" type="java.util.Collection<com.gwtplatform.processors.tools.domain.Type>" file="com/gwtplatform/processors/tools/bindings/gin/GinModule.vm" *#
+#* @vtlvariable name="setBindings" type="java.util.Set<java.util.Map.Entry<com.gwtplatform.processors.tools.domain.Type,java.util.Collection<com.gwtplatform.processors.tools.bindings.gin.GinBinding>>>" file="com/gwtplatform/processors/tools/bindings/gin/GinModule.vm" *#

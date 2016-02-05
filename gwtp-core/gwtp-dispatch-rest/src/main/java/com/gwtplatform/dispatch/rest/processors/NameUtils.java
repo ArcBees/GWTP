@@ -32,6 +32,7 @@ import static com.google.auto.common.MoreElements.asType;
 
 public class NameUtils {
     private static final String REST_MODULE_NAME = "GeneratedRestModule";
+    private static final String JACKSON_MAPPER_PROVIDER_NAME = "GeneratedJacksonMapperProvider";
 
     public static String parentName(VariableElement element) {
         return element.getEnclosingElement().accept(new SimpleElementVisitor6<String, Void>("") {
@@ -67,5 +68,12 @@ public class NameUtils {
 
         // Source packages is guaranteed not to be null.
         return new Type(sourcePackages.iterator().next(), REST_MODULE_NAME);
+    }
+
+    public static Type findJacksonMapperProviderType(Utils utils) {
+        Set<String> sourcePackages = utils.getSourceFilter().getSourcePackages();
+
+        // Source packages is guaranteed not to be null.
+        return new Type(sourcePackages.iterator().next(), JACKSON_MAPPER_PROVIDER_NAME);
     }
 }

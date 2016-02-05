@@ -3,8 +3,11 @@ package $impl.packageName;
 import javax.annotation.Generated;
 
 import com.google.gwt.inject.client.AbstractGinModule;
+import com.google.gwt.inject.client.multibindings.GinMultibinder;
 import com.google.inject.TypeLiteral;
+import com.gwtplatform.common.client.GwtpModule;
 
+@GwtpModule
 @Generated("$processor.qualifiedName")
 public class $impl.simpleName extends AbstractGinModule {
     @Override
@@ -18,22 +21,20 @@ public class $impl.simpleName extends AbstractGinModule {
 #if($binding.implemented.isPresent())
 #set($implemented = $binding.implemented.get())
 #set($implementerMethod = '        .to')
-#if($implemented.isParameterized())
-        bind(new TypeLiteral<$implemented.qualifiedParameterizedName>() {})
-#else
-        bind(${implemented.qualifiedName}.class)
-#end
+        bind(#maybeTypeLiteral($implemented))
 #end
 #set($implementer = $binding.implementer)
-#if($implementer.isParameterized())
-        ${implementerMethod}(new TypeLiteral<$implementer.qualifiedParameterizedName>() {})
-#else
-        ${implementerMethod}(${implementer.qualifiedName}.class)
+        ${implementerMethod}(#maybeTypeLiteral($implementer))
+                #appendScopeMethod($binding);
 #end
-#if($binding.isEagerSingleton())
-                .asEagerSingleton()
-#elseif($binding.scope.isPresent())
-                .in(${binding.scope.get().qualifiedName}.class)#end;
+
+#foreach ($bindingEntries in $setBindings)
+        GinMultibinder.newSetBinder(binder(), #maybeTypeLiteral($bindingEntries.key))
+#foreach ($binding in $bindingEntries.value)
+#set($implementer = $binding.implementer)
+                .addBinding().to(#maybeTypeLiteral($implementer))
+                #appendScopeMethod($binding);
+#end
 #end
     }
 }
