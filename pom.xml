@@ -561,8 +561,8 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Rebind dependencies -->
-            <!-- TODO: Shade rebind deps -->
+            <!-- Processor dependencies -->
+            <!-- TODO: Shade velocity, common and guava -->
             <dependency>
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity</artifactId>
@@ -577,6 +577,7 @@
                 <groupId>com.google.auto.service</groupId>
                 <artifactId>auto-service</artifactId>
                 <version>${auto-service.version}</version>
+                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
