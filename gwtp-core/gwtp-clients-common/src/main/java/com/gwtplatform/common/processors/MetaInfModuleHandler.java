@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.processors;
+package com.gwtplatform.common.processors;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

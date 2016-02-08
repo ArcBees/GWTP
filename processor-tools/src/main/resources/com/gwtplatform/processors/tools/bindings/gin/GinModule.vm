@@ -5,7 +5,7 @@ import javax.annotation.Generated;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.inject.client.multibindings.GinMultibinder;
 import com.google.inject.TypeLiteral;
-import com.gwtplatform.common.client.GwtpModule;
+import com.gwtplatform.common.client.annotations.GwtpModule;
 
 @GwtpModule
 @Generated("$processor.qualifiedName")

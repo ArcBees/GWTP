@@ -47,5 +47,11 @@
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
+            <artifactId>processor-tools</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
