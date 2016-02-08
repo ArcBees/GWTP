@@ -83,6 +83,8 @@ public class ProxyProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        utils.incrementRoundNumber();
+
         try {
             // Find the requested class
             Set<? extends Element> elementsAnnotatedWithProxyStandard =

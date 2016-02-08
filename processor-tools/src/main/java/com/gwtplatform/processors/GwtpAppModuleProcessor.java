@@ -55,6 +55,7 @@ public class GwtpAppModuleProcessor extends AbstractProcessor {
     private static final Type MAIN_MODULE_TYPE = new Type(GwtpApp.class.getPackage().getName(), "GeneratedGwtpModule");
 
     private Logger logger;
+    private Utils utils;
 
     private BindingsProcessors bindingsProcessors;
     private MetaInfModuleHandler metaInfModuleHandler;
@@ -68,7 +69,7 @@ public class GwtpAppModuleProcessor extends AbstractProcessor {
         Map<String, String> options = processingEnv.getOptions();
 
         logger = new Logger(processingEnv.getMessager(), options);
-        Utils utils = new Utils(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils(), options);
+        utils = new Utils(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils(), options);
         Outputter outputter = new Outputter(logger, this, processingEnv.getFiler());
         bindingsProcessors = new BindingsProcessors(logger, utils, outputter);
         metaInfModuleHandler = new MetaInfModuleHandler(logger, outputter);
@@ -81,9 +82,11 @@ public class GwtpAppModuleProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        utils.incrementRoundNumber();
+
         try {
             if (!roundEnv.processingOver()) {
-                doProcess(roundEnv);
+                process(roundEnv);
             } else {
                 processLast();
             }
@@ -96,16 +99,14 @@ public class GwtpAppModuleProcessor extends AbstractProcessor {
         return false;
     }
 
-    private void doProcess(RoundEnvironment environment) throws Exception {
+    private void process(RoundEnvironment environment) throws Exception {
+        Set<? extends Element> moduleElements = environment.getElementsAnnotatedWith(GwtpModule.class);
+        moduleElements = utils.getSourceFilter().filterElements(moduleElements);
+
         if (isGwtpApp(environment)) {
-            logger.debug("Processing GWTP application.");
-
-            ensureModuleIsCreated();
-            installModules(metaInfModuleHandler.readAll());
+            addModulesToGwtpApp(moduleElements);
         } else {
-            logger.debug("Processing GWTP meta data.");
-
-            addModulesToMetaInf(environment);
+            addModulesToMetaInf(moduleElements);
         }
     }
 
@@ -117,18 +118,37 @@ public class GwtpAppModuleProcessor extends AbstractProcessor {
         return isGwtpApp;
     }
 
+    private void addModulesToGwtpApp(Set<? extends Element> moduleElements) throws Exception {
+        logger.debug("Processing GWTP main module.");
+
+        ensureModuleIsCreated();
+
+        installModules(metaInfModuleHandler.readAll());
+        installModules(moduleElements);
+    }
+
     private void ensureModuleIsCreated() {
         bindingsProcessors.process(newModule(MAIN_MODULE_TYPE));
     }
 
-    private void installModules(List<String> modules) {
-        for (String module : modules) {
-            bindingsProcessors.process(newSubModule(MAIN_MODULE_TYPE, new Type(module)));
+    private void installModules(Set<? extends Element> moduleElements) {
+        for (Element moduleElement : moduleElements) {
+            process(new Type(moduleElement.asType()));
         }
     }
 
-    private void addModulesToMetaInf(RoundEnvironment environment) throws IOException {
-        Set<? extends Element> moduleElements = environment.getElementsAnnotatedWith(GwtpModule.class);
+    private void installModules(List<String> modules) {
+        for (String module : modules) {
+            process(new Type(module));
+        }
+    }
+
+    private void process(Type moduleType) {
+        bindingsProcessors.process(newSubModule(MAIN_MODULE_TYPE, moduleType));
+    }
+
+    private void addModulesToMetaInf(Set<? extends Element> moduleElements) throws IOException {
+        logger.debug("Processing GWTP modules meta data.");
 
         for (Element moduleElement : moduleElements) {
             String moduleType = MoreElements.asType(moduleElement).getQualifiedName().toString();

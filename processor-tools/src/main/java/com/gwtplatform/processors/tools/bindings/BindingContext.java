@@ -30,6 +30,7 @@ public class BindingContext {
     private final boolean setBinder;
 
     private boolean eagerSingleton;
+    private boolean outputNow;
 
     private BindingContext(
             Type moduleType,
@@ -48,6 +49,12 @@ public class BindingContext {
 
     public static BindingContext newModule(Type module) {
         return new BindingContext(module, absentType(), absentType(), absentType(), true, false);
+    }
+
+    public static BindingContext flushModule(Type module) {
+        BindingContext context = newModule(module);
+        context.setOutputNow(true);
+        return context;
     }
 
     public static BindingContext newSubModule(
@@ -120,5 +127,18 @@ public class BindingContext {
 
     public boolean isSetBinder() {
         return setBinder;
+    }
+
+    public boolean isOutputNow() {
+        return outputNow;
+    }
+
+    /**
+     * Ensure the configured module is written, along with every configured bindings. The module's canonical name will
+     * become unusable by future generated modules in this compilation. Be careful not to flag modules when unnecessary
+     * as this could lead to infinite processing between metadata files and bindings processors.
+     */
+    public void setOutputNow(boolean outputNow) {
+        this.outputNow = outputNow;
     }
 }

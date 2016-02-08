@@ -50,11 +50,6 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
         sourceFiles = new HashMap<>();
     }
 
-    // TODO: We need a way to flush modules tagged for it after each round (ie: GeneratedRestModule$1, ...$2, etc)
-    // This is because of the GwtpModule applied to the class. It can't be picked up when it is created at the last
-    // round
-    // TODO: OR. Output bindings as we go so the annotated module can be picked up
-
     @Override
     public Void process(BindingContext context) {
         ensureSourceFileIsCreated(context);
@@ -65,6 +60,10 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
             } else {
                 createBinding(context);
             }
+        }
+
+        if (context.isOutputNow()) {
+            flushModule(context.getModuleType());
         }
 
         return null;
@@ -115,23 +114,36 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
         setBindings.put(implementedType, binding);
     }
 
+    private void flushModule(Type moduleType) {
+        outputModule(moduleType);
+
+        sourceFiles.remove(moduleType);
+        bindings.removeAll(moduleType);
+        subModules.removeAll(moduleType);
+        setBinders.remove(moduleType);
+    }
+
     @Override
     public void processLast() {
-        for (Map.Entry<Type, FileObject> entry : sourceFiles.entrySet()) {
-            Type moduleType = entry.getKey();
-            logger.debug("Generating GIN module `%s`.", moduleType.getQualifiedName());
-
-            Multimap<Type, GinBinding> setBindings = setBinders.get(moduleType);
-            Set<Entry<Type, Collection<GinBinding>>> setBindingsEntries = setBindings == null
-                    ? new HashSet<Entry<Type, Collection<GinBinding>>>()
-                    : setBindings.asMap().entrySet();
-
-            outputter
-                    .configure(TEMPLATE)
-                    .withParam("bindings", bindings.get(moduleType))
-                    .withParam("setBindings", setBindingsEntries)
-                    .withParam("subModules", subModules.get(moduleType))
-                    .writeTo(moduleType, entry.getValue());
+        for (Type moduleType : sourceFiles.keySet()) {
+            outputModule(moduleType);
         }
+    }
+
+    private void outputModule(Type moduleType) {
+        logger.debug("Generating GIN module `%s`.", moduleType.getQualifiedName());
+
+        FileObject fileObject = sourceFiles.get(moduleType);
+        Multimap<Type, GinBinding> setBindings = setBinders.get(moduleType);
+        Set<Entry<Type, Collection<GinBinding>>> setBindingsEntries = setBindings == null
+                ? new HashSet<Entry<Type, Collection<GinBinding>>>()
+                : setBindings.asMap().entrySet();
+
+        outputter
+                .configure(TEMPLATE)
+                .withParam("bindings", bindings.get(moduleType))
+                .withParam("setBindings", setBindingsEntries)
+                .withParam("subModules", subModules.get(moduleType))
+                .writeTo(moduleType, fileObject);
     }
 }

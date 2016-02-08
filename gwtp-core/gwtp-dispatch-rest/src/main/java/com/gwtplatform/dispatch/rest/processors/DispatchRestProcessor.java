@@ -44,7 +44,9 @@ import com.gwtplatform.processors.tools.outputter.Outputter;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.MoreElements.isType;
+import static com.gwtplatform.dispatch.rest.processors.NameUtils.findRestModuleType;
 import static com.gwtplatform.processors.tools.GwtSourceFilter.GWTP_MODULE_OPTION;
+import static com.gwtplatform.processors.tools.bindings.BindingContext.flushModule;
 import static com.gwtplatform.processors.tools.logger.Logger.DEBUG_OPTION;
 
 @AutoService(Processor.class)
@@ -104,10 +106,8 @@ public class DispatchRestProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         try {
-            Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(Path.class);
-            elements = utils.getSourceFilter().filterElements(elements);
-
-            processVisibleElements(elements, roundEnv);
+            utils.incrementRoundNumber();
+            process(roundEnv);
         } catch (UnableToProcessException e) {
             logger.error(UNABLE_TO_PROCESS_GENERAL);
         } catch (Exception e) {
@@ -117,16 +117,27 @@ public class DispatchRestProcessor extends AbstractProcessor {
         return false;
     }
 
-    private void processVisibleElements(Set<? extends Element> elements, RoundEnvironment roundEnv) {
+    private void process(RoundEnvironment roundEnv) {
+        boolean elementsProcessed = processGwtElements(roundEnv);
+
+        if (elementsProcessed) {
+            flushBindingsProcessors();
+        }
+
+        maybeProcessLastRound(roundEnv);
+    }
+
+    private boolean processGwtElements(RoundEnvironment roundEnv) {
+        Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(Path.class);
+        elements = utils.getSourceFilter().filterElements(elements);
+
         for (Element element : elements) {
             if (isType(element)) {
                 process(element);
             }
         }
 
-        if (roundEnv.processingOver()) {
-            processLastRound();
-        }
+        return !elements.isEmpty();
     }
 
     private void process(Element element) {
@@ -140,9 +151,15 @@ public class DispatchRestProcessor extends AbstractProcessor {
         }
     }
 
-    private void processLastRound() {
-        resourceProcessor.processLast();
-        serializationProcessors.processLast();
-        bindingsProcessors.processLast();
+    private void flushBindingsProcessors() {
+        bindingsProcessors.process(flushModule(findRestModuleType(utils)));
+    }
+
+    private void maybeProcessLastRound(RoundEnvironment roundEnv) {
+        if (roundEnv.processingOver()) {
+            resourceProcessor.processLast();
+            serializationProcessors.processLast();
+            bindingsProcessors.processLast();
+        }
     }
 }

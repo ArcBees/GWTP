@@ -38,6 +38,8 @@ public class Utils {
     private final Map<String, String> options;
     private final GwtSourceFilter sourceFilter;
 
+    private int roundNumber;
+
     public Utils(
             Logger logger,
             Types types,
@@ -116,5 +118,17 @@ public class Utils {
                     }
                 })
                 .toList();
+    }
+
+    public void incrementRoundNumber() {
+        ++roundNumber;
+    }
+
+    /**
+     * Fetches the round number. 0 means the first round has not yet been executed. This happens when the class is
+     * created in init() and before process() is called.
+     */
+    public int getRoundNumber() {
+        return roundNumber;
     }
 }
