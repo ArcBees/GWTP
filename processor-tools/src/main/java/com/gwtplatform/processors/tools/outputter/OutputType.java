@@ -35,7 +35,7 @@ public enum OutputType {
     GWT {
         @Override
         FileObject createFileObject(Logger logger, Filer filer, Type type) throws IOException {
-            return new GwtFileObject(logger, filer, type);
+            return new GwtFileObject(filer, type);
         }
     },
     META_INF {

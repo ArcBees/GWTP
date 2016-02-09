@@ -28,7 +28,6 @@ import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 
 import com.gwtplatform.processors.tools.domain.Type;
-import com.gwtplatform.processors.tools.logger.Logger;
 
 /**
  * A FileObject that wraps both the .java file that will be compiled to a .class and the .java file that will be
@@ -84,20 +83,17 @@ class GwtFileObject implements FileObject {
         }
     }
 
-    private final boolean debug;
     private final FileObject prodFileObject;
     private final FileObject devFileObject;
 
     GwtFileObject(
-            Logger logger,
             Filer filer,
             Type type) throws IOException {
-        debug = logger.isDebugEnabled();
         prodFileObject = filer.createResource(
                 StandardLocation.CLASS_OUTPUT,
                 type.getPackageName(),
                 type.getSimpleName() + ".java");
-        devFileObject = debug ? filer.createSourceFile(type.getQualifiedName()) : null;
+        devFileObject = filer.createSourceFile(type.getQualifiedName());
     }
 
     @Override
@@ -115,12 +111,11 @@ class GwtFileObject implements FileObject {
         return prodFileObject.openInputStream();
     }
 
-    @SuppressWarnings("resource")
     @Override
     public OutputStream openOutputStream() throws IOException {
         OutputStream prodOutputStream = prodFileObject.openOutputStream();
 
-        return debug ? new MultiFileOutputStream(prodOutputStream, devFileObject.openOutputStream()) : prodOutputStream;
+        return new MultiFileOutputStream(prodOutputStream, devFileObject.openOutputStream());
     }
 
     @Override
@@ -133,12 +128,11 @@ class GwtFileObject implements FileObject {
         return prodFileObject.getCharContent(ignoreEncodingErrors);
     }
 
-    @SuppressWarnings("resource")
     @Override
     public Writer openWriter() throws IOException {
         Writer prodWriter = prodFileObject.openWriter();
 
-        return debug ? new MultiFileWriter(prodWriter, devFileObject.openWriter()) : prodWriter;
+        return new MultiFileWriter(prodWriter, devFileObject.openWriter());
     }
 
     @Override
