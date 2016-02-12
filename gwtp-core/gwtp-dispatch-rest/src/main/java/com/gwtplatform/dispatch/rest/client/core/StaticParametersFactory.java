@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rest.client.core;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.dispatch.rest.client.annotations.DefaultDateFormat;
@@ -31,22 +32,22 @@ import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory
  */
 public class StaticParametersFactory {
     @Inject
-    static RestDispatch restDispatch;
+    static Provider<RestDispatch> restDispatch;
     @Inject
-    static HttpParameterFactory httpParameterFactory;
+    static Provider<HttpParameterFactory> httpParameterFactory;
     @Inject
     @DefaultDateFormat
-    static String defaultDateFormat;
+    static Provider<String> defaultDateFormat;
 
     public static RestDispatch getRestDispatch() {
-        return restDispatch;
+        return restDispatch.get();
     }
 
     public static HttpParameterFactory getHttpParameterFactory() {
-        return httpParameterFactory;
+        return httpParameterFactory.get();
     }
 
     public static String getDefaultDateFormat() {
-        return defaultDateFormat;
+        return defaultDateFormat.get();
     }
 }
