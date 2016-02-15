@@ -28,6 +28,7 @@
 
 #* @vtlvariable name="endPoint" type="com.gwtplatform.dispatch.rest.processors.details.EndPointDetails" file="endpoint/EndPoint.vm" *#
 #* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.details.Variable>" file="endpoint/EndPoint.vm" *#
+#* @vtlvariable name="paramSnippets" type="java.util.List<com.gwtplatform.processors.tools.outputter.CodeSnippet>" file="endpoint/EndPoint.vm" *#
 
 #* @vtlvariable name="mappers" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.serialization.jackson.JacksonMapper>" file="serialization/jackson/JacksonMapperProvider.vm" *#
 

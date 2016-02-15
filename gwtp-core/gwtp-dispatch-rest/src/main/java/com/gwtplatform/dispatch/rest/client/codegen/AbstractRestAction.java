@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.rest.client.codegen;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
@@ -32,24 +31,24 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * @param <R> the result type
  */
 public abstract class AbstractRestAction<R> implements RestAction<R> {
-    private final HttpParameterFactory httpParameterFactory;
-    private final String defaultDateFormat;
     private final HttpMethod httpMethod;
-    private final String rawServicePath;
+    private final String path;
     private final List<HttpParameter> parameters;
 
     private Object bodyParam;
 
+    /**
+     * Creates a new instance of the action without parsing the regular expressions from the rawServicePath.
+     *
+     * @param httpMethod of the action
+     * @param path the path after parsing the regex definitions
+     */
     protected AbstractRestAction(
-            HttpParameterFactory httpParameterFactory,
-            String defaultDateFormat,
             HttpMethod httpMethod,
-            String rawServicePath) {
-        this.httpParameterFactory = httpParameterFactory;
-        this.defaultDateFormat = defaultDateFormat;
+            String path) {
         this.httpMethod = httpMethod;
-        this.rawServicePath = rawServicePath;
-        this.parameters = new ArrayList<HttpParameter>();
+        this.path = path;
+        this.parameters = new ArrayList<>();
     }
 
     @Override
@@ -59,7 +58,7 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
 
     @Override
     public String getPath() {
-        return rawServicePath;
+        return path;
     }
 
     @Override
@@ -89,12 +88,7 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
         return bodyParam != null;
     }
 
-    protected void addParam(HttpParameter.Type type, String name, Object value) {
-        addParam(type, name, value, defaultDateFormat);
-    }
-
-    protected void addParam(HttpParameter.Type type, String name, Object value, String dateFormat) {
-        HttpParameter parameter = httpParameterFactory.create(type, name, value, dateFormat);
+    protected void addParam(HttpParameter parameter) {
         parameters.add(parameter);
     }
 

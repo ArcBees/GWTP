@@ -19,17 +19,18 @@ package com.gwtplatform.dispatch.rest.client.interceptor;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.gwtplatform.common.shared.UrlUtils;
+import com.gwtplatform.dispatch.rest.client.core.parameters.QueryParameter;
 import com.gwtplatform.dispatch.rest.client.interceptor.InterceptorContext.Builder;
 import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
-import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
 
 public class RestInterceptorRegistryTest {
     private static final String PATH_1 = "/path_1";
@@ -41,11 +42,13 @@ public class RestInterceptorRegistryTest {
 
     private DefaultRestInterceptorRegistry interceptorRegistry;
     private ExposedRestAction<Void> action;
+    private UrlUtils urlUtils;
 
     @Before
     public void setUp() {
-        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.GET, PATH_1);
+        action = new SecuredRestAction(HttpMethod.GET, PATH_1);
         interceptorRegistry = new DefaultRestInterceptorRegistry();
+        urlUtils = mock(UrlUtils.class);
     }
 
     @Test
@@ -66,8 +69,8 @@ public class RestInterceptorRegistryTest {
     @Test
     public void register_interceptor_multipleParams() {
         // Given
-        action.addParam(Type.QUERY, PARAM_NAME_1, PARAM_VALUE_1);
-        action.addParam(Type.QUERY, PARAM_NAME_2, PARAM_VALUE_2);
+        action.addParam(new QueryParameter(PARAM_NAME_1, PARAM_VALUE_1, null, urlUtils));
+        action.addParam(new QueryParameter(PARAM_NAME_2, PARAM_VALUE_2, null, urlUtils));
 
         InterceptorContext context = new Builder()
                 .path(PATH_1)
@@ -85,8 +88,8 @@ public class RestInterceptorRegistryTest {
     @Test
     public void register_interceptor_multipleParams_invalid() {
         // Given
-        action.addParam(Type.QUERY, PARAM_NAME_1, PARAM_VALUE_1);
-        action.addParam(Type.QUERY, PARAM_NAME_2, PARAM_VALUE_2);
+        action.addParam(new QueryParameter(PARAM_NAME_1, PARAM_VALUE_1, null, urlUtils));
+        action.addParam(new QueryParameter(PARAM_NAME_2, PARAM_VALUE_2, null, urlUtils));
 
         InterceptorContext context = new Builder()
                 .path(PATH_1)

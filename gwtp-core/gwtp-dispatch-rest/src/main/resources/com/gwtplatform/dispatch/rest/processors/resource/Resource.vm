@@ -3,22 +3,22 @@ package $impl.packageName;
 import javax.annotation.Generated;
 import javax.inject.Inject;
 
+import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.annotations.DefaultDateFormat;
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 
 #printImports($imports)
 
 @Generated(value = "$processor.qualifiedName", date = "$processingDate")
 public class $impl.parameterizedName implements $resource.parameterizedName {
-    private final HttpParameterFactory httpParameterFactory;
+    private final UrlUtils urlUtils;
     private final String defaultDateFormat;
 
     @Inject
     ${impl.simpleName}(
-            @DefaultDateFormat String defaultDateFormat,
-            HttpParameterFactory httpParameterFactory) {
+            UrlUtils urlUtils,
+            @DefaultDateFormat String defaultDateFormat) {
         this.defaultDateFormat = defaultDateFormat;
-        this.httpParameterFactory = httpParameterFactory;
+        this.urlUtils = urlUtils;
     }
 #foreach ($method in $methods)
 

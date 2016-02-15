@@ -30,14 +30,14 @@ public class RestParameterBindings {
     private final Map<HttpMethod, Set<HttpParameter>> parametersMap;
 
     public RestParameterBindings() {
-        parametersMap = new EnumMap<HttpMethod, Set<HttpParameter>>(HttpMethod.class);
+        parametersMap = new EnumMap<>(HttpMethod.class);
     }
 
     public void put(HttpMethod httpMethod, HttpParameter parameter) {
         Set<HttpParameter> parameters = parametersMap.get(httpMethod);
 
         if (parameters == null) {
-            parameters = new LinkedHashSet<HttpParameter>();
+            parameters = new LinkedHashSet<>();
         }
         if (parameter.getObject() != null) {
             parametersMap.put(httpMethod, parameters);

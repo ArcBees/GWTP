@@ -23,6 +23,8 @@ import javax.lang.model.element.Element;
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
 
 public class Path {
+    private static final Class<javax.ws.rs.Path> ANNOTATION_CLASS = javax.ws.rs.Path.class;
+
     private final String value;
 
     public Path(Element element) {
@@ -39,8 +41,8 @@ public class Path {
     private String resolvePath(Element element) {
         String path = "";
 
-        if (isAnnotationPresent(element, javax.ws.rs.Path.class)) {
-            path = element.getAnnotation(javax.ws.rs.Path.class).value();
+        if (isAnnotationPresent(element, ANNOTATION_CLASS)) {
+            path = element.getAnnotation(ANNOTATION_CLASS).value();
         }
 
         return normalize(path);
@@ -65,6 +67,8 @@ public class Path {
                 && !path.startsWith("https://")) {
             newPath = "/" + path;
         }
+
+        // TODO: Remove Regexes
 
         return newPath;
     }

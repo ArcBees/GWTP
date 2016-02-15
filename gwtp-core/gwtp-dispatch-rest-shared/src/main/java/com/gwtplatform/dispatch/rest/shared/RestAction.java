@@ -32,7 +32,8 @@ import com.gwtplatform.dispatch.shared.TypedAction;
 public interface RestAction<R> extends TypedAction<R>, HasSecured {
     /**
      * Returns the relative path for this action. It should not be prepended by the path annotated with {@link
-     * com.gwtplatform.dispatch.rest.client.RestApplicationPath @RestApplicationPath}.
+     * com.gwtplatform.dispatch.rest.client.RestApplicationPath @RestApplicationPath}. This path does not contain
+     * regular expressions for the URI templates anymore.
      *
      * @return the relative path for this action.
      */

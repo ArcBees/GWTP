@@ -7,6 +7,7 @@
 
     <inherits name="com.google.gwt.http.HTTP"/>
     <inherits name="com.google.gwt.json.JSON"/>
+    <inherits name="com.google.gwt.logging.Logging"/>
     <inherits name="com.github.nmorel.gwtjackson.GwtJackson"/>
 
     <!-- Specify the paths for translatable code -->

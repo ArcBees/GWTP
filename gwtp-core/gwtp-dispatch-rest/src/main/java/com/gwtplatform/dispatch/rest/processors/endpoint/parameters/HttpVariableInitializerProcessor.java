@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,12 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.core.parameters;
+package com.gwtplatform.dispatch.rest.processors.endpoint.parameters;
 
-import com.gwtplatform.dispatch.rest.shared.HttpParameter;
+import com.gwtplatform.dispatch.rest.processors.details.HttpVariable;
+import com.gwtplatform.processors.tools.ContextProcessor;
+import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 
-public interface HttpParameterFactory {
-    HttpParameter create(HttpParameter.Type type, String name, Object object);
-
-    HttpParameter create(HttpParameter.Type type, String name, Object object, String dateFormat);
+public interface HttpVariableInitializerProcessor extends ContextProcessor<HttpVariable, CodeSnippet> {
 }

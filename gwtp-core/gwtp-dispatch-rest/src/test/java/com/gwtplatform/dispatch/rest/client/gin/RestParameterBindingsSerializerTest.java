@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,22 +14,28 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.serialization;
+package com.gwtplatform.dispatch.rest.client.gin;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
-import com.gwtplatform.dispatch.rest.client.gin.RestParameterBindings;
-import com.gwtplatform.dispatch.rest.client.gin.RestParameterBindingsSerializer;
-import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.FormParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HeaderParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.PathParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.QueryParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 import static org.junit.Assert.assertEquals;
 
+import static com.gwtplatform.dispatch.rest.client.gin.RestParameterBindingsSerializer.URL_UTILS;
+
 public class RestParameterBindingsSerializerTest {
-    private final RestParameterBindingsSerializer serializer = new RestParameterBindingsSerializer();
-    private final HttpParameterFactory factory = new MockHttpParameterFactory();
+    private RestParameterBindingsSerializer serializer;
+
+    @Before
+    public void setUp() {
+        serializer = new RestParameterBindingsSerializer();
+    }
 
     @Test
     public void serializeEmpty() {
@@ -47,7 +53,7 @@ public class RestParameterBindingsSerializerTest {
     public void serializeSimple() {
         // given
         RestParameterBindings map = new RestParameterBindings();
-        map.put(HttpMethod.GET, factory.create(Type.QUERY, "a", 1));
+        map.put(HttpMethod.GET, new QueryParameter("a", 1, null, URL_UTILS));
 
         // when
         String serialized = serializer.serialize(map);
@@ -60,10 +66,10 @@ public class RestParameterBindingsSerializerTest {
     public void serializeComplex() {
         // given
         RestParameterBindings map = new RestParameterBindings();
-        map.put(HttpMethod.GET, factory.create(Type.QUERY, "a", 1));
-        map.put(HttpMethod.GET, factory.create(Type.FORM, "b", false));
-        map.put(HttpMethod.POST, factory.create(Type.HEADER, "c", "some string"));
-        map.put(HttpMethod.POST, factory.create(Type.PATH, "d", 29L));
+        map.put(HttpMethod.GET, new QueryParameter("a", 1, null, URL_UTILS));
+        map.put(HttpMethod.GET, new FormParameter("b", false, null, URL_UTILS));
+        map.put(HttpMethod.POST, new HeaderParameter("c", "some string", null));
+        map.put(HttpMethod.POST, new PathParameter("d", 29L, null, null, URL_UTILS));
 
         // when
         String serialized = serializer.serialize(map);

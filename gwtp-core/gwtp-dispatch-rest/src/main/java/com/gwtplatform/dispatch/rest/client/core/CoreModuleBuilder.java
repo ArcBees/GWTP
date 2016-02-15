@@ -17,8 +17,6 @@
 package com.gwtplatform.dispatch.rest.client.core;
 
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
-import com.gwtplatform.dispatch.rest.client.core.parameters.DefaultHttpParameterFactory;
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.gin.BaseRestDispatchModuleBuilder;
 
 public class CoreModuleBuilder extends BaseRestDispatchModuleBuilder<CoreModuleBuilder> {
@@ -26,7 +24,6 @@ public class CoreModuleBuilder extends BaseRestDispatchModuleBuilder<CoreModuleB
     private Class<? extends CookieManager> cookieManager = DefaultCookieManager.class;
     private Class<? extends DispatchCallFactory> dispatchCallFactory = DefaultDispatchCallFactory.class;
     private Class<? extends HeaderFactory> headerFactory = DefaultHeaderFactory.class;
-    private Class<? extends HttpParameterFactory> httpParameterFactory = DefaultHttpParameterFactory.class;
     private Class<? extends RequestBuilderFactory> requestBuilderFactory = DefaultRequestBuilderFactory.class;
     private Class<? extends ResponseDeserializer> responseDeserializer = DefaultResponseDeserializer.class;
     private Class<? extends RestDispatch> restDispatch = DefaultRestDispatch.class;
@@ -53,11 +50,6 @@ public class CoreModuleBuilder extends BaseRestDispatchModuleBuilder<CoreModuleB
 
     public CoreModuleBuilder headerFactory(Class<? extends HeaderFactory> headerFactory) {
         this.headerFactory = headerFactory;
-        return self();
-    }
-
-    public CoreModuleBuilder httpParameterFactory(Class<? extends HttpParameterFactory> httpParameterFactory) {
-        this.httpParameterFactory = httpParameterFactory;
         return self();
     }
 
@@ -105,10 +97,6 @@ public class CoreModuleBuilder extends BaseRestDispatchModuleBuilder<CoreModuleB
 
     Class<? extends HeaderFactory> getHeaderFactory() {
         return headerFactory;
-    }
-
-    Class<? extends HttpParameterFactory> getHttpParameterFactory() {
-        return httpParameterFactory;
     }
 
     Class<? extends RequestBuilderFactory> getRequestBuilderFactory() {

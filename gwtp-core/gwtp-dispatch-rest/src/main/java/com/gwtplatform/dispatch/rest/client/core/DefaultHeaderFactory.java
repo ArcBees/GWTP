@@ -27,7 +27,7 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
 import com.gwtplatform.dispatch.rest.client.annotations.GlobalHeaderParams;
 import com.gwtplatform.dispatch.rest.client.annotations.XsrfHeaderName;
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HeaderParameter;
 import com.gwtplatform.dispatch.rest.client.gin.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
@@ -37,18 +37,15 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
 
 public class DefaultHeaderFactory implements HeaderFactory {
-    private final HttpParameterFactory httpParameterFactory;
     private final RestParameterBindings globalParams;
     private final String securityHeaderName;
     private final String applicationPath;
 
     @Inject
     DefaultHeaderFactory(
-            HttpParameterFactory httpParameterFactory,
             @GlobalHeaderParams RestParameterBindings globalParams,
             @XsrfHeaderName String securityHeaderName,
             @RestApplicationPath String applicationPath) {
-        this.httpParameterFactory = httpParameterFactory;
         this.globalParams = globalParams;
         this.securityHeaderName = securityHeaderName;
         this.applicationPath = applicationPath;
@@ -92,12 +89,12 @@ public class DefaultHeaderFactory implements HeaderFactory {
             accept.deleteCharAt(0);
         }
 
-        headerParams.add(httpParameterFactory.create(Type.HEADER, HttpHeaders.ACCEPT, accept));
+        headerParams.add(new HeaderParameter(HttpHeaders.ACCEPT, accept, null));
     }
 
     private void maybeAddModuleBase(RestAction<?> action, List<HttpParameter> headerParams) {
         if (!isAbsoluteUrl(action.getPath()) && !applicationPath.isEmpty()) {
-            headerParams.add(httpParameterFactory.create(Type.HEADER, MODULE_BASE_HEADER, applicationPath));
+            headerParams.add(new HeaderParameter(MODULE_BASE_HEADER, applicationPath, null));
         }
     }
 
@@ -105,7 +102,7 @@ public class DefaultHeaderFactory implements HeaderFactory {
         String xsrfToken = action.isSecured() ? securityToken : "";
 
         if (xsrfToken != null && !xsrfToken.isEmpty()) {
-            headerParams.add(httpParameterFactory.create(Type.HEADER, securityHeaderName, xsrfToken));
+            headerParams.add(new HeaderParameter(securityHeaderName, xsrfToken, null));
         }
     }
 

@@ -16,7 +16,15 @@
 
 package com.gwtplatform.dispatch.rest.client.core.parameters;
 
+import com.gwtplatform.dispatch.rest.shared.DateFormat;
+
 public class HeaderParameter extends CollectionSupportedParameter {
+    public HeaderParameter(
+            String name,
+            Object object) {
+        this(name, object, DateFormat.DEFAULT);
+    }
+
     public HeaderParameter(
             String name,
             Object object,

@@ -33,6 +33,7 @@ public class HttpVariable implements HasImports {
     private final String name;
     private final Optional<HttpAnnotation> httpAnnotation;
     private final Optional<String> dateFormat;
+    private final Optional<String> regex;
 
     public HttpVariable(
             Logger logger,
@@ -44,6 +45,8 @@ public class HttpVariable implements HasImports {
         name = variable.getName();
         httpAnnotation = new HttpAnnotationResolver(logger, utils).resolve(variableElement);
         dateFormat = new DateFormatResolver(logger).resolve(variableElement);
+        // TODO: extract regex
+        regex = Optional.absent();
     }
 
     public Type getType() {
@@ -60,6 +63,10 @@ public class HttpVariable implements HasImports {
 
     public Optional<String> getDateFormat() {
         return dateFormat;
+    }
+
+    public Optional<String> getRegex() {
+        return regex;
     }
 
     public boolean isBody() {

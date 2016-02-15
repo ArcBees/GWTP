@@ -16,14 +16,20 @@
 
 package com.gwtplatform.dispatch.rest.processors.endpoint;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.details.HttpVariable;
+import com.gwtplatform.dispatch.rest.processors.endpoint.parameters.HttpVariableInitializerProcessors;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationContext;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.logger.Logger;
+import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 import com.gwtplatform.processors.tools.outputter.Outputter;
 import com.gwtplatform.processors.tools.utils.Utils;
 
@@ -34,12 +40,14 @@ public class EndPointProcessor extends DispatchRestContextProcessor<EndPoint, Vo
     private static final String TEMPLATE = "/com/gwtplatform/dispatch/rest/processors/endpoint/EndPoint.vm";
 
     private SerializationProcessors serializationProcessors;
+    private HttpVariableInitializerProcessors httpVariableInitializerProcessors;
 
     @Override
     public void init(Logger logger, Utils utils, Outputter outputter) {
         super.init(logger, utils, outputter);
 
         serializationProcessors = new SerializationProcessors(logger, utils, outputter);
+        httpVariableInitializerProcessors = new HttpVariableInitializerProcessors(logger, utils, outputter);
     }
 
     @Override
@@ -48,14 +56,28 @@ public class EndPointProcessor extends DispatchRestContextProcessor<EndPoint, Vo
 
         logger.debug("Generating end-point implementation `%s`.", type);
 
+        EndPointDetails endPointDetails = endPoint.getEndPointDetails();
+        List<CodeSnippet> paramSnippets = createInitializerSnippets(endPointDetails.getHttpVariables());
+
         outputter.configure(TEMPLATE)
-                .withParam("endPoint", endPoint.getEndPointDetails())
+                .withParam("endPoint", endPointDetails)
+                .withParam("paramSnippets", paramSnippets)
                 .withParam("fields", endPoint.getFields())
                 .writeTo(type);
 
         generateSerializers(endPoint);
 
         return null;
+    }
+
+    private List<CodeSnippet> createInitializerSnippets(Collection<HttpVariable> httpVariables) {
+        List<CodeSnippet> codeSnippets = new ArrayList<>();
+
+        for (HttpVariable httpVariable : httpVariables) {
+            codeSnippets.add(httpVariableInitializerProcessors.process(httpVariable));
+        }
+
+        return codeSnippets;
     }
 
     private void generateSerializers(EndPoint endPoint) {
@@ -70,5 +92,10 @@ public class EndPointProcessor extends DispatchRestContextProcessor<EndPoint, Vo
 
         context = new SerializationContext(endPointDetails.getResultType(), endPointDetails.getProduces(), WRITE);
         serializationProcessors.process(context);
+    }
+
+    @Override
+    public void processLast() {
+        httpVariableInitializerProcessors.processLast();
     }
 }

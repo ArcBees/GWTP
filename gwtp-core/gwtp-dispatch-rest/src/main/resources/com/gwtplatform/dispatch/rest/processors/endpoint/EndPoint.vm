@@ -5,8 +5,9 @@ import java.util.List;
 
 import javax.annotation.Generated;
 
+import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.codegen.AbstractRestAction;
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.*;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
@@ -15,12 +16,12 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 @Generated(value = "$processor.qualifiedName", date = "$processingDate")
 public class $impl.parameterizedName extends AbstractRestAction<$endPoint.resultType.parameterizedName> {
     public ${impl.simpleName}(
-            HttpParameterFactory httpParameterFactory,
+            UrlUtils urlUtils,
             String defaultDateFormat#appendParameterDefinitions(3 $fields)) {
-        super(httpParameterFactory, defaultDateFormat, HttpMethod.$endPoint.verb.name(), "$endPoint.path");
+        super(HttpMethod.$endPoint.verb.name(), "$endPoint.path");
 
-#foreach($param in $endPoint.httpVariables)#set($annotation = $param.httpAnnotation.get())
-        addParam(Type.$annotation.parameterType.name(), "$annotation.name", $param.name#if($param.dateFormat.isPresent()), "$param.dateFormat.get()"#end);
+#foreach($param in $paramSnippets)
+        addParam($param.code);
 #end
 #if($endPoint.body.isPresent())
         setBodyParam($endPoint.body.get().name);

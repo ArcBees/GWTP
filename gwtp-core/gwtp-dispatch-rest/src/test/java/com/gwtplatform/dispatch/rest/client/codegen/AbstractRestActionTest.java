@@ -19,7 +19,9 @@ package com.gwtplatform.dispatch.rest.client.codegen;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
+import com.gwtplatform.common.shared.UrlUtils;
+import com.gwtplatform.dispatch.rest.client.core.parameters.FormParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.QueryParameter;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
@@ -27,6 +29,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 public class AbstractRestActionTest {
     private static final String PARAM_NAME_1 = "someName";
@@ -35,16 +38,18 @@ public class AbstractRestActionTest {
     private static final int PARAM_VALUE_2 = 7;
 
     private AbstractRestAction<Void> action;
+    private UrlUtils urlUtils;
 
     @Before
     public void setUp() {
-        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST, "");
+        urlUtils = mock(UrlUtils.class);
+        action = new SecuredRestAction(HttpMethod.POST, "");
     }
 
     @Test
     public void addParam_null_doesNotAddParam() {
         // When
-        action.addParam(Type.QUERY, PARAM_NAME_1, null);
+        action.addParam(new QueryParameter(PARAM_NAME_1, null, null, urlUtils));
 
         // Then
         assertTrue(action.getParameters(Type.QUERY).isEmpty());
@@ -53,8 +58,8 @@ public class AbstractRestActionTest {
     @Test
     public void addParam_string_addsParam() {
         // When
-        action.addParam(Type.QUERY, PARAM_NAME_1, PARAM_VALUE_1);
-        action.addParam(Type.QUERY, PARAM_NAME_2, PARAM_VALUE_2);
+        action.addParam(new QueryParameter(PARAM_NAME_1, PARAM_VALUE_1, null, urlUtils));
+        action.addParam(new QueryParameter(PARAM_NAME_2, PARAM_VALUE_2, null, urlUtils));
 
         // Then
         assertThat(action.getParameters(Type.QUERY))
@@ -68,8 +73,8 @@ public class AbstractRestActionTest {
     @Test
     public void getParams_stripsOutNulls() {
         // When
-        action.addParam(Type.FORM, PARAM_NAME_1, null);
-        action.addParam(Type.FORM, PARAM_NAME_2, PARAM_VALUE_2);
+        action.addParam(new FormParameter(PARAM_NAME_1, null, null, urlUtils));
+        action.addParam(new FormParameter(PARAM_NAME_2, PARAM_VALUE_2, null, urlUtils));
 
         // Then
         assertThat(action.getParameters(Type.FORM))

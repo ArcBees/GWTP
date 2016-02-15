@@ -16,19 +16,49 @@
 
 package com.gwtplatform.dispatch.rest.client.core.parameters;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.google.gwt.logging.client.LogConfiguration;
 import com.gwtplatform.common.shared.UrlUtils;
+import com.gwtplatform.dispatch.rest.shared.DateFormat;
 
 public class PathParameter extends ClientHttpParameter {
+    private static final Logger LOGGER = Logger.getLogger(PathParameter.class.getName());
+
+    private final String regex;
     private final UrlUtils urlUtils;
 
     public PathParameter(
             String name,
             Object object,
+            String regex,
+            UrlUtils urlUtils) {
+        this(name, object, DateFormat.DEFAULT, regex, urlUtils);
+    }
+
+    public PathParameter(
+            String name,
+            Object object,
             String dateFormat,
+            String regex,
             UrlUtils urlUtils) {
         super(Type.PATH, name, object, dateFormat);
 
+        this.regex = regex;
         this.urlUtils = urlUtils;
+
+        validate();
+    }
+
+    private void validate() {
+        if (LogConfiguration.loggingIsEnabled() && regex != null) {
+            String value = parseObject(getObject());
+            if (!value.matches(regex)) {
+                LOGGER.log(Level.WARNING, "Path parameter '" + getName() + "': Value '" + value + "' does not match "
+                        + "regular expression '" + regex + "'.");
+            }
+        }
     }
 
     @Override

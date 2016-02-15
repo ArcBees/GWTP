@@ -16,15 +16,16 @@
 
 package com.gwtplatform.dispatch.rest.client.testutils;
 
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**
  * Used by test code to create a secured {@link com.gwtplatform.dispatch.rest.shared.RestAction}.
  */
 public class SecuredRestAction extends ExposedRestAction<Void> {
-    public SecuredRestAction(HttpParameterFactory factory, HttpMethod httpMethod, String rawServicePath) {
-        super(factory, httpMethod, rawServicePath);
+    public SecuredRestAction(
+            HttpMethod httpMethod,
+            String rawServicePath) {
+        super(httpMethod, rawServicePath);
     }
 
     @Override

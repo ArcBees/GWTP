@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.client.testutils;
 
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**
@@ -24,10 +23,9 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
  */
 public class UnsecuredRestAction extends ExposedRestAction<Void> {
     public UnsecuredRestAction(
-            HttpParameterFactory factory,
             HttpMethod httpMethod,
-            String rawServicePath) {
-        super(factory, httpMethod, rawServicePath);
+            String path) {
+        super(httpMethod, path);
     }
 
     @Override
