@@ -19,6 +19,8 @@ package com.gwtplatform.mvp.client;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.presenter.slots.IsSlot;
+import com.gwtplatform.mvp.client.presenter.slots.LegacySlotConvertor;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
@@ -210,7 +212,12 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
 
     @Override
     public void setInSlot(Object slot, PresenterWidget<?> content) {
-        super.setInSlot(slot, content);
+        setInSlot(LegacySlotConvertor.convert(slot), content);
+    }
+
+    @Override
+    public <T extends PresenterWidget<?>> void setInSlot(IsSlot<T> slot, T child) {
+        super.setInSlot(slot, child);
 
         // TODO: Consider switching this to an event bus based mechanism where the
         // child presenter fires an event when it is revealed and the parent highlights the tab.
@@ -218,7 +225,7 @@ public abstract class TabContainerPresenter<V extends View & TabPanel, Proxy_ ex
         // If we're setting a presenter attached to an actual slot, then highlight the tab
         if (slot == tabContentSlot) {
             try {
-                Presenter<?, ?> presenter = (Presenter<?, ?>) content;
+                Presenter<?, ?> presenter = (Presenter<?, ?>) child;
                 TabContentProxy<?> proxy = (TabContentProxy<?>) presenter.getProxy();
                 getView().setActiveTab(proxy.getTab());
             } catch (Exception e) {
