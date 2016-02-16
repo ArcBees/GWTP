@@ -19,9 +19,12 @@ package com.gwtplatform.dispatch.rest.client.core;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
+import com.google.gwt.logging.client.LogConfiguration;
 import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
 import com.gwtplatform.dispatch.rest.client.annotations.GlobalQueryParams;
 import com.gwtplatform.dispatch.rest.client.gin.RestParameterBindings;
@@ -32,6 +35,7 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 public class DefaultUriFactory implements UriFactory {
     private final RestParameterBindings globalQueryParams;
     private final String applicationPath;
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Inject
     DefaultUriFactory(
@@ -94,8 +98,15 @@ public class DefaultUriFactory implements UriFactory {
         for (HttpParameter param : params) {
             List<Entry<String, String>> entries = param.getEncodedEntries();
             assert entries.size() == 1;
-
             Entry<String, String> entry = entries.get(0);
+            String key = entry.getKey();
+            String value = entry.getValue();
+            String regex = action.getPathParameterRegex(key);
+            if (LogConfiguration.loggingIsEnabled() && regex != null && !value.matches(regex)) {
+                logger.log(Level.WARNING, "Path parameter '" + key + "': Value '" + value
+                        + "' does not match regular expression '" + regex + "'.");
+            }
+
             path = path.replace("{" + entry.getKey() + "}", entry.getValue());
         }
 

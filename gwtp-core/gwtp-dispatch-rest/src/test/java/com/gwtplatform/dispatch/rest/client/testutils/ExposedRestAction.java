@@ -18,9 +18,12 @@ package com.gwtplatform.dispatch.rest.client.testutils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.gwtplatform.dispatch.rest.client.codegen.AbstractRestAction;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -40,7 +43,15 @@ public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
             HttpParameterFactory factory,
             HttpMethod httpMethod,
             String rawServicePath) {
-        super(factory, DateFormat.DEFAULT, httpMethod, rawServicePath);
+        super(factory, DateFormat.DEFAULT, httpMethod, rawServicePath, PathResolver.resolvePath(rawServicePath));
+
+        // also resolve the regular expressions add them to the newly created instance
+        Map<String, String> regex = PathResolver.extractPathParameterRegex(rawServicePath);
+        if (regex != null) {
+            for (Entry<String, String> entry : regex.entrySet()) {
+                addParameterExpression(entry.getKey(), entry.getValue());
+            }
+        }
     }
 
     @Override

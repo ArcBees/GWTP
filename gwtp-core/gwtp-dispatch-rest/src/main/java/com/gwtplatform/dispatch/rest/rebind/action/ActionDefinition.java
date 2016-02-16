@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.rebind.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -29,7 +30,9 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 public class ActionDefinition extends ClassDefinition {
     private final HttpMethod verb;
+    private final String rawServicePath;
     private final String path;
+    private final Map<String, String> pathParamRegexMapping;
     private final boolean secured;
     private final Set<ContentType> consumes;
     private final Set<ContentType> produces;
@@ -41,7 +44,9 @@ public class ActionDefinition extends ClassDefinition {
             String packageName,
             String className,
             HttpMethod verb,
+            String rawServicePath,
             String path,
+            Map<String, String> pathParamRegexMapping,
             boolean secured,
             Set<ContentType> consumes,
             Set<ContentType> produces,
@@ -51,7 +56,9 @@ public class ActionDefinition extends ClassDefinition {
         super(packageName, className);
 
         this.verb = verb;
+        this.rawServicePath = rawServicePath;
         this.path = path;
+        this.pathParamRegexMapping = pathParamRegexMapping;
         this.secured = secured;
         this.consumes = consumes;
         this.produces = produces;
@@ -66,6 +73,14 @@ public class ActionDefinition extends ClassDefinition {
 
     public String getPath() {
         return path;
+    }
+
+    public String getRawServicePath() {
+        return rawServicePath;
+    }
+
+    public Map<String, String> getPathParamRegexMapping() {
+        return pathParamRegexMapping;
     }
 
     public boolean isSecured() {

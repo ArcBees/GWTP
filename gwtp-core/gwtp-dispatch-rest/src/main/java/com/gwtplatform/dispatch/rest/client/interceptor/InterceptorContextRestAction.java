@@ -34,10 +34,7 @@ class InterceptorContextRestAction implements RestAction<Object> {
     private final String path;
     private final List<HttpParameter> parameters;
 
-    InterceptorContextRestAction(
-            HttpMethod httpMethod,
-            String path,
-            int queryCount) {
+    InterceptorContextRestAction(HttpMethod httpMethod, String path, int queryCount) {
         this.httpMethod = httpMethod;
         this.path = path;
         this.parameters = new ArrayList<HttpParameter>();
@@ -101,5 +98,15 @@ class InterceptorContextRestAction implements RestAction<Object> {
     @Override
     public List<ContentType> getClientConsumedContentTypes() {
         return null;
+    }
+
+    @Override
+    public String getPathParameterRegex(String pathParameter) {
+        return null;
+    }
+
+    @Override
+    public String getRawServicePath() {
+        return getPath();
     }
 }

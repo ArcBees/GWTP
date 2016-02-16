@@ -57,12 +57,8 @@ public class AbstractRestActionTest {
         action.addParam(Type.QUERY, PARAM_NAME_2, PARAM_VALUE_2);
 
         // Then
-        assertThat(action.getParameters(Type.QUERY))
-                .hasSize(2)
-                .extracting("name", "object")
-                .containsExactly(
-                        tuple(PARAM_NAME_1, PARAM_VALUE_1),
-                        tuple(PARAM_NAME_2, PARAM_VALUE_2));
+        assertThat(action.getParameters(Type.QUERY)).hasSize(2).extracting("name", "object").containsExactly(tuple(
+                PARAM_NAME_1, PARAM_VALUE_1), tuple(PARAM_NAME_2, PARAM_VALUE_2));
     }
 
     @Test
@@ -72,9 +68,18 @@ public class AbstractRestActionTest {
         action.addParam(Type.FORM, PARAM_NAME_2, PARAM_VALUE_2);
 
         // Then
-        assertThat(action.getParameters(Type.FORM))
-                .hasSize(1)
-                .extracting("name", "object")
-                .containsExactly(tuple(PARAM_NAME_2, PARAM_VALUE_2));
+        assertThat(action.getParameters(Type.FORM)).hasSize(1).extracting("name", "object").containsExactly(tuple(
+                PARAM_NAME_2, PARAM_VALUE_2));
     }
+
+    @Test
+    public void pathParameterWithRegex_regExShouldBeRemovedFromPath() {
+        // When
+        action = new SecuredRestAction(new MockHttpParameterFactory(), HttpMethod.POST, "{id: [0-9]*}/subpath/{sid}");
+
+        // Then
+        assertThat(action.getPath()).isEqualTo("{id}/subpath/{sid}");
+        assertThat(action.getPathParameterRegex("id")).isEqualTo("[0-9]*");
+    }
+
 }

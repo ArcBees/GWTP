@@ -24,23 +24,45 @@ import com.gwtplatform.dispatch.shared.TypedAction;
 /**
  * An action used by {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
  * <p/>
- * You will usually want to let GWTP generate your actions by creating services as explained <a
- * href="https://github.com/ArcBees/GWTP/wiki/Rest-Dispatch#write-services-and-actions">here</a>.
+ * You will usually want to let GWTP generate your actions by creating services as explained
+ * <a href="https://github.com/ArcBees/GWTP/wiki/Rest-Dispatch#write-services-and-actions">here</a>.
  *
  * @param <R> the result type.
  */
 public interface RestAction<R> extends TypedAction<R>, HasSecured {
+
     /**
-     * Returns the relative path for this action. It should not be prepended by the path annotated with {@link
-     * com.gwtplatform.dispatch.rest.client.RestApplicationPath @RestApplicationPath}.
+     * Returns the raw value of the @Path annotation. This path may also contain regular expression values for the
+     * specific variables.
+     * 
+     * @see JSR-311 section 3.4
+     * @return the raw service path for this action
+     */
+    String getRawServicePath();
+
+    /**
+     * Returns the relative path for this action. It should not be prepended by the path annotated with
+     * {@link com.gwtplatform.dispatch.rest.client.RestApplicationPath @RestApplicationPath}. This path does not contain
+     * regular expressions for the URI templates anymore.
      *
+     * @see #getRawServicePath()
      * @return the relative path for this action.
      */
     String getPath();
 
     /**
+     * Returns the regular expression which should be used to validate the given parameter value. In case no regular
+     * expression is specified this method will return <code>null</code>
+     * 
+     * @param pathParameter The parameter to get the regular expression for.
+     * @return The regular expression for the given parameter or <code>null</code> in case no regular expression is
+     *         defined for this path parameter
+     */
+    String getPathParameterRegex(String pathParameter);
+
+    /**
      * @return the {@link com.gwtplatform.dispatch.rest.shared.HttpMethod} designator used to send this action over
-     * HTTP.
+     *         HTTP.
      */
     HttpMethod getHttpMethod();
 
@@ -50,8 +72,8 @@ public interface RestAction<R> extends TypedAction<R>, HasSecured {
     List<HttpParameter> getParameters(HttpParameter.Type type);
 
     /**
-     * @return The object that will be serialized and used for the body of this action. There are no {@link
-     * com.gwtplatform.dispatch.rest.shared.HttpParameter.Type#FORM @FormParam} parameters.
+     * @return The object that will be serialized and used for the body of this action. There are no
+     *         {@link com.gwtplatform.dispatch.rest.shared.HttpParameter.Type#FORM @FormParam} parameters.
      */
     Object getBodyParam();
 

@@ -2,6 +2,7 @@ package $package;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.core.HttpHeaders;
 
@@ -15,13 +16,18 @@ public class $impl extends AbstractRestAction<$result> {
     public ${impl}(
             HttpParameterFactory httpParameterFactory,
             String defaultDateFormat#generateAppendedMethodSignature($parameters)) {
-        super(httpParameterFactory, defaultDateFormat, HttpMethod.$httpVerb, "$path");
+        super(httpParameterFactory, defaultDateFormat, HttpMethod.$httpVerb, "$rawServicePath", "$path");
 
 #foreach($param in $httpParameters)
         addParam(Type.$param.type.getAssociatedType(), "$param.name", $param.variableName#if($param.dateFormat), "$param.dateFormat"#end);
 #end
 #if($bodyParameterName)
         setBodyParam($bodyParameterName);
+#end
+#if($pathParamRegexMapping)
+#foreach($entry in $pathParamRegexMapping.entrySet())
+        addParameterExpression("$entry.getKey()", "$entry.getValue()");
+#end
 #end
     }
 
