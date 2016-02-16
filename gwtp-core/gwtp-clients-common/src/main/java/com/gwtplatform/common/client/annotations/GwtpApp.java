@@ -21,6 +21,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Use this annotation to mark a project as a GWTP application. Such projects are usually packaged as WAR archives
+ * rather than JARs.
+ */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)
 public @interface GwtpApp {
