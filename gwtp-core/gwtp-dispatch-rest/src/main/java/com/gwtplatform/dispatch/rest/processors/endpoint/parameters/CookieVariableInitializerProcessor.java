@@ -23,7 +23,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 
 @AutoService(HttpVariableInitializerProcessor.class)
-class CookieVariableInitializerProcessor extends AbstractHttpVariableInitializerProcessor {
+public class CookieVariableInitializerProcessor extends AbstractHttpVariableInitializerProcessor {
     @Override
     protected Type getSupportedParameterType() {
         return Type.COOKIE;

@@ -23,7 +23,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 
 @AutoService(HttpVariableInitializerProcessor.class)
-class PathVariableInitializerProcessor extends AbstractHttpVariableInitializerProcessor {
+public class PathVariableInitializerProcessor extends AbstractHttpVariableInitializerProcessor {
     @Override
     protected Type getSupportedParameterType() {
         return Type.PATH;
@@ -33,6 +33,7 @@ class PathVariableInitializerProcessor extends AbstractHttpVariableInitializerPr
     protected CodeSnippet process(HttpVariable httpVariable, String httpNameArgument, String variableNameArgument,
             String dateFormatArgument) {
         String regexArgument = parseOptionalStringArgument(httpVariable.getRegex(), "null");
+        regexArgument = regexArgument.replace("\\", "\\\\");
 
         return buildConstructorCall(PathParameter.class, httpNameArgument, variableNameArgument, dateFormatArgument,
                 regexArgument, "urlUtils");
