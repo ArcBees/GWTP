@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,20 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.crawlerservice.server.domain;
+package com.gwtplatform.crawler.server;
 
 import java.util.Date;
 
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-import com.gwtplatform.crawler.server.CrawledPage;
-
 /**
- * Stores a cached version of a page.
+ * Default crawled page implementation.
+ * @author Ben Dol
  */
-@Entity
-public class CachedPage implements CrawledPage {
-    @Id
+public class DefaultCrawledPage implements CrawledPage {
     private String url;
     private Date fetchDate;
     private boolean fetchInProgress;

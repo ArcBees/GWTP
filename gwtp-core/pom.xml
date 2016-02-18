@@ -29,6 +29,8 @@
         <module>gwtp-tester</module>
         <module>gwtp-processors</module>
         <module>gwtp-crawler</module>
+        <module>gwtp-crawler-guice</module>
+        <module>gwtp-crawler-spring</module>
         <module>gwtp-all</module>
     </modules>
 
@@ -249,6 +251,13 @@
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity</artifactId>
                 <version>${velocity.version}</version>
+            </dependency>
+
+            <!-- HTML Dependencies -->
+            <dependency>
+                <groupId>net.sourceforge.htmlunit</groupId>
+                <artifactId>htmlunit</artifactId>
+                <version>${htmlunit.version}</version>
             </dependency>
 
             <!-- Test dependencies -->

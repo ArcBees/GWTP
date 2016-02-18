@@ -8,8 +8,8 @@
         <version>1.6-SNAPSHOT</version>
     </parent>
 
-    <artifactId>gwtp-crawler</artifactId>
-    <name>GWTP Crawler</name>
+    <artifactId>gwtp-crawler-guice</artifactId>
+    <name>GWTP Crawler for Guice</name>
 
     <build>
         <resources>
@@ -32,13 +32,19 @@
 
     <dependencies>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>gwtp-crawler</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
         </dependency>
 
+        <!-- DI dependencies -->
         <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
-            <artifactId>htmlunit</artifactId>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
         </dependency>
     </dependencies>
 </project>
