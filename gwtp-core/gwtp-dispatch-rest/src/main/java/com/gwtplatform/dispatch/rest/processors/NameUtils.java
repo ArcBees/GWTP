@@ -67,7 +67,7 @@ public class NameUtils {
         Set<String> sourcePackages = utils.getSourceFilter().getSourcePackages();
 
         // Source packages is guaranteed not to be null.
-        return new Type(sourcePackages.iterator().next(), REST_MODULE_NAME + "$" + utils.getRoundNumber());
+        return new Type(sourcePackages.iterator().next(), REST_MODULE_NAME + "$$" + utils.getRoundNumber());
     }
 
     public static Type findJacksonMapperProviderType(Utils utils) {

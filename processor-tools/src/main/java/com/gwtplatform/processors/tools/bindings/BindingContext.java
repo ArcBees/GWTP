@@ -93,6 +93,15 @@ public class BindingContext {
         return new BindingContext(module, of(implementation), of(parent), of(new Type(scope)), false, false);
     }
 
+    public static BindingContext newEagerSingletonBinding(
+            Type module,
+            Type parent,
+            Type implementation) {
+        BindingContext bindingContext = newBinding(module, parent, implementation);
+        bindingContext.eagerSingleton = true;
+        return bindingContext;
+    }
+
     private static Optional<Type> absentType() {
         return Optional.absent();
     }
@@ -115,10 +124,6 @@ public class BindingContext {
 
     public boolean isEagerSingleton() {
         return eagerSingleton;
-    }
-
-    public void setEagerSingleton(boolean eagerSingleton) {
-        this.eagerSingleton = eagerSingleton;
     }
 
     public boolean isSubModule() {

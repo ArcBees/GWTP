@@ -8,7 +8,7 @@ import com.google.inject.TypeLiteral;
 import com.gwtplatform.common.client.annotations.GwtpModule;
 
 @GwtpModule
-@Generated("$processor.qualifiedName")
+@Generated(value = "$processor.qualifiedName", date = "$processingDate")
 public class $impl.simpleName extends AbstractGinModule {
     @Override
     protected void configure() {

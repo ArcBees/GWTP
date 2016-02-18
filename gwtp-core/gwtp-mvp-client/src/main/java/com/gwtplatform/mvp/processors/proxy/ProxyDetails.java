@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,15 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.processors.proxy;
 
-import com.gwtplatform.mvp.client.Presenter;
+import java.util.Set;
 
-/**
- * A useful mixing class to define a {@link Proxy} that is also a {@link Place}.
- * See {@link ProxyPlaceAbstract} for more details.
- *
- * @param <P> Type of the associated {@link Presenter}.
- */
-public class ProxyPlaceImpl<P extends Presenter<?, ?>> extends ProxyPlaceAbstract<P, Proxy<P>> {
+import javax.lang.model.element.Element;
+
+import com.gwtplatform.processors.tools.domain.HasImports;
+import com.gwtplatform.processors.tools.domain.HasType;
+import com.gwtplatform.processors.tools.domain.Type;
+
+public interface ProxyDetails extends HasType, HasImports {
+    interface Factory {
+        ProxyDetails create(Element element);
+    }
+
+    Type getPresenterType();
+
+    Type getProxyType();
+
+    Set<String> getContentSlots();
 }

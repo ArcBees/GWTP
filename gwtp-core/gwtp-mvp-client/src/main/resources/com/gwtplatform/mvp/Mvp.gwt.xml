@@ -14,9 +14,9 @@
         <when-type-is class="com.gwtplatform.mvp.client.ApplicationController"/>
     </generate-with>
 
-    <generate-with class="com.gwtplatform.mvp.rebind.ProxyGenerator">
-        <when-type-assignable class="com.gwtplatform.mvp.client.proxy.Proxy"/>
-    </generate-with>
+    <!--<generate-with class="com.gwtplatform.mvp.rebind.ProxyGenerator">-->
+        <!--<when-type-assignable class="com.gwtplatform.mvp.client.proxy.Proxy"/>-->
+    <!--</generate-with>-->
 
     <!-- Specify the paths for translatable code                    -->
     <source path='client' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java"/>
