@@ -7,6 +7,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.common.client.StandardProvider;
 import com.gwtplatform.mvp.client.proxy.PlaceImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper;
 import com.gwtplatform.mvp.client.proxy.ProxyImpl;
 import com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
@@ -39,11 +40,16 @@ public class $impl.simpleName extends ProxyPlaceImpl<$presenterType.simpleName> 
     ${impl.simpleName}(
             EventBus eventBus,
             PlaceManager placeManager,
-            WrappedProxy wrappedProxy) {
+            WrappedProxy wrappedProxy#if($gatekeeperType),
+            $gatekeeperType.simpleName gatekeeper#end) {
         bind(placeManager, eventBus);
         setProxy(wrappedProxy);
 
         String[] nameTokens = {#foreach($nameToken in $nameTokens)"$nameToken"#commaIfNeeded()#end};
+#if($gatekeeperType)
+        setPlace(new PlaceWithGatekeeper(nameTokens, gatekeeper));
+#else
         setPlace(new PlaceImpl(nameTokens));
+#end
     }
 }

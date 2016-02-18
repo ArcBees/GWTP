@@ -71,15 +71,23 @@ public class OutputBuilder {
     public OutputBuilder withParam(String key, HasImports value) {
         context.put(key, value);
 
+        if (value != null) {
+            withImports(value.getImports());
+        }
+
         // TODO: Resolve simple name clashes if value instanceof Type. In the meantime, use can. names and skip imports.
-        return withImports(value.getImports());
+        return this;
     }
 
     public OutputBuilder withParam(String key, Iterable<? extends HasImports> value) {
         context.put(key, value);
 
+        if (value != null) {
+            withImports(FluentIterable.from(value).transformAndConcat(EXTRACT_IMPORTS_FUNCTION).toList());
+        }
+
         // TODO: Resolve simple name clashes if value instanceof Type.
-        return withImports(FluentIterable.from(value).transformAndConcat(EXTRACT_IMPORTS_FUNCTION).toList());
+        return this;
     }
 
     public OutputBuilder withParam(String key, Object value) {
