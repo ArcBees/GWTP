@@ -19,6 +19,8 @@ package com.gwtplatform.mvp.processors.proxy;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 
+import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
@@ -29,5 +31,24 @@ public class SimpleProxyDetails extends AbstractProxyDetails {
             TypeElement element,
             TypeMirror proxyMirror) {
         super(logger, utils, element, proxyMirror);
+
+        maybeWarnNameToken();
+        maybeWarnGatekeeper();
+    }
+
+    private void maybeWarnNameToken() {
+        if (element.getAnnotation(NameToken.class) != null) {
+            logger.warning()
+                    .context(element)
+                    .log("Proxy is annotated with @NameToken, but does not extend ProxyPlace<>.");
+        }
+    }
+
+    private void maybeWarnGatekeeper() {
+        if (element.getAnnotation(UseGatekeeper.class) != null) {
+            logger.warning()
+                    .context(element)
+                    .log("Proxy is annotated with @UseGatekeeper, but does not extend ProxyPlace<>.");
+        }
     }
 }

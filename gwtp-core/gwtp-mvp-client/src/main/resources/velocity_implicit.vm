@@ -17,3 +17,4 @@
 #* @vtlvariable name="proxyType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
 #* @vtlvariable name="slotNames" type="java.util.Collection<java.lang.String>" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
 #* @vtlvariable name="nameTokens" type="java.util.Collection<java.lang.String>" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
+#* @vtlvariable name="gatekeeperType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#

@@ -43,6 +43,7 @@ public class ProxyPlaceProcessor extends AbstractContextProcessor<ProxyDetails, 
         outputter.configure(TEMPLATE)
                 .withParam("proxyType", proxy.getProxyType())
                 .withParam("presenterType", proxy.getPresenterType())
+                .withParam("gatekeeperType", proxyPlace.getGatekeeperType())
                 .withParam("slotNames", proxy.getContentSlots())
                 .withParam("nameTokens", proxyPlace.getNameTokens())
                 .writeTo(proxy.getType());
