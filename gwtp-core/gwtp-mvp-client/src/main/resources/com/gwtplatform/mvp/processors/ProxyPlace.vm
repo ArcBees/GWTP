@@ -1,0 +1,49 @@
+package $impl.packageName;
+
+import javax.annotation.Generated;
+import javax.inject.Inject;
+import javax.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.common.client.StandardProvider;
+import com.gwtplatform.mvp.client.proxy.PlaceImpl;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.ProxyImpl;
+import com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+#printImports($imports)
+
+@Generated(value = "$processor.qualifiedName", date = "$processingDate")
+public class $impl.simpleName extends ProxyPlaceImpl<$presenterType.simpleName> implements $proxyType.simpleName {
+## TODO: This is a basically a SimpleProxy with a hard-coded name. Reuse the other file
+    static class WrappedProxy extends ProxyImpl<$presenterType.simpleName> {
+        @Inject
+        public WrappedProxy(
+                EventBus eventBus,
+                PlaceManager placeManager,
+                Provider<$presenterType.simpleName> presenterProvider) {
+            bind(placeManager, eventBus);
+
+            presenter = new StandardProvider<>(presenterProvider);
+
+#if(!$slotNames.isEmpty())
+            RevealContentHandler<$presenterType.simpleName> revealContentHandler
+                    = new RevealContentHandler<$presenterType.simpleName>(eventBus, this);
+#foreach($slotName in $slotNames)
+            eventBus.addHandler(${presenterType}.$slotName, revealContentHandler);
+#end
+#end
+        }
+    }
+
+    @Inject
+    ${impl.simpleName}(
+            EventBus eventBus,
+            PlaceManager placeManager,
+            WrappedProxy wrappedProxy) {
+        bind(placeManager, eventBus);
+        setProxy(wrappedProxy);
+
+        String[] nameTokens = {#foreach($nameToken in $nameTokens)"$nameToken"#commaIfNeeded()#end};
+        setPlace(new PlaceImpl(nameTokens));
+    }
+}

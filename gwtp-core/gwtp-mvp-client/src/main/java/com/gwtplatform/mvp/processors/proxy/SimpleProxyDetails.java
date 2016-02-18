@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,15 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.client.proxy;
+package com.gwtplatform.mvp.processors.proxy;
 
-import com.gwtplatform.mvp.client.Presenter;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.TypeMirror;
 
-/**
- * A useful mixing class to define a {@link Proxy} that is also a {@link Place}.
- * See {@link ProxyPlaceAbstract} for more details.
- *
- * @param <P> Type of the associated {@link Presenter}.
- */
-public class ProxyPlaceImpl<P extends Presenter<?, ?>> extends ProxyPlaceAbstract<P, Proxy<P>> {
+import com.gwtplatform.processors.tools.logger.Logger;
+import com.gwtplatform.processors.tools.utils.Utils;
+
+public class SimpleProxyDetails extends AbstractProxyDetails {
+    SimpleProxyDetails(
+            Logger logger,
+            Utils utils,
+            TypeElement element,
+            TypeMirror proxyMirror) {
+        super(logger, utils, element, proxyMirror);
+    }
 }

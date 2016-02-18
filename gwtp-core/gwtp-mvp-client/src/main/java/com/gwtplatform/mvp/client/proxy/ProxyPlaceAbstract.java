@@ -37,8 +37,8 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * @param <P>      The Presenter's type.
  * @param <Proxy_> Type of the associated {@link Proxy}.
  */
-public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<P>> implements ProxyPlace<P>,
-        HasHandlerContainer {
+public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<P>>
+        implements ProxyPlace<P>, HasHandlerContainer {
     /**
      * Hides {@link com.gwtplatform.mvp.client.HandlerContainer#bind()} and
      * {@link com.gwtplatform.mvp.client.HandlerContainer#unbind()} from implementers.

@@ -1,0 +1,32 @@
+package $impl.packageName;
+
+import javax.annotation.Generated;
+import javax.inject.Inject;
+import javax.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+import com.gwtplatform.mvp.client.proxy.ProxyImpl;
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+import com.gwtplatform.common.client.StandardProvider;
+#printImports($imports)
+
+@Generated(value = "$processor.qualifiedName", date = "$processingDate")
+public class $impl.simpleName extends ProxyImpl<$presenterType.simpleName> implements $proxyType.simpleName {
+    @Inject
+    ${impl.simpleName}(
+            EventBus eventBus,
+            PlaceManager placeManager,
+            Provider<$presenterType.simpleName> presenterProvider) {
+        bind(placeManager, eventBus);
+
+        presenter = new StandardProvider<>(presenterProvider);
+
+#if(!$slotNames.isEmpty())
+        RevealContentHandler<$presenterType.simpleName> revealContentHandler
+                = new RevealContentHandler<$presenterType.simpleName>(eventBus, this);
+#foreach($slotName in $slotNames)
+        eventBus.addHandler(${presenterType.simpleName}.$slotName, revealContentHandler);
+#end
+#end
+    }
+}
