@@ -34,4 +34,6 @@ public interface ProxyDetails extends HasType, HasImports {
     Type getProxyType();
 
     Set<String> getContentSlots();
+
+    boolean isCodeSplit();
 }

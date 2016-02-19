@@ -38,18 +38,20 @@ public class ProxyPlaceProcessor extends AbstractContextProcessor<ProxyDetails, 
     public Type process(ProxyDetails proxy) {
         ProxyPlaceDetails proxyPlace = (ProxyPlaceDetails) proxy;
 
-        logger.debug("Generating proxy place `%s`.", proxy.getProxyType());
+        logger.debug("Generating proxy place `%s`.", proxyPlace.getProxyType());
 
         outputter.configure(TEMPLATE)
-                .withParam("proxyType", proxy.getProxyType())
-                .withParam("presenterType", proxy.getPresenterType())
+                .withParam("proxyType", proxyPlace.getProxyType())
+                .withParam("presenterType", proxyPlace.getPresenterType())
                 .withParam("gatekeeperType", proxyPlace.getGatekeeperType())
-                .withParam("slotNames", proxy.getContentSlots())
+                .withParam("gatekeeperParams", proxyPlace.getGatekeeperParams())
+                .withParam("slotNames", proxyPlace.getContentSlots())
                 .withParam("nameTokens", proxyPlace.getNameTokens())
-                .writeTo(proxy.getType());
+                .withParam("codeSplit", proxyPlace.isCodeSplit())
+                .writeTo(proxyPlace.getType());
 
-        proxyModules.bindProxy(proxy);
+        proxyModules.bindProxy(proxyPlace);
 
-        return proxy.getType();
+        return proxyPlace.getType();
     }
 }
