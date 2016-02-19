@@ -16,7 +16,7 @@
 
 package com.gwtplatform.common.client;
 
-import com.google.inject.Provider;
+import javax.inject.Provider;
 
 /**
  * This class can be used to contain a group of providers that should all sit
@@ -27,9 +27,7 @@ import com.google.inject.Provider;
  * GWTP automatically handles ProviderBundles when used with ApplicationController
  * and Ginjector generation.
  * <p/>
- * <p/>
  * Here is an example use of a manual {@link ProviderBundle}:
- * <p/>
  * <pre>
  * public class MyPresenterBundle extends ProviderBundle {
  *   public final static int ID_Object1 = 0;
@@ -47,14 +45,12 @@ import com.google.inject.Provider;
  * }</pre>
  */
 public class ProviderBundle {
-
     protected final Provider<?> providers[];
 
     /**
      * Constructs a {@link ProviderBundle} containing a given number of providers.
      * After calling this constructor you should set the provider manually like
      * so:
-     * <p/>
      * <pre>
      *     providers[0] = object1Provider;
      *     providers[1] = object2Provider;
@@ -76,5 +72,4 @@ public class ProviderBundle {
     public Provider<?> get(int providerId) {
         return providers[providerId];
     }
-
 }

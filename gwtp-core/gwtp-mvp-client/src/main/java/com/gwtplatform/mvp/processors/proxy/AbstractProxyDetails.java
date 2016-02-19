@@ -21,14 +21,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
@@ -38,10 +41,13 @@ import com.gwtplatform.processors.tools.utils.Utils;
 import static javax.lang.model.util.ElementFilter.fieldsIn;
 
 import static com.google.auto.common.MoreElements.asType;
+import static com.google.auto.common.MoreElements.getAnnotationMirror;
 import static com.google.auto.common.MoreElements.hasModifiers;
 import static com.google.auto.common.MoreTypes.asDeclared;
 import static com.google.auto.common.MoreTypes.asTypeElement;
 import static com.google.auto.common.MoreTypes.isTypeOf;
+import static com.google.common.base.Optional.absent;
+import static com.google.common.base.Optional.of;
 
 public abstract class AbstractProxyDetails implements ProxyDetails {
     protected final TypeElement element;
@@ -52,6 +58,7 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
     private Type type;
     private TypeMirror presenterMirror;
     private Set<String> contentSlots;
+    private Optional<BundleDetails> bundleDetails;
 
     protected AbstractProxyDetails(
             Logger logger,
@@ -104,19 +111,23 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
     @Override
     public Set<String> getContentSlots() {
         if (contentSlots == null) {
-            TypeElement presenterElement = asTypeElement(getPresenterMirror());
-            List<Element> presenterMembers = utils.getAllMembers(presenterElement);
-            List<VariableElement> presenterFields = fieldsIn(presenterMembers);
-            contentSlots = new HashSet<>();
-
-            for (VariableElement field : presenterFields) {
-                if (isValidContentSlot(field)) {
-                    contentSlots.add(field.getSimpleName().toString());
-                }
-            }
+            extractContentSlots();
         }
 
         return contentSlots;
+    }
+
+    private void extractContentSlots() {
+        TypeElement presenterElement = asTypeElement(getPresenterMirror());
+        List<Element> presenterMembers = utils.getAllMembers(presenterElement);
+        List<VariableElement> presenterFields = fieldsIn(presenterMembers);
+        contentSlots = new HashSet<>();
+
+        for (VariableElement field : presenterFields) {
+            if (isValidContentSlot(field)) {
+                contentSlots.add(field.getSimpleName().toString());
+            }
+        }
     }
 
     private boolean isValidContentSlot(VariableElement field) {
@@ -136,6 +147,24 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
     @Override
     public boolean isCodeSplit() {
         return element.getAnnotation(ProxyCodeSplit.class) != null;
+    }
+
+    @Override
+    public BundleDetails getBundleDetails() {
+        if (bundleDetails == null) {
+            extractBundleDetails();
+        }
+
+        return bundleDetails.orNull();
+    }
+
+    private void extractBundleDetails() {
+        Optional<AnnotationMirror> annotation = getAnnotationMirror(element, ProxyCodeSplitBundle.class);
+        bundleDetails = absent();
+
+        if (annotation.isPresent()) {
+            bundleDetails = of(new BundleDetails(logger, element, annotation.get()));
+        }
     }
 
     @Override

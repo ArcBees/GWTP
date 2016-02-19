@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.common.client.CodeSplitBundleProvider;
 import com.gwtplatform.common.client.CodeSplitProvider;
 import com.gwtplatform.common.client.StandardProvider;
 import com.gwtplatform.mvp.client.proxy.Place;
@@ -19,17 +20,25 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 @Generated(value = "$processor.qualifiedName", date = "$processingDate")
 public class $impl.simpleName extends ProxyPlaceImpl<$presenterType.simpleName> implements $proxyType.simpleName {
-## TODO: The body is basically the same as a SimpleProxy. Extract macros
     static class WrappedProxy extends ProxyImpl<$presenterType.simpleName> {
+## TODO: The body is basically the same as a SimpleProxy. Extract macros
         @Inject
         WrappedProxy(
                 EventBus eventBus,
                 PlaceManager placeManager,
-                #if($codeSplit)Async#{end}Provider<$presenterType.simpleName> presenterProvider) {
+#if($bundle.manualBundle)
+                AsyncProvider<$bundle.bundleType.simpleName> bundleProvider#elseif($codeSplit)
+                AsyncProvider<$presenterType.simpleName> presenterProvider#else
+                Provider<$presenterType.simpleName> presenterProvider#end) {
             bind(placeManager, eventBus);
 
-            presenter = new #if($codeSplit)CodeSplitProvider#{else}StandardProvider#end<>(presenterProvider);
-
+#if($bundle)
+            presenter = new CodeSplitBundleProvider<>(bundleProvider, $bundle.id);
+#elseif($codeSplit)
+            presenter = new CodeSplitProvider<>(presenterProvider);
+#else
+            presenter = new StandardProvider<>(presenterProvider);
+#end
 #if(!$slotNames.isEmpty())
             RevealContentHandler<$presenterType.simpleName> revealContentHandler
                     = new RevealContentHandler<$presenterType.simpleName>(eventBus, this);
