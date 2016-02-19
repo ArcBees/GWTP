@@ -28,6 +28,7 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
 
 import com.google.common.collect.FluentIterable;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
@@ -101,14 +102,6 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
     }
 
     @Override
-    public Collection<String> getImports() {
-        return FluentIterable
-                .from(getProxyType().getImports())
-                .append(getPresenterType().getImports())
-                .toList();
-    }
-
-    @Override
     public Set<String> getContentSlots() {
         if (contentSlots == null) {
             TypeElement presenterElement = asTypeElement(getPresenterMirror());
@@ -138,5 +131,18 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
         }
 
         return false;
+    }
+
+    @Override
+    public boolean isCodeSplit() {
+        return element.getAnnotation(ProxyCodeSplit.class) != null;
+    }
+
+    @Override
+    public Collection<String> getImports() {
+        return FluentIterable
+                .from(getProxyType().getImports())
+                .append(getPresenterType().getImports())
+                .toList();
     }
 }

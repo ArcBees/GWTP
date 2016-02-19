@@ -4,9 +4,11 @@ import javax.annotation.Generated;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.inject.client.AsyncProvider;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyImpl;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+import com.gwtplatform.common.client.CodeSplitProvider;
 import com.gwtplatform.common.client.StandardProvider;
 #printImports($imports)
 
@@ -16,17 +18,16 @@ public class $impl.simpleName extends ProxyImpl<$presenterType.simpleName> imple
     ${impl.simpleName}(
             EventBus eventBus,
             PlaceManager placeManager,
-            Provider<$presenterType.simpleName> presenterProvider) {
+            #if($codeSplit)Async#{end}Provider<$presenterType.simpleName> presenterProvider) {
         bind(placeManager, eventBus);
 
-        presenter = new StandardProvider<>(presenterProvider);
+        presenter = new #if($codeSplit)CodeSplitProvider#{else}StandardProvider#end<>(presenterProvider);
 
 #if(!$slotNames.isEmpty())
         RevealContentHandler<$presenterType.simpleName> revealContentHandler
                 = new RevealContentHandler<$presenterType.simpleName>(eventBus, this);
 #foreach($slotName in $slotNames)
         eventBus.addHandler(${presenterType.simpleName}.$slotName, revealContentHandler);
-#end
-#end
+#end#end
     }
 }

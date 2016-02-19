@@ -3,11 +3,15 @@ package $impl.packageName;
 import javax.annotation.Generated;
 import javax.inject.Inject;
 import javax.inject.Provider;
+import com.google.gwt.inject.client.AsyncProvider;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.common.client.CodeSplitProvider;
 import com.gwtplatform.common.client.StandardProvider;
+import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.PlaceImpl;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper;
+import com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams;
 import com.gwtplatform.mvp.client.proxy.ProxyImpl;
 import com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
@@ -15,24 +19,23 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 
 @Generated(value = "$processor.qualifiedName", date = "$processingDate")
 public class $impl.simpleName extends ProxyPlaceImpl<$presenterType.simpleName> implements $proxyType.simpleName {
-## TODO: This is a basically a SimpleProxy with a hard-coded name. Reuse the other file
+## TODO: The body is basically the same as a SimpleProxy. Extract macros
     static class WrappedProxy extends ProxyImpl<$presenterType.simpleName> {
         @Inject
-        public WrappedProxy(
+        WrappedProxy(
                 EventBus eventBus,
                 PlaceManager placeManager,
-                Provider<$presenterType.simpleName> presenterProvider) {
+                #if($codeSplit)Async#{end}Provider<$presenterType.simpleName> presenterProvider) {
             bind(placeManager, eventBus);
 
-            presenter = new StandardProvider<>(presenterProvider);
+            presenter = new #if($codeSplit)CodeSplitProvider#{else}StandardProvider#end<>(presenterProvider);
 
 #if(!$slotNames.isEmpty())
             RevealContentHandler<$presenterType.simpleName> revealContentHandler
                     = new RevealContentHandler<$presenterType.simpleName>(eventBus, this);
 #foreach($slotName in $slotNames)
             eventBus.addHandler(${presenterType}.$slotName, revealContentHandler);
-#end
-#end
+#end#end
         }
     }
 
@@ -42,14 +45,24 @@ public class $impl.simpleName extends ProxyPlaceImpl<$presenterType.simpleName> 
             PlaceManager placeManager,
             WrappedProxy wrappedProxy#if($gatekeeperType),
             $gatekeeperType.simpleName gatekeeper#end) {
-        bind(placeManager, eventBus);
-        setProxy(wrappedProxy);
-
+        Place place;
         String[] nameTokens = {#foreach($nameToken in $nameTokens)"$nameToken"#commaIfNeeded()#end};
 #if($gatekeeperType)
-        setPlace(new PlaceWithGatekeeper(nameTokens, gatekeeper));
+#if($gatekeeperParams.isEmpty())
+
+        place = new PlaceWithGatekeeper(nameTokens, gatekeeper);
 #else
-        setPlace(new PlaceImpl(nameTokens));
+        String[] gatekeeperParams = {#foreach($param in $gatekeeperParams)"$param"#commaIfNeeded()#end};
+
+        place = new PlaceWithGatekeeperWithParams(nameTokens, gatekeeper, gatekeeperParams);
 #end
+#else
+
+        place = new PlaceImpl(nameTokens);
+#end
+
+        bind(placeManager, eventBus);
+        setProxy(wrappedProxy);
+        setPlace(place);
     }
 }

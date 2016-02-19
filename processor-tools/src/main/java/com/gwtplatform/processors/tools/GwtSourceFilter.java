@@ -99,10 +99,10 @@ public class GwtSourceFilter {
         }
     }
 
-    public Set<? extends Element> filterElements(Set<? extends Element> elements) {
-        Set<Element> filteredElements = new HashSet<>();
+    public <E extends Element> Set<E> filterElements(Set<E> elements) {
+        Set<E> filteredElements = new HashSet<>();
 
-        for (Element element : elements) {
+        for (E element : elements) {
             if (elementIsPartOfGwtSource(element)) {
                 filteredElements.add(element);
             }
