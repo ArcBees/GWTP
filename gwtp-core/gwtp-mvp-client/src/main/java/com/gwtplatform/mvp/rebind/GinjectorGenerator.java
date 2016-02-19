@@ -87,7 +87,8 @@ public class GinjectorGenerator extends AbstractGenerator {
         }
         try {
             PresenterDefinitions presenterDefinitions = new PresenterDefinitions();
-            findAllPresenters(presenterDefinitions);
+            // FIXME: Disabled to not clash with processors
+            // findAllPresenters(presenterDefinitions);
 
             ClassSourceFileComposerFactory composer = initComposer();
             writeMandatoryGetterImports(composer);

@@ -48,6 +48,7 @@ public class ProxyPlaceProcessor extends AbstractContextProcessor<ProxyDetails, 
                 .withParam("slotNames", proxyPlace.getContentSlots())
                 .withParam("nameTokens", proxyPlace.getNameTokens())
                 .withParam("codeSplit", proxyPlace.isCodeSplit())
+                .withParam("bundle", proxyPlace.getBundleDetails())
                 .writeTo(proxyPlace.getType());
 
         proxyModules.bindProxy(proxyPlace);

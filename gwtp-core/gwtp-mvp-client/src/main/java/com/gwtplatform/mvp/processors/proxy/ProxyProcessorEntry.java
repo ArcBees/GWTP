@@ -32,6 +32,7 @@ import javax.lang.model.element.TypeElement;
 import com.google.auto.service.AutoService;
 import com.google.common.collect.Sets;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.processors.proxy.ProxyDetails.Factory;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
@@ -64,7 +65,8 @@ public class ProxyProcessorEntry extends AbstractProcessor {
     public Set<String> getSupportedAnnotationTypes() {
         return Sets.newHashSet(
                 ProxyStandard.class.getCanonicalName(),
-                ProxyCodeSplit.class.getCanonicalName());
+                ProxyCodeSplit.class.getCanonicalName(),
+                ProxyCodeSplitBundle.class.getCanonicalName());
     }
 
     @Override
@@ -120,6 +122,7 @@ public class ProxyProcessorEntry extends AbstractProcessor {
     private boolean processGwtElements(RoundEnvironment roundEnv) {
         Set<Element> elements = new HashSet<>(roundEnv.getElementsAnnotatedWith(ProxyStandard.class));
         elements.addAll(roundEnv.getElementsAnnotatedWith(ProxyCodeSplit.class));
+        elements.addAll(roundEnv.getElementsAnnotatedWith(ProxyCodeSplitBundle.class));
 
         elements = utils.getSourceFilter().filterElements(elements);
 
