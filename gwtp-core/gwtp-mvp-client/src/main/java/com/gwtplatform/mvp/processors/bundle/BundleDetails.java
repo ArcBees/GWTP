@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.processors.proxy;
+package com.gwtplatform.mvp.processors.bundle;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -24,31 +24,40 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.SimpleAnnotationValueVisitor7;
 
+import com.google.common.base.CaseFormat;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
-import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
+import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.AnnotationMirrors.getAnnotationValue;
 import static com.google.auto.common.MoreTypes.asTypeElement;
 
 public class BundleDetails implements HasImports {
+    private static final String BUNDLE_NAME = "GeneratedBundle";
+
     private final Logger logger;
+    private final Utils utils;
+    private final Type targetType;
     private final TypeElement proxyElement;
     private final AnnotationMirror codeSplitBundleMirror;
 
-    private boolean valid = true;
     private boolean initialized;
+    private boolean valid = true;
     private String bundleName;
     private Type bundleType;
     private int id;
 
     public BundleDetails(
             Logger logger,
+            Utils utils,
+            Type targetType,
             TypeElement proxyElement,
             AnnotationMirror codeSplitBundleMirror) {
         this.logger = logger;
+        this.utils = utils;
+        this.targetType = targetType;
         this.proxyElement = proxyElement;
         this.codeSplitBundleMirror = codeSplitBundleMirror;
     }
@@ -63,6 +72,14 @@ public class BundleDetails implements HasImports {
         return valid;
     }
 
+    public Type getTargetType() {
+        return targetType;
+    }
+
+    public String getBundleName() {
+        return bundleName;
+    }
+
     public int getId() {
         initialize();
         return id;
@@ -73,22 +90,23 @@ public class BundleDetails implements HasImports {
         return bundleType;
     }
 
-    public String getBundleName() {
-        initialize();
-        return bundleName;
-    }
-
     private void initialize() {
         if (initialized) {
             return;
         }
 
+        initialized = true;
         bundleName = extractBundleValue();
         bundleType = extractBundleClass();
         id = extractBundleId();
-        initialized = true;
 
         validateBundleConfiguration();
+
+        if (valid && !bundleName.isEmpty()) {
+            bundleType = new Type(
+                    utils.getSourceFilter().getApplicationPackage(),
+                    BUNDLE_NAME + "$$" + bundleName);
+        }
     }
 
     private String extractBundleValue() {
@@ -96,9 +114,14 @@ public class BundleDetails implements HasImports {
                 .accept(new SimpleAnnotationValueVisitor7<String, Void>("") {
                     @Override
                     public String visitString(String value, Void v) {
-                        return value.trim();
+                        return sanitizeBundleName(value);
                     }
                 }, null);
+    }
+
+    private String sanitizeBundleName(String name) {
+        String sanitized = name.trim().replaceAll("[^\\w\\d]", "_");
+        return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, sanitized);
     }
 
     private int extractBundleId() {
@@ -145,20 +168,16 @@ public class BundleDetails implements HasImports {
                             + "Both a Bundle Class and an ID must be specified. "
                             + "Defaulting to @ProxyStandard.");
             valid = false;
-        } else if (!bundleName.isEmpty()) {
-            // TODO: Remove this check and handle generated bundles.
-            logger.error()
-                    .context(proxyElement, codeSplitBundleMirror)
-                    .log("Generated bundles are not implemented yet.");
-            throw new UnableToProcessException();
+        } else {
+            valid = true;
         }
-
-        valid = true;
     }
 
     @Override
     public Collection<String> getImports() {
-        if (bundleType != null) {
+        initialize();
+
+        if (isValid()) {
             return bundleType.getImports();
         }
         return Collections.emptyList();

@@ -14,14 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.processors.proxy;
+package com.gwtplatform.common.client.annotations;
 
-import com.gwtplatform.mvp.processors.bundle.NamedProviderBundleProcessor;
-import com.gwtplatform.processors.tools.ContextProcessor;
-import com.gwtplatform.processors.tools.domain.Type;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public interface ProxyProcessor extends ContextProcessor<ProxyDetails, Type> {
-    void setProxyModules(ProxyModules proxyModules);
-
-    void setProviderBundleProcessor(NamedProviderBundleProcessor providerBundleProcessor);
+@Retention(RetentionPolicy.SOURCE)
+@Target(ElementType.TYPE)
+public @interface ProviderBundle {
+    String value();
 }
+

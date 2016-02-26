@@ -1,7 +1,7 @@
 #* @implicitly included *#
 
 #* @vtlmacrolibrary path="macros.vm" *#
-#* @vtlmacrolibrary path="../../../../../../../../../../processor-tools/src/main/resources/com/gwtplatform/processors/tools/macros.vm" *#
+#* @vtlmacrolibrary path="/com/gwtplatform/processors/tools/macros.vm" *#
 #* @velocityproperties path=com/gwtplatform/dispatch/rest/processors/velocity.properties *#
 
 #* @vtlvariable name="impl" type="com.gwtplatform.processors.tools.domain.Type" *#

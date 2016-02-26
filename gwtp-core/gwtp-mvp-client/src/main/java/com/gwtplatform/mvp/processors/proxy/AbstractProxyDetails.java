@@ -33,6 +33,7 @@ import com.google.common.collect.FluentIterable;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
+import com.gwtplatform.mvp.processors.bundle.BundleDetails;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
@@ -163,15 +164,20 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
         bundleDetails = absent();
 
         if (annotation.isPresent()) {
-            bundleDetails = of(new BundleDetails(logger, element, annotation.get()));
+            bundleDetails = of(new BundleDetails(logger, utils, getPresenterType(), element, annotation.get()));
         }
     }
 
     @Override
     public Collection<String> getImports() {
-        return FluentIterable
+        FluentIterable<String> imports = FluentIterable
                 .from(getProxyType().getImports())
-                .append(getPresenterType().getImports())
-                .toList();
+                .append(getPresenterType().getImports());
+
+        if (getBundleDetails() != null) {
+            imports = imports.append(getBundleDetails().getImports());
+        }
+
+        return imports.toList();
     }
 }
