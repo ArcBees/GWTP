@@ -6,7 +6,9 @@ import javax.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.gwtplatform.common.client.CodeSplitBundleProvider;
+import com.gwtplatform.common.client.CodeSplitNamedBundleProvider;
 import com.gwtplatform.common.client.CodeSplitProvider;
+import com.gwtplatform.common.client.NamedProviderBundleCollection;
 import com.gwtplatform.common.client.StandardProvider;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyImpl;
@@ -18,13 +20,19 @@ public class $impl.simpleName extends ProxyImpl<$presenterType.simpleName> imple
     @Inject
     ${impl.simpleName}(
             EventBus eventBus,
-            PlaceManager placeManager,#if($bundle.manualBundle)
-            AsyncProvider<$bundle.bundleType.simpleName> bundleProvider#elseif($codeSplit)
-            AsyncProvider<$presenterType.simpleName> presenterProvider#else
-            Provider<$presenterType.simpleName> presenterProvider#end) {
+            PlaceManager placeManager,
+#if($bundle && !$bundle.isManualBundle())
+                NamedProviderBundleCollection providerBundleCollection#elseif($bundle)
+                AsyncProvider<$bundle.bundleType.simpleName> bundleProvider#elseif($codeSplit)
+                AsyncProvider<$presenterType.simpleName> presenterProvider#else
+                Provider<$presenterType.simpleName> presenterProvider#end) {
         bind(placeManager, eventBus);
 
-#if($bundle)
+#if($bundle && !$bundle.isManualBundle())
+        presenter = new CodeSplitNamedBundleProvider(
+                providerBundleCollection.getBundle("$bundle.bundleName"),
+                "$presenterType.qualifiedParameterizedName");
+#elseif($bundle)
         presenter = new CodeSplitBundleProvider<>(bundleProvider, $bundle.id);
 #elseif($codeSplit)
         presenter = new CodeSplitProvider<>(presenterProvider);

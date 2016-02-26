@@ -20,6 +20,7 @@ import java.util.Set;
 
 import javax.lang.model.element.Element;
 
+import com.gwtplatform.mvp.processors.bundle.BundleDetails;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.HasType;
 import com.gwtplatform.processors.tools.domain.Type;

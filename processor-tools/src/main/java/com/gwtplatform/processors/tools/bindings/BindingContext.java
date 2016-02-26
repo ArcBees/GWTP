@@ -80,6 +80,19 @@ public class BindingContext {
 
     public static BindingContext newBinding(
             Type module,
+            Type implementation) {
+        return new BindingContext(module, of(implementation), absentType(), absentType(), false, false);
+    }
+
+    public static BindingContext newBinding(
+            Type module,
+            Type implementation,
+            Class<?> scope) {
+        return new BindingContext(module, of(implementation), absentType(), of(new Type(scope)), false, false);
+    }
+
+    public static BindingContext newBinding(
+            Type module,
             Type parent,
             Type implementation) {
         return new BindingContext(module, of(implementation), of(parent), absentType(), false, false);

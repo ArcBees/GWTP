@@ -68,6 +68,10 @@ public class GwtSourceFilter {
         this.sourcePackages = new LinkedHashSet<>();
     }
 
+    public String getApplicationPackage() {
+        return getSourcePackages().iterator().next();
+    }
+
     public Set<String> getSourcePackages() {
         if (!initialized) {
             resolveSourcePackages();

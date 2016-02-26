@@ -9,17 +9,20 @@
 #* @vtlvariable name="imports" type="java.util.Collection<java.lang.String>" *#
 #* @vtlvariable name="type" type="com.gwtplatform.processors.tools.domain.Type" *#
 
-#* @vtlvariable name="presenterType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/SimpleProxy.vm" *#
-#* @vtlvariable name="proxyType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/SimpleProxy.vm" *#
-#* @vtlvariable name="slotNames" type="java.util.Collection<java.lang.String>" file="com/gwtplatform/mvp/processors/SimpleProxy.vm" *#
-#* @vtlvariable name="codeSplit" type="boolean" file="com/gwtplatform/mvp/processors/SimpleProxy.vm" *#
-#* @vtlvariable name="bundle" type="com.gwtplatform.mvp.processors.proxy.BundleDetails" file="com/gwtplatform/mvp/processors/SimpleProxy.vm" *#
+#* @vtlvariable name="presenterType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/proxy/SimpleProxy.vm" *#
+#* @vtlvariable name="proxyType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/proxy/SimpleProxy.vm" *#
+#* @vtlvariable name="slotNames" type="java.util.Collection<java.lang.String>" file="com/gwtplatform/mvp/processors/proxy/SimpleProxy.vm" *#
+#* @vtlvariable name="codeSplit" type="boolean" file="com/gwtplatform/mvp/processors/proxy/SimpleProxy.vm" *#
+#* @vtlvariable name="bundle" type="com.gwtplatform.mvp.processors.bundle.BundleDetails" file="com/gwtplatform/mvp/processors/proxy/SimpleProxy.vm" *#
 
-#* @vtlvariable name="presenterType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
-#* @vtlvariable name="proxyType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
-#* @vtlvariable name="slotNames" type="java.util.Collection<java.lang.String>" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
-#* @vtlvariable name="codeSplit" type="boolean" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
-#* @vtlvariable name="nameTokens" type="java.util.Collection<java.lang.String>" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
-#* @vtlvariable name="gatekeeperType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
-#* @vtlvariable name="gatekeeperParams" type="java.util.List<java.lang.String>" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
-#* @vtlvariable name="bundle" type="com.gwtplatform.mvp.processors.proxy.BundleDetails" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
+#* @vtlvariable name="presenterType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/proxy/ProxyPlace.vm" *#
+#* @vtlvariable name="proxyType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/proxy/ProxyPlace.vm" *#
+#* @vtlvariable name="slotNames" type="java.util.Collection<java.lang.String>" file="com/gwtplatform/mvp/processors/proxy/ProxyPlace.vm" *#
+#* @vtlvariable name="codeSplit" type="boolean" file="com/gwtplatform/mvp/processors/proxy/ProxyPlace.vm" *#
+#* @vtlvariable name="nameTokens" type="java.util.Collection<java.lang.String>" file="com/gwtplatform/mvp/processors/proxy/ProxyPlace.vm" *#
+#* @vtlvariable name="gatekeeperType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/proxy/ProxyPlace.vm" *#
+#* @vtlvariable name="gatekeeperParams" type="java.util.List<java.lang.String>" file="com/gwtplatform/mvp/processors/proxy/ProxyPlace.vm" *#
+#* @vtlvariable name="bundle" type="com.gwtplatform.mvp.processors.bundle.BundleDetails" file="com/gwtplatform/mvp/processors/proxy/ProxyPlace.vm" *#
+
+#* @vtlvariable name="providerTypes" type="java.util.List<com.gwtplatform.processors.tools.domain.Type>" file="com/gwtplatform/mvp/processors/bundle/ProviderBundle.vm" *#
+#* @vtlvariable name="name" type="java.lang.String" file="com/gwtplatform/mvp/processors/bundle/ProviderBundle.vm" *#

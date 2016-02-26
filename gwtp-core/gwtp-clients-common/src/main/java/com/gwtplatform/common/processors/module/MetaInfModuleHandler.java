@@ -14,16 +14,14 @@
  * the License.
  */
 
-package com.gwtplatform.common.processors;
+package com.gwtplatform.common.processors.module;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -41,7 +39,10 @@ import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.outputter.OutputType;
 import com.gwtplatform.processors.tools.outputter.Outputter;
 
-public class MetaInfModuleHandler {
+import static java.nio.charset.Charset.defaultCharset;
+import static java.nio.file.FileSystems.newFileSystem;
+
+class MetaInfModuleHandler {
     private static final Type META_INF_TYPE = new Type("", "gwtp/ginModules");
 
     private final Logger logger;
@@ -109,12 +110,12 @@ public class MetaInfModuleHandler {
         Map<String, Object> env = new HashMap<>();
         String[] paths = uri.toString().split("!");
 
-        try (FileSystem fileSystem = FileSystems.newFileSystem(URI.create(paths[0]), env)) {
+        try (FileSystem fileSystem = newFileSystem(URI.create(paths[0]), env)) {
             return extractModulesToInstall(fileSystem.getPath(paths[1]));
         }
     }
 
     private List<String> extractModulesToInstall(Path path) throws IOException {
-        return Files.readAllLines(path, Charset.defaultCharset());
+        return Files.readAllLines(path, defaultCharset());
     }
 }

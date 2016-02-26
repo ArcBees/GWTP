@@ -44,7 +44,7 @@ import javax.inject.Provider;
  *   }
  * }</pre>
  */
-public class ProviderBundle {
+public abstract class ProviderBundle {
     protected final Provider<?> providers[];
 
     /**
@@ -59,7 +59,7 @@ public class ProviderBundle {
      *
      * @param bundleSize The number of providers in the bundle.
      */
-    public ProviderBundle(int bundleSize) {
+    protected ProviderBundle(int bundleSize) {
         providers = new Provider<?>[bundleSize];
     }
 

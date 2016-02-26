@@ -19,6 +19,7 @@ package com.gwtplatform.mvp.processors.proxy;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gwtplatform.mvp.processors.bundle.NamedProviderBundleProcessor;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.outputter.Outputter;
 import com.gwtplatform.processors.tools.utils.Utils;
@@ -34,16 +35,19 @@ public class ProxyProcessors {
     private final Utils utils;
     private final Outputter outputter;
     private final ProxyModules proxyModules;
+    private final NamedProviderBundleProcessor providerBundleProcessor;
 
     public ProxyProcessors(
             Logger logger,
             Utils utils,
             Outputter outputter,
-            ProxyModules proxyModules) {
+            ProxyModules proxyModules,
+            NamedProviderBundleProcessor providerBundleProcessor) {
         this.logger = logger;
         this.utils = utils;
         this.outputter = outputter;
         this.proxyModules = proxyModules;
+        this.providerBundleProcessor = providerBundleProcessor;
 
         if (processors == null) {
             processors = Arrays.<ProxyProcessor>asList(
@@ -86,6 +90,7 @@ public class ProxyProcessors {
             for (ProxyProcessor processor : processors) {
                 processor.init(logger, utils, outputter);
                 processor.setProxyModules(proxyModules);
+                processor.setProviderBundleProcessor(providerBundleProcessor);
             }
 
             initialized = true;

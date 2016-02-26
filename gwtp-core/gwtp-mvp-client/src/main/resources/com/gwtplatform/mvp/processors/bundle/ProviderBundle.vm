@@ -1,0 +1,24 @@
+package $impl.packageName;
+
+import java.util.AbstractMap.SimpleEntry;
+
+import javax.annotation.Generated;
+import javax.inject.Inject;
+import javax.inject.Provider;
+
+import com.gwtplatform.common.client.NamedProviderBundle;
+import com.gwtplatform.common.client.annotations.ProviderBundle;
+#printImports($imports)
+
+@ProviderBundle("$name")
+@Generated(value = "$processor.qualifiedName", date = "$processingDate")
+public class $impl.simpleName extends NamedProviderBundle {
+    @Inject
+    ${impl.simpleName}(#foreach ($type in $providerTypes)
+
+            Provider<$type.parameterizedName> provider$foreach.index#commaIfNeeded()#end) {
+        super(#foreach ($type in $providerTypes)
+
+                new SimpleEntry<String, Provider<?>>("$type.qualifiedParameterizedName", provider$foreach.index#commaIfNeeded())#end);
+    }
+}

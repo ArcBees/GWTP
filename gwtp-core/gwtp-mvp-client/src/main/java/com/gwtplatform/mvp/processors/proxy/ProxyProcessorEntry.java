@@ -34,6 +34,7 @@ import com.google.common.collect.Sets;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.processors.bundle.NamedProviderBundleProcessor;
 import com.gwtplatform.mvp.processors.proxy.ProxyDetails.Factory;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
@@ -60,6 +61,7 @@ public class ProxyProcessorEntry extends AbstractProcessor {
     private BindingsProcessors bindingsProcessors;
     private ProxyProcessors proxyProcessors;
     private ProxyModules proxyModules;
+    private NamedProviderBundleProcessor providerBundleProcessor;
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
@@ -92,7 +94,10 @@ public class ProxyProcessorEntry extends AbstractProcessor {
     private void initializeProcessors() {
         bindingsProcessors = new BindingsProcessors(logger, utils, outputter);
         proxyModules = new ProxyModules(utils, bindingsProcessors);
-        proxyProcessors = new ProxyProcessors(logger, utils, outputter, proxyModules);
+        providerBundleProcessor = new NamedProviderBundleProcessor();
+        proxyProcessors = new ProxyProcessors(logger, utils, outputter, proxyModules, providerBundleProcessor);
+
+        providerBundleProcessor.init(logger, utils, outputter);
     }
 
     @Override
@@ -114,6 +119,7 @@ public class ProxyProcessorEntry extends AbstractProcessor {
 
         if (elementsProcessed) {
             proxyModules.flush();
+            providerBundleProcessor.flush();
         }
 
         maybeProcessLastRound(roundEnv);
@@ -145,6 +151,7 @@ public class ProxyProcessorEntry extends AbstractProcessor {
 
     private void maybeProcessLastRound(RoundEnvironment roundEnv) {
         if (roundEnv.processingOver()) {
+            providerBundleProcessor.processLast();
             proxyProcessors.processLast();
             bindingsProcessors.processLast();
         }

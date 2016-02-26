@@ -16,17 +16,25 @@
 
 package com.gwtplatform.mvp.processors.proxy;
 
+import com.gwtplatform.mvp.processors.bundle.BundleDetails;
+import com.gwtplatform.mvp.processors.bundle.NamedProviderBundleProcessor;
 import com.gwtplatform.processors.tools.AbstractContextProcessor;
 import com.gwtplatform.processors.tools.domain.Type;
 
 public class SimpleProxyProcessor extends AbstractContextProcessor<ProxyDetails, Type> implements ProxyProcessor {
-    private static final String TEMPLATE = "com/gwtplatform/mvp/processors/SimpleProxy.vm";
+    private static final String TEMPLATE = "com/gwtplatform/mvp/processors/proxy/SimpleProxy.vm";
 
     private ProxyModules proxyModules;
+    private NamedProviderBundleProcessor providerBundleProcessor;
 
     @Override
     public void setProxyModules(ProxyModules proxyModules) {
         this.proxyModules = proxyModules;
+    }
+
+    @Override
+    public void setProviderBundleProcessor(NamedProviderBundleProcessor providerBundleProcessor) {
+        this.providerBundleProcessor = providerBundleProcessor;
     }
 
     @Override
@@ -38,14 +46,19 @@ public class SimpleProxyProcessor extends AbstractContextProcessor<ProxyDetails,
     public Type process(ProxyDetails proxy) {
         logger.debug("Generating proxy `%s`.", proxy.getProxyType());
 
+        BundleDetails bundleDetails = proxy.getBundleDetails();
+
         outputter.configure(TEMPLATE)
                 .withParam("proxyType", proxy.getProxyType())
                 .withParam("presenterType", proxy.getPresenterType())
                 .withParam("slotNames", proxy.getContentSlots())
                 .withParam("codeSplit", proxy.isCodeSplit())
-                .withParam("bundle", proxy.getBundleDetails())
+                .withParam("bundle", bundleDetails)
                 .writeTo(proxy.getType());
 
+        if (bundleDetails != null) {
+            providerBundleProcessor.process(bundleDetails);
+        }
         proxyModules.bindProxy(proxy);
 
         return proxy.getType();

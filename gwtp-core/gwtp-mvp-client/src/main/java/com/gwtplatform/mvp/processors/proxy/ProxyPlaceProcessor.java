@@ -16,17 +16,25 @@
 
 package com.gwtplatform.mvp.processors.proxy;
 
+import com.gwtplatform.mvp.processors.bundle.BundleDetails;
+import com.gwtplatform.mvp.processors.bundle.NamedProviderBundleProcessor;
 import com.gwtplatform.processors.tools.AbstractContextProcessor;
 import com.gwtplatform.processors.tools.domain.Type;
 
 public class ProxyPlaceProcessor extends AbstractContextProcessor<ProxyDetails, Type> implements ProxyProcessor {
-    private static final String TEMPLATE = "com/gwtplatform/mvp/processors/ProxyPlace.vm";
+    private static final String TEMPLATE = "com/gwtplatform/mvp/processors/proxy/ProxyPlace.vm";
 
     private ProxyModules proxyModules;
+    private NamedProviderBundleProcessor providerBundleProcessor;
 
     @Override
     public void setProxyModules(ProxyModules proxyModules) {
         this.proxyModules = proxyModules;
+    }
+
+    @Override
+    public void setProviderBundleProcessor(NamedProviderBundleProcessor providerBundleProcessor) {
+        this.providerBundleProcessor = providerBundleProcessor;
     }
 
     @Override
@@ -40,6 +48,7 @@ public class ProxyPlaceProcessor extends AbstractContextProcessor<ProxyDetails, 
 
         logger.debug("Generating proxy place `%s`.", proxyPlace.getProxyType());
 
+        BundleDetails bundleDetails = proxyPlace.getBundleDetails();
         outputter.configure(TEMPLATE)
                 .withParam("proxyType", proxyPlace.getProxyType())
                 .withParam("presenterType", proxyPlace.getPresenterType())
@@ -48,9 +57,12 @@ public class ProxyPlaceProcessor extends AbstractContextProcessor<ProxyDetails, 
                 .withParam("slotNames", proxyPlace.getContentSlots())
                 .withParam("nameTokens", proxyPlace.getNameTokens())
                 .withParam("codeSplit", proxyPlace.isCodeSplit())
-                .withParam("bundle", proxyPlace.getBundleDetails())
+                .withParam("bundle", bundleDetails)
                 .writeTo(proxyPlace.getType());
 
+        if (bundleDetails != null) {
+            providerBundleProcessor.process(bundleDetails);
+        }
         proxyModules.bindProxy(proxyPlace);
 
         return proxyPlace.getType();
