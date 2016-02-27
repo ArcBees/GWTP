@@ -1,6 +1,7 @@
 #* @implicitly included *#
 
 #* @vtlmacrolibrary path="com/gwtplatform/processors/tools/macros.vm" *#
+#* @vtlmacrolibrary path="com/gwtplatform/mvp/processors/proxy/macros.vm" *#
 #* @velocityproperties path=com/gwtplatform/processors/tools/velocity.properties *#
 
 #* @vtlvariable name="impl" type="com.gwtplatform.processors.tools.domain.Type" *#
@@ -8,6 +9,11 @@
 #* @vtlvariable name="processingDate" type="java.lang.String" *#
 #* @vtlvariable name="imports" type="java.util.Collection<java.lang.String>" *#
 #* @vtlvariable name="type" type="com.gwtplatform.processors.tools.domain.Type" *#
+
+#* @vtlvariable name="presenterType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/proxy/macros.vm" *#
+#* @vtlvariable name="slotNames" type="java.util.Collection<java.lang.String>" file="com/gwtplatform/mvp/processors/proxy/macros.vm" *#
+#* @vtlvariable name="codeSplit" type="boolean" file="com/gwtplatform/mvp/processors/proxy/macros.vm" *#
+#* @vtlvariable name="bundle" type="com.gwtplatform.mvp.processors.bundle.BundleDetails" file="com/gwtplatform/mvp/processors/proxy/macros.vm" *#
 
 #* @vtlvariable name="presenterType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/proxy/SimpleProxy.vm" *#
 #* @vtlvariable name="proxyType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/proxy/SimpleProxy.vm" *#

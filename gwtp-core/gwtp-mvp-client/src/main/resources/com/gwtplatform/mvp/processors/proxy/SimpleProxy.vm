@@ -1,49 +1,11 @@
 package $impl.packageName;
 
 import javax.annotation.Generated;
-import javax.inject.Inject;
-import javax.inject.Provider;
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.gwt.inject.client.AsyncProvider;
-import com.gwtplatform.common.client.CodeSplitBundleProvider;
-import com.gwtplatform.common.client.CodeSplitNamedBundleProvider;
-import com.gwtplatform.common.client.CodeSplitProvider;
-import com.gwtplatform.common.client.NamedProviderBundleCollection;
-import com.gwtplatform.common.client.StandardProvider;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.ProxyImpl;
-import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+#printProxyImports($bundle $codeSplit $slotNames)
 #printImports($imports)
 
 @Generated(value = "$processor.qualifiedName", date = "$processingDate")
 public class $impl.simpleName extends ProxyImpl<$presenterType.simpleName> implements $proxyType.simpleName {
-    @Inject
-    ${impl.simpleName}(
-            EventBus eventBus,
-            PlaceManager placeManager,
-#if($bundle && !$bundle.isManualBundle())
-                NamedProviderBundleCollection providerBundleCollection#elseif($bundle)
-                AsyncProvider<$bundle.bundleType.simpleName> bundleProvider#elseif($codeSplit)
-                AsyncProvider<$presenterType.simpleName> presenterProvider#else
-                Provider<$presenterType.simpleName> presenterProvider#end) {
-        bind(placeManager, eventBus);
-
-#if($bundle && !$bundle.isManualBundle())
-        presenter = new CodeSplitNamedBundleProvider(
-                providerBundleCollection.getBundle("$bundle.bundleName"),
-                "$presenterType.qualifiedParameterizedName");
-#elseif($bundle)
-        presenter = new CodeSplitBundleProvider<>(bundleProvider, $bundle.id);
-#elseif($codeSplit)
-        presenter = new CodeSplitProvider<>(presenterProvider);
-#else
-        presenter = new StandardProvider<>(presenterProvider);
-#end
-#if(!$slotNames.isEmpty())
-        RevealContentHandler<$presenterType.simpleName> revealContentHandler
-                = new RevealContentHandler<$presenterType.simpleName>(eventBus, this);
-#foreach($slotName in $slotNames)
-        eventBus.addHandler(${presenterType.simpleName}.$slotName, revealContentHandler);
-#end#end
-    }
+#printProxyBody($impl.simpleName $bundle $codeSplit $presenterType $slotNames)
 }
