@@ -71,7 +71,7 @@ public class EndPointDetails implements HasImports {
     private final Logger logger;
     private final Utils utils;
 
-    private Path path;
+    private PathDetails path;
     private Secured secured;
     private Set<ContentType> consumes;
     private Set<ContentType> produces;
@@ -115,13 +115,13 @@ public class EndPointDetails implements HasImports {
     }
 
     void processElement(Element element) {
-        path = path == null ? new Path(element) : new Path(element, path);
+        path = path == null ? new PathDetails(element) : new PathDetails(element, path);
         secured = secured == null ? new Secured(element) : new Secured(element, secured);
         consumes = copyOf(consumes == null ? resolveConsumes(element) : resolveConsumes(element, consumes));
         produces = copyOf(produces == null ? resolveProduces(element) : resolveProduces(element, produces));
     }
 
-    public void processVerb(Method method) {
+    private void processVerb(Method method) {
         verb = new HttpVerbResolver(logger).resolve(method.getElement());
     }
 
@@ -168,7 +168,7 @@ public class EndPointDetails implements HasImports {
     }
 
     private void resolveVariable(Method method, Variable variable) {
-        HttpVariable httpVariable = new HttpVariable(logger, utils, variable);
+        HttpVariable httpVariable = new HttpVariable(logger, utils, getPath(), variable);
 
         if (body.isPresent() && httpVariable.isBody()) {
             ExecutableElement methodElement = method.getElement();
@@ -215,7 +215,7 @@ public class EndPointDetails implements HasImports {
         return verb;
     }
 
-    public Path getPath() {
+    public PathDetails getPath() {
         return path;
     }
 

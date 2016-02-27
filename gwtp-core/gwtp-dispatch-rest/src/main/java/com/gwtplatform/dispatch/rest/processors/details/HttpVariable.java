@@ -28,6 +28,9 @@ import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
+import static com.google.common.base.Optional.absent;
+import static com.google.common.base.Optional.fromNullable;
+
 public class HttpVariable implements HasImports {
     private final Type type;
     private final String name;
@@ -38,6 +41,7 @@ public class HttpVariable implements HasImports {
     public HttpVariable(
             Logger logger,
             Utils utils,
+            PathDetails path,
             Variable variable) {
         VariableElement variableElement = variable.getElement();
 
@@ -45,8 +49,15 @@ public class HttpVariable implements HasImports {
         name = variable.getName();
         httpAnnotation = new HttpAnnotationResolver(logger, utils).resolve(variableElement);
         dateFormat = new DateFormatResolver(logger).resolve(variableElement);
-        // TODO: extract regex
-        regex = Optional.absent();
+        regex = findRegex(path);
+    }
+
+    private Optional<String> findRegex(PathDetails path) {
+        if (!httpAnnotation.isPresent()) {
+            return absent();
+        }
+
+        return fromNullable(path.getRegex(httpAnnotation.get().getName()));
     }
 
     public Type getType() {

@@ -23,7 +23,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 
 @AutoService(HttpVariableInitializerProcessor.class)
-class HeaderVariableInitializerProcessor extends AbstractHttpVariableInitializerProcessor {
+public class HeaderVariableInitializerProcessor extends AbstractHttpVariableInitializerProcessor {
     @Override
     protected Type getSupportedParameterType() {
         return Type.HEADER;
