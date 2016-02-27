@@ -1,0 +1,40 @@
+package $impl.packageName;
+
+import javax.annotation.Generated;
+
+import com.google.gwt.inject.client.AbstractGinModule;
+import com.google.gwt.inject.client.multibindings.GinMultibinder;
+import com.google.inject.TypeLiteral;
+import com.gwtplatform.common.client.annotations.GwtpModule;
+
+@GwtpModule
+@Generated("$processor.qualifiedName")
+public class $impl.simpleName extends AbstractGinModule {
+    @Override
+    protected void configure() {
+#foreach($subModule in $subModules)
+        install(new ${subModule.qualifiedName}());
+#end
+
+#foreach ($binding in $bindings)
+#set($implementerMethod = 'bind')
+#if($binding.implemented.isPresent())
+#set($implemented = $binding.implemented.get())
+#set($implementerMethod = '        .to')
+        bind(#maybeTypeLiteral($implemented))
+#end
+#set($implementer = $binding.implementer)
+        ${implementerMethod}(#maybeTypeLiteral($implementer))
+                #appendScopeMethod($binding);
+#end
+
+#foreach ($bindingEntries in $setBindings)
+        GinMultibinder.newSetBinder(binder(), #maybeTypeLiteral($bindingEntries.key))
+#foreach ($binding in $bindingEntries.value)
+#set($implementer = $binding.implementer)
+                .addBinding().to(#maybeTypeLiteral($implementer))
+                #appendScopeMethod($binding);
+#end
+#end
+    }
+}

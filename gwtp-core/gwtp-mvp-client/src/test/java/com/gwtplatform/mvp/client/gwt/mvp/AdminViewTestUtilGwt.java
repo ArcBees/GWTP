@@ -17,22 +17,13 @@
 package com.gwtplatform.mvp.client.gwt.mvp;
 
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 /**
  * A test presenter meant to be run in a GWTTestCase.
  */
 public class AdminViewTestUtilGwt extends ViewImpl implements AdminPresenterTestUtilGwt.MyView {
-
-    public final FlowPanel widget;
-
     public AdminViewTestUtilGwt() {
-        widget = new FlowPanel();
-    }
-
-    @Override
-    public Widget asWidget() {
-        return widget;
+        initWidget(new FlowPanel());
     }
 }

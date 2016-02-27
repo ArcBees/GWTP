@@ -20,27 +20,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gwtplatform.dispatch.rest.client.codegen.AbstractRestAction;
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
-import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
-import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
+import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 
 /**
  * Used by test code to expose protected methods from {@link com.gwtplatform.dispatch.rest.client.codegen
- * .AbstractRestAction AbstractRestAction}. The goal is to help clean up the test code.
+ * .AbstractRestAction
+ * AbstractRestAction}. The goal is to help clean up the test code.
  */
 public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
     private String bodyClass;
     private String resultClass;
-    private List<ContentType> produced = new ArrayList<ContentType>();
-    private List<ContentType> consumed = new ArrayList<ContentType>();
+    private List<ContentType> produced = new ArrayList<>();
+    private List<ContentType> consumed = new ArrayList<>();
 
     protected ExposedRestAction(
-            HttpParameterFactory factory,
             HttpMethod httpMethod,
             String rawServicePath) {
-        super(factory, DateFormat.DEFAULT, httpMethod, rawServicePath);
+        super(httpMethod, rawServicePath);
     }
 
     @Override
@@ -49,8 +47,8 @@ public abstract class ExposedRestAction<R> extends AbstractRestAction<R> {
     }
 
     @Override
-    public void addParam(Type type, String name, Object value) {
-        super.addParam(type, name, value);
+    public void addParam(HttpParameter parameter) {
+        super.addParam(parameter);
     }
 
     public void setBodyClass(String bodyClass) {

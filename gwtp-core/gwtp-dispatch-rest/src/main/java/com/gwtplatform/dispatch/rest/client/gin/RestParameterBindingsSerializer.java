@@ -23,8 +23,12 @@ import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.gwtplatform.common.shared.UrlUtils;
-import com.gwtplatform.dispatch.rest.client.core.parameters.DefaultHttpParameterFactory;
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.CookieParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.FormParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HeaderParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.MatrixParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.PathParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.QueryParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
@@ -33,7 +37,7 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
  * Parses {@link com.gwtplatform.dispatch.rest.client.gin.RestParameterBindings} from and to JSON.
  */
 public class RestParameterBindingsSerializer {
-    private static final UrlUtils URL_UTILS = new UrlUtils() {
+    static final UrlUtils URL_UTILS = new UrlUtils() {
         @Override
         public String encodePathSegment(String decodedPathSegment) {
             return encodeQueryString(decodedPathSegment);
@@ -69,10 +73,7 @@ public class RestParameterBindingsSerializer {
         }
     };
 
-    private final HttpParameterFactory parameterFactory;
-
     public RestParameterBindingsSerializer() {
-        parameterFactory = new DefaultHttpParameterFactory(URL_UTILS, null);
     }
 
     /**
@@ -105,17 +106,42 @@ public class RestParameterBindingsSerializer {
             JSONArray jsonParameters = json.get(method).isArray();
 
             for (int i = 0; i < jsonParameters.size(); ++i) {
-                JSONObject jsonParameter = jsonParameters.get(i).isObject();
-                String key = jsonParameter.get("key").isString().stringValue();
-                String value = jsonParameter.get("value").isString().stringValue();
-                Type type = Type.valueOf(jsonParameter.get("type").isString().stringValue());
-                HttpParameter parameter = parameterFactory.create(type, key, value);
-
+                HttpParameter parameter = deserialize(jsonParameters.get(i).isObject());
                 parameters.put(httpMethod, parameter);
             }
         }
 
         return parameters;
+    }
+
+    private HttpParameter deserialize(JSONObject jsonParameter) {
+        String key = jsonParameter.get("key").isString().stringValue();
+        String value = jsonParameter.get("value").isString().stringValue();
+        Type type = Type.valueOf(jsonParameter.get("type").isString().stringValue());
+        HttpParameter parameter = null;
+
+        switch (type) {
+            case COOKIE:
+                parameter = new CookieParameter(key, value);
+                break;
+            case FORM:
+                parameter = new FormParameter(key, value, URL_UTILS);
+                break;
+            case HEADER:
+                parameter = new HeaderParameter(key, value);
+                break;
+            case MATRIX:
+                parameter = new MatrixParameter(key, value, URL_UTILS);
+                break;
+            case PATH:
+                parameter = new PathParameter(key, value, null, URL_UTILS);
+                break;
+            case QUERY:
+                parameter = new QueryParameter(key, value, URL_UTILS);
+                break;
+        }
+
+        return parameter;
     }
 
     private void serializeValues(StringBuilder result, HttpMethod method, Set<HttpParameter> parameters) {

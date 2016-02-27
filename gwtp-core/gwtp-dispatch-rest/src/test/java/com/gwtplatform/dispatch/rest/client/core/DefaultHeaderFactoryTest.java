@@ -16,6 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.client.core;
 
+import java.util.Arrays;
+
 import javax.inject.Inject;
 import javax.ws.rs.core.HttpHeaders;
 
@@ -29,18 +31,17 @@ import org.mockito.InOrder;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.user.client.rpc.RpcRequestBuilder;
 import com.google.inject.Provides;
+import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
 import com.gwtplatform.dispatch.rest.client.annotations.GlobalHeaderParams;
 import com.gwtplatform.dispatch.rest.client.annotations.XsrfHeaderName;
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.HeaderParameter;
 import com.gwtplatform.dispatch.rest.client.gin.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
-import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.UnsecuredRestAction;
-import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
+import com.gwtplatform.dispatch.rest.client.testutils.UrlUtilsForTests;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
-import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 import static org.mockito.Matchers.anyString;
@@ -57,22 +58,22 @@ public class DefaultHeaderFactoryTest {
     public static class Module extends JukitoModule {
         @Override
         protected void configureTest() {
+            bind(UrlUtils.class).to(UrlUtilsForTests.class).in(TestSingleton.class);
+
             bindConstant().annotatedWith(RestApplicationPath.class).to(APPLICATION_PATH);
             bindConstant().annotatedWith(XsrfHeaderName.class).to(XSRF_HEADER_NAME);
 
             forceMock(RequestBuilder.class);
-
-            bind(HttpParameterFactory.class).to(MockHttpParameterFactory.class);
         }
 
         @Provides
         @TestSingleton
         @GlobalHeaderParams
-        RestParameterBindings getHeaderParams(HttpParameterFactory parameterFactory) {
+        RestParameterBindings getHeaderParams() {
             RestParameterBindings headers = new RestParameterBindings();
-            headers.put(GET, parameterFactory.create(Type.HEADER, KEY_1, VALUE_1));
-            headers.put(GET, parameterFactory.create(Type.HEADER, KEY_2, VALUE_2));
-            headers.put(POST, parameterFactory.create(Type.HEADER, KEY_3, VALUE_3));
+            headers.put(GET, new HeaderParameter(KEY_1, VALUE_1, null));
+            headers.put(GET, new HeaderParameter(KEY_2, VALUE_2, null));
+            headers.put(POST, new HeaderParameter(KEY_3, VALUE_3, null));
 
             return headers;
         }
@@ -94,14 +95,12 @@ public class DefaultHeaderFactoryTest {
     @Inject
     private DefaultHeaderFactory factory;
     @Inject
-    private HttpParameterFactory parameterFactory;
-    @Inject
     private RequestBuilder requestBuilder;
 
     @Test
     public void build_securityToken_securityHeaderIsSet() {
         // Given
-        RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
 
         // When
         factory.buildHeaders(requestBuilder, action, SECURITY_TOKEN);
@@ -113,7 +112,7 @@ public class DefaultHeaderFactoryTest {
     @Test
     public void build_emptySecurityToken_securityHeaderIsNotSet() {
         // Given
-        RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
 
         // When
         factory.buildHeaders(requestBuilder, action, "");
@@ -125,7 +124,7 @@ public class DefaultHeaderFactoryTest {
     @Test
     public void build_actionNotSecured_securityHeaderIsNotSet() {
         // Given
-        RestAction<Void> action = new UnsecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        RestAction<Void> action = new UnsecuredRestAction(GET, RELATIVE_PATH);
 
         // When
         factory.buildHeaders(requestBuilder, action, SECURITY_TOKEN);
@@ -137,7 +136,7 @@ public class DefaultHeaderFactoryTest {
     @Test
     public void build_globalHeadersWithHttpMethod_areSetForSameHttpMethod() {
         // Given
-        RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
 
         // When
         factory.buildHeaders(requestBuilder, action, SECURITY_TOKEN);
@@ -180,7 +179,7 @@ public class DefaultHeaderFactoryTest {
     @Test
     public void build_acceptContentTypes_acceptHeaderIsSet() {
         // given
-        UnsecuredRestAction action = new UnsecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        UnsecuredRestAction action = new UnsecuredRestAction(GET, RELATIVE_PATH);
         action.setClientConsumedContentTypes(Arrays.asList(ContentType.valueOf("a"), ContentType.valueOf("b")));
 
         // when
@@ -193,8 +192,8 @@ public class DefaultHeaderFactoryTest {
     @Test
     public void build_emptyRestApplicationPath_headerIsNotSet(@GlobalHeaderParams RestParameterBindings bindings) {
         // given
-        DefaultHeaderFactory factory = new DefaultHeaderFactory(parameterFactory, bindings, XSRF_HEADER_NAME, "");
-        UnsecuredRestAction action = new UnsecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        factory = new DefaultHeaderFactory(bindings, XSRF_HEADER_NAME, "");
+        UnsecuredRestAction action = new UnsecuredRestAction(GET, RELATIVE_PATH);
 
         // when
         factory.buildHeaders(requestBuilder, action, "");
@@ -206,9 +205,8 @@ public class DefaultHeaderFactoryTest {
     @Test
     public void build_notEmptyRestApplicationPath_headerIsNotSet(@GlobalHeaderParams RestParameterBindings bindings) {
         // given
-        DefaultHeaderFactory factory =
-                new DefaultHeaderFactory(parameterFactory, bindings, XSRF_HEADER_NAME, APPLICATION_PATH);
-        UnsecuredRestAction action = new UnsecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        factory = new DefaultHeaderFactory(bindings, XSRF_HEADER_NAME, APPLICATION_PATH);
+        UnsecuredRestAction action = new UnsecuredRestAction(GET, RELATIVE_PATH);
 
         // when
         factory.buildHeaders(requestBuilder, action, "");
@@ -218,9 +216,9 @@ public class DefaultHeaderFactoryTest {
     }
 
     private RestAction<Void> createActionWithHeaderParams() {
-        ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
-        action.addParam(Type.HEADER, ACTION_KEY_1, VALUE_1);
-        action.addParam(Type.HEADER, ACTION_KEY_2, VALUE_2);
+        ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+        action.addParam(new HeaderParameter(ACTION_KEY_1, VALUE_1, null));
+        action.addParam(new HeaderParameter(ACTION_KEY_2, VALUE_2, null));
 
         return action;
     }

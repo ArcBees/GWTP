@@ -16,29 +16,18 @@
 
 package com.gwtplatform.mvp.client.gwt.mvp;
 
-import javax.inject.Singleton;
-
 import com.google.inject.name.Names;
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.web.bindery.event.shared.SimpleEventBus;
-import com.gwtplatform.common.client.ClientUrlUtils;
-import com.gwtplatform.common.shared.UrlUtils;
-import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
-import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
+import com.gwtplatform.mvp.client.gin.DefaultModule;
 
 public class ClientModuleTestUtilGwt extends AbstractPresenterModule {
     @Override
     protected void configure() {
-        // Singletons
-        bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
-        bind(PlaceManager.class).to(PlaceManagerTestUtilGwt.class).in(Singleton.class);
-        bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
-        bind(RootPresenter.class).asEagerSingleton();
-
-        bind(UrlUtils.class).to(ClientUrlUtils.class).in(Singleton.class);
+        install(new DefaultModule.Builder()
+                .defaultPlace("home")
+                .errorPlace("home")
+                .unauthorizedPlace("home")
+                .build());
 
         // Presenters
         bindPresenter(MainPresenterTestUtilGwt.class, MainPresenterTestUtilGwt.MyView.class,

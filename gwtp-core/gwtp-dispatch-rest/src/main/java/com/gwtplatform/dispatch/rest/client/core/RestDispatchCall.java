@@ -106,9 +106,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
             cookieManager.saveCookiesFromAction(getAction());
 
             return new GwtHttpDispatchRequest(requestBuilder.send());
-        } catch (RequestException e) {
-            onExecuteFailure(e);
-        } catch (ActionException e) {
+        } catch (RequestException | ActionException e) {
             onExecuteFailure(e);
         }
         return new CompletedDispatchRequest();

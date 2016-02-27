@@ -17,9 +17,17 @@
 package com.gwtplatform.dispatch.rest.client.core.parameters;
 
 import com.gwtplatform.common.shared.UrlUtils;
+import com.gwtplatform.dispatch.rest.shared.DateFormat;
 
 public class FormParameter extends CollectionSupportedParameter {
     private final UrlUtils urlUtils;
+
+    public FormParameter(
+            String name,
+            Object object,
+            UrlUtils urlUtils) {
+        this(name, object, DateFormat.DEFAULT, urlUtils);
+    }
 
     public FormParameter(
             String name,

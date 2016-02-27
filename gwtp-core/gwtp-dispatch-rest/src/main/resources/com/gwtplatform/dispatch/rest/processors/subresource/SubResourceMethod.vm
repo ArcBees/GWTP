@@ -1,0 +1,6 @@
+    @Override
+    public $method.returnType.parameterizedName ${method.name}(#printParameterDefinitions(3 $method.parameters)) {
+        return new ${subResourceType.parameterizedName}(
+                urlUtils,
+                defaultDateFormat#appendParameterNames(4 $subResourceArguments));
+    }

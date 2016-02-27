@@ -1,0 +1,29 @@
+package $impl.packageName;
+
+import javax.annotation.Generated;
+
+import com.gwtplatform.common.shared.UrlUtils;
+#printImports($imports)
+
+@Generated(value = "$processor.qualifiedName", date = "$processingDate")
+public class $impl.simpleName implements $subResourceType.parameterizedName {
+    private final UrlUtils urlUtils;
+    private final String defaultDateFormat;
+#foreach ($field in $fields)
+    private final $field.type.qualifiedParameterizedName $field.name;
+#end
+
+    public ${impl.simpleName}(
+            UrlUtils urlUtils,
+            String defaultDateFormat#appendParameterDefinitions(3 $fields)) {
+        this.urlUtils = urlUtils;
+        this.defaultDateFormat = defaultDateFormat;
+#foreach ($field in $fields)
+        this.$field.name = $field.name;
+#end
+    }
+
+#foreach ($method in $methods)
+$method.code
+#end
+}

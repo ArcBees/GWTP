@@ -27,8 +27,6 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.gwtplatform.dispatch.rest.client.annotations.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.core.DefaultRequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.core.HttpRequestBuilderFactory;
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
-import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -49,8 +47,6 @@ public class DefaultRequestBuilderFactoryTest {
 
             forceMock(HttpRequestBuilderFactory.class);
             forceMock(RequestBuilder.class);
-
-            bind(HttpParameterFactory.class).to(MockHttpParameterFactory.class);
         }
     }
 
@@ -64,15 +60,13 @@ public class DefaultRequestBuilderFactoryTest {
     private HttpRequestBuilderFactory httpRequestBuilderFactory;
     @Inject
     private RequestBuilder requestBuilder;
-    @Inject
-    private HttpParameterFactory parameterFactory;
 
     @Test
     public void requestTimeoutShouldBeTheTimeoutProvided() throws ActionException {
         // Given
         given(httpRequestBuilderFactory.create(eq(RequestBuilder.GET), anyString())).willReturn(requestBuilder);
 
-        RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
 
         // When
         factory.build(action, SECURITY_TOKEN);

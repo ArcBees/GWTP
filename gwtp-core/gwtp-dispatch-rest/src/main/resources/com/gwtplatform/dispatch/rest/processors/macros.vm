@@ -1,0 +1,17 @@
+## TODO: Find a way to use `new ContentType(...)` for better performances.
+#macro(recreateContentType $contentType)
+ContentType.valueOf("$contentType")#end
+
+#macro(printParameterDefinitions $tabs $parameters)#foreach ($parameter in $parameters)
+
+#indent($tabs)$parameter.type.parameterizedName $parameter.name#commaIfNeeded()#end#end
+
+#macro(appendParameterDefinitions $tabs $parameters)#foreach ($parameter in $parameters),
+#indent($tabs)$parameter.type.parameterizedName $parameter.name#end#end
+
+#macro(printParameterNames $tabs $parameters)#foreach ($parameter in $parameters)
+
+#indent($tabs)$parameter.name#commaIfNeeded()#end#end
+
+#macro(appendParameterNames $tabs $parameters)#foreach ($parameter in $parameters),
+#indent($tabs)$parameter.name#end#end

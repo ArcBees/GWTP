@@ -1,0 +1,13 @@
+#macro(commaIfNeeded)#if($foreach.hasNext), #end#end
+
+#macro(indent $tabCount)#set($spaceCount = $tabCount * 4)#foreach($i in [1..$spaceCount]) #end#end
+
+#macro(printImports $imports)#foreach ($import in $imports)
+import $import;
+#end#end
+
+#macro(maybeTypeLiteral $type)#if($type.isParameterized())new TypeLiteral<$type.qualifiedParameterizedName>() {}#else${type.qualifiedName}.class#end#end
+
+#macro(appendScopeMethod $binding)
+#if($binding.isEagerSingleton()).asEagerSingleton()
+#elseif($binding.scope.isPresent()).in(${binding.scope.get().qualifiedName}.class)#end#end

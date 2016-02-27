@@ -24,11 +24,13 @@ import com.gwtplatform.mvp.client.PopupViewCloseHandler;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
 public class PopupPresenterTestUtilGwt extends PresenterWidget<PopupPresenterTestUtilGwt.MyView> {
-    public interface MyView extends PopupView {
+    interface MyView extends PopupView {
     }
 
     @Inject
-    PopupPresenterTestUtilGwt(EventBus eventBus, MyView view) {
+    PopupPresenterTestUtilGwt(
+            EventBus eventBus,
+            MyView view) {
         super(eventBus, view);
     }
 

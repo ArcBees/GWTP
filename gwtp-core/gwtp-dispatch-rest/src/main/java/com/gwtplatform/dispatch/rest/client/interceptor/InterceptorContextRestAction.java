@@ -40,7 +40,7 @@ class InterceptorContextRestAction implements RestAction<Object> {
             int queryCount) {
         this.httpMethod = httpMethod;
         this.path = path;
-        this.parameters = new ArrayList<HttpParameter>();
+        this.parameters = new ArrayList<>();
 
         // Add fake query params
         for (int i = 0; i < queryCount; i++) {

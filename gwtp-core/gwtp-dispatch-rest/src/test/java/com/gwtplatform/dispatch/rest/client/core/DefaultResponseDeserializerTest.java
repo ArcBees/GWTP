@@ -26,9 +26,7 @@ import org.junit.runner.RunWith;
 
 import com.google.gwt.http.client.Response;
 import com.google.inject.multibindings.Multibinder;
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
-import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.UnsecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -43,8 +41,6 @@ public class DefaultResponseDeserializerTest {
     public static class Module extends JukitoModule {
         @Override
         protected void configureTest() {
-            bind(HttpParameterFactory.class).to(MockHttpParameterFactory.class);
-
             Serialization serialization = mock(Serialization.class);
             bind(Serialization.class).toInstance(serialization);
 
@@ -55,14 +51,12 @@ public class DefaultResponseDeserializerTest {
     @Inject
     private DefaultResponseDeserializer deserializer;
     @Inject
-    private HttpParameterFactory parameterFactory;
-    @Inject
     private Serialization serialization;
 
     @Test(expected = ActionException.class)
     public void deserialize_errorCode_throws() throws ActionException {
         // given
-        UnsecuredRestAction action = new UnsecuredRestAction(parameterFactory, HttpMethod.GET, "");
+        UnsecuredRestAction action = new UnsecuredRestAction(HttpMethod.GET, "");
 
         Response response = mock(Response.class);
         given(response.getStatusCode()).willReturn(404);
@@ -74,7 +68,7 @@ public class DefaultResponseDeserializerTest {
     @Test(expected = ActionException.class)
     public void deserialize_resultClassNotKnown_throws() throws ActionException {
         // given
-        UnsecuredRestAction action = new UnsecuredRestAction(parameterFactory, HttpMethod.GET, "");
+        UnsecuredRestAction action = new UnsecuredRestAction(HttpMethod.GET, "");
 
         Response response = mock(Response.class);
         given(response.getStatusCode()).willReturn(200);
@@ -86,7 +80,7 @@ public class DefaultResponseDeserializerTest {
     @Test(expected = ActionException.class)
     public void deserialize_noCapableSerialization_throws() throws ActionException {
         // given
-        UnsecuredRestAction action = new UnsecuredRestAction(parameterFactory, HttpMethod.GET, "");
+        UnsecuredRestAction action = new UnsecuredRestAction(HttpMethod.GET, "");
         action.setResultClass("MyClass<Hey<Ho>>>");
 
         Response response = mock(Response.class);
@@ -105,7 +99,7 @@ public class DefaultResponseDeserializerTest {
         String serializedContent = "agakrybatgfkasfh";
         Object expectedResult = new Object();
 
-        UnsecuredRestAction action = new UnsecuredRestAction(parameterFactory, HttpMethod.GET, "");
+        UnsecuredRestAction action = new UnsecuredRestAction(HttpMethod.GET, "");
         action.setResultClass(resultType);
 
         Response response = mock(Response.class);

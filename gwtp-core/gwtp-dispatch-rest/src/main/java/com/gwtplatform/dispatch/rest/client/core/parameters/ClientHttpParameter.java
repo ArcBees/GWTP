@@ -106,7 +106,7 @@ public class ClientHttpParameter implements HttpParameter {
         String encodedValue = encodeValue(value);
         String encodedKey = encodeKey(name);
 
-        return new SimpleEntry<String, String>(encodedKey, encodedValue);
+        return new SimpleEntry<>(encodedKey, encodedValue);
     }
 
     protected String parseObject(Object object) {

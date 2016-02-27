@@ -19,7 +19,15 @@ package com.gwtplatform.dispatch.rest.client.core.parameters;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.NewCookie;
 
+import com.gwtplatform.dispatch.rest.shared.DateFormat;
+
 public class CookieParameter extends CollectionSupportedParameter {
+    public CookieParameter(
+            String name,
+            Object object) {
+        this(name, object, DateFormat.DEFAULT);
+    }
+
     public CookieParameter(
             String name,
             Object object,

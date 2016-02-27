@@ -23,30 +23,27 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.client.gwt.mvp.AdminPresenterTestUtilGwt.MyProxy;
+import com.gwtplatform.mvp.client.gwt.mvp.AdminPresenterTestUtilGwt.MyView;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
 
 /**
  * A test presenter meant to be run in a GWTTestCase.
  */
-public class AdminPresenterTestUtilGwt extends Presenter<AdminPresenterTestUtilGwt.MyView,
-        AdminPresenterTestUtilGwt.MyProxy> {
-
-    /**
-     * Presenter's view.
-     */
-    public interface MyView extends View {
+public class AdminPresenterTestUtilGwt extends Presenter<MyView, MyProxy> {
+    interface MyView extends View {
     }
 
-    /**
-     * Presenter's proxy.
-     */
     @ProxyStandard
-    @NameToken({"admin","selfService"})
-    public interface MyProxy extends ProxyPlace<AdminPresenterTestUtilGwt> {
+    @NameToken({"admin", "selfService"})
+    interface MyProxy extends ProxyPlace<AdminPresenterTestUtilGwt> {
     }
 
     @Inject
-    public AdminPresenterTestUtilGwt(final EventBus eventBus, final MyView view, final MyProxy proxy) {
+    AdminPresenterTestUtilGwt(
+            EventBus eventBus,
+            MyView view,
+            MyProxy proxy) {
         super(eventBus, view, proxy, RevealType.Root);
     }
 }

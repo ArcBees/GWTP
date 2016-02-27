@@ -16,36 +16,14 @@
 
 package com.gwtplatform.mvp.client.gwt.mvp;
 
-import javax.inject.Inject;
-
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 /**
  * A test presenter meant to be run in a GWTTestCase.
  */
 public class MainViewTestUtilGwt extends ViewImpl implements MainPresenterTestUtilGwt.MyView {
-
-    /**
-     */
-    public interface Binder extends UiBinder<Widget, MainViewTestUtilGwt> {
-    }
-
-    @UiField
-    HTMLPanel mainSlot;
-
-    private final Widget widget;
-
-    @Inject
-    public MainViewTestUtilGwt(Binder uiBinder) {
-        widget = uiBinder.createAndBindUi(this);
-    }
-
-    @Override
-    public Widget asWidget() {
-        return widget;
+    MainViewTestUtilGwt() {
+        initWidget(new FlowPanel());
     }
 }

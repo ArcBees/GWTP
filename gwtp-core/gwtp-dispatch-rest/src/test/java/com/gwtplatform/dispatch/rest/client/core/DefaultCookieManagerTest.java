@@ -22,15 +22,20 @@ import org.junit.runner.RunWith;
 import org.mockito.InOrder;
 
 import com.google.gwtmockito.GwtMockitoTestRunner;
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
-import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.CookieParameter;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
+import static java.util.Arrays.asList;
+
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+
+import static com.google.common.collect.Maps.immutableEntry;
 
 @RunWith(GwtMockitoTestRunner.class)
 public class DefaultCookieManagerTest {
@@ -39,19 +44,17 @@ public class DefaultCookieManagerTest {
     private static final String SOME_VALUE_2 = "someValue";
 
     private DefaultCookieManager manager;
-    private HttpParameterFactory httpParameterFactory;
 
     @Before
     public void setUp() {
-        httpParameterFactory = new MockHttpParameterFactory();
         manager = spy(new DefaultCookieManager());
     }
 
     @Test
     public void saveSingleCookie() {
         // given
-        SecuredRestAction action = new SecuredRestAction(httpParameterFactory, HttpMethod.GET, "");
-        action.addParam(Type.COOKIE, SOME_NAME, SOME_VALUE);
+        SecuredRestAction action = new SecuredRestAction(HttpMethod.GET, "");
+        action.addParam(cookieParam(SOME_NAME, SOME_VALUE));
 
         // when
         manager.saveCookiesFromAction(action);
@@ -63,9 +66,9 @@ public class DefaultCookieManagerTest {
     @Test
     public void saveMultipleCookies() {
         // given
-        SecuredRestAction action = new SecuredRestAction(httpParameterFactory, HttpMethod.GET, "");
-        action.addParam(Type.COOKIE, SOME_NAME, SOME_VALUE);
-        action.addParam(Type.COOKIE, SOME_NAME, SOME_VALUE_2);
+        SecuredRestAction action = new SecuredRestAction(HttpMethod.GET, "");
+        action.addParam(cookieParam(SOME_NAME, SOME_VALUE));
+        action.addParam(cookieParam(SOME_NAME, SOME_VALUE_2));
 
         // when
         manager.saveCookiesFromAction(action);
@@ -74,5 +77,13 @@ public class DefaultCookieManagerTest {
         InOrder inOrder = inOrder(manager);
         inOrder.verify(manager).saveCookie(SOME_VALUE);
         inOrder.verify(manager).saveCookie(SOME_VALUE_2);
+    }
+
+    private CookieParameter cookieParam(String name, String value) {
+        CookieParameter cookieParam = mock(CookieParameter.class);
+        given(cookieParam.getEncodedEntries()).willReturn(asList(immutableEntry(name, value)));
+        given(cookieParam.getType()).willReturn(Type.COOKIE);
+        given(cookieParam.getObject()).willReturn(value);
+        return cookieParam;
     }
 }

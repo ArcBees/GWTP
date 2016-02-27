@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.rest.client.core.parameters;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
@@ -23,12 +24,13 @@ import java.util.Map.Entry;
 import javax.inject.Inject;
 
 import org.jukito.JukitoRunner;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.google.gwt.junit.GWTMockUtilities;
 import com.gwtplatform.common.shared.UrlUtils;
-import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,14 +51,21 @@ public class PathParameterTest {
 
     @Before
     public void setUp() {
+        GWTMockUtilities.disarm();
+
         given(urlUtils.encodePathSegment(anyString())).willReturn(ENCODED_ANY_VALUE);
         given(urlUtils.encodePathSegment(VALUE_1)).willReturn(ENCODED_VALUE_1);
+    }
+
+    @After
+    public void tearDown() {
+        GWTMockUtilities.restore();
     }
 
     @Test
     public void getType_returnsForm() {
         // given
-        PathParameter param = new PathParameter(SOME_KEY, VALUE_1, null, urlUtils);
+        PathParameter param = new PathParameter(SOME_KEY, VALUE_1, null, null, urlUtils);
 
         // when
         Type type = param.getType();
@@ -68,7 +77,7 @@ public class PathParameterTest {
     @Test
     public void getEntries_anyValue_encodesValue() {
         // given
-        PathParameter param = new PathParameter(SOME_KEY, VALUE_1, null, urlUtils);
+        PathParameter param = new PathParameter(SOME_KEY, VALUE_1, null, null, urlUtils);
 
         // when
         List<Entry<String, String>> entries = param.getEncodedEntries();
@@ -84,7 +93,7 @@ public class PathParameterTest {
     public void getEntries_collection_returnOneEntry() {
         // given
         Collection<String> objects = Arrays.asList(VALUE_1, VALUE_2);
-        PathParameter param = new PathParameter(SOME_KEY, objects, null, urlUtils);
+        PathParameter param = new PathParameter(SOME_KEY, objects, null, null, urlUtils);
 
         // when
         List<Entry<String, String>> entries = param.getEncodedEntries();

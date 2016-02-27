@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.7.0//EN"
+        "http://gwtproject.org/doctype/2.7.0/gwt-module.dtd">
+<module>
+    <inherits name="com.gwtplatform.processors.tools.module2.GwtSourceFilterTestModule"/>
+    <inherits name="com.gwtplatform.processors.tools.module3.GwtSourceFilterTestModule"/>
+
+    <source path="client"/>
+</module>

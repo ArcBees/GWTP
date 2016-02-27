@@ -25,15 +25,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.inject.Provides;
+import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
 import com.gwtplatform.dispatch.rest.client.annotations.GlobalQueryParams;
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+import com.gwtplatform.dispatch.rest.client.core.parameters.MatrixParameter;
+import com.gwtplatform.dispatch.rest.client.core.parameters.QueryParameter;
 import com.gwtplatform.dispatch.rest.client.gin.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
-import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.UnsecuredRestAction;
-import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
+import com.gwtplatform.dispatch.rest.client.testutils.UrlUtilsForTests;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,19 +47,19 @@ public class DefaultUriFactoryTest {
     public static class Module extends JukitoModule {
         @Override
         protected void configureTest() {
-            bindConstant().annotatedWith(RestApplicationPath.class).to(APPLICATION_PATH);
+            bind(UrlUtils.class).to(UrlUtilsForTests.class).in(TestSingleton.class);
 
-            bind(HttpParameterFactory.class).to(MockHttpParameterFactory.class);
+            bindConstant().annotatedWith(RestApplicationPath.class).to(APPLICATION_PATH);
         }
 
         @Provides
         @TestSingleton
         @GlobalQueryParams
-        RestParameterBindings getQueryParams(HttpParameterFactory parameterFactory) {
+        RestParameterBindings getQueryParams(UrlUtils urlUtils) {
             RestParameterBindings queries = new RestParameterBindings();
-            queries.put(GET, parameterFactory.create(Type.QUERY, KEY_1, VALUE_1));
-            queries.put(GET, parameterFactory.create(Type.QUERY, KEY_2, VALUE_2));
-            queries.put(POST, parameterFactory.create(Type.QUERY, KEY_3, VALUE_3));
+            queries.put(GET, new QueryParameter(KEY_1, VALUE_1, null, urlUtils));
+            queries.put(GET, new QueryParameter(KEY_2, VALUE_2, null, urlUtils));
+            queries.put(POST, new QueryParameter(KEY_3, VALUE_3, null, urlUtils));
 
             return queries;
         }
@@ -79,12 +80,12 @@ public class DefaultUriFactoryTest {
     @Inject
     private DefaultUriFactory factory;
     @Inject
-    private HttpParameterFactory parameterFactory;
+    private UrlUtils urlUtils;
 
     @Test
     public void absoluteUrlShouldNotChange() {
         // Given
-        RestAction<Void> action = new UnsecuredRestAction(parameterFactory, GET, ABSOLUTE_PATH);
+        RestAction<Void> action = new UnsecuredRestAction(GET, ABSOLUTE_PATH);
 
         // When
         String url = factory.buildUrl(action);
@@ -96,7 +97,7 @@ public class DefaultUriFactoryTest {
     @Test
     public void relativeUrlShouldBePrependedByApplicationPath() {
         // Given
-        RestAction<Void> action = new UnsecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        RestAction<Void> action = new UnsecuredRestAction(GET, RELATIVE_PATH);
 
         // When
         String url = factory.buildUrl(action);
@@ -108,7 +109,7 @@ public class DefaultUriFactoryTest {
     @Test
     public void globalQueryParamsShouldBeSetForCorrespondingHttpMethod() {
         // Given
-        RestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
 
         // When
         String url = factory.buildUrl(action);
@@ -122,9 +123,9 @@ public class DefaultUriFactoryTest {
     @Test
     public void allActionQueryParamsShouldBeSet() {
         // Given
-        ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
-        action.addParam(Type.QUERY, ACTION_KEY_1, VALUE_1);
-        action.addParam(Type.QUERY, ACTION_KEY_2, VALUE_2);
+        ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+        action.addParam(new QueryParameter(ACTION_KEY_1, VALUE_1, null, urlUtils));
+        action.addParam(new QueryParameter(ACTION_KEY_2, VALUE_2, null, urlUtils));
 
         // When
         String url = factory.buildUrl(action);
@@ -139,9 +140,9 @@ public class DefaultUriFactoryTest {
     @Test
     public void allMatrixParamsShouldBeSet() {
         // Given
-        ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
-        action.addParam(Type.MATRIX, ACTION_KEY_1, VALUE_1);
-        action.addParam(Type.MATRIX, ACTION_KEY_2, VALUE_2);
+        ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+        action.addParam(new MatrixParameter(ACTION_KEY_1, VALUE_1, null, urlUtils));
+        action.addParam(new MatrixParameter(ACTION_KEY_2, VALUE_2, null, urlUtils));
 
         // When
         String url = factory.buildUrl(action);

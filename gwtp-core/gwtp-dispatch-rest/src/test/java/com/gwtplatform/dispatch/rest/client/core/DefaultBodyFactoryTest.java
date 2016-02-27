@@ -30,11 +30,11 @@ import org.junit.runner.RunWith;
 
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.inject.multibindings.Multibinder;
-import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+import com.gwtplatform.common.shared.UrlUtils;
+import com.gwtplatform.dispatch.rest.client.core.parameters.FormParameter;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.serialization.SerializedValue;
 import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
-import com.gwtplatform.dispatch.rest.client.testutils.MockHttpParameterFactory;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.UnsecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
@@ -62,8 +62,6 @@ public class DefaultBodyFactoryTest {
         protected void configureTest() {
             forceMock(RequestBuilder.class);
 
-            bind(HttpParameterFactory.class).to(MockHttpParameterFactory.class);
-
             Serialization serialization = mock(Serialization.class);
             bind(Serialization.class).toInstance(serialization);
 
@@ -79,9 +77,9 @@ public class DefaultBodyFactoryTest {
     @Inject
     private UriFactory uriFactory;
     @Inject
-    private HttpParameterFactory parameterFactory;
-    @Inject
     private RequestBuilder requestBuilder;
+    @Inject
+    private UrlUtils urlUtils;
 
     @Before
     public void setUp() {
@@ -91,7 +89,7 @@ public class DefaultBodyFactoryTest {
     @Test
     public void build_noFormParamsNoBody_setsExplicitNullAsRequestData() throws ActionException {
         // Given
-        RestAction<Void> action = new UnsecuredRestAction(parameterFactory, DELETE, RELATIVE_PATH);
+        RestAction<Void> action = new UnsecuredRestAction(DELETE, RELATIVE_PATH);
 
         // When
         factory.buildBody(requestBuilder, action);
@@ -104,8 +102,8 @@ public class DefaultBodyFactoryTest {
     @Test
     public void build_formParams_requestContainsOnlyFormParams() throws ActionException {
         // Given
-        ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
-        action.addParam(Type.FORM, "Key1", "Some Value");
+        ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
+        action.addParam(new FormParameter("Key1", "Some Value", null, urlUtils));
 
         // When
         factory.buildBody(requestBuilder, action);
@@ -124,7 +122,7 @@ public class DefaultBodyFactoryTest {
         ContentType contentType = ContentType.valueOf("json-abc");
         SerializedValue serializedValue = new SerializedValue(contentType, serializedData);
 
-        ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
         action.setBodyParam(unserializedObject);
         action.setBodyClass(serializationKey);
 
@@ -146,7 +144,7 @@ public class DefaultBodyFactoryTest {
         Object unserializedObject = new Object();
         String serializationKey = "meta";
 
-        ExposedRestAction<Void> action = new SecuredRestAction(parameterFactory, GET, RELATIVE_PATH);
+        ExposedRestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
         action.setBodyParam(unserializedObject);
         action.setBodyClass(serializationKey);
 

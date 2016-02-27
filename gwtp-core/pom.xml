@@ -244,13 +244,6 @@
                 <version>${gwt-jackson.version}</version>
             </dependency>
 
-            <!-- Rebind dependencies -->
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity</artifactId>
-                <version>${velocity.version}</version>
-            </dependency>
-
             <!-- Test dependencies -->
             <dependency>
                 <groupId>org.jukito</groupId>
@@ -274,12 +267,6 @@
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
                 <version>${assertj-core.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
