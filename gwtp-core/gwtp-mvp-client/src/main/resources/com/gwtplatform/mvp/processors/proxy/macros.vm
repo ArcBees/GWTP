@@ -1,0 +1,53 @@
+#macro(printProxyImports $bundle $codeSplit $slotNames)
+import javax.inject.Inject;
+#if($bundle && !$bundle.isManualBundle())
+import com.gwtplatform.common.client.CodeSplitNamedBundleProvider;
+import com.gwtplatform.common.client.NamedProviderBundleCollection;
+#elseif($bundle)
+import com.google.gwt.inject.client.AsyncProvider;
+import com.gwtplatform.common.client.CodeSplitBundleProvider;
+#elseif($codeSplit)
+import com.google.gwt.inject.client.AsyncProvider;
+import com.gwtplatform.common.client.CodeSplitProvider;
+#else
+import javax.inject.Provider;
+import com.gwtplatform.common.client.StandardProvider;
+#end
+#if(!$slotNames.isEmpty())
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+#end
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+#end
+
+#macro(printProxyBody $typeName $bundle $codeSplit $presenterType $slotNames)
+        @Inject
+        ${typeName}(
+                EventBus eventBus,
+                PlaceManager placeManager,
+#if($bundle && !$bundle.isManualBundle())
+                NamedProviderBundleCollection providerBundleCollection#elseif($bundle)
+                AsyncProvider<$bundle.bundleType.simpleName> bundleProvider#elseif($codeSplit)
+                AsyncProvider<$presenterType.simpleName> presenterProvider#else
+                Provider<$presenterType.simpleName> presenterProvider#end) {
+            bind(placeManager, eventBus);
+
+#if($bundle && !$bundle.isManualBundle())
+            presenter = new CodeSplitNamedBundleProvider(
+                    providerBundleCollection.getBundle("$bundle.bundleName"),
+                    "$presenterType.qualifiedParameterizedName");
+#elseif($bundle)
+            presenter = new CodeSplitBundleProvider<>(bundleProvider, $bundle.id);
+#elseif($codeSplit)
+            presenter = new CodeSplitProvider<>(presenterProvider);
+#else
+            presenter = new StandardProvider<>(presenterProvider);
+#end
+#if(!$slotNames.isEmpty())
+            RevealContentHandler<$presenterType.simpleName> revealContentHandler
+                    = new RevealContentHandler<$presenterType.simpleName>(eventBus, this);
+#foreach($slotName in $slotNames)
+            eventBus.addHandler(${presenterType.simpleName}.$slotName, revealContentHandler);
+#end#end
+        }
+#end

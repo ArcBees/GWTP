@@ -49,6 +49,7 @@ import static com.gwtplatform.processors.tools.logger.Logger.DEBUG_OPTION;
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 @SupportedOptions({DEBUG_OPTION, GWTP_MODULE_OPTION})
 public class ProxyProcessorEntry extends AbstractProcessor {
+    private static final String PROXY_MACROS = "com/gwtplatform/mvp/processors/proxy/macros.vm";
     private static final String UNABLE_TO_PROCESS_PROXY = "Unable to process proxy.";
     private static final String UNRESOLVABLE_EXCEPTION = "Unresolvable exception.";
 
@@ -84,7 +85,7 @@ public class ProxyProcessorEntry extends AbstractProcessor {
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
         utils = new Utils(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils(),
                 processingEnv.getOptions());
-        outputter = new Outputter(logger, this, processingEnv.getFiler());
+        outputter = new Outputter(logger, this, processingEnv.getFiler(), PROXY_MACROS);
     }
 
     private void initializeDomainFactories() {
