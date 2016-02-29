@@ -23,32 +23,40 @@ import java.util.Set;
 
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
 
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
+import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 import com.gwtplatform.mvp.processors.bundle.BundleDetails;
+import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static javax.lang.model.util.ElementFilter.fieldsIn;
+import static javax.lang.model.util.ElementFilter.methodsIn;
 
 import static com.google.auto.common.MoreElements.asType;
 import static com.google.auto.common.MoreElements.getAnnotationMirror;
 import static com.google.auto.common.MoreElements.hasModifiers;
 import static com.google.auto.common.MoreTypes.asDeclared;
+import static com.google.auto.common.MoreTypes.asElement;
 import static com.google.auto.common.MoreTypes.asTypeElement;
 import static com.google.auto.common.MoreTypes.isTypeOf;
 import static com.google.common.base.Optional.absent;
 import static com.google.common.base.Optional.of;
+import static com.google.common.collect.FluentIterable.from;
 
 public abstract class AbstractProxyDetails implements ProxyDetails {
     protected final TypeElement element;
@@ -60,6 +68,7 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
     private TypeMirror presenterMirror;
     private Set<String> contentSlots;
     private Optional<BundleDetails> bundleDetails;
+    private List<ProxyEventMethod> proxyEventMethods;
 
     protected AbstractProxyDetails(
             Logger logger,
@@ -151,6 +160,52 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
     }
 
     @Override
+    public List<ProxyEventMethod> getProxyEventMethods() {
+        if (proxyEventMethods == null) {
+            TypeElement presenterElement = asTypeElement(getPresenterMirror());
+            List<ExecutableElement> methods = methodsIn(utils.getElements().getAllMembers(presenterElement));
+
+            proxyEventMethods = FluentIterable.from(methods)
+                    .filter(new Predicate<ExecutableElement>() {
+                        @Override
+                        public boolean apply(ExecutableElement method) {
+                            return method.getAnnotation(ProxyEvent.class) != null;
+                        }
+                    })
+                    .transform(new Function<ExecutableElement, ProxyEventMethod>() {
+                        @Override
+                        public ProxyEventMethod apply(ExecutableElement element) {
+                            return new ProxyEventMethod(logger, utils, element);
+                        }
+                    })
+                    .toList();
+
+            ensureNoHandlerMethodClashes();
+        }
+
+        return proxyEventMethods;
+    }
+
+    private void ensureNoHandlerMethodClashes() {
+        List<String> handlerMethodNames = FluentIterable.from(proxyEventMethods)
+                .transform(new Function<ProxyEventMethod, String>() {
+                    @Override
+                    public String apply(ProxyEventMethod proxyEvent) {
+                        return proxyEvent.getHandlerMethodName();
+                    }
+                }).toList();
+        Set<String> uniqueHandlerMethodNames = new HashSet<>(handlerMethodNames);
+
+        if (handlerMethodNames.size() != uniqueHandlerMethodNames.size()) {
+            // TODO: Probably not worth it, but with some gymnastic we could print exactly which methods.
+            logger.error()
+                    .context(asElement(getPresenterMirror()))
+                    .log("Presenter contains multiple @ProxyEvents with handlers that have clashing method names.");
+            throw new UnableToProcessException();
+        }
+    }
+
+    @Override
     public BundleDetails getBundleDetails() {
         if (bundleDetails == null) {
             extractBundleDetails();
@@ -170,9 +225,11 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
 
     @Override
     public Collection<String> getImports() {
-        FluentIterable<String> imports = FluentIterable
-                .from(getProxyType().getImports())
-                .append(getPresenterType().getImports());
+        FluentIterable<String> imports =
+                from(proxyEventMethods)
+                        .transformAndConcat(HasImports.EXTRACT_IMPORTS_FUNCTION)
+                        .append(getProxyType().getImports())
+                        .append(getPresenterType().getImports());
 
         if (getBundleDetails() != null) {
             imports = imports.append(getBundleDetails().getImports());

@@ -25,7 +25,7 @@ import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails.Factory;
-import com.gwtplatform.dispatch.rest.processors.details.Method;
+import com.gwtplatform.processors.tools.domain.Method;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodUtils;

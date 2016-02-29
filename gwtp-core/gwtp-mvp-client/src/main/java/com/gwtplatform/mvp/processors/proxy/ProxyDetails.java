@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.processors.proxy;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.lang.model.element.Element;
@@ -39,4 +40,6 @@ public interface ProxyDetails extends HasType, HasImports {
     boolean isCodeSplit();
 
     BundleDetails getBundleDetails();
+
+    List<ProxyEventMethod> getProxyEventMethods();
 }

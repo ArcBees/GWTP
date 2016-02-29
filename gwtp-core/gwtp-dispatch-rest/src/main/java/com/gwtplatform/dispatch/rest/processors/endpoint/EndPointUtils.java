@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.rest.processors.endpoint;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gwtplatform.dispatch.rest.processors.details.Variable;
+import com.gwtplatform.processors.tools.domain.Variable;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.subresource.SubResource;

@@ -1,4 +1,4 @@
-#macro(printProxyImports $bundle $codeSplit $slotNames)
+#macro(printProxyImports $bundle $codeSplit $slotNames $proxyEvents)
 import javax.inject.Inject;
 #if($bundle && !$bundle.isManualBundle())
 import com.gwtplatform.common.client.CodeSplitNamedBundleProvider;
@@ -13,6 +13,9 @@ import com.gwtplatform.common.client.CodeSplitProvider;
 import javax.inject.Provider;
 import com.gwtplatform.common.client.StandardProvider;
 #end
+#if(!$proxyEvents.isEmpty())
+import com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback;
+#end
 #if(!$slotNames.isEmpty())
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 #end
@@ -20,7 +23,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 #end
 
-#macro(printProxyBody $typeName $bundle $codeSplit $presenterType $slotNames)
+#macro(printProxyBody $typeName $bundle $codeSplit $presenterType $slotNames $proxyEvents)
         @Inject
         ${typeName}(
                 EventBus eventBus,
@@ -49,5 +52,25 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 #foreach($slotName in $slotNames)
             eventBus.addHandler(${presenterType.simpleName}.$slotName, revealContentHandler);
 #end#end
+#registerProxyEvents($proxyEvents)
         }
 #end
+
+#macro(implementProxyEventHandlers $proxyEvents)#foreach($proxyEvent in $proxyEvents),
+                $proxyEvent.handlerType.parameterizedName#end#end
+
+#macro(registerProxyEvents $proxyEvents)#foreach($proxyEvent in $proxyEvents)
+        eventBus.addHandler(${proxyEvent.eventType.simpleName}.$proxyEvent.typeAccessor, this);
+#end#end
+
+#macro(overrideProxyEventHandlers $presenterType $proxyEvents)#foreach($proxyEvent in $proxyEvents)
+    @Override
+    public void ${proxyEvent.handlerMethodName}(final $proxyEvent.eventType.parameterizedName event) {
+        getPresenter(new NotifyingAsyncCallback<$presenterType.simpleName>(getEventBus()){
+            @Override
+            public void success($presenterType.simpleName presenter) {
+                presenter.${proxyEvent.annotatedMethodName}(event);
+            }
+        });
+    }
+#end#end

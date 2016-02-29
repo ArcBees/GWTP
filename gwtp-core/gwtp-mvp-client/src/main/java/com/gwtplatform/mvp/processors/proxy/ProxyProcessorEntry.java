@@ -106,8 +106,7 @@ public class ProxyProcessorEntry extends AbstractProcessor {
         try {
             utils.incrementRoundNumber();
             process(roundEnv);
-        } catch (UnableToProcessException e) {
-            logger.error(UNRESOLVABLE_EXCEPTION);
+        } catch (UnableToProcessException ignore) {
         } catch (Exception e) {
             logger.error().throwable(e).log(UNRESOLVABLE_EXCEPTION);
         }
