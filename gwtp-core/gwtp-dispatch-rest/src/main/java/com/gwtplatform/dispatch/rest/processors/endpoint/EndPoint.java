@@ -26,7 +26,7 @@ import javax.lang.model.element.TypeElement;
 import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
-import com.gwtplatform.dispatch.rest.processors.details.Variable;
+import com.gwtplatform.processors.tools.domain.Variable;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.utils.Utils;
 

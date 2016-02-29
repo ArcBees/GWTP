@@ -9,25 +9,25 @@
 #* @vtlvariable name="processingDate" type="java.lang.String" *#
 #* @vtlvariable name="imports" type="java.util.Collection<java.lang.String>" *#
 
-#* @vtlvariable name="parameters" type="java.util.List<com.gwtplatform.dispatch.rest.processors.details.Variable>" file="macros.vm" *#
+#* @vtlvariable name="parameters" type="java.util.List<com.gwtplatform.processors.tools.domain.Variable>" file="macros.vm" *#
 
 #* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.processors.tools.outputter.CodeSnippet>" file="resource/Resource.vm" *#
 #* @vtlvariable name="resource" type="com.gwtplatform.processors.tools.domain.Type" file="resource/Resource.vm" *#
 
-#* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.details.Method" file="subresource/SubResourceMethod.vm" *#
+#* @vtlvariable name="method" type="com.gwtplatform.processors.tools.domain.Method" file="subresource/SubResourceMethod.vm" *#
 #* @vtlvariable name="subResourceType" type="com.gwtplatform.processors.tools.domain.Type" file="subresource/SubResourceMethod.vm" *#
-#* @vtlvariable name="subResourceArguments" type="java.util.List<com.gwtplatform.dispatch.rest.processors.details.Variable>" file="subresource/SubResourceMethod.vm" *#
+#* @vtlvariable name="subResourceArguments" type="java.util.List<com.gwtplatform.processors.tools.domain.Variable>" file="subresource/SubResourceMethod.vm" *#
 
-#* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.details.Variable>" file="subresource/SubResource.vm" *#
+#* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.processors.tools.domain.Variable>" file="subresource/SubResource.vm" *#
 #* @vtlvariable name="methods" type="java.util.Collection<com.gwtplatform.processors.tools.outputter.CodeSnippet>" file="subresource/SubResource.vm" *#
 #* @vtlvariable name="subResourceType" type="com.gwtplatform.processors.tools.domain.Type" file="subresource/SubResource.vm" *#
 
-#* @vtlvariable name="method" type="com.gwtplatform.dispatch.rest.processors.details.Method" file="endpoint/EndPointMethod.vm" *#
+#* @vtlvariable name="method" type="com.gwtplatform.processors.tools.domain.Method" file="endpoint/EndPointMethod.vm" *#
 #* @vtlvariable name="endPointType" type="com.gwtplatform.processors.tools.domain.Type" file="endpoint/EndPointMethod.vm" *#
-#* @vtlvariable name="endPointArguments" type="java.util.List<com.gwtplatform.dispatch.rest.processors.details.Variable>" file="endpoint/EndPointMethod.vm" *#
+#* @vtlvariable name="endPointArguments" type="java.util.List<com.gwtplatform.processors.tools.domain.Variable>" file="endpoint/EndPointMethod.vm" *#
 
 #* @vtlvariable name="endPoint" type="com.gwtplatform.dispatch.rest.processors.details.EndPointDetails" file="endpoint/EndPoint.vm" *#
-#* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.details.Variable>" file="endpoint/EndPoint.vm" *#
+#* @vtlvariable name="fields" type="java.util.Collection<com.gwtplatform.processors.tools.domain.Variable>" file="endpoint/EndPoint.vm" *#
 #* @vtlvariable name="paramSnippets" type="java.util.List<com.gwtplatform.processors.tools.outputter.CodeSnippet>" file="endpoint/EndPoint.vm" *#
 
 #* @vtlvariable name="mappers" type="java.util.Collection<com.gwtplatform.dispatch.rest.processors.serialization.jackson.JacksonMapper>" file="serialization/jackson/JacksonMapperProvider.vm" *#

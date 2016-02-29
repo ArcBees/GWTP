@@ -53,6 +53,7 @@ public class SimpleProxyProcessor extends AbstractContextProcessor<ProxyDetails,
                 .withParam("presenterType", proxy.getPresenterType())
                 .withParam("slotNames", proxy.getContentSlots())
                 .withParam("codeSplit", proxy.isCodeSplit())
+                .withParam("proxyEvents", proxy.getProxyEventMethods())
                 .withParam("bundle", bundleDetails)
                 .writeTo(proxy.getType());
 
