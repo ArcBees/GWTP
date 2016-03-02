@@ -1,45 +1,47 @@
 package $impl.packageName;
 
 import javax.annotation.Generated;
+
 import com.gwtplatform.mvp.client.proxy.Place;
 import com.gwtplatform.mvp.client.proxy.ProxyImpl;
 import com.gwtplatform.mvp.client.proxy.ProxyPlaceImpl;
-#if($gatekeeperType)
-#if($gatekeeperParams.isEmpty())
+#if($proxy.usesDefaultGatekeeper())
+import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
+import com.gwtplatform.mvp.client.proxy.Gatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper;
-#else
+#elseif(!$proxy.gatekeeperParams.isEmpty())
 import com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeperWithParams;
-#end
+#elseif($proxy.gatekeeperType)
+import com.gwtplatform.mvp.client.proxy.PlaceWithGatekeeper;
 #else
 import com.gwtplatform.mvp.client.proxy.PlaceImpl;
 #end
-#printProxyImports($bundle $codeSplit $slotNames $proxyEvents)
+#printProxyImports($proxy)
 #printImports($imports)
 
 @Generated(value = "$processor.qualifiedName", date = "$processingDate")
-public class $impl.simpleName extends ProxyPlaceImpl<$presenterType.simpleName>
-        implements $proxyType.simpleName#implementProxyEventHandlers($proxyEvents) {
-    static class WrappedProxy extends ProxyImpl<$presenterType.simpleName> {
-#printProxyBody("WrappedProxy" $bundle $codeSplit $presenterType $slotNames "")
+public class $impl.simpleName extends ProxyPlaceImpl<$proxy.presenterType.simpleName>
+        implements $proxy.proxyType.simpleName#implementProxyEventHandlers($proxy) {
+    static class WrappedProxy extends ProxyImpl<$proxy.presenterType.simpleName> {
+#printProxyBody("WrappedProxy" $proxy false)
     }
 
     @Inject
     ${impl.simpleName}(
             EventBus eventBus,
             PlaceManager placeManager,
-            WrappedProxy wrappedProxy#if($gatekeeperType),
-            $gatekeeperType.simpleName gatekeeper#end) {
+            WrappedProxy wrappedProxy#if($proxy.usesDefaultGatekeeper()),
+            @DefaultGatekeeper Gatekeeper gatekeeper#elseif($proxy.gatekeeperType),
+            $proxy.gatekeeperType.simpleName gatekeeper#end) {
         Place place;
-        String[] nameTokens = {#foreach($nameToken in $nameTokens)"$nameToken"#commaIfNeeded()#end};
-#if($gatekeeperType)
-#if($gatekeeperParams.isEmpty())
-
-        place = new PlaceWithGatekeeper(nameTokens, gatekeeper);
-#else
-        String[] gatekeeperParams = {#foreach($param in $gatekeeperParams)"$param"#commaIfNeeded()#end};
+        String[] nameTokens = {#foreach($nameToken in $proxy.nameTokens)"$nameToken"#commaIfNeeded()#end};
+#if(!$proxy.gatekeeperParams.isEmpty())
+        String[] gatekeeperParams = {#foreach($param in $proxy.gatekeeperParams)"$param"#commaIfNeeded()#end};
 
         place = new PlaceWithGatekeeperWithParams(nameTokens, gatekeeper, gatekeeperParams);
-#end
+#elseif($proxy.usesDefaultGatekeeper() || $proxy.gatekeeperType)
+
+        place = new PlaceWithGatekeeper(nameTokens, gatekeeper);
 #else
 
         place = new PlaceImpl(nameTokens);
@@ -48,8 +50,8 @@ public class $impl.simpleName extends ProxyPlaceImpl<$presenterType.simpleName>
         bind(placeManager, eventBus);
         setProxy(wrappedProxy);
         setPlace(place);
-#registerProxyEvents($proxyEvents)
+#registerProxyEvents($proxy)
     }
 
-#overrideProxyEventHandlers($presenterType $proxyEvents)
+#overrideProxyEventHandlers($proxy)
 }

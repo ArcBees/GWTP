@@ -1,4 +1,5 @@
-#macro(printProxyImports $bundle $codeSplit $slotNames $proxyEvents)
+#macro(printProxyImports $proxy)
+#set($bundle=$proxy.bundleDetails)
 import javax.inject.Inject;
 #if($bundle && !$bundle.isManualBundle())
 import com.gwtplatform.common.client.CodeSplitNamedBundleProvider;
@@ -6,31 +7,33 @@ import com.gwtplatform.common.client.NamedProviderBundleCollection;
 #elseif($bundle)
 import com.google.gwt.inject.client.AsyncProvider;
 import com.gwtplatform.common.client.CodeSplitBundleProvider;
-#elseif($codeSplit)
+#elseif($proxy.codeSplit)
 import com.google.gwt.inject.client.AsyncProvider;
 import com.gwtplatform.common.client.CodeSplitProvider;
 #else
 import javax.inject.Provider;
 import com.gwtplatform.common.client.StandardProvider;
 #end
-#if(!$proxyEvents.isEmpty())
+#if(!$proxy.proxyEventMethods.isEmpty())
 import com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback;
 #end
-#if(!$slotNames.isEmpty())
+#if(!$proxy.contentSlots.isEmpty())
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
 #end
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 #end
 
-#macro(printProxyBody $typeName $bundle $codeSplit $presenterType $slotNames $proxyEvents)
+#macro(printProxyBody $typeName $proxy $bindProxyEvents)
+#set($bundle=$proxy.bundleDetails)
+#set($presenterType=$proxy.presenterType)
         @Inject
         ${typeName}(
                 EventBus eventBus,
                 PlaceManager placeManager,
 #if($bundle && !$bundle.isManualBundle())
                 NamedProviderBundleCollection providerBundleCollection#elseif($bundle)
-                AsyncProvider<$bundle.bundleType.simpleName> bundleProvider#elseif($codeSplit)
+                AsyncProvider<$bundle.bundleType.simpleName> bundleProvider#elseif($proxy.codeSplit)
                 AsyncProvider<$presenterType.simpleName> presenterProvider#else
                 Provider<$presenterType.simpleName> presenterProvider#end) {
             bind(placeManager, eventBus);
@@ -41,34 +44,34 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
                     "$presenterType.qualifiedParameterizedName");
 #elseif($bundle)
             presenter = new CodeSplitBundleProvider<>(bundleProvider, $bundle.id);
-#elseif($codeSplit)
+#elseif($proxy.codeSplit)
             presenter = new CodeSplitProvider<>(presenterProvider);
 #else
             presenter = new StandardProvider<>(presenterProvider);
 #end
-#if(!$slotNames.isEmpty())
+#if(!$proxy.contentSlots.isEmpty())
             RevealContentHandler<$presenterType.simpleName> revealContentHandler
                     = new RevealContentHandler<$presenterType.simpleName>(eventBus, this);
-#foreach($slotName in $slotNames)
+#foreach($slotName in $proxy.contentSlots)
             eventBus.addHandler(${presenterType.simpleName}.$slotName, revealContentHandler);
 #end#end
-#registerProxyEvents($proxyEvents)
+#if($bindProxyEvents)#registerProxyEvents($proxy)#end
         }
 #end
 
-#macro(implementProxyEventHandlers $proxyEvents)#foreach($proxyEvent in $proxyEvents),
+#macro(implementProxyEventHandlers $proxy)#foreach($proxyEvent in $proxy.proxyEventMethods),
                 $proxyEvent.handlerType.parameterizedName#end#end
 
-#macro(registerProxyEvents $proxyEvents)#foreach($proxyEvent in $proxyEvents)
+#macro(registerProxyEvents $proxy)#foreach($proxyEvent in $proxy.proxyEventMethods)
         eventBus.addHandler(${proxyEvent.eventType.simpleName}.$proxyEvent.typeAccessor, this);
 #end#end
 
-#macro(overrideProxyEventHandlers $presenterType $proxyEvents)#foreach($proxyEvent in $proxyEvents)
+#macro(overrideProxyEventHandlers $proxy)#foreach($proxyEvent in $proxy.proxyEventMethods)
     @Override
     public void ${proxyEvent.handlerMethodName}(final $proxyEvent.eventType.parameterizedName event) {
-        getPresenter(new NotifyingAsyncCallback<$presenterType.simpleName>(getEventBus()){
+        getPresenter(new NotifyingAsyncCallback<$proxy.presenterType.simpleName>(getEventBus()){
             @Override
-            public void success($presenterType.simpleName presenter) {
+            public void success($proxy.presenterType.simpleName presenter) {
                 presenter.${proxyEvent.annotatedMethodName}(event);
             }
         });
