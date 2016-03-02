@@ -46,17 +46,11 @@ public class SimpleProxyProcessor extends AbstractContextProcessor<ProxyDetails,
     public Type process(ProxyDetails proxy) {
         logger.debug("Generating proxy `%s`.", proxy.getProxyType());
 
-        BundleDetails bundleDetails = proxy.getBundleDetails();
-
         outputter.configure(TEMPLATE)
-                .withParam("proxyType", proxy.getProxyType())
-                .withParam("presenterType", proxy.getPresenterType())
-                .withParam("slotNames", proxy.getContentSlots())
-                .withParam("codeSplit", proxy.isCodeSplit())
-                .withParam("proxyEvents", proxy.getProxyEventMethods())
-                .withParam("bundle", bundleDetails)
+                .withParam("proxy", proxy)
                 .writeTo(proxy.getType());
 
+        BundleDetails bundleDetails = proxy.getBundleDetails();
         if (bundleDetails != null) {
             providerBundleProcessor.process(bundleDetails);
         }

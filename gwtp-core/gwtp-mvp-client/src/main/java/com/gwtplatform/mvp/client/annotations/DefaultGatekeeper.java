@@ -16,15 +16,20 @@
 
 package com.gwtplatform.mvp.client.annotations;
 
-import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 /**
- * Use this annotation in your custom ginjector to annotate a method returning a
- * {@link com.gwtplatform.mvp.client.proxy.Gatekeeper}-derived class. This class
- * will be used to provide places for proxies that are not annotated with the
- * {@link UseGatekeeper} annotation.
+ * Annotate a {@link com.gwtplatform.mvp.client.proxy.Gatekeeper Gatekeeper}-derived class to tell GWTP it has tp use it
+ * by default. This class will be used to provide places for proxies that are not annotated with the {@link
+ * UseGatekeeper} or {@link NoGatekeeper} annotations. Only one gatekeeper can be annotated with this annotation.
  */
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target({TYPE, FIELD, PARAMETER})
+@Retention(RUNTIME)
 public @interface DefaultGatekeeper {
 }

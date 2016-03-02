@@ -16,7 +16,6 @@
 
 package com.gwtplatform.common.processors.module;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -41,6 +40,7 @@ import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.outputter.Outputter;
+import com.gwtplatform.processors.tools.utils.MetaInfResource;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.MoreElements.asType;
@@ -52,12 +52,13 @@ import static com.gwtplatform.processors.tools.bindings.BindingContext.newSubMod
 @SupportedOptions({Logger.DEBUG_OPTION, GwtSourceFilter.GWTP_MODULE_OPTION})
 public class GwtpAppModuleProcessor extends AbstractProcessor {
     public static final Type MAIN_MODULE_TYPE = new Type("com.gwtplatform.common.client.GeneratedGwtpModule");
+    private static final String GIN_MODULES_META_INF_NAME = "gwtp/ginModules";
 
     private Logger logger;
     private Utils utils;
 
     private BindingsProcessors bindingsProcessors;
-    private MetaInfModuleHandler metaInfModuleHandler;
+    private MetaInfResource ginModulesMetaData;
 
     private boolean isGwtpApp;
 
@@ -71,7 +72,7 @@ public class GwtpAppModuleProcessor extends AbstractProcessor {
         utils = new Utils(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils(), options);
         Outputter outputter = new Outputter(logger, this, processingEnv.getFiler());
         bindingsProcessors = new BindingsProcessors(logger, utils, outputter);
-        metaInfModuleHandler = new MetaInfModuleHandler(logger, outputter);
+        ginModulesMetaData = new MetaInfResource(logger, outputter, GIN_MODULES_META_INF_NAME);
     }
 
     @Override
@@ -117,12 +118,12 @@ public class GwtpAppModuleProcessor extends AbstractProcessor {
         return isGwtpApp;
     }
 
-    private void addModulesToGwtpApp(Set<? extends Element> moduleElements) throws Exception {
+    private void addModulesToGwtpApp(Set<? extends Element> moduleElements) {
         logger.debug("Processing GWTP main module.");
 
         ensureModuleIsCreated();
 
-        installModules(metaInfModuleHandler.readAll());
+        installModules(ginModulesMetaData.readAll());
         installModules(moduleElements);
     }
 
@@ -146,18 +147,18 @@ public class GwtpAppModuleProcessor extends AbstractProcessor {
         bindingsProcessors.process(newSubModule(MAIN_MODULE_TYPE, moduleType));
     }
 
-    private void addModulesToMetaInf(Set<? extends Element> moduleElements) throws IOException {
+    private void addModulesToMetaInf(Set<? extends Element> moduleElements) {
         logger.debug("Processing GWTP modules meta data.");
 
         for (Element moduleElement : moduleElements) {
             String moduleType = asType(moduleElement).getQualifiedName().toString();
 
-            metaInfModuleHandler.writeLine(moduleType);
+            ginModulesMetaData.writeLine(moduleType);
         }
     }
 
-    private void processLast() throws IOException {
-        metaInfModuleHandler.closeWriter();
+    private void processLast() {
+        ginModulesMetaData.closeWriter();
 
         if (isGwtpApp) {
             bindingsProcessors.processLast();

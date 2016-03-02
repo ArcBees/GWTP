@@ -27,8 +27,8 @@ import javax.lang.model.util.SimpleTypeVisitor6;
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.HttpVariable;
-import com.gwtplatform.processors.tools.domain.Method;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
+import com.gwtplatform.processors.tools.domain.Method;
 
 import static com.google.auto.common.MoreTypes.asTypeElement;
 

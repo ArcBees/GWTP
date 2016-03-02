@@ -226,7 +226,7 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
     @Override
     public Collection<String> getImports() {
         FluentIterable<String> imports =
-                from(proxyEventMethods)
+                from(getProxyEventMethods())
                         .transformAndConcat(HasImports.EXTRACT_IMPORTS_FUNCTION)
                         .append(getProxyType().getImports())
                         .append(getPresenterType().getImports());

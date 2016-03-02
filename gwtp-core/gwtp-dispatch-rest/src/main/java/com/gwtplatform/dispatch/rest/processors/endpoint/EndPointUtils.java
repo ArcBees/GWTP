@@ -19,10 +19,10 @@ package com.gwtplatform.dispatch.rest.processors.endpoint;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gwtplatform.processors.tools.domain.Variable;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.subresource.SubResource;
+import com.gwtplatform.processors.tools.domain.Variable;
 
 public class EndPointUtils {
     public List<Variable> processFields(ResourceMethod method) {
