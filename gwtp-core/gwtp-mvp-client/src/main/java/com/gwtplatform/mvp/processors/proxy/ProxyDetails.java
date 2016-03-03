@@ -42,4 +42,6 @@ public interface ProxyDetails extends HasType, HasImports {
     BundleDetails getBundleDetails();
 
     List<ProxyEventMethod> getProxyEventMethods();
+
+    Type getCustomProvider();
 }
