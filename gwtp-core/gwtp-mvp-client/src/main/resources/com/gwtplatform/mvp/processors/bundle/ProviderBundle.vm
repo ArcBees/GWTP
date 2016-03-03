@@ -14,6 +14,7 @@ import com.gwtplatform.common.client.annotations.ProviderBundle;
 @Generated(value = "$processor.qualifiedName", date = "$processingDate")
 public class $impl.simpleName extends NamedProviderBundle {
     @Inject
+    @SuppressWarnings("unchecked" /* Ignore the generic vararg warning. */)
     ${impl.simpleName}(#foreach ($type in $providerTypes)
 
             Provider<$type.parameterizedName> provider$foreach.index#commaIfNeeded()#end) {

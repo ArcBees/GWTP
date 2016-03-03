@@ -145,7 +145,6 @@ public class NamedProviderBundleCollectionProcessor extends AbstractProcessor {
 
     private void addBundlesToCollection(Set<? extends Element> bundles) {
         for (Element bundle : bundles) {
-
             String name = bundle.getAnnotation(ProviderBundle.class).value();
             Type type = new Type(asType(bundle));
 
