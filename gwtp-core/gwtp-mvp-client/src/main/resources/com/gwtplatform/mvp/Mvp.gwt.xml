@@ -14,14 +14,11 @@
         <when-type-is class="com.gwtplatform.mvp.client.ApplicationController"/>
     </generate-with>
 
-    <!--<generate-with class="com.gwtplatform.mvp.rebind.ProxyGenerator">-->
-        <!--<when-type-assignable class="com.gwtplatform.mvp.client.proxy.Proxy"/>-->
-    <!--</generate-with>-->
-
     <!-- Specify the paths for translatable code                    -->
     <source path='client' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java"/>
 
-    <!-- gin.ginjector is set to a default value, no other value must be set for Ginjector generation --><!-- if another value is set, it must point to a valid manual Ginjector class -->
+    <!-- gin.ginjector is set to a default value, no other value must be set for Ginjector generation -->
+    <!-- if another value is set, it must point to a valid manual Ginjector class -->
     <define-configuration-property name="gin.ginjector" is-multi-valued="false"/>
     <set-configuration-property name="gin.ginjector" value="com.gwtplatform.mvp.client.ClientGinjector"/>
 
