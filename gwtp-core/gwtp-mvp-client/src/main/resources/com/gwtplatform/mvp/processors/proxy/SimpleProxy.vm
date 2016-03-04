@@ -1,0 +1,15 @@
+package $impl.packageName;
+
+import javax.annotation.Generated;
+
+import com.gwtplatform.mvp.client.proxy.ProxyImpl;
+#printProxyImports($proxy)
+#printImports($imports)
+
+@Generated(value = "$processor.qualifiedName", date = "$processingDate")
+public class $impl.simpleName extends ProxyImpl<$proxy.presenterType.simpleName>
+        implements $proxy.proxyType.simpleName#implementProxyEventHandlers($proxy) {
+#printProxyBody($impl.simpleName $proxy true)
+
+#overrideProxyEventHandlers($proxy)
+}

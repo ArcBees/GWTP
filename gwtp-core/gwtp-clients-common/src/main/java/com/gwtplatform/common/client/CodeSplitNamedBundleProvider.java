@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,27 +21,15 @@ import javax.inject.Provider;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-/**
- * Implements a {@link IndirectProvider} that uses code splitting for a specific type. The object will be provided from
- * a {@link ProviderBundle}.
- *
- * @param <T> The type of the provided object.
- * @param <B> The type of the {@link ProviderBundle} providing this object.
- */
-public class CodeSplitBundleProvider<T, B extends ProviderBundle> implements IndirectProvider<T> {
+public class CodeSplitNamedBundleProvider<T, B extends NamedProviderBundle> implements IndirectProvider<T> {
     private final AsyncProvider<B> bundleProvider;
-    private final int providerId;
+    private final String providerName;
 
-    /**
-     * Construct a {@link IndirectProvider} that implements code splitting for a specific type. The object will be
-     * provided from a {@link ProviderBundle}.
-     *
-     * @param bundleProvider The {@link ProviderBundle} providing the object.
-     * @param providerId The identifier of the provided object, within the {@link ProviderBundle}.
-     */
-    public CodeSplitBundleProvider(AsyncProvider<B> bundleProvider, int providerId) {
+    public CodeSplitNamedBundleProvider(
+            AsyncProvider<B> bundleProvider,
+            String providerName) {
         this.bundleProvider = bundleProvider;
-        this.providerId = providerId;
+        this.providerName = providerName;
     }
 
     @Override
@@ -55,7 +43,8 @@ public class CodeSplitBundleProvider<T, B extends ProviderBundle> implements Ind
             @SuppressWarnings("unchecked")
             @Override
             public void onSuccess(B providerBundle) {
-                callback.onSuccess(((Provider<T>) providerBundle.get(providerId)).get());
+                Provider<T> provider = (Provider<T>) providerBundle.get(providerName);
+                callback.onSuccess(provider.get());
             }
         });
     }

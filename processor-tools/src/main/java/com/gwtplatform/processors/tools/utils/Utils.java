@@ -87,6 +87,19 @@ public class Utils {
         return types.getDeclaredType(element, typeArguments);
     }
 
+    public TypeMirror createWithTypeArguments(Class<?> clazz, TypeMirror... typeArguments) {
+        return createWithTypeArguments(clazz.getCanonicalName(), typeArguments);
+    }
+
+    public TypeMirror createWithTypeArguments(String qualifiedName, TypeMirror... typeArguments) {
+        if (typeArguments == null) {
+            typeArguments = new TypeMirror[0];
+        }
+
+        TypeElement element = elements.getTypeElement(qualifiedName);
+        return types.getDeclaredType(element, typeArguments);
+    }
+
     public List<Element> getAllMembers(TypeElement type, Class<?> exclusion) {
         return getAllMembers(type, elements.getTypeElement(exclusion.getCanonicalName()));
     }

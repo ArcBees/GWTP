@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,15 +14,10 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.endpoint;
+package com.gwtplatform.common.client;
 
-import java.util.List;
+import com.google.gwt.inject.client.AsyncProvider;
 
-import com.gwtplatform.dispatch.rest.processors.details.HasEndPointDetails;
-import com.gwtplatform.processors.tools.domain.HasImports;
-import com.gwtplatform.processors.tools.domain.HasType;
-import com.gwtplatform.processors.tools.domain.Variable;
-
-public interface IsEndPoint extends HasType, HasEndPointDetails, HasImports {
-    List<Variable> getFields();
+public interface NamedProviderBundleCollection {
+    AsyncProvider<? extends NamedProviderBundle> getBundle(String bundleName);
 }

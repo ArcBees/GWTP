@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,15 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.endpoint;
+package com.gwtplatform.mvp.client.proxy;
 
-import java.util.List;
-
-import com.gwtplatform.dispatch.rest.processors.details.HasEndPointDetails;
-import com.gwtplatform.processors.tools.domain.HasImports;
-import com.gwtplatform.processors.tools.domain.HasType;
-import com.gwtplatform.processors.tools.domain.Variable;
-
-public interface IsEndPoint extends HasType, HasEndPointDetails, HasImports {
-    List<Variable> getFields();
+/**
+ * A {@link Gatekeeper} that allows all requests. This is used as a default gatekeeper if no classes sport the {@link
+ * com.gwtplatform.mvp.client.annotations.DefaultGatekeeper @DefaultGatekeeper} annotation.
+ */
+public class AlwaysTrueGatekeeper implements Gatekeeper {
+    @Override
+    public boolean canReveal() {
+        return true;
+    }
 }

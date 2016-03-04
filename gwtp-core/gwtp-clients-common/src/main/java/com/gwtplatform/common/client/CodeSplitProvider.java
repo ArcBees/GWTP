@@ -26,7 +26,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  * @param <T> The type of the provided object.
  */
-public final class CodeSplitProvider<T> implements IndirectProvider<T> {
+public class CodeSplitProvider<T> implements IndirectProvider<T> {
     private final AsyncProvider<T> provider;
 
     /**
