@@ -17,6 +17,7 @@
 package com.gwtplatform.mvp.processors.proxy;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +34,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Sets;
 import com.gwtplatform.mvp.client.annotations.GatekeeperParams;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.GatekeeperWithParams;
 import com.gwtplatform.processors.tools.domain.Type;
@@ -45,6 +47,7 @@ import static com.google.common.base.Optional.of;
 
 public class ProxyPlaceDetails extends AbstractProxyDetails {
     private Set<String> nameTokens;
+    private Boolean defaultGatekeeper;
     private Optional<Type> gatekeeperType;
     private List<String> gatekeeperParams;
 
@@ -79,13 +82,20 @@ public class ProxyPlaceDetails extends AbstractProxyDetails {
                 .log("You must annotate and specify at least one name token on a ProxyPlace<>.");
     }
 
+    public boolean usesDefaultGatekeeper() {
+        if (defaultGatekeeper == null) {
+            NoGatekeeper noGatekeeper = element.getAnnotation(NoGatekeeper.class);
+            defaultGatekeeper = noGatekeeper == null && getGatekeeperType() == null;
+        }
+
+        return defaultGatekeeper;
+    }
+
     public Type getGatekeeperType() {
         if (gatekeeperType == null) {
             TypeMirror mirror = extractGatekeeperMirror();
             gatekeeperType = mirror == null ? Optional.<Type>absent() : of(new Type(mirror));
         }
-
-        // TODO: Handle @NoGatekeeper when the @DefaultGatekeeper is handled.
 
         return gatekeeperType.orNull();
     }
@@ -149,5 +159,15 @@ public class ProxyPlaceDetails extends AbstractProxyDetails {
         }
 
         return true;
+    }
+
+    @Override
+    public Collection<String> getImports() {
+        Collection<String> imports = new ArrayList<>(super.getImports());
+        if (!usesDefaultGatekeeper() && getGatekeeperType() != null) {
+            imports.add(getGatekeeperType().getQualifiedName());
+        }
+
+        return imports;
     }
 }

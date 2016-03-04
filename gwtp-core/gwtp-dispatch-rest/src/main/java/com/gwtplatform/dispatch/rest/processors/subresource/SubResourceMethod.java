@@ -25,10 +25,10 @@ import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails;
 import com.gwtplatform.dispatch.rest.processors.details.EndPointDetails.Factory;
-import com.gwtplatform.processors.tools.domain.Method;
 import com.gwtplatform.dispatch.rest.processors.resource.Resource;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethodUtils;
+import com.gwtplatform.processors.tools.domain.Method;
 
 import static com.google.auto.common.MoreTypes.asTypeElement;
 import static com.google.common.base.Optional.absent;

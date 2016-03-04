@@ -32,7 +32,7 @@ public class PrimitivesTest {
         @Override
         protected void configureTest() {
             bindManyNamedInstances(PrimitivesTestCase.class, PRIMITIVES,
-            new PrimitivesTestCase(boolean.class, Primitives.BOOLEAN),
+                    new PrimitivesTestCase(boolean.class, Primitives.BOOLEAN),
                     new PrimitivesTestCase(byte.class, Primitives.BYTE),
                     new PrimitivesTestCase(char.class, Primitives.CHAR),
                     new PrimitivesTestCase(double.class, Primitives.DOUBLE),

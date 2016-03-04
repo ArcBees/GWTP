@@ -44,28 +44,18 @@ public class ProxyPlaceProcessor extends AbstractContextProcessor<ProxyDetails, 
 
     @Override
     public Type process(ProxyDetails proxy) {
-        ProxyPlaceDetails proxyPlace = (ProxyPlaceDetails) proxy;
+        logger.debug("Generating proxy place `%s`.", proxy.getProxyType());
 
-        logger.debug("Generating proxy place `%s`.", proxyPlace.getProxyType());
-
-        BundleDetails bundleDetails = proxyPlace.getBundleDetails();
         outputter.configure(TEMPLATE)
-                .withParam("proxyType", proxyPlace.getProxyType())
-                .withParam("presenterType", proxyPlace.getPresenterType())
-                .withParam("gatekeeperType", proxyPlace.getGatekeeperType())
-                .withParam("gatekeeperParams", proxyPlace.getGatekeeperParams())
-                .withParam("slotNames", proxyPlace.getContentSlots())
-                .withParam("nameTokens", proxyPlace.getNameTokens())
-                .withParam("codeSplit", proxyPlace.isCodeSplit())
-                .withParam("proxyEvents", proxy.getProxyEventMethods())
-                .withParam("bundle", bundleDetails)
-                .writeTo(proxyPlace.getType());
+                .withParam("proxy", proxy)
+                .writeTo(proxy.getType());
 
+        BundleDetails bundleDetails = proxy.getBundleDetails();
         if (bundleDetails != null) {
             providerBundleProcessor.process(bundleDetails);
         }
-        proxyModules.bindProxy(proxyPlace);
+        proxyModules.bindProxy(proxy);
 
-        return proxyPlace.getType();
+        return proxy.getType();
     }
 }
