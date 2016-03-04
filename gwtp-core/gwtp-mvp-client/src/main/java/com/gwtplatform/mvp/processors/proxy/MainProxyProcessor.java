@@ -16,7 +16,7 @@
 
 package com.gwtplatform.mvp.processors.proxy;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -30,7 +30,11 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
 import com.google.auto.service.AutoService;
+import com.google.common.collect.Sets;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
+import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
+import com.gwtplatform.mvp.processors.bundle.NamedProviderBundleProcessor;
 import com.gwtplatform.mvp.processors.proxy.ProxyDetails.Factory;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
@@ -44,7 +48,8 @@ import static com.gwtplatform.processors.tools.logger.Logger.DEBUG_OPTION;
 @AutoService(Processor.class)
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 @SupportedOptions({DEBUG_OPTION, GWTP_MODULE_OPTION})
-public class ProxyProcessorEntry extends AbstractProcessor {
+public class MainProxyProcessor extends AbstractProcessor {
+    private static final String PROXY_MACROS = "com/gwtplatform/mvp/processors/proxy/macros.vm";
     private static final String UNABLE_TO_PROCESS_PROXY = "Unable to process proxy.";
     private static final String UNRESOLVABLE_EXCEPTION = "Unresolvable exception.";
 
@@ -57,10 +62,14 @@ public class ProxyProcessorEntry extends AbstractProcessor {
     private BindingsProcessors bindingsProcessors;
     private ProxyProcessors proxyProcessors;
     private ProxyModules proxyModules;
+    private NamedProviderBundleProcessor providerBundleProcessor;
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return Collections.singleton(ProxyStandard.class.getCanonicalName());
+        return Sets.newHashSet(
+                ProxyStandard.class.getCanonicalName(),
+                ProxyCodeSplit.class.getCanonicalName(),
+                ProxyCodeSplitBundle.class.getCanonicalName());
     }
 
     @Override
@@ -76,7 +85,7 @@ public class ProxyProcessorEntry extends AbstractProcessor {
         logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
         utils = new Utils(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils(),
                 processingEnv.getOptions());
-        outputter = new Outputter(logger, this, processingEnv.getFiler());
+        outputter = new Outputter(logger, this, processingEnv.getFiler(), PROXY_MACROS);
     }
 
     private void initializeDomainFactories() {
@@ -86,7 +95,10 @@ public class ProxyProcessorEntry extends AbstractProcessor {
     private void initializeProcessors() {
         bindingsProcessors = new BindingsProcessors(logger, utils, outputter);
         proxyModules = new ProxyModules(utils, bindingsProcessors);
-        proxyProcessors = new ProxyProcessors(logger, utils, outputter, proxyModules);
+        providerBundleProcessor = new NamedProviderBundleProcessor();
+        proxyProcessors = new ProxyProcessors(logger, utils, outputter, proxyModules, providerBundleProcessor);
+
+        providerBundleProcessor.init(logger, utils, outputter);
     }
 
     @Override
@@ -94,8 +106,7 @@ public class ProxyProcessorEntry extends AbstractProcessor {
         try {
             utils.incrementRoundNumber();
             process(roundEnv);
-        } catch (UnableToProcessException e) {
-            logger.error(UNRESOLVABLE_EXCEPTION);
+        } catch (UnableToProcessException ignore) {
         } catch (Exception e) {
             logger.error().throwable(e).log(UNRESOLVABLE_EXCEPTION);
         }
@@ -108,13 +119,17 @@ public class ProxyProcessorEntry extends AbstractProcessor {
 
         if (elementsProcessed) {
             proxyModules.flush();
+            providerBundleProcessor.flush();
         }
 
         maybeProcessLastRound(roundEnv);
     }
 
     private boolean processGwtElements(RoundEnvironment roundEnv) {
-        Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(ProxyStandard.class);
+        Set<Element> elements = new HashSet<>(roundEnv.getElementsAnnotatedWith(ProxyStandard.class));
+        elements.addAll(roundEnv.getElementsAnnotatedWith(ProxyCodeSplit.class));
+        elements.addAll(roundEnv.getElementsAnnotatedWith(ProxyCodeSplitBundle.class));
+
         elements = utils.getSourceFilter().filterElements(elements);
 
         for (Element element : elements) {
@@ -136,6 +151,7 @@ public class ProxyProcessorEntry extends AbstractProcessor {
 
     private void maybeProcessLastRound(RoundEnvironment roundEnv) {
         if (roundEnv.processingOver()) {
+            providerBundleProcessor.processLast();
             proxyProcessors.processLast();
             bindingsProcessors.processLast();
         }

@@ -9,4 +9,6 @@ import $import;
 #macro(maybeTypeLiteral $type)#if($type.isParameterized())new TypeLiteral<$type.qualifiedParameterizedName>() {}#else${type.qualifiedName}.class#end#end
 
 #macro(appendScopeMethod $binding)
-#if($binding.isEagerSingleton()).asEagerSingleton()#elseif($binding.scope.isPresent()).in(${binding.scope.get().qualifiedName}.class)#end#end
+#if($binding.isEagerSingleton())
+.asEagerSingleton()#elseif($binding.scope.isPresent())
+.in(${binding.scope.get().qualifiedName}.class)#end#end

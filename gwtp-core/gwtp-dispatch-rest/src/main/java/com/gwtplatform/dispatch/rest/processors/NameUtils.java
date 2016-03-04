@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.processors;
 
-import java.util.Set;
-
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
@@ -64,16 +62,11 @@ public class NameUtils {
     }
 
     public static Type findRestModuleType(Utils utils) {
-        Set<String> sourcePackages = utils.getSourceFilter().getSourcePackages();
-
-        // Source packages is guaranteed not to be null.
-        return new Type(sourcePackages.iterator().next(), REST_MODULE_NAME + "$$" + utils.getRoundNumber());
+        return new Type(utils.getSourceFilter().getApplicationPackage(),
+                REST_MODULE_NAME + "$$" + utils.getRoundNumber());
     }
 
     public static Type findJacksonMapperProviderType(Utils utils) {
-        Set<String> sourcePackages = utils.getSourceFilter().getSourcePackages();
-
-        // Source packages is guaranteed not to be null.
-        return new Type(sourcePackages.iterator().next(), JACKSON_MAPPER_PROVIDER_NAME);
+        return new Type(utils.getSourceFilter().getApplicationPackage(), JACKSON_MAPPER_PROVIDER_NAME);
     }
 }

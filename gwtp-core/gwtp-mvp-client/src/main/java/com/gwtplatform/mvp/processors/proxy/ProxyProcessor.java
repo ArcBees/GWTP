@@ -16,9 +16,12 @@
 
 package com.gwtplatform.mvp.processors.proxy;
 
+import com.gwtplatform.mvp.processors.bundle.NamedProviderBundleProcessor;
 import com.gwtplatform.processors.tools.ContextProcessor;
 import com.gwtplatform.processors.tools.domain.Type;
 
 public interface ProxyProcessor extends ContextProcessor<ProxyDetails, Type> {
     void setProxyModules(ProxyModules proxyModules);
+
+    void setProviderBundleProcessor(NamedProviderBundleProcessor providerBundleProcessor);
 }

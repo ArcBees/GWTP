@@ -1,6 +1,7 @@
 #* @implicitly included *#
 
 #* @vtlmacrolibrary path="com/gwtplatform/processors/tools/macros.vm" *#
+#* @vtlmacrolibrary path="com/gwtplatform/mvp/processors/proxy/macros.vm" *#
 #* @velocityproperties path=com/gwtplatform/processors/tools/velocity.properties *#
 
 #* @vtlvariable name="impl" type="com.gwtplatform.processors.tools.domain.Type" *#
@@ -9,11 +10,9 @@
 #* @vtlvariable name="imports" type="java.util.Collection<java.lang.String>" *#
 #* @vtlvariable name="type" type="com.gwtplatform.processors.tools.domain.Type" *#
 
-#* @vtlvariable name="presenterType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/SimpleProxy.vm" *#
-#* @vtlvariable name="proxyType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/SimpleProxy.vm" *#
-#* @vtlvariable name="slotNames" type="java.util.Collection<java.lang.String>" file="com/gwtplatform/mvp/processors/SimpleProxy.vm" *#
+#* @vtlvariable name="proxy" type="com.gwtplatform.mvp.processors.proxy.AbstractProxyDetails" file="com/gwtplatform/mvp/processors/proxy/macros.vm" *#
+#* @vtlvariable name="proxy" type="com.gwtplatform.mvp.processors.proxy.SimpleProxyDetails" file="com/gwtplatform/mvp/processors/proxy/SimpleProxy.vm" *#
+#* @vtlvariable name="proxy" type="com.gwtplatform.mvp.processors.proxy.ProxyPlaceDetails" file="com/gwtplatform/mvp/processors/proxy/ProxyPlace.vm" *#
 
-#* @vtlvariable name="presenterType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
-#* @vtlvariable name="proxyType" type="com.gwtplatform.processors.tools.domain.Type" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
-#* @vtlvariable name="slotNames" type="java.util.Collection<java.lang.String>" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
-#* @vtlvariable name="nameTokens" type="java.util.Collection<java.lang.String>" file="com/gwtplatform/mvp/processors/ProxyPlace.vm" *#
+#* @vtlvariable name="providerTypes" type="java.util.List<com.gwtplatform.processors.tools.domain.Type>" file="com/gwtplatform/mvp/processors/bundle/ProviderBundle.vm" *#
+#* @vtlvariable name="name" type="java.lang.String" file="com/gwtplatform/mvp/processors/bundle/ProviderBundle.vm" *#

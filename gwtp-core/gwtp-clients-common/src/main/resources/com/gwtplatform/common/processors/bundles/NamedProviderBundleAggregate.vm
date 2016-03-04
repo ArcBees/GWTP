@@ -1,0 +1,38 @@
+package $impl.packageName;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Generated;
+import javax.inject.Inject;
+import javax.inject.Provider;
+
+import com.gwtplatform.common.client.NamedProviderBundle;
+#printImports($imports)
+
+@Generated(value = "$processor.qualifiedName", date = "$processingDate")
+public class $impl.simpleName extends NamedProviderBundle {
+    private final List<NamedProviderBundle> bundles = new ArrayList<>();
+
+    @Inject
+    ${impl.simpleName}(#foreach($bundle in $bundles)
+
+            $bundle.simpleName bundle$foreach.index#commaIfNeeded()#end) {
+        super();
+#foreach($bundle in $bundles)
+        bundles.add(bundle$foreach.index);
+#end
+    }
+
+    @Override
+    public Provider<?> get(String name) {
+        for (NamedProviderBundle bundle : bundles) {
+            Provider<?> provider = bundle.get(name);
+            if(provider != null) {
+                return provider;
+            }
+        }
+
+        return null;
+    }
+}

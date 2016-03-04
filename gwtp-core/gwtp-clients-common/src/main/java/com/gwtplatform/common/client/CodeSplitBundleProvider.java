@@ -16,30 +16,28 @@
 
 package com.gwtplatform.common.client;
 
+import javax.inject.Provider;
+
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.inject.Provider;
 
 /**
- * Implements a {@link IndirectProvider} that uses code splitting for a specific
- * type. The object will be provided from a {@link ProviderBundle}.
+ * Implements a {@link IndirectProvider} that uses code splitting for a specific type. The object will be provided from
+ * a {@link ProviderBundle}.
  *
  * @param <T> The type of the provided object.
  * @param <B> The type of the {@link ProviderBundle} providing this object.
  */
-public final class CodeSplitBundleProvider<T, B extends ProviderBundle>
-        implements IndirectProvider<T> {
-
+public class CodeSplitBundleProvider<T, B extends ProviderBundle> implements IndirectProvider<T> {
     private final AsyncProvider<B> bundleProvider;
     private final int providerId;
 
     /**
-     * Construct a {@link IndirectProvider} that implements code splitting for a
-     * specific type. The object will be provided from a {@link ProviderBundle}.
+     * Construct a {@link IndirectProvider} that implements code splitting for a specific type. The object will be
+     * provided from a {@link ProviderBundle}.
      *
      * @param bundleProvider The {@link ProviderBundle} providing the object.
-     * @param providerId     The identifier of the provided object, within the
-     *                       {@link ProviderBundle}.
+     * @param providerId The identifier of the provided object, within the {@link ProviderBundle}.
      */
     public CodeSplitBundleProvider(AsyncProvider<B> bundleProvider, int providerId) {
         this.bundleProvider = bundleProvider;
@@ -61,5 +59,4 @@ public final class CodeSplitBundleProvider<T, B extends ProviderBundle>
             }
         });
     }
-
 }
