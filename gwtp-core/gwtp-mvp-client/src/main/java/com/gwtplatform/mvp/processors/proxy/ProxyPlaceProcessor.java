@@ -16,17 +16,25 @@
 
 package com.gwtplatform.mvp.processors.proxy;
 
+import com.gwtplatform.mvp.processors.bundle.BundleDetails;
+import com.gwtplatform.mvp.processors.bundle.NamedProviderBundleProcessor;
 import com.gwtplatform.processors.tools.AbstractContextProcessor;
 import com.gwtplatform.processors.tools.domain.Type;
 
 public class ProxyPlaceProcessor extends AbstractContextProcessor<ProxyDetails, Type> implements ProxyProcessor {
-    private static final String TEMPLATE = "com/gwtplatform/mvp/processors/ProxyPlace.vm";
+    private static final String TEMPLATE = "com/gwtplatform/mvp/processors/proxy/ProxyPlace.vm";
 
     private ProxyModules proxyModules;
+    private NamedProviderBundleProcessor providerBundleProcessor;
 
     @Override
     public void setProxyModules(ProxyModules proxyModules) {
         this.proxyModules = proxyModules;
+    }
+
+    @Override
+    public void setProviderBundleProcessor(NamedProviderBundleProcessor providerBundleProcessor) {
+        this.providerBundleProcessor = providerBundleProcessor;
     }
 
     @Override
@@ -36,18 +44,16 @@ public class ProxyPlaceProcessor extends AbstractContextProcessor<ProxyDetails, 
 
     @Override
     public Type process(ProxyDetails proxy) {
-        ProxyPlaceDetails proxyPlace = (ProxyPlaceDetails) proxy;
-
         logger.debug("Generating proxy place `%s`.", proxy.getProxyType());
 
         outputter.configure(TEMPLATE)
-                .withParam("proxyType", proxy.getProxyType())
-                .withParam("presenterType", proxy.getPresenterType())
-                .withParam("gatekeeperType", proxyPlace.getGatekeeperType())
-                .withParam("slotNames", proxy.getContentSlots())
-                .withParam("nameTokens", proxyPlace.getNameTokens())
+                .withParam("proxy", proxy)
                 .writeTo(proxy.getType());
 
+        BundleDetails bundleDetails = proxy.getBundleDetails();
+        if (bundleDetails != null) {
+            providerBundleProcessor.process(bundleDetails);
+        }
         proxyModules.bindProxy(proxy);
 
         return proxy.getType();

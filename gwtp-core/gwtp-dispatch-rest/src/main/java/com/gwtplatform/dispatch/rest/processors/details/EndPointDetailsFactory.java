@@ -18,6 +18,7 @@ package com.gwtplatform.dispatch.rest.processors.details;
 
 import javax.lang.model.element.TypeElement;
 
+import com.gwtplatform.processors.tools.domain.Method;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 

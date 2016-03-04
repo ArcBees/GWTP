@@ -17,6 +17,7 @@
 package com.gwtplatform.mvp.processors.proxy;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -27,22 +28,28 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.SimpleAnnotationValueVisitor7;
 
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Sets;
+import com.gwtplatform.mvp.client.annotations.GatekeeperParams;
 import com.gwtplatform.mvp.client.annotations.NameToken;
+import com.gwtplatform.mvp.client.annotations.NoGatekeeper;
 import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
+import com.gwtplatform.mvp.client.proxy.GatekeeperWithParams;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.AnnotationMirrors.getAnnotationValue;
 import static com.google.auto.common.MoreElements.getAnnotationMirror;
-import static com.google.common.base.Optional.absent;
 import static com.google.common.base.Optional.of;
 
 public class ProxyPlaceDetails extends AbstractProxyDetails {
     private Set<String> nameTokens;
+    private Boolean defaultGatekeeper;
     private Optional<Type> gatekeeperType;
+    private List<String> gatekeeperParams;
 
     public ProxyPlaceDetails(
             Logger logger,
@@ -75,34 +82,92 @@ public class ProxyPlaceDetails extends AbstractProxyDetails {
                 .log("You must annotate and specify at least one name token on a ProxyPlace<>.");
     }
 
-    public Type getGatekeeperType() {
-        if (gatekeeperType == null) {
-            extractGatekeeper();
+    public boolean usesDefaultGatekeeper() {
+        if (defaultGatekeeper == null) {
+            NoGatekeeper noGatekeeper = element.getAnnotation(NoGatekeeper.class);
+            defaultGatekeeper = noGatekeeper == null && getGatekeeperType() == null;
         }
 
-        // TODO: Handle @NoGatekeeper when the @DefaultGatekeeper is handled.
+        return defaultGatekeeper;
+    }
+
+    public Type getGatekeeperType() {
+        if (gatekeeperType == null) {
+            TypeMirror mirror = extractGatekeeperMirror();
+            gatekeeperType = mirror == null ? Optional.<Type>absent() : of(new Type(mirror));
+        }
 
         return gatekeeperType.orNull();
     }
 
-    private void extractGatekeeper() {
+    private TypeMirror extractGatekeeperMirror() {
         Optional<AnnotationMirror> annotationMirror = getAnnotationMirror(element, UseGatekeeper.class);
-        gatekeeperType = absent();
 
         if (annotationMirror.isPresent()) {
             AnnotationValue value = getAnnotationValue(annotationMirror.get(), "value");
 
-            gatekeeperType = value.accept(new SimpleAnnotationValueVisitor7<Optional<Type>, Object>(gatekeeperType) {
+            return value.accept(new SimpleAnnotationValueVisitor7<TypeMirror, Void>(null) {
                 @Override
-                public Optional<Type> visitType(TypeMirror typeMirror, Object o) {
-                    return of(new Type(typeMirror));
+                public TypeMirror visitType(TypeMirror typeMirror, Void o) {
+                    return typeMirror;
                 }
             }, null);
         }
+
+        return null;
     }
 
     public List<String> getGatekeeperParams() {
-        // TODO: Handle gatekeeper with params
-        return new ArrayList<>();
+        if (gatekeeperParams == null) {
+            extractGatekeeperParams();
+        }
+
+        return gatekeeperParams;
+    }
+
+    private void extractGatekeeperParams() {
+        GatekeeperParams annotation = element.getAnnotation(GatekeeperParams.class);
+        gatekeeperParams = new ArrayList<>();
+
+        if (annotation != null && verifyIsGatekeeperWithParams()) {
+            FluentIterable.of(annotation.value())
+                    .transform(new Function<String, String>() {
+                        @Override
+                        public String apply(String param) {
+                            return param
+                                    .replace("\\", "\\\\")
+                                    .replace("\"", "\\\"");
+                        }
+                    })
+                    .copyInto(gatekeeperParams);
+        }
+    }
+
+    private boolean verifyIsGatekeeperWithParams() {
+        TypeMirror gatekeeperMirror = extractGatekeeperMirror();
+        TypeMirror expectedParentMirror = utils.getElements()
+                .getTypeElement(GatekeeperWithParams.class.getCanonicalName())
+                .asType();
+
+        if (gatekeeperMirror == null
+                || !utils.getTypes().isSubtype(gatekeeperMirror, expectedParentMirror)) {
+            logger.mandatoryWarning()
+                    .context(element)
+                    .log("Proxy annotated with @GatekeeperParams with missing or invalid gatekeeper argument. "
+                            + "A gatekeeper that implements GatekeeperWithParams must be provided to @UseGatekeeper.");
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public Collection<String> getImports() {
+        Collection<String> imports = new ArrayList<>(super.getImports());
+        if (!usesDefaultGatekeeper() && getGatekeeperType() != null) {
+            imports.add(getGatekeeperType().getQualifiedName());
+        }
+
+        return imports;
     }
 }

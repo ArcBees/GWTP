@@ -28,9 +28,9 @@ import java.lang.annotation.Target;
  * the presenter will handle the event even if it was not yet initialized.
  * <p/>
  * Methods annotated by {@code @ProxyEvent} must return {@code void} and accept
- * a single parameter derived from {@link com.google.gwt.event.shared.GwtEvent GwtEvent}.
+ * a single parameter derived from {@link com.google.web.bindery.event.shared.Event Event}.
  * This event class must have a static {@code getType} method returning a type
- * derived from {@link com.google.gwt.event.shared.GwtEvent.Type Type}.
+ * derived from {@link com.google.web.bindery.event.shared.Event.Type Type}.
  */
 @Target(ElementType.METHOD)
 public @interface ProxyEvent {

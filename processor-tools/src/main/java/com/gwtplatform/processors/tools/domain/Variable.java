@@ -14,14 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.details;
+package com.gwtplatform.processors.tools.domain;
 
 import java.util.Collection;
 
 import javax.lang.model.element.VariableElement;
-
-import com.gwtplatform.processors.tools.domain.HasImports;
-import com.gwtplatform.processors.tools.domain.Type;
 
 public class Variable implements HasImports {
     private final VariableElement element;
@@ -36,7 +33,7 @@ public class Variable implements HasImports {
         this.name = processName(element, existingVariableNames);
     }
 
-    public String processName(VariableElement element, Collection<String> existingVariableNames) {
+    private String processName(VariableElement element, Collection<String> existingVariableNames) {
         String simpleName = element.getSimpleName().toString();
         String uniqueName = simpleName;
 
