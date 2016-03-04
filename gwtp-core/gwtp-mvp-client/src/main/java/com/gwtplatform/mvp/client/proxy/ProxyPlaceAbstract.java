@@ -205,34 +205,6 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
                 }
             }
         });
-        addRegisteredHandler(GetPlaceTitleEvent.getType(), new GetPlaceTitleHandler() {
-            @Override
-            public void onGetPlaceTitle(GetPlaceTitleEvent event) {
-                if (event.isHandled()) {
-                    return;
-                }
-                PlaceRequest request = event.getRequest();
-                if (matchesRequest(request)) {
-                    if (canReveal()) {
-                        event.setHandled();
-                        getPlaceTitle(event);
-                    }
-                }
-            }
-        });
-    }
-
-    /**
-     * Obtains the title for this place and invoke the passed handler when the
-     * title is available. By default, places don't have a title and will invoke
-     * the handler with {@code null}, but override this method to provide your own
-     * title.
-     *
-     * @param event The {@link GetPlaceTitleEvent} to invoke once the title is
-     *              available.
-     */
-    protected void getPlaceTitle(GetPlaceTitleEvent event) {
-        event.getHandler().onSetPlaceTitle(null);
     }
 
     /**

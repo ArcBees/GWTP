@@ -177,11 +177,6 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     }
 
     @Override
-    public void getCurrentTitle(SetPlaceTitleHandler handler) {
-        getTitle(placeHierarchy.size() - 1, handler);
-    }
-
-    @Override
     public EventBus getEventBus() {
         return eventBus;
     }
@@ -207,18 +202,6 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
         }
         lock();
         return true;
-    }
-
-    @Override
-    public void getTitle(int index, SetPlaceTitleHandler handler)
-            throws IndexOutOfBoundsException {
-        GetPlaceTitleEvent event = new GetPlaceTitleEvent(
-                placeHierarchy.get(index), handler);
-        fireEvent(event);
-        // If nobody took care of the title, indicate it's null
-        if (!event.isHandled()) {
-            handler.onSetPlaceTitle(null);
-        }
     }
 
     @Override
