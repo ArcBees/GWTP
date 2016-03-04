@@ -177,7 +177,7 @@ public class BundleDetails implements HasImports {
     public Collection<String> getImports() {
         initialize();
 
-        if (isValid()) {
+        if (isValid() && isManualBundle()) {
             return bundleType.getImports();
         }
         return Collections.emptyList();

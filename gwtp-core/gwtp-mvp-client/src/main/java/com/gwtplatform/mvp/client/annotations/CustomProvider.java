@@ -15,28 +15,31 @@
  */
 package com.gwtplatform.mvp.client.annotations;
 
-import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import com.gwtplatform.common.client.IndirectProvider;
 
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.SOURCE;
+
 /**
- * Use this annotation with a {@link com.gwtplatform.mvp.client.proxy.Proxy} to specify a custom
- * {@linkplain com.gwtplatform.common.client.IndirectProvider provider} which is used to load the
- * presenter behind the proxy. Using a custom provider enables you to add steps which should happen
- * <b>before</b> the presenter is loaded, instantiated and processed by GIN.
+ * Use this annotation with a {@link com.gwtplatform.mvp.client.proxy.Proxy Proxy} to specify a custom {@linkplain
+ * com.gwtplatform.common.client.IndirectProvider provider} which is used to load the presenter behind the proxy. Using
+ * a custom provider enables you to add steps which should happen <b>before</b> the presenter is loaded, instantiated
+ * and processed by GIN.
  * <p/>
- * The class implementing {@code IndirectProvider} must provide a constructor which takes the
- * original provider as the single argument. For presenters which use {@code @ProxyStandard}
- * this is {@code com.google.inject.Provider&lt;T&gt;}; for presenters which use {@code @ProxyCodeSplit}
- * or {@code @ProxyCodeSplitBundle} this is {@code com.google.gwt.inject.client.AsyncProvider&lt;T&gt;}
+ * The class implementing {@code IndirectProvider} must provide a constructor which takes the original provider as the
+ * single argument. For presenters which use {@link ProxyStandard @ProxyStandard} this is {@link javax.inject.Provider
+ * Provider&lt;T&gt;}; for presenters which use {@link ProxyCodeSplit @ProxyCodeSplit} or {@link ProxyCodeSplitBundle
+ * @ProxyCodeSplitBundle } this is {@link com.google.gwt.inject.client.AsyncProvider AsyncProvider&lt;T&gt;}
  * <p/>
- * Here is an example use of {@code CustomProvider}:
+ * Here is an example use of {@code @CustomProvider}:
  * <p/>
  * <pre>
  * &#064;ProxyCodeSplit
  * &#064;CustomProvider(SecurityContextProvider.class)
- * public interface MyProxy extends ProxyPlace&lt;MyPresenter&gt; {
+ * interface MyProxy extends ProxyPlace&lt;MyPresenter&gt; {
  * }
  *
  * ...
@@ -57,7 +60,8 @@ import com.gwtplatform.common.client.IndirectProvider;
  * }
  * </pre>
  */
-@Target(ElementType.TYPE)
+@Target(TYPE)
+@Retention(SOURCE)
 public @interface CustomProvider {
-    Class<? extends IndirectProvider> value();
+    Class<? extends IndirectProvider<?>> value();
 }
