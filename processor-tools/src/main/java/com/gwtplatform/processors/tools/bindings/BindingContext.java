@@ -25,6 +25,7 @@ public class BindingContext {
     private final Type moduleType;
     private final Optional<Type> implementation;
     private final Optional<Type> parent;
+    private final Optional<Type> annotation;
     private final Optional<Type> scope;
     private final boolean subModule;
     private final boolean setBinder;
@@ -32,42 +33,44 @@ public class BindingContext {
     private boolean eagerSingleton;
     private boolean outputNow;
 
-    private BindingContext(
+    BindingContext(
             Type moduleType,
             Optional<Type> implementation,
             Optional<Type> parent,
+            Optional<Type> annotation,
             Optional<Type> scope,
             boolean subModule,
             boolean setBinder) {
         this.moduleType = moduleType;
         this.implementation = implementation;
         this.parent = parent;
+        this.annotation = annotation;
         this.scope = scope;
         this.subModule = subModule;
         this.setBinder = setBinder;
     }
 
     public static BindingContext newModule(Type module) {
-        return new BindingContext(module, absentType(), absentType(), absentType(), true, false);
+        return new BindingContext(module, absentType(), absentType(), absentType(), absentType(), true, false);
     }
 
     public static BindingContext flushModule(Type module) {
         BindingContext context = newModule(module);
-        context.setOutputNow(true);
+        context.outputNow = true;
         return context;
     }
 
     public static BindingContext newSubModule(
             Type module,
             Type subModule) {
-        return new BindingContext(module, of(subModule), absentType(), absentType(), true, false);
+        return new BindingContext(module, of(subModule), absentType(), absentType(), absentType(), true, false);
     }
 
     public static BindingContext newSetBinder(
             Type module,
             Type parent,
             Type implementation) {
-        return new BindingContext(module, of(implementation), of(parent), absentType(), false, true);
+        return new BindingContext(module, of(implementation), of(parent), absentType(), absentType(), false, true);
     }
 
     public static BindingContext newSetBinder(
@@ -75,14 +78,29 @@ public class BindingContext {
             Type parent,
             Type implementation,
             Class<?> scope) {
-        return new BindingContext(module, of(implementation), of(parent), of(new Type(scope)), false, true);
+        return new BindingContext(module, of(implementation), of(parent), absentType(), of(new Type(scope)), false,
+                true);
+    }
+
+    public static BindingContext newBinding(
+            Type module,
+            Type implementation) {
+        return new BindingContext(module, of(implementation), absentType(), absentType(), absentType(), false, false);
+    }
+
+    public static BindingContext newBinding(
+            Type module,
+            Type implementation,
+            Class<?> scope) {
+        return new BindingContext(module, of(implementation), absentType(), absentType(), of(new Type(scope)), false,
+                false);
     }
 
     public static BindingContext newBinding(
             Type module,
             Type parent,
             Type implementation) {
-        return new BindingContext(module, of(implementation), of(parent), absentType(), false, false);
+        return new BindingContext(module, of(implementation), of(parent), absentType(), absentType(), false, false);
     }
 
     public static BindingContext newBinding(
@@ -90,7 +108,18 @@ public class BindingContext {
             Type parent,
             Type implementation,
             Class<?> scope) {
-        return new BindingContext(module, of(implementation), of(parent), of(new Type(scope)), false, false);
+        return new BindingContext(module, of(implementation), of(parent), absentType(), of(new Type(scope)), false,
+                false);
+    }
+
+    public static BindingContext newAnnotatedBinding(
+            Type module,
+            Type parent,
+            Type implementation,
+            Class<?> annotation,
+            Class<?> scope) {
+        return new BindingContext(module, of(implementation), of(parent), of(new Type(annotation)), of(new Type(scope)),
+                false, false);
     }
 
     public static BindingContext newEagerSingletonBinding(
@@ -136,14 +165,5 @@ public class BindingContext {
 
     public boolean isOutputNow() {
         return outputNow;
-    }
-
-    /**
-     * Ensure the configured module is written, along with every configured bindings. The module's canonical name will
-     * become unusable by future generated modules in this compilation. Be careful not to flag modules when unnecessary
-     * as this could lead to infinite processing between metadata files and bindings processors.
-     */
-    public void setOutputNow(boolean outputNow) {
-        this.outputNow = outputNow;
     }
 }

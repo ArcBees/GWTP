@@ -25,6 +25,7 @@ import com.gwtplatform.dispatch.rest.processors.resolvers.DateFormatResolver;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpAnnotationResolver;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.Type;
+import com.gwtplatform.processors.tools.domain.Variable;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 

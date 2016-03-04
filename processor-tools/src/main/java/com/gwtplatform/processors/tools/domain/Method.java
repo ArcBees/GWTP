@@ -14,9 +14,10 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.processors.details;
+package com.gwtplatform.processors.tools.domain;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.lang.model.element.ExecutableElement;
@@ -24,8 +25,6 @@ import javax.lang.model.element.VariableElement;
 
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
-import com.gwtplatform.processors.tools.domain.HasImports;
-import com.gwtplatform.processors.tools.domain.Type;
 
 public class Method implements HasImports {
     private static class ElementToVariableFunction implements Function<VariableElement, Variable> {
@@ -45,6 +44,10 @@ public class Method implements HasImports {
     private final String name;
     private final List<Variable> parameters;
     private final ExecutableElement element;
+
+    public Method(ExecutableElement element) {
+        this(element, Collections.<String>emptyList());
+    }
 
     public Method(
             ExecutableElement element,

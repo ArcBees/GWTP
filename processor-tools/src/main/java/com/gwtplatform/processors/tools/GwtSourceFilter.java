@@ -41,13 +41,13 @@ import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 public class GwtSourceFilter {
+    public static final String GWTP_MODULE_OPTION = "gwtp.module";
+
     private static final String MODULE_EXTENSION = ".gwt.xml";
     private static final String SOURCE_TAG = "source";
     private static final String PATH_ATTRIBUTE = "path";
     private static final String INHERITS_TAG = "inherits";
     private static final String NAME_ATTRIBUTE = "name";
-
-    public static final String GWTP_MODULE_OPTION = "gwtp.module";
 
     private final Logger logger;
     private final Utils utils;
@@ -66,6 +66,10 @@ public class GwtSourceFilter {
         this.moduleNames = moduleNames;
         this.parsedModules = new HashSet<>();
         this.sourcePackages = new LinkedHashSet<>();
+    }
+
+    public String getApplicationPackage() {
+        return getSourcePackages().iterator().next();
     }
 
     public Set<String> getSourcePackages() {

@@ -1,0 +1,88 @@
+#macro(printProxyImports $proxy)
+#set($bundle=$proxy.bundleDetails)
+import javax.inject.Inject;
+#if($bundle && !$bundle.isManualBundle())
+#if(!$proxy.customProvider)
+import com.gwtplatform.common.client.CodeSplitNamedBundleProvider;
+#end
+import com.gwtplatform.common.client.NamedProviderBundleCollection;
+#elseif($bundle)
+import com.google.gwt.inject.client.AsyncProvider;
+#if(!$proxy.customProvider)
+import com.gwtplatform.common.client.CodeSplitBundleProvider;
+#end
+#elseif($proxy.codeSplit)
+import com.google.gwt.inject.client.AsyncProvider;
+#if(!$proxy.customProvider)
+import com.gwtplatform.common.client.CodeSplitProvider;
+#end
+#else
+import javax.inject.Provider;
+#if(!$proxy.customProvider)
+import com.gwtplatform.common.client.StandardProvider;
+#end
+#end
+#if(!$proxy.proxyEventMethods.isEmpty())
+import com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback;
+#end
+#if(!$proxy.contentSlots.isEmpty())
+import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+#end
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.proxy.PlaceManager;
+#end
+
+#macro(printProxyBody $typeName $proxy $bindProxyEvents)
+#set($bundle=$proxy.bundleDetails)
+#set($presenterType=$proxy.presenterType)
+        @Inject
+        ${typeName}(
+                EventBus eventBus,
+                PlaceManager placeManager,
+#if($bundle && !$bundle.isManualBundle())
+                NamedProviderBundleCollection providerBundleCollection#elseif($bundle)
+                AsyncProvider<$bundle.bundleType.simpleName> presenterProvider#elseif($proxy.codeSplit)
+                AsyncProvider<$presenterType.simpleName> presenterProvider#else
+                Provider<$presenterType.simpleName> presenterProvider#end) {
+            bind(placeManager, eventBus);
+
+#if($bundle && !$bundle.isManualBundle())
+            presenter = new #if($proxy.customProvider)${proxy.customProvider.parameterizedName}(
+                    providerBundleCollection.getBundle("$bundle.bundleName"))#{else}CodeSplitNamedBundleProvider<>(
+                    providerBundleCollection.getBundle("$bundle.bundleName"),
+                    "$presenterType.qualifiedParameterizedName")#end;
+#elseif($bundle)
+            presenter = new #if($proxy.customProvider)${proxy.customProvider.parameterizedName}(presenterProvider)#{else}CodeSplitBundleProvider<>(presenterProvider, $bundle.id)#end;
+#elseif($proxy.codeSplit)
+            presenter = new #if($proxy.customProvider)${proxy.customProvider.parameterizedName}#{else}CodeSplitProvider<>#end(presenterProvider);
+#else
+            presenter = new #if($proxy.customProvider)${proxy.customProvider.parameterizedName}#{else}StandardProvider<>#end(presenterProvider);
+#end
+#if(!$proxy.contentSlots.isEmpty())
+            RevealContentHandler<$presenterType.simpleName> revealContentHandler
+                    = new RevealContentHandler<$presenterType.simpleName>(eventBus, this);
+#foreach($slotName in $proxy.contentSlots)
+            eventBus.addHandler(${presenterType.simpleName}.$slotName, revealContentHandler);
+#end#end
+#if($bindProxyEvents)#registerProxyEvents($proxy)#end
+        }
+#end
+
+#macro(implementProxyEventHandlers $proxy)#foreach($proxyEvent in $proxy.proxyEventMethods),
+                $proxyEvent.handlerType.parameterizedName#end#end
+
+#macro(registerProxyEvents $proxy)#foreach($proxyEvent in $proxy.proxyEventMethods)
+        eventBus.addHandler(${proxyEvent.eventType.simpleName}.$proxyEvent.typeAccessor, this);
+#end#end
+
+#macro(overrideProxyEventHandlers $proxy)#foreach($proxyEvent in $proxy.proxyEventMethods)
+    @Override
+    public void ${proxyEvent.handlerMethodName}(final $proxyEvent.eventType.parameterizedName event) {
+        getPresenter(new NotifyingAsyncCallback<$proxy.presenterType.simpleName>(getEventBus()){
+            @Override
+            public void success($proxy.presenterType.simpleName presenter) {
+                presenter.${proxyEvent.annotatedMethodName}(event);
+            }
+        });
+    }
+#end#end

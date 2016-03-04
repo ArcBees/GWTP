@@ -16,10 +16,12 @@
 
 package com.gwtplatform.mvp.processors.proxy;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.lang.model.element.Element;
 
+import com.gwtplatform.mvp.processors.bundle.BundleDetails;
 import com.gwtplatform.processors.tools.domain.HasImports;
 import com.gwtplatform.processors.tools.domain.HasType;
 import com.gwtplatform.processors.tools.domain.Type;
@@ -36,4 +38,10 @@ public interface ProxyDetails extends HasType, HasImports {
     Set<String> getContentSlots();
 
     boolean isCodeSplit();
+
+    BundleDetails getBundleDetails();
+
+    List<ProxyEventMethod> getProxyEventMethods();
+
+    Type getCustomProvider();
 }
