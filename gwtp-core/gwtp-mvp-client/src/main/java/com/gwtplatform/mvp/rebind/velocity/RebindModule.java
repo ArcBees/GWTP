@@ -30,7 +30,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.gwtplatform.common.rebind.Logger;
-import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorFactory;
 import com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator;
 
 public class RebindModule extends AbstractModule {
@@ -48,12 +47,8 @@ public class RebindModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bindConstant().annotatedWith(VelocityProperties.class).to(VELOCITY_PROPERTIES);
-
         bind(GeneratorUtil.class).in(Singleton.class);
-        bind(GenerateFormFactorGinjectors.class).in(Singleton.class);
 
-        install(new FactoryModuleBuilder().build(FormFactorGinjectorFactory.class));
         install(new FactoryModuleBuilder().build(VelocityPlacetokenGenerator.Factory.class));
     }
 
@@ -74,12 +69,12 @@ public class RebindModule extends AbstractModule {
 
     @Provides
     @Singleton
-    public VelocityEngine getVelocityEngine(@VelocityProperties String velocityProperties, Logger logger)
+    public VelocityEngine getVelocityEngine(Logger logger)
             throws UnableToCompleteException {
         try {
             InputStream inputStream = null;
             try {
-                inputStream = this.getClass().getClassLoader().getResourceAsStream(velocityProperties);
+                inputStream = this.getClass().getClassLoader().getResourceAsStream(VELOCITY_PROPERTIES);
                 Properties properties = new Properties();
                 properties.load(inputStream);
                 return new VelocityEngine(properties);
@@ -89,7 +84,7 @@ public class RebindModule extends AbstractModule {
                 }
             }
         } catch (Exception e) {
-            logger.die("Cannot load velocity properties from " + velocityProperties);
+            logger.die("Cannot load velocity properties from " + VELOCITY_PROPERTIES);
             return null;
         }
     }

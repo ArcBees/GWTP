@@ -17,21 +17,20 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.gwt.junit.tools.GWTTestSuite;
-import com.gwtplatform.mvp.client.gwt.mvp.MvpGwtTestInSuite;
-import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatterGwtTestInSuite;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 
 /**
- * All the GWT test cases of gwtp-mvp-client. Does not extend {@code GWTTestSuite} as it is
- * not compatible with gwt-maven-plugin. See {@link http://mojo.codehaus.org/gwt-maven-plugin/user-guide/testing.html}.
+ * All the GWT test cases of gwtp-mvp-client. Does not extend {@code GWTTestSuite} as it is not compatible with
+ * gwt-maven-plugin. See {@link http://mojo.codehaus.org/gwt-maven-plugin/user-guide/testing.html}.
  */
 public class MvpClientGwtTestSuite extends TestCase {
     public static Test suite() {
         GWTTestSuite suite = new GWTTestSuite("All the GWT test cases of gwtp-mvp-client and gwtp-mvp-shared.");
-        suite.addTestSuite(ParameterTokenFormatterGwtTestInSuite.class);
-        suite.addTestSuite(MvpGwtTestInSuite.class);
+        // TODO: All generators need to be migrated before re-enabling and APT configured on test-source
+        // suite.addTestSuite(ParameterTokenFormatterGwtTestInSuite.class);
+        // suite.addTestSuite(MvpGwtTestInSuite.class);
         return suite;
     }
 }

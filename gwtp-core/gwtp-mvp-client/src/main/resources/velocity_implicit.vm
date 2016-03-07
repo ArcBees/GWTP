@@ -16,3 +16,5 @@
 
 #* @vtlvariable name="providerTypes" type="java.util.List<com.gwtplatform.processors.tools.domain.Type>" file="com/gwtplatform/mvp/processors/bundle/ProviderBundle.vm" *#
 #* @vtlvariable name="name" type="java.lang.String" file="com/gwtplatform/mvp/processors/bundle/ProviderBundle.vm" *#
+
+#* @vtlvariable name="entryPoint" type="com.gwtplatform.mvp.processors.entrypoint.EntryPoint" file="com/gwtplatform/mvp/processors/entrypoint/EntryPoint.vm" *#

@@ -21,9 +21,8 @@ import javax.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
 /**
- * The default Bootstrapper that is used by GWTP if no other is specified via
- * {@link com.gwtplatform.mvp.client.annotations.Bootstrap}.
- * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping
+ * The default Bootstrapper that is used if none is specified in {@link
+ * com.gwtplatform.mvp.client.annotations.UseBootstrapper @UseBootstrapper}.
  */
 public class DefaultBootstrapper implements Bootstrapper {
     private final PlaceManager placeManager;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,17 +14,25 @@
  * the License.
  */
 
-package com.gwtplatform.mvp.rebind.velocity;
+package com.gwtplatform.mvp.client.annotations;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.google.inject.BindingAnnotation;
+import com.gwtplatform.mvp.client.Bootstrapper;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.PARAMETER})
-@BindingAnnotation
-public @interface VelocityProperties {
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.SOURCE;
+
+/**
+ * Configures the {@link Bootstrapper} to use in your generated entry-point.
+ * <p>
+ * This annotation must be put on a class that is also annotated with
+ * {@link com.gwtplatform.common.client.annotations.GwtpApp @GwtpApp}. Only one such class is authorized in an
+ * application.
+ */
+@Target(TYPE)
+@Retention(SOURCE)
+public @interface UseBootstrapper {
+    Class<? extends Bootstrapper> value();
 }

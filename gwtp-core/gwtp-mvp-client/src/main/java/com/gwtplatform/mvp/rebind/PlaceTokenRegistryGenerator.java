@@ -59,7 +59,7 @@ public class PlaceTokenRegistryGenerator extends Generator {
     /**
      * Finds all place tokens.
      */
-    private static Map<String, JClassType> findPlaceTokens(final GeneratorContext generatorContext) {
+    private Map<String, JClassType> findPlaceTokens(final GeneratorContext generatorContext) {
         Map<String, JClassType> placeTokens = new HashMap<String, JClassType>();
 
         for (JClassType type : generatorContext.getTypeOracle().getTypes()) {
@@ -77,7 +77,7 @@ public class PlaceTokenRegistryGenerator extends Generator {
     /**
      * Checks if the given place tokens are valid.
      */
-    private static void checkPlaces(final Map<String, JClassType> placeTokens) {
+    private void checkPlaces(final Map<String, JClassType> placeTokens) {
         for (Map.Entry<String, JClassType> entry : placeTokens.entrySet()) {
             if (!entry.getKey().startsWith("/") && !entry.getKey().startsWith("!/")) {
                 throw new InvocationException("The token '" + entry.getKey() + "' of '"

@@ -17,11 +17,16 @@
 package com.gwtplatform.mvp.client;
 
 /**
- * When a class implementing the PreBootstrapper interface and annotated with
- * {@link com.gwtplatform.mvp.client.annotations.PreBootstrap} is found, the ApplicationController
- * will call onPreBootstrap() before GWTP is initialized.
- * Because of this fact, <em>no injection can be provided</em> for this class.
- * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping
+ * Defines a class that will be executed before injection happens. Your pre-bootstrapper must contain a public, empty
+ * constructor.
+ * <p>
+ * A pre-bootstrapper can be, for example, useful to configure
+ * {@link com.google.gwt.core.client.GWT#setUncaughtExceptionHandler GWT#setUncaughtExceptionHandler}.
+ * <p>
+ * Your pre-bootstrapper must be configured by annotating a
+ * {@link com.gwtplatform.common.client.annotations.GwtpApp @GwtpApp}-annotated class with
+ * {@link com.gwtplatform.mvp.client.annotations.UsePreBootstrapper @UsePreBootstrapper}. Only
+ * one such class is authorized in an application.
  */
 public interface PreBootstrapper {
     void onPreBootstrap();

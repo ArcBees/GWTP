@@ -2,57 +2,27 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.7.0//EN"
         "http://gwtproject.org/doctype/2.7.0/gwt-module.dtd">
 <module>
-    <!-- Inherit the core Web Toolkit stuff.                        -->
-    <inherits name="com.google.gwt.inject.Inject"/>
-
     <!-- Inherit shared modules -->
     <inherits name='com.gwtplatform.common.ClientsCommon'/>
     <inherits name='com.gwtplatform.mvp.MvpShared'/>
     <inherits name='com.google.gwt.place.Place'/>
 
-    <generate-with class="com.gwtplatform.mvp.rebind.ApplicationControllerGenerator">
-        <when-type-is class="com.gwtplatform.mvp.client.ApplicationController"/>
-    </generate-with>
-
     <!-- Specify the paths for translatable code                    -->
     <source path='client' excludes="**/*Test.java,**/*TestSuite.java,**/*TestUtil.java"/>
 
-    <!-- gin.ginjector is set to a default value, no other value must be set for Ginjector generation -->
-    <!-- if another value is set, it must point to a valid manual Ginjector class -->
-    <define-configuration-property name="gin.ginjector" is-multi-valued="false"/>
-    <set-configuration-property name="gin.ginjector" value="com.gwtplatform.mvp.client.ClientGinjector"/>
-
-    <!-- optional comma separated list of extension interface to the ginjector -->
-    <define-configuration-property name="gin.ginjector.extensions" is-multi-valued="true"/>
-    <set-configuration-property name="gin.ginjector.extensions" value=""/>
-
-    <!--
-      optional comma separated list of annotation classes which can be added to widget presenter for
-      declaration in ginjector
-    -->
-    <define-configuration-property name="gin.ginjector.annotation" is-multi-valued="true"/>
-    <set-configuration-property name="gin.ginjector.annotation" value=""/>
-
-    <!-- kicks off the gwtp application flow -->
-    <define-configuration-property name="gwtp.bootstrapper" is-multi-valued="false"/>
-    <set-configuration-property name="gwtp.bootstrapper" value="com.gwtplatform.mvp.client.DefaultBootstrapper"/>
-
-    <!-- hooks into the GWTP bootstrapping process right before it starts -->
-    <define-configuration-property name="gwtp.prebootstrapper" is-multi-valued="true"/>
-
     <!-- Form factor specific modules -->
     <define-configuration-property name="gin.ginjector.module.desktop" is-multi-valued="false"/>
-    <set-configuration-property name="gin.ginjector.module.desktop" value=""/>
+    <set-configuration-property name="gin.ginjector.module.desktop" value="com.gwtplatform.mvp.client.gin.EmptyModule"/>
 
     <define-configuration-property name="gin.ginjector.module.mobile" is-multi-valued="false"/>
-    <set-configuration-property name="gin.ginjector.module.mobile" value=""/>
+    <set-configuration-property name="gin.ginjector.module.mobile" value="com.gwtplatform.mvp.client.gin.EmptyModule"/>
 
     <define-configuration-property name="gin.ginjector.module.tablet" is-multi-valued="false"/>
-    <set-configuration-property name="gin.ginjector.module.tablet" value=""/>
+    <set-configuration-property name="gin.ginjector.module.tablet" value="com.gwtplatform.mvp.client.gin.EmptyModule"/>
 
     <!-- Default form factor Desktop -->
-    <replace-with class="com.gwtplatform.mvp.client.DesktopGinjectorProvider">
-        <when-type-is class="com.gwtplatform.mvp.client.GinjectorProvider"/>
+    <replace-with class="com.gwtplatform.mvp.client.gin.DesktopMvpGinjector.Factory">
+        <when-type-is class="com.gwtplatform.mvp.client.gin.MvpGinjector.Factory"/>
     </replace-with>
 
     <!-- Generate the place token index -->

@@ -1,0 +1,33 @@
+package $impl.packageName;
+
+import javax.annotation.Generated;
+
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.Scheduler;
+
+import com.gwtplatform.mvp.client.Bootstrapper;
+import com.gwtplatform.mvp.client.gin.MvpGinjector;
+#printImports($imports)
+
+@Generated(value = "$processor", date = "$processingDate")
+public class $impl.simpleName implements EntryPoint {
+    @Override
+    public void onModuleLoad() {
+#if($entryPoint.preBootstrapper)
+        new ${entryPoint.preBootstrapper.simpleName}().onPreBootstrap();
+        Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+            @Override
+            public void execute() {
+                bootstrap();
+            }
+        });
+#else
+        bootstrap();
+#end
+    }
+
+    private void bootstrap() {
+        Bootstrapper bootstrapper = MvpGinjector.INSTANCE.getBootstrapper();
+        bootstrapper.onBootstrap();
+    }
+}

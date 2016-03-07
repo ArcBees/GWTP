@@ -21,7 +21,6 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.junit.client.GWTTestCase;
-import com.gwtplatform.mvp.client.DelayedBindRegistry;
 import com.gwtplatform.mvp.client.PopupViewCloseHandler;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
@@ -44,7 +43,6 @@ public class MvpGwtTestInSuite extends GWTTestCase {
 
         InstantiationCounterTestUtilGwt.resetCounter();
         ginjector = GWT.create(GinjectorTestUtilGwt.class);
-        DelayedBindRegistry.bind(ginjector);
         presenter = ginjector.getMainPresenter().get();
     }
 

@@ -12,14 +12,14 @@
     <!-- Form Factor Ginjectors -->
 
     <!-- Tablet -->
-    <replace-with class="com.gwtplatform.mvp.client.TabletGinjectorProvider">
-        <when-type-is class="com.gwtplatform.mvp.client.GinjectorProvider"/>
+    <replace-with class="com.gwtplatform.mvp.client.gin.TabletMvpGinjector.Factory">
+        <when-type-is class="com.gwtplatform.mvp.client.gin.MvpGinjector.Factory"/>
         <when-property-is name="gwtp.formfactor" value="tablet"/>
     </replace-with>
 
     <!-- Mobile -->
-    <replace-with class="com.gwtplatform.mvp.client.MobileGinjectorProvider">
-        <when-type-is class="com.gwtplatform.mvp.client.GinjectorProvider"/>
+    <replace-with class="com.gwtplatform.mvp.client.gin.MobileMvpGinjector.Factory">
+        <when-type-is class="com.gwtplatform.mvp.client.gin.MvpGinjector.Factory"/>
         <when-property-is name="gwtp.formfactor" value="mobile"/>
     </replace-with>
 </module>
