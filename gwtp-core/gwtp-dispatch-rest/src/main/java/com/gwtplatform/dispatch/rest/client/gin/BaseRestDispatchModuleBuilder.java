@@ -110,17 +110,6 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
     /**
      * Specify the XSRF token header name.
      *
-     * @deprecated Since 1.4. Use {@link #xsrfTokenHeaderName(String)}
-     */
-    @Deprecated
-    public B xcsrfTokenHeaderName(String xsrfTokenHeaderName) {
-        this.xsrfTokenHeaderName = xsrfTokenHeaderName;
-        return self();
-    }
-
-    /**
-     * Specify the XSRF token header name.
-     *
      * @param xsrfTokenHeaderName The XSRF token header name.
      *
      * @return this {@link com.gwtplatform.dispatch.rest.client.gin.BaseRestDispatchModuleBuilder builder} object.

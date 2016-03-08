@@ -16,9 +16,9 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.event.shared.GwtEvent;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
@@ -132,11 +132,9 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 @Singleton
 public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends PresenterWidget<V> {
     /**
-     * The RevealType define which event will be fired in the default {@link #revealInParent()}.
-     * <p/>
-     * Root will fire a {@link RevealRootContentEvent}.
-     * RootLayout will fire a {@link RevealRootLayoutContentEvent}.
-     * RootPopup will fire a {@link RevealRootPopupContentEvent}.
+     * The RevealType define which event will be fired in the default {@link #revealInParent()}. <ul> <li>Root will fire
+     * a {@link RevealRootContentEvent}. <li>RootLayout will fire a {@link RevealRootLayoutContentEvent}. <li>RootPopup
+     * will fire a {@link RevealRootPopupContentEvent}.</ul>
      */
     public enum RevealType {
         Root,
@@ -149,85 +147,97 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
      */
     private final Proxy_ proxy;
     private RevealType revealType;
-    private GwtEvent.Type<RevealContentHandler<?>> slot;
+    private NestedSlot slot;
 
     /**
-     * Creates a {@link Presenter} that is not necessarily using automatic
-     * binding. Automatic binding will only work when instantiating this object using
-     * Guice/GIN dependency injection. See
-     * {@link HandlerContainerImpl#HandlerContainerImpl(boolean)} for
-     * more details on automatic binding.
+     * Creates a {@link Presenter} that is not necessarily using automatic binding. Automatic binding will only work
+     * when instantiating this object using Guice/GIN dependency injection. See {@link
+     * HandlerContainerImpl#HandlerContainerImpl(boolean)} for more details on automatic binding.
      *
      * @param autoBind {@code true} to request automatic binding, {@code false} otherwise.
      * @param eventBus The {@link EventBus}.
-     * @param view     The {@link View}.
-     * @param proxy    The {@link Proxy}.
+     * @param view The {@link View}.
+     * @param proxy The {@link Proxy}.
      */
-    public Presenter(boolean autoBind, EventBus eventBus, V view, Proxy_ proxy) {
-        super(eventBus, view);
+    protected Presenter(
+            boolean autoBind,
+            EventBus eventBus,
+            V view,
+            Proxy_ proxy) {
+        super(autoBind, eventBus, view);
+
         this.proxy = proxy;
     }
 
     /**
-     * Creates a {@link Presenter} that uses automatic binding. This will
-     * only work when instantiating this object using Guice/GIN dependency injection.
-     * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
+     * Creates a {@link Presenter} that uses automatic binding. This will only work when instantiating this object using
+     * Guice/GIN dependency injection. See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
      * automatic binding.
      *
      * @param eventBus The {@link EventBus}.
-     * @param view     The {@link View}.
-     * @param proxy    The {@link Proxy}.
+     * @param view The {@link View}.
+     * @param proxy The {@link Proxy}.
      */
-    public Presenter(EventBus eventBus, V view, Proxy_ proxy) {
+    protected Presenter(
+            EventBus eventBus,
+            V view,
+            Proxy_ proxy) {
         this(eventBus, view, proxy, null, null);
     }
 
     /**
-     * Creates a {@link Presenter} that uses automatic binding. This will
-     * only work when instantiating this object using Guice/GIN dependency injection.
-     * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
+     * Creates a {@link Presenter} that uses automatic binding. This will only work when instantiating this object using
+     * Guice/GIN dependency injection. See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
      * automatic binding.
      *
-     * @param eventBus   The {@link EventBus}.
-     * @param view       The {@link View}.
-     * @param proxy      The {@link Proxy}.
+     * @param eventBus The {@link EventBus}.
+     * @param view The {@link View}.
+     * @param proxy The {@link Proxy}.
      * @param revealType The {@link RevealType}.
      */
-    public Presenter(EventBus eventBus, V view, Proxy_ proxy, RevealType revealType) {
+    protected Presenter(
+            EventBus eventBus,
+            V view,
+            Proxy_ proxy,
+            RevealType revealType) {
         this(eventBus, view, proxy, revealType, null);
     }
 
     /**
-     * Creates a {@link Presenter} that uses automatic binding. This will
-     * only work when instantiating this object using Guice/GIN dependency injection.
-     * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
+     * Creates a {@link Presenter} that uses automatic binding. This will only work when instantiating this object using
+     * Guice/GIN dependency injection. See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
      * automatic binding.
      *
      * @param eventBus The {@link EventBus}.
-     * @param view     The {@link View}.
-     * @param proxy    The {@link Proxy}.
-     * @param slot     The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and
-     *                 {@see RevealContentHandler}.
+     * @param view The {@link View}.
+     * @param proxy The {@link Proxy}.
+     * @param slot The slot where to reveal this presenter. See {@link NestedSlot} and {@link RevealContentHandler}.
      */
-    public Presenter(EventBus eventBus, V view, Proxy_ proxy, GwtEvent.Type<RevealContentHandler<?>> slot) {
+    protected Presenter(
+            EventBus eventBus,
+            V view,
+            Proxy_ proxy,
+            NestedSlot slot) {
         this(eventBus, view, proxy, null, slot);
     }
 
     /**
-     * Creates a {@link Presenter} that uses automatic binding. This will
-     * only work when instantiating this object using Guice/GIN dependency injection.
-     * See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
+     * Creates a {@link Presenter} that uses automatic binding. This will only work when instantiating this object using
+     * Guice/GIN dependency injection. See {@link HandlerContainerImpl#HandlerContainerImpl()} for more details on
      * automatic binding.
      *
-     * @param eventBus   The {@link EventBus}.
-     * @param view       The {@link View}.
-     * @param proxy      The {@link Proxy}.
+     * @param eventBus The {@link EventBus}.
+     * @param view The {@link View}.
+     * @param proxy The {@link Proxy}.
      * @param revealType The {@link RevealType}.
-     * @param slot       The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type}
-     *                   and {@see RevealContentHandler}.
+     * @param slot The slot where to reveal this presenter. See {@link NestedSlot} and {@link RevealContentHandler}.
      */
-    public Presenter(EventBus eventBus, V view, Proxy_ proxy, RevealType revealType,
-            GwtEvent.Type<RevealContentHandler<?>> slot) {
+    protected Presenter(
+            EventBus eventBus,
+            V view,
+            Proxy_ proxy,
+            RevealType revealType,
+            NestedSlot slot) {
         super(eventBus, view);
         this.proxy = proxy;
         this.revealType = revealType;
@@ -319,7 +329,7 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
      * {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager} navigates
      * to this {@link Presenter}. You should override the method to extract any
      * parameters you need from the request. Make sure you call your parent's
-     * {@link #prepareFromRequest} method.
+     * {@code #prepareFromRequest} method.
      * <p/>
      * If your presenter needs to fetch some information from the server while
      * preparing itself, consider using manual reveal. See {@link #useManualReveal()}.
@@ -354,31 +364,27 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
     /**
      * Returns the slot where this presenter is to be revealed.
      *
-     * @return The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and {@see
-     *         RevealContentHandler}.
+     * @return The slot where to reveal this presenter see {@link NestedSlot} and {@link RevealContentHandler}.
      */
-    protected GwtEvent.Type<RevealContentHandler<?>> getSlot() {
+    protected NestedSlot getSlot() {
         return slot;
     }
 
     /**
-     * Set the slot where this presenter is to be revealed.
-     * The slot is ignored in {@link #revealInParent()} if the parent type is not null.
+     * Set the slot where this presenter is to be revealed. The slot is ignored in {@link #revealInParent()} if the
+     * parent type is not null.
      *
-     * @param slot The slot where to reveal this presenter see {@see com.google.gwt.event.shared.GwtEvent.Type} and
-     *             {@see RevealContentHandler}.
+     * @param slot The slot where to reveal this presenter. See {@link NestedSlot} and {@link RevealContentHandler}.
      */
-    protected void setSlot(GwtEvent.Type<RevealContentHandler<?>> slot) {
+    protected void setSlot(NestedSlot slot) {
         this.slot = slot;
     }
 
     /**
-     * Requests that the presenter reveal itself in its parent presenter.
-     * You can override this method to either fire a
-     * {@link com.gwtplatform.mvp.client.proxy.RevealContentEvent RevealContentEvent},
-     * a {@link com.gwtplatform.mvp.client.proxy.RevealRootContentEvent RevealRootContentEvent}
-     * or a {@link com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent RevealRootLayoutContentEvent}.
+     * Requests that the presenter reveal itself in its parent presenter. You can override this method to either fire a
+     * {@link RevealContentEvent}, a {@link RevealRootContentEvent} or a {@link RevealRootLayoutContentEvent}.
      */
+    @SuppressWarnings("unchecked")
     protected void revealInParent() {
         if (revealType != null) {
             switch (revealType) {

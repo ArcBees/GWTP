@@ -19,7 +19,6 @@ package com.gwtplatform.mvp.client.proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.GwtEvent;
@@ -53,17 +52,12 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     private HandlerRegistration windowClosingHandlerRegistration;
     private boolean locked;
 
-    private List<PlaceRequest> placeHierarchy = new ArrayList<PlaceRequest>();
+    private List<PlaceRequest> placeHierarchy = new ArrayList<>();
 
-    /**
-     * @deprecated Since 1.4.
-     */
-    @Deprecated
-    public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter) {
-        this(eventBus, tokenFormatter, (Historian) GWT.create(Historian.class));
-    }
-
-    public PlaceManagerImpl(EventBus eventBus, TokenFormatter tokenFormatter, Historian historian) {
+    public PlaceManagerImpl(
+            EventBus eventBus,
+            TokenFormatter tokenFormatter,
+            Historian historian) {
         this.eventBus = eventBus;
         this.tokenFormatter = tokenFormatter;
         this.historian = historian;
@@ -97,9 +91,8 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     }
 
     /**
-     * If a confirmation question is set (see
-     * {@link #setOnLeaveConfirmation(String)}), this asks the user if he wants to
-     * leave the current page.
+     * If a confirmation question is set (see {@link #setOnLeaveConfirmation(String)}), this asks the user if he wants
+     * to leave the current page.
      *
      * @return true if the user accepts to leave. false if he refuses.
      */
@@ -119,13 +112,11 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     }
 
     /**
-     * Fires the {@link PlaceRequestInternalEvent} for the given
-     * {@link PlaceRequest}. Do not call this method directly,
+     * Fires the {@link PlaceRequestInternalEvent} for the given {@link PlaceRequest}. Do not call this method directly,
      * instead call {@link #revealPlace(PlaceRequest)} or a related method.
      *
-     * @param request          The {@link PlaceRequest} to fire.
-     * @param updateBrowserUrl {@code true} If the browser URL should be updated, {@code false}
-     *                         otherwise.
+     * @param request The {@link PlaceRequest} to fire.
+     * @param updateBrowserUrl {@code true} If the browser URL should be updated, {@code false} otherwise.
      */
     protected void doRevealPlace(PlaceRequest request, boolean updateBrowserUrl) {
         PlaceRequestInternalEvent requestEvent = new PlaceRequestInternalEvent(request,
@@ -141,9 +132,8 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     }
 
     /**
-     * Called whenever an error occurred that requires the error page to be shown
-     * to the user. This method will detect infinite reveal loops and throw an
-     * {@link RuntimeException} in that case.
+     * Called whenever an error occurred that requires the error page to be shown to the user. This method will detect
+     * infinite reveal loops and throw an {@link RuntimeException} in that case.
      *
      * @param invalidHistoryToken The history token that was not recognised.
      */
@@ -187,9 +177,8 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     }
 
     /**
-     * Checks that the place manager is not locked and that the user allows the
-     * application to navigate (see {@link #confirmLeaveState()}. If the
-     * application is allowed to navigate, this method locks navigation.
+     * Checks that the place manager is not locked and that the user allows the application to navigate (see {@link
+     * #confirmLeaveState()}. If the application is allowed to navigate, this method locks navigation.
      *
      * @return true if the place manager can get the lock false otherwise.
      */
@@ -210,10 +199,9 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     }
 
     /**
-     * Called whenever the user tries to access an page to which he doesn't have
-     * access, and we need to reveal the user-defined unauthorized place. This
-     * method will detect infinite reveal loops and throw an
-     * {@link RuntimeException} in that case.
+     * Called whenever the user tries to access an page to which he doesn't have access, and we need to reveal the
+     * user-defined unauthorized place. This method will detect infinite reveal loops and throw an {@link
+     * RuntimeException} in that case.
      *
      * @param historyToken The history token that was not recognised.
      */
@@ -257,7 +245,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
             return;
         }
         try {
-            if (historyToken.trim().equals("")) {
+            if (historyToken.trim().isEmpty()) {
                 unlock();
                 revealDefaultPlace();
             } else {
@@ -416,8 +404,8 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     }
 
     /**
-     * This method saves the history token, making it possible to correctly restore the browser's
-     * URL if the user refuses to navigate. (See {@link #onWindowClosing(ClosingEvent)})
+     * This method saves the history token, making it possible to correctly restore the browser's URL if the user
+     * refuses to navigate. (See {@link #onWindowClosing(ClosingEvent)})
      *
      * @param historyToken The current history token, a string.
      */
@@ -437,32 +425,29 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
         if (question != null && onLeaveQuestion == null) {
             windowClosingHandlerRegistration = Window.addWindowClosingHandler(this);
         }
-        if (question == null && onLeaveQuestion != null) {
+        if (question == null) {
             windowClosingHandlerRegistration.removeHandler();
         }
         onLeaveQuestion = question;
     }
 
     /**
-     * Start revealing an error or unauthorized page. This method will throw an
-     * exception if an infinite loop is detected.
+     * Start revealing an error or unauthorized page. This method will throw an exception if an infinite loop is
+     * detected.
      *
      * @see #stopError()
      */
     private void startError() {
         if (this.internalError) {
-            throw new RuntimeException(
-                    "Encountered repeated errors resulting in an infinite loop. Make sure all users have access "
-                            + "to the pages revealed by revealErrorPlace and revealUnauthorizedPlace. (Note that the " +
-                            "default "
-                            + "implementations call revealDefaultPlace)");
+            throw new RuntimeException("Encountered repeated errors resulting in an infinite loop. Make sure all users "
+                    + "have access to the pages revealed by revealErrorPlace and revealUnauthorizedPlace. (Note that "
+                    + "the default implementations call revealDefaultPlace)");
         }
         internalError = true;
     }
 
     /**
-     * Indicates that an error page has successfully been revealed. Makes it
-     * possible to detect infinite loops.
+     * Indicates that an error page has successfully been revealed. Makes it possible to detect infinite loops.
      *
      * @see #startError()
      */
@@ -505,30 +490,26 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     }
 
     /**
-     * Returns a modified copy of the place hierarchy based on the specified
-     * {@code level}.
+     * Returns a modified copy of the place hierarchy based on the specified {@code level}.
      *
-     * @param level If negative, take back that many elements from the tail of the
-     *              hierarchy. If positive, keep only that many elements from the head
-     *              of the hierarchy. Passing {@code 0} leaves the hierarchy
-     *              untouched.
+     * @param level If negative, take back that many elements from the tail of the hierarchy. If positive, keep only
+     * that many elements from the head of the hierarchy. Passing {@code 0} leaves the hierarchy untouched.
      */
     private List<PlaceRequest> truncatePlaceHierarchy(int level) {
         int size = placeHierarchy.size();
         if (level < 0) {
             if (-level >= size) {
-                return new ArrayList<PlaceRequest>();
+                return new ArrayList<>();
             } else {
-                return new ArrayList<PlaceRequest>(placeHierarchy.subList(0, size
-                        + level));
+                return new ArrayList<>(placeHierarchy.subList(0, size + level));
             }
         } else if (level > 0) {
             if (level >= size) {
-                return new ArrayList<PlaceRequest>(placeHierarchy);
+                return new ArrayList<>(placeHierarchy);
             } else {
-                return new ArrayList<PlaceRequest>(placeHierarchy.subList(0, level));
+                return new ArrayList<>(placeHierarchy.subList(0, level));
             }
         }
-        return new ArrayList<PlaceRequest>(placeHierarchy);
+        return new ArrayList<>(placeHierarchy);
     }
 }

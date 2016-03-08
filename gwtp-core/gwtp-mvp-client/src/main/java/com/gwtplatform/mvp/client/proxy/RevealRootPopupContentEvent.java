@@ -22,68 +22,34 @@ import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PresenterWidget;
 
 /**
- * This event is fired when a {@link com.gwtplatform.mvp.client.PresenterWidget}
- * wants to reveal itself as a popup at the root of the application. It is
- * typically fired by the {@link com.gwtplatform.mvp.client.PresenterWidget}'s
- * parent.<br/>
- * Use this type of event to reveal popup content that should get added at the
- * root of the presenter hierarchy.
+ * This event is fired when a {@link com.gwtplatform.mvp.client.PresenterWidget PresenterWidget} wants to reveal itself
+ * as a popup at the root of the application. It is typically fired by the
+ * {@link com.gwtplatform.mvp.client.PresenterWidget PresenterWidget}'s parent.
+ * <p>
+ * Use this type of event to reveal popup content that should get added at the root of the presenter hierarchy.
  *
  * @see RevealContentEvent
  * @see RevealRootContentEvent
  * @see RevealRootLayoutContentEvent
  */
-public final class RevealRootPopupContentEvent extends
-        GwtEvent<RevealRootPopupContentHandler> {
-
+public final class RevealRootPopupContentEvent extends GwtEvent<RevealRootPopupContentHandler> {
     private static final Type<RevealRootPopupContentHandler> TYPE = new Type<RevealRootPopupContentHandler>();
+
     private final PresenterWidget<? extends PopupView> content;
 
-    public RevealRootPopupContentEvent(
-            PresenterWidget<? extends PopupView> content) {
+    public RevealRootPopupContentEvent(PresenterWidget<? extends PopupView> content) {
         this.content = content;
     }
 
-    @Deprecated
-    public RevealRootPopupContentEvent(
-            PresenterWidget<? extends PopupView> content, boolean center) {
-        this(content);
-    }
-
     /**
-     * Fires a {@link RevealRootPopupContentEvent} into a source that has access
-     * to an {@link com.google.web.bindery.event.shared.EventBus}.
+     * Fires a {@link RevealRootPopupContentEvent} into a source that has access to an {@link
+     * com.google.web.bindery.event.shared.EventBus EventBus}.
      *
-     * @param source
-     *            The source that fires this event ({@link HasHandlers}).
-     * @param content
-     *            The {@link PresenterWidget} with a {@link PopupView} that
-     *            wants to set itself as root content.
+     * @param source The source that fires this event ({@link HasHandlers}).
+     * @param content The {@link PresenterWidget} with a {@link PopupView} that wants to set itself as root content.
      */
-    public static void fire(final HasHandlers source,
-            final PresenterWidget<? extends PopupView> content) {
+    public static void fire(HasHandlers source, PresenterWidget<? extends PopupView> content) {
         source.fireEvent(new RevealRootPopupContentEvent(content));
-    }
-
-    /**
-     * Fires a {@link RevealRootPopupContentEvent} into a source that has access
-     * to an {@link com.google.web.bindery.event.shared.EventBus}.
-     *
-     * @param source
-     *            The source that fires this event ({@link HasHandlers}).
-     * @param content
-     *            The {@link PresenterWidget} with a {@link PopupView} that
-     *            wants to set itself as root content.
-     * @param center
-     *            Does nothing.
-     *
-     * @deprecated Since 1.4.
-     */
-    @Deprecated
-    public static void fire(final HasHandlers source,
-            final PresenterWidget<? extends PopupView> content,
-            final boolean center) {
-        fire(source, content);
     }
 
     public static Type<RevealRootPopupContentHandler> getType() {
@@ -97,14 +63,6 @@ public final class RevealRootPopupContentEvent extends
 
     public PresenterWidget<? extends PopupView> getContent() {
         return content;
-    }
-
-    /**
-     * @deprecated Since 1.4.
-     */
-    @Deprecated
-    public boolean isCentered() {
-        return true;
     }
 
     @Override

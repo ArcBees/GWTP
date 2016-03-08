@@ -19,17 +19,15 @@ package com.gwtplatform.mvp.client.proxy;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 import com.gwtplatform.mvp.client.Presenter;
+import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 
 /**
- * This event is fired by a {@link com.gwtplatform.mvp.client.Presenter} that desires to reveal itself
- * within its parent. It is typically fired in the {@link com.gwtplatform.mvp.client.Presenter#revealInParent()}
- * method. To reveal a presenter at the root of the application, fire either
- * {@link RevealRootContentEvent}, {@link RevealRootLayoutContentEvent} or
- * {@link RevealRootPopupContentEvent} instead.
+ * This event is fired by a {@link Presenter} that desires to reveal itself within its parent. It is typically fired in
+ * the {@link Presenter#revealInParent()} method. To reveal a presenter at the root of the application, fire either
+ * {@link RevealRootContentEvent}, {@link RevealRootLayoutContentEvent} or {@link RevealRootPopupContentEvent} instead.
  * <p/>
- * This event is handled by {@link Proxy} classes. Upon handling this
- * event, the proxy <b>first</b> sets the content appropriately in the
- * presenter, and then reveals the presenter.
+ * This event is handled by {@link Proxy} classes. Upon handling this event, the proxy <b>first</b> sets the content
+ * appropriately in the presenter, and then reveals the presenter.
  *
  * @see RevealRootContentEvent
  * @see RevealRootLayoutContentEvent
@@ -37,31 +35,29 @@ import com.gwtplatform.mvp.client.Presenter;
  */
 public final class RevealContentEvent extends GwtEvent<RevealContentHandler<?>> {
     private final Presenter<?, ?> content;
-    private final Type<RevealContentHandler<?>> type;
+    private final NestedSlot type;
 
     public RevealContentEvent(
-            Type<RevealContentHandler<?>> type,
+            NestedSlot type,
             Presenter<?, ?> content) {
         this.type = type;
         this.content = content;
     }
 
     /**
-     * Fires a {@link RevealContentEvent} with a specific {@link com.google.gwt.event.shared.GwtEvent.Type}
-     * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
+     * Fires a {@link RevealContentEvent} with a specific {@link NestedSlot} into a source that has access to an {@link
+     * com.google.web.bindery.event.shared.EventBus EventBus}.
      *
-     * @param source  The source that fires this event ({@link HasHandlers}).
-     * @param type    The specific event {@link com.google.gwt.event.shared.GwtEvent.Type},
-     *                usually defined in the parent presenter
-     *                and annotated with {@link com.gwtplatform.mvp.client.annotations.ContentSlot}.
+     * @param source The source that fires this event ({@link HasHandlers}).
+     * @param type The specific event {@link NestedSlot}, usually defined in the parent presenter.
      * @param content The {@link Presenter} that wants to set itself as content in his parent.
      */
-    public static void fire(HasHandlers source, Type<RevealContentHandler<?>> type, Presenter<?, ?> content) {
+    public static void fire(HasHandlers source, NestedSlot type, Presenter<?, ?> content) {
         source.fireEvent(new RevealContentEvent(type, content));
     }
 
     @Override
-    public Type<RevealContentHandler<?>> getAssociatedType() {
+    public NestedSlot getAssociatedType() {
         return type;
     }
 
