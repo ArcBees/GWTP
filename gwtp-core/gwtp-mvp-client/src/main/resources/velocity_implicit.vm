@@ -18,3 +18,5 @@
 #* @vtlvariable name="name" type="java.lang.String" file="com/gwtplatform/mvp/processors/bundle/ProviderBundle.vm" *#
 
 #* @vtlvariable name="entryPoint" type="com.gwtplatform.mvp.processors.entrypoint.EntryPoint" file="com/gwtplatform/mvp/processors/entrypoint/EntryPoint.vm" *#
+
+#* @vtlvariable name="tokens" type="java.util.Set<java.lang.String>" file="com/gwtplatform/mvp/processors/PlaceTokenRegistry.vm" *#
