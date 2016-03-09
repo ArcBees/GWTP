@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.inject.Singleton;
@@ -29,11 +28,10 @@ import javax.lang.model.element.TypeElement;
 import javax.tools.FileObject;
 
 import com.google.auto.service.AutoService;
-import com.google.common.collect.Sets;
-import com.gwtplatform.common.client.annotations.GwtpApp;
 import com.gwtplatform.common.processors.AbstractGwtpAppProcessor;
 import com.gwtplatform.mvp.client.annotations.NameToken;
 import com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry;
+import com.gwtplatform.processors.tools.SupportedAnnotationClasses;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.utils.MetaInfResource;
@@ -42,6 +40,7 @@ import static com.gwtplatform.common.processors.module.GwtpAppModuleProcessor.MA
 import static com.gwtplatform.processors.tools.bindings.BindingContext.newBinding;
 
 @AutoService(Processor.class)
+@SupportedAnnotationClasses(NameToken.class)
 public class PlaceTokenRegistryProcessor extends AbstractGwtpAppProcessor {
     private static final String META_INF_FILE_NAME = "gwtp/placeTokens";
     private static final Type REGISTRY_TYPE = new Type(
@@ -56,16 +55,7 @@ public class PlaceTokenRegistryProcessor extends AbstractGwtpAppProcessor {
     private FileObject registryFile;
 
     @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        return Sets.newHashSet(
-                GwtpApp.class.getCanonicalName(),
-                NameToken.class.getCanonicalName());
-    }
-
-    @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
-
+    protected void initSafe() {
         bindingsProcessors = new BindingsProcessors(logger, utils, outputter);
         metaInfResource = new MetaInfResource(logger, outputter, META_INF_FILE_NAME);
         tokens = new HashSet<>();

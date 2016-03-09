@@ -16,82 +16,50 @@
 
 package com.gwtplatform.dispatch.rest.processors;
 
-import java.util.Collections;
-import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedOptions;
-import javax.annotation.processing.SupportedSourceVersion;
-import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.ws.rs.Path;
 
 import com.google.auto.service.AutoService;
+import com.google.common.collect.Sets;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourcePostProcessors;
 import com.gwtplatform.dispatch.rest.processors.resource.RootResource;
 import com.gwtplatform.dispatch.rest.processors.resource.RootResourceFactory;
 import com.gwtplatform.dispatch.rest.processors.resource.RootResourceProcessor;
 import com.gwtplatform.dispatch.rest.processors.serialization.SerializationProcessors;
+import com.gwtplatform.processors.tools.AbstractProcessor;
+import com.gwtplatform.processors.tools.SupportedAnnotationClasses;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.outputter.Outputter;
-import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.MoreElements.isType;
 import static com.gwtplatform.dispatch.rest.processors.NameUtils.findRestModuleType;
-import static com.gwtplatform.processors.tools.GwtSourceFilter.GWTP_MODULE_OPTION;
 import static com.gwtplatform.processors.tools.bindings.BindingContext.flushModule;
-import static com.gwtplatform.processors.tools.logger.Logger.DEBUG_OPTION;
 
 @AutoService(Processor.class)
-@SupportedSourceVersion(SourceVersion.RELEASE_7)
-@SupportedOptions({DEBUG_OPTION, GWTP_MODULE_OPTION})
+@SupportedAnnotationClasses(Path.class)
 public class DispatchRestProcessor extends AbstractProcessor {
-    private static final String UNABLE_TO_PROCESS_GENERAL = "Unable to process Rest-Dispatch classes.";
     private static final String UNABLE_TO_PROCESS_RESOURCE = "Unable to process resource.";
-    private static final String UNRESOLVABLE_EXCEPTION = "Unresolvable exception.";
     private static final String DISPATCH_MACROS = "com/gwtplatform/dispatch/rest/processors/macros.vm";
 
-    private Logger logger;
-    private Utils utils;
-    private Outputter outputter;
     private RootResource.Factory rootResourceFactory;
     private RootResourceProcessor resourceProcessor;
     private ResourcePostProcessors resourcePostProcessors;
     private SerializationProcessors serializationProcessors;
     private BindingsProcessors bindingsProcessors;
 
-    public DispatchRestProcessor() {
+    @Override
+    protected Set<String> getMacroFiles() {
+        return Sets.newHashSet(DISPATCH_MACROS);
     }
 
     @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
-
-        initializeTools(processingEnv);
-        initializeDomainFactory();
-        initializeProcessors();
-    }
-
-    private void initializeTools(ProcessingEnvironment processingEnv) {
-        Map<String, String> options = processingEnv.getOptions();
-
-        logger = new Logger(processingEnv.getMessager(), options);
-        utils = new Utils(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils(), options);
-        outputter = new Outputter(logger, this, processingEnv.getFiler(), DISPATCH_MACROS);
-    }
-
-    private void initializeDomainFactory() {
+    protected void initSafe() {
         rootResourceFactory = new RootResourceFactory(logger, utils);
-    }
-
-    private void initializeProcessors() {
         resourceProcessor = new RootResourceProcessor(logger, utils, outputter);
         resourcePostProcessors = new ResourcePostProcessors(logger, utils, outputter);
         serializationProcessors = new SerializationProcessors(logger, utils, outputter);
@@ -99,25 +67,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
     }
 
     @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        return Collections.singleton(Path.class.getCanonicalName());
-    }
-
-    @Override
-    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        try {
-            utils.incrementRoundNumber();
-            process(roundEnv);
-        } catch (UnableToProcessException e) {
-            logger.error(UNABLE_TO_PROCESS_GENERAL);
-        } catch (Exception e) {
-            logger.error().throwable(e).log(UNRESOLVABLE_EXCEPTION);
-        }
-
-        return false;
-    }
-
-    private void process(RoundEnvironment roundEnv) {
+    protected void processSafe(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         boolean elementsProcessed = processGwtElements(roundEnv);
 
         if (elementsProcessed) {

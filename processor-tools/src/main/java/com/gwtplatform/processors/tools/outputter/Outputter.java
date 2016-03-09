@@ -25,6 +25,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.Processor;
@@ -57,7 +58,7 @@ public class Outputter {
     private final Logger logger;
     private final Type processor;
     private final Filer filer;
-    private final List<String> macroFiles;
+    private final Set<String> macroFiles;
 
     private VelocityEngine velocityEngine;
 
@@ -69,7 +70,18 @@ public class Outputter {
         this.logger = logger;
         this.processor = new Type(processor.getClass());
         this.filer = filer;
-        this.macroFiles = FluentIterable.of(macroFiles).append(DEFAULT_MACRO_FILE).toList();
+        this.macroFiles = FluentIterable.of(macroFiles).append(DEFAULT_MACRO_FILE).toSet();
+    }
+
+    public Outputter(
+            Logger logger,
+            Processor processor,
+            Filer filer,
+            Collection<String> macroFiles) {
+        this.logger = logger;
+        this.processor = new Type(processor.getClass());
+        this.filer = filer;
+        this.macroFiles = FluentIterable.from(macroFiles).append(DEFAULT_MACRO_FILE).toSet();
     }
 
     public OutputBuilder configure(String templateFile) {

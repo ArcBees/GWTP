@@ -181,6 +181,8 @@ public class GwtSourceFilter {
         try (InputStream moduleFile = GwtSourceFilter.class.getResourceAsStream(moduleFileName)) {
             if (moduleFile != null) {
                 loadModule(moduleBasePackage, moduleFile);
+            } else {
+                logger.warning("Unable to find module file '%s' in source tree.", moduleName);
             }
         }
     }

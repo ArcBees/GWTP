@@ -16,6 +16,7 @@
 
 package com.gwtplatform.mvp.processors.proxy;
 
+import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -42,6 +43,7 @@ import com.gwtplatform.mvp.client.annotations.CustomProvider;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
+import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 import com.gwtplatform.mvp.processors.bundle.BundleDetails;
 import com.gwtplatform.processors.tools.domain.HasImports;
@@ -50,6 +52,8 @@ import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.LogBuilder;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
+
+import static java.util.Arrays.asList;
 
 import static javax.lang.model.element.ElementKind.CLASS;
 import static javax.lang.model.element.Modifier.ABSTRACT;
@@ -64,6 +68,7 @@ import static com.google.auto.common.AnnotationMirrors.getAnnotationValue;
 import static com.google.auto.common.MoreElements.asType;
 import static com.google.auto.common.MoreElements.getAnnotationMirror;
 import static com.google.auto.common.MoreElements.hasModifiers;
+import static com.google.auto.common.MoreElements.isAnnotationPresent;
 import static com.google.auto.common.MoreTypes.asDeclared;
 import static com.google.auto.common.MoreTypes.asElement;
 import static com.google.auto.common.MoreTypes.asTypeElement;
@@ -73,6 +78,9 @@ import static com.google.common.base.Optional.of;
 import static com.google.common.collect.FluentIterable.from;
 
 public abstract class AbstractProxyDetails implements ProxyDetails {
+    private static final List<Class<? extends Annotation>> SUPPORTED_ANNOTATIONS =
+            asList(ProxyStandard.class, ProxyCodeSplit.class, ProxyCodeSplitBundle.class);
+
     protected final TypeElement element;
     protected final Logger logger;
     protected final Utils utils;
@@ -94,6 +102,22 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
         this.utils = utils;
         this.element = element;
         this.proxyMirror = proxyMirror;
+
+        warnIfMultipleAnnotations();
+    }
+
+    private void warnIfMultipleAnnotations() {
+        int count = 0;
+        for (Class<? extends Annotation> classy : SUPPORTED_ANNOTATIONS) {
+            if (isAnnotationPresent(element, classy)) {
+                ++count;
+            }
+        }
+
+        if (count > 1) {
+            logger.warning().context(element)
+                    .log("Multiple proxy annotation detected. Review and make sure only one is present.");
+        }
     }
 
     @Override

@@ -16,76 +16,36 @@
 
 package com.gwtplatform.common.processors;
 
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
-import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
 import com.gwtplatform.common.client.annotations.GwtpApp;
-import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.outputter.Outputter;
-import com.gwtplatform.processors.tools.utils.Utils;
-
-import static com.gwtplatform.processors.tools.GwtSourceFilter.GWTP_MODULE_OPTION;
-import static com.gwtplatform.processors.tools.logger.Logger.DEBUG_OPTION;
+import com.gwtplatform.processors.tools.AbstractProcessor;
 
 public abstract class AbstractGwtpAppProcessor extends AbstractProcessor {
-    protected Logger logger;
-    protected Utils utils;
-    protected Outputter outputter;
-
     private boolean gwtpAppPresent;
 
     @Override
-    public Set<String> getSupportedOptions() {
-        Set<String> supportedOptions = new HashSet<>(super.getSupportedOptions());
-        supportedOptions.add(DEBUG_OPTION);
-        supportedOptions.add(GWTP_MODULE_OPTION);
-        return supportedOptions;
+    public Set<String> getSupportedAnnotationTypes() {
+        Set<String> types = new HashSet<>(super.getSupportedAnnotationTypes());
+        types.add(GwtpApp.class.getCanonicalName());
+        return Collections.unmodifiableSet(types);
     }
 
     @Override
-    public SourceVersion getSupportedSourceVersion() {
-        return SourceVersion.RELEASE_7;
-    }
+    protected void processSafe(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        loadGwtpApp(roundEnv);
 
-    @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
-
-        Map<String, String> options = processingEnv.getOptions();
-        logger = new Logger(processingEnv.getMessager(), options);
-        utils = new Utils(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils(), options);
-        outputter = new Outputter(logger, this, processingEnv.getFiler());
-    }
-
-    @Override
-    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        if (roundEnv.errorRaised()) {
-            return false;
+        if (gwtpAppPresent) {
+            processAsApp(annotations, roundEnv);
+        } else {
+            processAsModule(annotations, roundEnv);
         }
-
-        try {
-            loadGwtpApp(roundEnv);
-
-            if (gwtpAppPresent) {
-                processAsApp(annotations, roundEnv);
-            } else {
-                processAsModule(annotations, roundEnv);
-            }
-        } catch (UnableToProcessException ignore) {
-        } catch (Exception e) {
-            logger.error().throwable(e).log("Unresolvable exception.");
-        }
-
-        return false;
     }
 
     private void loadGwtpApp(RoundEnvironment roundEnv) {

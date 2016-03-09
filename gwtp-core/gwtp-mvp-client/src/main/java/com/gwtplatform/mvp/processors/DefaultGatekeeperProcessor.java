@@ -20,13 +20,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedOptions;
-import javax.annotation.processing.SupportedSourceVersion;
 import javax.inject.Singleton;
-import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
@@ -34,17 +30,14 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 
 import com.google.auto.service.AutoService;
-import com.google.common.collect.Sets;
-import com.gwtplatform.common.client.annotations.GwtpApp;
 import com.gwtplatform.common.processors.AbstractGwtpAppProcessor;
 import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
 import com.gwtplatform.mvp.client.proxy.AlwaysTrueGatekeeper;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
-import com.gwtplatform.processors.tools.GwtSourceFilter;
+import com.gwtplatform.processors.tools.SupportedAnnotationClasses;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
-import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.MetaInfResource;
 
 import static com.google.auto.common.MoreElements.asType;
@@ -53,8 +46,7 @@ import static com.gwtplatform.common.processors.module.GwtpAppModuleProcessor.MA
 import static com.gwtplatform.processors.tools.bindings.BindingContext.newAnnotatedBinding;
 
 @AutoService(Processor.class)
-@SupportedOptions({Logger.DEBUG_OPTION, GwtSourceFilter.GWTP_MODULE_OPTION})
-@SupportedSourceVersion(SourceVersion.RELEASE_7)
+@SupportedAnnotationClasses(DefaultGatekeeper.class)
 public class DefaultGatekeeperProcessor extends AbstractGwtpAppProcessor {
     private static final String META_INF_FILE_NAME = "gwtp/defaultGatekeeper";
     private static final Type DEFAULT_GATEKEEPER = new Type(AlwaysTrueGatekeeper.class);
@@ -66,17 +58,7 @@ public class DefaultGatekeeperProcessor extends AbstractGwtpAppProcessor {
     private boolean metaDataProcessed;
 
     @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        return Sets.newHashSet(
-                GwtpApp.class.getCanonicalName(),
-                DefaultGatekeeper.class.getCanonicalName()
-        );
-    }
-
-    @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
-
+    protected void initSafe() {
         bindingsProcessors = new BindingsProcessors(logger, utils, outputter);
         metaInfResource = new MetaInfResource(logger, outputter, META_INF_FILE_NAME);
     }

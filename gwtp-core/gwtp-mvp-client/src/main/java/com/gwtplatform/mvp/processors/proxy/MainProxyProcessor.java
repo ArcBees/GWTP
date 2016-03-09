@@ -19,13 +19,8 @@ package com.gwtplatform.mvp.processors.proxy;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedOptions;
-import javax.annotation.processing.SupportedSourceVersion;
-import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
@@ -36,26 +31,16 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.processors.bundle.NamedProviderBundleProcessor;
 import com.gwtplatform.mvp.processors.proxy.ProxyDetails.Factory;
+import com.gwtplatform.processors.tools.AbstractProcessor;
+import com.gwtplatform.processors.tools.SupportedAnnotationClasses;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
-import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.outputter.Outputter;
-import com.gwtplatform.processors.tools.utils.Utils;
-
-import static com.gwtplatform.processors.tools.GwtSourceFilter.GWTP_MODULE_OPTION;
-import static com.gwtplatform.processors.tools.logger.Logger.DEBUG_OPTION;
 
 @AutoService(Processor.class)
-@SupportedSourceVersion(SourceVersion.RELEASE_7)
-@SupportedOptions({DEBUG_OPTION, GWTP_MODULE_OPTION})
+@SupportedAnnotationClasses({ProxyStandard.class, ProxyCodeSplit.class, ProxyCodeSplitBundle.class})
 public class MainProxyProcessor extends AbstractProcessor {
     private static final String PROXY_MACROS = "com/gwtplatform/mvp/processors/proxy/macros.vm";
     private static final String UNABLE_TO_PROCESS_PROXY = "Unable to process proxy.";
-    private static final String UNRESOLVABLE_EXCEPTION = "Unresolvable exception.";
-
-    private Logger logger;
-    private Outputter outputter;
-    private Utils utils;
 
     private Factory proxyFactory;
 
@@ -65,34 +50,13 @@ public class MainProxyProcessor extends AbstractProcessor {
     private NamedProviderBundleProcessor providerBundleProcessor;
 
     @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        return Sets.newHashSet(
-                ProxyStandard.class.getCanonicalName(),
-                ProxyCodeSplit.class.getCanonicalName(),
-                ProxyCodeSplitBundle.class.getCanonicalName());
+    protected Set<String> getMacroFiles() {
+        return Sets.newHashSet(PROXY_MACROS);
     }
 
     @Override
-    public synchronized void init(ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
-
-        initializeTools(processingEnv);
-        initializeDomainFactories();
-        initializeProcessors();
-    }
-
-    private void initializeTools(ProcessingEnvironment processingEnv) {
-        logger = new Logger(processingEnv.getMessager(), processingEnv.getOptions());
-        utils = new Utils(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils(),
-                processingEnv.getOptions());
-        outputter = new Outputter(logger, this, processingEnv.getFiler(), PROXY_MACROS);
-    }
-
-    private void initializeDomainFactories() {
+    protected void initSafe() {
         proxyFactory = new ProxyDetailsFactory(logger, utils);
-    }
-
-    private void initializeProcessors() {
         bindingsProcessors = new BindingsProcessors(logger, utils, outputter);
         proxyModules = new ProxyModules(utils, bindingsProcessors);
         providerBundleProcessor = new NamedProviderBundleProcessor();
@@ -102,19 +66,7 @@ public class MainProxyProcessor extends AbstractProcessor {
     }
 
     @Override
-    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        try {
-            utils.incrementRoundNumber();
-            process(roundEnv);
-        } catch (UnableToProcessException ignore) {
-        } catch (Exception e) {
-            logger.error().throwable(e).log(UNRESOLVABLE_EXCEPTION);
-        }
-
-        return false;
-    }
-
-    private void process(RoundEnvironment roundEnv) {
+    protected void processSafe(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         boolean elementsProcessed = processGwtElements(roundEnv);
 
         if (elementsProcessed) {
