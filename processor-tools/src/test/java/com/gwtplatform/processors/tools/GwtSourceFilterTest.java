@@ -57,6 +57,7 @@ public class GwtSourceFilterTest {
         // then
         assertThat(filter.getSourcePackages()).containsOnly(
                 "com.gwtplatform.processors.tools.module1.client",
+                "com.gwtplatform.processors.tools.module1.client.potatoes.red",
                 "com.gwtplatform.processors.tools.module2.client",
                 "com.gwtplatform.processors.tools.module2.shared",
                 "com.gwtplatform.processors.tools.module3",
