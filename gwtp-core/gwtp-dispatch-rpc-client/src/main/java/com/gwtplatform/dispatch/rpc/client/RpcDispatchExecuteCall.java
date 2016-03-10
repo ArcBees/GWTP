@@ -22,9 +22,6 @@ import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
-import com.gwtplatform.dispatch.client.OldDelegatingAsyncCallback;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptedAsyncCallback;
 import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptor;
 import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptorRegistry;
@@ -45,13 +42,11 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
     private final DispatchServiceAsync dispatchService;
     private final RpcDispatchHooks dispatchHooks;
     private final RpcInterceptorRegistry interceptorRegistry;
-    private final ClientActionHandlerRegistry clientActionHandlerRegistry;
 
     RpcDispatchExecuteCall(
             RpcDispatchCallFactory dispatchCallFactory,
             DispatchServiceAsync dispatchService,
             ExceptionHandler exceptionHandler,
-            ClientActionHandlerRegistry clientActionHandlerRegistry,
             RpcInterceptorRegistry interceptorRegistry,
             SecurityCookieAccessor securityCookieAccessor,
             RpcDispatchHooks dispatchHooks,
@@ -63,7 +58,6 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
         this.dispatchService = dispatchService;
         this.dispatchHooks = dispatchHooks;
         this.interceptorRegistry = interceptorRegistry;
-        this.clientActionHandlerRegistry = clientActionHandlerRegistry;
     }
 
     @Override
@@ -76,7 +70,7 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
 
             if (interceptorIndirectProvider != null) {
                 DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
-                RpcInterceptedAsyncCallback<A, R> delegatingCallback = new RpcInterceptedAsyncCallback<A, R>(
+                RpcInterceptedAsyncCallback<A, R> delegatingCallback = new RpcInterceptedAsyncCallback<>(
                         dispatchCallFactory, this, action, getCallback(), dispatchRequest);
 
                 interceptorIndirectProvider.get(delegatingCallback);
@@ -85,13 +79,7 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
             }
         }
 
-        // Maintaining support for client action handlers
-        DispatchRequest dispatchRequest = findClientActionHandlerRequest();
-        if (dispatchRequest == null) {
-            return processCall();
-        } else {
-            return dispatchRequest;
-        }
+        return processCall();
     }
 
     @Override
@@ -113,28 +101,5 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
                     }
                 }
         ));
-    }
-
-    /**
-     * @deprecated Since 1.4.
-     */
-    @Deprecated
-    private DispatchRequest findClientActionHandlerRequest() {
-        DispatchRequest request = null;
-
-        A action = getAction();
-        IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider =
-                clientActionHandlerRegistry.find(action.getClass());
-
-        if (clientActionHandlerProvider != null) {
-            DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
-            OldDelegatingAsyncCallback<A, R> delegatingCallback =
-                    new OldDelegatingAsyncCallback<A, R>(this, action, getCallback(), dispatchRequest);
-
-            clientActionHandlerProvider.get(delegatingCallback);
-
-            request = dispatchRequest;
-        }
-        return request;
     }
 }

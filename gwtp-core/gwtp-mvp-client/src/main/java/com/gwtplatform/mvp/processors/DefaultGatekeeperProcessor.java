@@ -18,10 +18,8 @@ package com.gwtplatform.mvp.processors;
 
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
@@ -38,6 +36,7 @@ import javax.lang.model.type.TypeMirror;
 import com.google.auto.service.AutoService;
 import com.google.common.collect.Sets;
 import com.gwtplatform.common.client.annotations.GwtpApp;
+import com.gwtplatform.common.processors.AbstractGwtpAppProcessor;
 import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
 import com.gwtplatform.mvp.client.proxy.AlwaysTrueGatekeeper;
 import com.gwtplatform.mvp.client.proxy.Gatekeeper;
@@ -46,9 +45,7 @@ import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
-import com.gwtplatform.processors.tools.outputter.Outputter;
 import com.gwtplatform.processors.tools.utils.MetaInfResource;
-import com.gwtplatform.processors.tools.utils.Utils;
 
 import static com.google.auto.common.MoreElements.asType;
 import static com.google.auto.common.MoreElements.hasModifiers;
@@ -58,15 +55,13 @@ import static com.gwtplatform.processors.tools.bindings.BindingContext.newAnnota
 @AutoService(Processor.class)
 @SupportedOptions({Logger.DEBUG_OPTION, GwtSourceFilter.GWTP_MODULE_OPTION})
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
-public class DefaultGatekeeperProcessor extends AbstractProcessor {
+public class DefaultGatekeeperProcessor extends AbstractGwtpAppProcessor {
     private static final String META_INF_FILE_NAME = "gwtp/defaultGatekeeper";
+    private static final Type DEFAULT_GATEKEEPER = new Type(AlwaysTrueGatekeeper.class);
 
-    private Logger logger;
-    private Utils utils;
     private BindingsProcessors bindingsProcessors;
     private MetaInfResource metaInfResource;
 
-    private boolean gwtpAppPresent;
     private boolean generated;
     private boolean metaDataProcessed;
 
@@ -82,57 +77,43 @@ public class DefaultGatekeeperProcessor extends AbstractProcessor {
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
 
-        Map<String, String> options = processingEnv.getOptions();
-        logger = new Logger(processingEnv.getMessager(), options);
-        utils = new Utils(logger, processingEnv.getTypeUtils(), processingEnv.getElementUtils(), options);
-        Outputter outputter = new Outputter(logger, this, processingEnv.getFiler());
         bindingsProcessors = new BindingsProcessors(logger, utils, outputter);
         metaInfResource = new MetaInfResource(logger, outputter, META_INF_FILE_NAME);
     }
 
     @Override
-    public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        if (roundEnv.errorRaised()) {
-            return false;
-        }
-
-        try {
-            loadGwtpApp(roundEnv);
-            maybeGenerate(roundEnv);
-        } catch (UnableToProcessException ignore) {
-        } catch (Exception e) {
-            logger.error().throwable(e).log("Unresolvable exception.");
-        }
-
-        return false;
-    }
-
-    private void loadGwtpApp(RoundEnvironment roundEnv) {
-        if (!gwtpAppPresent) {
-            Set<? extends Element> annotations = roundEnv.getElementsAnnotatedWith(GwtpApp.class);
-            annotations = utils.getSourceFilter().filterElements(annotations);
-
-            gwtpAppPresent = !annotations.isEmpty();
-        }
-    }
-
-    private void maybeGenerate(RoundEnvironment roundEnv) {
-        Set<TypeElement> gatekeepers = extractGatekeeperTypeElements(roundEnv);
+    protected void processAsApp(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        Set<TypeElement> gatekeepers = extractGatekeepers(roundEnv);
 
         if (!gatekeepers.isEmpty()) {
-            generateFromElement(gatekeepers);
-        } else if (gwtpAppPresent && !generated) {
+            Type gatekeeper = asGatekeeper(gatekeepers.iterator().next());
+            createBinding(gatekeeper);
+
+            generated = true;
+        } else if (!generated) {
             if (!metaDataProcessed) {
                 maybeGenerateFromMetaData();
                 metaDataProcessed = true;
             }
             if (!generated && roundEnv.processingOver()) {
-                createBinding(new Type(AlwaysTrueGatekeeper.class));
+                createBinding(DEFAULT_GATEKEEPER);
             }
         }
     }
 
-    private Set<TypeElement> extractGatekeeperTypeElements(RoundEnvironment roundEnv) {
+    @Override
+    protected void processAsModule(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+        Set<TypeElement> gatekeepers = extractGatekeepers(roundEnv);
+
+        if (!gatekeepers.isEmpty()) {
+            Type gatekeeper = asGatekeeper(gatekeepers.iterator().next());
+            createMetadataFile(gatekeeper);
+
+            generated = true;
+        }
+    }
+
+    private Set<TypeElement> extractGatekeepers(RoundEnvironment roundEnv) {
         Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(DefaultGatekeeper.class);
         elements = utils.getSourceFilter().filterElements(elements);
         Set<TypeElement> typeElements = new LinkedHashSet<>();
@@ -143,24 +124,17 @@ public class DefaultGatekeeperProcessor extends AbstractProcessor {
             }
         }
 
+        validateGatekeepers(typeElements);
         return typeElements;
     }
 
-    private void generateFromElement(Set<TypeElement> elements) {
-        if (generated || elements.size() != 1) {
+    private void validateGatekeepers(Set<TypeElement> gatekeepers) {
+        if ((!generated && gatekeepers.size() > 1)
+                || (generated && !gatekeepers.isEmpty())) {
             logger.error()
-                    .context(elements.iterator().next())
+                    .context(gatekeepers.iterator().next())
                     .log("Multiple classes annotated with @DefaultGatekeeper. You may only have one or none.");
             throw new UnableToProcessException();
-        } else {
-            Type gatekeeper = asGatekeeper(elements.iterator().next());
-            if (gwtpAppPresent) {
-                createBinding(gatekeeper);
-            } else {
-                createMetadataFile(gatekeeper);
-            }
-
-            generated = true;
         }
     }
 

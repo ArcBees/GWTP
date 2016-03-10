@@ -1,0 +1,29 @@
+package $impl.packageName;
+
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.annotation.Generated;
+
+import com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry;
+#printImports($imports)
+
+@Generated(value = "$processor", date = "$processingDate")
+public class $impl.simpleName implements PlaceTokenRegistry {
+    private final Set<String> tokens;
+
+    ${impl.simpleName}() {
+        Set<String> mutableTokens = new TreeSet<>();
+#foreach ($token in $tokens)
+        mutableTokens.add("$token");
+#end
+
+        tokens = Collections.unmodifiableSet(mutableTokens);
+    }
+
+    @Override
+    public Set<String> getAllPlaceTokens() {
+        return tokens;
+    }
+}

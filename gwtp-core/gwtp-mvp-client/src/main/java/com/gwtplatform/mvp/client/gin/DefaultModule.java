@@ -28,8 +28,6 @@ import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
 import com.gwtplatform.mvp.client.annotations.ErrorPlace;
 import com.gwtplatform.mvp.client.annotations.UnauthorizedPlace;
-import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalytics;
-import com.gwtplatform.mvp.client.googleanalytics.GoogleAnalyticsImpl;
 import com.gwtplatform.mvp.client.proxy.DefaultPlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
@@ -154,7 +152,6 @@ public class DefaultModule extends AbstractGinModule {
         bind(EventBus.class).to(builder.getEventBusClass()).in(Singleton.class);
         bind(TokenFormatter.class).to(builder.getTokenFormatterClass()).in(Singleton.class);
         bind(PlaceManager.class).to(builder.getPlaceManagerClass()).in(Singleton.class);
-        bind(GoogleAnalytics.class).to(GoogleAnalyticsImpl.class).in(Singleton.class);
 
         maybeBindConstant(DefaultPlace.class, builder.getDefaultPlace());
         maybeBindConstant(ErrorPlace.class, builder.getErrorPlace());

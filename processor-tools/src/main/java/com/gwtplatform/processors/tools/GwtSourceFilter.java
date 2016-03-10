@@ -18,6 +18,7 @@ package com.gwtplatform.processors.tools;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -34,9 +35,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
@@ -48,6 +50,8 @@ public class GwtSourceFilter {
     private static final String PATH_ATTRIBUTE = "path";
     private static final String INHERITS_TAG = "inherits";
     private static final String NAME_ATTRIBUTE = "name";
+
+    private static final DocumentBuilder documentBuilder = createDocumentBuilder();
 
     private final Logger logger;
     private final Utils utils;
@@ -66,6 +70,24 @@ public class GwtSourceFilter {
         this.moduleNames = moduleNames;
         this.parsedModules = new HashSet<>();
         this.sourcePackages = new LinkedHashSet<>();
+    }
+
+    private static DocumentBuilder createDocumentBuilder() {
+        try {
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            documentBuilder.setEntityResolver(new EntityResolver() {
+                @Override
+                public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
+                    // Disable the loading of DTDs as it is a huge slow down during compilation.
+                    return new InputSource(new StringReader(""));
+                }
+            });
+
+            return documentBuilder;
+        } catch (ParserConfigurationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getApplicationPackage() {
@@ -96,7 +118,7 @@ public class GwtSourceFilter {
         String modules = utils.getOption(GWTP_MODULE_OPTION);
 
         if (modules == null) {
-            logger.warning("Add `-A%s=com.domain.YourModule.gwt.xml` to your compiler options to enable GWTP "
+            logger.warning("Add `-A%s=com.domain.YourModule` to your compiler options to enable GWTP "
                     + "annotation processors.", GWTP_MODULE_OPTION);
         } else {
             addModules(modules.split(","));
@@ -141,14 +163,12 @@ public class GwtSourceFilter {
     public void addModule(String moduleName) {
         try {
             loadModule(moduleName);
-        } catch (IOException | ParserConfigurationException | SAXException e) {
-            logger.error().throwable(e).log("Unable to parse module for source paths '%s'.", moduleName);
-            throw new UnableToProcessException();
+        } catch (IOException | SAXException e) {
+            logger.mandatoryWarning().throwable(e).log("Unable to parse module for source paths '%s'.", moduleName);
         }
     }
 
-    private void loadModule(String moduleName)
-            throws IOException, ParserConfigurationException, SAXException {
+    private void loadModule(String moduleName) throws IOException, SAXException {
         if (moduleName == null || moduleName.isEmpty() || parsedModules.contains(moduleName)) {
             return;
         }
@@ -159,24 +179,21 @@ public class GwtSourceFilter {
         String moduleBasePackage = moduleFileName.substring(1, moduleFileName.lastIndexOf('/')).replace('/', '.');
 
         try (InputStream moduleFile = GwtSourceFilter.class.getResourceAsStream(moduleFileName)) {
-            loadModule(moduleBasePackage, moduleFile);
+            if (moduleFile != null) {
+                loadModule(moduleBasePackage, moduleFile);
+            }
         }
     }
 
-    private void loadModule(String moduleBasePackage, InputStream moduleFile)
-            throws ParserConfigurationException, IOException, SAXException {
+    private void loadModule(String moduleBasePackage, InputStream moduleFile) throws IOException, SAXException {
         Document document = parseModule(moduleFile);
 
         loadSourcePackages(moduleBasePackage, document);
         loadInheritedModules(document);
     }
 
-    private Document parseModule(InputStream moduleFile)
-            throws ParserConfigurationException, SAXException, IOException {
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+    private Document parseModule(InputStream moduleFile) throws SAXException, IOException {
         Document document = documentBuilder.parse(moduleFile);
-
         document.getDocumentElement().normalize();
 
         return document;
@@ -203,15 +220,14 @@ public class GwtSourceFilter {
         sourcePackages.add(sourcePackage);
     }
 
-    private void loadInheritedModules(Document document)
-            throws IOException, ParserConfigurationException, SAXException {
+    private void loadInheritedModules(Document document) throws IOException, SAXException {
         NodeList inheritsNodes = document.getElementsByTagName(INHERITS_TAG);
         for (int i = 0; i < inheritsNodes.getLength(); ++i) {
             loadInheritedModule(inheritsNodes.item(i));
         }
     }
 
-    private void loadInheritedModule(Node inheritsNode) throws IOException, ParserConfigurationException, SAXException {
+    private void loadInheritedModule(Node inheritsNode) throws IOException, SAXException {
         NamedNodeMap inheritsAttributes = inheritsNode.getAttributes();
         Node nameAttribute = inheritsAttributes.getNamedItem(NAME_ATTRIBUTE);
         String name = nameAttribute.getNodeValue();

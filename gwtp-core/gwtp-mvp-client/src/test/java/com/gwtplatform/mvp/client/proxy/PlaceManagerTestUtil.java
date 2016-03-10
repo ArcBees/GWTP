@@ -18,24 +18,25 @@ package com.gwtplatform.mvp.client.proxy;
 
 import javax.inject.Inject;
 
+import com.google.gwt.place.shared.PlaceHistoryHandler.Historian;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 
+import static org.mockito.Mockito.mock;
+
 /**
- * This place manager overrides all the methods that use
- * GWT-dependent classes and can be used for testing without
+ * This place manager overrides all the methods that use GWT-dependent classes and can be used for testing without
  * having to rely on a {@code GWTTestCase}.
  */
 class PlaceManagerTestUtil extends PlaceManagerImpl {
-
     private final PlaceRequest defaultPlaceRequest = new PlaceRequest.Builder().nameToken("defaultPlace").build();
     private final PlaceManagerWindowMethodsTestUtil gwtWindowMethods;
 
     @Inject
     public PlaceManagerTestUtil(EventBus eventBus, TokenFormatter tokenFormatter,
             PlaceManagerWindowMethodsTestUtil gwtWindowMethods) {
-        super(eventBus, tokenFormatter);
+        super(eventBus, tokenFormatter, mock(Historian.class));
         this.gwtWindowMethods = gwtWindowMethods;
     }
 

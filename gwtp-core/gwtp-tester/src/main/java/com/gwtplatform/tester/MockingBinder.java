@@ -22,15 +22,13 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 
 /**
- * {@link MockingBinder} makes testing view even easier by mocking every
- * {@link UiField} and returning a mocked object upon creation.
+ * {@link MockingBinder} makes testing view even easier by mocking every {@link UiField} and returning a mocked object
+ * upon creation.
  * <p/>
- * To use it, you should build a small class that extends MockingBinder and bind
- * that class inside your Guice test module. You will have to provide a
- * {@link MockFactory} to let MockingBinder mock everything.
+ * To use it, you should build a small class that extends MockingBinder and bind that class inside your Guice test
+ * module. You will have to provide a {@link MockFactory} to let MockingBinder mock everything.
  * <p/>
  * Ex:
- * <p/>
  * <pre>
  * public static class Module extends JukitoModule {
  *  static class MyTestBinder extends MockingBinder&lt;Widget, BlogView&gt; implements
@@ -59,10 +57,11 @@ public abstract class MockingBinder<U, O> implements UiBinder<U, O> {
 
     /**
      * @param returnTypeClass Type to return when creating the mocked ui.
-     * @param mockFactory     A {@link MockFactory} to provide mock object.
+     * @param mockFactory A {@link MockFactory} to provide mock object.
      */
-    public MockingBinder(final Class<U> returnTypeClass,
-            final MockFactory mockFactory) {
+    public MockingBinder(
+            Class<U> returnTypeClass,
+            MockFactory mockFactory) {
         this.returnTypeClass = returnTypeClass;
         this.mockFactory = mockFactory;
     }

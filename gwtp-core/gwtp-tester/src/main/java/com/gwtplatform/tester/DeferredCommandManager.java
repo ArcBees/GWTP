@@ -22,15 +22,13 @@ import java.util.List;
 import com.google.gwt.user.client.Command;
 
 /**
- * This class mimicks GWT's {@link com.google.gwt.user.client.DeferredCommand}
- * but it can be used in test cases without having to rely on a
- * {@link com.google.gwt.junit.client.GWTTestCase}.
+ * This class mimics GWT's {@link com.google.gwt.user.client.DeferredCommand DeferredCommand} but it can be used in test
+ * cases without having to rely on a {@link com.google.gwt.junit.client.GWTTestCase GWTTestCase}.
  * <p/>
- * Use {@link #addCommand(Command)} to add deferred commands, then call
- * {@link #pump()} to process all the deferred commands.
+ * Use {@link #addCommand(Command)} to add deferred commands, then call {@link #pump()} to process all the deferred
+ * commands.
  */
 public class DeferredCommandManager {
-
     private final List<Command> commands = new LinkedList<Command>();
 
     public void addCommand(Command command) {
@@ -42,5 +40,4 @@ public class DeferredCommandManager {
             commands.remove(0).execute();
         }
     }
-
 }

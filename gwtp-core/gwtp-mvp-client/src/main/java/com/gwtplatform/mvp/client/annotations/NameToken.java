@@ -17,14 +17,16 @@
 package com.gwtplatform.mvp.client.annotations;
 
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used on the declaration of a presenter's
- * {@link com.gwtplatform.mvp.client.proxy.ProxyPlace ProxyPlace}
- * to specify the name token to use to access this presenter.
+ * This annotation is used on the declaration of a presenter's {@link com.gwtplatform.mvp.client.proxy.ProxyPlace
+ * ProxyPlace} to specify the name tokens to use to access this presenter.
  */
 @Target(ElementType.TYPE)
+@Retention(RetentionPolicy.SOURCE)
 public @interface NameToken {
     String[] value();
 }
