@@ -17,14 +17,9 @@
 package com.gwtplatform.dispatch.rpc.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.common.client.IndirectProvider;
-import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
-import com.gwtplatform.dispatch.client.OldDelegatingAsyncCallback;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler;
-import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 import com.gwtplatform.dispatch.rpc.shared.Result;
@@ -58,13 +53,11 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
 
     private final DispatchServiceAsync dispatchService;
     private final RpcDispatchHooks dispatchHooks;
-    private final ClientActionHandlerRegistry clientActionHandlerRegistry;
     private final R result;
 
     RpcDispatchUndoCall(
             DispatchServiceAsync dispatchService,
             ExceptionHandler exceptionHandler,
-            ClientActionHandlerRegistry clientActionHandlerRegistry,
             SecurityCookieAccessor securityCookieAccessor,
             RpcDispatchHooks dispatchHooks,
             A action,
@@ -74,7 +67,6 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
 
         this.dispatchService = dispatchService;
         this.dispatchHooks = dispatchHooks;
-        this.clientActionHandlerRegistry = clientActionHandlerRegistry;
         this.result = result;
     }
 
@@ -83,14 +75,7 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
         dispatchHooks.onExecute(getAction(), true);
 
         // TODO: Add support for intercepting undo calls
-
-        // Maintaining support for client action handlers
-        DispatchRequest dispatchRequest = findClientActionHandlerRequest();
-        if (dispatchRequest == null) {
-            return processCall();
-        } else {
-            return dispatchRequest;
-        }
+        return processCall();
     }
 
     @Override
@@ -112,28 +97,5 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
                     }
                 }
         ));
-    }
-
-    /**
-     * @deprecated Since 1.4.
-     */
-    @Deprecated
-    private DispatchRequest findClientActionHandlerRequest() {
-        DispatchRequest request = null;
-
-        A action = getAction();
-        IndirectProvider<ClientActionHandler<?, ?>> clientActionHandlerProvider =
-                clientActionHandlerRegistry.find(action.getClass());
-
-        if (clientActionHandlerProvider != null) {
-            DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
-            OldDelegatingAsyncCallback<A, R> delegatingCallback =
-                    new OldDelegatingAsyncCallback<A, R>(this, action, getCallback(), dispatchRequest);
-
-            clientActionHandlerProvider.get(delegatingCallback);
-
-            request = dispatchRequest;
-        }
-        return request;
     }
 }

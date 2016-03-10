@@ -19,13 +19,11 @@ package com.gwtplatform.tester;
 import com.google.inject.Provider;
 
 /**
- * For use in test cases where an {@link Provider} is required to provide an
- * object and the test case needs to provide a mock of the object.
+ * For use in test cases where an {@link Provider} is required to provide an object and the test case needs to provide a
+ * mock of the object.
  * <p/>
- * Note that the same mock will be returned for every invocation of {{@link #get()}
- * (it behaves as a singleton) which may impact your tests, for example
- * if you rely on {@code ==}. If you're using mockito, consider using the
- * {@link com.gwtplatform.tester.mockito.MockProvider MockProvider} instead.
+ * Note that the same mock will be returned for every invocation of {{@link #get()} (it behaves as a singleton) which
+ * may impact your tests, for example if you rely on {@code ==}.
  *
  * @param <T> The type of mock object provided
  */
@@ -41,6 +39,7 @@ public class MockProvider<T> implements Provider<T> {
         this.mock = mock;
     }
 
+    @Override
     public T get() {
         return this.mock;
     }

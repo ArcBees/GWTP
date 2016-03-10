@@ -18,7 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import javax.inject.Inject;
 
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.place.shared.PlaceHistoryHandler.Historian;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.DefaultPlace;
@@ -31,14 +30,11 @@ import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
  * This is a subtype of {@link com.gwtplatform.mvp.client.proxy.PlaceManagerImpl PlaceManagerImpl} that uses
  * custom name tokens to reveal default, error and unauthorized places.
  * <p/>
- * <b>Important! </b>If you use this class, don't forget to bind
- * {@link com.gwtplatform.mvp.client.annotations.DefaultPlace DefaultPlace},
- * {@link com.gwtplatform.mvp.client.annotations.ErrorPlace ErrorPlace} and
- * {@link com.gwtplatform.mvp.client.annotations.UnauthorizedPlace UnauthorizedPlace} to Presenter name tokens in
- * your Gin module.
+ * <b>Important! </b>If you use this class, don't forget to bind {@link DefaultPlace DefaultPlace},
+ * {@link ErrorPlace ErrorPlace} and {@link UnauthorizedPlace UnauthorizedPlace} to valid name tokens.
  * <p/>
  * <i>Note: </i>The default, error and unauthorized places are revealed without updating the browser's URL (hence
- * the false value passed in {@link #revealPlace(com.gwtplatform.mvp.shared.proxy.PlaceRequest, boolean) revealPlace}).
+ * the false value passed in {@link #revealPlace(PlaceRequest, boolean) revealPlace}).
  * This will avoid stepping into an infinite navigation loop if the user navigates back (using the browser's back
  * button).
  * <p/>
@@ -54,27 +50,14 @@ public class DefaultPlaceManager extends PlaceManagerImpl {
     private final PlaceRequest errorPlaceRequest;
     private final PlaceRequest unauthorizedPlaceRequest;
 
-    /**
-     * @deprecated Since 1.4.
-     */
-    @Deprecated
-    public DefaultPlaceManager(EventBus eventBus,
+    @Inject
+    public DefaultPlaceManager(
+            EventBus eventBus,
             TokenFormatter tokenFormatter,
             @DefaultPlace String defaultPlaceNameToken,
             @ErrorPlace String errorPlaceNameToken,
-            @UnauthorizedPlace String unauthorizedPlaceNameToken) {
-        this(eventBus, tokenFormatter, defaultPlaceNameToken,
-                errorPlaceNameToken, unauthorizedPlaceNameToken,
-                (Historian) GWT.create(Historian.class));
-    }
-
-    @Inject
-    public DefaultPlaceManager(EventBus eventBus,
-                               TokenFormatter tokenFormatter,
-                               @DefaultPlace String defaultPlaceNameToken,
-                               @ErrorPlace String errorPlaceNameToken,
-                               @UnauthorizedPlace String unauthorizedPlaceNameToken,
-                               Historian historian) {
+            @UnauthorizedPlace String unauthorizedPlaceNameToken,
+            Historian historian) {
         super(eventBus, tokenFormatter, historian);
 
         defaultPlaceRequest = new PlaceRequest.Builder().nameToken(defaultPlaceNameToken).build();

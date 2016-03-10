@@ -6,4 +6,5 @@
     <inherits name="com.gwtplatform.processors.tools.module3.GwtSourceFilterTestModule"/>
 
     <source path="client"/>
+    <source path="client/potatoes/red"/>
 </module>

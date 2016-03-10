@@ -21,7 +21,6 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.user.client.Command;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
 
 /**
  * This is the handler class for {@link RevealContentEvent}. It should be used
@@ -32,25 +31,23 @@ import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
  * @param <T> The Presenter's type.
  */
 public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHandler {
-
     private final EventBus eventBus;
     private final ProxyImpl<T> proxy;
 
-    public RevealContentHandler(final EventBus eventBus,
-            final ProxyImpl<T> proxy) {
+    public RevealContentHandler(
+            EventBus eventBus,
+            ProxyImpl<T> proxy) {
         this.eventBus = eventBus;
         this.proxy = proxy;
     }
 
     /**
-     * This is the dispatched method. Reveals
+     * This is the dispatched method.
      *
-     * @param revealContentEvent The event containing the presenter that wants to
-     *                           bet set as content.
+     * @param event The event containing the presenter that wants to bet set as content.
      */
-    public final void onRevealContent(final RevealContentEvent revealContentEvent) {
+    public final void onRevealContent(final RevealContentEvent event) {
         proxy.getPresenter(new NotifyingAsyncCallback<T>(eventBus) {
-
             @Override
             public void success(final T presenter) {
                 // Deferring is needed because the event bus enqueues and delays handler
@@ -63,17 +60,10 @@ public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHan
                     @Override
                     public void execute() {
                         presenter.forceReveal();
-                        if (revealContentEvent.getAssociatedType() instanceof NestedSlot) {
-                            presenter.setInSlot((NestedSlot) revealContentEvent.getAssociatedType(),
-                                    revealContentEvent.getContent());
-                        } else {
-                            presenter.setInSlot(revealContentEvent.getAssociatedType(),
-                                    revealContentEvent.getContent());
-                        }
+                        presenter.setInSlot(event.getAssociatedType(), event.getContent());
                     }
                 });
             }
         });
     }
-
 }

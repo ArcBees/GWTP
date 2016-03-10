@@ -38,14 +38,6 @@ public class PhoneGapDispatchAsyncModule extends RpcDispatchAsyncModule {
         }
     }
 
-    /**
-     * @deprecated Since 1.4. Use the PhoneGapDispatchAsyncModule.Builder class
-     */
-    @Deprecated
-    public PhoneGapDispatchAsyncModule() {
-        this(new Builder());
-    }
-
     protected PhoneGapDispatchAsyncModule(Builder builder) {
         super(builder);
     }
