@@ -8,7 +8,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class CachedPageTest {
-
     private static final int LONG_TIMEOUT = 2000;
     private static final int SHORT_TIMEOUT = 500;
 

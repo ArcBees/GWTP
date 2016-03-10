@@ -228,7 +228,6 @@
         <target.jdk>1.7</target.jdk>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <gwt.style>OBF</gwt.style>
         <maven-site-plugin.skip>false</maven-site-plugin.skip>
 
         <!-- Maven -->
@@ -268,7 +267,7 @@
         <spring.version>4.0.5.RELEASE</spring.version>
         <velocity.version>1.7</velocity.version>
         <auto-common.version>1.0-SNAPSHOT</auto-common.version>
-        <auto-service.version>1.0-SNAPSHOT</auto-service.version>
+        <auto-service.version>1.0-rc2</auto-service.version>
         <htmlunit.version>2.15</htmlunit.version>
 
         <!-- Testing -->
@@ -562,7 +561,7 @@
     <dependencyManagement>
         <dependencies>
             <!-- Processor dependencies -->
-            <!-- TODO: Shade velocity, common and guava -->
+            <!-- TODO: Shade velocity, auto and guava -->
             <dependency>
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity</artifactId>
