@@ -71,7 +71,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
         boolean elementsProcessed = processGwtElements(roundEnv);
 
         if (elementsProcessed) {
-            flushBindingsProcessors();
+            bindingsProcessors.process(flushModule(findRestModuleType(utils)));
         }
 
         maybeProcessLastRound(roundEnv);
@@ -101,15 +101,10 @@ public class DispatchRestProcessor extends AbstractProcessor {
         }
     }
 
-    private void flushBindingsProcessors() {
-        bindingsProcessors.process(flushModule(findRestModuleType(utils)));
-    }
-
     private void maybeProcessLastRound(RoundEnvironment roundEnv) {
         if (roundEnv.processingOver()) {
             resourceProcessor.processLast();
             serializationProcessors.processLast();
-            bindingsProcessors.processLast();
         }
     }
 }

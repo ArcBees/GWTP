@@ -123,13 +123,6 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
         setBinders.remove(moduleType);
     }
 
-    @Override
-    public void processLast() {
-        for (Type moduleType : sourceFiles.keySet()) {
-            outputModule(moduleType);
-        }
-    }
-
     private void outputModule(Type moduleType) {
         logger.debug("Generating GIN module `%s`.", moduleType.getQualifiedName());
 

@@ -26,7 +26,6 @@ public class BindingsProcessors {
     private static final String NO_BINDING_POLICIES_FOUND = "Can not find a binding policy for `%s`.";
 
     private static ServiceLoader<BindingsProcessor> processors;
-    private static boolean processedLast;
     private static boolean initialized;
 
     private final Logger logger;
@@ -60,18 +59,6 @@ public class BindingsProcessors {
 
         if (!processed) {
             logger.mandatoryWarning(NO_BINDING_POLICIES_FOUND, context);
-        }
-    }
-
-    public void processLast() {
-        ensureInitialized();
-
-        if (!processedLast) {
-            processedLast = true;
-
-            for (BindingsProcessor processor : processors) {
-                processor.processLast();
-            }
         }
     }
 

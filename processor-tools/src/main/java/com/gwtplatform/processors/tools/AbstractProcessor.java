@@ -58,7 +58,7 @@ public abstract class AbstractProcessor extends javax.annotation.processing.Abst
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        SupportedAnnotationTypes supportedTypes = this.getClass().getAnnotation(SupportedAnnotationTypes.class);
+        SupportedAnnotationTypes supportedTypes = getClass().getAnnotation(SupportedAnnotationTypes.class);
         SupportedAnnotationClasses supportedClasses = getClass().getAnnotation(SupportedAnnotationClasses.class);
 
         Set<String> supportedAnnotations = new HashSet<>();
