@@ -33,6 +33,7 @@ import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.utils.MetaInfResource;
 
 import static com.google.auto.common.MoreElements.asType;
+import static com.gwtplatform.processors.tools.bindings.BindingContext.flushModule;
 import static com.gwtplatform.processors.tools.bindings.BindingContext.newModule;
 import static com.gwtplatform.processors.tools.bindings.BindingContext.newSubModule;
 
@@ -70,7 +71,7 @@ public class GwtpAppModuleProcessor extends AbstractGwtpAppProcessor {
         installModules(extractModules(roundEnv));
 
         if (roundEnv.processingOver()) {
-            bindingsProcessors.processLast();
+            bindingsProcessors.process(flushModule(MAIN_MODULE_TYPE));
         }
     }
 

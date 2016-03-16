@@ -44,7 +44,6 @@ public class MainProxyProcessor extends AbstractProcessor {
 
     private Factory proxyFactory;
 
-    private BindingsProcessors bindingsProcessors;
     private ProxyProcessors proxyProcessors;
     private ProxyModules proxyModules;
     private NamedProviderBundleProcessor providerBundleProcessor;
@@ -57,8 +56,7 @@ public class MainProxyProcessor extends AbstractProcessor {
     @Override
     protected void initSafe() {
         proxyFactory = new ProxyDetailsFactory(logger, utils);
-        bindingsProcessors = new BindingsProcessors(logger, utils, outputter);
-        proxyModules = new ProxyModules(utils, bindingsProcessors);
+        proxyModules = new ProxyModules(utils, new BindingsProcessors(logger, utils, outputter));
         providerBundleProcessor = new NamedProviderBundleProcessor();
         proxyProcessors = new ProxyProcessors(logger, utils, outputter, proxyModules, providerBundleProcessor);
 
@@ -105,7 +103,6 @@ public class MainProxyProcessor extends AbstractProcessor {
         if (roundEnv.processingOver()) {
             providerBundleProcessor.processLast();
             proxyProcessors.processLast();
-            bindingsProcessors.processLast();
         }
     }
 }

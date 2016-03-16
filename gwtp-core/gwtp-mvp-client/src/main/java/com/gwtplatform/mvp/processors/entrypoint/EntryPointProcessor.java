@@ -71,10 +71,6 @@ public class EntryPointProcessor extends AbstractProcessor {
 
             generated = true;
         }
-
-        if (generated && roundEnv.processingOver()) {
-            bindingsProcessors.processLast();
-        }
     }
 
     private TypeElement findGwtpAppElement(RoundEnvironment roundEnv) {
