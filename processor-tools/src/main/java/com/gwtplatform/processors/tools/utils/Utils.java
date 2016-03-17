@@ -27,7 +27,6 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.processors.tools.GwtSourceFilter;
 import com.gwtplatform.processors.tools.logger.Logger;
@@ -92,12 +91,13 @@ public class Utils {
     }
 
     public TypeMirror createWithTypeArguments(String qualifiedName, TypeMirror... typeArguments) {
-        if (typeArguments == null) {
-            typeArguments = new TypeMirror[0];
+        TypeMirror[] typeMirrors = typeArguments;
+        if (typeMirrors == null) {
+            typeMirrors = new TypeMirror[0];
         }
 
         TypeElement element = elements.getTypeElement(qualifiedName);
-        return types.getDeclaredType(element, typeArguments);
+        return types.getDeclaredType(element, typeMirrors);
     }
 
     public List<Element> getAllMembers(TypeElement type, Class<?> exclusion) {
@@ -108,12 +108,7 @@ public class Utils {
         List<? extends Element> allMembers = elements.getAllMembers(type);
 
         final Set<Element> allExclusions = exclusions == null ? null : FluentIterable.of(exclusions)
-                .transformAndConcat(new Function<TypeElement, Iterable<? extends Element>>() {
-                    @Override
-                    public Iterable<? extends Element> apply(TypeElement exclusion) {
-                        return elements.getAllMembers(exclusion);
-                    }
-                }).toSet();
+                .transformAndConcat(elements::getAllMembers).toSet();
 
         return FluentIterable.from(allMembers)
                 .transform(new Function<Element, Element>() {
@@ -124,12 +119,7 @@ public class Utils {
                         return element;
                     }
                 })
-                .filter(new Predicate<Element>() {
-                    @Override
-                    public boolean apply(Element element) {
-                        return allExclusions == null || !allExclusions.contains(element);
-                    }
-                })
+                .filter(element -> allExclusions == null || !allExclusions.contains(element))
                 .toList();
     }
 

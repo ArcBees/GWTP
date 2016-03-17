@@ -28,7 +28,7 @@ import com.google.web.bindery.event.shared.EventBus;
  * @see AsyncCallFailEvent
  */
 public class AsyncCallSucceedEvent extends GwtEvent<AsyncCallSucceedHandler> {
-    private static final Type<AsyncCallSucceedHandler> TYPE = new Type<AsyncCallSucceedHandler>();
+    private static final Type<AsyncCallSucceedHandler> TYPE = new Type<>();
 
     AsyncCallSucceedEvent() {
     }

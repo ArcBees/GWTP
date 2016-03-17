@@ -72,7 +72,7 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
 
     public static Type<PlaceRequestInternalHandler> getType() {
         if (TYPE == null) {
-            TYPE = new Type<PlaceRequestInternalHandler>();
+            TYPE = new Type<>();
         }
         return TYPE;
     }

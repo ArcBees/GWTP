@@ -146,7 +146,7 @@ public class RootPresenter extends PresenterWidget<RootPresenter.RootView>
         }
     }
 
-    private static final SingleSlot<Presenter<?,?>> rootSlot = new SingleSlot<Presenter<?,?>>();
+    private static final SingleSlot<Presenter<?,?>> rootSlot = new SingleSlot<>();
 
     private boolean isResetting;
 

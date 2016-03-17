@@ -33,6 +33,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -124,9 +125,11 @@ class ProviderBundleMetaInfReader {
     private void loadBundlesFromStream(String bundleName, InputStream stream) throws IOException {
         List<Type> bundleCollection = getOrCreateBundleCollection(bundleName);
 
-        for (String bundle : readLines(new InputStreamReader(stream))) {
-            bundleCollection.add(new Type(bundle));
-        }
+        bundleCollection.addAll(
+                readLines(new InputStreamReader(stream))
+                        .stream()
+                        .map(Type::new)
+                        .collect(Collectors.toList()));
     }
 
     private List<Type> getOrCreateBundleCollection(String bundleName) {

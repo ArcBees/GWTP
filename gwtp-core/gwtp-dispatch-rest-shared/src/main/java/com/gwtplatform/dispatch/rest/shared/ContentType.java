@@ -51,7 +51,7 @@ public class ContentType {
     public static ContentType valueOf(String value) {
         String type = WILDCARD;
         String subType = WILDCARD;
-        Map<String, String> parameters = new HashMap<String, String>();
+        Map<String, String> parameters = new HashMap<>();
 
         if (value != null) {
             String[] parts = value.split(PARAMETER_DELIMITER);

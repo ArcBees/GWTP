@@ -64,7 +64,7 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
      * @return the parameter builder instance
      */
     public RestParameterBuilder<B> addGlobalHeaderParam(String key) {
-        return new RestParameterBuilder<B>(self(), Type.HEADER, globalHeaderParams, key);
+        return new RestParameterBuilder<>(self(), Type.HEADER, globalHeaderParams, key);
     }
 
     /**
@@ -75,7 +75,7 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
      * @return the parameter builder instance
      */
     public RestParameterBuilder<B> addGlobalQueryParam(String key) {
-        return new RestParameterBuilder<B>(self(), Type.QUERY, globalQueryParams, key);
+        return new RestParameterBuilder<>(self(), Type.QUERY, globalQueryParams, key);
     }
 
     /**

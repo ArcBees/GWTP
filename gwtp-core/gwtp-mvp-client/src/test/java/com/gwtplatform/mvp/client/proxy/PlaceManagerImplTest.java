@@ -90,7 +90,7 @@ public class PlaceManagerImplTest {
     static class DummyProxyBasic extends ProxyImpl<DummyPresenterBasic> {
         @Inject
         public DummyProxyBasic(Provider<DummyPresenterBasic> presenter) {
-            this.presenter = new StandardProvider<DummyPresenterBasic>(presenter);
+            this.presenter = new StandardProvider<>(presenter);
         }
     }
 
@@ -157,7 +157,7 @@ public class PlaceManagerImplTest {
     static class DummyProxyRedirect extends ProxyImpl<DummyPresenterRedirect> {
         @Inject
         public DummyProxyRedirect(Provider<DummyPresenterRedirect> presenter) {
-            this.presenter = new StandardProvider<DummyPresenterRedirect>(presenter);
+            this.presenter = new StandardProvider<>(presenter);
         }
     }
 
@@ -199,7 +199,7 @@ public class PlaceManagerImplTest {
     static class DummyProxyRedirectNoHistory extends ProxyImpl<DummyPresenterRedirectNoHistory> {
         @Inject
         public DummyProxyRedirectNoHistory(Provider<DummyPresenterRedirectNoHistory> presenter) {
-            this.presenter = new StandardProvider<DummyPresenterRedirectNoHistory>(presenter);
+            this.presenter = new StandardProvider<>(presenter);
         }
     }
 

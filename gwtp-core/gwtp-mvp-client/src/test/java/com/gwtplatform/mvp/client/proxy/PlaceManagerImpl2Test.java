@@ -25,11 +25,8 @@ import org.jukito.JukitoRunner;
 import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import com.google.gwt.junit.GWTMockUtilities;
-import com.google.gwt.user.client.Command;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.tester.DeferredCommandManager;
@@ -73,20 +70,12 @@ public class PlaceManagerImpl2Test {
     @Test
     public void placeManagerUserCallUpdateHistoryWhenRevealingPlace() {
         // Given
-        doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                deferredCommandManager.addCommand(new Command() {
-                    @Override
-                    public void execute() {
-                        placeManager.updateHistory(new PlaceRequest.Builder().nameToken("dummyNameToken")
-                                .with("dummyParam", "dummyValue").build(), true);
-                    }
-                });
-                ((PlaceRequestInternalEvent) args[0]).setHandled();
-                return null;
-            }
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            deferredCommandManager.addCommand(() -> placeManager.updateHistory(new PlaceRequest.Builder()
+                    .nameToken("dummyNameToken").with("dummyParam", "dummyValue").build(), true));
+            ((PlaceRequestInternalEvent) args[0]).setHandled();
+            return null;
         }).when(eventBus).fireEventFromSource(isA(PlaceRequestInternalEvent.class), eq(placeManager));
 
         // When
@@ -105,19 +94,13 @@ public class PlaceManagerImpl2Test {
     @Test
     public void placeManagerRevealRelativePlaceWithZeroLevelShouldGoToDefaultPlace() {
         // Given
-        doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                deferredCommandManager.addCommand(new Command() {
-                    @Override
-                    public void execute() {
-                        placeManager.updateHistory(new PlaceRequest.Builder().nameToken("defaultPlace").build(), true);
-                    }
-                });
-                ((PlaceRequestInternalEvent) args[0]).setHandled();
-                return null;
-            }
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            deferredCommandManager.addCommand(
+                    () -> placeManager.updateHistory(new PlaceRequest.Builder().nameToken("defaultPlace").build(),
+                            true));
+            ((PlaceRequestInternalEvent) args[0]).setHandled();
+            return null;
         }).when(eventBus).fireEventFromSource(isA(PlaceRequestInternalEvent.class), eq(placeManager));
 
         // When
@@ -135,19 +118,13 @@ public class PlaceManagerImpl2Test {
     @Test
     public void placeManagerRevealPlaceHierarchyWithEmptyHierarchyShouldGoToDefaultPlace() {
         // Given
-        doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) throws Throwable {
-                Object[] args = invocation.getArguments();
-                deferredCommandManager.addCommand(new Command() {
-                    @Override
-                    public void execute() {
-                        placeManager.updateHistory(new PlaceRequest.Builder().nameToken("defaultPlace").build(), true);
-                    }
-                });
-                ((PlaceRequestInternalEvent) args[0]).setHandled();
-                return null;
-            }
+        doAnswer(invocation -> {
+            Object[] args = invocation.getArguments();
+            deferredCommandManager.addCommand(
+                    () -> placeManager.updateHistory(new PlaceRequest.Builder().nameToken("defaultPlace").build(),
+                            true));
+            ((PlaceRequestInternalEvent) args[0]).setHandled();
+            return null;
         }).when(eventBus).fireEventFromSource(isA(PlaceRequestInternalEvent.class), eq(placeManager));
 
         // When

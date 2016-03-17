@@ -33,7 +33,7 @@ public class MultipleResult<T> implements Result {
     private ArrayList<T> value;
 
     public MultipleResult(List<T> value) {
-        this.value = new ArrayList<T>(value);
+        this.value = new ArrayList<>(value);
     }
 
     protected MultipleResult() {

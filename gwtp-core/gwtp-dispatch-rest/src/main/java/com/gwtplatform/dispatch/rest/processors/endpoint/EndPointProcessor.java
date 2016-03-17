@@ -16,9 +16,9 @@
 
 package com.gwtplatform.dispatch.rest.processors.endpoint;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
@@ -71,11 +71,9 @@ public class EndPointProcessor extends DispatchRestContextProcessor<EndPoint, Vo
     }
 
     private List<CodeSnippet> createInitializerSnippets(Collection<HttpVariable> httpVariables) {
-        List<CodeSnippet> codeSnippets = new ArrayList<>();
-
-        for (HttpVariable httpVariable : httpVariables) {
-            codeSnippets.add(httpVariableInitializerProcessors.process(httpVariable));
-        }
+        List<CodeSnippet> codeSnippets = httpVariables.stream()
+                .map(httpVariable -> httpVariableInitializerProcessors.process(httpVariable))
+                .collect(Collectors.toList());
 
         return codeSnippets;
     }

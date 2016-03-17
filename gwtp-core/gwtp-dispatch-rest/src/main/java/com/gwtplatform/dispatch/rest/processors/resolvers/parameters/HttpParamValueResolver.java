@@ -25,7 +25,6 @@ import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
@@ -53,14 +52,11 @@ public abstract class HttpParamValueResolver {
 
         // The FluentIterable will lazily initialize resolvers
         return FluentIterable.from(serviceLoader)
-                .transform(new Function<HttpParamValueResolver, HttpParamValueResolver>() {
-                    @Override
-                    public HttpParamValueResolver apply(HttpParamValueResolver resolver) {
-                        if (!resolver.initialized) {
-                            resolver.init(utils, logger);
-                        }
-                        return resolver;
+                .transform(resolver -> {
+                    if (!resolver.initialized) {
+                        resolver.init(utils, logger);
                     }
+                    return resolver;
                 });
     }
 

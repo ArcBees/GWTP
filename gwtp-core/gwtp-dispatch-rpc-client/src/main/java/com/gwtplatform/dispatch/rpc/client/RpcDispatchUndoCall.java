@@ -64,7 +64,7 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
             A action,
             R result,
             AsyncCallback<Void> callback) {
-        super(exceptionHandler, securityCookieAccessor, action, new AsyncCallbackWrapper<R>(callback));
+        super(exceptionHandler, securityCookieAccessor, action, new AsyncCallbackWrapper<>(callback));
 
         this.dispatchService = dispatchService;
         this.dispatchHooks = dispatchHooks;

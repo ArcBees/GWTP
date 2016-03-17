@@ -90,7 +90,7 @@ public class GatekeeperTest {
     static class DummyProxyWithDenyGatekeeper extends ProxyImpl<DummyPresenterWithDenyGatekeeper> {
         @Inject
         public DummyProxyWithDenyGatekeeper(Provider<DummyPresenterWithDenyGatekeeper> presenter) {
-            this.presenter = new StandardProvider<DummyPresenterWithDenyGatekeeper>(presenter);
+            this.presenter = new StandardProvider<>(presenter);
         }
     }
 
@@ -125,7 +125,7 @@ public class GatekeeperTest {
     static class DummyProxyWithGrantGatekeeper extends ProxyImpl<DummyPresenterWithGrantGatekeeper> {
         @Inject
         public DummyProxyWithGrantGatekeeper(Provider<DummyPresenterWithGrantGatekeeper> presenter) {
-            this.presenter = new StandardProvider<DummyPresenterWithGrantGatekeeper>(presenter);
+            this.presenter = new StandardProvider<>(presenter);
         }
     }
 
@@ -158,7 +158,7 @@ public class GatekeeperTest {
     static class DummyProxyDefault extends ProxyImpl<DummyPresenterDefault> {
         @Inject
         public DummyProxyDefault(Provider<DummyPresenterDefault> presenter) {
-            this.presenter = new StandardProvider<DummyPresenterDefault>(presenter);
+            this.presenter = new StandardProvider<>(presenter);
         }
     }
 

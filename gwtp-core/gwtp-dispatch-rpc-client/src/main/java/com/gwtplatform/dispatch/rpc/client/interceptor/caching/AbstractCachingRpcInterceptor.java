@@ -58,7 +58,7 @@ public abstract class AbstractCachingRpcInterceptor<A, R> extends AbstractRpcInt
 
     // Holds callbacks, so that for multiple requests before the first returns (is served), we save round trips as well
     private final Map<A, List<CallbackDispatchRequest<R>>> pendingRequestCallbackMap =
-            new HashMap<A, List<CallbackDispatchRequest<R>>>();
+            new HashMap<>();
 
     public AbstractCachingRpcInterceptor(Class<A> actionType, Cache cache) {
         super(actionType);
@@ -73,7 +73,7 @@ public abstract class AbstractCachingRpcInterceptor<A, R> extends AbstractRpcInt
 
         if (pendingRequestCallbacks != null) {
             CallbackDispatchRequest<R> callbackDispatchRequest =
-                    new DefaultCallbackDispatchRequest<R>(resultCallback);
+                    new DefaultCallbackDispatchRequest<>(resultCallback);
 
             // Add callback to pending list and return
             pendingRequestCallbacks.add(callbackDispatchRequest);
@@ -126,9 +126,9 @@ public abstract class AbstractCachingRpcInterceptor<A, R> extends AbstractRpcInt
                     });
 
             // Add pending callback
-            ArrayList<CallbackDispatchRequest<R>> resultRequestCallbacks = new ArrayList<CallbackDispatchRequest<R>>();
+            ArrayList<CallbackDispatchRequest<R>> resultRequestCallbacks = new ArrayList<>();
 
-            CallbackDispatchRequest<R> callbackDispatchRequest = new DelegatingCallbackDispatchRequest<R>(request,
+            CallbackDispatchRequest<R> callbackDispatchRequest = new DelegatingCallbackDispatchRequest<>(request,
                     resultCallback);
             resultRequestCallbacks.add(callbackDispatchRequest);
 

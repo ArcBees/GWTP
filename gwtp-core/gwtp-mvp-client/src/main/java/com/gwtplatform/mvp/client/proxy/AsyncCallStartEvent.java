@@ -29,7 +29,7 @@ import com.google.web.bindery.event.shared.EventBus;
  * @see AsyncCallFailEvent
  */
 public class AsyncCallStartEvent extends GwtEvent<AsyncCallStartHandler> {
-    private static final Type<AsyncCallStartHandler> TYPE = new Type<AsyncCallStartHandler>();
+    private static final Type<AsyncCallStartHandler> TYPE = new Type<>();
 
     AsyncCallStartEvent() {
     }

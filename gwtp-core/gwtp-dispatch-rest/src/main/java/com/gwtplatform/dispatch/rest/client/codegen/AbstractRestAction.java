@@ -63,7 +63,7 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
 
     @Override
     public List<HttpParameter> getParameters(Type type) {
-        List<HttpParameter> filteredParams = new ArrayList<HttpParameter>();
+        List<HttpParameter> filteredParams = new ArrayList<>();
         for (HttpParameter parameter : parameters) {
             if (parameter.getType() == type && parameter.getObject() != null) {
                 filteredParams.add(parameter);

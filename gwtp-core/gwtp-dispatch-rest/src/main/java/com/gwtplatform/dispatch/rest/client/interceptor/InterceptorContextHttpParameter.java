@@ -50,6 +50,6 @@ class InterceptorContextHttpParameter implements HttpParameter {
 
     @Override
     public List<Entry<String, String>> getEncodedEntries() {
-        return new ArrayList<Entry<String, String>>();
+        return new ArrayList<>();
     }
 }

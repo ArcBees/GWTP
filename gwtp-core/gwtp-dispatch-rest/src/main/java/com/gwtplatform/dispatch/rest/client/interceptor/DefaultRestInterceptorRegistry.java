@@ -20,7 +20,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.google.gwt.inject.client.AsyncProvider;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Provider;
 import com.gwtplatform.common.client.CodeSplitBundleProvider;
 import com.gwtplatform.common.client.IndirectProvider;
@@ -69,7 +68,7 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  */
 public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     private final Map<InterceptorContext, IndirectProvider<RestInterceptor>> interceptors =
-            new LinkedHashMap<InterceptorContext, IndirectProvider<RestInterceptor>>();
+            new LinkedHashMap<>();
 
     @Override
     public <A> IndirectProvider<RestInterceptor> find(A action) {
@@ -97,12 +96,7 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     protected void register(final RestInterceptor interceptor) {
         for (InterceptorContext context : interceptor.getInterceptorContexts()) {
             register(context,
-                    new IndirectProvider<RestInterceptor>() {
-                        @Override
-                        public void get(AsyncCallback<RestInterceptor> callback) {
-                            callback.onSuccess(interceptor);
-                        }
-                    });
+                    (IndirectProvider<RestInterceptor>) callback -> callback.onSuccess(interceptor));
         }
     }
 
@@ -115,12 +109,7 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     protected void register(InterceptorContext context,
                             final Provider<RestInterceptor> handlerProvider) {
         register(context,
-                new IndirectProvider<RestInterceptor>() {
-                    @Override
-                    public void get(AsyncCallback<RestInterceptor> callback) {
-                        callback.onSuccess(handlerProvider.get());
-                    }
-                });
+                (IndirectProvider<RestInterceptor>) callback -> callback.onSuccess(handlerProvider.get()));
     }
 
     /**
@@ -132,12 +121,7 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     protected void register(InterceptorContext context,
                             final AsyncProvider<RestInterceptor> handlerProvider) {
         register(context,
-                new IndirectProvider<RestInterceptor>() {
-                    @Override
-                    public void get(AsyncCallback<RestInterceptor> callback) {
-                        handlerProvider.get(callback);
-                    }
-                });
+                (IndirectProvider<RestInterceptor>) handlerProvider::get);
     }
 
     /**
@@ -151,7 +135,7 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     protected <B extends ProviderBundle> void register(InterceptorContext context,
                                                        AsyncProvider<B> bundleProvider,
                                                        int providerId) {
-        register(context, new CodeSplitBundleProvider<RestInterceptor, B>(bundleProvider, providerId));
+        register(context, new CodeSplitBundleProvider<>(bundleProvider, providerId));
     }
 
     /**

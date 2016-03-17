@@ -60,7 +60,7 @@ public class PlaceRequestTest {
     @Test
     public void shouldBuildRequestWithParameterMap() {
         // given
-        Map<String, String> existingParameters = new HashMap<String, String>();
+        Map<String, String> existingParameters = new HashMap<>();
         existingParameters.put("name1", "value1");
         existingParameters.put("name2", "value2");
 

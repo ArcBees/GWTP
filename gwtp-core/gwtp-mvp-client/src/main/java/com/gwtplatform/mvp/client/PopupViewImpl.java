@@ -16,18 +16,12 @@
 
 package com.gwtplatform.mvp.client;
 
-import com.google.gwt.event.logical.shared.CloseEvent;
-import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.gwt.event.logical.shared.ResizeEvent;
-import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.PopupPanel;
-import com.google.gwt.user.client.ui.PopupPanel.PositionCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import com.gwtplatform.mvp.client.proxy.NavigationEvent;
-import com.gwtplatform.mvp.client.proxy.NavigationHandler;
 import com.gwtplatform.mvp.client.view.CenterPopupPositioner;
 import com.gwtplatform.mvp.client.view.PopupPositioner;
 import com.gwtplatform.mvp.client.view.PopupPositioner.PopupPosition;
@@ -73,12 +67,9 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
         setPopupPositioner(positioner);
 
         if (repositionOnWindowResize()) {
-            Window.addResizeHandler(new ResizeHandler() {
-                @Override
-                public void onResize(ResizeEvent event) {
-                    if (asPopupPanel().isShowing()) {
-                        showAndReposition();
-                    }
+            Window.addResizeHandler(event -> {
+                if (asPopupPanel().isShowing()) {
+                    showAndReposition();
                 }
             });
         }
@@ -100,12 +91,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
             if (autoHideHandler != null) {
                 return;
             }
-            autoHideHandler = eventBus.addHandler(NavigationEvent.getType(), new NavigationHandler() {
-                @Override
-                public void onNavigation(NavigationEvent navigationEvent) {
-                    hide();
-                }
-            });
+            autoHideHandler = eventBus.addHandler(NavigationEvent.getType(), navigationEvent -> hide());
         } else {
             if (autoHideHandler != null) {
                 autoHideHandler.removeHandler();
@@ -117,12 +103,9 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     public void setCloseHandler(final PopupViewCloseHandler popupViewCloseHandler) {
         this.popupViewCloseHandler = popupViewCloseHandler;
         if (closeHandlerRegistration == null) {
-            closeHandlerRegistration = asPopupPanel().addCloseHandler(new CloseHandler<PopupPanel>() {
-                @Override
-                public void onClose(CloseEvent<PopupPanel> event) {
-                    if (PopupViewImpl.this.popupViewCloseHandler != null) {
-                        PopupViewImpl.this.popupViewCloseHandler.onClose();
-                    }
+            closeHandlerRegistration = asPopupPanel().addCloseHandler(event -> {
+                if (PopupViewImpl.this.popupViewCloseHandler != null) {
+                    PopupViewImpl.this.popupViewCloseHandler.onClose();
                 }
             });
         }
@@ -141,12 +124,9 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
     @Override
     public void showAndReposition() {
         onReposition();
-        asPopupPanel().setPopupPositionAndShow(new PositionCallback() {
-            @Override
-            public void setPosition(int offsetWidth, int offsetHeight) {
-                PopupPosition popupPosition = positioner.getPopupPosition(offsetWidth, offsetHeight);
-                asPopupPanel().setPopupPosition(popupPosition.getLeft(), popupPosition.getTop());
-            }
+        asPopupPanel().setPopupPositionAndShow((offsetWidth, offsetHeight) -> {
+            PopupPosition popupPosition = positioner.getPopupPosition(offsetWidth, offsetHeight);
+            asPopupPanel().setPopupPosition(popupPosition.getLeft(), popupPosition.getTop());
         });
     }
 

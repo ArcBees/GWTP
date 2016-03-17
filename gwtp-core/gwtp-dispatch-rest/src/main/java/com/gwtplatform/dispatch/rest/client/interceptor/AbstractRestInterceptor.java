@@ -38,7 +38,7 @@ public abstract class AbstractRestInterceptor extends AbstractInterceptor<RestAc
             InterceptorContext... moreContexts) {
         super(RestAction.class);
 
-        List<InterceptorContext> contexts = new ArrayList<InterceptorContext>();
+        List<InterceptorContext> contexts = new ArrayList<>();
         contexts.add(context);
 
         if (moreContexts != null) {

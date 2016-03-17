@@ -53,13 +53,13 @@ public abstract class AbstractDispatchImpl implements Dispatch {
 
         private DefaultExecutionContext(AbstractDispatchImpl dispatch) {
             this.dispatch = dispatch;
-            this.actionResults = new java.util.ArrayList<ActionResult<?, ?>>();
+            this.actionResults = new java.util.ArrayList<>();
         }
 
         @Override
         public <A extends Action<R>, R extends Result> R execute(A action) throws ActionException, ServiceException {
             R result = dispatch.doExecute(action, this);
-            actionResults.add(new ActionResult<A, R>(action, result, true));
+            actionResults.add(new ActionResult<>(action, result, true));
             return result;
         }
 
@@ -67,7 +67,7 @@ public abstract class AbstractDispatchImpl implements Dispatch {
         public <A extends Action<R>, R extends Result> void undo(A action, R result) throws ActionException,
                 ServiceException {
             dispatch.doExecute(action, this);
-            actionResults.add(new ActionResult<A, R>(action, result, false));
+            actionResults.add(new ActionResult<>(action, result, false));
         }
 
         /**
@@ -108,10 +108,7 @@ public abstract class AbstractDispatchImpl implements Dispatch {
         DefaultExecutionContext ctx = new DefaultExecutionContext(this);
         try {
             return doExecute(action, ctx);
-        } catch (ActionException e) {
-            ctx.rollback();
-            throw e;
-        } catch (ServiceException e) {
+        } catch (ActionException | ServiceException e) {
             ctx.rollback();
             throw e;
         }
@@ -123,10 +120,7 @@ public abstract class AbstractDispatchImpl implements Dispatch {
         DefaultExecutionContext ctx = new DefaultExecutionContext(this);
         try {
             doUndo(action, result, ctx);
-        } catch (ActionException e) {
-            ctx.rollback();
-            throw e;
-        } catch (ServiceException e) {
+        } catch (ActionException | ServiceException e) {
             ctx.rollback();
             throw e;
         }

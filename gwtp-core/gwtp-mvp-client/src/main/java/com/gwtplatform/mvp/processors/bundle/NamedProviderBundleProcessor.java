@@ -61,9 +61,7 @@ public class NamedProviderBundleProcessor extends AbstractContextProcessor<Bundl
 
     public void flush() {
         if (!bundleContents.isEmpty()) {
-            for (Type bundleType : bundleContents.keySet()) {
-                outputBundle(bundleType);
-            }
+            bundleContents.keySet().forEach(this::outputBundle);
 
             bundleContents.clear();
             bundleNames.clear();

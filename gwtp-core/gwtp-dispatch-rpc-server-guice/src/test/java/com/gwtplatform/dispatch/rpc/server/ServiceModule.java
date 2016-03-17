@@ -52,7 +52,7 @@ public class ServiceModule extends AbstractModule {
             Class<? extends ActionValidator> actionValidator) {
 
         bind(ActionHandlerValidatorMap.class).toInstance(
-                new ActionHandlerValidatorMapImpl<A, R>(actionClass,
-                        new ActionHandlerValidatorClass<A, R>(handlerClass, actionValidator)));
+                new ActionHandlerValidatorMapImpl<>(actionClass,
+                        new ActionHandlerValidatorClass<>(handlerClass, actionValidator)));
     }
 }

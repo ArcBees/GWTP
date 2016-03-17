@@ -31,12 +31,7 @@ public enum Primitives {
     SHORT("short", Short.class, "0"),
     VOID("void", Void.class, "null");
 
-    public static final Predicate<CharSequence> IS_PRIMITIVE_PREDICATE = new Predicate<CharSequence>() {
-        @Override
-        public boolean apply(CharSequence name) {
-            return findByPrimitive(name).isPresent();
-        }
-    };
+    public static final Predicate<CharSequence> IS_PRIMITIVE_PREDICATE = name -> findByPrimitive(name).isPresent();
 
     private final String primitive;
     private final Class<?> boxedClass;
@@ -53,22 +48,12 @@ public enum Primitives {
 
     public static Optional<Primitives> findByPrimitive(final CharSequence primitiveName) {
         return FluentIterable.of(values())
-                .firstMatch(new Predicate<Primitives>() {
-                    @Override
-                    public boolean apply(Primitives primitives) {
-                        return primitiveName.equals(primitives.getPrimitive());
-                    }
-                });
+                .firstMatch(primitives -> primitiveName.equals(primitives.getPrimitive()));
     }
 
     public static Optional<Primitives> findByBoxed(final CharSequence boxedName) {
         return FluentIterable.of(values())
-                .firstMatch(new Predicate<Primitives>() {
-                    @Override
-                    public boolean apply(Primitives primitives) {
-                        return boxedName.equals(primitives.getBoxedClass().getCanonicalName());
-                    }
-                });
+                .firstMatch(primitives -> boxedName.equals(primitives.getBoxedClass().getCanonicalName()));
     }
 
     public String getPrimitive() {

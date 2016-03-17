@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.PackageElement;
@@ -35,7 +36,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -76,12 +76,9 @@ public class GwtSourceFilter {
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            documentBuilder.setEntityResolver(new EntityResolver() {
-                @Override
-                public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
-                    // Disable the loading of DTDs as it is a huge slow down during compilation.
-                    return new InputSource(new StringReader(""));
-                }
+            documentBuilder.setEntityResolver((publicId, systemId) -> {
+                // Disable the loading of DTDs as it is a huge slow down during compilation.
+                return new InputSource(new StringReader(""));
             });
 
             return documentBuilder;
@@ -126,13 +123,9 @@ public class GwtSourceFilter {
     }
 
     public <E extends Element> Set<E> filterElements(Set<E> elements) {
-        Set<E> filteredElements = new HashSet<>();
-
-        for (E element : elements) {
-            if (elementIsPartOfGwtSource(element)) {
-                filteredElements.add(element);
-            }
-        }
+        Set<E> filteredElements = elements.stream()
+                .filter(element -> elementIsPartOfGwtSource(element))
+                .collect(Collectors.toSet());
 
         return filteredElements;
     }

@@ -30,7 +30,6 @@ import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 
 import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.web.bindery.event.shared.Event;
 import com.gwtplatform.processors.tools.domain.HasImports;
@@ -185,25 +184,15 @@ public class ProxyEventMethod implements HasImports {
 
     private Optional<ExecutableElement> extractEventTypeMethodAccessor(List<? extends Element> members) {
         return FluentIterable.from(methodsIn(members))
-                .firstMatch(new Predicate<ExecutableElement>() {
-                    @Override
-                    public boolean apply(ExecutableElement method) {
-                        return method.getSimpleName().contentEquals("getType")
-                                && method.getParameters().isEmpty()
-                                && isGwtEventType(method, method.getReturnType());
-                    }
-                });
+                .firstMatch(method -> method.getSimpleName().contentEquals("getType")
+                        && method.getParameters().isEmpty()
+                        && isGwtEventType(method, method.getReturnType()));
     }
 
     private Optional<VariableElement> extractEventTypeFieldAccessor(List<? extends Element> members) {
         return FluentIterable.from(fieldsIn(members))
-                .firstMatch(new Predicate<VariableElement>() {
-                    @Override
-                    public boolean apply(VariableElement variable) {
-                        return variable.getSimpleName().contentEquals("TYPE")
-                                && isGwtEventType(variable, variable.asType());
-                    }
-                });
+                .firstMatch(variable -> variable.getSimpleName().contentEquals("TYPE")
+                        && isGwtEventType(variable, variable.asType()));
     }
 
     private boolean isGwtEventType(Element element, TypeMirror typeMirror) {

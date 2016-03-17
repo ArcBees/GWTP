@@ -49,7 +49,7 @@ public class DefaultCacheImpl implements Cache {
      * Initializes the cache with auto expiration OFF.
      */
     public DefaultCacheImpl() {
-        this.map = new HashMap<Object, CacheValue>();
+        this.map = new HashMap<>();
         // By default, autoExpireTime is -1 so that objects never expire
         this.autoExpireTimeInMs = -1;
     }
@@ -60,7 +60,7 @@ public class DefaultCacheImpl implements Cache {
      * @param autoExpireTimeInMs Time in milliseconds after which entries in cache expire
      */
     public DefaultCacheImpl(long autoExpireTimeInMs) {
-        this.map = new HashMap<Object, CacheValue>();
+        this.map = new HashMap<>();
         this.autoExpireTimeInMs = autoExpireTimeInMs;
     }
 

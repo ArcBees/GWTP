@@ -105,11 +105,12 @@ public class Logger {
 
     void log(Kind kind, String message, Throwable throwable, Object[] arguments, Element element,
             AnnotationMirror annotationMirror, AnnotationValue annotationValue) {
+        String logMessage = message;
         if (!debug && (kind == Kind.ERROR || kind == Kind.MANDATORY_WARNING)) {
-            message += System.lineSeparator() + SEE_LOG;
+            logMessage += System.lineSeparator() + SEE_LOG;
         }
 
-        messager.printMessage(kind, format(message, arguments), element, annotationMirror, annotationValue);
+        messager.printMessage(kind, format(logMessage, arguments), element, annotationMirror, annotationValue);
 
         if (debug && throwable != null) {
             StringWriter writer = new StringWriter();

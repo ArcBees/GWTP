@@ -244,7 +244,7 @@ public class PlaceRequest {
 
         private void lazyInitializeParamMap() {
             if (this.params == null) {
-                this.params = new LinkedHashMap<String, String>();
+                this.params = new LinkedHashMap<>();
             }
         }
 

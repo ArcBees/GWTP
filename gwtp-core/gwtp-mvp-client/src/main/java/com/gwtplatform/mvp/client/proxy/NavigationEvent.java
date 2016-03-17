@@ -33,7 +33,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * @see NavigationRefusedEvent
  */
 public final class NavigationEvent extends GwtEvent<NavigationHandler> {
-    private static final Type<NavigationHandler> TYPE = new Type<NavigationHandler>();
+    private static final Type<NavigationHandler> TYPE = new Type<>();
 
     private final PlaceRequest request;
 
