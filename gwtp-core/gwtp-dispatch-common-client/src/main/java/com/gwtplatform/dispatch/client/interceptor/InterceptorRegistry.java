@@ -28,5 +28,5 @@ public interface InterceptorRegistry {
      * @return The the client-side interceptor, or {@code null} if no appropriate client-side interceptor
      * could be found.
      */
-    <A> IndirectProvider<? extends Interceptor<?, ?>> find(A action);
+    <A> IndirectProvider<? extends Interceptor<?, ?, ?>> find(A action);
 }

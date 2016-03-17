@@ -18,8 +18,8 @@ package com.gwtplatform.dispatch.rest.client.core;
 
 import javax.inject.Inject;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.annotations.RestBinding;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
@@ -57,8 +57,8 @@ public class DefaultDispatchCallFactory implements DispatchCallFactory {
     }
 
     @Override
-    public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback) {
-        return new RestDispatchCall<A, R>(this, exceptionHandler, interceptorRegistry, securityCookieAccessor,
+    public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, RestCallback<R> callback) {
+        return new RestDispatchCall<>(this, exceptionHandler, interceptorRegistry, securityCookieAccessor,
                 requestBuilderFactory, cookieManager, responseDeserializer, dispatchHooks, action, callback);
     }
 }

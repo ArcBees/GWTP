@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.client.interceptor;
 import java.util.List;
 
 import com.gwtplatform.dispatch.client.interceptor.Interceptor;
+import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
@@ -57,7 +58,7 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  *   }
  * </pre>
  */
-public interface RestInterceptor extends Interceptor<RestAction, Object> {
+public interface RestInterceptor extends Interceptor<RestAction, Object, RestCallback> {
     /**
      * Get rest interceptor contexts.
      */

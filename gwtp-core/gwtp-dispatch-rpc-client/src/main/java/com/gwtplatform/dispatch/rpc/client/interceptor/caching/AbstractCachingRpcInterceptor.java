@@ -67,7 +67,7 @@ public abstract class AbstractCachingRpcInterceptor<A, R> extends AbstractRpcInt
 
     public DispatchRequest execute(final A action,
                                    final AsyncCallback<R> resultCallback,
-                                   ExecuteCommand<A, R> executeCommand) {
+                                   ExecuteCommand<A, R, AsyncCallback<R>> executeCommand) {
         // First check if any pending callbacks for this action
         List<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap.get(action);
 

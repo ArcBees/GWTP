@@ -26,7 +26,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * @param <A> action class.
  * @param <R> result class.
  */
-public interface Interceptor<A, R> {
+public interface Interceptor<A, R, C> {
     /**
      * Handles the specified action.
      * <p/>
@@ -46,7 +46,7 @@ public interface Interceptor<A, R> {
      * com.gwtplatform.dispatch.client.CompletedDispatchRequest CompletedDispatchRequest} if you executed, cancelled or
      * ignored the action.
      */
-    DispatchRequest execute(A action, AsyncCallback<R> resultCallback, ExecuteCommand<A, R> executeCommand);
+    DispatchRequest execute(A action, C resultCallback, ExecuteCommand<A, R, C> executeCommand);
 
     /**
      * @return The type of action supported by this interceptor.

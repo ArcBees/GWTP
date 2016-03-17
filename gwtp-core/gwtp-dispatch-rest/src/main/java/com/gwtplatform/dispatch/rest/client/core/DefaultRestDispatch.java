@@ -18,7 +18,7 @@ package com.gwtplatform.dispatch.rest.client.core;
 
 import javax.inject.Inject;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
@@ -36,7 +36,7 @@ public class DefaultRestDispatch implements RestDispatch {
     }
 
     @Override
-    public <A extends RestAction<R>, R> DispatchRequest execute(A action, AsyncCallback<R> callback) {
+    public <A extends RestAction<R>, R> DispatchRequest execute(A action, RestCallback<R> callback) {
         RestDispatchCall<A, R> call = callFactory.create(action, callback);
 
         return call.execute();

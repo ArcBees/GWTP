@@ -20,6 +20,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.DelegatingAsyncCallback;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.DispatchCall;
+import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.client.core.DispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.core.RestDispatchCall;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -35,14 +36,14 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * @param <R> the result type for this action.
  */
 public class RestInterceptedAsyncCallback<A extends RestAction<R>, R>
-        extends DelegatingAsyncCallback<A, R, RestInterceptor> {
+        extends DelegatingAsyncCallback<A, R, RestInterceptor, RestCallback<R>> {
     private final DispatchCallFactory dispatchCallFactory;
 
     public RestInterceptedAsyncCallback(
             DispatchCallFactory dispatchCallFactory,
-            DispatchCall<A, R> dispatchCall,
+            DispatchCall<A, R, RestCallback<R>> dispatchCall,
             A action,
-            AsyncCallback<R> callback,
+            RestCallback<R> callback,
             DelegatingDispatchRequest dispatchRequest) {
         super(dispatchCall, action, callback, dispatchRequest);
 
@@ -50,7 +51,7 @@ public class RestInterceptedAsyncCallback<A extends RestAction<R>, R>
     }
 
     @Override
-    public DispatchRequest execute(A action, AsyncCallback<R> resultCallback) {
+    public DispatchRequest execute(A action, RestCallback<R> resultCallback) {
         if (getDispatchRequest().isPending()) {
             RestDispatchCall<A, R> newDispatchCall = dispatchCallFactory.create(action, resultCallback);
             newDispatchCall.setIntercepted(true);
@@ -59,5 +60,19 @@ public class RestInterceptedAsyncCallback<A extends RestAction<R>, R>
         } else {
             return null;
         }
+    }
+
+    public AsyncCallback<RestInterceptor> asAsyncCallback() {
+        return new AsyncCallback<RestInterceptor>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                handleFailure(caught);
+            }
+
+            @Override
+            public void onSuccess(RestInterceptor result) {
+                handleSuccess(result);
+            }
+        };
     }
 }

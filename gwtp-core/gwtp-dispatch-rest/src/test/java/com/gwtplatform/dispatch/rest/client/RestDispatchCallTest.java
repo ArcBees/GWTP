@@ -25,7 +25,6 @@ import org.mockito.InOrder;
 
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestException;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.rest.client.core.CookieManager;
 import com.gwtplatform.dispatch.rest.client.core.RequestBuilderFactory;
@@ -71,7 +70,7 @@ public class RestDispatchCallTest {
     private RestDispatchHooks dispatchHooks;
 
     @Test
-    public void someAction_cookieSavedBeforeExecution(AsyncCallback<Void> callback)
+    public void someAction_cookieSavedBeforeExecution(RestCallback<Void> callback)
             throws ActionException, RequestException {
         // given
         SomeAction action = createAction();
@@ -93,7 +92,7 @@ public class RestDispatchCallTest {
         return new SomeAction(HttpMethod.GET, "");
     }
 
-    private <A extends RestAction<R>, R> RestDispatchCall<A, R> createCall(A action, AsyncCallback<R> callback) {
+    private <A extends RestAction<R>, R> RestDispatchCall<A, R> createCall(A action, RestCallback<R> callback) {
         return new RestDispatchCall<>(null, exceptionHandler, interceptorRegistry, securityCookieAccessor,
                 requestBuilderFactory, cookieManager, responseDeserializer, dispatchHooks, action, callback);
     }

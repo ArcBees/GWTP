@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.gwtplatform.dispatch.client.interceptor.AbstractInterceptor;
+import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
@@ -28,7 +29,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * Simple abstract super-class for {@link RestInterceptor} implementations that forces the action class to be passed in
  * as a constructor to the handler.
  */
-public abstract class AbstractRestInterceptor extends AbstractInterceptor<RestAction, Object>
+public abstract class AbstractRestInterceptor extends AbstractInterceptor<RestAction, Object, RestCallback>
         implements RestInterceptor {
     private final List<InterceptorContext> interceptorContexts;
 

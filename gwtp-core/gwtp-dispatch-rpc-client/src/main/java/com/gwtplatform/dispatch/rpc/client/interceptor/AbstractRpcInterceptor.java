@@ -16,6 +16,7 @@
 
 package com.gwtplatform.dispatch.rpc.client.interceptor;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.interceptor.AbstractInterceptor;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
@@ -26,7 +27,8 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * @param <A> The action type.
  * @param <R> The result type.
  */
-public abstract class AbstractRpcInterceptor<A, R> extends AbstractInterceptor<A, R> implements RpcInterceptor<A, R> {
+public abstract class AbstractRpcInterceptor<A, R> extends AbstractInterceptor<A, R, AsyncCallback<R>>
+        implements RpcInterceptor<A, R> {
     protected AbstractRpcInterceptor(Class<A> actionType) {
         super(actionType);
     }

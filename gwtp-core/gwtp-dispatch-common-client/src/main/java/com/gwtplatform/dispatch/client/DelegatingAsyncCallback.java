@@ -29,18 +29,19 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * @param <A> the {@link TypedAction} type.
  * @param <R> the result type for this action.
  * @param <T> the interceptor type used.
+ * @param <C> the callback type used.
  */
-public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T extends Interceptor>
-        implements AsyncCallback<T>, ExecuteCommand<A, R> {
-    private final DispatchCall<A, R> dispatchCall;
+public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T extends Interceptor, C>
+        implements ExecuteCommand<A, R, C> {
+    private final DispatchCall<A, R, C> dispatchCall;
     private final A action;
-    private final AsyncCallback<R> callback;
+    private final C callback;
     private final DelegatingDispatchRequest dispatchRequest;
 
     protected DelegatingAsyncCallback(
-            DispatchCall<A, R> dispatchCall,
+            DispatchCall<A, R, C> dispatchCall,
             A action,
-            AsyncCallback<R> callback,
+            C callback,
             DelegatingDispatchRequest dispatchRequest) {
         this.dispatchCall = dispatchCall;
         this.action = action;
@@ -48,8 +49,7 @@ public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T ext
         this.dispatchRequest = dispatchRequest;
     }
 
-    @Override
-    public void onSuccess(T interceptor) {
+    protected void handleSuccess(T interceptor) {
         if (!interceptor.canExecute(getAction())) {
             delegateFailure(interceptor);
         } else if (getDispatchRequest().isPending()) {
@@ -57,18 +57,19 @@ public abstract class DelegatingAsyncCallback<A extends TypedAction<R>, R, T ext
         }
     }
 
-    @Override
-    public void onFailure(Throwable caught) {
+    protected void handleFailure(Throwable caught) {
         dispatchRequest.cancel();
 
-        dispatchCall.onExecuteFailure(caught);
+        dispatchCall.onExecuteFailure(caught, null);
     }
 
     protected void delegateFailure(Interceptor interceptor) {
         InterceptorMismatchException exception =
                 new InterceptorMismatchException(action.getClass(), interceptor.getActionType());
 
-        onFailure(exception);
+        if (dispatchCall.shouldHandleFailure(exception)) {
+            handleFailure(exception);
+        }
     }
 
     @SuppressWarnings("unchecked")

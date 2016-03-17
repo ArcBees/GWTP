@@ -62,7 +62,7 @@ public class AbstractRpcInterceptorTest {
 
             @Override
             public DispatchRequest execute(A action, AsyncCallback<R> resultCallback,
-                                           ExecuteCommand<A, R> executeCommand) {
+                                           ExecuteCommand<A, R, AsyncCallback<R>> executeCommand) {
                 return executeCommand.execute(action, resultCallback);
             }
         };

@@ -16,8 +16,8 @@
 
 package com.gwtplatform.dispatch.rest.client.interceptor;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
+import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
@@ -27,8 +27,8 @@ public class SampleRestInterceptor extends AbstractRestInterceptor {
     }
 
     @Override
-    public DispatchRequest execute(RestAction action, AsyncCallback<Object> resultCallback,
-            ExecuteCommand<RestAction, Object> executeCommand) {
+    public DispatchRequest execute(RestAction action, RestCallback resultCallback,
+            ExecuteCommand<RestAction, Object, RestCallback> executeCommand) {
         return null;
     }
 }

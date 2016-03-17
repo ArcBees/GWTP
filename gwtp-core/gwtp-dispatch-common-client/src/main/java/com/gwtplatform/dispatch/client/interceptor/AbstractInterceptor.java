@@ -22,7 +22,7 @@ package com.gwtplatform.dispatch.client.interceptor;
  * @param <A> action class.
  * @param <R> result class.
  */
-public abstract class AbstractInterceptor<A, R> implements Interceptor<A, R> {
+public abstract class AbstractInterceptor<A, R, C> implements Interceptor<A, R, C> {
     private final Class<A> actionType;
 
     protected AbstractInterceptor(Class<A> actionType) {

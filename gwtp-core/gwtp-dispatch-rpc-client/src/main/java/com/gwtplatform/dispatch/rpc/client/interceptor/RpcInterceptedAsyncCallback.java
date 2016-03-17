@@ -36,16 +36,18 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * @param <R> the result type for this action.
  */
 public class RpcInterceptedAsyncCallback<A extends Action<R>, R extends Result>
-        extends DelegatingAsyncCallback<A, R, RpcInterceptor<?, ?>> {
+        extends DelegatingAsyncCallback<A, R, RpcInterceptor<?, ?>, AsyncCallback<R>>
+        implements AsyncCallback<RpcInterceptor<?, ?>> {
     private final RpcDispatchCallFactory dispatchCallFactory;
 
     public RpcInterceptedAsyncCallback(
             RpcDispatchCallFactory dispatchCallFactory,
-            DispatchCall<A, R> dispatchCall,
+            DispatchCall<A, R, AsyncCallback<R>> dispatchCall,
             A action,
             AsyncCallback<R> callback,
             DelegatingDispatchRequest dispatchRequest) {
         super(dispatchCall, action, callback, dispatchRequest);
+
         this.dispatchCallFactory = dispatchCallFactory;
     }
 
@@ -59,5 +61,15 @@ public class RpcInterceptedAsyncCallback<A extends Action<R>, R extends Result>
         } else {
             return null;
         }
+    }
+
+    @Override
+    public void onSuccess(RpcInterceptor<?, ?> result) {
+        handleSuccess(result);
+    }
+
+    @Override
+    public void onFailure(Throwable caught) {
+        handleFailure(caught);
     }
 }

@@ -16,7 +16,6 @@
 
 package com.gwtplatform.dispatch.client.interceptor;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
@@ -26,7 +25,7 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * @param <A> The action type.
  * @param <R> The result type.
  */
-public interface ExecuteCommand<A, R> {
+public interface ExecuteCommand<A, R, C> {
     /**
      * Execute an action.
      *
@@ -35,5 +34,5 @@ public interface ExecuteCommand<A, R> {
      *
      * @return A {@link DispatchRequest} representing the request, it should never be {@code null}.
      */
-    DispatchRequest execute(A action, AsyncCallback<R> resultCallback);
+    DispatchRequest execute(A action, C resultCallback);
 }

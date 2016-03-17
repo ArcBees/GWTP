@@ -21,7 +21,6 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
@@ -44,7 +43,7 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * @param <A> the {@link RestAction} type.
  * @param <R> the result type for this action.
  */
-public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R> {
+public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R, RestCallback<R>> {
     private final DispatchCallFactory dispatchCallFactory;
     private final RequestBuilderFactory requestBuilderFactory;
     private final CookieManager cookieManager;
@@ -63,7 +62,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
             ResponseDeserializer responseDeserializer,
             RestDispatchHooks dispatchHooks,
             A action,
-            AsyncCallback<R> callback) {
+            RestCallback<R> callback) {
         super(exceptionHandler, securityCookieAccessor, action, callback);
 
         this.dispatchCallFactory = dispatchCallFactory;
@@ -84,10 +83,10 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
             // Attempt to intercept the dispatch request
             if (interceptorProvider != null) {
                 DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
-                RestInterceptedAsyncCallback<A, R> delegatingCallback = new RestInterceptedAsyncCallback<A, R>(
+                RestInterceptedAsyncCallback<A, R> delegatingCallback = new RestInterceptedAsyncCallback<>(
                         dispatchCallFactory, this, action, getCallback(), dispatchRequest);
 
-                interceptorProvider.get(delegatingCallback);
+                interceptorProvider.get(delegatingCallback.asAsyncCallback());
 
                 return dispatchRequest;
             }
@@ -107,7 +106,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
 
             return new GwtHttpDispatchRequest(requestBuilder.send());
         } catch (RequestException | ActionException e) {
-            onExecuteFailure(e);
+            shouldHandleFailure(e);
         }
         return new CompletedDispatchRequest();
     }
@@ -116,7 +115,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
     protected void onExecuteSuccess(R result, Response response) {
         assignResponse(response);
 
-        super.onExecuteSuccess(result, response);
+        getCallback().onSuccess(result, response);
 
         dispatchHooks.onSuccess(getAction(), response, result);
     }
@@ -125,27 +124,30 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
     protected void onExecuteFailure(Throwable caught, Response response) {
         assignResponse(response);
 
-        super.onExecuteFailure(caught, response);
+        if (shouldHandleFailure(caught)) {
+            getCallback().onFailure(caught, response);
+        }
 
         dispatchHooks.onFailure(getAction(), response, caught);
     }
 
     private void assignResponse(Response response) {
-        if (getCallback() instanceof RestCallback) {
-            ((RestCallback<?>) getCallback()).setResponse(response);
-        }
+        getCallback().setResponse(response);
     }
 
     private RequestCallback createRequestCallback() {
         return new RequestCallback() {
+            private Response response;
+
             @Override
             public void onResponseReceived(Request request, Response response) {
+                this.response = response;
                 RestDispatchCall.this.onResponseReceived(response);
             }
 
             @Override
             public void onError(Request request, Throwable exception) {
-                onExecuteFailure(exception);
+                onExecuteFailure(exception, response);
             }
         };
     }

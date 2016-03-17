@@ -104,7 +104,7 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * @param <A> The type of the action.
  * @param <R> The type of the result.
  */
-public interface RpcInterceptor<A, R> extends Interceptor<A, R> {
+public interface RpcInterceptor<A, R> extends Interceptor<A, R, AsyncCallback<R>> {
     /**
      * Undoes the specified action if supported.
      * <p/>
