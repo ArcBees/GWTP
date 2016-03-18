@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 import com.google.inject.BindingAnnotation;
 
 /**
- * Bind this annotation on the string you want to use as a security cookie:
+ * Bind this annotation on the string you want to use as a security cookie.
  * <p/>
  * <pre>
  * bindConstant().annotatedWith(SecurityCookie.class).to("MYCOOKIE");
