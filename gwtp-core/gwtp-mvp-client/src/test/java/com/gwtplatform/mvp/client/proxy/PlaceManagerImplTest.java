@@ -76,7 +76,7 @@ public class PlaceManagerImplTest {
     @TestMockSingleton
     abstract static class DummyPresenterBasic extends Presenter<View, DummyProxyPlaceBasic> {
         @Inject
-        public DummyPresenterBasic(EventBus eventBus, View view, DummyProxyPlaceBasic proxy) {
+        DummyPresenterBasic(EventBus eventBus, View view, DummyProxyPlaceBasic proxy) {
             super(eventBus, view, proxy);
         }
 
@@ -89,7 +89,7 @@ public class PlaceManagerImplTest {
     @TestEagerSingleton
     static class DummyProxyBasic extends ProxyImpl<DummyPresenterBasic> {
         @Inject
-        public DummyProxyBasic(Provider<DummyPresenterBasic> presenter) {
+        DummyProxyBasic(Provider<DummyPresenterBasic> presenter) {
             this.presenter = new StandardProvider<>(presenter);
         }
     }
@@ -97,7 +97,7 @@ public class PlaceManagerImplTest {
     abstract static class ProxyPlaceBase<P extends Presenter<?, ?>> extends ProxyPlaceImpl<P> {
         private final DeferredCommandManager deferredCommandManager;
 
-        public ProxyPlaceBase(Place place,
+        ProxyPlaceBase(Place place,
                 Proxy<P> proxy,
                 DeferredCommandManager deferredCommandManager) {
             super();
@@ -115,7 +115,7 @@ public class PlaceManagerImplTest {
     @TestEagerSingleton
     static class DummyProxyPlaceBasic extends ProxyPlaceBase<DummyPresenterBasic> {
         @Inject
-        public DummyProxyPlaceBasic(DummyProxyBasic proxy,
+        DummyProxyPlaceBasic(DummyProxyBasic proxy,
                 DeferredCommandManager deferredCommandManager) {
             super(new PlaceImpl("dummyNameTokenBasic"), proxy, deferredCommandManager);
         }
@@ -133,7 +133,7 @@ public class PlaceManagerImplTest {
         private final PlaceManager placeManager;
 
         @Inject
-        public DummyPresenterRedirect(EventBus eventBus, DummyProxyPlaceBasic proxy,
+        DummyPresenterRedirect(EventBus eventBus, DummyProxyPlaceBasic proxy,
                 PlaceManager placeManager) {
             super(eventBus, mock(View.class), proxy);
             this.placeManager = placeManager;
@@ -156,7 +156,7 @@ public class PlaceManagerImplTest {
     @TestEagerSingleton
     static class DummyProxyRedirect extends ProxyImpl<DummyPresenterRedirect> {
         @Inject
-        public DummyProxyRedirect(Provider<DummyPresenterRedirect> presenter) {
+        DummyProxyRedirect(Provider<DummyPresenterRedirect> presenter) {
             this.presenter = new StandardProvider<>(presenter);
         }
     }
@@ -164,7 +164,7 @@ public class PlaceManagerImplTest {
     @TestEagerSingleton
     static class DummyProxyPlaceRedirect extends ProxyPlaceBase<DummyPresenterRedirect> {
         @Inject
-        public DummyProxyPlaceRedirect(DummyProxyRedirect proxy,
+        DummyProxyPlaceRedirect(DummyProxyRedirect proxy,
                 DeferredCommandManager deferredCommandManager) {
             super(new PlaceImpl("dummyNameTokenRedirect"), proxy, deferredCommandManager);
         }
@@ -177,7 +177,7 @@ public class PlaceManagerImplTest {
         private final PlaceManager placeManager;
 
         @Inject
-        public DummyPresenterRedirectNoHistory(EventBus eventBus,
+        DummyPresenterRedirectNoHistory(EventBus eventBus,
                 DummyProxyPlaceRedirectNoHistory proxy, PlaceManager placeManager) {
             super(eventBus, mock(View.class), proxy);
             this.placeManager = placeManager;
@@ -198,7 +198,7 @@ public class PlaceManagerImplTest {
     @TestEagerSingleton
     static class DummyProxyRedirectNoHistory extends ProxyImpl<DummyPresenterRedirectNoHistory> {
         @Inject
-        public DummyProxyRedirectNoHistory(Provider<DummyPresenterRedirectNoHistory> presenter) {
+        DummyProxyRedirectNoHistory(Provider<DummyPresenterRedirectNoHistory> presenter) {
             this.presenter = new StandardProvider<>(presenter);
         }
     }
@@ -208,7 +208,7 @@ public class PlaceManagerImplTest {
             ProxyPlaceBase<DummyPresenterRedirectNoHistory> {
 
         @Inject
-        public DummyProxyPlaceRedirectNoHistory(DummyProxyRedirectNoHistory proxy,
+        DummyProxyPlaceRedirectNoHistory(DummyProxyRedirectNoHistory proxy,
                 DeferredCommandManager deferredCommandManager) {
             super(new PlaceImpl(DummyPresenterRedirectNoHistory.TOKEN), proxy, deferredCommandManager);
         }

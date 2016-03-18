@@ -71,7 +71,7 @@ public class GatekeeperWithParamsTest {
     abstract static class DummyPresenterWithDenyGatekeeperWithParams
             extends Presenter<View, DummyProxyPlaceWithDenyGatekeeperWithParams> {
         @Inject
-        public DummyPresenterWithDenyGatekeeperWithParams(EventBus eventBus, View view,
+        DummyPresenterWithDenyGatekeeperWithParams(EventBus eventBus, View view,
                 DummyProxyPlaceWithDenyGatekeeperWithParams proxy) {
             super(eventBus, view, proxy);
         }
@@ -86,7 +86,7 @@ public class GatekeeperWithParamsTest {
     static class DummyProxyWithDenyGatekeeperWithParams
             extends ProxyImpl<DummyPresenterWithDenyGatekeeperWithParams> {
         @Inject
-        public DummyProxyWithDenyGatekeeperWithParams(
+        DummyProxyWithDenyGatekeeperWithParams(
                 Provider<DummyPresenterWithDenyGatekeeperWithParams> presenter) {
             this.presenter = new StandardProvider<>(presenter);
         }
@@ -96,7 +96,7 @@ public class GatekeeperWithParamsTest {
     static class DummyProxyPlaceWithDenyGatekeeperWithParams
             extends ProxyPlaceBase<DummyPresenterWithDenyGatekeeperWithParams> {
         @Inject
-        public DummyProxyPlaceWithDenyGatekeeperWithParams(
+        DummyProxyPlaceWithDenyGatekeeperWithParams(
                 DummyProxyWithDenyGatekeeperWithParams proxy,
                 DeferredCommandManager deferredCommandManager,
                 GatekeeperWithParams gatekeeper) {
@@ -109,7 +109,7 @@ public class GatekeeperWithParamsTest {
     abstract static class DummyPresenterWithGrantGatekeeperWithParams
             extends Presenter<View, DummyProxyPlaceWithGrantGatekeeperWithParams> {
         @Inject
-        public DummyPresenterWithGrantGatekeeperWithParams(EventBus eventBus, View view,
+        DummyPresenterWithGrantGatekeeperWithParams(EventBus eventBus, View view,
                 DummyProxyPlaceWithGrantGatekeeperWithParams proxy) {
             super(eventBus, view, proxy);
         }
@@ -124,7 +124,7 @@ public class GatekeeperWithParamsTest {
     static class DummyProxyWithGrantGatekeeperWithParams
             extends ProxyImpl<DummyPresenterWithGrantGatekeeperWithParams> {
         @Inject
-        public DummyProxyWithGrantGatekeeperWithParams(
+        DummyProxyWithGrantGatekeeperWithParams(
                 Provider<DummyPresenterWithGrantGatekeeperWithParams> presenter) {
             this.presenter = new StandardProvider<>(presenter);
         }
@@ -134,7 +134,7 @@ public class GatekeeperWithParamsTest {
     static class DummyProxyPlaceWithGrantGatekeeperWithParams
             extends ProxyPlaceBase<DummyPresenterWithGrantGatekeeperWithParams> {
         @Inject
-        public DummyProxyPlaceWithGrantGatekeeperWithParams(
+        DummyProxyPlaceWithGrantGatekeeperWithParams(
                 DummyProxyWithGrantGatekeeperWithParams proxy,
                 DeferredCommandManager deferredCommandManager,
                 GatekeeperWithParams gatekeeper) {
@@ -146,7 +146,7 @@ public class GatekeeperWithParamsTest {
     @TestMockSingleton
     abstract static class DummyPresenterDefault extends Presenter<View, DummyProxyPlaceDefault> {
         @Inject
-        public DummyPresenterDefault(EventBus eventBus, View view, DummyProxyPlaceDefault proxy) {
+        DummyPresenterDefault(EventBus eventBus, View view, DummyProxyPlaceDefault proxy) {
             super(eventBus, view, proxy);
         }
 
@@ -159,7 +159,7 @@ public class GatekeeperWithParamsTest {
     @TestEagerSingleton
     static class DummyProxyDefault extends ProxyImpl<DummyPresenterDefault> {
         @Inject
-        public DummyProxyDefault(Provider<DummyPresenterDefault> presenter) {
+        DummyProxyDefault(Provider<DummyPresenterDefault> presenter) {
             this.presenter = new StandardProvider<>(presenter);
         }
     }
@@ -167,7 +167,7 @@ public class GatekeeperWithParamsTest {
     @TestEagerSingleton
     static class DummyProxyPlaceDefault extends ProxyPlaceBase<DummyPresenterDefault> {
         @Inject
-        public DummyProxyPlaceDefault(DummyProxyDefault proxy,
+        DummyProxyPlaceDefault(DummyProxyDefault proxy,
                 DeferredCommandManager deferredCommandManager) {
             super(new PlaceImpl("defaultPlace"), proxy, deferredCommandManager);
         }
