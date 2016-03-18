@@ -224,6 +224,16 @@
         <module>processor-tools</module>
     </modules>
 
+    <repositories>
+        <repository>
+            <id>google-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/google-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <properties>
         <target.jdk>1.8</target.jdk>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -231,9 +241,9 @@
         <maven-site-plugin.skip>false</maven-site-plugin.skip>
 
         <!-- Maven -->
-        <gwt-maven-plugin.version>2.8.0-SNAPSHOT</gwt-maven-plugin.version>
-        <maven-checkstyle-plugin.version>2.17</maven-checkstyle-plugin.version>
-        <checkstyle.version>6.12</checkstyle.version>
+        <gwt-maven-plugin.version>2.8.0-beta1</gwt-maven-plugin.version>
+        <maven-checkstyle-plugin.version>2.15</maven-checkstyle-plugin.version>
+        <checkstyle.version>6.4.1</checkstyle.version>
         <arcbees-checkstyle.version>1.2</arcbees-checkstyle.version>
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
