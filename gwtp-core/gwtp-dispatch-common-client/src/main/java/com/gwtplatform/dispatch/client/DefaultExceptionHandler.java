@@ -29,6 +29,7 @@ public final class DefaultExceptionHandler implements ExceptionHandler {
      * @param e The exception.
      * @return The status.
      */
+    @Override
     public Status onFailure(Throwable e) {
         return Status.CONTINUE;
     }

@@ -22,15 +22,15 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.CallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
-import com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest;
-import com.gwtplatform.dispatch.client.DelegatingCallbackDispatchRequest;
 import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
+import com.gwtplatform.dispatch.rpc.client.CallbackDispatchRequest;
+import com.gwtplatform.dispatch.rpc.client.DefaultCallbackDispatchRequest;
+import com.gwtplatform.dispatch.rpc.client.DelegatingCallbackDispatchRequest;
 import com.gwtplatform.dispatch.rpc.client.interceptor.AbstractRpcInterceptor;
 import com.gwtplatform.dispatch.rpc.client.interceptor.UndoCommand;
+import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
-import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * Abstract base class for client-side interceptors with caching support.
@@ -67,7 +67,7 @@ public abstract class AbstractCachingRpcInterceptor<A, R> extends AbstractRpcInt
 
     public DispatchRequest execute(final A action,
                                    final AsyncCallback<R> resultCallback,
-                                   ExecuteCommand<A, R, AsyncCallback<R>> executeCommand) {
+                                   ExecuteCommand<A, AsyncCallback<R>> executeCommand) {
         // First check if any pending callbacks for this action
         List<CallbackDispatchRequest<R>> pendingRequestCallbacks = pendingRequestCallbackMap.get(action);
 
@@ -178,8 +178,7 @@ public abstract class AbstractCachingRpcInterceptor<A, R> extends AbstractRpcInt
         return cache;
     }
 
-    @Override
-    public boolean canExecute(TypedAction<?> action) {
+    public boolean canExecute(Action<?> action) {
         return action.getClass().equals(getActionType());
     }
 }

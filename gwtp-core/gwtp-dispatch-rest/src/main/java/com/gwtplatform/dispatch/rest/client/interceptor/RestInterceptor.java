@@ -18,9 +18,11 @@ package com.gwtplatform.dispatch.rest.client.interceptor;
 
 import java.util.List;
 
-import com.gwtplatform.dispatch.client.interceptor.Interceptor;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
 import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * Instances of this interface will handle specific types of action classes on the client.
@@ -58,7 +60,39 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  *   }
  * </pre>
  */
-public interface RestInterceptor extends Interceptor<RestAction, Object, RestCallback> {
+public interface RestInterceptor {
+    /**
+     * Ensures this intercepted call can be executed.
+     *
+     * @param action the action to test against.
+     * @return true if this action can be executed, false if not.
+     */
+    boolean canExecute(RestAction<?> action);
+
+    /**
+     * Handles the specified action.
+     * <p/>
+     * If the interceptor makes asynchronous calls, it is recommended that you confirm that this request has not been
+     * cancelled after returning by calling {@link com.gwtplatform.dispatch.client.DelegatingDispatchRequest#isPending()
+     * DelegatingDispatchRequest#isPending()} against the request parameter.
+     *
+     * @param action The action to execute.
+     * @param resultCallback The callback to use to communicate the result of the action. Unless the request is
+     * cancelled, you must invoke {@link AsyncCallback#onSuccess(Object)} on this callback once you have obtained the
+     * result. If any failure occurs call {@link AsyncCallback#onFailure(Throwable)}.
+     * @param executeCommand Call {@link ExecuteCommand#execute(Object, AsyncCallback)} on this object to send the
+     * action over to the server. As a parameter you can pass {@code resultCallback} or your custom {@link
+     * AsyncCallback} if you want to process the result.
+     *
+     * @return A {@link DispatchRequest} object. Never return {@code null}, instead return a new {@link
+     * com.gwtplatform.dispatch.client.CompletedDispatchRequest CompletedDispatchRequest} if you executed, cancelled or
+     * ignored the action.
+     */
+    <A extends RestAction<R>, R> DispatchRequest execute(
+            A action,
+            RestCallback<R> resultCallback,
+            ExecuteCommand<A, RestCallback<R>> executeCommand);
+
     /**
      * Get rest interceptor contexts.
      */

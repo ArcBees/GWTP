@@ -17,14 +17,13 @@
 package com.gwtplatform.dispatch.rest.client.interceptor;
 
 import com.gwtplatform.common.client.IndirectProvider;
-import com.gwtplatform.dispatch.client.interceptor.InterceptorRegistry;
 
 /**
  * Implementations of this interface will be used by
  * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} implementation to find
  * client-side interceptor.
  */
-public interface RestInterceptorRegistry extends InterceptorRegistry {
+public interface RestInterceptorRegistry {
     /**
      * Gets the client-side interceptor that supports the specific action.
      *

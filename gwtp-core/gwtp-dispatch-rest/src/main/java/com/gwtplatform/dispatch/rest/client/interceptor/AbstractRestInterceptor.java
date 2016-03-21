@@ -20,24 +20,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.gwtplatform.dispatch.client.interceptor.AbstractInterceptor;
-import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
-import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * Simple abstract super-class for {@link RestInterceptor} implementations that forces the action class to be passed in
  * as a constructor to the handler.
  */
-public abstract class AbstractRestInterceptor extends AbstractInterceptor<RestAction, Object, RestCallback>
-        implements RestInterceptor {
+public abstract class AbstractRestInterceptor implements RestInterceptor {
     private final List<InterceptorContext> interceptorContexts;
 
     protected AbstractRestInterceptor(
             InterceptorContext context,
             InterceptorContext... moreContexts) {
-        super(RestAction.class);
-
         List<InterceptorContext> contexts = new ArrayList<>();
         contexts.add(context);
 
@@ -54,15 +48,13 @@ public abstract class AbstractRestInterceptor extends AbstractInterceptor<RestAc
     }
 
     @Override
-    public boolean canExecute(TypedAction<?> action) {
-        if (action instanceof RestAction) {
-            InterceptorContext subjectContext = new InterceptorContext.Builder((RestAction<?>) action).build();
+    public boolean canExecute(RestAction<?> action) {
+        InterceptorContext subjectContext = new InterceptorContext.Builder(action).build();
 
-            for (InterceptorContext context : interceptorContexts) {
-                // Must have at least one supporting context
-                if (context.equals(subjectContext)) {
-                    return true;
-                }
+        for (InterceptorContext context : interceptorContexts) {
+            // Must have at least one supporting context
+            if (context.equals(subjectContext)) {
+                return true;
             }
         }
         return false;

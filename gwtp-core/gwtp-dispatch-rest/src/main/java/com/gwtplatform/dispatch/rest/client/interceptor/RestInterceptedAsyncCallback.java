@@ -17,15 +17,13 @@
 package com.gwtplatform.dispatch.rest.client.interceptor;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.DelegatingAsyncCallback;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.client.DispatchCall;
+import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
 import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.client.core.DispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.core.RestDispatchCall;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
-import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * {@code AsyncCallback} implementation wrapping another {@link AsyncCallback} object used by a {@link
@@ -36,23 +34,29 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * @param <R> the result type for this action.
  */
 public class RestInterceptedAsyncCallback<A extends RestAction<R>, R>
-        extends DelegatingAsyncCallback<A, R, RestInterceptor, RestCallback<R>> {
+        implements ExecuteCommand<A, RestCallback<R>> {
     private final DispatchCallFactory dispatchCallFactory;
+    private final RestDispatchCall<A, R> dispatchCall;
+    private final A action;
+    private final RestCallback<R> callback;
+    private final DelegatingDispatchRequest dispatchRequest;
 
     public RestInterceptedAsyncCallback(
             DispatchCallFactory dispatchCallFactory,
-            DispatchCall<A, R, RestCallback<R>> dispatchCall,
+            RestDispatchCall<A, R> dispatchCall,
             A action,
             RestCallback<R> callback,
             DelegatingDispatchRequest dispatchRequest) {
-        super(dispatchCall, action, callback, dispatchRequest);
-
         this.dispatchCallFactory = dispatchCallFactory;
+        this.dispatchCall = dispatchCall;
+        this.action = action;
+        this.callback = callback;
+        this.dispatchRequest = dispatchRequest;
     }
 
     @Override
     public DispatchRequest execute(A action, RestCallback<R> resultCallback) {
-        if (getDispatchRequest().isPending()) {
+        if (dispatchRequest.isPending()) {
             RestDispatchCall<A, R> newDispatchCall = dispatchCallFactory.create(action, resultCallback);
             newDispatchCall.setIntercepted(true);
 
@@ -74,5 +78,21 @@ public class RestInterceptedAsyncCallback<A extends RestAction<R>, R>
                 handleSuccess(result);
             }
         };
+    }
+
+    protected void handleSuccess(RestInterceptor interceptor) {
+        if (dispatchRequest.isPending()) {
+            delegateExecute(interceptor);
+        }
+    }
+
+    protected void handleFailure(Throwable caught) {
+        dispatchRequest.cancel();
+
+        dispatchCall.onExecuteFailure(caught, null);
+    }
+
+    protected void delegateExecute(RestInterceptor interceptor) {
+        dispatchRequest.setDelegate(interceptor.execute(action, callback, this));
     }
 }

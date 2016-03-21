@@ -21,7 +21,6 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptedAsyncCallback;
@@ -40,7 +39,7 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * @param <R> the {@link Result} type for this action.
  */
 public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result>
-        extends DispatchCall<A, R, AsyncCallback<R>> {
+        extends DispatchCall<A, R> {
     private final RpcDispatchCallFactory dispatchCallFactory;
     private final DispatchServiceAsync dispatchService;
     private final RpcDispatchHooks dispatchHooks;
@@ -86,12 +85,12 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result>
     }
 
     @Override
-    protected void onExecuteSuccess(R result, Response response) {
+    public void onExecuteSuccess(R result, Response response) {
         getCallback().onSuccess(result);
     }
 
     @Override
-    protected void onExecuteFailure(Throwable caught, Response response) {
+    public void onExecuteFailure(Throwable caught, Response response) {
         if (shouldHandleFailure(caught)) {
             getCallback().onFailure(caught);
         }

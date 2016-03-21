@@ -24,12 +24,12 @@ import com.google.gwt.http.client.Response;
  * @param <R> The result type
  */
 @FunctionalInterface
-public interface RestCallback<R> {
-    void onSuccess(R result, Response response);
-
-    default void setResponse(Response response) {
+public interface RestCallback<R> extends SuccessCallback<R>, AlwaysCallback, FailureCallback {
+    @Override
+    default void always(Response response) {
     }
 
+    @Override
     default void onFailure(Throwable throwable, Response response) {
     }
 }

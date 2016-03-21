@@ -27,8 +27,10 @@ public class SampleRestInterceptor extends AbstractRestInterceptor {
     }
 
     @Override
-    public DispatchRequest execute(RestAction action, RestCallback resultCallback,
-            ExecuteCommand<RestAction, Object, RestCallback> executeCommand) {
+    public <A extends RestAction<R>, R> DispatchRequest execute(
+            A action,
+            RestCallback<R> resultCallback,
+            ExecuteCommand<A, RestCallback<R>> executeCommand) {
         return null;
     }
 }
