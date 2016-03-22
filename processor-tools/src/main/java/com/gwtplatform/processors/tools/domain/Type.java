@@ -33,10 +33,15 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
+
 import static com.google.auto.common.MoreElements.getPackage;
+import static com.google.auto.common.MoreTypes.asArray;
 import static com.google.auto.common.MoreTypes.asDeclared;
 import static com.google.auto.common.MoreTypes.asPrimitiveType;
 import static com.google.auto.common.MoreTypes.isType;
+import static com.google.common.collect.FluentIterable.from;
 
 public class Type implements HasImports, Comparable<Type> {
     private static final Function<TypeMirror, Type> TYPE_MIRROR_TO_TYPE = new Function<TypeMirror, Type>() {
@@ -50,33 +55,43 @@ public class Type implements HasImports, Comparable<Type> {
     private final String simpleName;
     private final String enclosingNames;
     private final List<Type> typeArguments;
+    private final boolean array;
 
     public Type(TypeElement element) {
         this(element.asType());
     }
 
-    // TODO: I guess it's time to go with factory methods...
+    // TODO: Ok, this class is BLOATED we need a factory and some polymorphism in there...
     public Type(TypeMirror type) {
         // void is not a primitive
         if (type.getKind() == TypeKind.VOID) {
             packageName = "";
             enclosingNames = "";
             simpleName = "void";
-            typeArguments = ImmutableList.of();
+            typeArguments = emptyList();
+            array = false;
         } else if (type.getKind().isPrimitive()) {
             packageName = "";
             enclosingNames = "";
             simpleName = asPrimitiveType(type).toString();
-            typeArguments = ImmutableList.of();
+            typeArguments = emptyList();
+            array = false;
+        } else if (type.getKind() == TypeKind.ARRAY) {
+            packageName = "";
+            enclosingNames = "";
+            simpleName = "";
+            typeArguments = singletonList(new Type(asArray(type).getComponentType()));
+            array = true;
         } else if (isType(type)) {
             DeclaredType declaredType = asDeclared(type);
             Element element = declaredType.asElement();
 
             packageName = getPackage(element).getQualifiedName().toString();
             simpleName = element.getSimpleName().toString();
-            typeArguments = FluentIterable.from(declaredType.getTypeArguments())
+            typeArguments = from(declaredType.getTypeArguments())
                     .transform(TYPE_MIRROR_TO_TYPE)
                     .toList();
+            array = false;
 
             StringBuilder enclosingElementNames = new StringBuilder();
 
@@ -98,6 +113,7 @@ public class Type implements HasImports, Comparable<Type> {
 
     public Type(String parameterizedQualifiedName) {
         enclosingNames = "";
+        array = false;
 
         String qualifiedName = parameterizedQualifiedName;
         Builder<Type> argumentsBuilder = ImmutableList.builder();
@@ -162,6 +178,7 @@ public class Type implements HasImports, Comparable<Type> {
         this.enclosingNames = enclosingNames;
         this.simpleName = simpleName;
         this.typeArguments = ImmutableList.copyOf(typeArguments);
+        this.array = false;
     }
 
     public String getQualifiedName() {
@@ -178,11 +195,19 @@ public class Type implements HasImports, Comparable<Type> {
     }
 
     public String getParameterizedName() {
-        return getSimpleName() + getSimpleTypeParameters();
+        if (array) {
+            return typeArguments.get(0).getParameterizedName() + "[]";
+        } else {
+            return getSimpleName() + getSimpleTypeParameters();
+        }
     }
 
     public String getQualifiedParameterizedName() {
-        return getQualifiedName() + getQualifiedTypeParameters();
+        if (array) {
+            return typeArguments.get(0).getQualifiedParameterizedName() + "[]";
+        } else {
+            return getQualifiedName() + getQualifiedTypeParameters();
+        }
     }
 
     public String getPackageName() {
@@ -225,10 +250,12 @@ public class Type implements HasImports, Comparable<Type> {
 
     @Override
     public Collection<String> getImports() {
-        return FluentIterable.from(typeArguments)
-                .transformAndConcat(EXTRACT_IMPORTS_FUNCTION)
-                .append(getQualifiedName())
-                .toSet();
+        FluentIterable<String> imports = from(typeArguments).transformAndConcat(EXTRACT_IMPORTS_FUNCTION);
+        if (!array) {
+            imports = imports.append(getQualifiedName());
+        }
+
+        return imports.toSet();
     }
 
     @Override
@@ -264,7 +291,7 @@ public class Type implements HasImports, Comparable<Type> {
             return "";
         }
 
-        String qualifiedTypeParameters = FluentIterable.from(typeArguments)
+        String qualifiedTypeParameters = from(typeArguments)
                 .transform(function)
                 .join(Joiner.on(", "));
 
