@@ -29,7 +29,7 @@ import com.google.gwt.user.client.Command;
  * commands.
  */
 public class DeferredCommandManager {
-    private final List<Command> commands = new LinkedList<Command>();
+    private final List<Command> commands = new LinkedList<>();
 
     public void addCommand(Command command) {
         commands.add(command);

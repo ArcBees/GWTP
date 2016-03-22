@@ -28,7 +28,6 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.SimpleAnnotationValueVisitor7;
 
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Sets;
@@ -131,14 +130,9 @@ public class ProxyPlaceDetails extends AbstractProxyDetails {
 
         if (annotation != null && verifyIsGatekeeperWithParams()) {
             FluentIterable.of(annotation.value())
-                    .transform(new Function<String, String>() {
-                        @Override
-                        public String apply(String param) {
-                            return param
-                                    .replace("\\", "\\\\")
-                                    .replace("\"", "\\\"");
-                        }
-                    })
+                    .transform(param -> param
+                            .replace("\\", "\\\\")
+                            .replace("\"", "\\\""))
                     .copyInto(gatekeeperParams);
         }
     }

@@ -309,7 +309,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
     public void testToPlaceTokenIsReverseOfToPlaceRequest() {
         // Setup
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
         params.put(" a b ", " c d ");
         params.put("a", "b=c=d");
         params.put("a=b", "c=d");
@@ -335,7 +335,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
         params.put("a", "d\\\\");
 
         // Given
-        ArrayList<String> testPlaceTokens = new ArrayList<String>();
+        ArrayList<String> testPlaceTokens = new ArrayList<>();
 
         for (Entry<String, String> entry : params.entrySet()) {
             // Escape separators
@@ -437,7 +437,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
     public void testToPlaceRequestHierarchyIsReverseOfToHistoryToken() {
         // Given
-        List<PlaceRequest> placeRequestHierarchyA = new ArrayList<PlaceRequest>();
+        List<PlaceRequest> placeRequestHierarchyA = new ArrayList<>();
         placeRequestHierarchyA.add(new PlaceRequest.Builder().nameToken("t1\\/=;").with("a", "b").build());
         placeRequestHierarchyA.add(new PlaceRequest.Builder().nameToken("t2").with("c\\/=;", "d").build());
         placeRequestHierarchyA.add(new PlaceRequest.Builder().nameToken("t3").with("c", "d\\/=;").build());
@@ -453,7 +453,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
 
     public void testToPlaceRequestHierarchyIsReverseOfToHistoryTokenAfterFullUrlEncode() {
         // Given
-        List<PlaceRequest> placeRequestHierarchyA = new ArrayList<PlaceRequest>();
+        List<PlaceRequest> placeRequestHierarchyA = new ArrayList<>();
         placeRequestHierarchyA.add(new PlaceRequest.Builder().nameToken("t1\\/=;").with("a", "b").build());
         placeRequestHierarchyA.add(new PlaceRequest.Builder().nameToken("t2").with("c\\/=;", "d").build());
         placeRequestHierarchyA.add(new PlaceRequest.Builder().nameToken("t3").with("c", "d\\/=;").build());
@@ -474,7 +474,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     public void testToHistoryTokenEmptyRequestHierarchy() {
         // Given
         String expectedHistoryToken = "";
-        List<PlaceRequest> placeRequestHierarchy = new ArrayList<PlaceRequest>();
+        List<PlaceRequest> placeRequestHierarchy = new ArrayList<>();
 
         // When
         String historyToken = tokenFormatter.toHistoryToken(placeRequestHierarchy);
@@ -486,7 +486,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     public void testToHistoryTokenSingleRequestInRequestHierarchy() {
         // Given
         String expectedHistoryToken = "";
-        List<PlaceRequest> placeRequestHierarchy = new ArrayList<PlaceRequest>();
+        List<PlaceRequest> placeRequestHierarchy = new ArrayList<>();
         placeRequestHierarchy.add(new PlaceRequest.Builder().nameToken("").build());
 
         // When
@@ -499,7 +499,7 @@ public class ParameterTokenFormatterGwtTestInSuite extends GWTTestCase {
     public void testToHistoryTokenValidRequestHierarchy() {
         // Given
         String expectedHistoryToken = "t1;a=b/t2;c=d/t3";
-        List<PlaceRequest> placeRequestHierarchy = new ArrayList<PlaceRequest>();
+        List<PlaceRequest> placeRequestHierarchy = new ArrayList<>();
         placeRequestHierarchy.add(new PlaceRequest.Builder().nameToken("t1").with("a", "b").build());
         placeRequestHierarchy.add(new PlaceRequest.Builder().nameToken("t2").with("c", "d").build());
         placeRequestHierarchy.add(new PlaceRequest.Builder().nameToken("t3").build());

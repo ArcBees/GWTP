@@ -18,7 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.user.client.Command;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 
@@ -56,12 +55,9 @@ public class RevealContentHandler<T extends Presenter<?, ?>> implements EventHan
                 // So if a presenter registers a handler in its onBind() method and a
                 // child fires the event in its onReveal() method, then the event might
                 // get lost because the handler is not officially registered yet.
-                Scheduler.get().scheduleDeferred(new Command() {
-                    @Override
-                    public void execute() {
-                        presenter.forceReveal();
-                        presenter.setInSlot(event.getAssociatedType(), event.getContent());
-                    }
+                Scheduler.get().scheduleDeferred(() -> {
+                    presenter.forceReveal();
+                    presenter.setInSlot(event.getAssociatedType(), event.getContent());
                 });
             }
         });

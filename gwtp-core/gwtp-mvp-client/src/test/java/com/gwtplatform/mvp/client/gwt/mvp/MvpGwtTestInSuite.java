@@ -19,11 +19,12 @@ package com.gwtplatform.mvp.client.gwt.mvp;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
-import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.gwtplatform.mvp.client.PopupViewCloseHandler;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest.Builder;
+
+import junit.framework.TestCase;
 
 /**
  * Integration test for various components of GWTP's MVP module.
@@ -57,57 +58,33 @@ public class MvpGwtTestInSuite extends GWTTestCase {
 
     public void testPopupViewCloseHandlerNotCalledWhenShown() {
         delayTestFinish(1000);
-        runTest(new ScheduledCommand() {
-            @Override
-            public void execute() {
-                PopupPresenterTestUtilGwt popupPresenter = ginjector.getPopupPresenter().get();
-                popupPresenter.asWidget().addAttachHandler(new AttachEvent.Handler() {
-                    @Override
-                    public void onAttachOrDetach(AttachEvent event) {
-                        if (event.isAttached()) {
-                            finishTest();
-                        } else {
-                            fail();
-                        }
-                    }
-                });
+        runTest(() -> {
+            PopupPresenterTestUtilGwt popupPresenter = ginjector.getPopupPresenter().get();
+            popupPresenter.asWidget().addAttachHandler(event -> {
+                if (event.isAttached()) {
+                    finishTest();
+                } else {
+                    fail();
+                }
+            });
 
-                ginjector.getPlaceManager().revealDefaultPlace();
+            ginjector.getPlaceManager().revealDefaultPlace();
 
-                final PopupViewCloseHandler closeHandler = new PopupViewCloseHandler() {
-                    @Override
-                    public void onClose() {
-                        fail();
-                    }
-                };
+            final PopupViewCloseHandler closeHandler = TestCase::fail;
 
-                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                    @Override
-                    public void execute() {
-                        presenter.showPopup(closeHandler);
-                    }
-                });
-            }
+            Scheduler.get().scheduleDeferred(() -> presenter.showPopup(closeHandler));
         });
     }
 
     public void testPopupViewCloseHandlerIsCalledWhenHidden() {
         delayTestFinish(1000);
-        runTest(new ScheduledCommand() {
-            @Override
-            public void execute() {
-                PopupPresenterTestUtilGwt popupPresenter = ginjector.getPopupPresenter().get();
+        runTest(() -> {
+            PopupPresenterTestUtilGwt popupPresenter = ginjector.getPopupPresenter().get();
 
-                final PopupViewCloseHandler closeHandler = new PopupViewCloseHandler() {
-                    @Override
-                    public void onClose() {
-                        finishTest();
-                    }
-                };
+            final PopupViewCloseHandler closeHandler = this::finishTest;
 
-                popupPresenter.getView().setCloseHandler(closeHandler);
-                popupPresenter.getView().hide();
-            }
+            popupPresenter.getView().setCloseHandler(closeHandler);
+            popupPresenter.getView().hide();
         });
     }
 
@@ -118,14 +95,11 @@ public class MvpGwtTestInSuite extends GWTTestCase {
         delayTestFinish(1000);
         ginjector.getPlaceManager().revealDefaultPlace();
 
-        runTest(new ScheduledCommand() {
-            @Override
-            public void execute() {
-                assertTrue(ginjector.getMainPresenter().get().isVisible());
-                assertFalse(ginjector.getAdminPresenter().get().isVisible());
+        runTest(() -> {
+            assertTrue(ginjector.getMainPresenter().get().isVisible());
+            assertFalse(ginjector.getAdminPresenter().get().isVisible());
 
-                revealAdmin();
-            }
+            revealAdmin();
         });
     }
 
@@ -133,14 +107,11 @@ public class MvpGwtTestInSuite extends GWTTestCase {
         PlaceRequest placeRequest = new Builder().nameToken("admin").build();
         ginjector.getPlaceManager().revealPlace(placeRequest);
 
-        runTest(new ScheduledCommand() {
-            @Override
-            public void execute() {
-                assertFalse(ginjector.getMainPresenter().get().isVisible());
-                assertTrue(ginjector.getAdminPresenter().get().isVisible());
+        runTest(() -> {
+            assertFalse(ginjector.getMainPresenter().get().isVisible());
+            assertTrue(ginjector.getAdminPresenter().get().isVisible());
 
-                revealHomePlace();
-            }
+            revealHomePlace();
         });
     }
 
@@ -148,14 +119,11 @@ public class MvpGwtTestInSuite extends GWTTestCase {
         PlaceRequest placeRequest = new Builder().nameToken("home").build();
         ginjector.getPlaceManager().revealPlace(placeRequest);
 
-        runTest(new ScheduledCommand() {
-            @Override
-            public void execute() {
-                assertTrue(ginjector.getMainPresenter().get().isVisible());
-                assertFalse(ginjector.getAdminPresenter().get().isVisible());
+        runTest(() -> {
+            assertTrue(ginjector.getMainPresenter().get().isVisible());
+            assertFalse(ginjector.getAdminPresenter().get().isVisible());
 
-                revealSelfService();
-            }
+            revealSelfService();
         });
     }
 
@@ -163,14 +131,11 @@ public class MvpGwtTestInSuite extends GWTTestCase {
         PlaceRequest placeRequest = new Builder().nameToken("selfService").build();
         ginjector.getPlaceManager().revealPlace(placeRequest);
 
-        runTest(new ScheduledCommand() {
-            @Override
-            public void execute() {
-                assertFalse(ginjector.getMainPresenter().get().isVisible());
-                assertTrue(ginjector.getAdminPresenter().get().isVisible());
+        runTest(() -> {
+            assertFalse(ginjector.getMainPresenter().get().isVisible());
+            assertTrue(ginjector.getAdminPresenter().get().isVisible());
 
-                finishTest();
-            }
+            finishTest();
         });
     }
 

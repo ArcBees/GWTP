@@ -36,39 +36,21 @@ import static com.google.auto.common.MoreElements.hasModifiers;
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
 
 public class ElementPredicates {
-    public static Predicate<Element> IS_ACCESSIBLE_CLASS = new Predicate<Element>() {
-        @Override
-        public boolean apply(Element element) {
-            return element.getKind() == CLASS
-                    && hasModifiers(PUBLIC).apply(element)
-                    && !hasModifiers(ABSTRACT).apply(element);
-        }
-    };
+    public static Predicate<Element> IS_ACCESSIBLE_CLASS = element -> element.getKind() == CLASS
+            && hasModifiers(PUBLIC).apply(element)
+            && !hasModifiers(ABSTRACT).apply(element);
 
-    public static Predicate<Element> IS_DEFAULT_CONSTRUCTOR = new Predicate<Element>() {
-        @Override
-        public boolean apply(Element element) {
-            return element.getKind() == CONSTRUCTOR
-                    && hasModifiers(PUBLIC).apply(element)
-                    && asExecutable(element).getParameters().isEmpty();
-        }
-    };
+    public static Predicate<Element> IS_DEFAULT_CONSTRUCTOR = element -> element.getKind() == CONSTRUCTOR
+            && hasModifiers(PUBLIC).apply(element)
+            && asExecutable(element).getParameters().isEmpty();
 
-    public static Predicate<Element> IS_INJECTABLE_CONSTRUCTOR = new Predicate<Element>() {
-        @Override
-        public boolean apply(Element element) {
-            return element.getKind() == CONSTRUCTOR
-                    && isAnnotationPresent(element, Inject.class);
-        }
-    };
+    public static Predicate<Element> IS_INJECTABLE_CONSTRUCTOR = element -> element.getKind() == CONSTRUCTOR
+            && isAnnotationPresent(element, Inject.class);
 
     public static Predicate<Element> hasMatchingConstructorOrNone(final Predicate<Element> predicate) {
-        return new Predicate<Element>() {
-            @Override
-            public boolean apply(Element element) {
-                List<ExecutableElement> constructors = constructorsIn(element.getEnclosedElements());
-                return constructors.isEmpty() || FluentIterable.from(constructors).anyMatch(predicate);
-            }
+        return element -> {
+            List<ExecutableElement> constructors = constructorsIn(element.getEnclosedElements());
+            return constructors.isEmpty() || FluentIterable.from(constructors).anyMatch(predicate);
         };
     }
 }

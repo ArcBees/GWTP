@@ -35,9 +35,8 @@ public abstract class AbstractEagerActionHandlerValidatorRegistryImpl implements
     private final Map<Class<? extends ActionValidator>, ActionValidator> validators;
 
     protected AbstractEagerActionHandlerValidatorRegistryImpl() {
-        actionHandlerValidatorInstances = new HashMap<Class<? extends Action<? extends Result>>,
-                ActionHandlerValidatorInstance>();
-        validators = new HashMap<Class<? extends ActionValidator>, ActionValidator>();
+        actionHandlerValidatorInstances = new HashMap<>();
+        validators = new HashMap<>();
     }
 
     @Override

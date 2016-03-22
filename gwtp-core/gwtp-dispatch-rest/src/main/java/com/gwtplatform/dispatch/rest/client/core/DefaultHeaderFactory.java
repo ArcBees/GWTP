@@ -66,7 +66,7 @@ public class DefaultHeaderFactory implements HeaderFactory {
     }
 
     private List<HttpParameter> buildParameters(RestAction<?> action, String securityToken) {
-        List<HttpParameter> headerParams = new ArrayList<HttpParameter>();
+        List<HttpParameter> headerParams = new ArrayList<>();
 
         addMediaTypes(action, headerParams);
         maybeAddModuleBase(action, headerParams);

@@ -119,7 +119,7 @@ public class DefaultUriFactory implements UriFactory {
     }
 
     private List<HttpParameter> getParameters(RestAction<?> action, Type type) {
-        List<HttpParameter> queryParams = new ArrayList<HttpParameter>();
+        List<HttpParameter> queryParams = new ArrayList<>();
         queryParams.addAll(globalQueryParams.get(action.getHttpMethod()));
         queryParams.addAll(action.getParameters(type));
         return queryParams;

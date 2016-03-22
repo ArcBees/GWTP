@@ -8,5 +8,5 @@
     <source path='client'/>
 
     <extend-configuration-property name="rpc.blacklist"
-            value="com.gwtplatform.dispatch.client.interceptor.InterceptorMismatchException"/>
+            value="com.gwtplatform.dispatch.rpc.client.interceptor.InterceptorMismatchException"/>
 </module>

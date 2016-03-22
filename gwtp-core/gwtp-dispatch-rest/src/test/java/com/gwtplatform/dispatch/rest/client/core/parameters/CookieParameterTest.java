@@ -152,7 +152,7 @@ public class CookieParameterTest {
     @Test
     public void getEntries_collectionOfCookie_returnsMultipleParsedCookies() {
         // given
-        List<Cookie> cookies = new ArrayList<Cookie>();
+        List<Cookie> cookies = new ArrayList<>();
         cookies.add(new Cookie(COOKIE_NAME, SOME_VALUE));
         cookies.add(new Cookie(COOKIE_NAME, SOME_VALUE_2));
 
@@ -172,7 +172,7 @@ public class CookieParameterTest {
     @Test(expected = IllegalArgumentException.class)
     public void getEntries_collectionOfObjects_throws() {
         // given
-        List<Object> cookies = new ArrayList<Object>();
+        List<Object> cookies = new ArrayList<>();
         cookies.add(SOME_VALUE);
 
         CookieParameter parameter = new CookieParameter(PARAM_NAME, cookies, "");

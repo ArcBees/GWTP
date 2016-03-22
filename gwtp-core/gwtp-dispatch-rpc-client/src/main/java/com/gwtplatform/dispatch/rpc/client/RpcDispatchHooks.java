@@ -20,7 +20,7 @@ import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
- * Hooks to be executed on every {@link com.gwtplatform.dispatch.client.DispatchCall}.
+ * Hooks to be executed on every {@link DispatchCall}.
  *
  * {@link RpcDispatchHooks#onExecute(Action, boolean)} will be called just before any action is attempted.<br>
  * {@link RpcDispatchHooks#onSuccess(Action, Result, boolean)} will be called when any action succeeds.<br>

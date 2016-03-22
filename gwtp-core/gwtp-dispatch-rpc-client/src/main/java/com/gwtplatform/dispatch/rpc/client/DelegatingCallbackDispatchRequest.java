@@ -14,9 +14,10 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.rpc.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
@@ -28,7 +29,7 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * <p/>
  * This class is used within
  * {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.AbstractCachingRpcInterceptor} to be able to store
- * inside an {@link java.util.HashMap HashMap} {@link com.gwtplatform.dispatch.client.DefaultCallbackDispatchRequest}
+ * inside an {@link java.util.HashMap HashMap} {@link DefaultCallbackDispatchRequest}
  * while keeping {@link GwtHttpDispatchRequest} nature.
  *
  * @param <R> The type of the {@link AsyncCallback}.

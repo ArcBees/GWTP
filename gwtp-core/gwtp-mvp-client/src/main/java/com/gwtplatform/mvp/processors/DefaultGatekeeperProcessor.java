@@ -19,6 +19,7 @@ package com.gwtplatform.mvp.processors;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
@@ -29,6 +30,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 
+import com.google.auto.common.MoreElements;
 import com.google.auto.service.AutoService;
 import com.gwtplatform.common.processors.AbstractGwtpAppProcessor;
 import com.gwtplatform.mvp.client.annotations.DefaultGatekeeper;
@@ -40,7 +42,6 @@ import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.utils.MetaInfResource;
 
-import static com.google.auto.common.MoreElements.asType;
 import static com.google.auto.common.MoreElements.hasModifiers;
 import static com.gwtplatform.common.processors.module.GwtpAppModuleProcessor.MAIN_MODULE_TYPE;
 import static com.gwtplatform.processors.tools.bindings.BindingContext.newAnnotatedBinding;
@@ -98,15 +99,14 @@ public class DefaultGatekeeperProcessor extends AbstractGwtpAppProcessor {
     private Set<TypeElement> extractGatekeepers(RoundEnvironment roundEnv) {
         Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(DefaultGatekeeper.class);
         elements = utils.getSourceFilter().filterElements(elements);
-        Set<TypeElement> typeElements = new LinkedHashSet<>();
 
-        for (Element gatekeeper : elements) {
-            if (gatekeeper.getKind() == ElementKind.CLASS) {
-                typeElements.add(asType(gatekeeper));
-            }
-        }
+        Set<TypeElement> typeElements = elements.stream()
+                .filter(gatekeeper -> gatekeeper.getKind() == ElementKind.CLASS)
+                .map(MoreElements::asType)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
         validateGatekeepers(typeElements);
+
         return typeElements;
     }
 

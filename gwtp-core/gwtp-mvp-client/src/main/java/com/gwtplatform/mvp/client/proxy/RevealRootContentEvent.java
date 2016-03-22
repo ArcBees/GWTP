@@ -33,7 +33,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * @see RevealRootPopupContentEvent
  */
 public final class RevealRootContentEvent extends GwtEvent<RevealRootContentHandler> {
-    private static final Type<RevealRootContentHandler> TYPE = new Type<RevealRootContentHandler>();
+    private static final Type<RevealRootContentHandler> TYPE = new Type<>();
 
     private final Presenter<?, ?> content;
 

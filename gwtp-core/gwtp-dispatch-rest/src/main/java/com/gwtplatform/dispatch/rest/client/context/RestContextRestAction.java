@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.interceptor;
+package com.gwtplatform.dispatch.rest.client.context;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +29,12 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * A RestAction stub used internally to compare interceptor contexts.
  */
 // TODO: Consider not implementing RestAction because it brings unneeded methods
-class InterceptorContextRestAction implements RestAction<Object> {
+class RestContextRestAction implements RestAction<Object> {
     private final HttpMethod httpMethod;
     private final String path;
     private final List<HttpParameter> parameters;
 
-    InterceptorContextRestAction(
+    RestContextRestAction(
             HttpMethod httpMethod,
             String path,
             int queryCount) {
@@ -44,7 +44,7 @@ class InterceptorContextRestAction implements RestAction<Object> {
 
         // Add fake query params
         for (int i = 0; i < queryCount; i++) {
-            parameters.add(new InterceptorContextHttpParameter("param" + i, "value" + i));
+            parameters.add(new RestContextHttpParameter("param" + i, "value" + i));
         }
     }
 

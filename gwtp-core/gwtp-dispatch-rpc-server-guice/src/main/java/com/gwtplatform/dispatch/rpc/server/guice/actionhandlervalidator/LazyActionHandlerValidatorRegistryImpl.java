@@ -47,11 +47,9 @@ public class LazyActionHandlerValidatorRegistryImpl implements
     @Inject
     LazyActionHandlerValidatorRegistryImpl(Injector injector) {
         this.injector = injector;
-        actionHandlerValidatorClasses = new ConcurrentHashMap<Class<? extends Action<?>>,
-                ActionHandlerValidatorClass<? extends Action<?>, ? extends Result>>();
-        actionHandlerValidatorInstances = new ConcurrentHashMap<Class<? extends Action<?>>,
-                ActionHandlerValidatorInstance>();
-        validators = new ConcurrentHashMap<Class<? extends ActionValidator>, ActionValidator>();
+        actionHandlerValidatorClasses = new ConcurrentHashMap<>();
+        actionHandlerValidatorInstances = new ConcurrentHashMap<>();
+        validators = new ConcurrentHashMap<>();
     }
 
     @Override

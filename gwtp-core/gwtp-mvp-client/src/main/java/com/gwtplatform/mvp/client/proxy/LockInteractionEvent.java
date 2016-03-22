@@ -51,7 +51,7 @@ public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
 
     public static Type<LockInteractionHandler> getType() {
         if (TYPE == null) {
-            TYPE = new Type<LockInteractionHandler>();
+            TYPE = new Type<>();
         }
         return TYPE;
     }

@@ -23,7 +23,6 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
@@ -61,12 +60,7 @@ public class ResourceUtils {
         List<ExecutableElement> methods = methodsIn(members);
 
         return FluentIterable.from(methods)
-                .transform(new Function<ExecutableElement, ResourceMethod>() {
-                    @Override
-                    public ResourceMethod apply(ExecutableElement element) {
-                        return resourceMethodFactories.create(resourceType, element);
-                    }
-                })
+                .transform(element1 -> resourceMethodFactories.create(resourceType, element1))
                 .filter(Predicates.notNull())
                 .toList();
     }

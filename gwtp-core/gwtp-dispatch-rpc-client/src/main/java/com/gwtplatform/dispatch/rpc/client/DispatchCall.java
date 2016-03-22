@@ -14,13 +14,14 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.rpc.client;
 
 import com.google.gwt.http.client.Response;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.ExceptionHandler.Status;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
-import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * An class representing a call made to the server through {@link com.gwtplatform.dispatch.rest.client.RestDispatch
@@ -34,11 +35,11 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * @param <A> The type of the {@link TypedAction} wrapped by this {@link DispatchCall}.
  * @param <R> The type of the result of the wrapped {@link TypedAction}.
  */
-public abstract class DispatchCall<A extends TypedAction<R>, R, C> {
+public abstract class DispatchCall<A, R> {
     private final A action;
     private final ExceptionHandler exceptionHandler;
     private final SecurityCookieAccessor securityCookieAccessor;
-    private final C callback;
+    private final AsyncCallback<R> callback;
 
     private boolean intercepted;
 
@@ -46,7 +47,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R, C> {
             ExceptionHandler exceptionHandler,
             SecurityCookieAccessor securityCookieAccessor,
             A action,
-            C callback) {
+            AsyncCallback<R> callback) {
         this.action = action;
         this.callback = callback;
         this.exceptionHandler = exceptionHandler;
@@ -94,7 +95,7 @@ public abstract class DispatchCall<A extends TypedAction<R>, R, C> {
      *
      * @return the callback to call when the action has been executed.
      */
-    protected C getCallback() {
+    protected AsyncCallback<R> getCallback() {
         return callback;
     }
 
@@ -128,25 +129,25 @@ public abstract class DispatchCall<A extends TypedAction<R>, R, C> {
     /**
      * Override this method to perform additional work when the action execution succeeded.
      *
-     * @param result the action result.
+     * @param result   the action result.
      * @param response the action {@link Response}.
      */
-    protected abstract void onExecuteSuccess(R result, Response response);
+    public abstract void onExecuteSuccess(R result, Response response);
 
     /**
      * Override this method to perform additional work when the action execution failed.
      *
      * @param caught the caught {@link Throwable}.
      */
-    protected boolean shouldHandleFailure(Throwable caught) {
-        return  !(exceptionHandler != null && exceptionHandler.onFailure(caught) == Status.STOP);
+    public boolean shouldHandleFailure(Throwable caught) {
+        return exceptionHandler.onFailure(caught) != Status.STOP;
     }
 
     /**
      * Override this method to perform additional work when the action execution failed.
      *
-     * @param caught the caught {@link Throwable}.
+     * @param caught   the caught {@link Throwable}.
      * @param response the failure {@link Response}.
      */
-    protected abstract void onExecuteFailure(Throwable caught, Response response);
+    public abstract void onExecuteFailure(Throwable caught, Response response);
 }

@@ -76,7 +76,7 @@ public class ContentTypeTest {
     @Test
     public void toString_wildcard() {
         // given
-        ContentType contentType = new ContentType("*", "*", new HashMap<String, String>());
+        ContentType contentType = new ContentType("*", "*", new HashMap<>());
 
         // when
         String string = contentType.toString();
@@ -88,7 +88,7 @@ public class ContentTypeTest {
     @Test
     public void toString_type_wildcard() {
         // given
-        ContentType contentType = new ContentType("text", "*", new HashMap<String, String>());
+        ContentType contentType = new ContentType("text", "*", new HashMap<>());
 
         // when
         String string = contentType.toString();
@@ -100,7 +100,7 @@ public class ContentTypeTest {
     @Test
     public void toString_type_type() {
         // given
-        ContentType contentType = new ContentType("text", "html", new HashMap<String, String>());
+        ContentType contentType = new ContentType("text", "html", new HashMap<>());
 
         // when
         String string = contentType.toString();
@@ -127,8 +127,8 @@ public class ContentTypeTest {
     @Test
     public void isCompatible_same() {
         // given
-        ContentType contentType1 = new ContentType("text", "html", new HashMap<String, String>());
-        ContentType contentType2 = new ContentType("text", "html", new HashMap<String, String>());
+        ContentType contentType1 = new ContentType("text", "html", new HashMap<>());
+        ContentType contentType2 = new ContentType("text", "html", new HashMap<>());
 
         // when
         boolean compatible = contentType1.isCompatible(contentType2);
@@ -140,8 +140,8 @@ public class ContentTypeTest {
     @Test
     public void isCompatible_differentType() {
         // given
-        ContentType contentType1 = new ContentType("text", "*", new HashMap<String, String>());
-        ContentType contentType2 = new ContentType("application", "*", new HashMap<String, String>());
+        ContentType contentType1 = new ContentType("text", "*", new HashMap<>());
+        ContentType contentType2 = new ContentType("application", "*", new HashMap<>());
 
         // when
         boolean compatible = contentType1.isCompatible(contentType2);
@@ -153,8 +153,8 @@ public class ContentTypeTest {
     @Test
     public void isCompatible_sameType_differentSubtype() {
         // given
-        ContentType contentType1 = new ContentType("text", "css", new HashMap<String, String>());
-        ContentType contentType2 = new ContentType("text", "html", new HashMap<String, String>());
+        ContentType contentType1 = new ContentType("text", "css", new HashMap<>());
+        ContentType contentType2 = new ContentType("text", "html", new HashMap<>());
 
         // when
         boolean compatible = contentType1.isCompatible(contentType2);
@@ -166,8 +166,8 @@ public class ContentTypeTest {
     @Test
     public void isCompatible_wildCardType1() {
         // given
-        ContentType contentType1 = new ContentType("*", "*", new HashMap<String, String>());
-        ContentType contentType2 = new ContentType("application", "*", new HashMap<String, String>());
+        ContentType contentType1 = new ContentType("*", "*", new HashMap<>());
+        ContentType contentType2 = new ContentType("application", "*", new HashMap<>());
 
         // when
         boolean compatible = contentType1.isCompatible(contentType2);
@@ -179,8 +179,8 @@ public class ContentTypeTest {
     @Test
     public void isCompatible_wildCardType2() {
         // given
-        ContentType contentType1 = new ContentType("text", "*", new HashMap<String, String>());
-        ContentType contentType2 = new ContentType("*", "*", new HashMap<String, String>());
+        ContentType contentType1 = new ContentType("text", "*", new HashMap<>());
+        ContentType contentType2 = new ContentType("*", "*", new HashMap<>());
 
         // when
         boolean compatible = contentType1.isCompatible(contentType2);
@@ -192,8 +192,8 @@ public class ContentTypeTest {
     @Test
     public void isCompatible_sameType_wildcardSubType1() {
         // given
-        ContentType contentType1 = new ContentType("text", "*", new HashMap<String, String>());
-        ContentType contentType2 = new ContentType("text", "html", new HashMap<String, String>());
+        ContentType contentType1 = new ContentType("text", "*", new HashMap<>());
+        ContentType contentType2 = new ContentType("text", "html", new HashMap<>());
 
         // when
         boolean compatible = contentType1.isCompatible(contentType2);
@@ -205,8 +205,8 @@ public class ContentTypeTest {
     @Test
     public void isCompatible_sameType_wildcardSubType2() {
         // given
-        ContentType contentType1 = new ContentType("text", "html", new HashMap<String, String>());
-        ContentType contentType2 = new ContentType("text", "*", new HashMap<String, String>());
+        ContentType contentType1 = new ContentType("text", "html", new HashMap<>());
+        ContentType contentType2 = new ContentType("text", "*", new HashMap<>());
 
         // when
         boolean compatible = contentType1.isCompatible(contentType2);
@@ -218,7 +218,7 @@ public class ContentTypeTest {
     @Test
     public void isCompatible_null() {
         // given
-        ContentType contentType1 = new ContentType("text", "html", new HashMap<String, String>());
+        ContentType contentType1 = new ContentType("text", "html", new HashMap<>());
         ContentType contentType2 = null;
 
         // when

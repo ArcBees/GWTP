@@ -28,7 +28,7 @@ import com.github.nmorel.gwtjackson.client.ObjectMapper;
  */
 public abstract class AbstractJacksonMapperProvider implements JacksonMapperProvider {
     private final Map<String, Provider<? extends ObjectMapper<?>>> objectMapperProviders =
-            new HashMap<String, Provider<? extends ObjectMapper<?>>>();
+            new HashMap<>();
 
     @SuppressWarnings("unchecked")
     @Override

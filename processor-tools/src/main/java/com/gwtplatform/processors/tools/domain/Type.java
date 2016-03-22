@@ -39,12 +39,7 @@ import static com.google.auto.common.MoreTypes.asPrimitiveType;
 import static com.google.auto.common.MoreTypes.isType;
 
 public class Type implements HasImports, Comparable<Type> {
-    private static final Function<TypeMirror, Type> TYPE_MIRROR_TO_TYPE = new Function<TypeMirror, Type>() {
-        @Override
-        public Type apply(TypeMirror typeArgument) {
-            return new Type(typeArgument);
-        }
-    };
+    private static final Function<TypeMirror, Type> TYPE_MIRROR_TO_TYPE = Type::new;
 
     private final String packageName;
     private final String simpleName;
@@ -143,7 +138,7 @@ public class Type implements HasImports, Comparable<Type> {
             String packageName,
             String enclosingNames,
             String simpleName) {
-        this(packageName, enclosingNames, simpleName, new ArrayList<Type>());
+        this(packageName, enclosingNames, simpleName, new ArrayList<>());
     }
 
     public Type(
@@ -206,21 +201,11 @@ public class Type implements HasImports, Comparable<Type> {
     }
 
     public String getQualifiedTypeParameters() {
-        return formatTypeParameters(new Function<Type, String>() {
-            @Override
-            public String apply(Type type) {
-                return type.getQualifiedParameterizedName();
-            }
-        });
+        return formatTypeParameters(Type::getQualifiedParameterizedName);
     }
 
     public String getSimpleTypeParameters() {
-        return formatTypeParameters(new Function<Type, String>() {
-            @Override
-            public String apply(Type type) {
-                return type.getParameterizedName();
-            }
-        });
+        return formatTypeParameters(Type::getParameterizedName);
     }
 
     @Override
