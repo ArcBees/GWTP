@@ -30,7 +30,6 @@ import com.gwtplatform.dispatch.rest.client.annotations.RequestTimeout;
 import com.gwtplatform.dispatch.rest.client.annotations.RestBinding;
 import com.gwtplatform.dispatch.rest.client.annotations.XsrfHeaderName;
 import com.gwtplatform.dispatch.rest.client.filter.RestFilterRegistry;
-import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.serialization.SerializationModule;
 
 /**
@@ -88,7 +87,6 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
         // Cross-concern
         bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
-        bind(RestInterceptorRegistry.class).to(builder.getInterceptorRegistry()).in(Singleton.class);
         bind(RestFilterRegistry.class).to(builder.getFilterRegistry()).in(Singleton.class);
     }
 
