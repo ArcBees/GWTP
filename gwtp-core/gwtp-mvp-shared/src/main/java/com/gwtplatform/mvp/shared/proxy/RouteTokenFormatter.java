@@ -130,7 +130,7 @@ public class RouteTokenFormatter implements TokenFormatter {
             assert placeTokenIsValid(placeToken) : "Place-token should start with a '/' or '!/'";
             assert placeToken.indexOf('?') == -1 : "No Query string expected here";
 
-            this.allMatches = new TreeSet<RouteMatch>();
+            this.allMatches = new TreeSet<>();
             this.placeParts = placeToken.split("/");
 
             for (String route : allRegisteredPlaceTokens.getAllPlaceTokens()) {
@@ -159,7 +159,7 @@ public class RouteTokenFormatter implements TokenFormatter {
                 return new RouteMatch(route, 0, null);
             }
 
-            Map<String, String> recordedParameters = new HashMap<String, String>();
+            Map<String, String> recordedParameters = new HashMap<>();
             int staticMatches = 0;
             for (int i = 0; i < placeParts.length; i++) {
                 if (placeParts[i].equals(routeParts[i])) {
@@ -261,7 +261,7 @@ public class RouteTokenFormatter implements TokenFormatter {
 
     @Override
     public List<PlaceRequest> toPlaceRequestHierarchy(String historyToken) throws TokenFormatException {
-        List<PlaceRequest> result = new ArrayList<PlaceRequest>();
+        List<PlaceRequest> result = new ArrayList<>();
         result.add(toPlaceRequest(historyToken));
 
         return result;
@@ -275,7 +275,7 @@ public class RouteTokenFormatter implements TokenFormatter {
      * @return A map containing all keys value pairs of the query-string.
      */
     Map<String, String> parseQueryString(String queryString, Map<String, String> into) {
-        Map<String, String> result = (into != null) ? into : new HashMap<String, String>();
+        Map<String, String> result = (into != null) ? into : new HashMap<>();
 
         if (queryString != null && !queryString.isEmpty()) {
             for (String keyValuePair : queryString.split("&")) {

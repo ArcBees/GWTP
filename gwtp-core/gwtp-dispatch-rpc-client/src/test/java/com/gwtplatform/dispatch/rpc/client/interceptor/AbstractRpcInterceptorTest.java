@@ -19,19 +19,37 @@ package com.gwtplatform.dispatch.rpc.client.interceptor;
 import org.junit.Test;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
+import com.gwtplatform.dispatch.client.ExecuteCommand;
+import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
-import com.gwtplatform.dispatch.shared.TypedAction;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class AbstractRpcInterceptorTest {
-    private static class TypedAction1 implements TypedAction<Result> {
+    private static class TypedAction1 implements Action<Result> {
+        @Override
+        public String getServiceName() {
+            return null;
+        }
+
+        @Override
+        public boolean isSecured() {
+            return false;
+        }
     }
 
-    private static class TypedAction2 implements TypedAction<Result> {
+    private static class TypedAction2 implements Action<Result> {
+        @Override
+        public String getServiceName() {
+            return null;
+        }
+
+        @Override
+        public boolean isSecured() {
+            return false;
+        }
     }
 
     @Test
@@ -62,7 +80,7 @@ public class AbstractRpcInterceptorTest {
 
             @Override
             public DispatchRequest execute(A action, AsyncCallback<R> resultCallback,
-                                           ExecuteCommand<A, R> executeCommand) {
+                                           ExecuteCommand<A, AsyncCallback<R>> executeCommand) {
                 return executeCommand.execute(action, resultCallback);
             }
         };

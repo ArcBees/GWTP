@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.interceptor;
+package com.gwtplatform.dispatch.rest.client.context;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +22,11 @@ import java.util.Map.Entry;
 
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 
-class InterceptorContextHttpParameter implements HttpParameter {
+class RestContextHttpParameter implements HttpParameter {
     private final String name;
     private final String value;
 
-    InterceptorContextHttpParameter(
+    RestContextHttpParameter(
             String name,
             String value) {
         this.name = name;
@@ -50,6 +50,6 @@ class InterceptorContextHttpParameter implements HttpParameter {
 
     @Override
     public List<Entry<String, String>> getEncodedEntries() {
-        return new ArrayList<Entry<String, String>>();
+        return new ArrayList<>();
     }
 }

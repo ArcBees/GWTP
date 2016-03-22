@@ -75,7 +75,7 @@ public class GatekeeperTest {
     abstract static class DummyPresenterWithDenyGatekeeper
             extends Presenter<View, DummyProxyPlaceWithDenyGatekeeper> {
         @Inject
-        public DummyPresenterWithDenyGatekeeper(EventBus eventBus, View view,
+        DummyPresenterWithDenyGatekeeper(EventBus eventBus, View view,
                 DummyProxyPlaceWithDenyGatekeeper proxy) {
             super(eventBus, view, proxy);
         }
@@ -89,8 +89,8 @@ public class GatekeeperTest {
     @TestEagerSingleton
     static class DummyProxyWithDenyGatekeeper extends ProxyImpl<DummyPresenterWithDenyGatekeeper> {
         @Inject
-        public DummyProxyWithDenyGatekeeper(Provider<DummyPresenterWithDenyGatekeeper> presenter) {
-            this.presenter = new StandardProvider<DummyPresenterWithDenyGatekeeper>(presenter);
+        DummyProxyWithDenyGatekeeper(Provider<DummyPresenterWithDenyGatekeeper> presenter) {
+            this.presenter = new StandardProvider<>(presenter);
         }
     }
 
@@ -98,7 +98,7 @@ public class GatekeeperTest {
     static class DummyProxyPlaceWithDenyGatekeeper
             extends ProxyPlaceBase<DummyPresenterWithDenyGatekeeper> {
         @Inject
-        public DummyProxyPlaceWithDenyGatekeeper(DummyProxyWithDenyGatekeeper proxy,
+        DummyProxyPlaceWithDenyGatekeeper(DummyProxyWithDenyGatekeeper proxy,
                 DeferredCommandManager deferredCommandManager,
                 @Named("DenyGatekeeper") Gatekeeper gatekeeper) {
             super(new PlaceWithGatekeeper("dummyNameTokenWithDenyGatekeeper", gatekeeper), proxy,
@@ -110,7 +110,7 @@ public class GatekeeperTest {
     abstract static class DummyPresenterWithGrantGatekeeper
             extends Presenter<View, DummyProxyPlaceWithGrantGatekeeper> {
         @Inject
-        public DummyPresenterWithGrantGatekeeper(EventBus eventBus, View view,
+        DummyPresenterWithGrantGatekeeper(EventBus eventBus, View view,
                 DummyProxyPlaceWithGrantGatekeeper proxy) {
             super(eventBus, view, proxy);
         }
@@ -124,8 +124,8 @@ public class GatekeeperTest {
     @TestEagerSingleton
     static class DummyProxyWithGrantGatekeeper extends ProxyImpl<DummyPresenterWithGrantGatekeeper> {
         @Inject
-        public DummyProxyWithGrantGatekeeper(Provider<DummyPresenterWithGrantGatekeeper> presenter) {
-            this.presenter = new StandardProvider<DummyPresenterWithGrantGatekeeper>(presenter);
+        DummyProxyWithGrantGatekeeper(Provider<DummyPresenterWithGrantGatekeeper> presenter) {
+            this.presenter = new StandardProvider<>(presenter);
         }
     }
 
@@ -133,7 +133,7 @@ public class GatekeeperTest {
     static class DummyProxyPlaceWithGrantGatekeeper
             extends ProxyPlaceBase<DummyPresenterWithGrantGatekeeper> {
         @Inject
-        public DummyProxyPlaceWithGrantGatekeeper(DummyProxyWithGrantGatekeeper proxy,
+        DummyProxyPlaceWithGrantGatekeeper(DummyProxyWithGrantGatekeeper proxy,
                 DeferredCommandManager deferredCommandManager,
                 @Named("GrantGatekeeper") Gatekeeper gatekeeper) {
             super(new PlaceWithGatekeeper("dummyNameTokenWithGrantGatekeeper", gatekeeper), proxy,
@@ -144,7 +144,7 @@ public class GatekeeperTest {
     @TestMockSingleton
     abstract static class DummyPresenterDefault extends Presenter<View, DummyProxyPlaceDefault> {
         @Inject
-        public DummyPresenterDefault(EventBus eventBus, View view, DummyProxyPlaceDefault proxy) {
+        DummyPresenterDefault(EventBus eventBus, View view, DummyProxyPlaceDefault proxy) {
             super(eventBus, view, proxy);
         }
 
@@ -157,15 +157,15 @@ public class GatekeeperTest {
     @TestEagerSingleton
     static class DummyProxyDefault extends ProxyImpl<DummyPresenterDefault> {
         @Inject
-        public DummyProxyDefault(Provider<DummyPresenterDefault> presenter) {
-            this.presenter = new StandardProvider<DummyPresenterDefault>(presenter);
+        DummyProxyDefault(Provider<DummyPresenterDefault> presenter) {
+            this.presenter = new StandardProvider<>(presenter);
         }
     }
 
     @TestEagerSingleton
     static class DummyProxyPlaceDefault extends ProxyPlaceBase<DummyPresenterDefault> {
         @Inject
-        public DummyProxyPlaceDefault(DummyProxyDefault proxy,
+        DummyProxyPlaceDefault(DummyProxyDefault proxy,
                 DeferredCommandManager deferredCommandManager) {
             super(new PlaceImpl("defaultPlace"), proxy, deferredCommandManager);
         }

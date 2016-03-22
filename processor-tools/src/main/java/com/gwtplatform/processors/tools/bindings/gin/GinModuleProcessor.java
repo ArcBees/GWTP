@@ -129,7 +129,7 @@ public class GinModuleProcessor extends AbstractContextProcessor<BindingContext,
         FileObject fileObject = sourceFiles.get(moduleType);
         Multimap<Type, GinBinding> setBindings = setBinders.get(moduleType);
         Set<Entry<Type, Collection<GinBinding>>> setBindingsEntries = setBindings == null
-                ? new HashSet<Entry<Type, Collection<GinBinding>>>()
+                ? new HashSet<>()
                 : setBindings.asMap().entrySet();
 
         outputter

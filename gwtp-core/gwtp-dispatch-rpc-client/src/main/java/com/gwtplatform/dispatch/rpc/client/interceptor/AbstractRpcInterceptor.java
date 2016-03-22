@@ -16,23 +16,29 @@
 
 package com.gwtplatform.dispatch.rpc.client.interceptor;
 
-import com.gwtplatform.dispatch.client.interceptor.AbstractInterceptor;
-import com.gwtplatform.dispatch.shared.TypedAction;
+import com.gwtplatform.dispatch.rpc.shared.Action;
 
 /**
- * Simple abstract super-class for {@link RpcInterceptor} implementations that forces the action class to be passed
- * in as a constructor to the interceptor.
+ * Simple abstract super-class for {@link RpcInterceptor} implementations that forces the action class to be passed in
+ * as a constructor to the interceptor.
  *
  * @param <A> The action type.
  * @param <R> The result type.
  */
-public abstract class AbstractRpcInterceptor<A, R> extends AbstractInterceptor<A, R> implements RpcInterceptor<A, R> {
+public abstract class AbstractRpcInterceptor<A, R> implements RpcInterceptor<A, R> {
+    private final Class<A> actionType;
+
     protected AbstractRpcInterceptor(Class<A> actionType) {
-        super(actionType);
+        this.actionType = actionType;
     }
 
     @Override
-    public boolean canExecute(TypedAction<?> action) {
+    public boolean canExecute(Action<?> action) {
         return getActionType().equals(action.getClass());
+    }
+
+    @Override
+    public Class<A> getActionType() {
+        return actionType;
     }
 }

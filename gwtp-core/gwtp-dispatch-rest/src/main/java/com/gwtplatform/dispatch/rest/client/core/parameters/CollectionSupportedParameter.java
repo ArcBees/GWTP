@@ -33,7 +33,7 @@ public class CollectionSupportedParameter extends ClientHttpParameter {
 
     @Override
     public List<Entry<String, String>> getEncodedEntries() {
-        List<Map.Entry<String, String>> entries = new ArrayList<Entry<String, String>>();
+        List<Map.Entry<String, String>> entries = new ArrayList<>();
 
         if (getObject() instanceof Collection) {
             // Spec. requires only List<T>, Set<T> or SortedSet<T>... but really?!

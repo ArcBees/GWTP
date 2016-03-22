@@ -18,11 +18,10 @@ package com.gwtplatform.dispatch.rest.client.core;
 
 import javax.inject.Inject;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
+import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.annotations.RestBinding;
-import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
@@ -31,7 +30,6 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  */
 public class DefaultDispatchCallFactory implements DispatchCallFactory {
     private final ExceptionHandler exceptionHandler;
-    private final RestInterceptorRegistry interceptorRegistry;
     private final SecurityCookieAccessor securityCookieAccessor;
     private final RequestBuilderFactory requestBuilderFactory;
     private final CookieManager cookieManager;
@@ -42,13 +40,11 @@ public class DefaultDispatchCallFactory implements DispatchCallFactory {
     DefaultDispatchCallFactory(
             @RestBinding ExceptionHandler exceptionHandler,
             @RestBinding SecurityCookieAccessor securityCookieAccessor,
-            RestInterceptorRegistry interceptorRegistry,
             RequestBuilderFactory requestBuilderFactory,
             CookieManager cookieManager,
             ResponseDeserializer responseDeserializer,
             RestDispatchHooks dispatchHooks) {
         this.exceptionHandler = exceptionHandler;
-        this.interceptorRegistry = interceptorRegistry;
         this.securityCookieAccessor = securityCookieAccessor;
         this.requestBuilderFactory = requestBuilderFactory;
         this.cookieManager = cookieManager;
@@ -57,8 +53,8 @@ public class DefaultDispatchCallFactory implements DispatchCallFactory {
     }
 
     @Override
-    public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, AsyncCallback<R> callback) {
-        return new RestDispatchCall<A, R>(this, exceptionHandler, interceptorRegistry, securityCookieAccessor,
-                requestBuilderFactory, cookieManager, responseDeserializer, dispatchHooks, action, callback);
+    public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, RestCallback<R> callback) {
+        return new RestDispatchCall<>(this, exceptionHandler, securityCookieAccessor, requestBuilderFactory,
+                cookieManager, responseDeserializer, dispatchHooks, action, callback);
     }
 }

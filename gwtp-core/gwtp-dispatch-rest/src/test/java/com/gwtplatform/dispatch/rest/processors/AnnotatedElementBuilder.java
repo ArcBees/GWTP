@@ -60,7 +60,9 @@ public class AnnotatedElementBuilder {
             Annotation annotation) {
         this(element, findAnnotationClass(annotation));
 
-        given(element.getAnnotation(annotationClass)).willReturn(annotation);
+        // TODO : Not sure why Intellij fails without this cast..
+        // noinspection RedundantCast
+        given(element.getAnnotation((Class<Annotation>) annotationClass)).willReturn(annotation);
     }
 
     public AnnotatedElementBuilder(

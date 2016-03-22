@@ -233,12 +233,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
 
     private void handleTokenChange(final String historyToken) {
         if (locked) {
-            defferedNavigation = new Command() {
-                @Override
-                public void execute() {
-                    handleTokenChange(historyToken);
-                }
-            };
+            defferedNavigation = () -> handleTokenChange(historyToken);
             return;
         }
         if (!getLock()) {
@@ -309,12 +304,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     @Override
     public void revealPlace(final PlaceRequest request, final boolean updateBrowserUrl) {
         if (locked) {
-            defferedNavigation = new Command() {
-                @Override
-                public void execute() {
-                    revealPlace(request, updateBrowserUrl);
-                }
-            };
+            defferedNavigation = () -> revealPlace(request, updateBrowserUrl);
             return;
         }
         if (!getLock()) {
@@ -329,12 +319,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     public void revealPlaceHierarchy(
             final List<PlaceRequest> placeRequestHierarchy) {
         if (locked) {
-            defferedNavigation = new Command() {
-                @Override
-                public void execute() {
-                    revealPlaceHierarchy(placeRequestHierarchy);
-                }
-            };
+            defferedNavigation = () -> revealPlaceHierarchy(placeRequestHierarchy);
             return;
         }
         if (!getLock()) {
@@ -352,12 +337,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     @Override
     public void revealRelativePlace(final int level) {
         if (locked) {
-            defferedNavigation = new Command() {
-                @Override
-                public void execute() {
-                    revealRelativePlace(level);
-                }
-            };
+            defferedNavigation = () -> revealRelativePlace(level);
             return;
         }
         if (!getLock()) {
@@ -382,12 +362,7 @@ public abstract class PlaceManagerImpl implements PlaceManager, ValueChangeHandl
     @Override
     public void revealRelativePlace(final PlaceRequest request, final int level) {
         if (locked) {
-            defferedNavigation = new Command() {
-                @Override
-                public void execute() {
-                    revealRelativePlace(request, level);
-                }
-            };
+            defferedNavigation = () -> revealRelativePlace(request, level);
             return;
         }
         if (!getLock()) {

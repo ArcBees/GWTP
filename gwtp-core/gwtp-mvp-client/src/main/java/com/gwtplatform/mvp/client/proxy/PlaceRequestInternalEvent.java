@@ -47,7 +47,7 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
     private boolean handled;
     private boolean authorized = true;
 
-    public PlaceRequestInternalEvent(
+    PlaceRequestInternalEvent(
             PlaceRequest request,
             boolean updateBrowserHistory) {
         this.request = request;
@@ -72,7 +72,7 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
 
     public static Type<PlaceRequestInternalHandler> getType() {
         if (TYPE == null) {
-            TYPE = new Type<PlaceRequestInternalHandler>();
+            TYPE = new Type<>();
         }
         return TYPE;
     }

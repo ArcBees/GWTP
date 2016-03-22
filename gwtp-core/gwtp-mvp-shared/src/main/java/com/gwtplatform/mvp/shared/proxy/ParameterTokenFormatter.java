@@ -200,7 +200,7 @@ public class ParameterTokenFormatter implements TokenFormatter {
         String unescapedHistoryToken = urlUtils.decodeQueryString(historyToken);
 
         int split = unescapedHistoryToken.indexOf(hierarchySeparator);
-        List<PlaceRequest> result = new ArrayList<PlaceRequest>();
+        List<PlaceRequest> result = new ArrayList<>();
         if (split == -1) {
             // History token consists of a single place token.
             result.add(unescapedStringToPlaceRequest(unescapedHistoryToken));

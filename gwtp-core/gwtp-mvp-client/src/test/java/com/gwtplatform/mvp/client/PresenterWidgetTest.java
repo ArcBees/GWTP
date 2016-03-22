@@ -323,7 +323,7 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentC) {
 
         // Given
-        Slot<PresenterWidget<?>> slotBC = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotBC = new Slot<>();
         presenterWidgetA.internalReveal();
 
         // When
@@ -374,7 +374,7 @@ public class PresenterWidgetTest {
             PresenterWidgetA presenterWidgetA,
             PresenterWidgetB contentB) {
         // Given
-        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotB = new Slot<>();
         presenterWidgetA.internalReveal();
         presenterWidgetA.setInSlot(slotB, contentB);
 
@@ -398,8 +398,8 @@ public class PresenterWidgetTest {
             PresenterWidgetA presenterWidgetA,
             PresenterWidgetB contentB) {
         // Given
-        Slot<PresenterWidget<?>> slotA = new Slot<PresenterWidget<?>>();
-        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotA = new Slot<>();
+        Slot<PresenterWidget<?>> slotB = new Slot<>();
         presenterWidgetA.internalReveal();
 
         // When
@@ -419,7 +419,7 @@ public class PresenterWidgetTest {
             PresenterWidgetB contentB,
             PresenterWidgetC contentC) {
         // Given
-        Slot<PresenterWidget<?>> slotBC = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotBC = new Slot<>();
         presenterWidgetA.internalReveal();
         presenterWidgetA.addToSlot(slotBC, contentB);
         presenterWidgetA.addToSlot(slotBC, contentC);
@@ -441,8 +441,8 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentCinB) {
         // Given
         // slot is empty in presenterWidgets, and it is NOT visible
-        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
-        Slot<PresenterWidget<?>> slotC = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotB = new Slot<>();
+        Slot<PresenterWidget<?>> slotC = new Slot<>();
         assertFalse(presenterWidgetA.isVisible());
         assertFalse(contentB.isVisible());
 
@@ -481,8 +481,8 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentCinB) {
         // Given
         // slot is empty in presenterWidgets, and it is NOT visible
-        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
-        Slot<PresenterWidget<?>> slotC = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotB = new Slot<>();
+        Slot<PresenterWidget<?>> slotC = new Slot<>();
         assertFalse(presenterWidgetA.isVisible());
         assertFalse(contentB.isVisible());
 
@@ -524,8 +524,8 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentCinB) {
 
         // Given
-        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
-        Slot<PresenterWidget<?>> slotC = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotB = new Slot<>();
+        Slot<PresenterWidget<?>> slotC = new Slot<>();
         presenterWidgetA.internalReveal();
 
         // When
@@ -557,8 +557,8 @@ public class PresenterWidgetTest {
             PresenterWidgetC contentC) {
         // Given
         // slot is empty in presenterWidget, and it is NOT visible
-        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
-        Slot<PresenterWidget<?>> slotC = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotB = new Slot<>();
+        Slot<PresenterWidget<?>> slotC = new Slot<>();
         assertFalse(presenterWidgetA.isVisible());
 
         // When
@@ -595,8 +595,8 @@ public class PresenterWidgetTest {
             PresenterWidgetB contentB,
             PresenterWidgetC contentC) {
         // Given
-        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
-        Slot<PresenterWidget<?>> slotC = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotB = new Slot<>();
+        Slot<PresenterWidget<?>> slotC = new Slot<>();
         presenterWidgetA.internalReveal();
 
         // When
@@ -625,7 +625,7 @@ public class PresenterWidgetTest {
             PresenterWidgetA presenterWidgetA,
             PresenterWidgetB contentB) {
         // Given
-        Slot<PresenterWidget<?>> slotB = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotB = new Slot<>();
         presenterWidgetA.internalReveal();
         presenterWidgetA.setInSlot(slotB, contentB);
 
@@ -687,8 +687,8 @@ public class PresenterWidgetTest {
             PresenterWidgetB presenterWidgetB,
             PresenterWidgetC contentC) {
         // Given
-        Slot<PresenterWidget<?>> slotCinA = new Slot<PresenterWidget<?>>();
-        Slot<PresenterWidget<?>> slotCinB = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotCinA = new Slot<>();
+        Slot<PresenterWidget<?>> slotCinB = new Slot<>();
         presenterWidgetA.internalReveal();
         presenterWidgetB.internalReveal();
 
@@ -707,8 +707,8 @@ public class PresenterWidgetTest {
             PresenterWidgetB presenterWidgetB,
             PresenterWidgetC contentC) {
         // Given
-        Slot<PresenterWidget<?>> slotCinA = new Slot<PresenterWidget<?>>();
-        Slot<PresenterWidget<?>> slotCinB = new Slot<PresenterWidget<?>>();
+        Slot<PresenterWidget<?>> slotCinA = new Slot<>();
+        Slot<PresenterWidget<?>> slotCinB = new Slot<>();
         presenterWidgetA.internalReveal();
         presenterWidgetB.internalReveal();
 

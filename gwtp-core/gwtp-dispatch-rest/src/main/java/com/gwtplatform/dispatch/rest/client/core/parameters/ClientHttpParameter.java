@@ -65,7 +65,7 @@ public class ClientHttpParameter implements HttpParameter {
 
     @Override
     public List<Entry<String, String>> getEncodedEntries() {
-        List<Entry<String, String>> entries = new ArrayList<Entry<String, String>>();
+        List<Entry<String, String>> entries = new ArrayList<>();
         entries.add(createEntry(object));
         return entries;
     }

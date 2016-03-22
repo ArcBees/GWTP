@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,14 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared;
+package com.gwtplatform.dispatch.rest.client;
 
-/**
- * An action with a result.
- * <p/>
- * Marker interface used by dispatch projects to associate an action type to a result type.
- *
- * @param <R> the result type for this action.
- */
-public interface TypedAction<R> {
+import com.google.gwt.http.client.Response;
+
+@FunctionalInterface
+public interface FailureCallback {
+    void onFailure(Throwable throwable, Response response);
 }

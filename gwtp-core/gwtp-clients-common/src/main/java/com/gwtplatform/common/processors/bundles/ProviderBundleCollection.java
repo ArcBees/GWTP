@@ -68,9 +68,7 @@ class ProviderBundleCollection implements HasType, HasImports {
     }
 
     public void write() {
-        for (ProviderBundleAggregate aggregate : aggregates.values()) {
-            aggregate.write();
-        }
+        aggregates.values().forEach(ProviderBundleAggregate::write);
 
         logger.debug("Generating named provider bundle collection.");
 

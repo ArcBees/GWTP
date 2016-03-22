@@ -22,8 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gwt.event.logical.shared.AttachEvent;
-import com.google.gwt.event.logical.shared.AttachEvent.Handler;
 import com.google.gwt.user.client.ui.HasOneWidget;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
@@ -43,10 +41,10 @@ import com.gwtplatform.mvp.client.presenter.slots.Slot;
  * * <b>Important</b> call {@link #initWidget(IsWidget)} in your {@link View}'s constructor.
  */
 public abstract class ViewImpl implements View {
-    private final Map<Object, HasOneWidget> oneWidgetSlots = new HashMap<Object, HasOneWidget>();
-    private final Map<Object, HasWidgets> hasWidgetSlots = new HashMap<Object, HasWidgets>();
+    private final Map<Object, HasOneWidget> oneWidgetSlots = new HashMap<>();
+    private final Map<Object, HasWidgets> hasWidgetSlots = new HashMap<>();
     private final Map<OrderedSlot<?>, List<Comparable<Comparable<?>>>> orderedSlots
-            = new HashMap<OrderedSlot<?>, List<Comparable<Comparable<?>>>>();
+            = new HashMap<>();
 
     private Widget widget;
 
@@ -144,7 +142,7 @@ public abstract class ViewImpl implements View {
      * @param container the container must implement {@link HasWidgets} &amp; {@link InsertPanel}.
      */
     protected <T extends HasWidgets & InsertPanel> void bindSlot(OrderedSlot<?> slot, T container) {
-        orderedSlots.put(slot, new ArrayList<Comparable<Comparable<?>>>());
+        orderedSlots.put(slot, new ArrayList<>());
         hasWidgetSlots.put(slot, container);
     }
 
@@ -157,14 +155,11 @@ public abstract class ViewImpl implements View {
 
         this.widget = widget.asWidget();
 
-        asWidget().addAttachHandler(new Handler() {
-            @Override
-            public void onAttachOrDetach(AttachEvent event) {
-                if (event.isAttached()) {
-                    onAttach();
-                } else {
-                    onDetach();
-                }
+        asWidget().addAttachHandler(event -> {
+            if (event.isAttached()) {
+                onAttach();
+            } else {
+                onDetach();
             }
         });
     }

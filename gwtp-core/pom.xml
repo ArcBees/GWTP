@@ -27,7 +27,7 @@
         <module>gwtp-dispatch-rpc-server-spring</module>
         <module>gwtp-dispatch-rpc-test</module>
         <module>gwtp-tester</module>
-        <module>gwtp-processors</module>
+        <!--<module>gwtp-processors</module>-->
         <module>gwtp-crawler</module>
         <module>gwtp-all</module>
     </modules>

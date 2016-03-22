@@ -33,9 +33,7 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.SimpleAnnotationValueVisitor7;
 
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.gwtplatform.common.client.IndirectProvider;
@@ -205,18 +203,8 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
             List<ExecutableElement> methods = methodsIn(utils.getElements().getAllMembers(presenterElement));
 
             proxyEventMethods = FluentIterable.from(methods)
-                    .filter(new Predicate<ExecutableElement>() {
-                        @Override
-                        public boolean apply(ExecutableElement method) {
-                            return method.getAnnotation(ProxyEvent.class) != null;
-                        }
-                    })
-                    .transform(new Function<ExecutableElement, ProxyEventMethod>() {
-                        @Override
-                        public ProxyEventMethod apply(ExecutableElement element) {
-                            return new ProxyEventMethod(logger, utils, element);
-                        }
-                    })
+                    .filter(method -> method.getAnnotation(ProxyEvent.class) != null)
+                    .transform(element1 -> new ProxyEventMethod(logger, utils, element1))
                     .toList();
 
             ensureNoHandlerMethodClashes();
@@ -227,12 +215,8 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
 
     private void ensureNoHandlerMethodClashes() {
         List<String> handlerMethodNames = FluentIterable.from(proxyEventMethods)
-                .transform(new Function<ProxyEventMethod, String>() {
-                    @Override
-                    public String apply(ProxyEventMethod proxyEvent) {
-                        return proxyEvent.getHandlerMethodName();
-                    }
-                }).toList();
+                .transform(ProxyEventMethod::getHandlerMethodName)
+                .toList();
         Set<String> uniqueHandlerMethodNames = new HashSet<>(handlerMethodNames);
 
         if (handlerMethodNames.size() != uniqueHandlerMethodNames.size()) {

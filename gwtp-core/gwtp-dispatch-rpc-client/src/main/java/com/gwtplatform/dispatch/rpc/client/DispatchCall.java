@@ -14,14 +14,14 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.rpc.client;
 
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.ExceptionHandler.Status;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
-import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * An class representing a call made to the server through {@link com.gwtplatform.dispatch.rest.client.RestDispatch
@@ -35,7 +35,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * @param <A> The type of the {@link TypedAction} wrapped by this {@link DispatchCall}.
  * @param <R> The type of the result of the wrapped {@link TypedAction}.
  */
-public abstract class DispatchCall<A extends TypedAction<R>, R> {
+public abstract class DispatchCall<A, R> {
     private final A action;
     private final ExceptionHandler exceptionHandler;
     private final SecurityCookieAccessor securityCookieAccessor;
@@ -91,9 +91,9 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     }
 
     /**
-     * The {@link AsyncCallback} to use when the execution of the action wrapped by this object is completed.
+     * The callback to use when the execution of the action wrapped by this object is completed.
      *
-     * @return the {@link AsyncCallback} to call when the action has been executed.
+     * @return the callback to call when the action has been executed.
      */
     protected AsyncCallback<R> getCallback() {
         return callback;
@@ -129,42 +129,25 @@ public abstract class DispatchCall<A extends TypedAction<R>, R> {
     /**
      * Override this method to perform additional work when the action execution succeeded.
      *
-     * @param result the action result.
-     */
-    protected void onExecuteSuccess(R result) {
-        callback.onSuccess(result);
-    }
-
-    /**
-     * Override this method to perform additional work when the action execution succeeded.
-     *
-     * @param result the action result.
+     * @param result   the action result.
      * @param response the action {@link Response}.
      */
-    protected void onExecuteSuccess(R result, Response response) {
-        onExecuteSuccess(result);
-    }
+    public abstract void onExecuteSuccess(R result, Response response);
 
     /**
      * Override this method to perform additional work when the action execution failed.
      *
      * @param caught the caught {@link Throwable}.
      */
-    protected void onExecuteFailure(Throwable caught) {
-        if (exceptionHandler != null && exceptionHandler.onFailure(caught) == Status.STOP) {
-            return;
-        }
-
-        callback.onFailure(caught);
+    public boolean shouldHandleFailure(Throwable caught) {
+        return exceptionHandler.onFailure(caught) != Status.STOP;
     }
 
     /**
      * Override this method to perform additional work when the action execution failed.
      *
-     * @param caught the caught {@link Throwable}.
+     * @param caught   the caught {@link Throwable}.
      * @param response the failure {@link Response}.
      */
-    protected void onExecuteFailure(Throwable caught, Response response) {
-        onExecuteFailure(caught);
-    }
+    public abstract void onExecuteFailure(Throwable caught, Response response);
 }

@@ -42,11 +42,9 @@ public class LazyActionHandlerValidatorRegistryImpl implements LazyActionHandler
     private final Map<Class<? extends ActionValidator>, ActionValidator> validators;
 
     public LazyActionHandlerValidatorRegistryImpl() {
-        actionHandlerValidatorClasses = new ConcurrentHashMap<Class<? extends Action<?>>,
-                ActionHandlerValidatorClass<? extends Action<?>, ? extends Result>>();
-        actionHandlerValidatorInstances = new ConcurrentHashMap<Class<? extends Action<?>>,
-                ActionHandlerValidatorInstance>();
-        validators = new ConcurrentHashMap<Class<? extends ActionValidator>, ActionValidator>();
+        actionHandlerValidatorClasses = new ConcurrentHashMap<>();
+        actionHandlerValidatorInstances = new ConcurrentHashMap<>();
+        validators = new ConcurrentHashMap<>();
     }
 
     @Override

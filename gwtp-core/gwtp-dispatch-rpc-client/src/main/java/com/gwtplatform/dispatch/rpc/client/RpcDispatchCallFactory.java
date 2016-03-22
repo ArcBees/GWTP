@@ -21,7 +21,7 @@ import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 
 /**
- * A factory used to create {@link com.gwtplatform.dispatch.client.DispatchCall} instances.
+ * A factory used to create {@link DispatchCall} instances.
  */
 public interface RpcDispatchCallFactory {
     <A extends Action<R>, R extends Result> RpcDispatchExecuteCall<A, R> create(A action,

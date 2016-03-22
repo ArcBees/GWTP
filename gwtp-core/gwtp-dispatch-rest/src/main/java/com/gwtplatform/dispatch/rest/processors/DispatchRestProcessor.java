@@ -24,6 +24,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.ws.rs.Path;
 
+import com.google.auto.common.MoreElements;
 import com.google.auto.service.AutoService;
 import com.google.common.collect.Sets;
 import com.gwtplatform.dispatch.rest.processors.resource.ResourcePostProcessors;
@@ -36,7 +37,6 @@ import com.gwtplatform.processors.tools.SupportedAnnotationClasses;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 
-import static com.google.auto.common.MoreElements.isType;
 import static com.gwtplatform.dispatch.rest.processors.NameUtils.findRestModuleType;
 import static com.gwtplatform.processors.tools.bindings.BindingContext.flushModule;
 
@@ -81,11 +81,7 @@ public class DispatchRestProcessor extends AbstractProcessor {
         Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(Path.class);
         elements = utils.getSourceFilter().filterElements(elements);
 
-        for (Element element : elements) {
-            if (isType(element)) {
-                process(element);
-            }
-        }
+        elements.stream().filter(MoreElements::isType).forEach(this::process);
 
         return !elements.isEmpty();
     }

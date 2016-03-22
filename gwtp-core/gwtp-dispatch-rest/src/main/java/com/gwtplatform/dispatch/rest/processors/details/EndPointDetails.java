@@ -27,10 +27,8 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 
 import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.gwtplatform.dispatch.rest.processors.NameUtils;
 import com.gwtplatform.dispatch.rest.processors.resolvers.HttpVerbResolver;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
@@ -205,12 +203,8 @@ public class EndPointDetails implements HasImports {
     }
 
     private boolean containsFormVariables() {
-        return Iterables.any(httpVariables, new Predicate<HttpVariable>() {
-            @Override
-            public boolean apply(HttpVariable httpVariable) {
-                return httpVariable.getHttpAnnotation().get().getParameterType() == HttpParameter.Type.FORM;
-            }
-        });
+        return httpVariables.stream().anyMatch(
+                httpVariable -> httpVariable.getHttpAnnotation().get().getParameterType() == HttpParameter.Type.FORM);
     }
 
     public HttpVerb getVerb() {

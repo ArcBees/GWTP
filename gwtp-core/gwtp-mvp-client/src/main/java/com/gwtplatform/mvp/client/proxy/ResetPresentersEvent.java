@@ -31,7 +31,7 @@ import com.google.gwt.event.shared.HasHandlers;
 public final class ResetPresentersEvent extends
         GwtEvent<ResetPresentersHandler> {
 
-    private static final Type<ResetPresentersHandler> type = new Type<ResetPresentersHandler>();
+    private static final Type<ResetPresentersHandler> type = new Type<>();
 
     /**
      * Fires a {@link ResetPresentersEvent}

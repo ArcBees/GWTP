@@ -16,8 +16,8 @@
 
 package com.gwtplatform.dispatch.rpc.client;
 
+import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.rpc.shared.Action;
@@ -63,7 +63,7 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
             A action,
             R result,
             AsyncCallback<Void> callback) {
-        super(exceptionHandler, securityCookieAccessor, action, new AsyncCallbackWrapper<R>(callback));
+        super(exceptionHandler, securityCookieAccessor, action, new AsyncCallbackWrapper<>(callback));
 
         this.dispatchService = dispatchService;
         this.dispatchHooks = dispatchHooks;
@@ -79,19 +79,31 @@ public class RpcDispatchUndoCall<A extends Action<R>, R extends Result> extends 
     }
 
     @Override
+    public void onExecuteSuccess(R result, Response response) {
+        getCallback().onSuccess(result);
+    }
+
+    @Override
+    public void onExecuteFailure(Throwable caught, Response response) {
+        if (shouldHandleFailure(caught)) {
+            getCallback().onFailure(caught);
+        }
+    }
+
+    @Override
     protected DispatchRequest processCall() {
         return new GwtHttpDispatchRequest(dispatchService.undo(getSecurityCookie(), getAction(), result,
                 new AsyncCallback<Void>() {
                     @Override
                     public void onFailure(Throwable caught) {
-                        RpcDispatchUndoCall.this.onExecuteFailure(caught);
+                        RpcDispatchUndoCall.this.onExecuteFailure(caught, null);
 
                         dispatchHooks.onFailure(getAction(), caught, true);
                     }
 
                     @Override
                     public void onSuccess(Void nothing) {
-                        RpcDispatchUndoCall.this.onExecuteSuccess(result);
+                        RpcDispatchUndoCall.this.onExecuteSuccess(result, null);
 
                         dispatchHooks.onSuccess(getAction(), result, true);
                     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,16 +14,15 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.rest.client.filter;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.shared.DispatchRequest;
+import java.util.Iterator;
+import java.util.Map;
 
-/**
- * An implementation of {@link DispatchRequest} that should be used by
- * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s that make asynchronous calls.
- *
- * @param <R> The type of the {@link AsyncCallback}.
- */
-public interface CallbackDispatchRequest<R> extends AsyncCallback<R>, DispatchRequest {
+import com.gwtplatform.dispatch.rest.client.context.RestContext;
+
+public interface RestFilterRegistry {
+    Iterator<Map.Entry<RestContext, RestFilter>> iterator();
+
+    void register(RestFilter restFilter);
 }

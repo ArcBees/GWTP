@@ -79,9 +79,7 @@ public class ProxyProcessors {
         if (!processedLast) {
             processedLast = true;
 
-            for (ProxyProcessor processor : processors) {
-                processor.processLast();
-            }
+            processors.forEach(ProxyProcessor::processLast);
         }
     }
 

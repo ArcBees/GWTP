@@ -68,7 +68,7 @@ import com.gwtplatform.common.client.ProviderBundle;
  */
 public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
     private final Map<Class<?>, IndirectProvider<RpcInterceptor<?, ?>>> interceptors =
-            new HashMap<Class<?>, IndirectProvider<RpcInterceptor<?, ?>>>();
+            new HashMap<>();
 
     @Override
     public <A> IndirectProvider<RpcInterceptor<?, ?>> find(A action) {
@@ -82,12 +82,7 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
      */
     protected void register(final RpcInterceptor<?, ?> handler) {
         register(handler.getActionType(),
-                new IndirectProvider<RpcInterceptor<?, ?>>() {
-                    @Override
-                    public void get(AsyncCallback<RpcInterceptor<?, ?>> callback) {
-                        callback.onSuccess(handler);
-                    }
-                });
+                (IndirectProvider<RpcInterceptor<?, ?>>) callback -> callback.onSuccess(handler));
     }
 
     /**
@@ -99,12 +94,7 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
     protected void register(Class<?> actionType,
             final Provider<? extends RpcInterceptor<?, ?>> handlerProvider) {
         register(actionType,
-                new IndirectProvider<RpcInterceptor<?, ?>>() {
-                    @Override
-                    public void get(AsyncCallback<RpcInterceptor<?, ?>> callback) {
-                        callback.onSuccess(handlerProvider.get());
-                    }
-                });
+                (IndirectProvider<RpcInterceptor<?, ?>>) callback -> callback.onSuccess(handlerProvider.get()));
     }
 
     /**
@@ -115,13 +105,7 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
      */
     protected void register(Class<?> actionType,
             final AsyncProvider<? extends RpcInterceptor<?, ?>> handlerProvider) {
-        register(actionType,
-                new IndirectProvider<RpcInterceptor<?, ?>>() {
-                    @Override
-                    public void get(AsyncCallback<RpcInterceptor<?, ?>> callback) {
-                        handlerProvider.get(callback);
-                    }
-                });
+        register(actionType, (IndirectProvider<RpcInterceptor<?, ?>>) callback -> handlerProvider.get(callback));
     }
 
     /**
@@ -135,7 +119,7 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
     protected <B extends ProviderBundle> void register(Class<?> actionType,
             AsyncProvider<B> bundleProvider,
             int providerId) {
-        register(actionType, new CodeSplitBundleProvider<RpcInterceptor<?, ?>, B>(bundleProvider, providerId));
+        register(actionType, new CodeSplitBundleProvider<>(bundleProvider, providerId));
     }
 
     /**
