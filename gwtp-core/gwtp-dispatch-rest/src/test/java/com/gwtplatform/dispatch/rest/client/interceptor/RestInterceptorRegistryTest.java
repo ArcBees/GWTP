@@ -20,8 +20,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.gwtplatform.common.shared.UrlUtils;
+import com.gwtplatform.dispatch.rest.client.context.RestContext;
+import com.gwtplatform.dispatch.rest.client.context.RestContext.Builder;
 import com.gwtplatform.dispatch.rest.client.core.parameters.QueryParameter;
-import com.gwtplatform.dispatch.rest.client.interceptor.InterceptorContext.Builder;
 import com.gwtplatform.dispatch.rest.client.testutils.ExposedRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
@@ -54,7 +55,7 @@ public class RestInterceptorRegistryTest {
     @Test
     public void register_interceptor() {
         // Given
-        InterceptorContext context = new Builder()
+        RestContext context = new Builder()
                 .path(PATH_1)
                 .httpMethod(HttpMethod.GET)
                 .build();
@@ -72,7 +73,7 @@ public class RestInterceptorRegistryTest {
         action.addParam(new QueryParameter(PARAM_NAME_1, PARAM_VALUE_1, null, urlUtils));
         action.addParam(new QueryParameter(PARAM_NAME_2, PARAM_VALUE_2, null, urlUtils));
 
-        InterceptorContext context = new Builder()
+        RestContext context = new Builder()
                 .path(PATH_1)
                 .httpMethod(HttpMethod.GET)
                 .queryCount(2)
@@ -91,7 +92,7 @@ public class RestInterceptorRegistryTest {
         action.addParam(new QueryParameter(PARAM_NAME_1, PARAM_VALUE_1, null, urlUtils));
         action.addParam(new QueryParameter(PARAM_NAME_2, PARAM_VALUE_2, null, urlUtils));
 
-        InterceptorContext context = new Builder()
+        RestContext context = new Builder()
                 .path(PATH_1)
                 .httpMethod(HttpMethod.GET)
                 .queryCount(1)
@@ -107,7 +108,7 @@ public class RestInterceptorRegistryTest {
     @Test
     public void register_interceptor_noHttpMethod() {
         // Given
-        InterceptorContext context = new Builder()
+        RestContext context = new Builder()
                 .path(PATH_1)
                 .build();
 
@@ -121,7 +122,7 @@ public class RestInterceptorRegistryTest {
     @Test
     public void register_interceptor_duplicate() {
         // Given
-        InterceptorContext context = new Builder()
+        RestContext context = new Builder()
                 .path(PATH_1)
                 .transcendent(true)
                 .build();

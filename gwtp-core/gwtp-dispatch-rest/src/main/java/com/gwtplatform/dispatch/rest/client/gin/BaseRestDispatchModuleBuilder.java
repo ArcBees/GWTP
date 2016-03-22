@@ -20,6 +20,8 @@ import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.core.CoreModule;
+import com.gwtplatform.dispatch.rest.client.filter.DefaultRestFilterRegistry;
+import com.gwtplatform.dispatch.rest.client.filter.RestFilterRegistry;
 import com.gwtplatform.dispatch.rest.client.interceptor.DefaultRestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
@@ -37,6 +39,7 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
     private RestParameterBindings globalQueryParams = new RestParameterBindings();
     private Class<? extends RestDispatchHooks> dispatchHooks = DefaultRestDispatchHooks.class;
     private Class<? extends RestInterceptorRegistry> interceptorRegistry = DefaultRestInterceptorRegistry.class;
+    private Class<? extends RestFilterRegistry> filterRegistry = DefaultRestFilterRegistry.class;
 
     protected BaseRestDispatchModuleBuilder() {
     }
@@ -49,6 +52,7 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
         globalQueryParams = copy.globalQueryParams;
         dispatchHooks = copy.dispatchHooks;
         interceptorRegistry = copy.interceptorRegistry;
+        filterRegistry = copy.filterRegistry;
     }
 
     @Override
@@ -145,6 +149,18 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
         return self();
     }
 
+    /**
+     * Specify an alternate REST filter registry.
+     *
+     * @param filterRegistry A {@link com.gwtplatform.dispatch.rest.client.filter.RestFilterRegistry} class.
+     *
+     * @return this {@link com.gwtplatform.dispatch.rest.client.gin.BaseRestDispatchModuleBuilder builder} object.
+     */
+    public B filterRegistry(Class<? extends RestFilterRegistry> filterRegistry) {
+        this.filterRegistry = filterRegistry;
+        return self();
+    }
+
     public abstract CoreModule getCoreModule();
 
     String getDefaultDateFormat() {
@@ -173,5 +189,9 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
 
     Class<? extends RestInterceptorRegistry> getInterceptorRegistry() {
         return interceptorRegistry;
+    }
+
+    Class<? extends RestFilterRegistry> getFilterRegistry() {
+        return filterRegistry;
     }
 }

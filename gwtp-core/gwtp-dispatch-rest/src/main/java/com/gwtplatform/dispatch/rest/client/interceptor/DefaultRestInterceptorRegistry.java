@@ -24,6 +24,7 @@ import com.google.inject.Provider;
 import com.gwtplatform.common.client.CodeSplitBundleProvider;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.common.client.ProviderBundle;
+import com.gwtplatform.dispatch.rest.client.context.RestContext;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
@@ -67,17 +68,17 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * </pre>
  */
 public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
-    private final Map<InterceptorContext, IndirectProvider<RestInterceptor>> interceptors =
+    private final Map<RestContext, IndirectProvider<RestInterceptor>> interceptors =
             new LinkedHashMap<>();
 
     @Override
     public <A> IndirectProvider<RestInterceptor> find(A action) {
         if (action instanceof RestAction) {
-            InterceptorContext subjectContext = new InterceptorContext
+            RestContext subjectContext = new RestContext
                     .Builder((RestAction) action).build();
 
-            for (Map.Entry<InterceptorContext, IndirectProvider<RestInterceptor>> entry : interceptors.entrySet()) {
-                InterceptorContext context = entry.getKey();
+            for (Map.Entry<RestContext, IndirectProvider<RestInterceptor>> entry : interceptors.entrySet()) {
+                RestContext context = entry.getKey();
 
                 if (context.equals(subjectContext)) {
                     return entry.getValue();
@@ -94,7 +95,7 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
      * @param interceptor The {@link RestInterceptor};
      */
     protected void register(final RestInterceptor interceptor) {
-        for (InterceptorContext context : interceptor.getInterceptorContexts()) {
+        for (RestContext context : interceptor.getRestContexts()) {
             register(context,
                     (IndirectProvider<RestInterceptor>) callback -> callback.onSuccess(interceptor));
         }
@@ -103,10 +104,10 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     /**
      * Register a {@link javax.inject.Provider} of a client-side interceptor.
      *
-     * @param context         The {@link InterceptorContext} for the rest interceptor.
+     * @param context         The {@link RestContext} for the rest interceptor.
      * @param handlerProvider The {@link com.google.inject.Provider} of the handler.
      */
-    protected void register(InterceptorContext context,
+    protected void register(RestContext context,
                             final Provider<RestInterceptor> handlerProvider) {
         register(context,
                 (IndirectProvider<RestInterceptor>) callback -> callback.onSuccess(handlerProvider.get()));
@@ -115,10 +116,10 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     /**
      * Register an {@link com.google.gwt.inject.client.AsyncProvider} of a client-side interceptor.
      *
-     * @param context         The {@link InterceptorContext} for the rest interceptor.
+     * @param context         The {@link RestContext} for the rest interceptor.
      * @param handlerProvider The {@link com.google.gwt.inject.client.AsyncProvider} of the handler.
      */
-    protected void register(InterceptorContext context,
+    protected void register(RestContext context,
                             final AsyncProvider<RestInterceptor> handlerProvider) {
         register(context,
                 (IndirectProvider<RestInterceptor>) handlerProvider::get);
@@ -127,12 +128,12 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     /**
      * Register a client-side interceptor that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
      *
-     * @param context        The {@link InterceptorContext} for the rest interceptor.
+     * @param context        The {@link RestContext} for the rest interceptor.
      * @param bundleProvider The {@link javax.inject.Provider} of the
      *                       {@link com.gwtplatform.common.client.ProviderBundle}.
      * @param providerId     The id of the client-side interceptor provider.
      */
-    protected <B extends ProviderBundle> void register(InterceptorContext context,
+    protected <B extends ProviderBundle> void register(RestContext context,
                                                        AsyncProvider<B> bundleProvider,
                                                        int providerId) {
         register(context, new CodeSplitBundleProvider<>(bundleProvider, providerId));
@@ -141,15 +142,11 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
     /**
      * Register an {@link com.gwtplatform.common.client.IndirectProvider} of a client-side interceptor.
      *
-     * @param context         The {@link InterceptorContext} for the rest interceptor.
+     * @param context         The {@link RestContext} for the rest interceptor.
      * @param handlerProvider The {@link com.gwtplatform.common.client.IndirectProvider}.
      */
-    protected void register(InterceptorContext context,
+    protected void register(RestContext context,
                             IndirectProvider<RestInterceptor> handlerProvider) {
-        // TODO: perhaps we could have the ability to add multiple contexts with a stack-like interceptor chain.
-        // E.g. We want to intercept all '/items/*' calls with one interceptor, but then on another interceptor
-        // we want to intercept all '/user/{id} calls. Requiring us to pass the result of each interception along
-        // the stack chain or have an override strategy.
         if (containsContext(context)) {
             throw new DuplicateInterceptorContextException(context.getPath(), context.getHttpMethod(),
                     context.getQueryCount());
@@ -157,11 +154,11 @@ public class DefaultRestInterceptorRegistry implements RestInterceptorRegistry {
         interceptors.put(context, handlerProvider);
     }
 
-    protected boolean containsContext(InterceptorContext context) {
+    protected boolean containsContext(RestContext context) {
         // This is currently finding a context based on whether or not it can intercept
         // an action with the same properties as the subject context provided. How a context is
         // indexed may need to change in the near future.
-        for (Map.Entry<InterceptorContext, IndirectProvider<RestInterceptor>> entry : interceptors.entrySet()) {
+        for (Map.Entry<RestContext, IndirectProvider<RestInterceptor>> entry : interceptors.entrySet()) {
             if (entry.getKey().equals(context)) {
                 return true;
             }

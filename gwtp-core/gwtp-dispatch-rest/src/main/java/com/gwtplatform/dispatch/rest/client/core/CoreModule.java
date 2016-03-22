@@ -20,6 +20,7 @@ import javax.inject.Singleton;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
+import com.gwtplatform.dispatch.rest.client.filter.RestFilterChain;
 
 public class CoreModule extends AbstractGinModule {
     private final CoreModuleBuilder builder;
@@ -38,5 +39,6 @@ public class CoreModule extends AbstractGinModule {
         bind(RequestBuilderFactory.class).to(builder.getRequestBuilderFactory()).in(Singleton.class);
         bind(ResponseDeserializer.class).to(builder.getResponseDeserializer()).in(Singleton.class);
         bind(RestDispatch.class).to(builder.getRestDispatch()).in(Singleton.class);
+        bind(RestFilterChain.class).to(builder.getFilterChain());
     }
 }

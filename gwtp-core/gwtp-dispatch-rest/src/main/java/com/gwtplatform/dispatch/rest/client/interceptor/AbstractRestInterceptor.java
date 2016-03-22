@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.gwtplatform.dispatch.rest.client.context.RestContext;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
@@ -27,31 +28,30 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * as a constructor to the handler.
  */
 public abstract class AbstractRestInterceptor implements RestInterceptor {
-    private final List<InterceptorContext> interceptorContexts;
+    private final List<RestContext> restContexts;
 
     protected AbstractRestInterceptor(
-            InterceptorContext context,
-            InterceptorContext... moreContexts) {
-        List<InterceptorContext> contexts = new ArrayList<>();
+            RestContext context,
+            RestContext... moreContexts) {
+        List<RestContext> contexts = new ArrayList<>();
         contexts.add(context);
 
         if (moreContexts != null) {
             Collections.addAll(contexts, moreContexts);
         }
 
-        interceptorContexts = Collections.unmodifiableList(contexts);
+        restContexts = Collections.unmodifiableList(contexts);
     }
 
-    @Override
-    public List<InterceptorContext> getInterceptorContexts() {
-        return interceptorContexts;
+    public List<RestContext> getRestContexts() {
+        return restContexts;
     }
 
     @Override
     public boolean canExecute(RestAction<?> action) {
-        InterceptorContext subjectContext = new InterceptorContext.Builder(action).build();
+        RestContext subjectContext = new RestContext.Builder(action).build();
 
-        for (InterceptorContext context : interceptorContexts) {
+        for (RestContext context : restContexts) {
             // Must have at least one supporting context
             if (context.equals(subjectContext)) {
                 return true;

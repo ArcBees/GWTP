@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.rest.client.interceptor;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 
 /**
- * This exception is thrown when multiple {@link com.gwtplatform.dispatch.rest.client.interceptor.InterceptorContext
+ * This exception is thrown when multiple {@link com.gwtplatform.dispatch.rest.client.context.RestContext
  * InterceptorContext} are attempting to be registered. There can only be one InterceptorContext registered per REST
  * interceptor.
  */

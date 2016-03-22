@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.interceptor;
+package com.gwtplatform.dispatch.client;
 
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 

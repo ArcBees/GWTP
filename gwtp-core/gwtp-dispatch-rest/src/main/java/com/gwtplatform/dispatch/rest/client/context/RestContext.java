@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.interceptor;
+package com.gwtplatform.dispatch.rest.client.context;
 
 import java.util.List;
 
@@ -24,16 +24,11 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
- * Context class used for the Rest Interceptor mappings.<br>
- * <pre>
- *     new InterceptorContext("/items", HttpMethod.GET, 2);
- * or:
- *     new InterceptorContext(getAction());
- * </pre>
+ * Context class used for the RestInterceptor and RestFilter mappings.
  */
-public class InterceptorContext {
+public class RestContext {
     /**
-     * {@link InterceptorContext} Builder.
+     * {@link RestContext} Builder.
      */
     public static class Builder {
         // Template domain
@@ -50,13 +45,13 @@ public class InterceptorContext {
         private boolean anyQueryCount;
 
         /**
-         * Constructs {@link InterceptorContext} builder.
+         * Constructs {@link RestContext} builder.
          */
         public Builder() {
         }
 
         /**
-         * Constructs {@link InterceptorContext} builder.
+         * Constructs {@link RestContext} builder.
          *
          * @param template the {@link RestAction} used as a template.
          */
@@ -137,12 +132,12 @@ public class InterceptorContext {
         }
 
         /**
-         * Build the {@link InterceptorContext}.
+         * Build the {@link RestContext}.
          *
          * @return built context.
          */
-        public InterceptorContext build() {
-            return new InterceptorContext(this);
+        public RestContext build() {
+            return new RestContext(this);
         }
 
         @Override
@@ -160,7 +155,7 @@ public class InterceptorContext {
 
     private Builder builder;
 
-    protected InterceptorContext(Builder builder) {
+    protected RestContext(Builder builder) {
         assert builder != null;
         this.builder = builder;
 
@@ -252,12 +247,12 @@ public class InterceptorContext {
             return false;
         }
 
-        InterceptorContext that = (InterceptorContext) o;
+        RestContext that = (RestContext) o;
         RestAction<?> action;
         if (that.useTemplate()) {
             action = that.getTemplate();
         } else {
-            action = new InterceptorContextRestAction(that.getHttpMethod(), that.getPath(), that.getQueryCount());
+            action = new RestContextRestAction(that.getHttpMethod(), that.getPath(), that.getQueryCount());
         }
         return canIntercept(action);
     }

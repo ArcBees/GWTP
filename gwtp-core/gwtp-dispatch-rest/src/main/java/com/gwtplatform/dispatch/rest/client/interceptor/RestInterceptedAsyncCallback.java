@@ -18,7 +18,7 @@ package com.gwtplatform.dispatch.rest.client.interceptor;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
+import com.gwtplatform.dispatch.client.ExecuteCommand;
 import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.client.core.DispatchCallFactory;
 import com.gwtplatform.dispatch.rest.client.core.RestDispatchCall;

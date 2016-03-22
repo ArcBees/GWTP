@@ -17,6 +17,8 @@
 package com.gwtplatform.dispatch.rest.client.core;
 
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
+import com.gwtplatform.dispatch.rest.client.filter.DefaultRestFilterChain;
+import com.gwtplatform.dispatch.rest.client.filter.RestFilterChain;
 import com.gwtplatform.dispatch.rest.client.gin.BaseRestDispatchModuleBuilder;
 
 public class CoreModuleBuilder extends BaseRestDispatchModuleBuilder<CoreModuleBuilder> {
@@ -28,6 +30,7 @@ public class CoreModuleBuilder extends BaseRestDispatchModuleBuilder<CoreModuleB
     private Class<? extends ResponseDeserializer> responseDeserializer = DefaultResponseDeserializer.class;
     private Class<? extends RestDispatch> restDispatch = DefaultRestDispatch.class;
     private Class<? extends UriFactory> uriFactory = DefaultUriFactory.class;
+    private Class<? extends RestFilterChain> filterChain = DefaultRestFilterChain.class;
 
     public CoreModuleBuilder(BaseRestDispatchModuleBuilder<?> baseBuilder) {
         super(baseBuilder);
@@ -73,6 +76,11 @@ public class CoreModuleBuilder extends BaseRestDispatchModuleBuilder<CoreModuleB
         return self();
     }
 
+    public CoreModuleBuilder filterChain(Class<? extends RestFilterChain> filterChain) {
+        this.filterChain = filterChain;
+        return self();
+    }
+
     @Override
     public CoreModule getCoreModule() {
         return new CoreModule(this);
@@ -113,5 +121,9 @@ public class CoreModuleBuilder extends BaseRestDispatchModuleBuilder<CoreModuleB
 
     Class<? extends UriFactory> getUriFactory() {
         return uriFactory;
+    }
+
+    Class<? extends RestFilterChain> getFilterChain() {
+        return filterChain;
     }
 }
