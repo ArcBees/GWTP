@@ -34,7 +34,7 @@ class PlaceManagerTestUtil extends PlaceManagerImpl {
     private final PlaceManagerWindowMethodsTestUtil gwtWindowMethods;
 
     @Inject
-    public PlaceManagerTestUtil(EventBus eventBus, TokenFormatter tokenFormatter,
+    PlaceManagerTestUtil(EventBus eventBus, TokenFormatter tokenFormatter,
             PlaceManagerWindowMethodsTestUtil gwtWindowMethods) {
         super(eventBus, tokenFormatter, mock(Historian.class));
         this.gwtWindowMethods = gwtWindowMethods;

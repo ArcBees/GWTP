@@ -27,7 +27,7 @@ import com.google.gwt.event.shared.HasHandlers;
  */
 public final class NavigationRefusedEvent extends
         GwtEvent<NavigationRefusedHandler> {
-    private static final Type<NavigationRefusedHandler> TYPE = new Type<NavigationRefusedHandler>();
+    private static final Type<NavigationRefusedHandler> TYPE = new Type<>();
 
     /**
      * Fires a {@link NavigationRefusedEvent}

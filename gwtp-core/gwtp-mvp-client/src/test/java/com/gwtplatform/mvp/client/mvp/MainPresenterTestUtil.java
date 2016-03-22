@@ -32,7 +32,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
  */
 public class MainPresenterTestUtil extends Presenter<MainPresenterTestUtil.MyView, MainPresenterTestUtil.MyProxy> {
 
-    public static final SingleSlot<PresenterWidget<?>> SLOT_SetMainContent = new SingleSlot<PresenterWidget<?>>();
+    public static final SingleSlot<PresenterWidget<?>> SLOT_SetMainContent = new SingleSlot<>();
 
     /**
      * Presenter's view.

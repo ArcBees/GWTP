@@ -53,10 +53,10 @@ public class GuiceBeanProvider implements BeanProvider {
     @Override
     public <B> Iterator<BindingDescriptor<B>> getBindings(Class<B> clazz) {
 
-        List<BindingDescriptor<B>> result = new ArrayList<BindingDescriptor<B>>();
+        List<BindingDescriptor<B>> result = new ArrayList<>();
 
         for (Binding<B> binding : injector.findBindingsByType(TypeLiteral.get(clazz))) {
-            result.add(new GuiceBindingDescriptorAdapter<B>(binding));
+            result.add(new GuiceBindingDescriptorAdapter<>(binding));
         }
 
         return result.iterator();

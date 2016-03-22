@@ -17,15 +17,14 @@
 package com.gwtplatform.dispatch.rpc.client.interceptor;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.DelegatingAsyncCallback;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.client.DispatchCall;
+import com.gwtplatform.dispatch.client.ExecuteCommand;
+import com.gwtplatform.dispatch.rpc.client.DispatchCall;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchExecuteCall;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
-import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * {@code AsyncCallback} implementation wrapping another {@link AsyncCallback} object used by a {@link
@@ -36,8 +35,12 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  * @param <R> the result type for this action.
  */
 public class RpcInterceptedAsyncCallback<A extends Action<R>, R extends Result>
-        extends DelegatingAsyncCallback<A, R, RpcInterceptor<?, ?>> {
+        implements AsyncCallback<RpcInterceptor<?, ?>>, ExecuteCommand<A, AsyncCallback<R>> {
     private final RpcDispatchCallFactory dispatchCallFactory;
+    private final DispatchCall<A, R> dispatchCall;
+    private final A action;
+    private final AsyncCallback<R> callback;
+    private final DelegatingDispatchRequest dispatchRequest;
 
     public RpcInterceptedAsyncCallback(
             RpcDispatchCallFactory dispatchCallFactory,
@@ -45,13 +48,16 @@ public class RpcInterceptedAsyncCallback<A extends Action<R>, R extends Result>
             A action,
             AsyncCallback<R> callback,
             DelegatingDispatchRequest dispatchRequest) {
-        super(dispatchCall, action, callback, dispatchRequest);
         this.dispatchCallFactory = dispatchCallFactory;
+        this.dispatchCall = dispatchCall;
+        this.action = action;
+        this.callback = callback;
+        this.dispatchRequest = dispatchRequest;
     }
 
     @Override
     public DispatchRequest execute(A action, AsyncCallback<R> resultCallback) {
-        if (getDispatchRequest().isPending()) {
+        if (dispatchRequest.isPending()) {
             RpcDispatchExecuteCall<A, R> newDispatchCall = dispatchCallFactory.create(action, resultCallback);
             newDispatchCall.setIntercepted(true);
 
@@ -59,5 +65,47 @@ public class RpcInterceptedAsyncCallback<A extends Action<R>, R extends Result>
         } else {
             return null;
         }
+    }
+
+    @Override
+    public void onSuccess(RpcInterceptor<?, ?> result) {
+        handleSuccess(result);
+    }
+
+    @Override
+    public void onFailure(Throwable caught) {
+        handleFailure(caught);
+    }
+
+    protected void handleSuccess(RpcInterceptor<?, ?> interceptor) {
+        if (!interceptor.canExecute(action)) {
+            delegateFailure(interceptor);
+        } else if (getDispatchRequest().isPending()) {
+            delegateExecute((RpcInterceptor<A, R>) interceptor);
+        }
+    }
+
+    protected void handleFailure(Throwable caught) {
+        dispatchRequest.cancel();
+
+        dispatchCall.onExecuteFailure(caught, null);
+    }
+
+    protected void delegateFailure(RpcInterceptor<?, ?> interceptor) {
+        InterceptorMismatchException exception =
+                new InterceptorMismatchException(action.getClass(), interceptor.getActionType());
+
+        if (dispatchCall.shouldHandleFailure(exception)) {
+            handleFailure(exception);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    protected void delegateExecute(RpcInterceptor<A, R> interceptor) {
+        dispatchRequest.setDelegate(interceptor.execute(action, callback, this));
+    }
+
+    protected DelegatingDispatchRequest getDispatchRequest() {
+        return dispatchRequest;
     }
 }

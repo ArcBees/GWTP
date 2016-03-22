@@ -188,20 +188,17 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
         this.placeManager = placeManager;
         this.eventBus = eventBus;
 
-        addRegisteredHandler(PlaceRequestInternalEvent.getType(), new PlaceRequestInternalHandler() {
-            @Override
-            public void onPlaceRequest(PlaceRequestInternalEvent event) {
-                if (event.isHandled()) {
-                    return;
-                }
-                PlaceRequest request = event.getRequest();
-                if (matchesRequest(request)) {
-                    event.setHandled();
-                    if (canReveal()) {
-                        handleRequest(request, event.shouldUpdateBrowserHistory());
-                    } else {
-                        event.setUnauthorized();
-                    }
+        addRegisteredHandler(PlaceRequestInternalEvent.getType(), event -> {
+            if (event.isHandled()) {
+                return;
+            }
+            PlaceRequest request = event.getRequest();
+            if (matchesRequest(request)) {
+                event.setHandled();
+                if (canReveal()) {
+                    handleRequest(request, event.shouldUpdateBrowserHistory());
+                } else {
+                    event.setUnauthorized();
                 }
             }
         });
@@ -240,20 +237,17 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
                 // request,
                 // in case it wants to fire some events. That's why we will do this in a
                 // deferred command.
-                addDeferredCommand(new Command() {
-                    @Override
-                    public void execute() {
-                        PlaceRequest originalRequest = placeManager.getCurrentPlaceRequest();
-                        presenter.prepareFromRequest(request);
-                        if (originalRequest == placeManager.getCurrentPlaceRequest()) {
-                            // User did not manually update place request in prepareFromRequest, update it here.
-                            placeManager.updateHistory(request, updateBrowserUrl);
-                        }
-                        NavigationEvent.fire(placeManager, request);
-                        if (!presenter.useManualReveal()) {
-                            // Automatic reveal
-                            manualReveal(presenter);
-                        }
+                addDeferredCommand(() -> {
+                    PlaceRequest originalRequest = placeManager.getCurrentPlaceRequest();
+                    presenter.prepareFromRequest(request);
+                    if (originalRequest == placeManager.getCurrentPlaceRequest()) {
+                        // User did not manually update place request in prepareFromRequest, update it here.
+                        placeManager.updateHistory(request, updateBrowserUrl);
+                    }
+                    NavigationEvent.fire(placeManager, request);
+                    if (!presenter.useManualReveal()) {
+                        // Automatic reveal
+                        manualReveal(presenter);
                     }
                 });
             }

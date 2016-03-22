@@ -37,7 +37,7 @@ public class BatchResult implements Result {
      * @param results The list of results.
      */
     public BatchResult(List<Result> results) {
-        this.results = new ArrayList<Result>(results);
+        this.results = new ArrayList<>(results);
     }
 
     /**

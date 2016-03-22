@@ -224,16 +224,26 @@
         <module>processor-tools</module>
     </modules>
 
+    <repositories>
+        <repository>
+            <id>google-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/google-snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <properties>
-        <target.jdk>1.7</target.jdk>
+        <target.jdk>1.8</target.jdk>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-site-plugin.skip>false</maven-site-plugin.skip>
 
         <!-- Maven -->
-        <gwt-maven-plugin.version>2.7.0</gwt-maven-plugin.version>
+        <gwt-maven-plugin.version>2.8.0-beta1</gwt-maven-plugin.version>
         <maven-checkstyle-plugin.version>2.15</maven-checkstyle-plugin.version>
-        <checkstyle.version>6.4.1</checkstyle.version>
+        <checkstyle.version>6.12</checkstyle.version>
         <arcbees-checkstyle.version>1.2</arcbees-checkstyle.version>
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
@@ -249,10 +259,10 @@
         <maven-release-plugin.version>2.5.1</maven-release-plugin.version>
 
         <!-- Client -->
-        <gwt.version>2.7.0</gwt.version>
+        <gwt.version>2.8.0-SNAPSHOT</gwt.version>
         <!-- when you update the gwt version please also update the dtds in all gwt.xml files -->
         <gin.version>2.1.2</gin.version>
-        <gwt-jackson.version>0.9.0</gwt-jackson.version>
+        <gwt-jackson.version>0.12.0</gwt-jackson.version>
 
         <!-- Server -->
         <jax-rs.version>1.1.1</jax-rs.version>

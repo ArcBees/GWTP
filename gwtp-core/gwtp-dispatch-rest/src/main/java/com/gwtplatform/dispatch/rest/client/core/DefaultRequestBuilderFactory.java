@@ -35,7 +35,7 @@ public class DefaultRequestBuilderFactory implements RequestBuilderFactory {
     private static final Map<HttpMethod, Method> HTTP_METHOD_TO_REQUEST_BUILDER;
 
     static {
-        HTTP_METHOD_TO_REQUEST_BUILDER = new EnumMap<HttpMethod, Method>(HttpMethod.class);
+        HTTP_METHOD_TO_REQUEST_BUILDER = new EnumMap<>(HttpMethod.class);
         HTTP_METHOD_TO_REQUEST_BUILDER.put(HttpMethod.GET, RequestBuilder.GET);
         HTTP_METHOD_TO_REQUEST_BUILDER.put(HttpMethod.POST, RequestBuilder.POST);
         HTTP_METHOD_TO_REQUEST_BUILDER.put(HttpMethod.PUT, RequestBuilder.PUT);

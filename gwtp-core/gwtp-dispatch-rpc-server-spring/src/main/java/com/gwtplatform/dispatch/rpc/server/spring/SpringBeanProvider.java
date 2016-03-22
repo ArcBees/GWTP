@@ -25,8 +25,8 @@ import java.util.Map.Entry;
 import org.springframework.context.ApplicationContext;
 
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider;
-import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor;
-
+import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper
+        .CommonBindingDescriptor;
 import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 
 public class SpringBeanProvider implements BeanProvider {
@@ -52,12 +52,12 @@ public class SpringBeanProvider implements BeanProvider {
 
     @Override
     public <B> Iterator<BindingDescriptor<B>> getBindings(Class<B> clazz) {
-        List<BindingDescriptor<B>> result = new ArrayList<BindingDescriptor<B>>();
+        List<BindingDescriptor<B>> result = new ArrayList<>();
 
         Map<String, B> beansOfType = applicationContext.getBeansOfType(clazz);
 
         for (Entry<String, B> beans : beansOfType.entrySet()) {
-            result.add(new SpringBindingDescriptorAdapter<B>(beans));
+            result.add(new SpringBindingDescriptorAdapter<>(beans));
         }
 
         return result.iterator();

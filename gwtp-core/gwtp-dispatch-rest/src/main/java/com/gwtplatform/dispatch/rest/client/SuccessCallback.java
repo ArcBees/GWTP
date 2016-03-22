@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,23 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.interceptor;
+package com.gwtplatform.dispatch.rest.client;
 
-/**
- * Abstract base interceptor.
- *
- * @param <A> action class.
- * @param <R> result class.
- */
-public abstract class AbstractInterceptor<A, R> implements Interceptor<A, R> {
-    private final Class<A> actionType;
+import com.google.gwt.http.client.Response;
 
-    protected AbstractInterceptor(Class<A> actionType) {
-        this.actionType = actionType;
-    }
-
-    @Override
-    public Class<A> getActionType() {
-        return actionType;
-    }
+@FunctionalInterface
+public interface SuccessCallback<R> {
+    void onSuccess(R result, Response response);
 }

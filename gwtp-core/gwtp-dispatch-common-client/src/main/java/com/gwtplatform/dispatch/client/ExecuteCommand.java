@@ -14,9 +14,8 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.interceptor;
+package com.gwtplatform.dispatch.client;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
@@ -24,9 +23,9 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * action to execute to the server.
  *
  * @param <A> The action type.
- * @param <R> The result type.
+ * @param <C> The callback type.
  */
-public interface ExecuteCommand<A, R> {
+public interface ExecuteCommand<A, C> {
     /**
      * Execute an action.
      *
@@ -35,5 +34,5 @@ public interface ExecuteCommand<A, R> {
      *
      * @return A {@link DispatchRequest} representing the request, it should never be {@code null}.
      */
-    DispatchRequest execute(A action, AsyncCallback<R> resultCallback);
+    DispatchRequest execute(A action, C resultCallback);
 }

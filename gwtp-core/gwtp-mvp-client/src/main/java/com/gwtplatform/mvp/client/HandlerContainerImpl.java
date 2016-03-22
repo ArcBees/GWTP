@@ -46,7 +46,7 @@ public class HandlerContainerImpl implements HandlerContainer {
     private final transient BindMonitor bound = new BindMonitor();
 
     private final transient List<HandlerRegistration> handlerRegistrations = new java.util
-            .ArrayList<HandlerRegistration>();
+            .ArrayList<>();
 
     /**
      * Creates a handler container class with automatic binding, unless

@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.rest.shared;
 import java.util.List;
 
 import com.gwtplatform.dispatch.shared.HasSecured;
-import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * An action used by {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
@@ -29,7 +28,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  *
  * @param <R> the result type.
  */
-public interface RestAction<R> extends TypedAction<R>, HasSecured {
+public interface RestAction<R> extends HasSecured {
     /**
      * Returns the relative path for this action. It should not be prepended by the path annotated with {@link
      * com.gwtplatform.dispatch.rest.client.RestApplicationPath @RestApplicationPath}. This path does not contain

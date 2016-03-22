@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,19 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.interceptor;
+package com.gwtplatform.dispatch.rest.client;
 
-import com.gwtplatform.common.client.IndirectProvider;
+import com.google.gwt.http.client.Response;
 
-/**
- * Base interface for interceptor registry implementations.
- */
-public interface InterceptorRegistry {
-    /**
-     * Gets the client-side interceptor that supports the specific action.
-     *
-     * @return The the client-side interceptor, or {@code null} if no appropriate client-side interceptor
-     * could be found.
-     */
-    <A> IndirectProvider<? extends Interceptor<?, ?>> find(A action);
+@FunctionalInterface
+public interface AlwaysCallback {
+    void always(Response response);
 }

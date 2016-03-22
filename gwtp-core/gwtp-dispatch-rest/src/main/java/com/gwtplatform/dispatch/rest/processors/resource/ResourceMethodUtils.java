@@ -24,7 +24,6 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeVisitor;
 import javax.lang.model.util.SimpleTypeVisitor6;
 
-import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.HttpVariable;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -47,12 +46,7 @@ public class ResourceMethodUtils {
     public Method processMethod(Resource parentResource, ExecutableElement element) {
         Collection<HttpVariable> variables = parentResource.getEndPointDetails().getHttpVariables();
         Collection<String> existingVariableNames = FluentIterable.from(variables)
-                .transform(new Function<HttpVariable, String>() {
-                    @Override
-                    public String apply(HttpVariable variable) {
-                        return variable.getName();
-                    }
-                })
+                .transform(HttpVariable::getName)
                 .toList();
 
         return new Method(element, existingVariableNames);

@@ -36,17 +36,17 @@ public abstract class HandlerModule {
 
     protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass,
             Class<? extends ActionHandler<A, R>> handlerClass) {
-        SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl<A, R>(actionClass,
-                new ActionHandlerValidatorClass<A, R>(handlerClass,
+        SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl<>(actionClass,
+                new ActionHandlerValidatorClass<>(handlerClass,
                         DefaultActionValidator.class)));
     }
 
     protected <A extends Action<R>, R extends Result> void bindHandler(Class<A> actionClass,
             Class<? extends ActionHandler<A, R>> handlerClass,
             Class<? extends ActionValidator> actionValidator) {
-        SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl<A, R>(actionClass,
-                new ActionHandlerValidatorClass<A, R>(handlerClass,
-                actionValidator)));
+        SpringUtils.registerBean(applicationContext, new ActionHandlerValidatorMapImpl<>(actionClass,
+                new ActionHandlerValidatorClass<>(handlerClass,
+                        actionValidator)));
     }
 
     protected abstract void configureHandlers();

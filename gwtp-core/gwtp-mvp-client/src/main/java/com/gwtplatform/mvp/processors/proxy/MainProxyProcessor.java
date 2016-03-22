@@ -82,9 +82,7 @@ public class MainProxyProcessor extends AbstractProcessor {
 
         elements = utils.getSourceFilter().filterElements(elements);
 
-        for (Element element : elements) {
-            process(element);
-        }
+        elements.forEach(this::process);
 
         return !elements.isEmpty();
     }

@@ -16,10 +16,11 @@
 
 package com.gwtplatform.dispatch.rpc.client;
 
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptedAsyncCallback;
@@ -37,7 +38,8 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * @param <A> the {@link Action} type.
  * @param <R> the {@link Result} type for this action.
  */
-public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> extends DispatchCall<A, R> {
+public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result>
+        extends DispatchCall<A, R> {
     private final RpcDispatchCallFactory dispatchCallFactory;
     private final DispatchServiceAsync dispatchService;
     private final RpcDispatchHooks dispatchHooks;
@@ -83,23 +85,36 @@ public class RpcDispatchExecuteCall<A extends Action<R>, R extends Result> exten
     }
 
     @Override
+    public void onExecuteSuccess(R result, Response response) {
+        getCallback().onSuccess(result);
+    }
+
+    @Override
+    public void onExecuteFailure(Throwable caught, Response response) {
+        if (shouldHandleFailure(caught)) {
+            getCallback().onFailure(caught);
+        }
+    }
+
+    @Override
     protected DispatchRequest processCall() {
-        return new GwtHttpDispatchRequest(dispatchService.execute(getSecurityCookie(), getAction(),
+        Request request = dispatchService.execute(getSecurityCookie(), getAction(),
                 new AsyncCallback<R>() {
                     @Override
                     public void onFailure(Throwable caught) {
-                        RpcDispatchExecuteCall.this.onExecuteFailure(caught);
+                        RpcDispatchExecuteCall.this.onExecuteFailure(caught, null);
 
                         dispatchHooks.onFailure(getAction(), caught, false);
                     }
 
                     @Override
                     public void onSuccess(R result) {
-                        RpcDispatchExecuteCall.this.onExecuteSuccess(result);
+                        RpcDispatchExecuteCall.this.onExecuteSuccess(result, null);
 
                         dispatchHooks.onSuccess(getAction(), result, false);
                     }
                 }
-        ));
+        );
+        return new GwtHttpDispatchRequest(request);
     }
 }

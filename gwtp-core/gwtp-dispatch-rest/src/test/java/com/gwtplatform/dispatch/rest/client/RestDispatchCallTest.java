@@ -25,13 +25,11 @@ import org.mockito.InOrder;
 
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestException;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.rest.client.core.CookieManager;
 import com.gwtplatform.dispatch.rest.client.core.RequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.core.ResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.core.RestDispatchCall;
-import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -58,8 +56,6 @@ public class RestDispatchCallTest {
     @Inject
     private ExceptionHandler exceptionHandler;
     @Inject
-    private RestInterceptorRegistry interceptorRegistry;
-    @Inject
     private SecurityCookieAccessor securityCookieAccessor;
     @Inject
     private RequestBuilderFactory requestBuilderFactory;
@@ -71,7 +67,7 @@ public class RestDispatchCallTest {
     private RestDispatchHooks dispatchHooks;
 
     @Test
-    public void someAction_cookieSavedBeforeExecution(AsyncCallback<Void> callback)
+    public void someAction_cookieSavedBeforeExecution(RestCallback<Void> callback)
             throws ActionException, RequestException {
         // given
         SomeAction action = createAction();
@@ -93,8 +89,8 @@ public class RestDispatchCallTest {
         return new SomeAction(HttpMethod.GET, "");
     }
 
-    private <A extends RestAction<R>, R> RestDispatchCall<A, R> createCall(A action, AsyncCallback<R> callback) {
-        return new RestDispatchCall<>(null, exceptionHandler, interceptorRegistry, securityCookieAccessor,
-                requestBuilderFactory, cookieManager, responseDeserializer, dispatchHooks, action, callback);
+    private <A extends RestAction<R>, R> RestDispatchCall<A, R> createCall(A action, RestCallback<R> callback) {
+        return new RestDispatchCall<>(null, exceptionHandler, securityCookieAccessor, requestBuilderFactory,
+                cookieManager, responseDeserializer, dispatchHooks, action, callback);
     }
 }

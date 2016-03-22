@@ -18,7 +18,6 @@ package com.gwtplatform.dispatch.rpc.shared;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.gwtplatform.dispatch.shared.HasSecured;
-import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
  * An action represents a command sent to the {@link com.gwtplatform.dispatch.rpc.server.Dispatch}. It has a specific
@@ -32,7 +31,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  *
  * @param <R> The {@link Result} type.
  */
-public interface Action<R extends Result> extends TypedAction<R>, HasSecured, IsSerializable {
+public interface Action<R extends Result> extends HasSecured, IsSerializable {
 
     /**
      * The URL of the service used by default.

@@ -575,7 +575,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
         visible = true;
 
         // use new set to prevent concurrent modification
-        for (PresenterWidget<?> child: new HashSet<PresenterWidget<?>>(children)) {
+        for (PresenterWidget<?> child: new HashSet<>(children)) {
             child.internalReveal();
         }
 
@@ -621,12 +621,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     private void monitorCloseEvent(final PresenterWidget<? extends PopupView> popupPresenter) {
         PopupView popupView = popupPresenter.getView();
 
-        popupView.setCloseHandler(new PopupViewCloseHandler() {
-            @Override
-            public void onClose() {
-                popupPresenter.removeFromParentSlot();
-            }
-        });
+        popupView.setCloseHandler(popupPresenter::removeFromParentSlot);
     }
 
     /**

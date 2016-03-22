@@ -20,8 +20,8 @@ import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder;
 import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.core.CoreModule;
-import com.gwtplatform.dispatch.rest.client.interceptor.DefaultRestInterceptorRegistry;
-import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
+import com.gwtplatform.dispatch.rest.client.filter.DefaultRestFilterRegistry;
+import com.gwtplatform.dispatch.rest.client.filter.RestFilterRegistry;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
@@ -36,7 +36,7 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
     private RestParameterBindings globalHeaderParams = new RestParameterBindings();
     private RestParameterBindings globalQueryParams = new RestParameterBindings();
     private Class<? extends RestDispatchHooks> dispatchHooks = DefaultRestDispatchHooks.class;
-    private Class<? extends RestInterceptorRegistry> interceptorRegistry = DefaultRestInterceptorRegistry.class;
+    private Class<? extends RestFilterRegistry> filterRegistry = DefaultRestFilterRegistry.class;
 
     protected BaseRestDispatchModuleBuilder() {
     }
@@ -48,7 +48,7 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
         globalHeaderParams = copy.globalHeaderParams;
         globalQueryParams = copy.globalQueryParams;
         dispatchHooks = copy.dispatchHooks;
-        interceptorRegistry = copy.interceptorRegistry;
+        filterRegistry = copy.filterRegistry;
     }
 
     @Override
@@ -64,7 +64,7 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
      * @return the parameter builder instance
      */
     public RestParameterBuilder<B> addGlobalHeaderParam(String key) {
-        return new RestParameterBuilder<B>(self(), Type.HEADER, globalHeaderParams, key);
+        return new RestParameterBuilder<>(self(), Type.HEADER, globalHeaderParams, key);
     }
 
     /**
@@ -75,7 +75,7 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
      * @return the parameter builder instance
      */
     public RestParameterBuilder<B> addGlobalQueryParam(String key) {
-        return new RestParameterBuilder<B>(self(), Type.QUERY, globalQueryParams, key);
+        return new RestParameterBuilder<>(self(), Type.QUERY, globalQueryParams, key);
     }
 
     /**
@@ -133,15 +133,14 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
     }
 
     /**
-     * Specify an alternate REST interceptor registry.
+     * Specify an alternate REST filter registry.
      *
-     * @param interceptorRegistry A {@link com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry
-     * RestInterceptorRegistry} class.
+     * @param filterRegistry A {@link com.gwtplatform.dispatch.rest.client.filter.RestFilterRegistry} class.
      *
      * @return this {@link com.gwtplatform.dispatch.rest.client.gin.BaseRestDispatchModuleBuilder builder} object.
      */
-    public B interceptorRegistry(Class<? extends RestInterceptorRegistry> interceptorRegistry) {
-        this.interceptorRegistry = interceptorRegistry;
+    public B filterRegistry(Class<? extends RestFilterRegistry> filterRegistry) {
+        this.filterRegistry = filterRegistry;
         return self();
     }
 
@@ -171,7 +170,7 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
         return dispatchHooks;
     }
 
-    Class<? extends RestInterceptorRegistry> getInterceptorRegistry() {
-        return interceptorRegistry;
+    Class<? extends RestFilterRegistry> getFilterRegistry() {
+        return filterRegistry;
     }
 }
