@@ -1,0 +1,75 @@
+/*
+ * Copyright 2015 ArcBees Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+package com.gwtplatform.dispatch.rest.shared;
+
+import com.google.gwt.http.client.Response;
+
+public class ActionResponseException extends RestActionException {
+
+    private int statusCode;
+    private String statusText;
+    private String headers;
+    private String content;
+
+    public ActionResponseException() {
+    }
+
+    public ActionResponseException(Response response) {
+        this(response, response.getStatusText());
+    }
+
+    public ActionResponseException(Response response, String message) {
+        super(message);
+
+        unwrapResponse(response);
+    }
+
+    public ActionResponseException(Response response, String message, Throwable cause) {
+        super(message, cause);
+
+        unwrapResponse(response);
+    }
+
+    public ActionResponseException(Response response, Throwable cause) {
+        super(cause);
+
+        unwrapResponse(response);
+    }
+
+    private void unwrapResponse(Response response) {
+        this.statusCode = response.getStatusCode();
+        this.statusText = response.getStatusText();
+        this.headers = response.getHeadersAsString();
+        this.content = response.getText();
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public String getStatusText() {
+        return statusText;
+    }
+
+    public String getHeaders() {
+        return headers;
+    }
+
+    public String getContent() {
+        return content;
+    }
+}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2015 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,28 +14,24 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.shared;
+package com.gwtplatform.dispatch.rest.shared;
 
-/**
- * These are thrown by {@link com.gwtplatform.dispatch.server.Dispatch#execute(Action)} if there is a problem executing
- * a particular {@link Action}.
- */
-public class ActionException extends Exception {
+import com.gwtplatform.dispatch.shared.ActionException;
 
-    private static final long serialVersionUID = -1423773155541528952L;
+public class RestActionException extends ActionException {
 
-    public ActionException() {
+    public RestActionException() {
     }
 
-    public ActionException(String message) {
+    public RestActionException(String message) {
         super(message);
     }
 
-    public ActionException(String message, Throwable cause) {
+    public RestActionException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ActionException(Throwable cause) {
+    public RestActionException(Throwable cause) {
         super(cause);
     }
 }

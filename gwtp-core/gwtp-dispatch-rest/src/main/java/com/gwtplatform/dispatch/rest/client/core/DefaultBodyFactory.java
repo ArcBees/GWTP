@@ -28,6 +28,7 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.serialization.SerializationException;
 import com.gwtplatform.dispatch.rest.client.serialization.SerializedValue;
+import com.gwtplatform.dispatch.rest.shared.ActionSerializationException;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -85,11 +86,11 @@ public class DefaultBodyFactory implements BodyFactory {
      * @return The serialized string.
      */
     protected SerializedValue serialize(Serialization serialization, Object object, String bodyClass,
-            List<ContentType> contentTypes) throws ActionException {
+            List<ContentType> contentTypes) throws ActionSerializationException {
         try {
             return serialization.serialize(bodyClass, contentTypes, object);
         } catch (SerializationException e) {
-            throw new ActionException(e);
+            throw new ActionSerializationException(e);
         }
     }
 
@@ -131,7 +132,8 @@ public class DefaultBodyFactory implements BodyFactory {
             }
         }
 
-        throw new ActionException("Unable to serialize request body. No serializer found.");
+        throw new ActionSerializationException(
+            "Unable to serialize request body. No serializer found.");
     }
 
     private Set<Serialization> getSerializations() {

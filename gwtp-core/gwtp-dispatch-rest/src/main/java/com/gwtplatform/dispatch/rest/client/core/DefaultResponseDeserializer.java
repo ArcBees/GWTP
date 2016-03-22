@@ -25,6 +25,8 @@ import javax.ws.rs.core.HttpHeaders;
 import com.google.gwt.http.client.Response;
 import com.gwtplatform.dispatch.rest.client.serialization.Serialization;
 import com.gwtplatform.dispatch.rest.client.serialization.SerializationException;
+import com.gwtplatform.dispatch.rest.shared.ActionDeserializationException;
+import com.gwtplatform.dispatch.rest.shared.ActionResponseException;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
@@ -48,7 +50,7 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
         if (isSuccessStatusCode(response)) {
             return getDeserializedResponse(action, response);
         } else {
-            throw new ActionException(response.getStatusText());
+            throw new ActionResponseException(response);
         }
     }
 
@@ -78,14 +80,15 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
      * @param serialization the serialization object to be used.
      * @param resultClass the parameterized type of the object once deserialized.
      * @param contentType the contentType of <code>data</code>.
-     * @param data the data to deserialize.    @return The deserialized object.
+     * @param response the response to deserialize.
+     * @return The deserialized object.
      */
     protected <R> R deserializeValue(Serialization serialization, String resultClass, ContentType contentType,
-            String data) throws ActionException {
+            Response response) throws ActionDeserializationException {
         try {
-            return serialization.deserialize(resultClass, contentType, data);
+            return serialization.deserialize(resultClass, contentType, response.getText());
         } catch (SerializationException e) {
-            throw new ActionException(e);
+            throw new ActionDeserializationException(response, e);
         }
     }
 
@@ -103,11 +106,12 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
             Serialization serialization = findSerialization(resultClass, contentType);
 
             if (serialization != null) {
-                return deserializeValue(serialization, resultClass, contentType, response.getText());
+                return deserializeValue(serialization, resultClass, contentType, response);
             }
         }
 
-        throw new ActionException("Unable to deserialize response. No serializer found.");
+        throw new ActionDeserializationException(response,
+            "Unable to deserialize response. No serializer found.");
     }
 
     private Set<Serialization> getSerializations() {
