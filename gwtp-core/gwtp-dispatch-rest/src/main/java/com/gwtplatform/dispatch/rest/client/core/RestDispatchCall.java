@@ -21,17 +21,11 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
-import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
-import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.client.DispatchCall;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
-import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptedAsyncCallback;
-import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptor;
-import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
@@ -43,19 +37,23 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * @param <A> the {@link RestAction} type.
  * @param <R> the result type for this action.
  */
-public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A, R, RestCallback<R>> {
+public class RestDispatchCall<A extends RestAction<R>, R>  {
     private final DispatchCallFactory dispatchCallFactory;
+    private final ExceptionHandler exceptionHandler;
+    private final SecurityCookieAccessor securityCookieAccessor;
     private final RequestBuilderFactory requestBuilderFactory;
     private final CookieManager cookieManager;
     private final ResponseDeserializer responseDeserializer;
-    private final RestInterceptorRegistry interceptorRegistry;
     private final RestDispatchHooks dispatchHooks;
+    private final A action;
+    private final RestCallback<R> callback;
+
+    private boolean intercepted;
 
     // TODO: Too many dependencies, split the logic
     public RestDispatchCall(
             DispatchCallFactory dispatchCallFactory,
             ExceptionHandler exceptionHandler,
-            RestInterceptorRegistry interceptorRegistry,
             SecurityCookieAccessor securityCookieAccessor,
             RequestBuilderFactory requestBuilderFactory,
             CookieManager cookieManager,
@@ -63,46 +61,81 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
             RestDispatchHooks dispatchHooks,
             A action,
             RestCallback<R> callback) {
-        super(exceptionHandler, securityCookieAccessor, action, callback);
-
         this.dispatchCallFactory = dispatchCallFactory;
+        this.exceptionHandler = exceptionHandler;
+        this.securityCookieAccessor = securityCookieAccessor;
         this.requestBuilderFactory = requestBuilderFactory;
         this.cookieManager = cookieManager;
         this.responseDeserializer = responseDeserializer;
-        this.interceptorRegistry = interceptorRegistry;
         this.dispatchHooks = dispatchHooks;
+        this.action = action;
+        this.callback = callback;
     }
 
-    @Override
+    /**
+     * Execution entry point. Call this method to execute the {@link RestAction action} wrapped by this instance.
+     *
+     * @return a {@link DispatchRequest} object.
+     */
     public DispatchRequest execute() {
-        A action = getAction();
-
-        if (!isIntercepted()) {
-            IndirectProvider<RestInterceptor> interceptorProvider = interceptorRegistry.find(action);
-
-            // Attempt to intercept the dispatch request
-            if (interceptorProvider != null) {
-                DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
-                RestInterceptedAsyncCallback<A, R> delegatingCallback = new RestInterceptedAsyncCallback<>(
-                        dispatchCallFactory, this, action, getCallback(), dispatchRequest);
-
-                interceptorProvider.get(delegatingCallback.asAsyncCallback());
-
-                return dispatchRequest;
-            }
-        }
-
         dispatchHooks.onExecute(action);
 
         // Execute the request as given
         return processCall();
     }
 
-    @Override
+    /**
+     * Override this method to perform additional work when the action execution succeeded.
+     *
+     * @param result the action result.
+     * @param response the action {@link Response}.
+     */
+    public void onExecuteSuccess(R result, Response response) {
+        assignResponse(response);
+
+        callback.onSuccess(result, response);
+
+        dispatchHooks.onSuccess(action, response, result);
+    }
+
+    /**
+     * Override this method to perform additional work when the action execution failed.
+     *
+     * @param caught the caught {@link Throwable}.
+     * @param response the failure {@link Response}.
+     */
+    public void onExecuteFailure(Throwable caught, Response response) {
+        assignResponse(response);
+
+        if (shouldHandleFailure(caught)) {
+            callback.onFailure(caught, response);
+        }
+
+        dispatchHooks.onFailure(action, response, caught);
+    }
+
+    public void setIntercepted(boolean intercepted) {
+        if (this.intercepted && !intercepted) {
+            throw new IllegalStateException("Can not overwrite the intercepted state of a DispatchCall.");
+        }
+
+        this.intercepted = intercepted;
+    }
+
+    public boolean isIntercepted() {
+        return intercepted;
+    }
+
+    /**
+     * Direct execution of a dispatch call without intercepting. Implementations must override this method to perform
+     * additional work when {@link #execute()} is called.
+     *
+     * @return a {@link DispatchRequest} object.
+     */
     protected DispatchRequest processCall() {
         try {
             RequestBuilder requestBuilder = buildRequest();
-            cookieManager.saveCookiesFromAction(getAction());
+            cookieManager.saveCookiesFromAction(action);
 
             return new GwtHttpDispatchRequest(requestBuilder.send());
         } catch (RequestException | ActionException e) {
@@ -111,28 +144,44 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
         return new CompletedDispatchRequest();
     }
 
-    @Override
-    protected void onExecuteSuccess(R result, Response response) {
-        assignResponse(response);
-
-        getCallback().onSuccess(result, response);
-
-        dispatchHooks.onSuccess(getAction(), response, result);
+    /**
+     * Returns the bound {@link ExceptionHandler}.
+     *
+     * @return the bound {@link ExceptionHandler}.
+     */
+    protected ExceptionHandler getExceptionHandler() {
+        return exceptionHandler;
     }
 
-    @Override
-    protected void onExecuteFailure(Throwable caught, Response response) {
-        assignResponse(response);
+    /**
+     * Returns the bound {@link SecurityCookieAccessor}.
+     *
+     * @return the bound {@link SecurityCookieAccessor}.
+     */
+    protected SecurityCookieAccessor getSecurityCookieAccessor() {
+        return securityCookieAccessor;
+    }
 
-        if (shouldHandleFailure(caught)) {
-            getCallback().onFailure(caught, response);
-        }
+    /**
+     * Returns the current security cookie as returned by the bound {@link SecurityCookieAccessor}.
+     *
+     * @return the current security cookie.
+     */
+    protected String getSecurityCookie() {
+        return securityCookieAccessor.getCookieContent();
+    }
 
-        dispatchHooks.onFailure(getAction(), response, caught);
+    /**
+     * Override this method to perform additional work when the action execution failed.
+     *
+     * @param caught the caught {@link Throwable}.
+     */
+    public boolean shouldHandleFailure(Throwable caught) {
+        return exceptionHandler.onFailure(caught) != ExceptionHandler.Status.STOP;
     }
 
     private void assignResponse(Response response) {
-        getCallback().setResponse(response);
+        callback.always(response);
     }
 
     private RequestCallback createRequestCallback() {
@@ -156,7 +205,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
         Response wrappedResponse = new ResponseWrapper(response);
 
         try {
-            R result = responseDeserializer.deserialize(getAction(), wrappedResponse);
+            R result = responseDeserializer.deserialize(action, wrappedResponse);
 
             onExecuteSuccess(result, wrappedResponse);
         } catch (ActionException e) {
@@ -165,7 +214,7 @@ public class RestDispatchCall<A extends RestAction<R>, R> extends DispatchCall<A
     }
 
     private RequestBuilder buildRequest() throws ActionException {
-        RequestBuilder requestBuilder = requestBuilderFactory.build(getAction(), getSecurityCookie());
+        RequestBuilder requestBuilder = requestBuilderFactory.build(action, getSecurityCookie());
         requestBuilder.setCallback(createRequestCallback());
 
         return requestBuilder;

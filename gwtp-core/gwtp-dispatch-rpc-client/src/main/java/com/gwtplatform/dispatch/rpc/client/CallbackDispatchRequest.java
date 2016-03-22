@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2011 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,22 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rpc.client;
 
-import com.google.gwt.http.client.Response;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * A callback.
+ * An implementation of {@link DispatchRequest} that should be used by
+ * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s that make asynchronous calls.
  *
- * @param <R> The result type
+ * @param <R> The type of the {@link AsyncCallback}.
  */
-@FunctionalInterface
-public interface RestCallback<R> extends SuccessCallback<R>, AlwaysCallback, FailureCallback {
-    @Override
-    default void always(Response response) {
-    }
-
-    @Override
-    default void onFailure(Throwable throwable, Response response) {
-    }
+public interface CallbackDispatchRequest<R> extends AsyncCallback<R>, DispatchRequest {
 }

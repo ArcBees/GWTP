@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,22 +14,16 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client;
+package com.gwtplatform.dispatch.rest.client.filter;
 
-import com.google.gwt.http.client.Response;
+import com.gwtplatform.dispatch.client.ExecuteCommand;
+import com.gwtplatform.dispatch.rest.client.RestCallback;
+import com.gwtplatform.dispatch.rest.shared.RestAction;
+import com.gwtplatform.dispatch.shared.DispatchRequest;
 
-/**
- * A callback.
- *
- * @param <R> The result type
- */
-@FunctionalInterface
-public interface RestCallback<R> extends SuccessCallback<R>, AlwaysCallback, FailureCallback {
-    @Override
-    default void always(Response response) {
-    }
-
-    @Override
-    default void onFailure(Throwable throwable, Response response) {
-    }
+public interface RestFilterChain {
+    DispatchRequest doFilter(
+            RestAction<?> action,
+            RestCallback<?> resultCallback,
+            ExecuteCommand<RestAction<?>, RestCallback<?>> executeCommand);
 }

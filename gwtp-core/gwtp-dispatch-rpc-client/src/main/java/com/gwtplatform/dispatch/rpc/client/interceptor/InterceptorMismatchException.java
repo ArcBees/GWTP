@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.interceptor;
+package com.gwtplatform.dispatch.rpc.client.interceptor;
 
 /**
  * This exception is thrown as a side-effect of an error when registering a delegating callback. A provider was

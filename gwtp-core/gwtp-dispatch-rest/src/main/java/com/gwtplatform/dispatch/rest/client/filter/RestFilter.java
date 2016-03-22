@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,21 +14,20 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.rest.client.interceptor;
+package com.gwtplatform.dispatch.rest.client.filter;
 
-import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
+import com.gwtplatform.dispatch.client.ExecuteCommand;
 import com.gwtplatform.dispatch.rest.client.RestCallback;
+import com.gwtplatform.dispatch.rest.client.context.RestContext;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
-public class SampleRestInterceptor extends AbstractRestInterceptor {
-    public SampleRestInterceptor(InterceptorContext context) {
-        super(context);
-    }
+public interface RestFilter {
+    DispatchRequest filter(
+            RestAction<?> action,
+            RestCallback<?> resultCallback,
+            ExecuteCommand<RestAction<?>, RestCallback<?>> executeCommand,
+            RestFilterChain filterChain);
 
-    @Override
-    public DispatchRequest execute(RestAction action, RestCallback resultCallback,
-            ExecuteCommand<RestAction, Object, RestCallback> executeCommand) {
-        return null;
-    }
+    RestContext getRestContext();
 }

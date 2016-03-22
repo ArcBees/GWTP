@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client.interceptor;
+package com.gwtplatform.dispatch.client;
 
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
@@ -23,9 +23,9 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * action to execute to the server.
  *
  * @param <A> The action type.
- * @param <R> The result type.
+ * @param <C> The callback type.
  */
-public interface ExecuteCommand<A, R, C> {
+public interface ExecuteCommand<A, C> {
     /**
      * Execute an action.
      *

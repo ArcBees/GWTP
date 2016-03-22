@@ -33,6 +33,7 @@ public class DefaultSecurityCookieAccessor implements SecurityCookieAccessor {
     @SecurityCookie
     public String cookieName;
 
+    @Override
     public String getCookieContent() {
         if (cookieName == null) {
             return null;
