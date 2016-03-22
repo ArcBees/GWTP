@@ -23,7 +23,7 @@ import java.util.Map;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
-import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
+import com.gwtplatform.dispatch.client.ExecuteCommand;
 import com.gwtplatform.dispatch.rpc.client.CallbackDispatchRequest;
 import com.gwtplatform.dispatch.rpc.client.DefaultCallbackDispatchRequest;
 import com.gwtplatform.dispatch.rpc.client.DelegatingCallbackDispatchRequest;

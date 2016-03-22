@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.rpc.client.interceptor;
 import org.junit.Test;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
+import com.gwtplatform.dispatch.client.ExecuteCommand;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.DispatchRequest;

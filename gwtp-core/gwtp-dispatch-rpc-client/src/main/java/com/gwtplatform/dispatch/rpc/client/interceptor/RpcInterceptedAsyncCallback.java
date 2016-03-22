@@ -18,7 +18,7 @@ package com.gwtplatform.dispatch.rpc.client.interceptor;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.client.interceptor.ExecuteCommand;
+import com.gwtplatform.dispatch.client.ExecuteCommand;
 import com.gwtplatform.dispatch.rpc.client.DispatchCall;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchExecuteCall;

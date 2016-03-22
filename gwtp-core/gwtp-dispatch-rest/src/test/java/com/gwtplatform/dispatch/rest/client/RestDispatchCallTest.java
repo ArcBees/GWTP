@@ -30,7 +30,6 @@ import com.gwtplatform.dispatch.rest.client.core.CookieManager;
 import com.gwtplatform.dispatch.rest.client.core.RequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.core.ResponseDeserializer;
 import com.gwtplatform.dispatch.rest.client.core.RestDispatchCall;
-import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
@@ -56,8 +55,6 @@ public class RestDispatchCallTest {
 
     @Inject
     private ExceptionHandler exceptionHandler;
-    @Inject
-    private RestInterceptorRegistry interceptorRegistry;
     @Inject
     private SecurityCookieAccessor securityCookieAccessor;
     @Inject
@@ -93,7 +90,7 @@ public class RestDispatchCallTest {
     }
 
     private <A extends RestAction<R>, R> RestDispatchCall<A, R> createCall(A action, RestCallback<R> callback) {
-        return new RestDispatchCall<>(null, exceptionHandler, interceptorRegistry, securityCookieAccessor,
-                requestBuilderFactory, cookieManager, responseDeserializer, dispatchHooks, action, callback);
+        return new RestDispatchCall<>(null, exceptionHandler, securityCookieAccessor, requestBuilderFactory,
+                cookieManager, responseDeserializer, dispatchHooks, action, callback);
     }
 }

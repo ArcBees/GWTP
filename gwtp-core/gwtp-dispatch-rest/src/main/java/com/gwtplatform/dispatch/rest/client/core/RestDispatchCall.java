@@ -21,16 +21,11 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
-import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.client.CompletedDispatchRequest;
-import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
-import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptedAsyncCallback;
-import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptor;
-import com.gwtplatform.dispatch.rest.client.interceptor.RestInterceptorRegistry;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
@@ -49,7 +44,6 @@ public class RestDispatchCall<A extends RestAction<R>, R>  {
     private final RequestBuilderFactory requestBuilderFactory;
     private final CookieManager cookieManager;
     private final ResponseDeserializer responseDeserializer;
-    private final RestInterceptorRegistry interceptorRegistry;
     private final RestDispatchHooks dispatchHooks;
     private final A action;
     private final RestCallback<R> callback;
@@ -60,7 +54,6 @@ public class RestDispatchCall<A extends RestAction<R>, R>  {
     public RestDispatchCall(
             DispatchCallFactory dispatchCallFactory,
             ExceptionHandler exceptionHandler,
-            RestInterceptorRegistry interceptorRegistry,
             SecurityCookieAccessor securityCookieAccessor,
             RequestBuilderFactory requestBuilderFactory,
             CookieManager cookieManager,
@@ -74,7 +67,6 @@ public class RestDispatchCall<A extends RestAction<R>, R>  {
         this.requestBuilderFactory = requestBuilderFactory;
         this.cookieManager = cookieManager;
         this.responseDeserializer = responseDeserializer;
-        this.interceptorRegistry = interceptorRegistry;
         this.dispatchHooks = dispatchHooks;
         this.action = action;
         this.callback = callback;
@@ -86,21 +78,6 @@ public class RestDispatchCall<A extends RestAction<R>, R>  {
      * @return a {@link DispatchRequest} object.
      */
     public DispatchRequest execute() {
-        if (!isIntercepted()) {
-            IndirectProvider<RestInterceptor> interceptorProvider = interceptorRegistry.find(action);
-
-            // Attempt to intercept the dispatch request
-            if (interceptorProvider != null) {
-                DelegatingDispatchRequest dispatchRequest = new DelegatingDispatchRequest();
-                RestInterceptedAsyncCallback<A, R> delegatingCallback = new RestInterceptedAsyncCallback<>(
-                        dispatchCallFactory, this, action, callback, dispatchRequest);
-
-                interceptorProvider.get(delegatingCallback.asAsyncCallback());
-
-                return dispatchRequest;
-            }
-        }
-
         dispatchHooks.onExecute(action);
 
         // Execute the request as given
