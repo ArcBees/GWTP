@@ -54,7 +54,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder<Builder> {
         protected Class<? extends DispatchAsync> dispatchAsync = RpcDispatchAsync.class;
 
-        private Class<? extends ExceptionHandler> exceptionHandlerType = DefaultExceptionHandler.class;
+        private Class<? extends ExceptionHandler> exceptionHandler = DefaultExceptionHandler.class;
         private Class<? extends RpcDispatchCallFactory> dispatchCallFactory = DefaultRpcDispatchCallFactory.class;
         private Class<? extends RpcDispatchHooks> dispatchHooks = DefaultRpcDispatchHooks.class;
         private Class<? extends RpcInterceptorRegistry> interceptorRegistry = DefaultRpcInterceptorRegistry.class;
@@ -64,8 +64,8 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
             return new RpcDispatchAsyncModule(this);
         }
 
-        public Class<? extends ExceptionHandler> getExceptionHandlerType() {
-            return exceptionHandlerType;
+        public Class<? extends ExceptionHandler> getExceptionHandler() {
+            return exceptionHandler;
         }
 
         public Class<? extends RpcDispatchHooks> getDispatchHooks() {
@@ -87,12 +87,12 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
         /**
          * Specify an alternative exception handler.
          *
-         * @param exceptionHandlerType The {@link ExceptionHandler} class.
+         * @param exceptionHandler The {@link ExceptionHandler} class.
          *
          * @return a {@link Builder} object.
          */
-        public Builder exceptionHandler(Class<? extends ExceptionHandler> exceptionHandlerType) {
-            this.exceptionHandlerType = exceptionHandlerType;
+        public Builder exceptionHandler(Class<? extends ExceptionHandler> exceptionHandler) {
+            this.exceptionHandler = exceptionHandler;
             return this;
         }
 
@@ -169,7 +169,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bind(DispatchAsync.class).to(builder.getDispatchAsync()).in(Singleton.class);
         bind(RpcInterceptorRegistry.class).to(builder.getInterceptorRegistry()).in(Singleton.class);
         bind(RpcDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
-        bind(ExceptionHandler.class).to(builder.getExceptionHandlerType());
+        bind(ExceptionHandler.class).to(builder.getExceptionHandler());
     }
 
     @Provides

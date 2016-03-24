@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 import com.google.gwt.i18n.shared.DateTimeFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
@@ -90,15 +91,14 @@ public class ClientHttpParameter implements HttpParameter {
 
         ClientHttpParameter that = (ClientHttpParameter) o;
 
-        return name.equals(that.name)
-                || (object == null ? that.object == null : object.equals(that.object));
+        return Objects.equals(type, that.type)
+                && Objects.equals(name, that.name)
+                && Objects.equals(object, that.object);
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + (object != null ? object.hashCode() : 0);
-        return result;
+        return Objects.hash(type, name, object);
     }
 
     protected Entry<String, String> createEntry(Object object) {
