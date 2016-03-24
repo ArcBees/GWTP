@@ -21,21 +21,18 @@ import java.lang.annotation.Annotation;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.inject.client.binder.GinAnnotatedBindingBuilder;
 import com.google.gwt.inject.client.binder.GinLinkedBindingBuilder;
-import com.gwtplatform.dispatch.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
-import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
  * This gin module provides provides access to the dispatcher singleton, which is used to make calls to the server. This
- * module requires an {@link ExceptionHandler} and a {@link SecurityCookieAccessor}. By default, these will be bound to
- * {@link DefaultExceptionHandler}, {@link DefaultSecurityCookieAccessor} respectively.
+ * module requires a {@link SecurityCookieAccessor} which is, by default, bound to
+ * {@link DefaultSecurityCookieAccessor}.
  * <p/>
  * Install the module in one of your {@link #configure()} methods:
  * <p/>
  * <pre>
  * install(new RestDispatchAsyncModule.Builder()
- *                 .exceptionHandler(MyExceptionHandler.class)
  *                 .sessionAccessor(MySessionAccessor.class)
  *                 .build());
  * </pre>
@@ -48,13 +45,12 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
      * A {@link AbstractDispatchAsyncModule} builder.
      * <p/>
      * By default, this builder configures the {@link AbstractDispatchAsyncModule} to use {@link
-     * DefaultExceptionHandler} and {@link DefaultSecurityCookieAccessor}.
+     * DefaultSecurityCookieAccessor}.
      *
      * @see com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule.Builder
      * @see com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule.Builder
      */
     public abstract static class Builder<B extends Builder<B>> {
-        private Class<? extends ExceptionHandler> exceptionHandlerType = DefaultExceptionHandler.class;
         private Class<? extends SecurityCookieAccessor> sessionAccessorType = DefaultSecurityCookieAccessor.class;
 
         /**
@@ -69,18 +65,6 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
          * @return The built {@link AbstractDispatchAsyncModule}.
          */
         public abstract AbstractDispatchAsyncModule build();
-
-        /**
-         * Specify an alternative exception handler.
-         *
-         * @param exceptionHandlerType The {@link ExceptionHandler} class.
-         *
-         * @return a {@link Builder} object.
-         */
-        public B exceptionHandler(Class<? extends ExceptionHandler> exceptionHandlerType) {
-            this.exceptionHandlerType = exceptionHandlerType;
-            return self();
-        }
 
         /**
          * Specify an alternate session accessor.
@@ -109,7 +93,6 @@ public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
 
     @Override
     protected final void configure() {
-        bindAnnotated(ExceptionHandler.class).to(builder.exceptionHandlerType);
         bindAnnotated(SecurityCookieAccessor.class).to(builder.sessionAccessorType);
 
         configureDispatch();

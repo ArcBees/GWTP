@@ -22,8 +22,8 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 public interface RestFilterChain {
-    DispatchRequest doFilter(
-            RestAction<?> action,
-            RestCallback<?> resultCallback,
-            ExecuteCommand<RestAction<?>, RestCallback<?>> executeCommand);
+    <R> DispatchRequest doFilter(
+            RestAction<R> action,
+            RestCallback<R> resultCallback,
+            ExecuteCommand<RestAction<R>, RestCallback<R>> executeCommand);
 }

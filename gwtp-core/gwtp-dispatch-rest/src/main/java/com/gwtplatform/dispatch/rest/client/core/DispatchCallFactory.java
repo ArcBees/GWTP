@@ -20,7 +20,7 @@ import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
- * A factory used to create {@link com.gwtplatform.dispatch.client.DispatchCall} instances.
+ * A factory used to create {@link RestDispatchCall} instances.
  */
 public interface DispatchCallFactory {
     <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, RestCallback<R> callback);

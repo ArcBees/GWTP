@@ -18,8 +18,7 @@ package com.gwtplatform.dispatch.rpc.client;
 
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.gwtplatform.dispatch.client.ExceptionHandler;
-import com.gwtplatform.dispatch.client.ExceptionHandler.Status;
+import com.gwtplatform.dispatch.rpc.client.ExceptionHandler.Status;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 

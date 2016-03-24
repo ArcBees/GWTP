@@ -17,7 +17,7 @@
 package com.gwtplatform.dispatch.rest.client.filter;
 
 import java.util.Iterator;
-import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Inject;
 
@@ -28,22 +28,22 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 public class DefaultRestFilterChain implements RestFilterChain {
-    private final Iterator<Map.Entry<RestContext, RestFilter>> filterIterator;
+    private final Iterator<Entry<RestContext, RestFilter>> filterIterator;
 
     @Inject
-    DefaultRestFilterChain(RestFilterRegistry filterRegistry) {
+    protected DefaultRestFilterChain(RestFilterRegistry filterRegistry) {
         filterIterator = filterRegistry.iterator();
     }
 
     @Override
-    public DispatchRequest doFilter(
-            RestAction<?> action,
-            RestCallback<?> resultCallback,
-            ExecuteCommand<RestAction<?>, RestCallback<?>> executeCommand) {
+    public <R> DispatchRequest doFilter(
+            RestAction<R> action,
+            RestCallback<R> resultCallback,
+            ExecuteCommand<RestAction<R>, RestCallback<R>> executeCommand) {
 
         if (filterIterator.hasNext()) {
-            Map.Entry<RestContext, RestFilter> filterEntry = filterIterator.next();
-            RestContext subjectContext = new RestContext.Builder((RestAction) action).build();
+            Entry<RestContext, RestFilter> filterEntry = filterIterator.next();
+            RestContext subjectContext = new RestContext.Builder(action).build();
 
             if (filterEntry.getKey().equals(subjectContext)) {
                 return filterEntry.getValue().filter(action, resultCallback, executeCommand, this);

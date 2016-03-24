@@ -22,8 +22,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.inject.Provides;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
+import com.gwtplatform.dispatch.rpc.client.DefaultExceptionHandler;
 import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchCallFactory;
 import com.gwtplatform.dispatch.rpc.client.DefaultRpcDispatchHooks;
+import com.gwtplatform.dispatch.rpc.client.ExceptionHandler;
 import com.gwtplatform.dispatch.rpc.client.RpcBinding;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchAsync;
 import com.gwtplatform.dispatch.rpc.client.RpcDispatchCallFactory;
@@ -52,6 +54,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
     public static class Builder extends AbstractDispatchAsyncModule.Builder<Builder> {
         protected Class<? extends DispatchAsync> dispatchAsync = RpcDispatchAsync.class;
 
+        private Class<? extends ExceptionHandler> exceptionHandlerType = DefaultExceptionHandler.class;
         private Class<? extends RpcDispatchCallFactory> dispatchCallFactory = DefaultRpcDispatchCallFactory.class;
         private Class<? extends RpcDispatchHooks> dispatchHooks = DefaultRpcDispatchHooks.class;
         private Class<? extends RpcInterceptorRegistry> interceptorRegistry = DefaultRpcInterceptorRegistry.class;
@@ -59,6 +62,10 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
         @Override
         public RpcDispatchAsyncModule build() {
             return new RpcDispatchAsyncModule(this);
+        }
+
+        public Class<? extends ExceptionHandler> getExceptionHandlerType() {
+            return exceptionHandlerType;
         }
 
         public Class<? extends RpcDispatchHooks> getDispatchHooks() {
@@ -75,6 +82,18 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
 
         public Class<? extends RpcDispatchCallFactory> getDispatchCallFactory() {
             return dispatchCallFactory;
+        }
+
+        /**
+         * Specify an alternative exception handler.
+         *
+         * @param exceptionHandlerType The {@link ExceptionHandler} class.
+         *
+         * @return a {@link Builder} object.
+         */
+        public Builder exceptionHandler(Class<? extends ExceptionHandler> exceptionHandlerType) {
+            this.exceptionHandlerType = exceptionHandlerType;
+            return this;
         }
 
         /**
@@ -150,6 +169,7 @@ public class RpcDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bind(DispatchAsync.class).to(builder.getDispatchAsync()).in(Singleton.class);
         bind(RpcInterceptorRegistry.class).to(builder.getInterceptorRegistry()).in(Singleton.class);
         bind(RpcDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
+        bind(ExceptionHandler.class).to(builder.getExceptionHandlerType());
     }
 
     @Provides

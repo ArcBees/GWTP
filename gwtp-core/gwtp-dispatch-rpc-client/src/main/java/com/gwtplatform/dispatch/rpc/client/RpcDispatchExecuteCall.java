@@ -21,7 +21,6 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.dispatch.client.DelegatingDispatchRequest;
-import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.GwtHttpDispatchRequest;
 import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptedAsyncCallback;
 import com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptor;

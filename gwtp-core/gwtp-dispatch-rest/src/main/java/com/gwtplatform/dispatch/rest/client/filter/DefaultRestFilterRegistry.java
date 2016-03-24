@@ -16,16 +16,17 @@
 
 package com.gwtplatform.dispatch.rest.client.filter;
 
-import java.util.AbstractMap;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.gwtplatform.dispatch.rest.client.context.RestContext;
 
 public class DefaultRestFilterRegistry implements RestFilterRegistry {
-    private final List<Map.Entry<RestContext, RestFilter>> filters = new ArrayList<>();
+    private final List<Entry<RestContext, RestFilter>> filters = new ArrayList<>();
 
     @Override
     public Iterator<Map.Entry<RestContext, RestFilter>> iterator() {
@@ -34,6 +35,6 @@ public class DefaultRestFilterRegistry implements RestFilterRegistry {
 
     @Override
     public void register(RestFilter filter) {
-        filters.add(new AbstractMap.SimpleEntry<>(filter.getRestContext(), filter));
+        filters.add(new SimpleEntry<>(filter.getRestContext(), filter));
     }
 }
