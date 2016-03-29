@@ -17,8 +17,6 @@
 package com.gwtplatform.dispatch.rest.client.gin;
 
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule.Builder;
-import com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks;
-import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.core.CoreModule;
 import com.gwtplatform.dispatch.rest.client.filter.DefaultRestFilterRegistry;
 import com.gwtplatform.dispatch.rest.client.filter.RestFilterRegistry;
@@ -35,7 +33,6 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
     private String defaultDateFormat = DateFormat.DEFAULT;
     private RestParameterBindings globalHeaderParams = new RestParameterBindings();
     private RestParameterBindings globalQueryParams = new RestParameterBindings();
-    private Class<? extends RestDispatchHooks> dispatchHooks = DefaultRestDispatchHooks.class;
     private Class<? extends RestFilterRegistry> filterRegistry = DefaultRestFilterRegistry.class;
 
     protected BaseRestDispatchModuleBuilder() {
@@ -47,7 +44,6 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
         defaultDateFormat = copy.defaultDateFormat;
         globalHeaderParams = copy.globalHeaderParams;
         globalQueryParams = copy.globalQueryParams;
-        dispatchHooks = copy.dispatchHooks;
         filterRegistry = copy.filterRegistry;
     }
 
@@ -120,19 +116,6 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
     }
 
     /**
-     * Supply your own implementation of {@link com.gwtplatform.dispatch.rest.client.RestDispatchHooks}. Default is
-     * {@link com.gwtplatform.dispatch.rest.client.DefaultRestDispatchHooks}
-     *
-     * @param dispatchHooks The {@link com.gwtplatform.dispatch.rest.client.RestDispatchHooks} implementation.
-     *
-     * @return this {@link com.gwtplatform.dispatch.rest.client.gin.BaseRestDispatchModuleBuilder} object.
-     */
-    public B dispatchHooks(Class<? extends RestDispatchHooks> dispatchHooks) {
-        this.dispatchHooks = dispatchHooks;
-        return self();
-    }
-
-    /**
      * Specify an alternate REST filter registry.
      *
      * @param filterRegistry A {@link com.gwtplatform.dispatch.rest.client.filter.RestFilterRegistry} class.
@@ -164,10 +147,6 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
 
     String getXsrfTokenHeaderName() {
         return xsrfTokenHeaderName;
-    }
-
-    Class<? extends RestDispatchHooks> getDispatchHooks() {
-        return dispatchHooks;
     }
 
     Class<? extends RestFilterRegistry> getFilterRegistry() {

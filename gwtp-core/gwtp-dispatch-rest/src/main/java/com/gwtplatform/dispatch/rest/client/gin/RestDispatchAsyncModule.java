@@ -22,7 +22,6 @@ import com.google.inject.Provides;
 import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.dispatch.client.gin.AbstractDispatchAsyncModule;
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
-import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.annotations.DefaultDateFormat;
 import com.gwtplatform.dispatch.rest.client.annotations.GlobalHeaderParams;
 import com.gwtplatform.dispatch.rest.client.annotations.GlobalQueryParams;
@@ -73,6 +72,8 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         install(new SerializationModule());
         install(builder.getCoreModule());
 
+        bind(RestFilterRegistry.class).to(builder.getFilterRegistry()).in(Singleton.class);
+
         // Constants / Configurations
         // It's not possible to bind non-native type constants, so we must encode them at compile-time and decode them
         // at runtime (ie: Global Parameters)
@@ -84,10 +85,6 @@ public class RestDispatchAsyncModule extends AbstractDispatchAsyncModule {
         bindConstant().annotatedWith(DefaultDateFormat.class).to(builder.getDefaultDateFormat());
         bindConstant().annotatedWith(GlobalHeaderParams.class).to(globalHeaderParams);
         bindConstant().annotatedWith(GlobalQueryParams.class).to(globalQueryParams);
-
-        // Cross-concern
-        bind(RestDispatchHooks.class).to(builder.getDispatchHooks()).in(Singleton.class);
-        bind(RestFilterRegistry.class).to(builder.getFilterRegistry()).in(Singleton.class);
     }
 
     @Provides

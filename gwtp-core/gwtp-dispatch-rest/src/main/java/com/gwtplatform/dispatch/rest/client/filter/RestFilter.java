@@ -23,11 +23,11 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 public interface RestFilter {
-    DispatchRequest filter(
-            RestAction<?> action,
-            RestCallback<?> resultCallback,
-            ExecuteCommand<RestAction<?>, RestCallback<?>> executeCommand,
-            RestFilterChain filterChain);
+    <R> DispatchRequest filter(
+            RestAction<R> action,
+            RestCallback<R> callback,
+            ExecuteCommand<RestAction<R>, RestCallback<R>> command,
+            RestFilterChain chain);
 
     RestContext getRestContext();
 }

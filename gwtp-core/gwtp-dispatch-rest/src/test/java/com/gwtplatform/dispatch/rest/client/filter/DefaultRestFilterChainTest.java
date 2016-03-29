@@ -136,8 +136,8 @@ public class DefaultRestFilterChainTest {
             DispatchRequest expected) {
         return spy(new RestFilter() {
             @Override
-            public DispatchRequest filter(RestAction<?> action, RestCallback<?> resultCallback,
-                    ExecuteCommand<RestAction<?>, RestCallback<?>> executeCommand, RestFilterChain filterChain) {
+            public <R> DispatchRequest filter(RestAction<R> action, RestCallback<R> callback,
+                    ExecuteCommand<RestAction<R>, RestCallback<R>> command, RestFilterChain chain) {
                 return expected;
             }
 

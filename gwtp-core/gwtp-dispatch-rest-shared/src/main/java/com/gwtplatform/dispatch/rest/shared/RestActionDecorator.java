@@ -39,6 +39,10 @@ public class RestActionDecorator<R> implements RestAction<R> {
         this.extraParams = extraParams;
     }
 
+    public RestAction<R> getDecoratedAction() {
+        return action;
+    }
+
     @Override
     public String getPath() {
         return action.getPath();

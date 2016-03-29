@@ -18,9 +18,7 @@ package com.gwtplatform.dispatch.rest.client.core;
 
 import javax.inject.Inject;
 
-import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.rest.client.RestCallback;
-import com.gwtplatform.dispatch.rest.client.RestDispatchHooks;
 import com.gwtplatform.dispatch.rest.client.annotations.RestBinding;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
@@ -29,32 +27,26 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * The default implementation for {@link DispatchCallFactory}.
  */
 public class DefaultDispatchCallFactory implements DispatchCallFactory {
-    private final ExceptionHandler exceptionHandler;
     private final SecurityCookieAccessor securityCookieAccessor;
     private final RequestBuilderFactory requestBuilderFactory;
     private final CookieManager cookieManager;
     private final ResponseDeserializer responseDeserializer;
-    private final RestDispatchHooks dispatchHooks;
 
     @Inject
-    DefaultDispatchCallFactory(
-            @RestBinding ExceptionHandler exceptionHandler,
+    protected DefaultDispatchCallFactory(
             @RestBinding SecurityCookieAccessor securityCookieAccessor,
             RequestBuilderFactory requestBuilderFactory,
             CookieManager cookieManager,
-            ResponseDeserializer responseDeserializer,
-            RestDispatchHooks dispatchHooks) {
-        this.exceptionHandler = exceptionHandler;
+            ResponseDeserializer responseDeserializer) {
         this.securityCookieAccessor = securityCookieAccessor;
         this.requestBuilderFactory = requestBuilderFactory;
         this.cookieManager = cookieManager;
         this.responseDeserializer = responseDeserializer;
-        this.dispatchHooks = dispatchHooks;
     }
 
     @Override
     public <A extends RestAction<R>, R> RestDispatchCall<A, R> create(A action, RestCallback<R> callback) {
-        return new RestDispatchCall<>(this, exceptionHandler, securityCookieAccessor, requestBuilderFactory,
-                cookieManager, responseDeserializer, dispatchHooks, action, callback);
+        return new RestDispatchCall<>(securityCookieAccessor, requestBuilderFactory, cookieManager,
+                responseDeserializer, action, callback);
     }
 }

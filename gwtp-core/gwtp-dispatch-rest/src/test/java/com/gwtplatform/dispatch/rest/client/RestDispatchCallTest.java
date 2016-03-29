@@ -25,7 +25,6 @@ import org.mockito.InOrder;
 
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestException;
-import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.rest.client.core.CookieManager;
 import com.gwtplatform.dispatch.rest.client.core.RequestBuilderFactory;
 import com.gwtplatform.dispatch.rest.client.core.ResponseDeserializer;
@@ -54,8 +53,6 @@ public class RestDispatchCallTest {
     }
 
     @Inject
-    private ExceptionHandler exceptionHandler;
-    @Inject
     private SecurityCookieAccessor securityCookieAccessor;
     @Inject
     private RequestBuilderFactory requestBuilderFactory;
@@ -63,8 +60,6 @@ public class RestDispatchCallTest {
     private CookieManager cookieManager;
     @Inject
     private ResponseDeserializer responseDeserializer;
-    @Inject
-    private RestDispatchHooks dispatchHooks;
 
     @Test
     public void someAction_cookieSavedBeforeExecution(RestCallback<Void> callback)
@@ -90,7 +85,7 @@ public class RestDispatchCallTest {
     }
 
     private <A extends RestAction<R>, R> RestDispatchCall<A, R> createCall(A action, RestCallback<R> callback) {
-        return new RestDispatchCall<>(null, exceptionHandler, securityCookieAccessor, requestBuilderFactory,
-                cookieManager, responseDeserializer, dispatchHooks, action, callback);
+        return new RestDispatchCall<>(securityCookieAccessor, requestBuilderFactory, cookieManager,
+                responseDeserializer, action, callback);
     }
 }

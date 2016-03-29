@@ -38,8 +38,7 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
     private Set<Serialization> serializations;
 
     @Inject
-    protected DefaultResponseDeserializer(
-            Provider<Set<Serialization>> serializationsProvider) {
+    protected DefaultResponseDeserializer(Provider<Set<Serialization>> serializationsProvider) {
         this.serializationsProvider = serializationsProvider;
     }
 

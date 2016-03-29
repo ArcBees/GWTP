@@ -26,7 +26,7 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * The default implementation for {@link com.gwtplatform.dispatch.rest.client.RestDispatch}.
+ * The default implementation for {@link RestDispatch}.
  */
 public class DefaultRestDispatch implements RestDispatch {
     private final Provider<RestFilterChain> restFilterChainProvider;
@@ -43,11 +43,10 @@ public class DefaultRestDispatch implements RestDispatch {
     @Override
     public <A extends RestAction<R>, R> DispatchRequest execute(A action, RestCallback<R> callback) {
         RestFilterChain filterChain = restFilterChainProvider.get();
-
         return filterChain.doFilter(action, callback, this::doExecute);
     }
 
-    private <A extends RestAction<R>, R> DispatchRequest doExecute(A action, RestCallback resultCallback) {
+    private <A extends RestAction<R>, R> DispatchRequest doExecute(A action, RestCallback<R> resultCallback) {
         RestDispatchCall<?, ?> call = callFactory.create(action, resultCallback);
         return call.execute();
     }

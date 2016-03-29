@@ -34,7 +34,7 @@ public class DelegatingDispatchRequest implements DispatchRequest {
     }
 
     /**
-     * Populates the {@link DelegatingDispatchRequest} object with a {@link DispatchRequest}.
+     * Assign the delegated {@link DispatchRequest} for this object.
      * <p/>
      * If the code that requested the command to be executed has already chosen to cancel the {@link DispatchRequest},
      * the {@link DispatchRequest} that has been passed will be immediately cancelled.

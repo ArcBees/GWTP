@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 ArcBees Inc.
+ * Copyright 2016 ArcBees Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,11 +14,11 @@
  * the License.
  */
 
-package com.gwtplatform.dispatch.client;
+package com.gwtplatform.dispatch.rpc.client;
 
 /**
- * Implementations of this interface can be added to a {@link com.gwtplatform.dispatch.shared.DispatchAsync}
- * implementation to intercept exceptions which return from further up the chain.
+ * Implementations of this interface can be added to a {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync
+ * DispatchAsync} implementation to intercept exceptions which return from further up the chain.
  */
 public interface ExceptionHandler {
     /**
