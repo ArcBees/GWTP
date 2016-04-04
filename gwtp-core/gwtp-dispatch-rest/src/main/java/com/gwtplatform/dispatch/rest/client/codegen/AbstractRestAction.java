@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.google.common.base.MoreObjects;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
@@ -100,12 +99,12 @@ public abstract class AbstractRestAction<R> implements RestAction<R> {
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("httpMethod", httpMethod)
-                .add("path", path)
-                .add("parameters", parameters)
-                .add("bodyParam", bodyParam)
-                .toString();
+        return "AbstractRestAction{" +
+                "httpMethod=" + httpMethod +
+                ", path='" + path + '\'' +
+                ", parameters=" + parameters +
+                ", bodyParam=" + bodyParam +
+                '}';
     }
 
     @Override
