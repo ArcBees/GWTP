@@ -4,8 +4,6 @@
 A complete model-view-presenter framework to simplify your next GWT project.
 
 ##Enterprise Support
-
-[![Join the chat at https://gitter.im/ArcBees/GWTP](https://badges.gitter.im/ArcBees/GWTP.svg)](https://gitter.im/ArcBees/GWTP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Get high quality support through ArcBees.
 
 * <a href="http://gwtp.arcbees.com">Enterprise Support Features</a>
@@ -90,3 +88,5 @@ Get high quality support through ArcBees.
 [![Atlassian](http://i.imgur.com/BKkj8Rg.png)](https://www.atlassian.com/)
 
 [![IntelliJ](https://lh6.googleusercontent.com/--QIIJfKrjSk/UJJ6X-UohII/AAAAAAAAAVM/cOW7EjnH778/s800/banner_IDEA.png)](http://www.jetbrains.com/idea/index.html)
+
+[![Join the chat at https://gitter.im/ArcBees/GWTP](https://badges.gitter.im/ArcBees/GWTP.svg)](https://gitter.im/ArcBees/GWTP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
