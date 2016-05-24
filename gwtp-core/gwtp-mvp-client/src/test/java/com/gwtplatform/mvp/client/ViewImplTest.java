@@ -154,7 +154,6 @@ public class ViewImplTest {
         final List<String> namesCopy = new ArrayList<>(names);
         Collections.sort(names);
         assertEquals("Container elements should be sorted.", namesCopy, names);
-
     }
 
     static class ComparableContent implements IsWidget, Comparable<ComparableContent> {
@@ -179,7 +178,6 @@ public class ViewImplTest {
     }
 
     interface MockInsertPanel extends InsertPanel, HasWidgets {
-
     }
 
     static class TestViewImpl extends ViewImpl {
