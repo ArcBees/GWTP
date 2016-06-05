@@ -38,7 +38,7 @@ import com.gwtplatform.crawler.server.CrawlFilter;
  * Then register inside web.xml like so:
  * <pre>
  * {@code
- * <filter>
+ *     <filter>
  *          <filter-name>crawlFilter</filter-name>
  *          <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
  *     </filter>
