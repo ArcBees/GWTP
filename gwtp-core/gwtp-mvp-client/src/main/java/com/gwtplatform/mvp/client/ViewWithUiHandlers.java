@@ -44,7 +44,9 @@ public abstract class ViewWithUiHandlers<C extends UiHandlers> extends ViewImpl
      */
     protected C getUiHandlers() {
         if (uiHandlers == null) {
-            logger.severe("uiHandlers are not set.  Did you call getUiHandlers() from your view's constructor?");
+            logger.severe("uiHandlers are not set. You should call " +
+                    "setUiHandlers() from your presenter's constructor to make " +
+                    "the UiHandlers instance available.");
         }
         return uiHandlers;
     }
