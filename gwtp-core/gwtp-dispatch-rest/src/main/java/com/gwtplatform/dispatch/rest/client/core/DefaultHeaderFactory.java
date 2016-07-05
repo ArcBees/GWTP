@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.ws.rs.core.HttpHeaders;
 
 import com.google.gwt.http.client.RequestBuilder;
@@ -39,16 +40,16 @@ import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADE
 public class DefaultHeaderFactory implements HeaderFactory {
     private final RestParameterBindings globalParams;
     private final String securityHeaderName;
-    private final String applicationPath;
+    private final Provider<String> applicationPathProvider;
 
     @Inject
     DefaultHeaderFactory(
             @GlobalHeaderParams RestParameterBindings globalParams,
             @XsrfHeaderName String securityHeaderName,
-            @RestApplicationPath String applicationPath) {
+            @RestApplicationPath Provider<String> applicationPathProvider) {
         this.globalParams = globalParams;
         this.securityHeaderName = securityHeaderName;
-        this.applicationPath = applicationPath;
+        this.applicationPathProvider = applicationPathProvider;
     }
 
     @Override
@@ -93,8 +94,10 @@ public class DefaultHeaderFactory implements HeaderFactory {
     }
 
     private void maybeAddModuleBase(RestAction<?> action, List<HttpParameter> headerParams) {
-        if (!isAbsoluteUrl(action.getPath()) && !applicationPath.isEmpty()) {
-            headerParams.add(new HeaderParameter(MODULE_BASE_HEADER, applicationPath, null));
+        String restApplicationPath = applicationPathProvider.get();
+
+        if (!isAbsoluteUrl(action.getPath()) && !restApplicationPath.isEmpty()) {
+            headerParams.add(new HeaderParameter(MODULE_BASE_HEADER, restApplicationPath, null));
         }
     }
 

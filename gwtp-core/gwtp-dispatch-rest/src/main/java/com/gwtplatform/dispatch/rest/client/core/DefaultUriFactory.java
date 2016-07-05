@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
 import com.gwtplatform.dispatch.rest.client.annotations.GlobalQueryParams;
@@ -31,14 +32,14 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 public class DefaultUriFactory implements UriFactory {
     private final RestParameterBindings globalQueryParams;
-    private final String applicationPath;
+    private final Provider<String> applicationPathProvider;
 
     @Inject
     DefaultUriFactory(
             @GlobalQueryParams RestParameterBindings globalQueryParams,
-            @RestApplicationPath String applicationPath) {
+            @RestApplicationPath Provider<String> applicationPathProvider) {
         this.globalQueryParams = globalQueryParams;
-        this.applicationPath = applicationPath;
+        this.applicationPathProvider = applicationPathProvider;
     }
 
     @Override
@@ -81,7 +82,7 @@ public class DefaultUriFactory implements UriFactory {
     private String buildPrefix(RestAction<?> action) {
         String prefix = "";
         if (!isAbsoluteUrl(action.getPath())) {
-            prefix = applicationPath;
+            prefix = applicationPathProvider.get();
         }
 
         return prefix;

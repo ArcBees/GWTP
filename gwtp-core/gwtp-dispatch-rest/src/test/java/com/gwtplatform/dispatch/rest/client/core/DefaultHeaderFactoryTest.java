@@ -19,6 +19,7 @@ package com.gwtplatform.dispatch.rest.client.core;
 import java.util.Arrays;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.ws.rs.core.HttpHeaders;
 
 import org.jukito.JukitoModule;
@@ -96,6 +97,9 @@ public class DefaultHeaderFactoryTest {
     private DefaultHeaderFactory factory;
     @Inject
     private RequestBuilder requestBuilder;
+    @Inject
+    @RestApplicationPath
+    private Provider<String> applicationPathProvider;
 
     @Test
     public void build_securityToken_securityHeaderIsSet() {
@@ -192,7 +196,7 @@ public class DefaultHeaderFactoryTest {
     @Test
     public void build_emptyRestApplicationPath_headerIsNotSet(@GlobalHeaderParams RestParameterBindings bindings) {
         // given
-        factory = new DefaultHeaderFactory(bindings, XSRF_HEADER_NAME, "");
+        factory = new DefaultHeaderFactory(bindings, XSRF_HEADER_NAME, () -> "");
         UnsecuredRestAction action = new UnsecuredRestAction(GET, RELATIVE_PATH);
 
         // when
@@ -205,7 +209,7 @@ public class DefaultHeaderFactoryTest {
     @Test
     public void build_notEmptyRestApplicationPath_headerIsNotSet(@GlobalHeaderParams RestParameterBindings bindings) {
         // given
-        factory = new DefaultHeaderFactory(bindings, XSRF_HEADER_NAME, APPLICATION_PATH);
+        factory = new DefaultHeaderFactory(bindings, XSRF_HEADER_NAME, applicationPathProvider);
         UnsecuredRestAction action = new UnsecuredRestAction(GET, RELATIVE_PATH);
 
         // when
