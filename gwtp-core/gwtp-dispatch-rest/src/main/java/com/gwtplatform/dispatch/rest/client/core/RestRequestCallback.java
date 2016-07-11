@@ -42,7 +42,6 @@ class RestRequestCallback<A extends RestAction<R>, R> implements RequestCallback
     @Override
     public void onResponseReceived(Request request, Response response) {
         this.response = new ResponseWrapper(response);
-        this.callback.always(response);
 
         try {
             R result = responseDeserializer.deserialize(action, response);
@@ -51,11 +50,15 @@ class RestRequestCallback<A extends RestAction<R>, R> implements RequestCallback
         } catch (ActionException e) {
             onFailure(e);
         }
+
+        callback.always(response);
     }
 
     @Override
     public void onError(Request request, Throwable throwable) {
         onFailure(throwable);
+
+        callback.always(response);
     }
 
     void onSuccess(R result) {
