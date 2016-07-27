@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+
 import com.gwtplatform.mvp.client.presenter.slots.IsSingleSlot;
 import com.gwtplatform.mvp.client.presenter.slots.OrderedSlot;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
@@ -53,13 +54,28 @@ public abstract class ViewImpl implements View {
     public void addToSlot(Object slot, IsWidget content) {
         if (hasWidgetSlots.containsKey(slot)) {
             if (orderedSlots.containsKey(slot)) {
-                List<Comparable<Comparable<?>>> list = orderedSlots.get(slot);
-                list.add((Comparable<Comparable<?>>) content);
-                Collections.sort(list);
-                int index = Collections.binarySearch(list, (Comparable<Comparable<?>>) content);
+                final List<Comparable<Comparable<?>>> list = orderedSlots.get(slot);
+                final int index = Collections.binarySearch(list, (Comparable<Comparable<?>>) content);
+                final int insertIdx;
+                if (index > 0) {
+                    /**
+                     * binary search returns the index of an equal item if found
+                     * insert before it
+                     */
 
-                InsertPanel insertPanel = (InsertPanel) hasWidgetSlots.get(slot);
-                insertPanel.insert(content.asWidget(), index);
+                    insertIdx = index;
+                } else {
+                    /**
+                     * binary search returns -index - 1 if an equal item is not found
+                     * where index is the "insertion point"
+                     * reverse this operation and insert at the insertion point
+                     */
+
+                    insertIdx = -index - 1;
+                }
+                list.add(insertIdx, (Comparable<Comparable<?>>) content);
+                final InsertPanel insertPanel = (InsertPanel) hasWidgetSlots.get(slot);
+                insertPanel.insert(content.asWidget(), insertIdx);
             } else {
                 hasWidgetSlots.get(slot).add(content.asWidget());
             }
@@ -115,11 +131,10 @@ public abstract class ViewImpl implements View {
      * <p/>
      * {@link HasOneWidget} has checked first.
      *
-     * @param slot the slot
+     * @param slot      the slot
      * @param container the container must implement {@link HasOneWidget}.
-     *
      * @throws IllegalArgumentException if {@code container} implements neither of {@link HasOneWidget} or {@link
-     * HasWidgets}.
+     *                                  HasWidgets}.
      */
     protected void bindSlot(IsSingleSlot<?> slot, Object container) {
         internalBindSlot(slot, container);
@@ -128,7 +143,7 @@ public abstract class ViewImpl implements View {
     /**
      * Link a {@link Slot} to a container.
      *
-     * @param slot the slot
+     * @param slot      the slot
      * @param container the container must implement HasWidgets.
      */
     protected void bindSlot(Slot<?> slot, HasWidgets container) {
@@ -138,7 +153,7 @@ public abstract class ViewImpl implements View {
     /**
      * Link an {@link OrderedSlot} to a container.
      *
-     * @param slot the slot
+     * @param slot      the slot
      * @param container the container must implement {@link HasWidgets} &amp; {@link InsertPanel}.
      */
     protected <T extends HasWidgets & InsertPanel> void bindSlot(OrderedSlot<?> slot, T container) {
