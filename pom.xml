@@ -273,7 +273,7 @@
         <guava.version>18.0</guava.version>
         <objectify.version>5.0.2</objectify.version>
         <persistence-api.version>1.0</persistence-api.version>
-        <servlet-api.version>2.5</servlet-api.version>
+        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
         <spring.version>4.0.5.RELEASE</spring.version>
         <velocity.version>1.7</velocity.version>
         <auto-common.version>1.0-SNAPSHOT</auto-common.version>
