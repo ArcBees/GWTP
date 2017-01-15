@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <properties>
+        <jsr305.version>3.0.1</jsr305.version>
+    </properties>
 
     <parent>
         <groupId>com.gwtplatform</groupId>
@@ -48,7 +51,7 @@
                     <includes>**/*GwtTest.java,**/*GwtTestSuite.java</includes>
                     <mode>htmlunit</mode>
                     <testTimeOut>180</testTimeOut>
-                    <sourceLevel>${target.jdk}</sourceLevel>
+                    <sourceLevel>auto</sourceLevel>
                 </configuration>
                 <executions>
                     <execution>
@@ -89,6 +92,10 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
         </dependency>
     </dependencies>
 
@@ -222,7 +229,7 @@
             <!-- Standard Java extension jars -->
             <dependency>
                 <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
+                <artifactId>javax.servlet-api</artifactId>
                 <version>${servlet-api.version}</version>
             </dependency>
             <dependency>
@@ -249,6 +256,12 @@
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity</artifactId>
                 <version>${velocity.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>${jsr305.version}</version>
             </dependency>
 
             <!-- Test dependencies -->

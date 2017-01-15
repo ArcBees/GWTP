@@ -34,6 +34,6 @@ public class CrawlServiceModule extends ServletModule {
     @Singleton
     @Provides
     WebClient getWebClient() {
-        return new WebClient(BrowserVersion.FIREFOX_24);
+        return new WebClient(BrowserVersion.FIREFOX_38);
     }
 }
