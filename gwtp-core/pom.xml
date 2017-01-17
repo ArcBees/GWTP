@@ -222,7 +222,7 @@
             <!-- Standard Java extension jars -->
             <dependency>
                 <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
+                <artifactId>javax.servlet-api</artifactId>
                 <version>${servlet-api.version}</version>
             </dependency>
             <dependency>
