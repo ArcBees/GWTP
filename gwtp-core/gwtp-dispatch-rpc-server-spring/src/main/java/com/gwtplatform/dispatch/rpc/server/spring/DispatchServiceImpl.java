@@ -17,7 +17,6 @@
 package com.gwtplatform.dispatch.rpc.server.spring;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -33,6 +32,7 @@ import org.springframework.web.context.ServletContextAware;
 import com.gwtplatform.dispatch.rpc.server.AbstractDispatchServiceImpl;
 import com.gwtplatform.dispatch.rpc.server.Dispatch;
 import com.gwtplatform.dispatch.rpc.server.RequestProvider;
+import com.gwtplatform.dispatch.rpc.server.logger.DispatchServiceLogHandler;
 
 /**
  * Dispatch request to the handler.
@@ -48,7 +48,7 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl implements 
     private ServletContext servletContext;
 
     @Autowired
-    public DispatchServiceImpl(Logger logger, Dispatch dispatch, RequestProvider requestProvider) {
+    public DispatchServiceImpl(DispatchServiceLogHandler logger, Dispatch dispatch, RequestProvider requestProvider) {
         super(logger, dispatch, requestProvider);
     }
 

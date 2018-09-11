@@ -16,13 +16,11 @@
 
 package com.gwtplatform.dispatch.rpc.server;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.gwtplatform.dispatch.rpc.server.logger.DispatchServiceLogHandler;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.DispatchService;
 import com.gwtplatform.dispatch.rpc.shared.Result;
@@ -44,6 +42,14 @@ import com.gwtplatform.dispatch.shared.ActionException;
  * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl
  */
 public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet implements DispatchService {
+
+    /**
+     * The type of the method that can throw an exception.
+     */
+    public enum DispatchType {
+        Execute,
+        Undo
+    }
     private static final long serialVersionUID = -4753225025940949024L;
     private static final String noSecurityCookieMessage = "You have to define a security cookie in order to use " +
             "secured actions. See com.gwtplatform.dispatch.shared" +
@@ -52,10 +58,10 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
             "aborting action, possible XSRF attack. (Maybe you forgot to set " +
             "the security cookie?)";
     protected final Dispatch dispatch;
-    protected final Logger logger;
+    protected final DispatchServiceLogHandler logger;
     protected final RequestProvider requestProvider;
 
-    protected AbstractDispatchServiceImpl(Logger logger,
+    protected AbstractDispatchServiceImpl(DispatchServiceLogHandler logger,
                                           Dispatch dispatch,
                                           RequestProvider requestProvider) {
         this.logger = logger;
@@ -86,28 +92,16 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
         try {
             return dispatch.execute(action);
         } catch (ActionException e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                String newMessage = "Action exception while executing " + action.getClass().getName() + ": " +
-                        e.getMessage();
-                logger.log(Level.WARNING, newMessage, e);
-            }
+            logger.log(e, action, DispatchType.Execute);
 
             removeStacktraces(e);
 
             throw e;
         } catch (ServiceException e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, "Service exception while executing " + action.getClass().getName() + ": " +
-                        e.getMessage(), e);
-            }
-
+            logger.log(e, action, DispatchType.Execute);
             throw new ServiceException(e.getMessage());
         } catch (RuntimeException e) {
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.log(Level.WARNING, "Unexpected exception while executing " + action.getClass().getName() + ": " +
-                        "" + e.getMessage(), e);
-            }
-
+            logger.log(e, action, DispatchType.Execute);
             throw new ServiceException(e.getMessage());
         }
     }
@@ -126,15 +120,15 @@ public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet i
         try {
             dispatch.undo(action, result);
         } catch (ActionException e) {
-            logger.warning("Action exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
+            logger.log(e, action, DispatchType.Undo);
 
             throw new ActionException(e.getMessage());
         } catch (ServiceException e) {
-            logger.warning("Service exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
+            logger.log(e, action, DispatchType.Undo);
 
             throw new ServiceException(e.getMessage());
         } catch (RuntimeException e) {
-            logger.warning("Unexpected exception while undoing " + action.getClass().getName() + ": " + e.getMessage());
+            logger.log(e, action, DispatchType.Undo);
 
             throw new ServiceException(e.getMessage());
         }

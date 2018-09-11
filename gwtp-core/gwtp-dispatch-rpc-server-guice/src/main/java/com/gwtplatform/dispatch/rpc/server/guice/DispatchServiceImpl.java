@@ -16,14 +16,13 @@
 
 package com.gwtplatform.dispatch.rpc.server.guice;
 
-import java.util.logging.Logger;
-
 import javax.inject.Singleton;
 
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.rpc.server.AbstractDispatchServiceImpl;
 import com.gwtplatform.dispatch.rpc.server.Dispatch;
 import com.gwtplatform.dispatch.rpc.server.RequestProvider;
+import com.gwtplatform.dispatch.rpc.server.logger.DispatchServiceLogHandler;
 import com.gwtplatform.dispatch.shared.SecurityCookie;
 
 /**
@@ -50,7 +49,8 @@ public class DispatchServiceImpl extends AbstractDispatchServiceImpl {
     protected String securityCookieName;
 
     @Inject
-    public DispatchServiceImpl(final Logger logger, final Dispatch dispatch, RequestProvider requestProvider) {
+    public DispatchServiceImpl(final DispatchServiceLogHandler logger, final Dispatch dispatch, RequestProvider
+            requestProvider) {
         super(logger, dispatch, requestProvider);
     }
 
