@@ -46,7 +46,7 @@ public class TestDispatchAsync implements DispatchAsync {
 
     class TestingDispatchRequest implements DispatchRequest {
 
-        public TestingDispatchRequest() {
+        TestingDispatchRequest() {
         }
 
         @Override

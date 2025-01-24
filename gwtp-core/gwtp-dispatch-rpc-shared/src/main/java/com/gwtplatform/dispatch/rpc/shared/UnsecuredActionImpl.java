@@ -18,11 +18,11 @@ package com.gwtplatform.dispatch.rpc.shared;
 
 /**
  * Default Action using the base path as dispatch/className. The base abstract implementation is {@link Action}.
- * <p/>
+ * <p>
  * An {@link Action} that uses the standard service name {@code "dispatch"}. Actions inheriting from this are <b>not</b>
  * secured against XSRF attacks, and they will work even if you do not configure a
  * {@link com.gwtplatform.dispatch.shared.SecurityCookie}.
- * <p/>
+ * <p>
  * Use {@link ActionImpl} for secured set to on by default.
  *
  * @param <R> The {@link Result} type.

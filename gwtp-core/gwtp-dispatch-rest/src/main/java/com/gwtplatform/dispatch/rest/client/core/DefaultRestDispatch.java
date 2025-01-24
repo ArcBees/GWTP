@@ -16,12 +16,12 @@
 
 package com.gwtplatform.dispatch.rest.client.core;
 
-import javax.inject.Inject;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
+
+import jakarta.inject.Inject;
 
 /**
  * The default implementation for {@link com.gwtplatform.dispatch.rest.client.RestDispatch}.

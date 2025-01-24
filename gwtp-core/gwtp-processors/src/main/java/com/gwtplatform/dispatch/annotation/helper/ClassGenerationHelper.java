@@ -37,11 +37,11 @@ public class ClassGenerationHelper extends GenerationHelper {
 
     /**
      * Generates a class header. Pass null to skip the parent class.
-     * <p/>
+     * <p>
      * <p>
      * <b>Usage:</b>
      * </p>
-     * <p/>
+     * <p>
      * <pre>
      * <code>
      *  generateClassHeader(Foo.class.getSimpleName(),
@@ -53,7 +53,7 @@ public class ClassGenerationHelper extends GenerationHelper {
      * <p>
      * <b>Generated example:</b>
      * </p>
-     * <p/>
+     * <p>
      * <pre>
      * <code>public class MyFoo extends Foo implements HasName, MyGenericInterface{@literal <Foo>} {</code></pre>
      *
@@ -157,13 +157,13 @@ public class ClassGenerationHelper extends GenerationHelper {
 
     /**
      * Creates a default field assignment.
-     * <p/>
+     * <p>
      * <p>
      * <code>generateFieldAssignment(myNameIsTest, null)</code>
      * </p>
-     * <p/>
+     * <p>
      * Generates:
-     * <p/>
+     * <p>
      * <p>
      * <code>    this.test = null;</code>
      * </p>

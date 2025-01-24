@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rpc.client;
 
-import javax.inject.Inject;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.gwtplatform.dispatch.client.ExceptionHandler;
 import com.gwtplatform.dispatch.client.actionhandler.ClientActionHandlerRegistry;
@@ -26,6 +24,8 @@ import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
+
+import jakarta.inject.Inject;
 
 /**
  * The default implementation for {@link RpcDispatchCallFactory}.

@@ -18,8 +18,6 @@ package com.gwtplatform.dispatch.rest.rebind.entrypoint;
 
 import java.io.PrintWriter;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -30,6 +28,8 @@ import com.gwtplatform.dispatch.rest.client.codegen.AbstractDispatchRestEntryPoi
 import com.gwtplatform.dispatch.rest.rebind.AbstractGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
+
+import jakarta.inject.Inject;
 
 public class DefaultEntryPointGenerator extends AbstractGenerator implements EntryPointGenerator {
     private String packageName;

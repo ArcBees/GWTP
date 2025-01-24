@@ -19,7 +19,7 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>test</goal>
+                           <goal>test</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -70,25 +70,20 @@
             <artifactId>gwtp-mvp-shared</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
             <artifactId>gwt-user</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
             <artifactId>gwt-dev</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt.inject</groupId>
+            <groupId>de.knightsoft-net</groupId>
             <artifactId>gin</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -105,7 +100,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jukito</groupId>
+            <groupId>de.knightsoft-net</groupId>
             <artifactId>jukito</artifactId>
         </dependency>
         <dependency>

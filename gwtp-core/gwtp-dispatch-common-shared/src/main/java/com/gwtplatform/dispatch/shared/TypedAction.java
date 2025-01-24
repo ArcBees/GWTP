@@ -18,7 +18,7 @@ package com.gwtplatform.dispatch.shared;
 
 /**
  * An action with a result.
- * <p/>
+ * <p>
  * Marker interface used by dispatch projects to associate an action type to a result type.
  *
  * @param <R> the result type for this action.

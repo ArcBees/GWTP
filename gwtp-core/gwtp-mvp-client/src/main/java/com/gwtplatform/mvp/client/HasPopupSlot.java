@@ -23,15 +23,15 @@ public interface HasPopupSlot {
      * centers it. The view associated with the {@code content}'s presenter must
      * inherit from {@link PopupView}. The popup will be visible and the
      * corresponding presenter will receive the lifecycle events as needed.
-     * <p/>
-     * Contrary to the {@link #setInSlot} method, no
+     * <p>
+     * Contrary to the {@code #setInSlot} method, no
      * {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent} is fired,
      * so {@link PresenterWidget#onReset()} is not invoked.
-     * <p/>
+     * <p>
      * @param child The popup child, a {@link PresenterWidget}.
      * @see #addToPopupSlot(PresenterWidget)
      */
-    void addToPopupSlot(final PresenterWidget<? extends PopupView> child);
+    void addToPopupSlot(PresenterWidget<? extends PopupView> child);
 
     /**
      * This method removes popup content within the {@link Presenter}. The view
@@ -41,14 +41,14 @@ public interface HasPopupSlot {
      *              previously been added using {@link #addToPopupSlot(PresenterWidget)}
      *              or {@link #addToPopupSlot(PresenterWidget, boolean)}
      */
-    void removeFromPopupSlot(final PresenterWidget<? extends PopupView> child);
+    void removeFromPopupSlot(PresenterWidget<? extends PopupView> child);
 
     /**
      * This method sets some popup content within the {@link Presenter}. The view
      * associated with the {@code content}'s presenter must inherit from
      * {@link PopupView}. The popup will be visible and the corresponding
      * presenter will receive the lifecycle events as needed.
-     * <p/>
+     * <p>
      * Contrary to the {@link View#setInSlot(Object, com.google.gwt.user.client.ui.IsWidget)}
      * method, no {@link com.gwtplatform.mvp.client.proxy.ResetPresentersEvent}
      * is fired, so {@link PresenterWidget#onReset()} is not invoked.
@@ -59,5 +59,5 @@ public interface HasPopupSlot {
      * @deprecated - Since 1.4. Use {@link #addToPopupSlot(PresenterWidget)} instead. Center no longer as any affect.
      */
     @Deprecated
-    void addToPopupSlot(final PresenterWidget<? extends PopupView> child, boolean center);
+    void addToPopupSlot(PresenterWidget<? extends PopupView> child, boolean center);
 }

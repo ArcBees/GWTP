@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.gwt.core.ext.BadPropertyValueException;
@@ -34,6 +32,8 @@ import com.gwtplatform.dispatch.rest.rebind.events.RegisterGinBindingEvent.Regis
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.EventBus;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
+
+import jakarta.inject.Inject;
 
 public class DefaultGinModuleGenerator extends AbstractVelocityGenerator implements GinModuleGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/gin/GinModule.vm";

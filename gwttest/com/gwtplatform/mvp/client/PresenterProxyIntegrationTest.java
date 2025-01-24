@@ -27,7 +27,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 /**
  * Integration test for {@link PresenterImpl} and automatically-generated
  * {@link Proxy} classes.
- * <p/>
+ * <p>
  * TODO: This doesn't work yet. See
  * http://code.google.com/p/gwt-platform/issues/detail?id=38
  */

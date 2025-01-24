@@ -22,5 +22,5 @@ import com.google.gwt.event.shared.EventHandler;
  * Handler for {@link AsyncCallSucceedEvent}.
  */
 public interface AsyncCallSucceedHandler extends EventHandler {
-    void onAsyncCallSucceed(final AsyncCallSucceedEvent asyncCallSucceedEvent);
+    void onAsyncCallSucceed(AsyncCallSucceedEvent asyncCallSucceedEvent);
 }

@@ -21,7 +21,7 @@
             <artifactId>gwtp-dispatch-rpc-shared</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
             <artifactId>gwt-user</artifactId>
         </dependency>
         <dependency>
@@ -36,7 +36,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jukito</groupId>
+            <groupId>de.knightsoft-net</groupId>
             <artifactId>jukito</artifactId>
         </dependency>
     </dependencies>

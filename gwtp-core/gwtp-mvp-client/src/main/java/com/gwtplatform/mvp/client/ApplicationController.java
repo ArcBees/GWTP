@@ -21,35 +21,35 @@ import com.google.gwt.core.client.EntryPoint;
 /**
  * ApplicationController will trigger the generation of your Ginjector. To activate the
  * generation you have to add one line to your module.gwt.xml file:
- * <p/>
+ * <p>
  * <pre>{@code
  * <set-configuration-property name="gin.ginjector.modules" value="com.arcbees.example.client.gin.ClientModule"/>
  * }</pre>
  * Multiple modules may be supplied as comma separated list.
- * <p/>
- * <p/>
+ * <p>
+ * <p>
  * The final step is to call {@code GWT.create(ApplicationController.class)} inside your entry point and then call
  * {@code applicationController.init()} .
- * <p/>
+ * <p>
  * You can add extension methods to your Ginjector by specifying additional interfaces. This property also
  * accepts a comma separated list.
- * <p/>
+ * <p>
  * <pre>{@code
  * <set-configuration-property name="gin.ginjector.extensions" value="com.arcbees.example.client.gin
  * .ClientInjectorAdditional"/>
  * }</pre>
- * <p/>
- * <p/>
+ * <p>
+ * <p>
  * In these additional interfaces you may for example add a {@link com.gwtplatform.mvp.client.annotations
  * .DefaultGatekeeper}.
- * <p/>
+ * <p>
  * <pre>{@code
  * public interface ClientInjectorAdditional {
  *   @DefaultGatekeeper
  *   MyDefaultGateKeeper getMyDefaultGateKeeper();
- * }</pre>
- * <p/>
- * @see https://github.com/ArcBees/GWTP/wiki/Bootstrapping
+ * }}</pre>
+ * <p>
+ * see https://github.com/ArcBees/GWTP/wiki/Bootstrapping
  */
 public interface ApplicationController extends EntryPoint {
     void init();

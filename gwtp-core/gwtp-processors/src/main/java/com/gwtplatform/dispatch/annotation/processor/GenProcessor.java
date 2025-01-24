@@ -31,8 +31,8 @@ import javax.tools.Diagnostic.Kind;
  * <p>
  * Abstract processor class for all {@code @GenX} annotations.
  * </p>
- * <p/>
- * Annotate your processor with @{@link SupportedAnnotationTypes} or override
+ * <p>
+ * Annotate your processor with {@code @SupportedAnnotationTypes} or override
  * {@link #getSupportedAnnotationTypes()} to receive elements, that are
  * annotated in the current environment with one of the given annotations. You
  * can get access these elements using the method

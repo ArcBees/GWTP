@@ -45,7 +45,7 @@ import com.google.web.bindery.requestfactory.shared.Locator;
  * <p>
  * <b>Fields as proxy:</b>
  * <br/>You can declare fields as proxy using {@link UseProxy}
- * or {@link @UseProxyName}.
+ * or {@link UseProxyName}.
  * </p>
  * <p>If you type:</p>
  * <pre>
@@ -90,16 +90,16 @@ import com.google.web.bindery.requestfactory.shared.Locator;
 public @interface GenProxy {
     /**
      * Defines the output package.
-     * <p/>
+     * <p>
      * <p>
      * By default the output is generated to the same source folder.
      * </p>
-     * <p/>
+     * <p>
      * <p>
      * If you are not using a custom target package, the processor will
      * automatically replace ".server" in your package name with ".shared".
      * </p>
-     * <p/>
+     * <p>
      * <p>
      * <code>
      * {@code @GenProxy}(targetPackage = "com.example.package.server")
@@ -137,7 +137,7 @@ public @interface GenProxy {
     boolean isEmbeddedType() default false;
 
     /**
-     * @see ProxyFor#locator()
+     * see ProxyFor#locator()
      */
     @SuppressWarnings("rawtypes") Class<? extends Locator> locator() default Locator.class;
 }

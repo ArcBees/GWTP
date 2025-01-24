@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Contains the list of {@link Result}s from successful actions in the {@link BatchAction}. The order will match the
  * order of the original {@link Action}s listed in the {@link BatchAction}.
- * <p/>
+ * <p>
  * If the {@link BatchAction} was specified to have an {@link BatchAction.OnException} value
  * of {@link BatchAction.OnException#CONTINUE}, failed actions will have a <code>null</code> value.
  */

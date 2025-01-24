@@ -18,8 +18,6 @@ package com.gwtplatform.dispatch.rest.client.core;
 
 import java.util.Set;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.ws.rs.core.HttpHeaders;
 
 import com.google.gwt.http.client.Response;
@@ -28,6 +26,9 @@ import com.gwtplatform.dispatch.rest.client.serialization.SerializationException
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 /**
  * Default implementation for {@link ResponseDeserializer}.
@@ -92,7 +93,7 @@ public class DefaultResponseDeserializer implements ResponseDeserializer {
     private boolean isSuccessStatusCode(Response response) {
         int statusCode = response.getStatusCode();
 
-        return (statusCode >= 200 && statusCode < 300) || statusCode == 304;
+        return statusCode >= 200 && statusCode < 300 || statusCode == 304;
     }
 
     private <R> R getDeserializedResponse(RestAction<R> action, Response response) throws ActionException {

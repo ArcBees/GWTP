@@ -24,7 +24,7 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
 /**
  * Annotation used to specify various information on a tab. The {@link #container}
  * parameter is mandatory. This annotation can be used in one of three ways:
- * <p/>
+ * <p>
  * <b>1) Annotating the proxy</b><br />
  * You can directly annotate your proxy with it, in which case the {@link #label}
  * parameter must be specified. For example:
@@ -46,12 +46,12 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
  *    nameToken = "SETTINGS-USER")
  * public interface MyProxy extends TabContentProxy&lt;SettingsTabStripPresenter&gt; { }
  * </pre>
- * <p/>
+ * <p>
  * <b>2) Annotating a static method returning {@code String}</b><br />
  * You can annotate a static method returning a {@code String}, in which case you must
  * not specify the {@link #label}. Again, specify the {@link #nameToken} parameter only
  * if your presenter is not a place.
- * <p/>
+ * <p>
  * The method you annotate can optionally accept exactly 1 parameter having the type
  * of your custom {@link com.google.gwt.inject.client.Ginjector}. Here's an example of
  * this usage:
@@ -67,17 +67,17 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
  *   return gingector.getTranslations().homePageLabel();
  * }
  * </pre>
- * <p/>
+ * <p>
  * <b>3) Annotating a static method returning
  * {@code TabData}</b><br />
  * You can annotate a static method returning a {@link com.gwtplatform.mvp.client.TabData},
  * in which case you must not specify either the {@link #label} nor the {@link #priority}.
  * Again, specify the {@link #nameToken} parameter only if your presenter is not a place.
- * <p/>
+ * <p>
  * The method you annotate can optionally accept parameters having either the type
  * of your custom {@link com.google.gwt.inject.client.Ginjector} or any type that is provided by
  * the ginjector. Here are two examples of this usage:
- * <p/>
+ * <p>
  * <pre>
  * {@code @}ProxyCodeSplit
  * public interface MyProxy extends TabContentProxy&lt;SettingsTabStripPresenter&gt; { }
@@ -90,7 +90,7 @@ import com.gwtplatform.mvp.client.TabContainerPresenter;
  *   return ginjector.getTabDataFactory().createUserTabData();
  * }
  * </pre>
- * <p/>
+ * <p>
  * <pre>
  * {@code @}TabInfo(container = ApplicationPresenter.class)
  * static TabData getTabData(Messages msgs, IsAdminGateKeeper keeper) {

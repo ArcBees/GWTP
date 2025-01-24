@@ -24,13 +24,13 @@ import com.google.gwt.uibinder.client.UiField;
 /**
  * {@link MockingBinder} makes testing view even easier by mocking every
  * {@link UiField} and returning a mocked object upon creation.
- * <p/>
+ * <p>
  * To use it, you should build a small class that extends MockingBinder and bind
  * that class inside your Guice test module. You will have to provide a
  * {@link MockFactory} to let MockingBinder mock everything.
- * <p/>
+ * <p>
  * Ex:
- * <p/>
+ * <p>
  * <pre>
  * public static class Module extends JukitoModule {
  *  static class MyTestBinder extends MockingBinder&lt;Widget, BlogView&gt; implements
@@ -47,7 +47,7 @@ import com.google.gwt.uibinder.client.UiField;
  *  }
  * }
  * </pre>
- * <p/>
+ * <p>
  * Disarming GWT is important to unit test views.
  *
  * @param <U> Mock type returned by {@link UiBinder#createAndBindUi(Object)}.

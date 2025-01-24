@@ -16,13 +16,13 @@
 
 package com.gwtplatform.mvp.client.gwt.mvp;
 
-import javax.inject.Inject;
-
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
+
+import jakarta.inject.Inject;
 
 /**
  * A test presenter meant to be run in a GWTTestCase.

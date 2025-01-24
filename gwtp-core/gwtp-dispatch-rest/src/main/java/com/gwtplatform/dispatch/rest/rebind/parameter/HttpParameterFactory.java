@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.rest.rebind.parameter;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.inject.Inject;
 import javax.ws.rs.core.Cookie;
 
 import com.google.gwt.core.ext.GeneratorContext;
@@ -31,6 +30,8 @@ import com.google.gwt.core.ext.typeinfo.JType;
 import com.gwtplatform.dispatch.rest.rebind.utils.JPrimitives;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
+
+import jakarta.inject.Inject;
 
 // TODO: Ideally, resolvers would handle parameter validation and this class would delegate to them
 public class HttpParameterFactory {

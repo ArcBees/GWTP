@@ -22,8 +22,8 @@ import com.gwtplatform.dispatch.shared.HasSecured;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
- * An action used by {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
- * <p/>
+ * An action used by {@code com.gwtplatform.dispatch.rest.client.RestDispatch}.
+ * <p>
  * You will usually want to let GWTP generate your actions by creating services as explained <a
  * href="https://github.com/ArcBees/GWTP/wiki/Rest-Dispatch#write-services-and-actions">here</a>.
  *
@@ -31,8 +31,8 @@ import com.gwtplatform.dispatch.shared.TypedAction;
  */
 public interface RestAction<R> extends TypedAction<R>, HasSecured {
     /**
-     * Returns the relative path for this action. It should not be prepended by the path annotated with {@link
-     * com.gwtplatform.dispatch.rest.client.RestApplicationPath @RestApplicationPath}.
+     * Returns the relative path for this action. It should not be prepended by the path annotated with {@code
+     * com.gwtplatform.dispatch.rest.client.RestApplicationPath}.
      *
      * @return the relative path for this action.
      */

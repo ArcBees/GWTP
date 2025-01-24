@@ -27,10 +27,9 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * the RPC mechanism from generating a serializer for all classes
  * that implement Serializable.
  *
- * @see
- * {@link SimpleResult}<br>
- * {@link MultipleResult}<br>
- * {@link NoResult}<br>
+ * @see SimpleResult
+ * @see MultipleResult
+ * @see NoResult
  *
  */
 public interface Result extends IsSerializable, Serializable {

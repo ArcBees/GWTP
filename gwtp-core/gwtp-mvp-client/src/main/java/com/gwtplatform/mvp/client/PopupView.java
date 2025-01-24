@@ -55,7 +55,7 @@ public interface PopupView extends View {
      * <b>Important!</b> Do not call this directly, instead use
      * {@link PresenterWidget#addToPopupSlot(PresenterWidget)} passing this
      * view's {@link PresenterWidget}.
-     * <p/>
+     * <p>
      * Make sure the {@link PopupView} is visible.
      * Will not reposition the popup before showing it.
      */
@@ -70,11 +70,11 @@ public interface PopupView extends View {
 
     /**
      * Set the PopupPositioner which will position this popup when it's presenter is revealed.
-     * @param positioner The {@link PopupPositioner} will automatically position the popup onReveal();
-     * @see
-     * {@link com.gwtplatform.mvp.client.view.CenterPopupPositioner},
-     * {@link com.gwtplatform.mvp.client.view.RelativeToWidgetPopupPositioner},
-     * {@link com.gwtplatform.mvp.client.view.TopLeftPopupPositioner}
+     *
+     * @param popupPositioner The {@link PopupPositioner} will automatically position the popup onReveal();
+     * @see com.gwtplatform.mvp.client.view.CenterPopupPositioner
+     * @see com.gwtplatform.mvp.client.view.RelativeToWidgetPopupPositioner
+     * @see com.gwtplatform.mvp.client.view.TopLeftPopupPositioner
      */
     void setPopupPositioner(PopupPositioner popupPositioner);
 

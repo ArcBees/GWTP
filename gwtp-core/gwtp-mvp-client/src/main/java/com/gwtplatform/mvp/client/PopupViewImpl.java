@@ -34,7 +34,7 @@ import com.gwtplatform.mvp.client.view.PopupPositioner.PopupPosition;
 /**
  * A simple implementation of {@link PopupView} that can be used when the widget
  * returned by {@link #asWidget()} inherits from {@link PopupPanel}.
- * <p/>
+ * <p>
  * Also, this implementation simply disregards every call to
  * {@link #setInSlot(Object, com.google.gwt.user.client.ui.IsWidget)}, {@link #addToSlot(Object,
  * com.google.gwt.user.client.ui.IsWidget)}, and
@@ -51,7 +51,7 @@ public abstract class PopupViewImpl extends ViewImpl implements PopupView {
 
     /**
      * By default the popup will position itself in the center of the window.
-     * To use a different positioner use {@link #PopupViewImpl(EventBus, PopupPosition)} instead.
+     * To use a different positioner use {@link #PopupViewImpl(EventBus, PopupPositioner)} instead.
      * @param eventBus The {@link EventBus}.
      */
     public PopupViewImpl(EventBus eventBus) {

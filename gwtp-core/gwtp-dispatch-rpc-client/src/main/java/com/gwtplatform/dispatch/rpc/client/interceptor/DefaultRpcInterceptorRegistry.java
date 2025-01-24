@@ -28,11 +28,12 @@ import com.gwtplatform.common.client.ProviderBundle;
 
 /**
  * The default implementation that {@link RpcInterceptorRegistry} that if bound will not load any client-side
- * interceptors. </p> To register client-side interceptors, extend this class and call {@link #register} in the
+ * interceptors.
+ * <p> To register client-side interceptors, extend this class and call {@link #register} in the
  * constructor.
- * <p/>
- * <h3><u>Example</u></h3>
- * <p/>
+ * </p>
+ * <h2><u>Example</u></h2>
+ * <p>
  * <pre>
  * <code>
  * public class MyRpcInterceptorRegistry extends DefaultClientInterceptorRegistry {
@@ -91,7 +92,7 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
     }
 
     /**
-     * Register a {@link javax.inject.Provider} of a client-side interceptor.
+     * Register a {@link jakarta.inject.Provider} of a client-side interceptor.
      *
      * @param actionType The type of action that the client-side interceptor supports.
      * @param handlerProvider The {@link com.google.inject.Provider} of the handler.
@@ -128,7 +129,7 @@ public class DefaultRpcInterceptorRegistry implements RpcInterceptorRegistry {
      * Register a client-side interceptor that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
      *
      * @param actionType The type of that the client-side interceptor supports.
-     * @param bundleProvider The {@link javax.inject.Provider} of the {@link com.gwtplatform.common.client
+     * @param bundleProvider The {@link jakarta.inject.Provider} of the {@link com.gwtplatform.common.client
      * .ProviderBundle}.
      * @param providerId The id of the client-side interceptor provider.
      */

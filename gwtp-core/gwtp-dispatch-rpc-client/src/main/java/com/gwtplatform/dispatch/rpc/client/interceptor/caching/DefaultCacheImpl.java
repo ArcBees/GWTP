@@ -28,7 +28,7 @@ public class DefaultCacheImpl implements Cache {
         private final Object value;
         private final long lastUpdateTime;
 
-        public CacheValue(Object value) {
+        CacheValue(Object value) {
             this.value = value;
             this.lastUpdateTime = new Date().getTime();
         }

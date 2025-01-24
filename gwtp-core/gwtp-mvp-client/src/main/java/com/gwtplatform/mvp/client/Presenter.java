@@ -33,9 +33,9 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * model-view-presenter</a> architecture. Each logical page of your application will usually
  * correspond to a singleton {@link Presenter}. If you need to separate logic from view
  * in a simple graphical component, you might consider using a {@link PresenterWidget}.
- * <p/>
+ * <p>
  * For more details on the hierarchical organization of presenters, see {@link PresenterWidget}.
- * <p/>
+ * <p>
  * Each presenter is associated to a {@link Proxy} which is responsible for listening to the
  * various events of interest for this presenter. This makes it possible to lazily instantiate
  * the presenter and use GWT code splitting. Proxies are automatically generated for you
@@ -65,7 +65,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * {@link com.gwtplatform.mvp.client.annotations.ProxyCodeSplit ProxyCodeSplit} or
  * {@link com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle ProxyCodeSplitBundle}
  * must always annotate the {@link Proxy} interface.
- * <p/>
+ * <p>
  * To reveal a presenter associated to a {@link com.gwtplatform.mvp.client.proxy.ProxyPlace ProxyPlace}
  * you can simply navigate to an hyperlink corresponding to this place's name token. The
  * {@link com.gwtplatform.mvp.client.proxy.PlaceManager PlaceManager} offers a number of method for building
@@ -86,13 +86,13 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * order to enforce loose coupling. This event is then handled by the presenter
  * using the {@link com.gwtplatform.mvp.client.annotations.ProxyEvent ProxyEvent}
  * mechanism.
- * <p/>
+ * <p>
  * If the presenter is revealed and is not currently visible, then its {@link #revealInParent()} method
  * will be called.
- * <p/>
+ * <p>
  * To hide a presenter, you can reveal another one in the same slot or you can use
  * one of the methods described in {@link PresenterWidget}.
- * <p/>
+ * <p>
  * A presenter has a number of lifecycle methods that you can hook on to:
  * <ul>
  * <li>{@link #onBind()}
@@ -109,7 +109,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * <li>The presenter's {@link #revealInParent()} is call and it asks to be set in one of its
  * parent slot by firing a
  * {@link com.gwtplatform.mvp.client.proxy.RevealContentEvent RevealContentEvent}</li>
- * <li>If a presenter already occupies this slot it is removed.</li>
+ * <li>If a presenter already occupies this slot it is removed.
  * <ul><li>If the presenter owning the slot is currently visible then
  * {@link #onHide()} is called on the removed presenter and, recursively,
  * on its children (bottom-up: first the children, then the parent)</li>
@@ -118,7 +118,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * too, this continues recursively until a visible presenter is reached, or until a presenter fires
  * {@link com.gwtplatform.mvp.client.proxy.RevealRootContentEvent RevealRootContentEvent}
  * or {@link com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent RevealRootLayoutContentEvent}</li>
- * </ul>
+ * </ul></li>
  * <li>When the above chain stops, {@link #onReveal} is called on all the presenters
  * that were traversed. (top down: first the parent, then the children);</li>
  * <li>Finally {@link #onReset()} is called on all the
@@ -133,7 +133,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends PresenterWidget<V> {
     /**
      * The RevealType define which event will be fired in the default {@link #revealInParent()}.
-     * <p/>
+     * <p>
      * Root will fire a {@link RevealRootContentEvent}.
      * RootLayout will fire a {@link RevealRootLayoutContentEvent}.
      * RootPopup will fire a {@link RevealRootPopupContentEvent}.
@@ -292,7 +292,7 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
      * to edit client details is unusable until all the data for this user has been
      * received. Fetching this data should be done in the {@link #prepareFromRequest(PlaceRequest)}
      * method.
-     * <p/>
+     * <p>
      * In order to use manual reveal, override this method to return {@code true}.
      * Then, in your {@link #prepareFromRequest}, you can either:
      * <ul>
@@ -320,10 +320,10 @@ public abstract class Presenter<V extends View, Proxy_ extends Proxy<?>> extends
      * to this {@link Presenter}. You should override the method to extract any
      * parameters you need from the request. Make sure you call your parent's
      * {@link #prepareFromRequest} method.
-     * <p/>
+     * <p>
      * If your presenter needs to fetch some information from the server while
      * preparing itself, consider using manual reveal. See {@link #useManualReveal()}.
-     * <p/>
+     * <p>
      * If your presenter does not handle any parameter and does not want to fetch
      * extra information, then there is no need to override this method.
      *

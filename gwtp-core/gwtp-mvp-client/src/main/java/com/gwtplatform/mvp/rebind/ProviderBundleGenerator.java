@@ -19,9 +19,6 @@ package com.gwtplatform.mvp.rebind;
 import java.io.PrintWriter;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -30,6 +27,9 @@ import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
 import com.google.inject.Provider;
 import com.gwtplatform.common.client.ProviderBundle;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 /**
  * Will generate a ProviderBundle.

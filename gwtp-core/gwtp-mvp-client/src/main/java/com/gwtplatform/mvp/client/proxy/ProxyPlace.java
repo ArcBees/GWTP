@@ -31,11 +31,11 @@ public interface ProxyPlace<P extends Presenter<?, ?>> extends Proxy<P>, Place {
      * called following one or more asynchronous server calls in
      * {@link Presenter#prepareFromRequest(com.gwtplatform.mvp.shared.proxy.PlaceRequest)}.
      * You should manually reveal your presenter exactly once, when all the data needed to use it is available.
-     * <p/>
+     * <p>
      * If you failed to fetch the data or cannot reveal the presenter you must call
      * {@link #manualRevealFailed()} otherwise navigation will be blocked and your application
      * will appear to be frozen.
-     * <p/>
+     * <p>
      * Also consider using {@link ManualRevealCallback}, which will automatically call
      * {@link #manualReveal(Presenter)} upon success and {@link #manualRevealFailed()} upon
      * failure.

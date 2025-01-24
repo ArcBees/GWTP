@@ -18,8 +18,6 @@ package com.gwtplatform.mvp.rebind.velocity;
 
 import java.io.PrintWriter;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.ext.BadPropertyValueException;
 import com.google.gwt.core.ext.ConfigurationProperty;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -29,6 +27,8 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.NotFoundException;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.gwtplatform.common.rebind.Logger;
+
+import jakarta.inject.Inject;
 
 public class GeneratorUtil {
     private static final String CANNOT_FIND_PROPERTY = "Cannot find %s property in your module.gwt.xml file.";

@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * Default Implementation for {@link Cache}, backed by an {@link java.util.HashMap}.
  *
- * @deprecated Since 1.4. Use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.DefaultCacheImpl}
+ * @deprecated Since 1.4. Use com.gwtplatform.dispatch.rpc.client.interceptor.caching.DefaultCacheImpl
  */
 @Deprecated
 public class DefaultCacheImpl implements Cache {
@@ -31,7 +31,7 @@ public class DefaultCacheImpl implements Cache {
         private final Object value;
         private final long lastUpdateTime;
 
-        public CacheValue(Object value) {
+        CacheValue(Object value) {
             this.value = value;
             this.lastUpdateTime = new Date().getTime();
         }

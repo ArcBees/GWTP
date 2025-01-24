@@ -36,10 +36,10 @@ import com.gwtplatform.mvp.client.presenter.slots.Slot;
 /**
  * A simple implementation of {@link View} that simply disregard every call to {@link #setInSlot(Object, IsWidget)},
  * {@link #addToSlot(Object, IsWidget)}, and {@link #removeFromSlot(Object, IsWidget)}.
- * <p/>
+ * <p>
  * Feel free not to inherit from this if you need another base class (such as {@link
  * com.google.gwt.user.client.ui.Composite Composite}), but you will have to define the above methods.
- * <p/>
+ * <p>
  * * <b>Important</b> call {@link #initWidget(IsWidget)} in your {@link View}'s constructor.
  */
 public abstract class ViewImpl implements View {
@@ -114,7 +114,7 @@ public abstract class ViewImpl implements View {
      * Link a {@link IsSingleSlot} sub-type to a container. The container must implement either {@link HasOneWidget} or
      * {@link HasWidgets}. Here we accept {@code Object} to prevent the hassle of of casting {@code container} if it
      * implements both interfaces.
-     * <p/>
+     * <p>
      * {@link HasOneWidget} has checked first.
      *
      * @param slot the slot
@@ -171,7 +171,7 @@ public abstract class ViewImpl implements View {
 
     /**
      * Method called after the view is attached to the DOM.
-     * <p/>
+     * <p>
      * You should override this method to perform any ui related initialization that needs to be done after that the
      * view is attached <b>and that the presenter doesn't have to be aware of</b> (attach event handlers for instance)
      */
@@ -180,7 +180,7 @@ public abstract class ViewImpl implements View {
 
     /**
      * Method called after the view is detached to the DOM.
-     * <p/>
+     * <p>
      * You should override this method to release any resources created directly or indirectly during the call to {@link
      * #onAttach()}
      */

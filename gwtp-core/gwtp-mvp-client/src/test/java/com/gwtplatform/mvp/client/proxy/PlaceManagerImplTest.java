@@ -18,9 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.jukito.TestEagerSingleton;
@@ -39,9 +36,12 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.tester.DeferredCommandManager;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -76,7 +76,7 @@ public class PlaceManagerImplTest {
     @TestMockSingleton
     abstract static class DummyPresenterBasic extends Presenter<View, DummyProxyPlaceBasic> {
         @Inject
-        public DummyPresenterBasic(EventBus eventBus, View view, DummyProxyPlaceBasic proxy) {
+        DummyPresenterBasic(EventBus eventBus, View view, DummyProxyPlaceBasic proxy) {
             super(eventBus, view, proxy);
         }
 
@@ -89,7 +89,7 @@ public class PlaceManagerImplTest {
     @TestEagerSingleton
     static class DummyProxyBasic extends ProxyImpl<DummyPresenterBasic> {
         @Inject
-        public DummyProxyBasic(Provider<DummyPresenterBasic> presenter) {
+        DummyProxyBasic(Provider<DummyPresenterBasic> presenter) {
             this.presenter = new StandardProvider<DummyPresenterBasic>(presenter);
         }
     }
@@ -97,7 +97,7 @@ public class PlaceManagerImplTest {
     abstract static class ProxyPlaceBase<P extends Presenter<?, ?>> extends ProxyPlaceImpl<P> {
         private final DeferredCommandManager deferredCommandManager;
 
-        public ProxyPlaceBase(Place place,
+        ProxyPlaceBase(Place place,
                 Proxy<P> proxy,
                 DeferredCommandManager deferredCommandManager) {
             super();
@@ -115,7 +115,7 @@ public class PlaceManagerImplTest {
     @TestEagerSingleton
     static class DummyProxyPlaceBasic extends ProxyPlaceBase<DummyPresenterBasic> {
         @Inject
-        public DummyProxyPlaceBasic(DummyProxyBasic proxy,
+        DummyProxyPlaceBasic(DummyProxyBasic proxy,
                 DeferredCommandManager deferredCommandManager) {
             super(new PlaceImpl("dummyNameTokenBasic"), proxy, deferredCommandManager);
         }
@@ -133,7 +133,7 @@ public class PlaceManagerImplTest {
         private final PlaceManager placeManager;
 
         @Inject
-        public DummyPresenterRedirect(EventBus eventBus, DummyProxyPlaceBasic proxy,
+        DummyPresenterRedirect(EventBus eventBus, DummyProxyPlaceBasic proxy,
                 PlaceManager placeManager) {
             super(eventBus, mock(View.class), proxy);
             this.placeManager = placeManager;
@@ -156,7 +156,7 @@ public class PlaceManagerImplTest {
     @TestEagerSingleton
     static class DummyProxyRedirect extends ProxyImpl<DummyPresenterRedirect> {
         @Inject
-        public DummyProxyRedirect(Provider<DummyPresenterRedirect> presenter) {
+        DummyProxyRedirect(Provider<DummyPresenterRedirect> presenter) {
             this.presenter = new StandardProvider<DummyPresenterRedirect>(presenter);
         }
     }
@@ -164,7 +164,7 @@ public class PlaceManagerImplTest {
     @TestEagerSingleton
     static class DummyProxyPlaceRedirect extends ProxyPlaceBase<DummyPresenterRedirect> {
         @Inject
-        public DummyProxyPlaceRedirect(DummyProxyRedirect proxy,
+        DummyProxyPlaceRedirect(DummyProxyRedirect proxy,
                 DeferredCommandManager deferredCommandManager) {
             super(new PlaceImpl("dummyNameTokenRedirect"), proxy, deferredCommandManager);
         }
@@ -177,7 +177,7 @@ public class PlaceManagerImplTest {
         private final PlaceManager placeManager;
 
         @Inject
-        public DummyPresenterRedirectNoHistory(EventBus eventBus,
+        DummyPresenterRedirectNoHistory(EventBus eventBus,
                 DummyProxyPlaceRedirectNoHistory proxy, PlaceManager placeManager) {
             super(eventBus, mock(View.class), proxy);
             this.placeManager = placeManager;
@@ -198,7 +198,7 @@ public class PlaceManagerImplTest {
     @TestEagerSingleton
     static class DummyProxyRedirectNoHistory extends ProxyImpl<DummyPresenterRedirectNoHistory> {
         @Inject
-        public DummyProxyRedirectNoHistory(Provider<DummyPresenterRedirectNoHistory> presenter) {
+        DummyProxyRedirectNoHistory(Provider<DummyPresenterRedirectNoHistory> presenter) {
             this.presenter = new StandardProvider<DummyPresenterRedirectNoHistory>(presenter);
         }
     }
@@ -208,7 +208,7 @@ public class PlaceManagerImplTest {
             ProxyPlaceBase<DummyPresenterRedirectNoHistory> {
 
         @Inject
-        public DummyProxyPlaceRedirectNoHistory(DummyProxyRedirectNoHistory proxy,
+        DummyProxyPlaceRedirectNoHistory(DummyProxyRedirectNoHistory proxy,
                 DeferredCommandManager deferredCommandManager) {
             super(new PlaceImpl(DummyPresenterRedirectNoHistory.TOKEN), proxy, deferredCommandManager);
         }
@@ -265,7 +265,7 @@ public class PlaceManagerImplTest {
         verify(presenter).prepareFromRequest(placeRequest);
         verify(presenter).forceReveal();
 
-        verify(gwtWindowMethods).setBrowserHistoryToken(any(String.class), eq(false));
+        verify(gwtWindowMethods).setBrowserHistoryToken(isNull(), eq(false));
 
         assertEquals(1, navigationHandler.navCount);
         placeRequest = navigationHandler.lastEvent.getRequest();
@@ -289,7 +289,7 @@ public class PlaceManagerImplTest {
 
         // Then
         // assert called only once
-        verify(gwtWindowMethods, times(1)).setBrowserHistoryToken(any(String.class), eq(false));
+        verify(gwtWindowMethods, times(1)).setBrowserHistoryToken(isNull(), eq(false));
 
         PlaceRequest finalPlaceRequest = placeManager.getCurrentPlaceRequest();
         assertEquals("dummyNameTokenBasic", finalPlaceRequest.getNameToken());

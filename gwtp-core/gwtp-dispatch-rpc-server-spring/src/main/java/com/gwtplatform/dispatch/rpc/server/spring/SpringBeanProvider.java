@@ -26,7 +26,6 @@ import org.springframework.context.ApplicationContext;
 
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.BeanProvider;
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper.CommonBindingDescriptor;
-
 import com.gwtplatform.dispatch.rpc.server.spring.utils.SpringUtils;
 
 public class SpringBeanProvider implements BeanProvider {

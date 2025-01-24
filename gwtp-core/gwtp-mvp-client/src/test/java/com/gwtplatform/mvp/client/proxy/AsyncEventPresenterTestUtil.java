@@ -97,7 +97,7 @@ public class AsyncEventPresenterTestUtil extends
     }
 
     static class MyAction extends ActionImpl<MyResult> {
-        public MyAction() {
+        MyAction() {
         }
     }
 

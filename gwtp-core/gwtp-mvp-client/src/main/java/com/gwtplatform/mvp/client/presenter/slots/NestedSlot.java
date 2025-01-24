@@ -23,7 +23,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
  * Use NestedSlot in classes extending {@link com.gwtplatform.mvp.client.Presenter}
  * to automatically display child presenters.
  *
- * @see: https://github.com/ArcBees/GWTP/wiki/Presenter-%22Slots%22
+ * see: https://github.com/ArcBees/GWTP/wiki/Presenter-%22Slots%22
  */
 public class NestedSlot extends GwtEvent.Type<RevealContentHandler<?>>
         implements IsSingleSlot<Presenter<?,?>>, RemovableSlot<Presenter<?,?>> {

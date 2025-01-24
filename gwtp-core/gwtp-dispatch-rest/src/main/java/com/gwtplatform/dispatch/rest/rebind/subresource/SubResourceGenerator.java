@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.inject.Inject;
 import javax.ws.rs.Path;
 
 import org.apache.velocity.app.VelocityEngine;
@@ -40,6 +39,8 @@ import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
+
+import jakarta.inject.Inject;
 
 public class SubResourceGenerator extends AbstractResourceGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/subresource/SubResource.vm";

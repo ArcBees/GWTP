@@ -19,8 +19,6 @@ package com.gwtplatform.mvp.rebind.velocity;
 import java.io.InputStream;
 import java.util.Properties;
 
-import javax.inject.Singleton;
-
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.gwt.core.ext.GeneratorContext;
@@ -32,6 +30,8 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.gwtplatform.common.rebind.Logger;
 import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorFactory;
 import com.gwtplatform.mvp.rebind.velocity.proxy.VelocityPlacetokenGenerator;
+
+import jakarta.inject.Singleton;
 
 public class RebindModule extends AbstractModule {
     private static final String VELOCITY_PROPERTIES = "com/gwtplatform/mvp/rebind/velocity.properties";

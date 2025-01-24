@@ -31,8 +31,8 @@ import com.gwtplatform.dispatch.annotation.helper.GenerationHelper;
 import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
 
 /**
- * Processes {@link GenEvent} annotations.
- * <p/>
+ * Processes {@code GenEvent} annotations.
+ * <p>
  * {@link GenEventProcessor} should only ever be called by tool infrastructure.
  * See {@link javax.annotation.processing.Processor} for more details.
  */

@@ -23,7 +23,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 /**
  * This event is fired whenever the user wants to have access to the title of a
  * place.
- * <p/>
+ * <p>
  * <b>Important!</b> You should never fire that event directly. Instead, use
  * {@link PlaceManager#getCurrentTitle(SetPlaceTitleHandler)} or
  * {@link PlaceManager#getTitle(int, SetPlaceTitleHandler)}.
@@ -52,7 +52,7 @@ public class GetPlaceTitleEvent extends GwtEvent<GetPlaceTitleHandler> {
     /**
      * Fires a {@link GetPlaceTitleEvent}
      * into a source that has access to an {@link com.google.web.bindery.event.shared.EventBus}.
-     * <p/>
+     * <p>
      * <b>Important!</b> You should never fire that event directly. See
      * {@link GetPlaceTitleEvent} for details.
      *

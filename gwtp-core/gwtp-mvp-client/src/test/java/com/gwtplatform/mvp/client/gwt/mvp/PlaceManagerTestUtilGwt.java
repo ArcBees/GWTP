@@ -16,12 +16,12 @@
 
 package com.gwtplatform.mvp.client.gwt.mvp;
 
-import javax.inject.Inject;
-
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
+
+import jakarta.inject.Inject;
 
 public class PlaceManagerTestUtilGwt extends PlaceManagerImpl {
     private final PlaceRequest defaultPlaceRequest;

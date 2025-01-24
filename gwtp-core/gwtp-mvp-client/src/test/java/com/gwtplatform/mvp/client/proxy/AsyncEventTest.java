@@ -16,12 +16,10 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import javax.inject.Inject;
-
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
@@ -35,8 +33,10 @@ import com.gwtplatform.mvp.client.proxy.AsyncEventPresenterTestUtil.MyView;
 import com.gwtplatform.tester.TestDispatchAsync;
 import com.gwtplatform.tester.TestDispatchService;
 
+import jakarta.inject.Inject;
+
 import static org.mockito.BDDMockito.willAnswer;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -65,7 +65,7 @@ public class AsyncEventTest {
         TestDispatchAsync spy = spy(new TestDispatchAsync(service, injector));
         AsyncEventPresenterTestUtil presenter = new AsyncEventPresenterTestUtil(eventBus, view, proxy, spy);
         willAnswer(new GetAsynchronousAnswer()).given(spy).execute(eq(new MyAction()),
-                Matchers.<AsyncCallback<MyResult>>any());
+                ArgumentMatchers.<AsyncCallback<MyResult>>any());
 
         // when
         presenter.onBind();
@@ -82,7 +82,7 @@ public class AsyncEventTest {
         TestDispatchAsync spy = spy(new TestDispatchAsync(service, injector));
         AsyncEventPresenterTestUtil presenter = new AsyncEventPresenterTestUtil(eventBus, view, proxy, spy);
         willAnswer(new GetAsynchronousFailureAnswer()).given(spy).execute(eq(new MyAction()),
-                Matchers.<AsyncCallback<MyResult>>any());
+                ArgumentMatchers.<AsyncCallback<MyResult>>any());
 
         // when
         presenter.onBind();

@@ -19,9 +19,6 @@ package com.gwtplatform.mvp.rebind;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.ext.TreeLogger;
@@ -43,6 +40,9 @@ import com.gwtplatform.mvp.client.TabDataBasic;
 import com.gwtplatform.mvp.client.proxy.NotifyingAsyncCallback;
 import com.gwtplatform.mvp.client.proxy.RevealContentEvent;
 import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 /**
  * The base class of any {@link ProxyOutputter} implementation.

@@ -19,9 +19,9 @@ package com.gwtplatform.dispatch.rest.client.serialization;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Provider;
-
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
+
+import jakarta.inject.Provider;
 
 /**
  * Abstract class providing utility methods to reduce the code generation complexity of {@link JacksonMapperProvider}.

@@ -17,7 +17,7 @@
 package com.gwtplatform.dispatch.rest.shared;
 
 /**
- * Represents the HTTP methods supported by the {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
+ * Represents the HTTP methods supported by the {@code com.gwtplatform.dispatch.rest.client.RestDispatch}.
  */
 public enum HttpMethod {
     GET,

@@ -16,11 +16,11 @@
 
 package com.gwtplatform.dispatch.rpc.server;
 
-import javax.inject.Inject;
-
 import com.gwtplatform.dispatch.rpc.server.actionhandler.AbstractActionHandler;
 import com.gwtplatform.dispatch.rpc.shared.NoResult;
 import com.gwtplatform.dispatch.shared.ActionException;
+
+import jakarta.inject.Inject;
 
 public class HandlerThatThrowsActionException extends AbstractActionHandler<SomeAction, NoResult> {
     @Inject

@@ -26,10 +26,10 @@ import com.google.inject.Provider;
  * the objects were behind their individual split points.
  * GWTP automatically handles ProviderBundles when used with ApplicationController
  * and Ginjector generation.
- * <p/>
- * <p/>
+ * <p>
+ * <p>
  * Here is an example use of a manual {@link ProviderBundle}:
- * <p/>
+ * <p>
  * <pre>
  * public class MyPresenterBundle extends ProviderBundle {
  *   public final static int ID_Object1 = 0;
@@ -38,8 +38,8 @@ import com.google.inject.Provider;
  *
  *   &#064;Inject
  *   MyPresenterBundle(
- *       final Provider<Object1> object1Provider,
- *       final Provider<Object2> object2Provider) {
+ *       final Provider&lt;Object1&gt; object1Provider,
+ *       final Provider&lt;Object2&gt; object2Provider) {
  *     super( BUNDLE_SIZE );
  *     providers[ID_Object1] = object1Provider;
  *     providers[ID_Object2] = object2Provider;
@@ -54,7 +54,7 @@ public class ProviderBundle {
      * Constructs a {@link ProviderBundle} containing a given number of providers.
      * After calling this constructor you should set the provider manually like
      * so:
-     * <p/>
+     * <p>
      * <pre>
      *     providers[0] = object1Provider;
      *     providers[1] = object2Provider;

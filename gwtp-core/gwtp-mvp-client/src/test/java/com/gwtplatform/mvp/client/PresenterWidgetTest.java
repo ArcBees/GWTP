@@ -16,9 +16,6 @@
 
 package com.gwtplatform.mvp.client;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.jukito.TestSingleton;
@@ -33,6 +30,9 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import com.gwtplatform.mvp.client.presenter.slots.Slot;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

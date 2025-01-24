@@ -22,6 +22,5 @@ import com.google.gwt.event.shared.EventHandler;
  * Handler for {@link NavigationRefusedEvent}.
  */
 public interface NavigationRefusedHandler extends EventHandler {
-    void onNavigationRefused(
-            final NavigationRefusedEvent navigationRefusedEvent);
+    void onNavigationRefused(NavigationRefusedEvent navigationRefusedEvent);
 }

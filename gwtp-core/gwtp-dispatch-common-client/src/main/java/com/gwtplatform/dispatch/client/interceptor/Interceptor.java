@@ -29,7 +29,7 @@ import com.gwtplatform.dispatch.shared.TypedAction;
 public interface Interceptor<A, R> {
     /**
      * Handles the specified action.
-     * <p/>
+     * <p>
      * If the interceptor makes asynchronous calls, it is recommended that you confirm that this request has not been
      * cancelled after returning by calling {@link com.gwtplatform.dispatch.client.DelegatingDispatchRequest#isPending()
      * DelegatingDispatchRequest#isPending()} against the request parameter.

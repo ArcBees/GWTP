@@ -30,7 +30,7 @@ import com.gwtplatform.mvp.client.proxy.TabContentProxy;
  * Note that this presenter is only meant to be used when the content are themselves
  * {@link Presenter}, if they are {@link PresenterWidget} then no special mechanism is
  * required and you can rely on a standard widget.
- * <p/>
+ * <p>
  * Classes extending {@link TabContainerPresenter} must declare one constant of type
  * {@link com.google.gwt.event.shared.GwtEvent.Type Type&lt;RequestTabsHandler&gt;}
  * and annotate it with {@link com.gwtplatform.mvp.client.annotations.RequestTabs RequestTabs}.

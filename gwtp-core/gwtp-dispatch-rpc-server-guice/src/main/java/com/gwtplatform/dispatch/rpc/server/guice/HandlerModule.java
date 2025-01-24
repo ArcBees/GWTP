@@ -62,9 +62,9 @@ public abstract class HandlerModule extends AbstractModule {
             Class<A> actionClass, Class<? extends ActionHandler<A, R>> handlerClass) {
         bind(ActionHandlerValidatorMap.class).annotatedWith(
                 UniqueAnnotations.create()).toInstance(
-                new ActionHandlerValidatorMapImpl<A, R>(actionClass,
-                        new ActionHandlerValidatorClass<A, R>(handlerClass,
-                                DefaultActionValidator.class)));
+                    new ActionHandlerValidatorMapImpl<A, R>(actionClass,
+                            new ActionHandlerValidatorClass<A, R>(handlerClass,
+                                    DefaultActionValidator.class)));
     }
 
     /**
@@ -79,9 +79,9 @@ public abstract class HandlerModule extends AbstractModule {
             Class<? extends ActionValidator> actionValidator) {
         bind(ActionHandlerValidatorMap.class).annotatedWith(
                 UniqueAnnotations.create()).toInstance(
-                new ActionHandlerValidatorMapImpl<A, R>(
+                    new ActionHandlerValidatorMapImpl<A, R>(
                         actionClass,
-                        new ActionHandlerValidatorClass<A, R>(handlerClass, actionValidator)));
+                            new ActionHandlerValidatorClass<A, R>(handlerClass, actionValidator)));
     }
 
     @Override

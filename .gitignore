@@ -11,3 +11,4 @@ META-INF
 chromedriver.log
 .errai/
 *.versionsBackup
+.factorypath

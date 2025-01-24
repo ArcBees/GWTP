@@ -18,9 +18,6 @@ package com.gwtplatform.mvp.rebind.velocity.ginjectors;
 
 import java.io.PrintWriter;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
@@ -29,6 +26,9 @@ import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.inject.assistedinject.Assisted;
 import com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator;
 import com.gwtplatform.mvp.rebind.velocity.GeneratorUtil;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 public class FormFactorGinjectorGenerator extends AbstractVelocityGenerator {
     private static final String GIN_MODULE = "ginmodule";

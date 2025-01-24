@@ -16,11 +16,11 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import javax.inject.Inject;
-
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
+
+import jakarta.inject.Inject;
 
 /**
  * This place manager overrides all the methods that use
@@ -33,7 +33,7 @@ class PlaceManagerTestUtil extends PlaceManagerImpl {
     private final PlaceManagerWindowMethodsTestUtil gwtWindowMethods;
 
     @Inject
-    public PlaceManagerTestUtil(EventBus eventBus, TokenFormatter tokenFormatter,
+    PlaceManagerTestUtil(EventBus eventBus, TokenFormatter tokenFormatter,
             PlaceManagerWindowMethodsTestUtil gwtWindowMethods) {
         super(eventBus, tokenFormatter);
         this.gwtWindowMethods = gwtWindowMethods;

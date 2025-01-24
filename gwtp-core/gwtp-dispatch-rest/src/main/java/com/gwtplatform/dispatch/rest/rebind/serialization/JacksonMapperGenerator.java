@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.velocity.app.VelocityEngine;
@@ -35,6 +34,8 @@ import com.gwtplatform.dispatch.rest.rebind.AbstractVelocityGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
+
+import jakarta.inject.Inject;
 
 import static com.gwtplatform.dispatch.rest.rebind.utils.JPrimitives.classTypeOrConvertToBoxed;
 

@@ -28,7 +28,7 @@ import javax.lang.model.element.VariableElement;
  * <p>You should consider to use a builder when you are faced with many constructor
  * parameters. Specially mandatory and optional parameters. Here comes the
  * {@link BuilderGenerationHelper} into play.</p>
- * <p/>
+ * <p>
  * Instead of making the desired object directly, the client calls a constructor
  * (or static factory) with all of the required parameters and gets a builder
  * object. Then the client calls setter-like methods on the builder object to
@@ -36,13 +36,13 @@ import javax.lang.model.element.VariableElement;
  * parameterless build method to generate the object, which is immutable. The
  * builder is a static member class of the class it builds. This class offers a
  * method to generate a builder like this.
- * <p/>
+ * <p>
  * Rules:
  * No optional fields - no Builder.
  * Has required fields and optional fields - Constructor for required fields + Builder.
  * Has optional fields - only Builder.
  *
- * @see http://my.safaribooksonline.com/9780137150021/ch02lev1sec2
+ * see http://my.safaribooksonline.com/9780137150021/ch02lev1sec2
  */
 public class BuilderGenerationHelper extends ClassGenerationHelper {
 

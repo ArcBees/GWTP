@@ -16,13 +16,13 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import javax.inject.Inject;
-
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.common.client.IndirectProvider;
 import com.gwtplatform.mvp.client.Presenter;
+
+import jakarta.inject.Inject;
 
 /**
  * @param <P> The presenter's type.
@@ -55,7 +55,7 @@ public class ProxyImpl<P extends Presenter<?, ?>> implements Proxy<P> {
 
     /**
      * Injects the various resources and performs other bindings.
-     * <p/>
+     * <p>
      * Never call directly, it should only be called by GIN. Method injection is
      * used instead of constructor injection, because the latter doesn't work well
      * with GWT generators.

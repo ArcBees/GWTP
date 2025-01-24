@@ -18,9 +18,6 @@ package com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import com.google.inject.Injector;
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorClass;
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorInstance;
@@ -28,6 +25,9 @@ import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.LazyActionHand
 import com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.Result;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 /**
  * This is a lazy-loading implementation of the registry. It will only create action handlers and validators when they

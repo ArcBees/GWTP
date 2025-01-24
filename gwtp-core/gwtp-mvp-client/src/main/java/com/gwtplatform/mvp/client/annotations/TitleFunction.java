@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
  * This annotation can be used to specify a function returning the title of a
  * place as a string, given the request. It can work in one of two ways. For
  * simple hard-coded titles see {@link Title}.
- * <p/>
+ * <p>
  * 1) You can use it to annotate a static or non-static public method in your
  * presenter that returns a string (the title). This method can optionally
  * accept a {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest} parameter to
@@ -31,7 +31,7 @@ import java.lang.annotation.Target;
  * optionally accept another parameter corresponding to your custom ginjector.
  * Using a static method is more efficient, as it doesn't force instantiation of
  * the associated presenter and view. Example of use:
- * <p/>
+ * <p>
  * <pre>
  * {@code @}TitleFunction
  *  static public String getTranslatedTitle( MyGinjector ginjector ) {
@@ -44,7 +44,7 @@ import java.lang.annotation.Target;
  *    return "Email #" + getEmailId();
  *  }
  * </pre>
- * <p/>
+ * <p>
  * 2) You can use it to annotate a static or non-static public method in your
  * presenter that returns {@code void} but accept a parameter of type
  * {@link com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler}. In this case,
@@ -54,12 +54,12 @@ import java.lang.annotation.Target;
  * fashion, for example following a call to the server. As above, your method
  * can accept a {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest} parameter
  * and your custom ginjector. Example of use:
- * <p/>
+ * <p>
  * <pre>
  * {@code @}TitleFunction
  *  public void getTitle( PlaceRequest placeRequest, final SetPlaceTitleHandler handler ) {
  *    prepareFromRequest( placeRequest );
- *    dispatcher.execute( new GetUserNameAction( getUserId(), new AsyncCallback<GetUserNameResult>(){
+ *    dispatcher.execute( new GetUserNameAction( getUserId(), new AsyncCallback&lt;GetUserNameResult&gt;(){
  *      public void onSuccess(GetUserNameResult result) {
  *        handler.onSetPlaceTitle( result.getUserName() );
  *      }

@@ -41,7 +41,7 @@ public class MockingBinderTest {
          */
         static class MyTestBinder extends MockingBinder<Widget, TestView> implements Binder {
             @Inject
-            public MyTestBinder(MockitoMockFactory mockitoMockFactory) {
+            MyTestBinder(MockitoMockFactory mockitoMockFactory) {
                 super(Widget.class, mockitoMockFactory);
             }
         }

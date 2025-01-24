@@ -16,12 +16,12 @@
 
 package com.gwtplatform.dispatch.rest.client.serialization;
 
-import javax.inject.Singleton;
-
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.inject.client.binder.GinBinder;
 import com.google.gwt.inject.client.binder.GinLinkedBindingBuilder;
 import com.google.gwt.inject.client.multibindings.GinMultibinder;
+
+import jakarta.inject.Singleton;
 
 public class SerializationModule extends AbstractGinModule {
     public static GinLinkedBindingBuilder<Serialization> registerSerializationBinding(GinBinder binder) {

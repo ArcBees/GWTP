@@ -70,7 +70,7 @@ public class GenerationHelper implements Closeable {
     /**
      * Replaces each placeholder of this string that matches a parameter index.
      * <p><b>Placeholder format:</b> {int}</p>
-     * <p/>
+     * <p>
      * <p><b>Usage:</b></p>
      * <pre><code>replaceParameters("{0} int myField = {1};", "private", 20);</code></pre>
      *
@@ -166,11 +166,11 @@ public class GenerationHelper implements Closeable {
 
     /**
      * Generates a list of Fields.
-     * <p/>
+     * <p>
      * <p>
      * <b>Usage:</b>
      * </p>
-     * <p/>
+     * <p>
      * <pre>
      * <code>generateFieldList(myList, true, false)</code></pre>
      *
@@ -204,14 +204,14 @@ public class GenerationHelper implements Closeable {
 
     /**
      * Use null as import to separate import groups.
-     * <p/>
+     * <p>
      * <p>
      * <b>Usage:</b>
      * </p>
-     * <p/>
+     * <p>
      * <pre>
-     * <code>generateImports({@link EventHandler}.class, {@link GwtEvent}.class, null,
-     * {@link GenEventProcessor}.class)</code></pre>
+     * <code>generateImports(EventHandler.class, GwtEvent.class, null,
+     * GenEventProcessor.class)</code></pre>
      *
      * <b>Generated example:</b>
      *
@@ -262,7 +262,7 @@ public class GenerationHelper implements Closeable {
 
     /**
      * Generates a package declaration.
-     * <p/>
+     * <p>
      * <p>
      * <b>Generated example:</b>
      * </p>

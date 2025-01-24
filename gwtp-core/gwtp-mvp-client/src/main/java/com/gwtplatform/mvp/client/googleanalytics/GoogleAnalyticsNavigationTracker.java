@@ -16,8 +16,6 @@
 
 package com.gwtplatform.mvp.client.googleanalytics;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.web.bindery.event.shared.EventBus;
@@ -26,15 +24,17 @@ import com.gwtplatform.mvp.client.proxy.NavigationEvent;
 import com.gwtplatform.mvp.client.proxy.NavigationHandler;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
+import jakarta.inject.Inject;
+
 /**
  * This class let's you register every navigation event to a Google Analytics
  * account. To use it, you must bind GoogleAnalytics as eager singleton in your
  * gin module and also bind the annotation {@link GaAccount} to your Google
  * Analytics account number:
- * <p/>
+ * <p>
  * <code>bind(GoogleAnalyticsImpl.class).to(GoogleAnalytics.class).asEagerSingleton();
  * bindConstant().annotatedWith(GaAccount.class).to("UA-12345678-1");</code>
- * <p/>
+ * <p>
  * If you want to log custom events, see {@link GoogleAnalytics}.
  *
  * @deprecated Since 1.4. Use https://github.com/ArcBees/universal-analytics instead.

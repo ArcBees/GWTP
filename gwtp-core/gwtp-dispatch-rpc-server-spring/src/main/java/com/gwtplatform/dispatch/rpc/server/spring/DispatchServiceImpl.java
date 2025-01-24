@@ -19,11 +19,6 @@ package com.gwtplatform.dispatch.rpc.server.spring;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -33,6 +28,11 @@ import org.springframework.web.context.ServletContextAware;
 import com.gwtplatform.dispatch.rpc.server.AbstractDispatchServiceImpl;
 import com.gwtplatform.dispatch.rpc.server.Dispatch;
 import com.gwtplatform.dispatch.rpc.server.RequestProvider;
+
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Dispatch request to the handler.

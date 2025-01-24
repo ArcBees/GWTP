@@ -16,13 +16,13 @@
 
 package com.gwtplatform.crawlerservice.server.guice;
 
-import javax.inject.Singleton;
-
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.inject.Provides;
 import com.google.inject.servlet.ServletModule;
 import com.gwtplatform.crawlerservice.server.CrawlServiceServlet;
+
+import jakarta.inject.Singleton;
 
 public class CrawlServiceModule extends ServletModule {
 
@@ -34,6 +34,6 @@ public class CrawlServiceModule extends ServletModule {
     @Singleton
     @Provides
     WebClient getWebClient() {
-        return new WebClient(BrowserVersion.FIREFOX_38);
+        return new WebClient(BrowserVersion.FIREFOX_ESR);
     }
 }

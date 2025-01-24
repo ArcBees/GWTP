@@ -16,11 +16,11 @@
 
 package com.gwtplatform.dispatch.rpc.server.guice;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import com.gwtplatform.dispatch.rpc.server.AbstractRandomSecurityCookieFilter;
 import com.gwtplatform.dispatch.shared.SecurityCookie;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 @Singleton
 public class RandomSecurityCookieFilter extends AbstractRandomSecurityCookieFilter {

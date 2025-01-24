@@ -151,7 +151,7 @@ public abstract class AbstractCachingRpcInterceptor<A, R> extends AbstractRpcInt
      * Override this method to perform an action before the call is sent to the server. If the call returns a
      * non-{@code null} result then the action is never executed on the server and the returned value is used. If the
      * call returns {@code null} then the action is executed on the server.
-     * <p/>
+     * <p>
      * You can use this method to fetch the {@code action} from the cache.
      *
      * @param action The action to be prefetched
@@ -162,7 +162,7 @@ public abstract class AbstractCachingRpcInterceptor<A, R> extends AbstractRpcInt
     /**
      * Override this method to perform an action after the call to the server returns successfully or not. If the call
      * succeeded, the result will be passed, if it failed {@code null} will be passed in the {@code result} parameter.
-     * <p/>
+     * <p>
      * You can use this method to add the result to cache, if it is {@code null} you should remove the {@code action}
      * from the cache.
      *

@@ -21,7 +21,7 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 /**
  * An implementation of {@link DispatchRequest} that is used in conjunction with {@link
  * com.gwtplatform.dispatch.client.interceptor.Interceptor Interceptor}s.
- * <p/>
+ * <p>
  * As the interceptor implementation may be provided asynchronously, the {@code DelegatingAsyncCallback} will initially
  * not contain a {@link DispatchRequest}. Once the interceptor is executed, this will be populated with a {@link
  * DispatchRequest} by calling {@link #setDelegate(DispatchRequest)}.
@@ -35,7 +35,7 @@ public class DelegatingDispatchRequest implements DispatchRequest {
 
     /**
      * Populates the {@link DelegatingDispatchRequest} object with a {@link DispatchRequest}.
-     * <p/>
+     * <p>
      * If the code that requested the command to be executed has already chosen to cancel the {@link DispatchRequest},
      * the {@link DispatchRequest} that has been passed will be immediately cancelled.
      *

@@ -16,12 +16,12 @@
 
 package com.gwtplatform.mvp.rebind.velocity;
 
-import javax.inject.Inject;
-
 import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorFactory;
 import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorGenerator;
 import com.gwtplatform.mvp.rebind.velocity.ginjectors.FormFactorGinjectorProviderGenerator;
 import com.gwtplatform.mvp.rebind.velocity.ginjectors.GinjectorProviderGenerator;
+
+import jakarta.inject.Inject;
 
 public class GenerateFormFactorGinjectors {
     private static final String FORMFACTOR_GINJECTOR_TEMPLATE = "com/gwtplatform/mvp/rebind/FormFactorGinjector.vm";

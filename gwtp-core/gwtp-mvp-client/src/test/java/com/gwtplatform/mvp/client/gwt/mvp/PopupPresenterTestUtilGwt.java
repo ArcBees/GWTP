@@ -16,12 +16,12 @@
 
 package com.gwtplatform.mvp.client.gwt.mvp;
 
-import javax.inject.Inject;
-
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.PopupViewCloseHandler;
 import com.gwtplatform.mvp.client.PresenterWidget;
+
+import jakarta.inject.Inject;
 
 public class PopupPresenterTestUtilGwt extends PresenterWidget<PopupPresenterTestUtilGwt.MyView> {
     public interface MyView extends PopupView {

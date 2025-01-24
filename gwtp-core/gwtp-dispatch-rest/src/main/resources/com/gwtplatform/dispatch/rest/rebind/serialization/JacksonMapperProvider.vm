@@ -1,7 +1,7 @@
 package $package;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
 import com.google.inject.TypeLiteral;

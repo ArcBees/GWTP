@@ -21,8 +21,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.UnableToCompleteException;
 import com.google.gwt.core.ext.typeinfo.JClassType;
@@ -36,6 +34,8 @@ import com.gwtplatform.dispatch.rest.rebind.resource.ResourceDefinition;
 import com.gwtplatform.dispatch.rest.rebind.resource.ResourceGenerator;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
+
+import jakarta.inject.Inject;
 
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGenerator;
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGeneratorWithoutInput;

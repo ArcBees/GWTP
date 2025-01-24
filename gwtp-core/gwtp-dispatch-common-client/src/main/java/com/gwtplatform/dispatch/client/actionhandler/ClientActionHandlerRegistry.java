@@ -20,11 +20,11 @@ import com.gwtplatform.common.client.IndirectProvider;
 
 /**
  * Implementations of this interface will be used by
- * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} or
- * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} implementation to find client-side action
+ * com.gwtplatform.dispatch.rpc.shared.DispatchAsync or
+ * com.gwtplatform.dispatch.rest.shared.RestDispatch implementation to find client-side action
  * handlers.
  *
- * @deprecated Since 1.4. Use {@link com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptorRegistry}
+ * @deprecated Since 1.4. Use com.gwtplatform.dispatch.rpc.client.interceptor.RpcInterceptorRegistry
  */
 @Deprecated
 public interface ClientActionHandlerRegistry {

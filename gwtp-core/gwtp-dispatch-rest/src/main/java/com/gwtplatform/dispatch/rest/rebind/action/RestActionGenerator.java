@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.gwt.core.ext.GeneratorContext;
@@ -55,6 +53,8 @@ import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
+
+import jakarta.inject.Inject;
 
 import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.FORM;
 import static com.gwtplatform.dispatch.rest.rebind.parameter.HttpParameterType.isHttpParameter;

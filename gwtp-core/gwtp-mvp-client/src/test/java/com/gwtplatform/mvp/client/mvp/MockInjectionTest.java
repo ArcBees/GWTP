@@ -16,8 +16,6 @@
 
 package com.gwtplatform.mvp.client.mvp;
 
-import javax.inject.Inject;
-
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.jukito.TestSingleton;
@@ -29,6 +27,8 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
+
+import jakarta.inject.Inject;
 
 /**
  * Test behaviour when a mock {@link PresenterWidget} is injected.

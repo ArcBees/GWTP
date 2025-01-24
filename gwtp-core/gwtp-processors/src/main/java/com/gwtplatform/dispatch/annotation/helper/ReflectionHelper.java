@@ -139,7 +139,7 @@ public class ReflectionHelper {
     }
 
     /**
-     * Returns all fields ordered that are {@link Modifier.FINAL} or {@link Modifier.STATIC}.
+     * Returns all fields ordered that are {@link Modifier#FINAL} or {@link Modifier#STATIC}.
      */
     public Collection<VariableElement> getConstantFields() {
         return getModifierFields(Modifier.FINAL, Modifier.STATIC);
@@ -158,7 +158,7 @@ public class ReflectionHelper {
     }
 
     /**
-     * Returns all fields which contains {@link Modifier.FINAL}.
+     * Returns all fields which contains {@link Modifier#FINAL}.
      */
     public Collection<VariableElement> getFinalFields() {
         return filterFields(getOrderedFields(), Modifier.FINAL);
@@ -186,8 +186,8 @@ public class ReflectionHelper {
     }
 
     /**
-     * Returns all fields that are not {@link Modifier.FINAL} or
-     * {@link Modifier.STATIC}. Sorted based on the @ {@link Order} annotation.
+     * Returns all fields that are not {@link Modifier#FINAL} or
+     * {@link Modifier#STATIC}. Sorted based on the @ {@link Order} annotation.
      */
     public Collection<VariableElement> getNonConstantFields() {
         return filterFields(getOrderedFields(), Modifier.FINAL, Modifier.STATIC);
@@ -246,7 +246,6 @@ public class ReflectionHelper {
      * <li><b>Non</b> {@link Modifier#STATIC} fields</li>
      * <li><b>Non</b> {@link Modifier#FINAL} fields</li>
      * </ul>
-     * </p>
      */
     public Collection<VariableElement> getRequiredFields() {
         Collection<VariableElement> fields = getFields();
@@ -260,7 +259,7 @@ public class ReflectionHelper {
     }
 
     /**
-     * Returns all fields which contains {@link Modifier.STATIC}.
+     * Returns all fields which contains {@link Modifier#STATIC}.
      */
     public Collection<VariableElement> getStaticFields() {
         return filterFields(getOrderedFields(), Modifier.STATIC);

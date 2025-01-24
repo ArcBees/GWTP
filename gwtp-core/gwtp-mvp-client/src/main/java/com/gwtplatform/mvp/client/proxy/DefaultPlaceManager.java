@@ -16,8 +16,6 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.place.shared.PlaceHistoryHandler.Historian;
 import com.google.web.bindery.event.shared.EventBus;
@@ -27,21 +25,23 @@ import com.gwtplatform.mvp.client.annotations.UnauthorizedPlace;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 
+import jakarta.inject.Inject;
+
 /**
  * This is a subtype of {@link com.gwtplatform.mvp.client.proxy.PlaceManagerImpl PlaceManagerImpl} that uses
  * custom name tokens to reveal default, error and unauthorized places.
- * <p/>
+ * <p>
  * <b>Important! </b>If you use this class, don't forget to bind
  * {@link com.gwtplatform.mvp.client.annotations.DefaultPlace DefaultPlace},
  * {@link com.gwtplatform.mvp.client.annotations.ErrorPlace ErrorPlace} and
  * {@link com.gwtplatform.mvp.client.annotations.UnauthorizedPlace UnauthorizedPlace} to Presenter name tokens in
  * your Gin module.
- * <p/>
+ * <p>
  * <i>Note: </i>The default, error and unauthorized places are revealed without updating the browser's URL (hence
  * the false value passed in {@link #revealPlace(com.gwtplatform.mvp.shared.proxy.PlaceRequest, boolean) revealPlace}).
  * This will avoid stepping into an infinite navigation loop if the user navigates back (using the browser's back
  * button).
- * <p/>
+ * <p>
  * Here's an example of infinite navigation loop that we want to avoid:
  * <ol>
  * <li>An unauthenticated hits #admin (a place reserved to authenticated admins)</li>

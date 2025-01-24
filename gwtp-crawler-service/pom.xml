@@ -43,6 +43,8 @@
                     <extraJvmArgs>-Xss1024k -Xmx512M</extraJvmArgs>
                     <includes>**/*GwtTest.java,**/*GwtTestSuite.java</includes>
                     <mode>htmlunit</mode>
+                    <productionMode>true</productionMode>
+                    <htmlunit>FF</htmlunit>
                     <testTimeOut>180</testTimeOut>
                 </configuration>
                 <executions>
@@ -55,18 +57,18 @@
 
                 <dependencies>
                     <dependency>
-                        <groupId>com.google.gwt</groupId>
+                        <groupId>org.gwtproject</groupId>
                         <artifactId>gwt-user</artifactId>
                         <version>${gwt.version}</version>
                     </dependency>
                     <dependency>
-                        <groupId>com.google.gwt</groupId>
+                        <groupId>org.gwtproject</groupId>
                         <artifactId>gwt-dev</artifactId>
                         <version>${gwt.version}</version>
                     </dependency>
                     <dependency>
-                        <groupId>com.google.gwt</groupId>
-                        <artifactId>gwt-servlet</artifactId>
+                        <groupId>org.gwtproject</groupId>
+                        <artifactId>gwt-servlet-jakarta</artifactId>
                         <version>${gwt.version}</version>
                     </dependency>
                 </dependencies>
@@ -81,14 +83,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <version>${servlet-api.version}</version>
         </dependency>
         <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>${javax.inject.version}</version>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+            <version>${jakarta.inject.version}</version>
         </dependency>
 
         <dependency>

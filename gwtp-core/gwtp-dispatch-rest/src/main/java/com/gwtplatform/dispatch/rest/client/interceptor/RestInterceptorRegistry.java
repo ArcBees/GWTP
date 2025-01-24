@@ -21,7 +21,7 @@ import com.gwtplatform.dispatch.client.interceptor.InterceptorRegistry;
 
 /**
  * Implementations of this interface will be used by
- * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} implementation to find
+ * {@code com.gwtplatform.dispatch.rest.shared.RestDispatch} implementation to find
  * client-side interceptor.
  */
 public interface RestInterceptorRegistry extends InterceptorRegistry {

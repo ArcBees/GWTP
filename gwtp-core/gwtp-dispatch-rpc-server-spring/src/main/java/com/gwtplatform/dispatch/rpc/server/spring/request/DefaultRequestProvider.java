@@ -16,12 +16,12 @@
 
 package com.gwtplatform.dispatch.rpc.server.spring.request;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.gwtplatform.dispatch.rpc.server.RequestProvider;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Request provider.

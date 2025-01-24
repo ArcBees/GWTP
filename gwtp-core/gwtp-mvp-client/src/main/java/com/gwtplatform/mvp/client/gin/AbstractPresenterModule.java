@@ -32,7 +32,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
     /**
      * Convenience method for binding a singleton presenter with its proxy, when
      * using automatically generated proxy classes and non-singleton views.
-     * <p/>
+     * <p>
      * <b>Important!</b> This is only be meant to be used by presenters associated
      * with non-singleton views, for example when the same view class is reused
      * with many presenters. As such, you will need to also use the
@@ -80,7 +80,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
     /**
      * Convenience method for binding a singleton presenter with its proxy, when
      * using automatically generated proxy classes and non-singleton views.
-     * <p/>
+     * <p>
      * <b>Important!</b> This is only be meant to be used by presenters associated
      * with non-singleton views, for example when the same view class is reused
      * with many presenters. As such, you will need to also use the
@@ -125,7 +125,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
     /**
      * Convenience method for binding a singleton presenter with its proxy, when
      * using custom-made proxy classes and non-singleton views.
-     * <p/>
+     * <p>
      * <b>Important!</b> This is only be meant to be used by presenters associated
      * with non-singleton views, for example when the same view class is reused
      * with many presenters. As such, you will need to also use the
@@ -179,7 +179,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
     /**
      * Convenience method for binding a singleton presenter with its proxy, when
      * using custom-made proxy classes and non-singleton views.
-     * <p/>
+     * <p>
      * <b>Important!</b> This is only be meant to be used by presenters associated
      * with non-singleton views, for example when the same view class is reused
      * with many presenters. As such, you will need to also use the
@@ -284,7 +284,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
 
     /**
      * Bind a view interface to its implementation in a non-singleton manner.
-     * <p/>
+     * <p>
      * <b>Important!</b> This is only be meant to be used for presenter associated
      * with non-singleton views, for example when the same view class is reused
      * with many presenters. As such, you will use this method with
@@ -307,7 +307,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
     /**
      * Convenience method for binding a singleton {@link PresenterWidget} with its
      * {@link View}.
-     * <p/>
+     * <p>
      * <b>Important!</b> If you want to use the same {@link PresenterWidget} in
      * many different places, you should consider making it non-singleton with
      * {@link #bindPresenterWidget}. It is possible to use the same singleton
@@ -335,7 +335,7 @@ public abstract class AbstractPresenterModule extends AbstractGinModule {
     /**
      * Convenience method for binding a singleton {@link PresenterWidget} with its
      * {@link View}.
-     * <p/>
+     * <p>
      * <b>Important!</b> If you want to use the same {@link PresenterWidget} in
      * many different places, you should consider making it non-singleton with
      * {@link #bindPresenterWidget}. It is possible to use the same singleton

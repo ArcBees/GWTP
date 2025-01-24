@@ -22,11 +22,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 /**
  * For use in test cases where an {@link AsyncProvider} is required to provide
  * an object and the test case needs to provide a mock of the object.
- * <p/>
+ * <p>
  * Note that the same mock will be returned for every invocation of of {@link #get(AsyncCallback)}
  * (it behaves as a singleton) which may impact your tests, for example
  * if you rely on {@code ==}. If you're using mockito, consider using the
- * {@link com.gwtplatform.tester.mockito.AsyncMockProvider AsyncMockProvider} instead.
+ * {@code com.gwtplatform.tester.mockito.AsyncMockProvider} instead.
  *
  * @param <T> The type of mock object provided
  */

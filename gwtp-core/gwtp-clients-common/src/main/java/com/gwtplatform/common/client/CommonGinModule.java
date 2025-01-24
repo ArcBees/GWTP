@@ -16,10 +16,10 @@
 
 package com.gwtplatform.common.client;
 
-import javax.inject.Singleton;
-
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.common.shared.UrlUtils;
+
+import jakarta.inject.Singleton;
 
 /**
  * Common client bindings.

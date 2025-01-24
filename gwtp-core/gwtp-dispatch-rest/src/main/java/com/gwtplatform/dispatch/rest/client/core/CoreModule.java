@@ -16,11 +16,11 @@
 
 package com.gwtplatform.dispatch.rest.client.core;
 
-import javax.inject.Singleton;
-
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.dispatch.rest.client.core.parameters.HttpParameterFactory;
+
+import jakarta.inject.Singleton;
 
 public class CoreModule extends AbstractGinModule {
     private final CoreModuleBuilder builder;

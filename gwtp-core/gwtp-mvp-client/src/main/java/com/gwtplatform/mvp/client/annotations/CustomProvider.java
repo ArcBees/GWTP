@@ -25,14 +25,14 @@ import com.gwtplatform.common.client.IndirectProvider;
  * {@linkplain com.gwtplatform.common.client.IndirectProvider provider} which is used to load the
  * presenter behind the proxy. Using a custom provider enables you to add steps which should happen
  * <b>before</b> the presenter is loaded, instantiated and processed by GIN.
- * <p/>
+ * <p>
  * The class implementing {@code IndirectProvider} must provide a constructor which takes the
  * original provider as the single argument. For presenters which use {@code @ProxyStandard}
  * this is {@code com.google.inject.Provider&lt;T&gt;}; for presenters which use {@code @ProxyCodeSplit}
  * or {@code @ProxyCodeSplitBundle} this is {@code com.google.gwt.inject.client.AsyncProvider&lt;T&gt;}
- * <p/>
+ * <p>
  * Here is an example use of {@code CustomProvider}:
- * <p/>
+ * <p>
  * <pre>
  * &#064;ProxyCodeSplit
  * &#064;CustomProvider(SecurityContextProvider.class)

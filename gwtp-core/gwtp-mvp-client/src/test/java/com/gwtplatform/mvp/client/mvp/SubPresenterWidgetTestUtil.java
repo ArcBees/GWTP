@@ -16,11 +16,11 @@
 
 package com.gwtplatform.mvp.client.mvp;
 
-import javax.inject.Inject;
-
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PresenterWidget;
 import com.gwtplatform.mvp.client.View;
+
+import jakarta.inject.Inject;
 
 /**
  * This is the test presenter.

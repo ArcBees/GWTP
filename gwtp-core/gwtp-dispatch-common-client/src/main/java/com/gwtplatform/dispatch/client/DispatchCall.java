@@ -24,12 +24,12 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 import com.gwtplatform.dispatch.shared.TypedAction;
 
 /**
- * An class representing a call made to the server through {@link com.gwtplatform.dispatch.rest.client.RestDispatch
- * RestDispatch} or {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync}.
- * <p/>
+ * An class representing a call made to the server through com.gwtplatform.dispatch.rest.client.RestDispatch
+ * or com.gwtplatform.dispatch.rpc.shared.DispatchAsync.
+ * <p>
  * This class will perform the work shared by all dispatch modules. It will delegate exceptions to the bound {@link
  * ExceptionHandler}. It will provide access to the security cookie through the bound {@link SecurityCookieAccessor}.
- * <p/>
+ * <p>
  * It also provides a couple extension points for implementations.
  *
  * @param <A> The type of the {@link TypedAction} wrapped by this {@link DispatchCall}.

@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.rest.rebind.resource;
 import java.io.PrintWriter;
 import java.util.Set;
 
-import javax.inject.Inject;
 import javax.ws.rs.Path;
 
 import org.apache.velocity.app.VelocityEngine;
@@ -34,6 +33,8 @@ import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind.utils.PathResolver;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.NoXsrfHeader;
+
+import jakarta.inject.Inject;
 
 public class TopLevelResourceGenerator extends AbstractResourceGenerator {
     private static final String TEMPLATE = "com/gwtplatform/dispatch/rest/rebind/resource/Resource.vm";

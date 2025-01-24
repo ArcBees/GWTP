@@ -21,13 +21,13 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * Instances of this interface will handle specific types of action classes on the client.
- * <p/>
+ * <p>
  * When a call is executed, the {@link ClientActionHandler} that has been registered with the bound
  * {@link ClientActionHandlerRegistry} is called and
- * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} or
- * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} does not automatically send the command over
+ * com.gwtplatform.dispatch.rpc.shared.DispatchAsync or
+ * com.gwtplatform.dispatch.rest.shared.RestDispatch does not automatically send the command over
  * HTTP to the server.
- * <p/>
+ * <p>
  * Client Action Handlers provide a number of flexible options:
  * <ul>
  * <li>The action can be modified before sending the action to the server.</li>
@@ -36,13 +36,13 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
  * <li>The {@link ClientActionHandler} can take over and communicate directly with the server, possibly using a
  * different mechanism.</li>
  * </ul>
- * <p/>
- * <p/>
+ * <p>
+ * <p>
  * <b>Important!</b> If your action handler makes asynchronous calls, be careful with your use of fields as a second
  * call your handler could be made while it is waiting for the asynchronous call to return.
- * <p/>
- * <h3>Caching Client Action Handler Example</h3>
- * <p/>
+ * </p>
+ * <h2>Caching Client Action Handler Example</h2>
+ * <p>
  * <pre>
  * <code>
  * // Interface of cache singleton
@@ -111,10 +111,10 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 public interface ClientActionHandler<A, R> {
     /**
      * Handles the specified action.
-     * <p/>
+     * <p>
      * If the handler makes asynchronous calls, it is recommended that you confirm that this request has not been
      * cancelled after returning by calling
-     * {@link com.gwtplatform.dispatch.client.DelegatingDispatchRequest#isCancelled()} against the request parameter.
+     * {@link com.gwtplatform.dispatch.client.DelegatingDispatchRequest#cancel()} against the request parameter.
      *
      * @param action         The action to execute.
      * @param resultCallback The callback to use to communicate the result of the action. Unless the request is
@@ -132,10 +132,10 @@ public interface ClientActionHandler<A, R> {
 
     /**
      * Undoes the specified action if supported.
-     * <p/>
+     * <p>
      * If the handler makes asynchronous calls, it is recommended that you confirm that this request has not been
      * cancelled after returning by calling
-     * {@link com.gwtplatform.dispatch.client.DelegatingDispatchRequest#isCancelled()} against the request parameter.
+     * {@link com.gwtplatform.dispatch.client.DelegatingDispatchRequest#cancel()} against the request parameter.
      *
      * @param action      The action to undo.
      * @param result      The result to undo.

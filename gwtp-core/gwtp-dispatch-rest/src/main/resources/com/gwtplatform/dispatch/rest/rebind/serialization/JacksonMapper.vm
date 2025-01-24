@@ -1,6 +1,6 @@
 package $package;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
 

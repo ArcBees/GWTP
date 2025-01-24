@@ -26,7 +26,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * method. To reveal a presenter at the root of the application, fire either
  * {@link RevealRootContentEvent}, {@link RevealRootLayoutContentEvent} or
  * {@link RevealRootPopupContentEvent} instead.
- * <p/>
+ * <p>
  * This event is handled by {@link Proxy} classes. Upon handling this
  * event, the proxy <b>first</b> sets the content appropriately in the
  * presenter, and then reveals the presenter.

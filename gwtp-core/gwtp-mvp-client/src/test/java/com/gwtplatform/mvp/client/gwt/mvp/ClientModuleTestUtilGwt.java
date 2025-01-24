@@ -16,8 +16,6 @@
 
 package com.gwtplatform.mvp.client.gwt.mvp;
 
-import javax.inject.Singleton;
-
 import com.google.inject.name.Names;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
@@ -28,6 +26,8 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
 import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
+
+import jakarta.inject.Singleton;
 
 public class ClientModuleTestUtilGwt extends AbstractPresenterModule {
     @Override

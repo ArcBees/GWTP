@@ -16,8 +16,8 @@
 
 package com.gwtplatform.mvp.client;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 /**
  * Bind this class to indicate that you wish to globally disable automatic binding in
@@ -28,7 +28,7 @@ import javax.inject.Singleton;
  * </pre>
  * If you do not bind this class then autobinding is controlled on a case-by-case
  * basis using the {@link HandlerContainerImpl}'s constructors.
- * <p/>
+ * <p>
  * Disabling automatic binding can be useful in unit tests, for example.
  */
 @Singleton

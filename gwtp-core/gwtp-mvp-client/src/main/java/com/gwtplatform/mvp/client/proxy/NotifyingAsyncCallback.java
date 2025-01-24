@@ -23,7 +23,7 @@ import com.google.web.bindery.event.shared.EventBus;
  * An implementation of {@link AsyncCallback} that sends events on the {@link EventBus} whenever
  * an async call starts, succeeds, or fails. The events fired are {@link AsyncCallStartEvent},
  * {@link AsyncCallSucceedEvent}, {@link AsyncCallFailEvent}.
- * <p/>
+ * <p>
  * So the way to use {@link NotifyingAsyncCallback} is the following:
  * <pre>
  *   NotifyingAsyncCallback callback = new NotifyingAsyncCallback(eventBus) { ... };

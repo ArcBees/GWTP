@@ -22,6 +22,5 @@ import com.google.gwt.event.shared.EventHandler;
  * Handler for {@link LockInteractionEvent}.
  */
 public interface LockInteractionHandler extends EventHandler {
-    void onLockInteraction(
-            final LockInteractionEvent lockInteractionEvent);
+    void onLockInteraction(LockInteractionEvent lockInteractionEvent);
 }

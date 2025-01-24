@@ -17,8 +17,8 @@
 package com.gwtplatform.dispatch.shared;
 
 /**
- * These are thrown by {@link com.gwtplatform.dispatch.server.Dispatch#execute(Action)} if there is a problem executing
- * a particular {@link Action}.
+ * These are thrown by com.gwtplatform.dispatch.server.Dispatch#execute(Action) if there is a problem executing
+ * a particular Action.
  */
 public class ActionException extends Exception {
 

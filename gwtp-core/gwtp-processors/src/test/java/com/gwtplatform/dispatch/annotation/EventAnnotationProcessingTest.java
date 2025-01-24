@@ -18,15 +18,15 @@ package com.gwtplatform.dispatch.annotation;
 
 import org.junit.Test;
 
+import com.google.gwt.event.shared.HasHandlers;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.google.gwt.event.shared.HasHandlers;
-
 /**
  * This test is being run by ant, but is not run in eclipse.
- * <p/>
+ * <p>
  * TODO: Make a test suite with a couple of permutations (with/without Order, Optional, both...).
  */
 public class EventAnnotationProcessingTest {

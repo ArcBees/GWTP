@@ -29,11 +29,11 @@ import com.gwtplatform.common.client.ProviderBundle;
 /**
  * The default implementation that {@link ClientActionHandlerRegistry} that if bound will not load any client-side
  * action handlers.
- * </p>
+ * <p>
  * To register client-side action handlers, extend this class and call {@link #register} in the constructor.
- * <p/>
- * <h3><u>Example</u></h3>
- * <p/>
+ * </p>
+ * <h2><u>Example</u></h2>
+ * <p>
  * <pre>
  * <code>
  * public class MyActionHandlerRegistry extends DefaultClientActionHandlerRegistry {
@@ -67,7 +67,7 @@ import com.gwtplatform.common.client.ProviderBundle;
  * </code>
  * </pre>
  *
- * @deprecated Since 1.4. Use {@link com.gwtplatform.dispatch.rpc.client.interceptor.DefaultRpcInterceptorRegistry}
+ * @deprecated Since 1.4. Use com.gwtplatform.dispatch.rpc.client.interceptor.DefaultRpcInterceptorRegistry
  */
 @Deprecated
 public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRegistry {
@@ -89,7 +89,7 @@ public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRe
     }
 
     /**
-     * Register a {@link javax.inject.Provider} of a client-side action handler.
+     * Register a {@link jakarta.inject.Provider} of a client-side action handler.
      *
      * @param actionType      The type of action that the client-side action handler supports.
      * @param handlerProvider The {@link com.google.inject.Provider} of the handler.
@@ -126,7 +126,7 @@ public class DefaultClientActionHandlerRegistry implements ClientActionHandlerRe
      * Register a client-side action handler that is part of a {@link com.gwtplatform.common.client.ProviderBundle}.
      *
      * @param actionType     The type of that the client-side action handler supports.
-     * @param bundleProvider The {@link javax.inject.Provider} of the
+     * @param bundleProvider The {@link jakarta.inject.Provider} of the
      *                       {@link com.gwtplatform.common.client.ProviderBundle}.
      * @param providerId     The id of the client-side action handler provider.
      */

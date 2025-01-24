@@ -30,28 +30,22 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * This gin module provides provides access to the dispatcher singleton, which is used to make calls to the server. This
  * module requires an {@link ExceptionHandler} and a {@link SecurityCookieAccessor}. By default, these will be bound to
  * {@link DefaultExceptionHandler}, {@link DefaultSecurityCookieAccessor} respectively.
- * <p/>
+ * <p>
  * Install the module in one of your {@link #configure()} methods:
- * <p/>
+ * <p>
  * <pre>
  * install(new RestDispatchAsyncModule.Builder()
  *                 .exceptionHandler(MyExceptionHandler.class)
  *                 .sessionAccessor(MySessionAccessor.class)
  *                 .build());
  * </pre>
- *
- * @see com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule
- * @see com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule
  */
 public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
     /**
      * A {@link AbstractDispatchAsyncModule} builder.
-     * <p/>
+     * <p>
      * By default, this builder configures the {@link AbstractDispatchAsyncModule} to use {@link
      * DefaultExceptionHandler} and {@link DefaultSecurityCookieAccessor}.
-     *
-     * @see com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule.Builder
-     * @see com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule.Builder
      */
     public abstract static class Builder<B extends Builder<B>> {
         private Class<? extends ExceptionHandler> exceptionHandlerType = DefaultExceptionHandler.class;

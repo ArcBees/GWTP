@@ -55,25 +55,17 @@
             <artifactId>gwtp-dispatch-rest-shared</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
             <artifactId>gwt-user</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
             <artifactId>gwt-dev</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.google.gwt.inject</groupId>
+            <groupId>de.knightsoft-net</groupId>
             <artifactId>gin</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.inject.extensions</groupId>
-            <artifactId>guice-multibindings</artifactId>
         </dependency>
 
         <!-- Serialization-->
@@ -90,7 +82,7 @@
 
         <!-- Test dependencies -->
         <dependency>
-            <groupId>org.jukito</groupId>
+            <groupId>de.knightsoft-net</groupId>
             <artifactId>jukito</artifactId>
         </dependency>
         <dependency>

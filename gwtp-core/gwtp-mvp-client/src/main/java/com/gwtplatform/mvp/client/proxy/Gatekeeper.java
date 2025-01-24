@@ -19,7 +19,7 @@ package com.gwtplatform.mvp.client.proxy;
 /**
  * Inherit from this class to define a gatekeeper that locks access to your
  * {@link Place} in specific situation. For example:
- * <p/>
+ * <p>
  * <pre>
  * public class AdminGatekeeper implements Gatekeeper {
  *
@@ -37,11 +37,11 @@ package com.gwtplatform.mvp.client.proxy;
  *
  * }
  * </pre>
- * <p/>
+ * <p>
  * You must also make sure that your custom Ginjector provides a {@code get}
  * method returning this {@link Gatekeeper} if you want to use it with the
  * {@link com.gwtplatform.mvp.client.annotations.UseGatekeeper} annotation.
- * <p/>
+ * <p>
  * You should usually bind your {@link Gatekeeper} as a singleton.
  */
 public interface Gatekeeper {

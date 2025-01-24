@@ -81,7 +81,7 @@ public abstract class BaseRestDispatchModuleBuilder<B extends BaseRestDispatchMo
     /**
      * Specify the pattern to use to format dates before they are sent to the end-point. The pattern must follow the
      * rules defined by {@link com.google.gwt.i18n.shared.DateTimeFormat DateTimeFormat}.
-     * <p/>
+     * <p>
      * Default is {@link com.gwtplatform.dispatch.rest.shared.DateFormat#DEFAULT}.
      *
      * @param defaultDateFormat The pattern used to format dates.

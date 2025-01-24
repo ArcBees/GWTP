@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.gwt.core.ext.GeneratorContext;
@@ -36,6 +34,8 @@ import com.gwtplatform.dispatch.rest.rebind.resource.MethodContext;
 import com.gwtplatform.dispatch.rest.rebind.resource.MethodDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
+
+import jakarta.inject.Inject;
 
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.findGenerator;
 import static com.gwtplatform.dispatch.rest.rebind.utils.Generators.getGenerator;

@@ -22,8 +22,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.gwt.core.ext.GeneratorContext;
@@ -38,6 +36,8 @@ import com.gwtplatform.dispatch.rest.rebind.utils.Arrays;
 import com.gwtplatform.dispatch.rest.rebind.utils.ClassDefinition;
 import com.gwtplatform.dispatch.rest.rebind.utils.EventBus;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
+
+import jakarta.inject.Inject;
 
 public class JacksonMapperProviderGenerator extends AbstractVelocityGenerator
         implements ExtensionGenerator, JacksonMapperDefinitions {

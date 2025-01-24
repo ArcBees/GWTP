@@ -24,7 +24,7 @@ import com.gwtplatform.mvp.client.Presenter;
  * This event is fired by a {@link Presenter} that desires to reveal itself
  * at the root of the application. It is typically fired in the {@link Presenter#revealInParent()}
  * method.
- * <p/>
+ * <p>
  * This type of content is usually meant to use the browser like a regular webpage, adding a vertical
  * scrollbar as the content overflow.
  *

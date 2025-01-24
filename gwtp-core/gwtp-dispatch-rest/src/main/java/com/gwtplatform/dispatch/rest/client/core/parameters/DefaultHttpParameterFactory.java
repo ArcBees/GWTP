@@ -16,12 +16,12 @@
 
 package com.gwtplatform.dispatch.rest.client.core.parameters;
 
-import javax.inject.Inject;
-
 import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.annotations.DefaultDateFormat;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
+
+import jakarta.inject.Inject;
 
 public class DefaultHttpParameterFactory implements HttpParameterFactory {
     private final UrlUtils urlUtils;

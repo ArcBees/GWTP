@@ -23,7 +23,7 @@ import java.util.List;
 public class Arrays {
     /**
      * Server the same purposes as Java's {@link java.util.Arrays Arrays}, except it is null-safe.
-     * <p/>
+     * <p>
      * Reason: Some introspection methods used by the generators return null arrays.
      */
     public static <T> List<T> asList(T... array) {

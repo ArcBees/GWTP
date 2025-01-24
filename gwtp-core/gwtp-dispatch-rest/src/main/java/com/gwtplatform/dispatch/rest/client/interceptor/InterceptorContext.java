@@ -17,6 +17,7 @@
 package com.gwtplatform.dispatch.rest.client.interceptor;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
@@ -146,15 +147,26 @@ public class InterceptorContext {
         }
 
         @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            Builder other = (Builder) obj;
+            return anyHttpMethod == other.anyHttpMethod && anyQueryCount == other.anyQueryCount
+                    && httpMethod == other.httpMethod && Objects.equals(path, other.path)
+                    && queryCount == other.queryCount && Objects.equals(template, other.template)
+                    && transcendent == other.transcendent;
+        }
+
+        @Override
         public int hashCode() {
-            int result = template != null ? template.hashCode() : 0;
-            result = 31 * result + (path != null ? path.hashCode() : 0);
-            result = 31 * result + (httpMethod != null ? httpMethod.hashCode() : 0);
-            result = 31 * result + queryCount;
-            result = 31 * result + (transcendent ? 1 : 0);
-            result = 31 * result + (anyHttpMethod ? 1 : 0);
-            result = 31 * result + (anyQueryCount ? 1 : 0);
-            return result;
+            return Objects.hash(anyHttpMethod, anyQueryCount, httpMethod, path, queryCount, template, transcendent);
         }
     }
 

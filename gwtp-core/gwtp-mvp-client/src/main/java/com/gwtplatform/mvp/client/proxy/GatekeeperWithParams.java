@@ -19,7 +19,7 @@ package com.gwtplatform.mvp.client.proxy;
 /**
  * Specialized {@link Gatekeeper} which needs additional parameters
  * in order to find out if the protected {@link Place} can be revealed.
- * </pre>
+ * <p>
  * Example of use:
  * <pre>
  * public class HasAllRolesGatekeeper implements GatekeeperWithParams {
@@ -44,12 +44,12 @@ package com.gwtplatform.mvp.client.proxy;
  * }
  * }
  * </pre>
- * <p/>
+ * <p>
  * You must also make sure that your custom Ginjector provides a {@code get}
  * method returning this {@link GatekeeperWithParams} if you want to use it
  * with the {@link com.gwtplatform.mvp.client.annotations.GatekeeperParams}
  * annotation.
- * <p/>
+ * <p>
  * You should usually bind your {@link GatekeeperWithParams} as a singleton.
  */
 public interface GatekeeperWithParams extends Gatekeeper {

@@ -22,9 +22,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * An implementation of {@link CallbackDispatchRequest} that should be used by
  * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s that make asynchronous calls that do not
  * return a {@link com.google.gwt.http.client.Request}.
- * <p/>
+ * <p>
  * {@link #isPending()} will return true until either {@link #onSuccess(Object)} or {@link #onFailure} is called.
- * <p/>
+ * <p>
  * Calling {@link #cancel()} will prevent the {@link #onSuccess(Object)} and {@link #onFailure(Throwable)} from being
  * forwarded to the code that requested the action handler be executed/undone.
  *

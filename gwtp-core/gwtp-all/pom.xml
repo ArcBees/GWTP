@@ -15,7 +15,7 @@
     <properties>
         <maven-site-plugin.skip>true</maven-site-plugin.skip>
 
-        <maven-assembly-plugin.version>2.5.3</maven-assembly-plugin.version>
+        <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
     </properties>
 
     <!-- The compound jar consist of the following dependencies -->
@@ -240,7 +240,7 @@
                 <!-- This is needed in order for the classes from gwt-dev that
                 (are used in ProxyGenerator class) to be resolved while creating the javadoc -->
                 <dependency>
-                    <groupId>com.google.gwt</groupId>
+                    <groupId>org.gwtproject</groupId>
                     <artifactId>gwt-dev</artifactId>
                     <scope>provided</scope>
                 </dependency>
@@ -274,7 +274,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
-                        <version>2.1</version>
+                        <version>3.8.1</version>
                         <executions>
                             <execution>
                                 <id>unpack-dependencies</id>
@@ -299,7 +299,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>3.1.0</version>
                         <executions>
                             <!-- Generate the javadoc -->
                             <execution>
@@ -317,12 +317,12 @@
                                                 All Rights Reserved.</i>]]>
                                             </bottom>
                                             <classpath refid="maven.compile.classpath" />
-                                            <link href="http://download.oracle.com/javase/6/docs/api/" />
-                                            <link href="http://google-web-toolkit.googlecode.com/svn/javadoc/2.0/" />
-                                            <link href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/" />
-                                            <link href="http://google-gin.googlecode.com/svn/trunk/javadoc/" />
-                                            <link href="http://google-guice.googlecode.com/svn/trunk/javadoc/" />
-                                            <link href="http://aopalliance.sourceforge.net/doc/" />
+                                            <link href="https://docs.oracle.com/en/java/javase/11/docs/api/" />
+                                            <link href="https://www.gwtproject.org/javadoc/latest/" />
+                                            <link href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/" />
+                                            <link href="https://gwtplus.github.io/google-gin/latest/javadoc/" />
+                                            <link href="https://javadoc.io/doc/com.google.inject/guice/latest/index.html" />
+                                            <link href="https://aopalliance.sourceforge.net/doc/" />
                                             <link href="https://github.com/nmorel/gwt-jackson/wiki/" />
                                         </javadoc>
                                         <jar destfile="${javadocArtifactFile}" basedir="${unpackedJavadocDir}" includes="**/**" />
@@ -339,7 +339,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>3.6.0</version>
                         <executions>
                             <execution>
                                 <id>attach-artifacts</id>

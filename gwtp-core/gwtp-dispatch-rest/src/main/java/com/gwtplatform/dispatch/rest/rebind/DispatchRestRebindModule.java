@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.rebind;
 
-import javax.inject.Singleton;
-
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.gwt.core.ext.GeneratorContext;
@@ -35,6 +33,8 @@ import com.gwtplatform.dispatch.rest.rebind.subresource.SubResourceModule;
 import com.gwtplatform.dispatch.rest.rebind.utils.EventBus;
 import com.gwtplatform.dispatch.rest.rebind.utils.Logger;
 import com.gwtplatform.dispatch.rest.rebind.utils.VelocityProperties;
+
+import jakarta.inject.Singleton;
 
 public class DispatchRestRebindModule extends AbstractModule {
     private final TreeLogger treeLogger;

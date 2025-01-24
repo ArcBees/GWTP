@@ -23,9 +23,9 @@ import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * The base class of the synchronous dispatcher service with an arbitrary action type. The server-side implementation is
- * {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl} and the async client-side version is
+ * com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl and the async client-side version is
  * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
- * <p/>
+ * <p>
  * This class is closely related to {@link com.gwtplatform.dispatch.rpc.shared.DispatchService}. In fact, this class
  * wouldn't be needed, but we use it to workaround a GWT limitation described in
  * {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.

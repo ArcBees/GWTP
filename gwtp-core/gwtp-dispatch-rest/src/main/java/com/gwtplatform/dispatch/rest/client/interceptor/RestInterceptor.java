@@ -23,12 +23,12 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 
 /**
  * Instances of this interface will handle specific types of action classes on the client.
- * <p/>
+ * <p>
  * When a call is executed, the {@link Interceptor} that has been registered with the bound
  * {@link com.gwtplatform.dispatch.client.interceptor.InterceptorRegistry InterceptorRegistry} is called and
- * {@link com.gwtplatform.dispatch.rest.shared.RestDispatch RestDispatch} does not automatically
+ * {@code com.gwtplatform.dispatch.rest.shared.RestDispatch} does not automatically
  * send the command over HTTP to the server.
- * <p/>
+ * <p>
  * Rest Interceptors provide a number of flexible options:
  * <ul>
  * <li>The action can be modified before sending the action to the server.</li>
@@ -37,10 +37,10 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  * <li>The {@link Interceptor} can take over and communicate directly with the server, possibly using a
  * different mechanism.</li>
  * </ul>
- * <p/>
+ * <p>
  * <b>Important!</b> If your interceptor makes asynchronous calls, be careful with your use of fields as a second
  * call your interceptor could be made while it is waiting for the asynchronous call to return.
- * <p/>
+ * <p>
  * <b>Example:</b>
  * <pre>
  *   public AddItemInterceptor extends AbstractRestInterceptor {
@@ -50,7 +50,7 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
  *
  *      {@literal @}Override
  *      public DispatchRequest execute(RestAction action, AsyncCallback{@literal <}Object{@literal >} resultCallback,
- *              ExecuteCommand<RestAction, Object> executeCommand) {
+ *              ExecuteCommand&lt;RestAction, Object&gt; executeCommand) {
  *          // process stuff here!
  *          return executeCommand.execute(action, resultCallback);
  *      }

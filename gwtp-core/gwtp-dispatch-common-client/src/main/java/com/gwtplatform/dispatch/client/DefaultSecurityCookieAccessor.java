@@ -24,7 +24,7 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 /**
  * This class provides access to the session id client side by looking into a cookie on the browser. This will work to
  * prevent XSRF attack.
- * <p/>
+ * <p>
  * To use this class you have to bind a constant string annotated with {@code @}{@link SecurityCookie} to your desired
  * cookie name.
  */

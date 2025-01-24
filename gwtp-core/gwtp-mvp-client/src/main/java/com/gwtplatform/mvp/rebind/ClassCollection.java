@@ -16,8 +16,6 @@
 
 package com.gwtplatform.mvp.rebind;
 
-import javax.inject.Provider;
-
 import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.JGenericType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
@@ -46,6 +44,8 @@ import com.gwtplatform.mvp.client.proxy.SetPlaceTitleHandler;
 import com.gwtplatform.mvp.client.proxy.TabContentProxy;
 import com.gwtplatform.mvp.client.proxy.TabContentProxyPlaceImpl;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
+
+import jakarta.inject.Provider;
 
 /**
  * Contains all the classes that are useful to various generators.

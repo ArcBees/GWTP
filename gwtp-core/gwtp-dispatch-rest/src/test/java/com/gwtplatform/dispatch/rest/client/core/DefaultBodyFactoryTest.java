@@ -18,7 +18,6 @@ package com.gwtplatform.dispatch.rest.client.core;
 
 import java.util.Date;
 
-import javax.inject.Inject;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
@@ -42,16 +41,17 @@ import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
+import jakarta.inject.Inject;
+
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyListOf;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.DELETE;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.GET;
 
@@ -128,8 +128,8 @@ public class DefaultBodyFactoryTest {
         action.setBodyParam(unserializedObject);
         action.setBodyClass(serializationKey);
 
-        given(serialization.canSerialize(eq(serializationKey), anyListOf(ContentType.class))).willReturn(true);
-        given(serialization.serialize(eq(serializationKey), anyListOf(ContentType.class), eq(unserializedObject)))
+        given(serialization.canSerialize(eq(serializationKey), anyList())).willReturn(true);
+        given(serialization.serialize(eq(serializationKey), anyList(), eq(unserializedObject)))
                 .willReturn(serializedValue);
 
         // When
@@ -150,7 +150,7 @@ public class DefaultBodyFactoryTest {
         action.setBodyParam(unserializedObject);
         action.setBodyClass(serializationKey);
 
-        given(serialization.canSerialize(eq(serializationKey), anyListOf(ContentType.class))).willReturn(false);
+        given(serialization.canSerialize(eq(serializationKey), anyList())).willReturn(false);
 
         // When
         factory.buildBody(requestBuilder, action);

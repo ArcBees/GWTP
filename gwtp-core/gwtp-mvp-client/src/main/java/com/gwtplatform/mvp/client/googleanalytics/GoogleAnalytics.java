@@ -19,7 +19,7 @@ package com.gwtplatform.mvp.client.googleanalytics;
 /**
  * This interface lets you manually register Google Analytics events in
  * your application.
- * <p/>
+ * <p>
  * Event Tracking is a method available in the {@code ga.js} tracking code that
  * you can use to record user interaction with website elements. This is
  * accomplished by attaching the method call to the particular UI element you
@@ -29,12 +29,12 @@ package com.gwtplatform.mvp.client.googleanalytics;
  * using the Event Tracking method. Finally, Event Tracking employs an
  * object-oriented model that you can use to collect and classify different
  * types of interaction with your web page objects.
- * <p/>
+ * <p>
  * Inject this interface in your presenters when you need to interact with the
  * Google Analytics module, for example to log your custom event. You can
  * also configure automatic registration of navigation event using
  * {@link GoogleAnalyticsNavigationTracker}.
- * <p/>
+ * <p>
  * Also, for more information about Event Tracking, please read:
  * <a href="http://code.google.com/apis/analytics/docs/tracking/eventTrackerGuide.html">Event Tracking Guide</a>
  * @deprecated Since 1.4. Use https://github.com/ArcBees/universal-analytics instead.

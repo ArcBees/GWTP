@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.client.actionhandler.caching;
 /**
  * Default implementation of {@link AbstractCachingClientActionHandler}. It supports action caching
  *
- * @deprecated Since 1.4. Use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.CachingInterceptor}
+ * @deprecated Since 1.4. Use com.gwtplatform.dispatch.rpc.client.interceptor.caching.CachingInterceptor
  *
  * @param <A> The type of the action.
  * @param <R> The type of the result.

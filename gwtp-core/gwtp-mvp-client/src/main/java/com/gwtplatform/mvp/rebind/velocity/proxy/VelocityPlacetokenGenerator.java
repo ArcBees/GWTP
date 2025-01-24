@@ -19,8 +19,6 @@ package com.gwtplatform.mvp.rebind.velocity.proxy;
 import java.io.PrintWriter;
 import java.util.Set;
 
-import javax.inject.Provider;
-
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
@@ -30,6 +28,8 @@ import com.google.inject.assistedinject.AssistedInject;
 import com.gwtplatform.mvp.rebind.velocity.AbstractVelocityGenerator;
 import com.gwtplatform.mvp.rebind.velocity.GeneratorUtil;
 import com.gwtplatform.mvp.shared.proxy.PlaceTokenRegistry;
+
+import jakarta.inject.Provider;
 
 /**
  * Velocity powered generator of an {@link PlaceTokenRegistry}.

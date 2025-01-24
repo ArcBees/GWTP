@@ -18,12 +18,12 @@ package com.gwtplatform.mvp.rebind.velocity;
 
 import java.io.PrintWriter;
 
-import javax.inject.Provider;
-
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
 import com.google.gwt.core.ext.UnableToCompleteException;
+
+import jakarta.inject.Provider;
 
 public abstract class AbstractVelocityGenerator {
     protected static final String IMPL_NAME = "implName";

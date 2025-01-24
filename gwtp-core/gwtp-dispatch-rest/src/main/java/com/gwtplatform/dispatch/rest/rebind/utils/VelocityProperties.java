@@ -21,9 +21,9 @@ import java.io.InputStream;
 import java.util.MissingResourceException;
 import java.util.Properties;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.ext.UnableToCompleteException;
+
+import jakarta.inject.Inject;
 
 public class VelocityProperties {
     private static final String VELOCITY_PROPERTIES = "com/gwtplatform/dispatch/rest/rebind/velocity.properties";

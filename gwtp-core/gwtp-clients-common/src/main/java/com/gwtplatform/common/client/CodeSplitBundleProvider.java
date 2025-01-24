@@ -18,7 +18,8 @@ package com.gwtplatform.common.client;
 
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.inject.Provider;
+
+import jakarta.inject.Provider;
 
 /**
  * Implements a {@link IndirectProvider} that uses code splitting for a specific

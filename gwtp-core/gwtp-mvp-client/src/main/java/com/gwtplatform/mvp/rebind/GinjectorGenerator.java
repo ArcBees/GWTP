@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.inject.Provider;
-
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -48,6 +46,8 @@ import com.gwtplatform.mvp.client.annotations.UseGatekeeper;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.rebind.velocity.GenerateFormFactorGinjectors;
 import com.gwtplatform.mvp.rebind.velocity.RebindModule;
+
+import jakarta.inject.Provider;
 
 /**
  * Will generate a Ginjector from Ginjector.

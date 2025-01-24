@@ -16,12 +16,12 @@
 
 package com.gwtplatform.dispatch.rest.rebind.serialization;
 
-import javax.inject.Singleton;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Binder;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.multibindings.Multibinder;
+
+import jakarta.inject.Singleton;
 
 import static com.gwtplatform.dispatch.rest.rebind.extension.ExtensionModule.addExtensionGenerator;
 

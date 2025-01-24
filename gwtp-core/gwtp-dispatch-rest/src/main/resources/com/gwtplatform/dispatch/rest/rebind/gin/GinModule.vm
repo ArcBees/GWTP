@@ -1,6 +1,6 @@
 package $package;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.TypeLiteral;

@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.client.actionhandler.caching;
 /**
  * Interface for client side caching.
  *
- * @deprecated Since 1.4. Use {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.Cache}
+ * @deprecated Since 1.4. Use com.gwtplatform.dispatch.rpc.client.interceptor.caching.Cache
  */
 @Deprecated
 public interface Cache {

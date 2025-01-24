@@ -32,8 +32,8 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -43,7 +43,7 @@
             <artifactId>mockito-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.jukito</groupId>
+            <groupId>de.knightsoft-net</groupId>
             <artifactId>jukito</artifactId>
         </dependency>
         <dependency>

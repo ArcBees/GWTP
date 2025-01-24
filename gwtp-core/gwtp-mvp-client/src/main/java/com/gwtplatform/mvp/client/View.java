@@ -26,12 +26,12 @@ public interface View extends IsWidget {
 
     /**
      * Requests the view to add content within a specific slot.
-     * <p/>
+     * <p>
      * Override the default implementation and manage all the slots of your view
      * into which content can be added. You should also consider overriding
      * {@link #removeFromSlot(Object, IsWidget)}.
      * If the view doesn't know about this slot, it can silently ignore the request.
-     * <p/>
+     * <p>
      * Used by {@link PresenterWidget#addToSlot(Object, PresenterWidget)}.
      *
      * @param slot    An opaque object indicating the slot to add into.
@@ -41,12 +41,12 @@ public interface View extends IsWidget {
 
     /**
      * Requests the view to remove content from a specific slot.
-     * <p/>
+     * <p>
      * Override the default implementation and manage all the slots of your view
      * into which content can be added and removed. You should also override
      * {@link #addToSlot(Object, IsWidget)}.
      * If the view doesn't know about this slot, it can silently ignore the request.
-     * <p/>
+     * <p>
      * Used by {@link PresenterWidget#removeFromSlot(Object, PresenterWidget)}.
      *
      * @param slot    An opaque object indicating the slot to remove from.
@@ -57,12 +57,12 @@ public interface View extends IsWidget {
     /**
      * Requests the view to set content within a specific slot, clearing anything
      * that was already contained there.
-     * <p/>
+     * <p>
      * Override the default implementation and manage all the slots of your view
      * into which content can be placed. If the view doesn't know about this slot,
      * it can silently ignore the request. When {@code null} is passed, your
      * implementation should clear the slot.
-     * <p/>
+     * <p>
      * Used by {@link PresenterWidget#setInSlot(Object, PresenterWidget)} and
      * {@link PresenterWidget#clearSlot(Object)}.
      *
