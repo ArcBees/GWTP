@@ -1,7 +1,8 @@
 package $impl.packageName;
 
+import jakarta.inject.Provider;
+
 import javax.annotation.Generated;
-import javax.inject.Provider;
 
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
 import com.google.gwt.core.client.GWT;

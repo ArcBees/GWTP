@@ -24,9 +24,9 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation to generate Event and Handler classes.
- * <p/>
+ * <p>
  * If you type:
- * <p/>
+ * <p>
  * <pre>
  * <code>
  * {@literal @}GenEvent
@@ -36,29 +36,29 @@ import java.lang.annotation.Target;
  * }
  * </code>
  * </pre>
- * <p/>
+ * <p>
  * gwt-platform will generate two classes, {@code FooChangedEvent} and {@code FooChangedHandler}.
- * <p/>
+ * <p>
  * {@code FooChangedEvent} will have fields, getters, and a constructor for foo and
  * originator, plus static {@code getType()}, instance dispatch, etc., for it to
  * function correctly as a {@link com.google.gwt.event.shared.GwtEvent}.
- * <p/>
+ * <p>
  * {@code FooChangedHandler} will be an interface with a {@code onFooChanged} method that takes
  * a {@code FooChangedEvent} parameter.
- * <p/>
+ * <p>
  * <b>Notes:</b>
- * <p/>
+ * <p>
  * There is no naming requirement for your class name. It will be appended with
  * Event and Handler.
- * <p/>
+ * <p>
  * <b>Using @{@link Order}:</b>
- * <p/>
+ * <p>
  * The order the the fields can be optionally specified using the @{@link Order}
  * annotation. If @{@link Order} is not used, then the order of the parameters to the
  * constructor and to fire() is undefined.
- * <p/>
+ * <p>
  * If you type:
- * <p/>
+ * <p>
  * <pre>
  * <code>
  * {@literal @}GenEvent
@@ -70,7 +70,7 @@ import java.lang.annotation.Target;
  * </code>
  * </pre>
  * The following constructor and {@code fire} methods will be generated:
- * <p/>
+ * <p>
  * <pre>
  * <code>
  *  ...
@@ -81,7 +81,7 @@ import java.lang.annotation.Target;
  * </code>
  * </pre>
  * Omitting the @{@link Order} annotations would yield:
- * <p/>
+ * <p>
  * <pre>
  * <code>
  *  ...
@@ -91,13 +91,13 @@ import java.lang.annotation.Target;
  *  ...
  * </code>
  * </pre>
- * <p/>
- * <p/>
+ * <p>
+ * <p>
  * <b>Using @{@link Optional}:</b>
- * <p/>
+ * <p>
  * If @{@link Optional} is used together with @{@link GenEvent}, an additional fire method is generated.
  * If you type:
- * <p/>
+ * <p>
  * <pre>
  * <code>
  * {@literal @}GenEvent
@@ -109,7 +109,7 @@ import java.lang.annotation.Target;
  * </code>
  * </pre>
  * The following constructors and {@code fire} methods will be generated:
- * <p/>
+ * <p>
  * <pre>
  * <code>
  *  ...

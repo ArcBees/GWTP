@@ -23,7 +23,7 @@ import com.google.gwt.event.shared.HasHandlers;
  * This event is fired whenever all visible presenters should
  * be reset. This is fired automatically right after navigating to a
  * new place.
- * <p/>
+ * <p>
  * The default implementation or {@link com.gwtplatform.mvp.client.RootPresenter} causes
  * {@link com.gwtplatform.mvp.client.PresenterWidget#onReset()}
  * to be called, starting from the top level presenter and going down.

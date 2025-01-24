@@ -20,7 +20,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
-import javax.lang.model.util.SimpleElementVisitor6;
+import javax.lang.model.util.SimpleElementVisitor8;
 
 import com.gwtplatform.dispatch.rest.processors.resource.ResourceMethod;
 import com.gwtplatform.processors.tools.domain.Type;
@@ -33,7 +33,7 @@ public class NameUtils {
     private static final String JACKSON_MAPPER_PROVIDER_NAME = "GeneratedJacksonMapperProvider";
 
     public static String parentName(VariableElement element) {
-        return element.getEnclosingElement().accept(new SimpleElementVisitor6<String, Void>("") {
+        return element.getEnclosingElement().accept(new SimpleElementVisitor8<String, Void>("") {
             @Override
             public String visitExecutable(ExecutableElement parent, Void v) {
                 return qualifiedMethodName(parent);

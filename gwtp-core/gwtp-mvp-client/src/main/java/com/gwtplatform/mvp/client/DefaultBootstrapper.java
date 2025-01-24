@@ -16,9 +16,9 @@
 
 package com.gwtplatform.mvp.client;
 
-import javax.inject.Inject;
-
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
+
+import jakarta.inject.Inject;
 
 /**
  * The default Bootstrapper that is used if none is specified in {@link

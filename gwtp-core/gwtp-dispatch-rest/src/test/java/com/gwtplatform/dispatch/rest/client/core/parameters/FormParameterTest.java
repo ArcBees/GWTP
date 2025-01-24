@@ -21,8 +21,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javax.inject.Inject;
-
 import org.jukito.JukitoRunner;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,6 +28,8 @@ import org.junit.runner.RunWith;
 
 import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
+
+import jakarta.inject.Inject;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;

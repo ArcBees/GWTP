@@ -16,14 +16,14 @@
 
 package com.gwtplatform.dispatch.rest.client.core;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-
 import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.client.RestDispatch;
 import com.gwtplatform.dispatch.rest.client.filter.RestFilterChain;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 /**
  * The default implementation for {@link RestDispatch}.

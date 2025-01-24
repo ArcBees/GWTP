@@ -23,9 +23,9 @@ import java.lang.annotation.Target;
  * Use this annotation with a {@link com.gwtplatform.mvp.client.proxy.Proxy} if
  * you don't want the associated {@link com.gwtplatform.mvp.client.Presenter} to
  * sit behind a split point.
- * <p/>
+ * <p>
  * Here is an example use of {@link ProxyStandard}:
- * <p/>
+ * <p>
  * <pre>
  * &#064;ProxyStandard
  * public interface MyProxy extends ProxyPlace&lt;MyPresenter&gt; {

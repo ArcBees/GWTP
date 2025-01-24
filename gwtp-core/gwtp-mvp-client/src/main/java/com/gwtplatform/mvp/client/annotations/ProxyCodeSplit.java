@@ -24,9 +24,9 @@ import java.lang.annotation.Target;
  * you want the associated {@link com.gwtplatform.mvp.client.Presenter} to sit
  * behind a split point. Thus the javascript code will be compiled into a new
  * javascript file and only be loaded from the webapplication server if needed.
- * <p/>
+ * <p>
  * Here is an example use of {@link ProxyCodeSplit}:
- * <p/>
+ * <p>
  * <pre>
  * &#064;ProxyCodeSplit
  * public interface MyProxy extends ProxyPlace&lt;MyPresenter&gt; {

@@ -1,7 +1,8 @@
 package $impl.packageName;
 
+import jakarta.inject.Inject;
+
 import javax.annotation.Generated;
-import javax.inject.Inject;
 
 import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.client.annotations.DefaultDateFormat;

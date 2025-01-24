@@ -41,7 +41,6 @@ import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.logger.Logger;
 
 import static java.nio.file.Files.newInputStream;
-
 import static com.google.common.io.CharStreams.readLines;
 import static com.google.common.io.Files.getNameWithoutExtension;
 

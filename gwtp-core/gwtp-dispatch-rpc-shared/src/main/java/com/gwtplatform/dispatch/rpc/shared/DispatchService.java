@@ -21,19 +21,15 @@ import com.gwtplatform.dispatch.shared.ActionException;
 
 /**
  * The base class of the synchronous dispatcher service. The server-side implementation is
- * {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl} and the async client-side version is
+ * {@code com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl} and the async client-side version is
  * {@link DispatchServiceAsync}.
- * <p/>
- * This class is closely related to {@link com.gwtplatform.dispatch.rpc.server.Dispatch}, in theory the latter wouldn't
+ * <p>
+ * This class is closely related to {@code com.gwtplatform.dispatch.rpc.server.Dispatch}, in theory the latter wouldn't
  * be needed, but we use it to workaround a GWT limitation described in
- * {@link com.gwtplatform.dispatch.rpc.client.DispatchAsync}.
+ * {@code com.gwtplatform.dispatch.rpc.client.DispatchAsync}.
  *
- * @see com.gwtplatform.dispatch.rpc.client.DispatchAsync
- * @see com.gwtplatform.dispatch.rpc.server.Dispatch
- * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl
  * @see DispatchService
  * @see DispatchServiceAsync
- * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl
  */
 public interface DispatchService extends RemoteService {
     /**

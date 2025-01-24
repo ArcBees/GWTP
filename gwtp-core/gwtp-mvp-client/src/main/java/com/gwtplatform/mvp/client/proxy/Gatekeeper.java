@@ -39,7 +39,7 @@ package com.gwtplatform.mvp.client.proxy;
  * You must also make sure that your custom Ginjector provides a {@code get}
  * method returning this {@link Gatekeeper} if you want to use it with the
  * {@link com.gwtplatform.mvp.client.annotations.UseGatekeeper @UseGatekeeper} annotation.
- * <p/>
+ * <p>
  * You should usually bind your {@link Gatekeeper} as a singleton.
  */
 public interface Gatekeeper {

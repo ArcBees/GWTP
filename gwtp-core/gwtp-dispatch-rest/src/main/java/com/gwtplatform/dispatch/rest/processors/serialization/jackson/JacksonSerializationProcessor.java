@@ -19,7 +19,6 @@ package com.gwtplatform.dispatch.rest.processors.serialization.jackson;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.inject.Singleton;
 import javax.tools.FileObject;
 import javax.ws.rs.core.MediaType;
 
@@ -38,6 +37,8 @@ import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.outputter.Outputter;
 import com.gwtplatform.processors.tools.utils.Primitives;
 import com.gwtplatform.processors.tools.utils.Utils;
+
+import jakarta.inject.Singleton;
 
 import static com.gwtplatform.dispatch.rest.processors.NameUtils.findRestModuleType;
 import static com.gwtplatform.processors.tools.bindings.BindingContext.newSetBinder;

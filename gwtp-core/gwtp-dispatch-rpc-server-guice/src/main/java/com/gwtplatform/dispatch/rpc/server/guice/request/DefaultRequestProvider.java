@@ -16,12 +16,12 @@
 
 package com.gwtplatform.dispatch.rpc.server.guice.request;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.inject.Singleton;
-import javax.servlet.http.HttpServletRequest;
-
 import com.gwtplatform.dispatch.rpc.server.RequestProvider;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+import jakarta.inject.Singleton;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Singleton
 public class DefaultRequestProvider implements RequestProvider {

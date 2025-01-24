@@ -16,10 +16,10 @@
 
 package com.gwtplatform.common.client;
 
-import javax.inject.Provider;
-
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
+import jakarta.inject.Provider;
 
 /**
  * Implements a {@link IndirectProvider} that uses code splitting for a specific type. The object will be provided from

@@ -16,9 +16,6 @@
 
 package com.gwtplatform.mvp.client.gwt.mvp;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.PopupViewCloseHandler;
 import com.gwtplatform.mvp.client.Presenter;
@@ -28,6 +25,9 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.gwt.mvp.MainPresenterTestUtilGwt.MyProxy;
 import com.gwtplatform.mvp.client.gwt.mvp.MainPresenterTestUtilGwt.MyView;
 import com.gwtplatform.mvp.client.proxy.ProxyPlace;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 /**
  * A test presenter meant to be run in a GWTTestCase.

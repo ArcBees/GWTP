@@ -18,8 +18,6 @@ package com.gwtplatform.mvp.client.gin;
 
 import java.lang.annotation.Annotation;
 
-import javax.inject.Singleton;
-
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.SimpleEventBus;
@@ -32,6 +30,8 @@ import com.gwtplatform.mvp.client.proxy.DefaultPlaceManager;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
 import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
+
+import jakarta.inject.Singleton;
 
 /**
  * Module with default GWTP bindings. You can use {@link DefaultModule.Builder} to configure each required bindings.
@@ -131,7 +131,7 @@ public class DefaultModule extends AbstractGinModule {
      * When instantiating the module this way be sure to read {@link DefaultPlaceManager} and manually bind the required
      * constants. Consider using {@link DefaultModule.Builder} if you need to use a different implementation than the
      * default one for a binding.
-     * <p/>
+     * <p>
      * <b>Important!</b> If you use this class, don't forget to bind {@link DefaultPlace}, {@link ErrorPlace} and {@link
      * UnauthorizedPlace} to name tokens associated to a presenter.<br/>
      */

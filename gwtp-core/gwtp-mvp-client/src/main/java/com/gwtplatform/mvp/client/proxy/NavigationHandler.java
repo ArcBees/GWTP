@@ -22,5 +22,5 @@ import com.google.gwt.event.shared.EventHandler;
  * Handler for {@link NavigationEvent}.
  */
 public interface NavigationHandler extends EventHandler {
-    void onNavigation(final NavigationEvent navigationEvent);
+    void onNavigation(NavigationEvent navigationEvent);
 }

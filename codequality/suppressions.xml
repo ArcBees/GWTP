@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suppressions PUBLIC
+        "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+        "http://users.tpg.com.au/ojburn/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+    <!-- Suppress files under target -->
+    <suppress checks=".*" files=".*[/\\]target[/\\].*"/>
+
+    <!-- Suppress method naming under test -->
+    <suppress checks="MethodName" files=".*[/\\]test[/\\].*"/>
+
+    <!-- Suppress files under com/google -->
+    <suppress checks=".*" files="com[/\\]google[/\\]"/>
+</suppressions>

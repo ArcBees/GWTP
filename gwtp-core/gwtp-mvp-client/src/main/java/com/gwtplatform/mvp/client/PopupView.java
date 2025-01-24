@@ -49,7 +49,7 @@ public interface PopupView extends View {
     /**
      * <b>Important!</b> Do not call this directly. Instead use {@link PresenterWidget#addToPopupSlot(PresenterWidget)},
      * passing this view's {@link PresenterWidget}.
-     * <p/>
+     * <p>
      * Make sure the {@link PopupView} is visible. Will not reposition the popup before showing it.
      */
     void show();

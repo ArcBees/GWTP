@@ -20,7 +20,7 @@ package com.gwtplatform.mvp.client;
  * A class that can contain handlers. Handlers can be registered when
  * the object is being bound, or at any time while it is bound. They
  * will be automatically unregistered when the class is unbound.
- * <p/>
+ * <p>
  * For details on the autobinding mechanism, see {@link HandlerContainerImpl}.
  */
 public interface HandlerContainer {
@@ -30,15 +30,15 @@ public interface HandlerContainer {
      * handlers. You should never call {@link #bind()} from the constructor
      * of a non-leaf class since it is meant to be called after the object has
      * been entirely constructed.
-     * <p/>
+     * <p>
      * When automatic binding is used (see {@link HandlerContainerImpl}), this will
      * be called immediately after the object is constructed through Guice/GIN dependency
      * injection mechanism.
-     * <p/>
+     * <p>
      * If you are not using automatic binding, or if you later call
      * {@link #unbind()} on this object, you will have to call {@link #bind()}
      * manually.
-     * <p/>
+     * <p>
      * Multiple call to bind will not fail, the class will be bound once.
      */
     void bind();

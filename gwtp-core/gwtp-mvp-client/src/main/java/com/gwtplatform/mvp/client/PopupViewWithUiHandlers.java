@@ -23,7 +23,7 @@ import com.gwtplatform.mvp.client.view.PopupPositioner;
  * Base class for a {@link PopupView} that implements the {@link HasUiHandlers}
  * interface. You should always call {@link #setUiHandlers(UiHandlers)} from your
  * presenter 's constructor.
- * <p/>
+ * <p>
  * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
  * since the {@link UiHandlers} are not yet set.
  *
@@ -59,7 +59,7 @@ public abstract class PopupViewWithUiHandlers<C extends UiHandlers> extends
 
     /**
      * Access the {@link UiHandlers} associated with this {@link View}.
-     * <p/>
+     * <p>
      * <b>Important!</b> Never call {@link #getUiHandlers()} inside your constructor
      * since the {@link UiHandlers} are not yet set.
      *

@@ -20,8 +20,8 @@ package com.gwtplatform.dispatch.shared;
  * Provides access to the security cookie stored on the client. The goal of this security cookie is to prevent XSRF
  * attack. For more details see <a href="http://www.gwtproject.org/articles/security_for_gwt_applications.html#xsrf">
  *     this document</a>.
- * <p/>
- * Notice that the default implementation is {@link com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor} which
+ * <p>
+ * Notice that the default implementation is {@code com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor} which
  * does not prevent XSRF attacks if {@literal @}{@link SecurityCookie} is not bound.
  */
 public interface SecurityCookieAccessor {

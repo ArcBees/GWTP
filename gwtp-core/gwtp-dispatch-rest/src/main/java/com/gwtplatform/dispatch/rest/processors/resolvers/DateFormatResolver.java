@@ -16,11 +16,14 @@
 
 package com.gwtplatform.dispatch.rest.processors.resolvers;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
+import javax.lang.model.element.Name;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.DeclaredType;
-import javax.lang.model.util.SimpleTypeVisitor6;
+import javax.lang.model.util.SimpleTypeVisitor8;
 
 import com.google.common.base.Optional;
 import com.gwtplatform.dispatch.rest.shared.DateFormat;
@@ -32,12 +35,16 @@ import static com.gwtplatform.dispatch.rest.processors.NameUtils.parentName;
 
 public class DateFormatResolver {
     private static final String DATE_FORMAT_NOT_DATE =
-            "Method `%s` parameter's `%s` is annotated with @DateFormat but its type is not Date.";
-    private static final SimpleTypeVisitor6<Boolean, Void> DATE_TYPE_VALIDATION_VISITOR =
-            new SimpleTypeVisitor6<Boolean, Void>(false) {
+            "Method `%s` parameter's `%s` is annotated with @DateFormat but its type is not Date, LocalDate "
+            + "or LocalDateTime.";
+    private static final SimpleTypeVisitor8<Boolean, Void> DATE_TYPE_VALIDATION_VISITOR =
+            new SimpleTypeVisitor8<Boolean, Void>(false) {
                 @Override
                 public Boolean visitDeclared(DeclaredType type, Void v) {
-                    return asType(type.asElement()).getQualifiedName().contentEquals(Date.class.getCanonicalName());
+                    final Name typeName = asType(type.asElement()).getQualifiedName();
+                    return typeName.contentEquals(Date.class.getCanonicalName())
+                            || typeName.contentEquals(LocalDate.class.getCanonicalName())
+                            || typeName.contentEquals(LocalDateTime.class.getCanonicalName());
                 }
             };
 

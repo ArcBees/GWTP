@@ -19,8 +19,6 @@ package com.gwtplatform.dispatch.rest.client.core;
 import java.util.List;
 import java.util.Set;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
@@ -32,6 +30,9 @@ import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 public class DefaultBodyFactory implements BodyFactory {
     private final Provider<Set<Serialization>> serializationsProvider;

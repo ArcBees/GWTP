@@ -4,7 +4,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 import javax.annotation.Generated;
-import javax.inject.Inject;
+
+import jakarta.inject.Inject;
 
 import com.google.gwt.inject.client.AsyncProvider;
 import com.gwtplatform.common.client.NamedProviderBundle;

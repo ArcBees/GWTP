@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import javax.inject.Inject;
-
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
@@ -31,11 +29,12 @@ import com.gwtplatform.dispatch.rest.client.testutils.SecuredRestAction;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
+import jakarta.inject.Inject;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.GET;
 
 @RunWith(JukitoRunner.class)
@@ -64,7 +63,7 @@ public class DefaultRequestBuilderFactoryTest {
     @Test
     public void requestTimeoutShouldBeTheTimeoutProvided() throws ActionException {
         // Given
-        given(httpRequestBuilderFactory.create(eq(RequestBuilder.GET), anyString())).willReturn(requestBuilder);
+        given(httpRequestBuilderFactory.create(eq(RequestBuilder.GET), isNull())).willReturn(requestBuilder);
 
         RestAction<Void> action = new SecuredRestAction(GET, RELATIVE_PATH);
 

@@ -16,14 +16,14 @@
 
 package com.gwtplatform.mvp.client;
 
-import javax.inject.Inject;
-
 import org.jukito.JukitoRunner;
 import org.jukito.TestSingleton;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import jakarta.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.ws.rs.core.HttpHeaders;
 
 import com.google.gwt.http.client.RequestBuilder;
@@ -34,6 +32,9 @@ import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import static com.google.gwt.user.client.rpc.RpcRequestBuilder.MODULE_BASE_HEADER;
 

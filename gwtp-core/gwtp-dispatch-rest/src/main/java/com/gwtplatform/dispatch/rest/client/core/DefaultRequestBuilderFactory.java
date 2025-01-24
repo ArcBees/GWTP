@@ -19,14 +19,14 @@ package com.gwtplatform.dispatch.rest.client.core;
 import java.util.EnumMap;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
 import com.gwtplatform.dispatch.rest.client.annotations.RequestTimeout;
 import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
+
+import jakarta.inject.Inject;
 
 /**
  * Default implementation for {@link RequestBuilderFactory}.

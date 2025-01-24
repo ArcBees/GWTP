@@ -23,7 +23,7 @@ public interface HasSecured {
     /**
      * Verifies if the action is secured. Secured actions perform a number of extra security checks, such as validating
      * the {@link com.gwtplatform.dispatch.shared.SecurityCookie} to foil XSRF attacks.
-     * <p/>
+     * <p>
      * <b>Important!</b> Make sure your method returns a value that does not depend on client-side information,
      * otherwise it could be tampered with to turn a secure action into an insecure one. An example of a bad practice
      * would be to store a {@code boolean secured} member and return that. Since this field is serialized, the user

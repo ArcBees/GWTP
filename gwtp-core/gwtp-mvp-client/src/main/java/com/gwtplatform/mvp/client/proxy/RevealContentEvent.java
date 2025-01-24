@@ -25,7 +25,7 @@ import com.gwtplatform.mvp.client.presenter.slots.NestedSlot;
  * This event is fired by a {@link Presenter} that desires to reveal itself within its parent. It is typically fired in
  * the {@link Presenter#revealInParent()} method. To reveal a presenter at the root of the application, fire either
  * {@link RevealRootContentEvent}, {@link RevealRootLayoutContentEvent} or {@link RevealRootPopupContentEvent} instead.
- * <p/>
+ * <p>
  * This event is handled by {@link Proxy} classes. Upon handling this event, the proxy <b>first</b> sets the content
  * appropriately in the presenter, and then reveals the presenter.
  *

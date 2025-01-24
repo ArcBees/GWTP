@@ -24,7 +24,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
  * Event fired after navigation has occurred. It will not be fired if navigation is
  * refused through {@link PlaceManager#setOnLeaveConfirmation}, instead
  * {@link NavigationRefusedEvent} will.
- * <p/>
+ * <p>
  * Instead of registering your presenter towards this event, consider overriding
  * {@link com.gwtplatform.mvp.client.PresenterWidget#onReset()}. From there
  * you can call {@link PlaceManager#getCurrentPlaceRequest()} to get the

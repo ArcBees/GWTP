@@ -29,7 +29,7 @@ import com.gwtplatform.mvp.client.view.PopupPositioner.PopupPosition;
 /**
  * A simple implementation of {@link PopupView} that can be used when the widget returned by {@link #asWidget()}
  * inherits from {@link PopupPanel}.
- * <p/>
+ * <p>
  * Also, this implementation simply disregards every call to {@link #setInSlot(Object, IsWidget)}, {@link
  * #addToSlot(Object, IsWidget)}, and {@link #removeFromSlot(Object, IsWidget)}.
  */

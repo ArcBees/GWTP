@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.rpc.client.interceptor;
 /**
  * This exception is thrown as a side-effect of an error when registering a delegating callback. A provider was
  * registered to provide a client-side interceptor for an action, but this action was not the same action as specified
- * by {@link Interceptor#getActionType()}.
+ * by {@code Interceptor#getActionType()}.
  */
 public class InterceptorMismatchException extends RuntimeException {
     private static final long serialVersionUID = 1L;

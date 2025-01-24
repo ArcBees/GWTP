@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.client.core;
 
-import javax.inject.Inject;
-
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.jukito.TestSingleton;
@@ -37,8 +35,9 @@ import com.gwtplatform.dispatch.rest.client.testutils.UnsecuredRestAction;
 import com.gwtplatform.dispatch.rest.client.testutils.UrlUtilsForTests;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import jakarta.inject.Inject;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.GET;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.POST;
 

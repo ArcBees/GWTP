@@ -16,9 +16,6 @@
 
 package com.gwtplatform.mvp.client.mvp;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.PresenterWidget;
@@ -26,6 +23,9 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.presenter.slots.SingleSlot;
 import com.gwtplatform.mvp.client.proxy.Proxy;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * This is the test presenter.

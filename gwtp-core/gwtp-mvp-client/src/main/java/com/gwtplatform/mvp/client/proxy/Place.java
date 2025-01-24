@@ -21,7 +21,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 /**
  * <b>Important:</b> For simplicity, places do not participate in dependency
  * injection and can be created with <code>new</code>.
- * <p/>
+ * <p>
  * A place represents a particular 'bookmark' or location inside the
  * application. A place is stateful - it may represent a location with it's
  * current settings, such as a particular ID value, or other unique indicators
@@ -32,7 +32,7 @@ public interface Place {
 
     /**
      * Checks if the associated presenter can be revealed.
-     * <p/>
+     * <p>
      * The default implementation of this method always return <code>true</code>,
      * but subclasses should override this and check to make sure the current user
      * has the privileges to see the place. Make sure the places you request in

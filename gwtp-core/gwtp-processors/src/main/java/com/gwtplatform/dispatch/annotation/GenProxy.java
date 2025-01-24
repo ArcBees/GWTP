@@ -90,16 +90,16 @@ import com.google.web.bindery.requestfactory.shared.Locator;
 public @interface GenProxy {
     /**
      * Defines the output package.
-     * <p/>
+     * <p>
      * <p>
      * By default the output is generated to the same source folder.
      * </p>
-     * <p/>
+     * <p>
      * <p>
      * If you are not using a custom target package, the processor will
      * automatically replace ".server" in your package name with ".shared".
      * </p>
-     * <p/>
+     * <p>
      * <p>
      * <code>
      * {@code @GenProxy}(targetPackage = "com.example.package.server")

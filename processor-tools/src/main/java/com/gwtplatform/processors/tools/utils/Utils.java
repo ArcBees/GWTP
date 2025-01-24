@@ -107,7 +107,8 @@ public class Utils {
     public List<Element> getAllMembers(TypeElement type, TypeElement... exclusions) {
         List<? extends Element> allMembers = elements.getAllMembers(type);
 
-        final Set<Element> allExclusions = exclusions == null ? null : FluentIterable.of(exclusions)
+        @SuppressWarnings("unchecked")
+        final Set<Element> allExclusions = exclusions == null ? null : (Set<Element>) FluentIterable.from(exclusions)
                 .transformAndConcat(elements::getAllMembers).toSet();
 
         return FluentIterable.from(allMembers)

@@ -21,18 +21,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * The asynchronous client-side dispatcher service. The server-side implementation is
- * {@link com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl}.
- * <p/>
+ * {@code com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl}.
+ * <p>
  * This class is closely related to {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}, in theory the latter
  * wouldn't be needed, but we use it to workaround a GWT limitation described in
- * {@link com.gwtplatform.dispatch.rpc.client.DispatchAsync}.
+ * {@code com.gwtplatform.dispatch.rpc.client.DispatchAsync}.
  *
- * @see com.gwtplatform.dispatch.client.DispatchAsync
- * @see com.gwtplatform.dispatch.rpc.server.Dispatch
- * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchService
  * @see DispatchServiceAsync
- * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl
  */
 public interface DispatchServiceAsync {
     /**

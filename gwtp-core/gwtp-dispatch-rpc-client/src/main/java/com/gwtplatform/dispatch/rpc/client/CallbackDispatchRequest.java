@@ -21,7 +21,7 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * An implementation of {@link DispatchRequest} that should be used by
- * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s that make asynchronous calls.
+ * {@code com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s that make asynchronous calls.
  *
  * @param <R> The type of the {@link AsyncCallback}.
  */

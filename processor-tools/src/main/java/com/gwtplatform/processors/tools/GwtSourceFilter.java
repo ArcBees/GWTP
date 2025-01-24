@@ -88,7 +88,7 @@ public class GwtSourceFilter {
     }
 
     public String getApplicationPackage() {
-        return getSourcePackages().iterator().next();
+        return getSourcePackages().stream().findFirst().orElse("");
     }
 
     public Set<String> getSourcePackages() {

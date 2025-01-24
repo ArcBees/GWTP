@@ -23,9 +23,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 
-import javax.inject.Inject;
-
 import com.gwtplatform.common.shared.UrlUtils;
+
+import jakarta.inject.Inject;
 
 /**
  * Implementation of {@link TokenFormatter} with support for route like place names.
@@ -38,7 +38,7 @@ import com.gwtplatform.common.shared.UrlUtils;
  * </p>
  * <p>
  * Replace the default binding to {@link ParameterTokenFormatter} with {@link RouteTokenFormatter}. In case you use
- * GWTPs {@link com.gwtplatform.mvp.client.gin.DefaultModule DefaultModule}:
+ * GWTPs {@code com.gwtplatform.mvp.client.gin.DefaultModule}:
  * </p>
  * <pre>
  * install(new DefaultModule(DefaultPlaceManager.class, RouteTokenFormatter.class));
@@ -114,7 +114,7 @@ public class RouteTokenFormatter implements TokenFormatter {
     private class RouteMatcher {
         /**
          * All matching routes of the place-token.
-         * <p/>
+         * <p>
          * Sorted in ascending order by the number of static matches.
          */
         final TreeSet<RouteMatch> allMatches;
@@ -223,9 +223,9 @@ public class RouteTokenFormatter implements TokenFormatter {
 
     @Override
     public String toHistoryToken(List<PlaceRequest> placeRequestHierarchy) throws TokenFormatException {
-        assert placeRequestHierarchy.size() == 1 : "Expected a place hierarchy with exactly one place.";
+        assert !placeRequestHierarchy.isEmpty() : "Expected a place hierarchy with one or more places.";
 
-        return toPlaceToken(placeRequestHierarchy.get(0));
+        return toPlaceToken(placeRequestHierarchy.get(placeRequestHierarchy.size() - 1));
     }
 
     @Override

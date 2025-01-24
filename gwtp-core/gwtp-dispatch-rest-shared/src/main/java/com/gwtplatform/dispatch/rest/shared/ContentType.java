@@ -45,7 +45,7 @@ public class ContentType {
 
     /**
      * Parses a content type and return an object representation. Input may look like:
-     * <p/>
+     * <p>
      * application/json; charset=utf-8; q=0.9
      */
     public static ContentType valueOf(String value) {

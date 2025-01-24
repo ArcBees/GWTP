@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 
 /**
  * Use the @{@link Optional} annotation to specify optional fields.
- * <p/>
+ * <p>
  * <p>
  * If one or more fields are declared optional, the system generates an
  * additional pair of constructor and {@code fire} method that can be called
@@ -34,7 +34,7 @@ import java.lang.annotation.Target;
  * The omitted fields are not initialized and will contain
  * their default value (i.e. objects will be initialized to {@code null}).
  * </p>
- * <p/>
+ * <p>
  * <p>
  * You can use this annotation with:
  * </p>
@@ -43,7 +43,7 @@ import java.lang.annotation.Target;
  * <li>@{@link GenDto}</li>
  * <li>@{@link GenDispatch}</li>
  * </ul>
- * <p/>
+ * <p>
  * <p>
  * See the above annotations for specific behaviors with optional fields.
  * </p>

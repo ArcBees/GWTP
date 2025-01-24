@@ -35,9 +35,8 @@ import org.mockito.MockingDetails;
 import com.google.gwt.dev.util.collect.Maps;
 
 import static java.util.Arrays.asList;
-
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockingDetails;
 

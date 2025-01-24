@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import com.gwtplatform.common.shared.UrlUtils;
+
+import jakarta.inject.Inject;
 
 /**
  * Formats tokens from {@code String} values to {@link PlaceRequest} and {@link PlaceRequest}
@@ -39,21 +39,21 @@ import com.gwtplatform.common.shared.UrlUtils;
  * parameter or a value it is escaped using the {@code '\'} character by replacing {@code '/'} with
  * {@code '\0'}, {@code ';'} with {@code '\1'}, {@code '='} with {@code '\2'} and {@code '\'} with
  * {@code '\3'}.
- * <p/>
+ * <p>
  * Before decoding a {@link String} URL fragment into a {@link PlaceRequest} or a
  * {@link PlaceRequest} hierarchy, {@link ParameterTokenFormatter} will first pass the
- * {@link String} through {@link URL#decodeQueryString(String)} so that if the URL was URL-encoded
+ * {@link String} through {@link UrlUtils#decodeQueryString(String)} so that if the URL was URL-encoded
  * by some user agent, like a mail user agent, it is still parsed correctly.
- * <p/>
+ * <p>
  * For example, {@link ParameterTokenFormatter} would parse any of the following:
- * <p/>
+ * <p>
  * <pre>
  * nameToken1%3Bparam1.1%3Dvalue1.1%3Bparam1.2%3Dvalue1.2%2FnameToken2%2FnameToken3%3Bparam3.1%3Dvalue%03%11
  * nameToken1;param1.1=value1.1;param1.2=value1.2/nameToken2/nameToken3;param3.1=value\03\21
  * </pre>
- * <p/>
+ * <p>
  * Into the following hierarchy of {@link PlaceRequest}:
- * <p/>
+ * <p>
  * <pre>
  * {
  *   { "nameToken1", { {"param1.1", "value1.1"}, {"parame1.2","value1.2"} },
@@ -61,9 +61,9 @@ import com.gwtplatform.common.shared.UrlUtils;
  *     "nameToken3", { {"param3.1", "value/3=1"} } }
  * }
  * </pre>
- * <p/>
+ * <p>
  * If you want to use different symbols as separator, use the
- * {@link #ParameterTokenFormatter(String, String, String)} constructor.
+ * {@link #ParameterTokenFormatter(UrlUtils, String, String, String)} constructor.
  */
 public class ParameterTokenFormatter implements TokenFormatter {
 
@@ -94,7 +94,7 @@ public class ParameterTokenFormatter implements TokenFormatter {
     /**
      * This constructor makes it possible to use custom separators in your token formatter. The
      * separators must be 1-letter strings, they must all be different from one another, and they
-     * must be encoded when ran through {@link URL#encodeQueryString(String)}).
+     * must be encoded when ran through {@link UrlUtils#encodeQueryString(String)}).
      *
      * @param hierarchySeparator The symbol used to separate {@link PlaceRequest} in a hierarchy.
      *                           Must be a 1-character string and can't be {@code %}.
@@ -148,7 +148,7 @@ public class ParameterTokenFormatter implements TokenFormatter {
 
     /**
      * Converts an unescaped string to a place request. To unescape the hash fragment you must run it
-     * through {@link URL#decodeQueryString(String)}.
+     * through {@link UrlUtils#decodeQueryString(String)}.
      *
      * @param unescapedPlaceToken The unescaped string to convert to a place request.
      * @return The place request.
@@ -251,7 +251,7 @@ public class ParameterTokenFormatter implements TokenFormatter {
     /**
      * Use our custom escaping mechanism to escape the provided string. This should be used on the
      * name token, and the parameter keys and values, before they are attached with the various
-     * separators. The string will also be passed through {@link URL#encodeQueryString}.
+     * separators. The string will also be passed through {@link UrlUtils#encodeQueryString}.
      * Visible for testing.
      *
      * @param string The string to escape.
@@ -287,9 +287,9 @@ public class ParameterTokenFormatter implements TokenFormatter {
      * Use our custom escaping mechanism to unescape the provided string. This should be used on the
      * name token, and the parameter keys and values, after they have been split using the various
      * separators. The input string is expected to already be sent through
-     * {@link URL#decodeQueryString}.
+     * {@link UrlUtils#decodeQueryString}.
      *
-     * @param string The string to unescape, must have passed through {@link URL#decodeQueryString}.
+     * @param string The string to unescape, must have passed through {@link UrlUtils#decodeQueryString}.
      * @return The unescaped string.
      * @throws TokenFormatException if there is an error converting.
      */

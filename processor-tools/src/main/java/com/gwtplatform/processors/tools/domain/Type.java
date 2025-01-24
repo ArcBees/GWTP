@@ -102,7 +102,7 @@ public class Type implements HasImports, Comparable<Type> {
 
             enclosingNames = enclosingElementNames.toString();
         } else {
-            throw new IllegalArgumentException("TypeMirror must be a primitive or declared type.");
+            throw new IllegalArgumentException("TypeMirror must be a primitive or declared type. " + type.toString());
         }
     }
 

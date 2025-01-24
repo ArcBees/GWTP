@@ -1,11 +1,12 @@
 package $impl.packageName;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Generated;
-import javax.inject.Inject;
-import javax.inject.Provider;
 
 import com.gwtplatform.common.client.NamedProviderBundle;
 #printImports($imports)

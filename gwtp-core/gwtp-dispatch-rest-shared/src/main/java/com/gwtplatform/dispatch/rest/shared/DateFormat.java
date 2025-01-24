@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation used to specify a date format pattern.
- * <p/>
+ * <p>
  * This annotation may be put on {@link java.util.Date Date} parameters annotated with
  * {@link javax.ws.rs.FormParam @FormParam}, {@link javax.ws.rs.QueryParam @QueryParam},
  * {@link javax.ws.rs.PathParam @PathParam} or {@link javax.ws.rs.HeaderParam @HeaderParam}.
@@ -34,7 +34,7 @@ public @interface DateFormat {
     /**
      * <a href="http://www.iso.org/iso/support/faqs/faqs_widely_used_standards/widely_used_standards_other/iso8601">
      * ISO 8601</a> date format.
-     * <p/>
+     * <p>
      * Example: {@code 2014-02-25T10:59:26.046-05:00}
      */
     String DEFAULT = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ";
@@ -42,7 +42,7 @@ public @interface DateFormat {
     /**
      * The formatting pattern to use for parsing the date. The pattern must follow the rules defined by
      * {@link com.google.gwt.i18n.shared.DateTimeFormat DateTimeFormat}.
-     * <p/>
+     * <p>
      * If not specified, {@link #DEFAULT} will be used.
      */
     String value() default DEFAULT;

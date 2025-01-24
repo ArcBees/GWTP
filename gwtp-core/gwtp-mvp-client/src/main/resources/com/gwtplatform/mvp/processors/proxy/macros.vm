@@ -1,6 +1,6 @@
 #macro(printProxyImports $proxy)
 #set($bundle=$proxy.bundleDetails)
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 #if($bundle && !$bundle.isManualBundle())
 #if(!$proxy.customProvider)
 import com.gwtplatform.common.client.CodeSplitNamedBundleProvider;
@@ -17,7 +17,7 @@ import com.google.gwt.inject.client.AsyncProvider;
 import com.gwtplatform.common.client.CodeSplitProvider;
 #end
 #else
-import javax.inject.Provider;
+import jakarta.inject.Provider;
 #if(!$proxy.customProvider)
 import com.gwtplatform.common.client.StandardProvider;
 #end

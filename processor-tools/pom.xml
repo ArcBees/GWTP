@@ -36,7 +36,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jukito</groupId>
+            <groupId>de.knightsoft-net</groupId>
             <artifactId>jukito</artifactId>
             <version>${jukito.version}</version>
             <scope>test</scope>

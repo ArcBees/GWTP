@@ -22,7 +22,7 @@ import java.util.Collections;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
-import javax.lang.model.util.SimpleAnnotationValueVisitor7;
+import javax.lang.model.util.SimpleAnnotationValueVisitor8;
 
 import com.google.common.base.CaseFormat;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplitBundle.NoOpProviderBundle;
@@ -111,7 +111,7 @@ public class BundleDetails implements HasImports {
 
     private String extractBundleValue() {
         return getAnnotationValue(codeSplitBundleMirror, "value")
-                .accept(new SimpleAnnotationValueVisitor7<String, Void>("") {
+                .accept(new SimpleAnnotationValueVisitor8<String, Void>("") {
                     @Override
                     public String visitString(String value, Void v) {
                         return sanitizeBundleName(value);
@@ -126,7 +126,7 @@ public class BundleDetails implements HasImports {
 
     private int extractBundleId() {
         return getAnnotationValue(codeSplitBundleMirror, "id")
-                .accept(new SimpleAnnotationValueVisitor7<Integer, Void>(-1) {
+                .accept(new SimpleAnnotationValueVisitor8<Integer, Void>(-1) {
                     @Override
                     public Integer visitInt(int id, Void v) {
                         return id;
@@ -136,7 +136,7 @@ public class BundleDetails implements HasImports {
 
     private Type extractBundleClass() {
         return getAnnotationValue(codeSplitBundleMirror, "bundleClass")
-                .accept(new SimpleAnnotationValueVisitor7<Type, Void>() {
+                .accept(new SimpleAnnotationValueVisitor8<Type, Void>() {
                     @Override
                     public Type visitType(TypeMirror bundleClass, Void v) {
                         boolean isNotSpecified = asTypeElement(bundleClass).getQualifiedName()
@@ -161,7 +161,7 @@ public class BundleDetails implements HasImports {
                             + "Either specify a bundle name or a Bundle Class with an ID. "
                             + "Defaulting to @ProxyStandard.");
             valid = false;
-        } else if ((id < 0 && bundleType != null) || (id > -1 && bundleType == null)) {
+        } else if (id < 0 && bundleType != null || id > -1 && bundleType == null) {
             logger.mandatoryWarning()
                     .context(proxyElement, codeSplitBundleMirror)
                     .log("@ProxyCodeSplitBundle used with an invalid Bundle Class configuration. "

@@ -18,7 +18,6 @@ package com.gwtplatform.dispatch.rest.client.serialization;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 
 import com.github.nmorel.gwtjackson.client.JsonDeserializationContext;
@@ -26,6 +25,8 @@ import com.github.nmorel.gwtjackson.client.JsonSerializationContext;
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
 import com.github.nmorel.gwtjackson.client.exception.JsonMappingException;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
+
+import jakarta.inject.Inject;
 
 /**
  * JSON implementation of {@link Serialization}. It acts as a facade to <a href="https://github.com/nmorel/gwt-jackson">
@@ -57,7 +58,7 @@ public class JsonSerialization implements Serialization {
     @Override
     public boolean canDeserialize(String type, ContentType contentType) {
         return VOID.equals(type)
-                || (CONTENT_TYPE.isCompatible(contentType) && jacksonMapperProvider.hasMapper(type));
+                || CONTENT_TYPE.isCompatible(contentType) && jacksonMapperProvider.hasMapper(type);
     }
 
     @Override

@@ -32,7 +32,7 @@ public interface PlaceManager extends HasHandlers {
      * Builds a string corresponding to the history token to reveal the specified
      * {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest}. This can be used with a
      * {@link com.google.gwt.user.client.ui.Hyperlink}.
-     * <p/>
+     * <p>
      * Invoking this history token will discard all the place hierarchy, effectively revealing the
      * request as a top-level place. To keep the place hierarchy, see
      * {@link #buildRelativeHistoryToken(com.gwtplatform.mvp.shared.proxy.PlaceRequest)},
@@ -49,7 +49,7 @@ public interface PlaceManager extends HasHandlers {
     /**
      * Builds a string corresponding to the history token to reveal the specified place from the
      * current place hierarchy.
-     * <p/>
+     * <p>
      * Examples, suppose the current hierarchy is {@code requestA > requestB > requestC}
      * <ul>
      * <li>Calling {@code revealRelativePlace(-1)} will make a link to
@@ -73,7 +73,7 @@ public interface PlaceManager extends HasHandlers {
      * Builds a string corresponding to the history token to reveal the specified {@link PlaceRequest}
      * as a child of the current place hierarchy. Identical to calling
      * {@link #buildRelativeHistoryToken(PlaceRequest, int)} with a level of {@code 0}.
-     * <p/>
+     * <p>
      * To get the history token for revealing as a top-level place, see {@link #buildHistoryToken}. To
      * navigate back to a specific place in the hierarchy, see
      * {@link #buildRelativeHistoryToken(int)}.
@@ -88,11 +88,11 @@ public interface PlaceManager extends HasHandlers {
     /**
      * Builds a string corresponding to the history token to reveal the specified {@link PlaceRequest}
      * relative to the other places in the current place hierarchy.
-     * <p/>
+     * <p>
      * To get the history token for revealing as a top-level place, see {@link #buildHistoryToken}. To
      * navigate back to a specific place in the hierarchy, see
      * {@link #buildRelativeHistoryToken(int)}.
-     * <p/>
+     * <p>
      * Examples, suppose the current hierarchy is {@code requestA > requestB > requestC}
      * <ul>
      * <li>Calling {@code buildRelativeHistoryToken(requestD, 0)} will make a link to
@@ -159,10 +159,10 @@ public interface PlaceManager extends HasHandlers {
     /**
      * Updates History without firing a {@link com.google.gwt.event.logical.shared.ValueChangeEvent}.
      * Only the last {@link PlaceRequest} of the place request hierarchy is modified.
-     * <p/>
+     * <p>
      * This method will only work if the passed {@link PlaceRequest} has the same name token as the
      * current place request (see {@link #getCurrentPlaceRequest()}.
-     * <p/>
+     * <p>
      * If {@code true} is passed as a second parameter, then this method causes a new token to be
      * added to the browser history, affecting the behavior of the browser's <em>back</em> button.
      *
@@ -185,7 +185,7 @@ public interface PlaceManager extends HasHandlers {
      * with it. Consider passing {@code false} as the second parameter of {@code revealPlace},
      * otherwise a new token will be inserted in the browser's history and hitting the browser's
      * <em>back</em> button will not take the user out of the application.
-     * <p/>
+     * <p>
      * <b>Important!</b> Make sure you build a valid {@link PlaceRequest} and that the user has access
      * to it, otherwise you might create an infinite loop.
      */
@@ -199,9 +199,9 @@ public interface PlaceManager extends HasHandlers {
      * second parameter of {@code revealPlace}, otherwise a new token will be inserted in the
      * browser's history and hitting the browser's <em>back</em> button will take the user back to the
      * invalid page he initially tried to access.
-     * <p/>
+     * <p>
      * The default implementation is simply to call {@link #revealDefaultPlace()}.
-     * <p/>
+     * <p>
      * <b>Important!</b> Make sure you build a valid {@link PlaceRequest} and that the user has access
      * to it, otherwise you might create an infinite loop.
      *
@@ -221,9 +221,9 @@ public interface PlaceManager extends HasHandlers {
      * be inserted in the browser's history and hitting the browser's <em>back</em> button will take
      * the user
      * back to the unauthorized page he initially tried to access.
-     * <p/>
+     * <p>
      * The default implementation is simply to call {@link #revealErrorPlace(String)}.
-     * <p/>
+     * <p>
      * <b>Important!</b> Make sure you build a valid {@link PlaceRequest} and that the user has access
      * to it, otherwise you might create an infinite loop.
      *
@@ -236,10 +236,10 @@ public interface PlaceManager extends HasHandlers {
      * current page. Navigating away can happen either occur by changing the program state (the
      * history token), by entering an external URL or by closing the window. All cases will be
      * handled.
-     * <p/>
+     * <p>
      * If the user indicates that he doesn't accept the navigation, then the navigation will be
      * cancelled, {@link NavigationRefusedEvent} will be triggered and the current page will remain.
-     * <p/>
+     * <p>
      *
      * @param question The question to display. Pass {@code null} to accept navigation directly,
      *                 without asking a question.
@@ -249,7 +249,7 @@ public interface PlaceManager extends HasHandlers {
     /**
      * Programmatically reveals the specified place, updating the browser URL in the process. If you
      * don't want the browser's URL to be updated see {@link #revealPlace(PlaceRequest, boolean)}.
-     * <p/>
+     * <p>
      * This discards the current place hierarchy, effectively revealing the request as a top-level
      * place. To keep the current place hierarchy, see {@link #revealRelativePlace(PlaceRequest)},
      * {@link #revealRelativePlace(PlaceRequest, int)} or {@link #revealRelativePlace(int)}. To reveal
@@ -262,7 +262,7 @@ public interface PlaceManager extends HasHandlers {
 
     /**
      * Programmatically reveals the specified place.
-     * <p/>
+     * <p>
      * This discards the current place hierarchy, effectively revealing the request as a top-level
      * place. To keep the current place hierarchy, see {@link #revealRelativePlace(PlaceRequest)},
      * {@link #revealRelativePlace(PlaceRequest, int)} or {@link #revealRelativePlace(int)}. To reveal
@@ -278,7 +278,7 @@ public interface PlaceManager extends HasHandlers {
     /**
      * Programmatically reveals the specified hierarchy of places place, updating the browser URL in
      * the process.
-     * <p/>
+     * <p>
      * This discards the current place hierarchy, replacing it with the specified place hierarchy. To
      * keep the current place hierarchy, see {@link #revealRelativePlace(PlaceRequest)},
      * {@link #revealRelativePlace(PlaceRequest, int)} or {@link #revealRelativePlace(int)}. To reveal
@@ -288,7 +288,7 @@ public interface PlaceManager extends HasHandlers {
 
     /**
      * Programmatically reveals the specified place from the current place hierarchy.
-     * <p/>
+     * <p>
      * Examples. Suppose the current hierarchy is {@code requestA > requestB > requestC}:
      * <ul>
      * <li>Calling {@code revealRelativePlace(-1)} makes it {@code requestA > requestB}</li>
@@ -310,7 +310,7 @@ public interface PlaceManager extends HasHandlers {
      * Programmatically reveals the specified place as a child of the current place hierarchy.
      * Identical to calling {@link #revealRelativePlace(PlaceRequest, int)} with a level of {@code 0}.
      * This will result in a {@link PlaceRequestInternalEvent} being fired.
-     * <p/>
+     * <p>
      * To reveal as a top-level place, see {@link #revealPlace}. To navigate back to a specific place
      * in the hierarchy, see {@link #revealRelativePlace(int)}.
      *
@@ -322,10 +322,10 @@ public interface PlaceManager extends HasHandlers {
     /**
      * Programmatically reveals the specified place relative to the other places in the current place
      * hierarchy. This will result in a {@link PlaceRequestInternalEvent} being fired.
-     * <p/>
+     * <p>
      * To reveal as a top-level place, see {@link #revealPlace}. To navigate back to a specific place
      * in the hierarchy, see {@link #revealRelativePlace(int)}.
-     * <p/>
+     * <p>
      * Examples. Suppose the current hierarchy is {@code requestA > requestB > requestC}:
      * <ul>
      * <li>Calling {@code revealRelativePlace(requestD, 0)} makes it

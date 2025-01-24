@@ -25,12 +25,12 @@ import com.google.inject.BindingAnnotation;
 
 /**
  * Bind this annotation on the string you want to use as a security cookie.
- * <p/>
+ * <p>
  * <pre>
  * bindConstant().annotatedWith(SecurityCookie.class).to("MYCOOKIE");
  * </pre>
- * <p/>
- * @see com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor
+ * <p>
+ * see com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})

@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rest.client;
 
-import javax.inject.Inject;
-
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,9 +33,11 @@ import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.ActionException;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
+import jakarta.inject.Inject;
+
+import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 
@@ -69,7 +69,7 @@ public class RestDispatchCallTest {
         RequestBuilder requestBuilder = mock(RequestBuilder.class);
         RestDispatchCall<SomeAction, Void> call = createCall(action, callback);
 
-        given(requestBuilderFactory.build(same(action), anyString())).willReturn(requestBuilder);
+        given(requestBuilderFactory.build(same(action), isNull())).willReturn(requestBuilder);
 
         // when
         call.execute();

@@ -24,7 +24,7 @@ import com.google.gwt.user.client.Command;
 /**
  * This class mimics GWT's {@link com.google.gwt.user.client.DeferredCommand DeferredCommand} but it can be used in test
  * cases without having to rely on a {@link com.google.gwt.junit.client.GWTTestCase GWTTestCase}.
- * <p/>
+ * <p>
  * Use {@link #addCommand(Command)} to add deferred commands, then call {@link #pump()} to process all the deferred
  * commands.
  */

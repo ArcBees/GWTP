@@ -3,8 +3,9 @@ package $impl.packageName;
 import java.util.AbstractMap.SimpleEntry;
 
 import javax.annotation.Generated;
-import javax.inject.Inject;
-import javax.inject.Provider;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 import com.gwtplatform.common.client.NamedProviderBundle;
 import com.gwtplatform.common.client.annotations.ProviderBundle;

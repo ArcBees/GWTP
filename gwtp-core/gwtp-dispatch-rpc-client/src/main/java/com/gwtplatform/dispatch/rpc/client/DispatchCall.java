@@ -23,16 +23,16 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
 
 /**
- * An class representing a call made to the server through {@link com.gwtplatform.dispatch.rest.client.RestDispatch
- * RestDispatch} or {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync}.
- * <p/>
+ * An class representing a call made to the server through {@code com.gwtplatform.dispatch.rest.client.RestDispatch}
+ * or {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync}.
+ * <p>
  * This class will perform the work shared by all dispatch modules. It will delegate exceptions to the bound {@link
  * ExceptionHandler}. It will provide access to the security cookie through the bound {@link SecurityCookieAccessor}.
- * <p/>
+ * <p>
  * It also provides a couple extension points for implementations.
  *
- * @param <A> The type of the {@link TypedAction} wrapped by this {@link DispatchCall}.
- * @param <R> The type of the result of the wrapped {@link TypedAction}.
+ * @param <A> The type of the {@code TypedAction} wrapped by this {@link DispatchCall}.
+ * @param <R> The type of the result of the wrapped {@code TypedAction}.
  */
 public abstract class DispatchCall<A, R> {
     private final A action;
@@ -66,7 +66,7 @@ public abstract class DispatchCall<A, R> {
     }
 
     /**
-     * Execution entry point. Call this method to execute the {@link TypedAction action} wrapped by this instance.
+     * Execution entry point. Call this method to execute the {@code TypedAction} wrapped by this instance.
      *
      * @return a {@link DispatchRequest} object.
      */
@@ -81,9 +81,9 @@ public abstract class DispatchCall<A, R> {
     protected abstract DispatchRequest processCall();
 
     /**
-     * Returns the {@link TypedAction} wrapped by this {@link DispatchCall}.
+     * Returns the {@code TypedAction} wrapped by this {@link DispatchCall}.
      *
-     * @return the {@link TypedAction} wrapped by this object.
+     * @return the {@code TypedAction} wrapped by this object.
      */
     protected A getAction() {
         return action;

@@ -23,7 +23,7 @@ import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
-import javax.lang.model.util.SimpleAnnotationValueVisitor7;
+import javax.lang.model.util.SimpleAnnotationValueVisitor8;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
@@ -141,7 +141,7 @@ public class EntryPoint implements HasType, HasImports {
         Optional<AnnotationMirror> annotation = getAnnotationMirror(element, annotationClass);
         if (annotation.isPresent()) {
             return getAnnotationValue(annotation.get(), "value")
-                    .accept(new SimpleAnnotationValueVisitor7<DeclaredType, Void>(null) {
+                    .accept(new SimpleAnnotationValueVisitor8<DeclaredType, Void>(null) {
                         @Override
                         public DeclaredType visitType(TypeMirror typeMirror, Void nothing) {
                             return asDeclared(typeMirror);

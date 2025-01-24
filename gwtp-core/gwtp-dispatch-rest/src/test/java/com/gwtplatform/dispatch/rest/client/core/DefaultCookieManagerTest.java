@@ -28,13 +28,11 @@ import com.gwtplatform.dispatch.rest.shared.HttpMethod;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
 import static java.util.Arrays.asList;
-
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-
 import static com.google.common.collect.Maps.immutableEntry;
 
 @RunWith(GwtMockitoTestRunner.class)

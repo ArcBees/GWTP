@@ -22,11 +22,11 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * An implementation of {@link DispatchRequest} that should be used by
- * {@link com.gwtplatform.dispatch.client.interceptor.Interceptor}s that make asynchronous calls that return a
+ * {@code com.gwtplatform.dispatch.client.interceptor.Interceptor}s that make asynchronous calls that return a
  * {@link com.google.gwt.http.client.Request Request}.
- * <p/>
+ * <p>
  * This class also takes a {@link DispatchRequest} and delegate work to this {@link DispatchRequest}.
- * <p/>
+ * <p>
  * This class is used within
  * {@link com.gwtplatform.dispatch.rpc.client.interceptor.caching.AbstractCachingRpcInterceptor} to be able to store
  * inside an {@link java.util.HashMap HashMap} {@link DefaultCallbackDispatchRequest}

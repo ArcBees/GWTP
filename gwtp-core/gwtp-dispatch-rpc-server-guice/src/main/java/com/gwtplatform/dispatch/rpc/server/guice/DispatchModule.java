@@ -31,7 +31,7 @@ import com.gwtplatform.dispatch.rpc.server.guice.request.DefaultRequestProvider;
  * interfaces. Also every
  * {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler ActionHandler} and
  * {@link com.gwtplatform.dispatch.rpc.server.actionvalidator.ActionValidator ActionValidator} will be loaded lazily.
- * <p/>
+ * <p>
  * If you want to override the defaults ({@link DispatchImpl}, {@link LazyActionHandlerValidatorRegistryImpl} pass
  * the override values into the constructor for this module and ensure it is installed <b>before</b> any
  * {@link HandlerModule} instances.

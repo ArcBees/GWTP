@@ -28,14 +28,14 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  * com.gwtplatform.common.client.IndirectProvider provider} which is used to load the presenter behind the proxy. Using
  * a custom provider enables you to add steps which should happen <b>before</b> the presenter is loaded, instantiated
  * and processed by GIN.
- * <p/>
+ * <p>
  * The class implementing {@code IndirectProvider} must provide a constructor which takes the original provider as the
- * single argument. For presenters which use {@link ProxyStandard @ProxyStandard} this is {@link javax.inject.Provider
- * Provider&lt;T&gt;}; for presenters which use {@link ProxyCodeSplit @ProxyCodeSplit} or {@link ProxyCodeSplitBundle
- * @ProxyCodeSplitBundle } this is {@link com.google.gwt.inject.client.AsyncProvider AsyncProvider&lt;T&gt;}
- * <p/>
+ * single argument. For presenters which use {@link ProxyStandard @ProxyStandard} this is {@link jakarta.inject.Provider
+ * Provider&lt;T&gt;}; for presenters which use {@link ProxyCodeSplit @ProxyCodeSplit} or {@link ProxyCodeSplitBundle}
+ * this is {@link com.google.gwt.inject.client.AsyncProvider AsyncProvider&lt;T&gt;}
+ * <p>
  * Here is an example use of {@code @CustomProvider}:
- * <p/>
+ * <p>
  * <pre>
  * &#064;ProxyCodeSplit
  * &#064;CustomProvider(SecurityContextProvider.class)

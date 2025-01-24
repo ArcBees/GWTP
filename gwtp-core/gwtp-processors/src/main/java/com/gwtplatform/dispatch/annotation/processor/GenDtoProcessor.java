@@ -31,7 +31,7 @@ import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
 
 /**
  * Processes {@link GenDto} annotations.
- * <p/>
+ * <p>
  * {@link GenDtoProcessor} should only ever be called by tool infrastructure.
  * See {@link javax.annotation.processing.Processor} for more details.
  */

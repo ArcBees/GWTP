@@ -19,7 +19,7 @@ package com.gwtplatform.dispatch.client;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * The interface that {@link com.gwtplatform.dispatch.client.interceptor.Interceptor Interceptor}s use to send the
+ * The interface that {@code com.gwtplatform.dispatch.client.interceptor.Interceptor}s use to send the
  * action to execute to the server.
  *
  * @param <A> The action type.

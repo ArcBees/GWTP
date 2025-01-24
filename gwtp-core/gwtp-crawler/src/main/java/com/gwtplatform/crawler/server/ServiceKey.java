@@ -28,7 +28,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Use this annotation to bind the key that should be used when invoking
- * {@link CrawlServiceServlet}. For example:
+ * {@code CrawlServiceServlet}. For example:
  * <pre>bindConstant().annotatedWith(ServiceKey.class).to("123456");
  * </pre>
  */

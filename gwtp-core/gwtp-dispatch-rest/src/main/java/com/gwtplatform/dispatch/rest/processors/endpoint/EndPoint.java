@@ -31,7 +31,6 @@ import com.gwtplatform.processors.tools.domain.Variable;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static javax.lang.model.util.ElementFilter.methodsIn;
-
 import static com.google.auto.common.MoreElements.asType;
 import static com.google.common.base.Optional.absent;
 import static com.google.common.base.Optional.of;

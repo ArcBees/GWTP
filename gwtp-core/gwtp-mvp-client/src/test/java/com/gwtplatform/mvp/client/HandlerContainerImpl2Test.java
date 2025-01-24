@@ -16,12 +16,12 @@
 
 package com.gwtplatform.mvp.client;
 
-import javax.inject.Inject;
-
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import jakarta.inject.Inject;
 
 import static org.junit.Assert.assertFalse;
 

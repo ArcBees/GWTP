@@ -18,8 +18,6 @@ package com.gwtplatform.dispatch.rest.processors.resource;
 
 import java.util.List;
 
-import javax.inject.Singleton;
-
 import com.gwtplatform.dispatch.rest.processors.DispatchRestContextProcessor;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
@@ -27,6 +25,8 @@ import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.outputter.CodeSnippet;
 import com.gwtplatform.processors.tools.outputter.Outputter;
 import com.gwtplatform.processors.tools.utils.Utils;
+
+import jakarta.inject.Singleton;
 
 import static com.gwtplatform.dispatch.rest.processors.NameUtils.findRestModuleType;
 import static com.gwtplatform.processors.tools.bindings.BindingContext.newBinding;

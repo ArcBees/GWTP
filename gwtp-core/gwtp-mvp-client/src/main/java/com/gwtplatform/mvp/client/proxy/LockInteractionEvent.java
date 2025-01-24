@@ -23,10 +23,11 @@ import com.google.gwt.event.shared.HasHandlers;
  * This event is fired whenever interaction should be locked throughout the application,
  * usually because a navigation operation is taking place and interacting could cause
  * unexpected state switches.
- * <p/>
+ * <p>
  * This event is typically fired by the {@link PlaceManager} whenever a navigation operation
  * starts or stops. It is handled by the default {@link com.gwtplatform.mvp.client.RootPresenter} implementation.
- * Override {@link com.gwtplatform.mvp.client.RootPresenter#lockInteraction(boolean)} to customize the behaviour.
+ * Override {@link com.gwtplatform.mvp.client.RootPresenter#onLockInteraction(LockInteractionEvent)} to customize
+ * the behaviour.
  */
 public class LockInteractionEvent extends GwtEvent<LockInteractionHandler> {
     private static Type<LockInteractionHandler> TYPE;

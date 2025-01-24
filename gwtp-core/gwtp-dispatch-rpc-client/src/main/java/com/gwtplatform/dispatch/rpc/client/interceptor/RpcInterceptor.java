@@ -23,21 +23,21 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * Instances of this interface will handle specific types of action classes on the client.
- * <p/>
+ * <p>
  * When a call is executed, the {@link RpcInterceptor} that has been registered with the bound {@link
  * RpcInterceptorRegistry} is called and {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync DispatchAsync} does
  * not automatically send the command over HTTP to the server.
- * <p/>
+ * <p>
  * Interceptors provide a number of flexible options: <ul> <li>The action can be modified before sending the action to
  * the server.</li> <li>A result can be returned without contacting the server.</li> <li>The result can be modified or
  * processed after it is returned from the server.</li> <li>The {@link RpcInterceptor} can take over and communicate
  * directly with the server, possibly using a different mechanism.</li> </ul>
- * <p/>
+ * <p>
  * <b>Important!</b> If your interceptor makes asynchronous calls, be careful with your use of fields as a second call
  * your interceptor could be made while it is waiting for the asynchronous call to return.
- * <p/>
- * <h3>Caching Interceptor Example</h3>
- * <p/>
+ * <p>
+ * <h2>Caching Interceptor Example</h2>
+ * <p>
  * <pre>
  * <code>
  * // Interface of cache singleton
@@ -116,7 +116,7 @@ public interface RpcInterceptor<A, R> {
 
     /**
      * Handles the specified action.
-     * <p/>
+     * <p>
      * If the interceptor makes asynchronous calls, it is recommended that you confirm that this request has not been
      * cancelled after returning by calling {@link com.gwtplatform.dispatch.client.DelegatingDispatchRequest#isPending()
      * DelegatingDispatchRequest#isPending()} against the request parameter.
@@ -126,7 +126,7 @@ public interface RpcInterceptor<A, R> {
      *                       cancelled, you must invoke {@link AsyncCallback#onSuccess(Object)} on this callback once
      *                       you have obtained the result. If any failure occurs call {@link
      *                       AsyncCallback#onFailure(Throwable)}.
-     * @param executeCommand Call {@link ExecuteCommand#execute(Object, AsyncCallback)} on this object to send the
+     * @param executeCommand Call {@link ExecuteCommand#execute(Object, Object)} on this object to send the
      *                       action over to the server. As a parameter you can pass {@code resultCallback} or your
      *                       custom {@link AsyncCallback} if you want to process the result.
      * @return A {@link DispatchRequest} object. Never return {@code null}, instead return a new {@link
@@ -140,7 +140,7 @@ public interface RpcInterceptor<A, R> {
 
     /**
      * Undoes the specified action if supported.
-     * <p/>
+     * <p>
      * If the interceptor makes asynchronous calls, it is recommended that you confirm that this request has not been
      * cancelled after returning by calling
      * {@link com.gwtplatform.dispatch.client.DelegatingDispatchRequest#isPending()}

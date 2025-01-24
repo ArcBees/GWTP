@@ -18,10 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Provider;
-
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.jukito.TestEagerSingleton;
@@ -39,6 +35,10 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImplTest.ProxyPlaceBase;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.tester.DeferredCommandManager;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Provider;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;

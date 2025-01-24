@@ -47,12 +47,12 @@ public enum Primitives {
     }
 
     public static Optional<Primitives> findByPrimitive(final CharSequence primitiveName) {
-        return FluentIterable.of(values())
+        return FluentIterable.from(values())
                 .firstMatch(primitives -> primitiveName.equals(primitives.getPrimitive()));
     }
 
     public static Optional<Primitives> findByBoxed(final CharSequence boxedName) {
-        return FluentIterable.of(values())
+        return FluentIterable.from(values())
                 .firstMatch(primitives -> boxedName.equals(primitives.getBoxedClass().getCanonicalName()));
     }
 

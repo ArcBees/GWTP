@@ -18,14 +18,14 @@ package com.gwtplatform.mvp.client;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import com.google.web.bindery.event.shared.HandlerRegistration;
+
+import jakarta.inject.Inject;
 
 /**
  * The implementation of {@link HandlerContainer}. Inherit from this class if
  * you want subclasses that can contain handlers.
- * <p/>
+ * <p>
  * Classes inheriting from {@link HandlerContainerImpl} and that participate in dependency
  * injection with Guice/GIN can use the automatic binding mechanism. See
  * {@link HandlerContainerImpl#HandlerContainerImpl()} and {@link #HandlerContainerImpl(boolean)}
@@ -52,7 +52,7 @@ public class HandlerContainerImpl implements HandlerContainer {
      * Creates a handler container class with automatic binding, unless
      * {@link AutobindDisable} is used to globally disable automatic
      * binding.
-     * <p/>
+     * <p>
      * Autobinding requires the class to be instantiated by Guice/GIN.
      * If you are instantiating {@link HandlerContainerImpl} with {@code new},
      * autobinding will not work. It is recommended you document it by
@@ -70,7 +70,7 @@ public class HandlerContainerImpl implements HandlerContainer {
      * injection mechanism, unless {@link AutobindDisable} is used to globally
      * disable automatic binding. Otherwise, the user is responsible for calling
      * {@link #bind()}.
-     * <p/>
+     * <p>
      * Autobinding requires the class to be instantiated by Guice/GIN.
      * If you are instantiating {@link HandlerContainerImpl} with {@code new},
      * autobinding will not work. It is recommended you document it by
@@ -113,19 +113,19 @@ public class HandlerContainerImpl implements HandlerContainer {
 
     /**
      * Lifecycle method called when binding the object.
-     * <p/>
+     * <p>
      * <b>Important :</b> Make sure you call your parent class {@link #onBind()}. Also, do
      * not call directly, call {@link #bind()} instead.
-     * <p/>
+     * <p>
      * Any event handler should be
      * initialised here rather than in the constructor. Also, it is good practice to
      * perform any costly initialisation here.
-     * <p/>
+     * <p>
      * Handlers registered by calling
      * {@link #registerHandler(HandlerRegistration)} will be removed
      * when unbinding. Any other initialisation that takes place here (or as a
      * side-effect of what is done here) should be taken down in {@link #onUnbind()}.
-     * <p/>
+     * <p>
      * This method will never be invoked more then once, or if it is, the second
      * time will necessarily be preceded by an invocation of {@link #onUnbind()}.
      */
@@ -134,15 +134,15 @@ public class HandlerContainerImpl implements HandlerContainer {
 
     /**
      * Lifecycle method called when unbinding the object.
-     * <p/>
+     * <p>
      * <b>Important :</b> Make sure you call your parent class {@link #onUnbind()}.
      * Also, do not call directly, call {@link #unbind()} instead.
-     * <p/>
+     * <p>
      * Any handler registration recorded with {@link #registerHandler (HandlerRegistration)}
      * will have
      * already been removed at this point. You should override this method to
      * take down any other initialisation that took place in {@link #onBind()}.
-     * <p/>
+     * <p>
      * This method will never be invoked more then once, or if it is, the second
      * time will necessarily be preceded by an invocation of {@link #onBind()}.
      */

@@ -33,17 +33,17 @@ public class InterfaceGenerationHelper extends GenerationHelper {
 
     /**
      * Generates an empty method body.
-     * <p/>
+     * <p>
      * If you type:
-     * <p/>
+     * <p>
      * <pre>
      * <code>
      *    writer.generateEmptyMethodBody("MyEntity", "stableId");
      * </code>
      * </pre>
-     * <p/>
+     * <p>
      * The following method body will be generated:
-     * <p/>
+     * <p>
      * <pre>
      * <code>
      *     MyEntity stableId();

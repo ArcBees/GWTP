@@ -22,7 +22,6 @@ import java.util.Set;
 
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
-import javax.inject.Singleton;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
@@ -33,6 +32,8 @@ import com.gwtplatform.common.processors.AbstractGwtpAppProcessor;
 import com.gwtplatform.processors.tools.SupportedAnnotationClasses;
 import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
+
+import jakarta.inject.Singleton;
 
 import static com.google.auto.common.MoreElements.asType;
 import static com.gwtplatform.common.processors.module.GwtpAppModuleProcessor.MAIN_MODULE_TYPE;

@@ -26,12 +26,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-import javax.inject.Provider;
-import javax.inject.Singleton;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.SilentCssErrorHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -39,9 +33,15 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
-import com.googlecode.objectify.Key;
+import com.googlecode.objectify.ObjectifyService;
 import com.gwtplatform.crawlerservice.server.domain.CachedPage;
 import com.gwtplatform.crawlerservice.server.service.CachedPageDao;
+
+import jakarta.inject.Provider;
+import jakarta.inject.Singleton;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Servlet that makes it possible to fetch an external page, renders it using HTMLUnit and returns the HTML page.
@@ -107,7 +107,7 @@ public class CrawlServiceServlet extends HttpServlet {
             if (!Strings.isNullOrEmpty(url)) {
                 url = URLDecoder.decode(url, CHAR_ENCODING);
 
-                CachedPage cachedPage = cachedPageDao.get(Key.create(CachedPage.class, url));
+                CachedPage cachedPage = cachedPageDao.get(ObjectifyService.key(CachedPage.class, url));
 
                 Date currDate = new Date();
 
@@ -216,9 +216,9 @@ public class CrawlServiceServlet extends HttpServlet {
         webClient.setAjaxController(new SyncAllAjaxController());
         webClient.setCssErrorHandler(new SilentCssErrorHandler());
 
-        WebRequest webRequest = new WebRequest(new URL(url), "text/html");
+        WebRequest webRequest = new WebRequest(new URL(url), "text/html", null);
         HtmlPage page = webClient.getPage(webRequest);
-        webClient.getJavaScriptEngine().pumpEventLoop(timeoutMillis);
+        webClient.getJavaScriptEngine().setJavaScriptTimeout(timeoutMillis);
 
         int waitForBackgroundJavaScript = webClient.waitForBackgroundJavaScript(jsTimeoutMillis);
         int loopCount = 0;
@@ -242,7 +242,7 @@ public class CrawlServiceServlet extends HttpServlet {
             }
         }
 
-        webClient.closeAllWindows();
+        webClient.close();
 
         return Pattern.compile("<style>.*?</style>", Pattern.DOTALL)
                 .matcher(page.asXml().replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", ""))

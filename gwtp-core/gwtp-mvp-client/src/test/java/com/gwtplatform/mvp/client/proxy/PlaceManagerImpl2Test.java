@@ -18,8 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import java.util.Collections;
 
-import javax.inject.Inject;
-
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.jukito.TestSingleton;
@@ -31,10 +29,12 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.tester.DeferredCommandManager;
 
+import jakarta.inject.Inject;
+
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isA;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isA;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
@@ -88,7 +88,7 @@ public class PlaceManagerImpl2Test {
         assertEquals(1, placeRequest.getParameterNames().size());
         assertEquals("dummyValue", placeRequest.getParameter("dummyParam", null));
 
-        verify(gwtWindowMethods).setBrowserHistoryToken(any(String.class), eq(false));
+        verify(gwtWindowMethods).setBrowserHistoryToken(isNull(), eq(false));
     }
 
     @Test
@@ -112,7 +112,7 @@ public class PlaceManagerImpl2Test {
         assertEquals("defaultPlace", placeRequest.getNameToken());
         assertEquals(0, placeRequest.getParameterNames().size());
 
-        verify(gwtWindowMethods).setBrowserHistoryToken(any(String.class), eq(false));
+        verify(gwtWindowMethods).setBrowserHistoryToken(isNull(), eq(false));
     }
 
     @Test
@@ -136,6 +136,6 @@ public class PlaceManagerImpl2Test {
         assertEquals("defaultPlace", placeRequest.getNameToken());
         assertEquals(0, placeRequest.getParameterNames().size());
 
-        verify(gwtWindowMethods).setBrowserHistoryToken(any(String.class), eq(false));
+        verify(gwtWindowMethods).setBrowserHistoryToken(isNull(), eq(false));
     }
 }

@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rpc.server;
 
-import javax.inject.Inject;
-
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.junit.Test;
@@ -27,6 +25,8 @@ import com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl;
 import com.gwtplatform.dispatch.rpc.server.guice.actionvalidator.DefaultActionValidator;
 import com.gwtplatform.dispatch.rpc.shared.ServiceException;
 import com.gwtplatform.dispatch.shared.ActionException;
+
+import jakarta.inject.Inject;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertEquals;

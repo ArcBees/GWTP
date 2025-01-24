@@ -19,13 +19,13 @@ package com.gwtplatform.dispatch.rest.client.filter;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import javax.inject.Inject;
-
 import com.gwtplatform.dispatch.client.ExecuteCommand;
 import com.gwtplatform.dispatch.rest.client.RestCallback;
 import com.gwtplatform.dispatch.rest.client.context.RestContext;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
+
+import jakarta.inject.Inject;
 
 public class DefaultRestFilterChain implements RestFilterChain {
     private final Iterator<Entry<RestContext, RestFilter>> filterIterator;

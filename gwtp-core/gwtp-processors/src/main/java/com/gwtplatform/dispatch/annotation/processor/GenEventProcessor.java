@@ -32,7 +32,7 @@ import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
 
 /**
  * Processes {@link GenEvent} annotations.
- * <p/>
+ * <p>
  * {@link GenEventProcessor} should only ever be called by tool infrastructure.
  * See {@link javax.annotation.processing.Processor} for more details.
  */

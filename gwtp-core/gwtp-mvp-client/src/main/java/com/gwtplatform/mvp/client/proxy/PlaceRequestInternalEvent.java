@@ -23,7 +23,7 @@ import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 /**
  * This event is fired by the {@link PlaceManager} whenever a new place is
  * requested, either by history navigation or directly.
- * <p/>
+ * <p>
  * <b>Important!</b> You should never fire that event directly. Instead, build a
  * {@link com.gwtplatform.mvp.shared.proxy.PlaceRequest} and pass it to one of the following methods:
  * <ul>
@@ -57,7 +57,7 @@ class PlaceRequestInternalEvent extends GwtEvent<PlaceRequestInternalHandler> {
     /**
      * Fires a {@link PlaceRequestInternalEvent}
      * into a source that has access to an {@com.google.web.bindery.event.shared.EventBus}.
-     * <p/>
+     * <p>
      * <b>Important!</b> You should not fire that event directly, see
      * {@link PlaceRequestInternalEvent} for more details.
      *

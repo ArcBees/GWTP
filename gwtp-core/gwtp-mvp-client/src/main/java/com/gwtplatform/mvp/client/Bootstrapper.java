@@ -18,7 +18,7 @@ package com.gwtplatform.mvp.client;
 
 /**
  * Defines a class that will be executed after injection happens. Your bootstrapper must contain a default, empty
- * constructor or an {@linkplain javax.inject.Inject @Inject}ed constructor.
+ * constructor or an {@linkplain jakarta.inject.Inject @Inject}ed constructor.
  * <p>
  * This class is responsible for calling {@link com.gwtplatform.mvp.client.proxy.PlaceManager#revealCurrentPlace
  * PlaceManager#revealCurrentPlace}. This is particularly useful when you need to do initialisation steps before the

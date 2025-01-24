@@ -16,8 +16,6 @@
 
 package com.gwtplatform.dispatch.rpc.client.gin;
 
-import javax.inject.Singleton;
-
 import com.google.gwt.core.client.GWT;
 import com.google.inject.Provides;
 import com.gwtplatform.dispatch.client.DefaultSecurityCookieAccessor;
@@ -36,12 +34,14 @@ import com.gwtplatform.dispatch.rpc.shared.DispatchAsync;
 import com.gwtplatform.dispatch.rpc.shared.DispatchService;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
 
+import jakarta.inject.Singleton;
+
 /**
  * An implementation of {@link AbstractDispatchAsyncModule} that uses Remote Procedure Calls (RPC).
- * <p/>
+ * <p>
  * This gin module provides provides access to the {@link DispatchAsync} singleton, which is used to make calls to the
  * server over RPC.
- * <p/>
+ * <p>
  * If you want to prevent XSRF attack (you use secured {@link com.gwtplatform.dispatch.rpc.shared.Action}s) the empty
  * {@link DefaultSecurityCookieAccessor} could leave your application vulnerable to XSRF attacks.
  *

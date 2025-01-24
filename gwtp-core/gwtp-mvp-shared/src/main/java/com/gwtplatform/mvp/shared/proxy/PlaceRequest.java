@@ -25,16 +25,16 @@ import java.util.Set;
  * This class represents a 'request' for a place location. It includes the 'id'
  * of the place as well as any parameter values. It can convert from and to
  * String tokens for use with the GWT History.
- * <p/>
- * <p/>
+ * <p>
+ * <p>
  * Place request tokens are formatted like this:
- * <p/>
+ * <p>
  * <code>#nameToken(;key=value)*</code>
- * <p/>
- * <p/>
+ * <p>
+ * <p>
  * There is a mandatory 'nameToken' value, followed by 0 or more key/value
  * pairs, separated by semi-colons (';'). A few examples follow:
- * <p/>
+ * <p>
  * <ul>
  * <li> <code>#users</code></li>
  * <li> <code>#user;name=j.blogs</code></li>
@@ -49,9 +49,9 @@ public class PlaceRequest {
 
     /**
      * Builds a request without any name token and without parameters. You should
-     * typically use {@link #PlaceRequest(String)} and specify the name token.
+     * typically use {@link #PlaceRequest(String, Map)} and specify the name token.
      * However, this version is acceptable when calling
-     * {@link com.gwtplatform.mvp.client.proxy.Proxy#reveal(PlaceRequest)}.
+     * {@code com.gwtplatform.mvp.client.proxy.Proxy#reveal(PlaceRequest)}.
      */
     public PlaceRequest() {
         this.nameToken = null;
@@ -174,7 +174,7 @@ public class PlaceRequest {
 
     /**
      * Class for constructing {@link PlaceRequest}s. This class supports all currently
-     * existing constructors and the {@link PlaceRequest#with(String, String)} method.
+     * existing constructors and the {@link PlaceRequest.Builder#with(String, String)} method.
      * It is not checked if any of the builder parameters are set when calling the {@link #build()} method as is
      * currently also possible to construct an empty {@link PlaceRequest}
      * (see {@link PlaceRequest#PlaceRequest()})

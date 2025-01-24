@@ -27,11 +27,11 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
- * {@code AsyncCallback} implementation wrapping another {@link AsyncCallback} object used by a {@link
- * com.gwtplatform.dispatch.client.interceptor.Interceptor Interceptor} implementations to delegate the execution
+ * {@code AsyncCallback} implementation wrapping another {@link AsyncCallback} object used by a {@code
+ * com.gwtplatform.dispatch.client.interceptor.Interceptor} implementations to delegate the execution
  * result.
  *
- * @param <A> the {@link TypedAction} type.
+ * @param <A> the {@code TypedAction} type.
  * @param <R> the result type for this action.
  */
 public class RpcInterceptedAsyncCallback<A extends Action<R>, R extends Result>

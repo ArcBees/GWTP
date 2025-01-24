@@ -18,9 +18,6 @@ package com.gwtplatform.mvp.client.proxy;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-
 import org.jukito.JukitoModule;
 import org.jukito.JukitoRunner;
 import org.jukito.TestEagerSingleton;
@@ -39,9 +36,12 @@ import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 import com.gwtplatform.tester.DeferredCommandManager;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -265,7 +265,7 @@ public class PlaceManagerImplTest {
         verify(presenter).prepareFromRequest(placeRequest);
         verify(presenter).forceReveal();
 
-        verify(gwtWindowMethods).setBrowserHistoryToken(any(String.class), eq(false));
+        verify(gwtWindowMethods).setBrowserHistoryToken(isNull(), eq(false));
 
         assertEquals(1, navigationHandler.navCount);
         placeRequest = navigationHandler.lastEvent.getRequest();
@@ -289,7 +289,7 @@ public class PlaceManagerImplTest {
 
         // Then
         // assert called only once
-        verify(gwtWindowMethods, times(1)).setBrowserHistoryToken(any(String.class), eq(false));
+        verify(gwtWindowMethods, times(1)).setBrowserHistoryToken(isNull(), eq(false));
 
         PlaceRequest finalPlaceRequest = placeManager.getCurrentPlaceRequest();
         assertEquals("dummyNameTokenBasic", finalPlaceRequest.getNameToken());

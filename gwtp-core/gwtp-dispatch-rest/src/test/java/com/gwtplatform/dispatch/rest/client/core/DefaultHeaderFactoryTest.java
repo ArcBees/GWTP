@@ -18,8 +18,6 @@ package com.gwtplatform.dispatch.rest.client.core;
 
 import java.util.Arrays;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.ws.rs.core.HttpHeaders;
 
 import org.jukito.JukitoModule;
@@ -45,12 +43,14 @@ import com.gwtplatform.dispatch.rest.client.testutils.UrlUtilsForTests;
 import com.gwtplatform.dispatch.rest.shared.ContentType;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
+
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.GET;
 import static com.gwtplatform.dispatch.rest.shared.HttpMethod.POST;
 

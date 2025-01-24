@@ -17,6 +17,7 @@
 package com.gwtplatform.mvp.client;
 
 import com.google.gwt.user.client.ui.IsWidget;
+import com.gwtplatform.mvp.client.presenter.slots.RemovableSlot;
 
 /**
  * The interface for view classes that handles all the UI-related code for a
@@ -26,13 +27,13 @@ public interface View extends IsWidget {
 
     /**
      * Requests the view to add content within a specific slot.
-     * <p/>
+     * <p>
      * Override the default implementation and manage all the slots of your view
      * into which content can be added. You should also consider overriding
      * {@link #removeFromSlot(Object, IsWidget)}.
      * If the view doesn't know about this slot, it can silently ignore the request.
-     * <p/>
-     * Used by {@link PresenterWidget#addToSlot(Object, PresenterWidget)}.
+     * <p>
+     * Used by {@link PresenterWidget#addToSlot(com.gwtplatform.mvp.client.presenter.slots.MultiSlot, PresenterWidget)}.
      *
      * @param slot    An opaque object indicating the slot to add into.
      * @param content The content to add, a {@link IsWidget}.
@@ -41,13 +42,13 @@ public interface View extends IsWidget {
 
     /**
      * Requests the view to remove content from a specific slot.
-     * <p/>
+     * <p>
      * Override the default implementation and manage all the slots of your view
      * into which content can be added and removed. You should also override
      * {@link #addToSlot(Object, IsWidget)}.
      * If the view doesn't know about this slot, it can silently ignore the request.
-     * <p/>
-     * Used by {@link PresenterWidget#removeFromSlot(Object, PresenterWidget)}.
+     * <p>
+     * Used by {@link PresenterWidget#removeFromSlot(RemovableSlot, PresenterWidget)}.
      *
      * @param slot    An opaque object indicating the slot to remove from.
      * @param content The content to remove, a {@link IsWidget}.
@@ -57,14 +58,14 @@ public interface View extends IsWidget {
     /**
      * Requests the view to set content within a specific slot, clearing anything
      * that was already contained there.
-     * <p/>
+     * <p>
      * Override the default implementation and manage all the slots of your view
      * into which content can be placed. If the view doesn't know about this slot,
      * it can silently ignore the request. When {@code null} is passed, your
      * implementation should clear the slot.
-     * <p/>
-     * Used by {@link PresenterWidget#setInSlot(Object, PresenterWidget)} and
-     * {@link PresenterWidget#clearSlot(Object)}.
+     * <p>
+     * Used by {@link PresenterWidget#setInSlot(com.gwtplatform.mvp.client.presenter.slots.IsSlot, PresenterWidget)}
+     * and {@link PresenterWidget#clearSlot(RemovableSlot)}.
      *
      * @param slot    An opaque object indicating the slot to add into.
      * @param content The content to add, a {@link IsWidget}. Pass {@code null} to

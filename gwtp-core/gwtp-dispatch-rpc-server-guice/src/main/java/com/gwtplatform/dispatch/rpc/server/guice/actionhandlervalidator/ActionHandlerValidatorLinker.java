@@ -16,12 +16,12 @@
 
 package com.gwtplatform.dispatch.rpc.server.guice.actionhandlervalidator;
 
-import javax.inject.Inject;
-
 import com.google.inject.Injector;
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorLinkerHelper;
 import com.gwtplatform.dispatch.rpc.server.actionhandlervalidator.ActionHandlerValidatorRegistry;
 import com.gwtplatform.dispatch.rpc.server.guice.GuiceBeanProvider;
+
+import jakarta.inject.Inject;
 
 /**
  * This class links any registered {@link com.gwtplatform.dispatch.rpc.server.actionhandler.ActionHandler ActionHandler}

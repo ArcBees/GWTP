@@ -32,7 +32,6 @@ import com.gwtplatform.dispatch.rest.shared.ContentType;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-
 import static com.gwtplatform.dispatch.rest.processors.AnnotatedElementBuilder.stubElementWithoutAnnotations;
 
 public class ContentTypeResolverTest {

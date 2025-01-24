@@ -16,12 +16,12 @@
 
 package com.gwtplatform.dispatch.rpc.client;
 
-import javax.inject.Inject;
-
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.user.client.rpc.RpcRequestBuilder;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync;
+
+import jakarta.inject.Inject;
 
 /**
  * This class is an extension of {@link RpcDispatchAsync} and configures the right service entry point and request

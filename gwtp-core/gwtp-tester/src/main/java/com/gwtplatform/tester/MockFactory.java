@@ -19,10 +19,10 @@ package com.gwtplatform.tester;
 /**
  * Mocking factory that transfers the work of creating a mock object to any Mocking framework. User should create an
  * implementation to inject in their {@link MockingBinder} implementation.
- * <p/>
+ * <p>
  * <pre>
  * public class MockitoMockFactory implements MockFactory {
- *   public <T> T mock(Class<T> classToMock) {
+ *   public &lt;T&gt; T mock(Class&lt;T&gt; classToMock) {
  *     return Mockito.mock(classToMock);
  *   }
  * }

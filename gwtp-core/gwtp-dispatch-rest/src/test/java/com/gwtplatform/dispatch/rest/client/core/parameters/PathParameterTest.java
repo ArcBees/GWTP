@@ -21,8 +21,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javax.inject.Inject;
-
 import org.jukito.JukitoRunner;
 import org.junit.After;
 import org.junit.Before;
@@ -33,10 +31,12 @@ import com.google.gwt.junit.GWTMockUtilities;
 import com.gwtplatform.common.shared.UrlUtils;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 
+import jakarta.inject.Inject;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyString;
 
 @RunWith(JukitoRunner.class)
 public class PathParameterTest {

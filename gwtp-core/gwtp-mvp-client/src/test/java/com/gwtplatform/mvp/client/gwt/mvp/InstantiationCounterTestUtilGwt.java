@@ -16,7 +16,7 @@
 
 package com.gwtplatform.mvp.client.gwt.mvp;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * A class that counts the number of times a Ginjector was created.

@@ -20,13 +20,13 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 import com.gwtplatform.dispatch.shared.HasSecured;
 
 /**
- * An action represents a command sent to the {@link com.gwtplatform.dispatch.rpc.server.Dispatch}. It has a specific
+ * An action represents a command sent to the {@code com.gwtplatform.dispatch.rpc.server.Dispatch}. It has a specific
  * result type which is returned if the action is successful. Your implementation should override
  * {@link #getServiceName} to return a default service url. If you use a
  * {@link com.gwtplatform.dispatch.shared.SecurityCookie} to prevent XSRF attacks and you want this action to be secured
  * against such attacks (i.e. it's not meant to be an anonymous action) then you should override {@link #isSecured()} to
  * return {@code true}.
- * <p/>
+ * <p>
  * You can usually inherit from {@link ActionImpl} or {@link UnsecuredActionImpl} instead.
  *
  * @param <R> The {@link Result} type.

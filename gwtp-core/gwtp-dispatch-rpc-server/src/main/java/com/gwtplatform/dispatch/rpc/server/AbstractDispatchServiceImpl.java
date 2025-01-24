@@ -16,10 +16,7 @@
 
 package com.gwtplatform.dispatch.rpc.server;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.google.gwt.user.server.rpc.jakarta.RemoteServiceServlet;
 import com.gwtplatform.dispatch.rpc.server.logger.DispatchServiceLogHandler;
 import com.gwtplatform.dispatch.rpc.shared.Action;
 import com.gwtplatform.dispatch.rpc.shared.DispatchService;
@@ -27,19 +24,20 @@ import com.gwtplatform.dispatch.rpc.shared.Result;
 import com.gwtplatform.dispatch.rpc.shared.ServiceException;
 import com.gwtplatform.dispatch.shared.ActionException;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+
 /**
  * This is the server-side implementation of the {@link DispatchService}, for which the client-side async service is
  * {@link com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync}.
- * <p/>
+ * <p>
  * This class is closely related to {@link AbstractDispatchImpl}, in theory the latter wouldn't be needed, but we use it
  * to workaround a GWT limitation described in {@link com.gwtplatform.dispatch.rpc.shared.DispatchAsync}.
  *
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchAsync
  * @see Dispatch
- * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchImpl
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchService
  * @see com.gwtplatform.dispatch.rpc.shared.DispatchServiceAsync
- * @see com.gwtplatform.dispatch.rpc.server.guice.DispatchServiceImpl
  */
 public abstract class AbstractDispatchServiceImpl extends RemoteServiceServlet implements DispatchService {
 

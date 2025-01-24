@@ -36,7 +36,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * This test is being run by ant, but is not run in eclipse.
- * <p/>
+ * <p>
  */
 public class ProxyAnnotationProcessingTest {
 

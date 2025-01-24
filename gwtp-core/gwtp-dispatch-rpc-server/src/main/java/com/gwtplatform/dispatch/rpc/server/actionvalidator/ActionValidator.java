@@ -26,7 +26,7 @@ import com.gwtplatform.dispatch.shared.ActionException;
  * whether or not the action can be executed. Doing so will often require session information, which can be done by
  * injecting a {@code Provider<HttpSession>} into the validator and calling {@code httpSessionProvider.get()} within the
  * {@link #isValid} method.
- * <p/>
+ * <p>
  * You should think of annotating your validators with {@code @RequestScoped} or {@code @Singleton}.
  */
 public interface ActionValidator {

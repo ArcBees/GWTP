@@ -22,7 +22,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.inject.Provider;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.Element;
@@ -31,7 +30,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
-import javax.lang.model.util.SimpleAnnotationValueVisitor7;
+import javax.lang.model.util.SimpleAnnotationValueVisitor8;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
@@ -51,8 +50,9 @@ import com.gwtplatform.processors.tools.logger.LogBuilder;
 import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
-import static java.util.Arrays.asList;
+import jakarta.inject.Provider;
 
+import static java.util.Arrays.asList;
 import static javax.lang.model.element.ElementKind.CLASS;
 import static javax.lang.model.element.Modifier.ABSTRACT;
 import static javax.lang.model.element.Modifier.PRIVATE;
@@ -61,7 +61,6 @@ import static javax.lang.model.element.Modifier.STATIC;
 import static javax.lang.model.util.ElementFilter.constructorsIn;
 import static javax.lang.model.util.ElementFilter.fieldsIn;
 import static javax.lang.model.util.ElementFilter.methodsIn;
-
 import static com.google.auto.common.AnnotationMirrors.getAnnotationValue;
 import static com.google.auto.common.MoreElements.asType;
 import static com.google.auto.common.MoreElements.getAnnotationMirror;
@@ -260,7 +259,7 @@ public abstract class AbstractProxyDetails implements ProxyDetails {
 
         if (annotationMirror.isPresent()) {
             AnnotationValue value = getAnnotationValue(annotationMirror.get(), "value");
-            DeclaredType valueType = value.accept(new SimpleAnnotationValueVisitor7<DeclaredType, Void>() {
+            DeclaredType valueType = value.accept(new SimpleAnnotationValueVisitor8<DeclaredType, Void>() {
                 @Override
                 public DeclaredType visitType(TypeMirror typeMirror, Void ignored) {
                     return asDeclared(typeMirror);

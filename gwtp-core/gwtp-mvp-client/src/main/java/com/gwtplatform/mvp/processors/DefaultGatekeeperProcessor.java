@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
-import javax.inject.Singleton;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
@@ -41,6 +40,8 @@ import com.gwtplatform.processors.tools.bindings.BindingsProcessors;
 import com.gwtplatform.processors.tools.domain.Type;
 import com.gwtplatform.processors.tools.exceptions.UnableToProcessException;
 import com.gwtplatform.processors.tools.utils.MetaInfResource;
+
+import jakarta.inject.Singleton;
 
 import static com.google.auto.common.MoreElements.hasModifiers;
 import static com.gwtplatform.common.processors.module.GwtpAppModuleProcessor.MAIN_MODULE_TYPE;
@@ -111,8 +112,8 @@ public class DefaultGatekeeperProcessor extends AbstractGwtpAppProcessor {
     }
 
     private void validateGatekeepers(Set<TypeElement> gatekeepers) {
-        if ((!generated && gatekeepers.size() > 1)
-                || (generated && !gatekeepers.isEmpty())) {
+        if (!generated && gatekeepers.size() > 1
+                || generated && !gatekeepers.isEmpty()) {
             logger.error()
                     .context(gatekeepers.iterator().next())
                     .log("Multiple classes annotated with @DefaultGatekeeper. You may only have one or none.");

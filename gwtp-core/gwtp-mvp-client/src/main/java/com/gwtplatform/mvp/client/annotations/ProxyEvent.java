@@ -23,10 +23,10 @@ import java.lang.annotation.Target;
  * Use this to annotate an event-handling method that should be registered in
  * the proxy rather than being registered in the presenter. Handlers annotated
  * in this way should not be registered in the Presenter.
- * <p/>
+ * <p>
  * The presenter will be instantiated as soon as the proxy intercepts the event, so
  * the presenter will handle the event even if it was not yet initialized.
- * <p/>
+ * <p>
  * Methods annotated by {@code @ProxyEvent} must return {@code void} and accept
  * a single parameter derived from {@link com.google.web.bindery.event.shared.Event Event}.
  * This event class must have a static {@code getType} method returning a type

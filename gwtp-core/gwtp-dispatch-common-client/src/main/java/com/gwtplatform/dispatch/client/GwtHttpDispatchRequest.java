@@ -21,7 +21,7 @@ import com.gwtplatform.dispatch.shared.DispatchRequest;
 
 /**
  * An implementation of {@link DispatchRequest} that is an adapter for {@link Request}.
- * <p/>
+ * <p>
  * If the code that requested the command to be executed chooses to cancel the {@link DispatchRequest} and the
  * {@link Request} that has been passed is still pending, it will be cancelled.
  */

@@ -45,7 +45,7 @@ public abstract class AbstractProcessor extends javax.annotation.processing.Abst
 
     @Override
     public SourceVersion getSupportedSourceVersion() {
-        return SourceVersion.RELEASE_7;
+        return SourceVersion.RELEASE_11;
     }
 
     @Override

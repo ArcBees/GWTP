@@ -18,9 +18,9 @@ package com.gwtplatform.dispatch.rest.client.serialization;
 
 import java.util.Set;
 
-import javax.inject.Inject;
-
 import com.github.nmorel.gwtjackson.client.ObjectMapper;
+
+import jakarta.inject.Inject;
 
 public class DispatchingJacksonMapperProvider implements JacksonMapperProvider {
     private final Set<JacksonMapperProvider> providers;

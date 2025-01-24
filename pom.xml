@@ -235,60 +235,61 @@
     </repositories>
 
     <properties>
-        <target.jdk>1.8</target.jdk>
+        <target.jdk>11</target.jdk>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven-site-plugin.skip>false</maven-site-plugin.skip>
 
         <!-- Maven -->
-        <gwt-maven-plugin.version>2.8.0</gwt-maven-plugin.version>
-        <maven-checkstyle-plugin.version>2.15</maven-checkstyle-plugin.version>
-        <checkstyle.version>6.12</checkstyle.version>
-        <arcbees-checkstyle.version>1.2</arcbees-checkstyle.version>
-        <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
-        <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
-        <maven-javadoc-plugin.version>2.10.2</maven-javadoc-plugin.version>
-        <maven-processor-plugin.version>2.2.4</maven-processor-plugin.version>
-        <maven-source-plugin.version>2.4</maven-source-plugin.version>
-        <maven-surefire-plugin.version>2.17</maven-surefire-plugin.version>
-        <maven-project-info-reports-plugin.version>2.8</maven-project-info-reports-plugin.version>
-        <maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
-        <maven-site-plugin.version>3.4</maven-site-plugin.version>
-        <jasmine-maven-plugin.version>1.3.1.5</jasmine-maven-plugin.version>
-        <versions-maven-plugin.version>2.1</versions-maven-plugin.version>
-        <maven-release-plugin.version>2.5.1</maven-release-plugin.version>
+        <gwt-maven-plugin.version>2.10.0</gwt-maven-plugin.version>
+        <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
+        <checkstyle.version>10.21.1</checkstyle.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-deploy-plugin.version>3.1.3</maven-deploy-plugin.version>
+        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+        <maven-processor-plugin.version>5.1</maven-processor-plugin.version>
+        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <maven-project-info-reports-plugin.version>3.8.0</maven-project-info-reports-plugin.version>
+        <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
+        <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+        <jasmine-maven-plugin.version>3.0-beta-02</jasmine-maven-plugin.version>
+        <webdrivermanager.version>5.9.2</webdrivermanager.version>
+        <versions-maven-plugin.version>2.18.0</versions-maven-plugin.version>
+        <maven-release-plugin.version>3.1.1</maven-release-plugin.version>
 
         <!-- Client -->
-        <gwt.version>2.8.0</gwt.version>
+        <gwt.version>2.12.1</gwt.version>
         <!-- when you update the gwt version please also update the dtds in all gwt.xml files -->
-        <gin.version>2.1.2</gin.version>
-        <gwt-jackson.version>0.14.1</gwt-jackson.version>
+        <!-- <gin.version>3.0.0</gin.version> -->
+        <gin.version>4.0.0</gin.version>
+        <gwt-jackson.version>0.15.4</gwt-jackson.version>
 
         <!-- Server -->
         <jax-rs.version>1.1.1</jax-rs.version>
-        <cglib.version>2.2</cglib.version>
-        <gae.version>1.9.7</gae.version>
-        <guice.version>3.0</guice.version>
-        <javax.inject.version>1</javax.inject.version>
-        <guava.version>18.0</guava.version>
-        <objectify.version>5.0.2</objectify.version>
+        <cglib.version>3.3.0</cglib.version>
+        <gae.version>2.0.3</gae.version>
+        <guice.version>7.0.0</guice.version>
+        <jakarta.inject.version>2.0.1</jakarta.inject.version>
+        <guava.version>33.3.1-jre</guava.version>
+        <objectify.version>6.1.2</objectify.version>
         <persistence-api.version>1.0</persistence-api.version>
-        <servlet-api.version>3.1.0</servlet-api.version>
-        <spring.version>4.0.5.RELEASE</spring.version>
+        <servlet-api.version>6.1.0</servlet-api.version>
+        <spring.version>6.2.2</spring.version>
         <velocity.version>1.7</velocity.version>
-        <auto-common.version>1.0-SNAPSHOT</auto-common.version>
-        <auto-service.version>1.0-rc2</auto-service.version>
-        <htmlunit.version>2.19</htmlunit.version>
+        <auto-common.version>1.2.2</auto-common.version>
+        <auto-service.version>1.1.1</auto-service.version>
+        <htmlunit.version>2.70.0</htmlunit.version>
 
         <!-- Testing -->
-        <jukito.version>1.4.1</jukito.version>
-        <junit.version>4.11</junit.version>
-        <mockito.version>1.9.5</mockito.version>
-        <gwtmockito.version>1.1.4</gwtmockito.version>
-        <assertj-core.version>1.6.1</assertj-core.version>
+        <jukito.version>1.6</jukito.version>
+        <junit.version>4.13.2</junit.version>
+        <mockito.version>4.11.0</mockito.version>
+        <gwtmockito.version>1.1.9</gwtmockito.version>
+        <assertj-core.version>3.26.3</assertj-core.version>
 
         <!-- GitHub Sites -->
-        <github.version>0.11</github.version>
+        <github.version>0.12</github.version>
 
         <!-- Used for releasing to sonatype as command line parameter -->
         <gpg.passphrase>SetAsParam</gpg.passphrase>
@@ -342,8 +343,8 @@
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>${maven-checkstyle-plugin.version}</version>
                     <configuration>
-                        <configLocation>/checkstyle.xml</configLocation>
-                        <suppressionsLocation>/suppressions.xml</suppressionsLocation>
+                        <configLocation>/codequality/checkstyle.xml</configLocation>
+                        <suppressionsLocation>/codequality/suppressions.xml</suppressionsLocation>
                         <propertyExpansion>basedir=${basedir}</propertyExpansion>
                         <consoleOutput>true</consoleOutput>
                         <failsOnError>true</failsOnError>
@@ -356,11 +357,6 @@
                             <groupId>com.puppycrawl.tools</groupId>
                             <artifactId>checkstyle</artifactId>
                             <version>${checkstyle.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.arcbees</groupId>
-                            <artifactId>checkstyle</artifactId>
-                            <version>${arcbees-checkstyle.version}</version>
                         </dependency>
                     </dependencies>
 
@@ -409,6 +405,14 @@
                     <groupId>com.github.searls</groupId>
                     <artifactId>jasmine-maven-plugin</artifactId>
                     <version>${jasmine-maven-plugin.version}</version>
+
+                    <dependencies>
+                        <dependency>
+                            <groupId>io.github.bonigarcia</groupId>
+                            <artifactId>webdrivermanager</artifactId>
+                            <version>${webdrivermanager.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -451,6 +455,7 @@
                     <excludes>
                         <exclude>**/*GwtTest.java</exclude>
                     </excludes>
+                    <argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
                 </configuration>
             </plugin>
 
@@ -505,13 +510,13 @@
                     <reportOutputDirectory>${project.build.directory}/staging</reportOutputDirectory>
 
                     <links>
-                        <link>http://download.oracle.com/javase/6/docs/api/</link>
-                        <link>http://google-web-toolkit.googlecode.com/svn/javadoc/latest/</link>
-                        <link>http://static.springsource.org/spring/docs/3.0.x/javadoc-api/</link>
-                        <link>http://google-gin.googlecode.com/svn/trunk/javadoc/</link>
-                        <link>http://google-guice.googlecode.com/svn/trunk/javadoc/</link>
-                        <link>http://aopalliance.sourceforge.net/doc/</link>
-                        <link>https://developers.google.com/appengine/docs/java/javadoc/</link>
+                        <link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
+                        <link>https://www.gwtproject.org/javadoc/latest/</link>
+                        <link>https://docs.spring.io/spring-framework/docs/current/javadoc-api/</link>
+                        <link>https://gwtplus.github.io/google-gin/latest/javadoc/</link>
+                        <link>https://javadoc.io/doc/com.google.inject/guice/latest/index.html</link>
+                        <link>https://aopalliance.sourceforge.net/doc/</link>
+                        <link>https://cloud.google.com/appengine/docs/legacy/standard/java/javadoc/</link>
                     </links>
 
                     <excludes>

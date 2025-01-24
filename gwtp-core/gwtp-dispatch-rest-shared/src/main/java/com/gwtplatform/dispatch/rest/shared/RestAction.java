@@ -21,8 +21,8 @@ import java.util.List;
 import com.gwtplatform.dispatch.shared.HasSecured;
 
 /**
- * An action used by {@link com.gwtplatform.dispatch.rest.client.RestDispatch RestDispatch}.
- * <p/>
+ * An action used by {@code com.gwtplatform.dispatch.rest.client.RestDispatch}.
+ * <p>
  * You will usually want to let GWTP generate your actions by creating services as explained <a
  * href="https://github.com/ArcBees/GWTP/wiki/Rest-Dispatch#write-services-and-actions">here</a>.
  *
@@ -30,8 +30,8 @@ import com.gwtplatform.dispatch.shared.HasSecured;
  */
 public interface RestAction<R> extends HasSecured {
     /**
-     * Returns the relative path for this action. It should not be prepended by the path annotated with {@link
-     * com.gwtplatform.dispatch.rest.client.RestApplicationPath @RestApplicationPath}. This path does not contain
+     * Returns the relative path for this action. It should not be prepended by the path annotated with {@code
+     * com.gwtplatform.dispatch.rest.client.RestApplicationPath}. This path does not contain
      * regular expressions for the URI templates anymore.
      *
      * @return the relative path for this action.

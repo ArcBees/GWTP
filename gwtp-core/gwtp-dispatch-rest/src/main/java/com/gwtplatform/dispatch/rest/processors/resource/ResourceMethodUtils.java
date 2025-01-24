@@ -22,7 +22,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeVisitor;
-import javax.lang.model.util.SimpleTypeVisitor6;
+import javax.lang.model.util.SimpleTypeVisitor8;
 
 import com.google.common.collect.FluentIterable;
 import com.gwtplatform.dispatch.rest.processors.details.HttpVariable;
@@ -33,7 +33,7 @@ import static com.google.auto.common.MoreTypes.asTypeElement;
 
 public class ResourceMethodUtils {
     private static final TypeVisitor<Boolean, Void> IS_REST_ACTION_VISITOR =
-            new SimpleTypeVisitor6<Boolean, Void>(false) {
+            new SimpleTypeVisitor8<Boolean, Void>(false) {
                 @Override
                 public Boolean visitDeclared(DeclaredType type, Void nothing) {
                     Name returnTypeName = asTypeElement(type).getQualifiedName();

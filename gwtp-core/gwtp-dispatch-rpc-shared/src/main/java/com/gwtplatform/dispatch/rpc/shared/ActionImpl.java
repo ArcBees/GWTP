@@ -18,12 +18,12 @@ package com.gwtplatform.dispatch.rpc.shared;
 
 /**
  * Default Action using the base path as dispatch/className. The base abstract implementation is {@link Action}.
- * <p/>
+ * <p>
  * An {@link Action} that uses the standard service name {@code "dispatch"}. Actions inheriting from this are secured
  * against XSRF attacks, but you need to configure a {@link com.gwtplatform.dispatch.shared.SecurityCookie}.
- * <p/>
+ * <p>
  * Use {@link UnsecuredActionImpl} for secured set to off by default.
- * <p/>
+ * <p>
  * Visit <a href="https://github.com/ArcBees/GWTP/wiki/RPC-Dispatch">this page</a> for more documentation.
  *
  * @param <R> The {@link Result} type.

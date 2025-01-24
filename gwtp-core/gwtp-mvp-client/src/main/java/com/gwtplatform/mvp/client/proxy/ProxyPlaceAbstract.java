@@ -16,8 +16,6 @@
 
 package com.gwtplatform.mvp.client.proxy;
 
-import javax.inject.Inject;
-
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.user.client.Command;
@@ -29,10 +27,12 @@ import com.gwtplatform.mvp.client.HasHandlerContainer;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.shared.proxy.PlaceRequest;
 
+import jakarta.inject.Inject;
+
 /**
  * A useful mixing class to define a {@link Proxy} that is also a {@link Place}.
  * You can usually inherit from the simpler form {@link ProxyPlace}.
- * <p/>
+ * <p>
  *
  * @param <P>      The Presenter's type.
  * @param <Proxy_> Type of the associated {@link Proxy}.
@@ -175,7 +175,7 @@ public class ProxyPlaceAbstract<P extends Presenter<?, ?>, Proxy_ extends Proxy<
 
     /**
      * Injects the various resources and performs other bindings.
-     * <p/>
+     * <p>
      * Never call directly, it should only be called by GIN. Method injection is
      * used instead of constructor injection, because the latter doesn't work well
      * with GWT generators.

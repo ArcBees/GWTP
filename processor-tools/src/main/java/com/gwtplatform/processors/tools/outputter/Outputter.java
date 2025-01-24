@@ -67,10 +67,7 @@ public class Outputter {
             Processor processor,
             Filer filer,
             String... macroFiles) {
-        this.logger = logger;
-        this.processor = new Type(processor.getClass());
-        this.filer = filer;
-        this.macroFiles = FluentIterable.of(macroFiles).append(DEFAULT_MACRO_FILE).toSet();
+        this(logger, processor, filer, List.of(macroFiles));
     }
 
     public Outputter(

@@ -16,7 +16,7 @@
 
 package com.gwtplatform.common.client;
 
-import javax.inject.Provider;
+import jakarta.inject.Provider;
 
 /**
  * This class can be used to contain a group of providers that should all sit
@@ -26,7 +26,7 @@ import javax.inject.Provider;
  * the objects were behind their individual split points.
  * GWTP automatically handles ProviderBundles when used with ApplicationController
  * and Ginjector generation.
- * <p/>
+ * <p>
  * Here is an example use of a manual {@link ProviderBundle}:
  * <pre>
  * public class MyPresenterBundle extends ProviderBundle {
@@ -36,8 +36,8 @@ import javax.inject.Provider;
  *
  *   &#064;Inject
  *   MyPresenterBundle(
- *       final Provider<Object1> object1Provider,
- *       final Provider<Object2> object2Provider) {
+ *       final Provider&lt;Object1&gt; object1Provider,
+ *       final Provider&lt;Object2&gt; object2Provider) {
  *     super( BUNDLE_SIZE );
  *     providers[ID_Object1] = object1Provider;
  *     providers[ID_Object2] = object2Provider;

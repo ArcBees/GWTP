@@ -20,11 +20,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * An implementation of {@link CallbackDispatchRequest} that should be used by
- * {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s that make asynchronous calls that do not
+ * {@code com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler}s that make asynchronous calls that do not
  * return a {@link com.google.gwt.http.client.Request}.
- * <p/>
+ * <p>
  * {@link #isPending()} will return true until either {@link #onSuccess(Object)} or {@link #onFailure} is called.
- * <p/>
+ * <p>
  * Calling {@link #cancel()} will prevent the {@link #onSuccess(Object)} and {@link #onFailure(Throwable)} from being
  * forwarded to the code that requested the action handler be executed/undone.
  *
@@ -40,11 +40,9 @@ public class DefaultCallbackDispatchRequest<R> implements CallbackDispatchReques
      * Construct a {@link DefaultCallbackDispatchRequest}. See the class documentation for details.
      *
      * @param callback The {@code resultCallback} parameter passed to
-     *                 {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler#execute
-     *                 ClientActionHandler#execute()}
+     *                 {@code ClientActionHandler#execute()}
      *                 or the callback parameter passed to
-     *                 {@link com.gwtplatform.dispatch.client.actionhandler.ClientActionHandler#undo
-     *                 ClientActionHandler#undo()}
+     *                 {@code ClientActionHandler#undo()}
      */
     public DefaultCallbackDispatchRequest(AsyncCallback<R> callback) {
         this.callback = callback;

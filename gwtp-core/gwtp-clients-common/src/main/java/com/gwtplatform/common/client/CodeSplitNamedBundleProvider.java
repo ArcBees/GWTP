@@ -16,10 +16,10 @@
 
 package com.gwtplatform.common.client;
 
-import javax.inject.Provider;
-
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
+import jakarta.inject.Provider;
 
 public class CodeSplitNamedBundleProvider<T, B extends NamedProviderBundle> implements IndirectProvider<T> {
     private final AsyncProvider<B> bundleProvider;

@@ -26,7 +26,7 @@ import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
-import javax.lang.model.util.SimpleAnnotationValueVisitor7;
+import javax.lang.model.util.SimpleAnnotationValueVisitor8;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
@@ -105,7 +105,7 @@ public class ProxyPlaceDetails extends AbstractProxyDetails {
         if (annotationMirror.isPresent()) {
             AnnotationValue value = getAnnotationValue(annotationMirror.get(), "value");
 
-            return value.accept(new SimpleAnnotationValueVisitor7<TypeMirror, Void>(null) {
+            return value.accept(new SimpleAnnotationValueVisitor8<TypeMirror, Void>(null) {
                 @Override
                 public TypeMirror visitType(TypeMirror typeMirror, Void o) {
                     return typeMirror;
@@ -129,7 +129,7 @@ public class ProxyPlaceDetails extends AbstractProxyDetails {
         gatekeeperParams = new ArrayList<>();
 
         if (annotation != null && verifyIsGatekeeperWithParams()) {
-            FluentIterable.of(annotation.value())
+            FluentIterable.from(annotation.value())
                     .transform(param -> param
                             .replace("\\", "\\\\")
                             .replace("\"", "\\\""))

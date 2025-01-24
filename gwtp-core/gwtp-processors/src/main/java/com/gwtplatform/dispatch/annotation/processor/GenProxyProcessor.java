@@ -38,7 +38,7 @@ import com.gwtplatform.dispatch.annotation.helper.ReflectionHelper;
 
 /**
  * Processes {@link GenProxy} annotations.
- * <p/>
+ * <p>
  * {@link GenProxyProcessor} should only ever be called by tool infrastructure.
  * See {@link javax.annotation.processing.Processor} for more details.
  */

@@ -25,7 +25,7 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.PrimitiveType;
 import javax.lang.model.type.TypeMirror;
-import javax.lang.model.util.SimpleTypeVisitor6;
+import javax.lang.model.util.SimpleTypeVisitor8;
 import javax.ws.rs.CookieParam;
 import javax.ws.rs.core.Cookie;
 
@@ -42,8 +42,8 @@ import static com.gwtplatform.dispatch.rest.processors.NameUtils.parentName;
 public class CookieParamValueResolver extends HttpParamValueResolver {
     private static final String COOKIE_BAD_RETURN_TYPE = "Method `%s` parameter's `%s` is annotated with @CookieParam "
             + "but has a bad return type. It may only be a primitive, `Cookie` or a `Collection<Cookie>`.";
-    private static final SimpleTypeVisitor6<Boolean, CookieParamValueResolver> VALID_COOKIE_TYPE_VISITOR =
-            new SimpleTypeVisitor6<Boolean, CookieParamValueResolver>(false) {
+    private static final SimpleTypeVisitor8<Boolean, CookieParamValueResolver> VALID_COOKIE_TYPE_VISITOR =
+            new SimpleTypeVisitor8<Boolean, CookieParamValueResolver>(false) {
                 @Override
                 public Boolean visitPrimitive(PrimitiveType type, CookieParamValueResolver resolver) {
                     return true;

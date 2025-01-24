@@ -16,9 +16,10 @@
 
 package com.gwtplatform.processors.tools.utils;
 
+import jakarta.inject.Inject;
+
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 

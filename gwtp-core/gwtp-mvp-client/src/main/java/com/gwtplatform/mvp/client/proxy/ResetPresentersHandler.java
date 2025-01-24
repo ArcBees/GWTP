@@ -20,6 +20,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 public interface ResetPresentersHandler extends EventHandler {
 
-    void onResetPresenters(final ResetPresentersEvent resetPresentersEvent);
+    void onResetPresenters(ResetPresentersEvent resetPresentersEvent);
 
 }

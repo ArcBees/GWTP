@@ -24,9 +24,9 @@ import com.gwtplatform.mvp.client.Presenter;
  * before the full {@link Presenter} is instantiated. This include, among
  * others, the presenter's specific {@link RevealContentEvent} that needs the
  * presenter to reveal itself.
- * <p/>
+ * <p>
  * The relationship between a presenter and its proxy is two-way.
- * <p/>
+ * <p>
  * {@link Presenter} subclasses will usually define their own interface called
  * MyProxy and be derived from this one.
  *

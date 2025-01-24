@@ -24,9 +24,9 @@ import java.lang.annotation.Target;
 
 /**
  * Use the @In(value) annotation on fields in an @GenDispatch class.
- * <p/>
+ * <p>
  * See {@link GenDispatch} for an example.
- * <p/>
+ * <p>
  * {@code value} Defines the order that fields should be specified in the
  * constructor of the generated action class.
  */

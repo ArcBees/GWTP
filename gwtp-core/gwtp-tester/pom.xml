@@ -30,21 +30,17 @@
             <artifactId>gwtp-dispatch-rpc-server</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
             <artifactId>gwt-user</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt.inject</groupId>
+            <groupId>de.knightsoft-net</groupId>
             <artifactId>gin</artifactId>
         </dependency>
 
         <!-- Test Dependencies -->
         <dependency>
-            <groupId>org.jukito</groupId>
+            <groupId>de.knightsoft-net</groupId>
             <artifactId>jukito</artifactId>
             <scope>test</scope>
         </dependency>
@@ -54,7 +50,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.google.gwt</groupId>
+            <groupId>org.gwtproject</groupId>
             <artifactId>gwt-dev</artifactId>
             <scope>test</scope>
         </dependency>

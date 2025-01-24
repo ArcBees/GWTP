@@ -44,7 +44,7 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
 /**
  * A presenter that does not have to be a singleton. Pages from your
  * application will usually be singletons and extend the {@link Presenter} class.
- * <p/>
+ * <p>
  * Choosing between a {@link Presenter} and {@link PresenterWidget} is a design decision that
  * requires some thought. For example, a {@link PresenterWidget} is useful when
  * you need a custom widget with extensive logic. For example, a chat box that can be instantiated
@@ -53,12 +53,12 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * parent presenter, which increases coupling. Therefore, you should use a {@link Presenter} when
  * the parent is not expected to know its child. Moreover, only {@link Presenter} can be attached
  * to name tokens in order to support browser history.
- * <p/>
+ * <p>
  * {@link PresenterWidget}s and {@link Presenter}s are organized in a hierarchy.
  * Internally, parent presenters have links to their currently attached children presenters. A
  * parent {@link Presenter} can contain either {@link Presenter}s or {@link PresenterWidget}s,
  * but a {@link PresenterWidget} can only contain {@link PresenterWidget}s.
- * <p/>
+ * <p>
  * To reveal a {@link PresenterWidget} you should insert it within a {@link HasSlots slot} of its
  * containing presenter using one of the following methods:
  * <ul>
@@ -68,7 +68,7 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * <li>{@link #addToPopupSlot(PresenterWidget)}
  * </ul>
  * Revealing a {@link Presenter} is done differently, refer to the class documentation for more details.
- * <p/>
+ * <p>
  * To hide a {@link PresenterWidget} or a {@link Presenter} you can use {@link #setInSlot} to place
  * another presenter in the same slot, or you can call one of the following methods:
  * <ul>
@@ -77,7 +77,7 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * <li>{@link PopupView#hide()} if the presenter is a popup or a dialog box.
  * </ul>
  * Hide a {@link Presenter} using these methods, but
- * <p/>
+ * <p>
  * A presenter has a number of lifecycle methods that you can hook on to:
  * <ul>
  * <li>{@link #onBind()}
@@ -90,7 +90,7 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * these lifecycle methods being called. For an example, here is what happens following
  * a call to {@link #setInSlot(IsSlot, PresenterWidget)}:
  * <ul>
- * <li>If a presenter already occupies this slot it is removed.</li>
+ * <li>If a presenter already occupies this slot it is removed.
  * <ul><li>If the presenter owning the slot is currently visible then
  * {@link #onHide()} is called on the removed presenter and, recursively,
  * on its children (bottom-up: first the children, then the parent)</li>
@@ -98,7 +98,7 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * set in one of its parent slot by firing a
  * {@link com.gwtplatform.mvp.client.proxy.RevealContentEvent RevealContentEvent}.
  * For more details, see the documentation for {@link Presenter}.</li>
- * </ul>
+ * </ul></li>
  * <li>If, at this point, the presenter owning the slot is not visible, then the
  * chain stops. Otherwise, {@link #onReveal()} is called on the {@link PresenterWidget} that
  * was just added.</li>
@@ -178,10 +178,10 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     /**
      * This method adds some content in a specific slot of the {@link Presenter}. The attached {@link View} should
      * manage this slot when its {@link View#addToSlot(Object, IsWidget)} is called.
-     * <p/>
+     * <p>
      * Contrary to the {@link #setInSlot(IsSlot, PresenterWidget)} method, no {@link ResetPresentersEvent} is fired, so
      * {@link PresenterWidget#onReset()} is not invoked.
-     * <p/>
+     * <p>
      * For more details on slots, see {@link HasSlots}.
      *
      * @param slot The slot into which the content is being added.
@@ -214,7 +214,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * This method clears the content in a specific slot. No {@link ResetPresentersEvent} is fired. The attached {@link
      * View} should manage this slot when its {@link View#setInSlot(Object, IsWidget)} is called. It should also clear
      * the slot when called with {@code null} as a parameter.
-     * <p/>
+     * <p>
      * For more details on slots, see {@link HasSlots}.
      *
      * @param slot Specific slot to clear.
@@ -309,7 +309,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * This method removes some content in a specific slot of the {@link Presenter}. No {@link ResetPresentersEvent} is
      * fired. The attached {@link View} should manage this slot when its {@link View#removeFromSlot(Object, IsWidget)}
      * is called.
-     * <p/>
+     * <p>
      * For more details on slots, see {@link HasSlots}.
      *
      * @param slot The slot for which the content is being removed.
@@ -336,7 +336,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * This method sets some content in a specific slot of the {@link Presenter}. The attached {@link View} should
      * manage this slot when its {@link View#setInSlot(Object, IsWidget)} is called. It should also clear the slot when
      * the called with {@code null} as a parameter.
-     * <p/>
+     * <p>
      * For more details on slots, see {@link HasSlots}.
      *
      * @param slot The slot for which the content is being set.
@@ -351,7 +351,7 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
      * This method sets some content in a specific slot of the {@link Presenter}. The attached {@link View} should
      * manage this slot when its {@link View#setInSlot(Object, IsWidget)} is called. It should also clear the slot when
      * called with {@code null} as a parameter.
-     * <p/>
+     * <p>
      * For more details on slots, see {@link HasSlots}.
      *
      * @param slot The slot for which the content is being set.
@@ -458,17 +458,17 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     /**
      * Lifecycle method called whenever this presenter is about to be
      * hidden.
-     * <p/>
+     * <p>
      * <b>Important:</b> Make sure you call your superclass {@code #onHide()} if
      * you override. Also, do not call directly, see {@link PresenterWidget}
      * for more details on lifecycle methods.
-     * <p/>
+     * <p>
      * You should override this method to dispose of any object
      * created directly or indirectly during the call to {@link #onReveal()}.
-     * <p/>
+     * <p>
      * This method will not be invoked a multiple times without {@link #onReveal()}
      * being called.
-     * <p/>
+     * <p>
      * In a presenter hierarchy, this method is called bottom-up: first on the
      * child presenters, then on the parent.
      */
@@ -478,20 +478,20 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     /**
      * Lifecycle method called on all visible presenters whenever a
      * presenter is revealed anywhere in the presenter hierarchy.
-     * <p/>
+     * <p>
      * <b>Important:</b> Make sure you call your superclass {@code #onReset()} if
      * you override. Also, do not call directly, fire a {@link ResetPresentersEvent}
      * to perform a reset manually. See {@link PresenterWidget} for more details on
      * lifecycle methods.
-     * <p/>
+     * <p>
      * This is one of the most frequently used lifecycle method. This is usually a good
      * place to refresh any information displayed by your presenter.
-     * <p/>
+     * <p>
      * Note that {@code #onReset()} is not called only when using
      * {@link #addToSlot(MultiSlot, PresenterWidget)}, {@link #addToPopupSlot(PresenterWidget)}
      * or #setInSlot(Object, PresenterWidget, boolean)} with {@code false} as the third
      * parameter.
-     * <p/>
+     * <p>
      * In a presenter hierarchy, this method is called top-down: first on the
      * parent presenters, then on the children.
      */
@@ -501,18 +501,18 @@ public abstract class PresenterWidget<V extends View> extends HandlerContainerIm
     /**
      * Lifecycle method called whenever this presenter is about to be
      * revealed.
-     * <p/>
+     * <p>
      * <b>Important:</b> Make sure you call your superclass {@code #onReveal()} if
      * you override. Also, do not call directly, see {@link PresenterWidget}
      * for more details on lifecycle methods.
-     * <p/>
+     * <p>
      * You should override this method to perform any action or initialisation
      * that needs to be done when the presenter is revealed. Any initialisation
      * you perform here should be taken down in {@link #onHide()}.
-     * <p/>
+     * <p>
      * Information that needs to be updated whenever the user navigates should
      * be refreshed in {@link #onReset()}.
-     * <p/>
+     * <p>
      * In a presenter hierarchy, this method is called top-down: first on the
      * parent presenters, then on the children.
      */

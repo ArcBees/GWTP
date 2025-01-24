@@ -20,15 +20,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-
 import com.gwtplatform.dispatch.rest.client.RestApplicationPath;
 import com.gwtplatform.dispatch.rest.client.annotations.GlobalQueryParams;
 import com.gwtplatform.dispatch.rest.client.gin.RestParameterBindings;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter;
 import com.gwtplatform.dispatch.rest.shared.HttpParameter.Type;
 import com.gwtplatform.dispatch.rest.shared.RestAction;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Provider;
 
 public class DefaultUriFactory implements UriFactory {
     private final RestParameterBindings globalQueryParams;

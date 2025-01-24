@@ -30,7 +30,6 @@ import com.gwtplatform.processors.tools.logger.Logger;
 import com.gwtplatform.processors.tools.utils.Utils;
 
 import static javax.lang.model.util.ElementFilter.methodsIn;
-
 import static com.google.auto.common.MoreElements.asType;
 
 public class ResourceUtils {

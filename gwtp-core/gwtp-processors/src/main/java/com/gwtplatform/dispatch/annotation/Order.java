@@ -25,10 +25,10 @@ import java.lang.annotation.Target;
 /**
  * Use with <code>@GenEvent</code> or <code>@GenDto</code> to specify the order
  * of the fields in the constructor parameter list.
- * <p/>
+ * <p>
  * Fields with an @Order will be first, sorted numerically, and then fields
  * without an @Order will be afterwards in an undefined order.
- * <p/>
+ * <p>
  * See {@link GenEvent} or {@link GenDto} for an example.
  */
 @Target({ElementType.FIELD})

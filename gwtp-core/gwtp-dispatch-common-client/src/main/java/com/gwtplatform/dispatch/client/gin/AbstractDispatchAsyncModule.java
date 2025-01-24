@@ -28,27 +28,21 @@ import com.gwtplatform.dispatch.shared.SecurityCookieAccessor;
  * This gin module provides provides access to the dispatcher singleton, which is used to make calls to the server. This
  * module requires a {@link SecurityCookieAccessor} which is, by default, bound to
  * {@link DefaultSecurityCookieAccessor}.
- * <p/>
+ * <p>
  * Install the module in one of your {@link #configure()} methods:
- * <p/>
+ * <p>
  * <pre>
  * install(new RestDispatchAsyncModule.Builder()
  *                 .sessionAccessor(MySessionAccessor.class)
  *                 .build());
  * </pre>
- *
- * @see com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule
- * @see com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule
  */
 public abstract class AbstractDispatchAsyncModule extends AbstractGinModule {
     /**
      * A {@link AbstractDispatchAsyncModule} builder.
-     * <p/>
+     * <p>
      * By default, this builder configures the {@link AbstractDispatchAsyncModule} to use {@link
      * DefaultSecurityCookieAccessor}.
-     *
-     * @see com.gwtplatform.dispatch.rpc.client.gin.RpcDispatchAsyncModule.Builder
-     * @see com.gwtplatform.dispatch.rest.client.gin.RestDispatchAsyncModule.Builder
      */
     public abstract static class Builder<B extends Builder<B>> {
         private Class<? extends SecurityCookieAccessor> sessionAccessorType = DefaultSecurityCookieAccessor.class;
